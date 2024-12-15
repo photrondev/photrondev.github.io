@@ -152,7 +152,7 @@
         <li><i class="bi bi-aspect-ratio"></i> Zoom fit the flowgraph to show the default zoom and pan</li>
         <li><i class="bi bi-zoom-in"></i> Zoom in the flowgraph so you can see focus on the nodes in center of the workflow</li>
         <li><i class="bi bi-star"></i> Add authoring notes to the workflow to include your name and description of the workflow</li>
-        <li><i class="bi bi-pencil-square"></i> Show the published view of the workflow. This is an experimental <a href="#Publish">feature</a> that allows you to simplify the workflow into a list of published parameters and hide the workflow. When in publish mode, click on this icon to switch back to the flowgraph mode again.</li>
+        <li><i class="bi bi-shop-window"></i> Show the published view of the workflow. This is an experimental <a href="#Publish">feature</a> that allows you to simplify the workflow into a list of published parameters and hide the workflow. When in publish mode, click on this icon to switch back to the flowgraph mode again.</li>
         <li><i class="bi bi-calculator-fill"></i> Sets the preferred numeric range for some of the standard parameters that can be normalized, percentage and other ranges</li>
         <li><i class="bi bi-circle-half"></i> Light or dark theme switching of the UI colors</li>
         <li><i class="bi bi-nvidia"></i> Sets the current CUDA device when you have multiple GPUs. Any new nodes powered by CUDA will be executed on this current GPU device.</li>
@@ -405,18 +405,13 @@
     </ul>
     <p id="PerformanceNodeMenuFuncs">Performance related functions</p>
     <ul>
-        <li><i class="bi bi-nvidia"></i> Cuda Device: is meant for systems with multiple GPUs to allow you to set the current GPU, any subsequent nodes that are GOU accelerated will be executed on the current GPU </li>
+        <li><i class="bi bi-nvidia"></i> Cuda Device: is meant for systems with multiple GPUs to allow you to set the current GPU, any subsequent nodes that are GPU accelerated will be executed on the current GPU </li>
         <li>
             <i class="glyphicon glyphicon-resize-small"></i> Merge: For the selected nodes you can merge them to run in the same CPU thread group. By default each C++ node is
             executed in a different CPU thread for automatic pipeline acceleration, however, there may be circumstances that you want to finely control the order of stream processing that you wish
             to execute on the same CPU thread
         </li>
         <li><i class="glyphicon glyphicon-resize-full"></i> Split: For the selected nodes you can split them to run on different CPU threads</li>
-        <li>
-            <i class="bi bi-distribute-horizontal"></i> Distribute: This is an experimental feature that allows you to select a contigious set of nodes and do the execution on
-            a different process on the same system, a different machine altogether. The selected nodes are removed and two distribution nodes, Source and Sink, are added to
-            receive and send data to the external process.
-        </li>
     </ul>
 
     <p id="IONodeMenuFuncs">Input/output port related functions</p>
@@ -451,6 +446,11 @@
 
     <p id="ExperimentalNodeMenuFuncs">Experimental functions</p>
     <ul>
+        <li>
+            <i class="bi bi-distribute-horizontal"></i> Distribute: This is an experimental <a href="#DistributionProcessing">feature</a> that allows you to select a contigious set of nodes and do the execution on
+            a different process on the same system, a different machine altogether. The selected nodes are removed and two distribution nodes, Source and Sink, are added to
+            receive and send data to the external process.
+        </li>
         <li>
             <i class="glyphicon glyphicon-shopping-cart"></i> Publish: an experimental <a href="#Publish">feature</a>  that allows you mark which of the nodes inputs and outputs will be available in the publish view.
             The published view is a simplification of the UI where the flowgraph no longer is shown and instead the editor has only the list of published inputs and the viewer can only show the list of
@@ -882,7 +882,8 @@
     <p>
         Make sure you have the latest Google Chrome browser installed : 131.0.6778.140 or higher and it is set to your default browser.
         Then download the INFINWORKFLOW package from Photron's website. There are multiple packages, the first package to download is infiniworkflow_v1_0.zip.
-        Unzip this file and then double click on the <i>install.bat</i> file in the unzipped folder - the installation will install the required Python modules
+        Unzip this file to a location where you want to maintain the INFINIWORKFLOW application, for example in your <i>Documents</i> folder.
+        To install, double click on the <i>install.bat</i> file in the unzipped folder - the installation will install the required Python modules
     </p>
 
     <p>
