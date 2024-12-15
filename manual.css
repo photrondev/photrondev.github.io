@@ -1,0 +1,32 @@
+
+/* Copyright (c) 2024 Photron USA Inc. - All rights reserved. */
+
+html, body {
+    background-color: black;
+    font-family: 'Trebuchet MS', sans-serif;
+    color: gray;
+    font-size: 1.1em;
+}
+
+i {
+    font-size: 1.2em;
+    color:white;
+}
+
+
+h1, h2, h3, h4 {
+    color: white;
+    scroll-margin-top: 50px;
+}
+
+p {
+    scroll-margin-top: 50px;
+}
+
+table, th, td {
+    border: 1px solid white;
+}
+
+th, td {
+    padding: 5px;
+}
