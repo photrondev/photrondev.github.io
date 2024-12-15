@@ -916,12 +916,13 @@
     </p>
     <h3 id="InstallPatches">Installation Patches</h3>
     <p>
-        There are two flavours of patches - one is a patch to the application and the others are feature patches to allow installation of different demos and packages.
+        There are three flavours of patches - one is a patch to the application, one is a SDK patch and the others are feature patches to allow
+        installation of different demos and packages. See the <a href="#DownloadablePackages">Downloadable Packages</a> for the full list.
 
-        The application patch, for example it will be names something as follows: infiniworkflow_patch_v1_0.zip, will be available on the Photron website
-        and is meant to patch your exisiting installation with a smaller set of files and thus has a substantially smaller download size. It is expected
-        that the application patch will be frequently updated when bugs are fixes and small features added. To patch you should open a Windows Powershell prompt
-        and then change the directory to your INFINIWORKFLOW folder (i.e. where you unzipped your original installation). Then type the following where you
+        The application patch is meant to patch your exisiting installation with a smaller set of files and thus has a substantially smaller download size. It is expected
+        that the application patch will be frequently updated when bugs are fixes and small features added. To patch you exisiting isntallation
+        you should download the patch, and then open a Windows Powershell prompt
+        and then change the directory to your existing INFINIWORKFLOW installation (i.e. where you unzipped your original installation). Then type the following where you
         should replace /folder/to/ to the actual folder you downloaded the application patch:
 
         <pre>
@@ -929,8 +930,8 @@
         </pre>
 
         The feature patches are meant to allow new functionaility including demos and assets such as the ML model.
-        For example you can download the YOLO classifier feature patch, yolo_v1_0.zip, from the Photron website and then install by open a Windows Powershell prompt
-        and then change the directory to your INFINIWORKFLOW folder and type the following where you
+        For example you can download the YOLO classifier feature patch, yolo_v1_0.zip then install by open a Windows Powershell prompt
+        and then change the directory to your existing INFINIWORKFLOW installation (i.e. where you unzipped your original installation) and type the following where you
         should replace /folder/to/ to the actual folder you downloaded the feature patch:
         <pre>
             patch.bat /folder/to/yolo_v1_0.zip
@@ -943,7 +944,7 @@
     <p>
         This feature allows you to do processing on a different process on the same machine or a different machine on the network.
 
-        You can start the distributted rendering by selecting a contigious set of nodes
+        You can start the distributed rendering by selecting a contigious set of nodes
         and then using the node context menu and selecting <a href="#ExperimentalNodeMenuFuncs">'Distributed'</a>.
         This brings up a dialog that allows you to set the URL for the server that will be performing the processing. Once
         you click Ok then the selected nodes are replaced by two nodes, the Distrubuted Sink and Distributed Source. The Sink
@@ -954,9 +955,9 @@
 
     <h3 id="Publish">Publish</h3>
     <p>
-        This feature allows you to do simplify your worflow to just a subset of input parameters you want to expose as well as a limted subset of outputs that
-        can be viewed. he future goal of this feature is to allow you to publish a simple app that has the critical controls that are needed in the deployment of your
-        workflow in production and whilst hiding the complexity of the workflow.
+        This feature allows you to simplify your worflow to just a subset of input parameters you want to expose as well as a limted subset of outputs that
+        can be viewed. The future goal of this feature is to allow you to publish a simple app that has the critical controls that are needed in the deployment of your
+        workflow in production whilst hiding the complexity of the workflow.
 
         The first step is to select the nodes you want to publish parameters by selecting a contigious set of nodes
         and then using the node context menu and selecting <a href="#ExperimentalNodeMenuFuncs">'Publish'</a>
@@ -964,9 +965,9 @@
     <img src="./assets/ui_publishing.gif" />
 
     <p>
-        Once you have selected the subset of input and outputs then you can click on the publish <i class="bi bi-pencil-square"></i> icon in the application menu
+        Once you have selected the subset of input and outputs then you can click on the publish <i class="bi bi-shop-window"></i> icon in the application menu
         and the flowgraph is hidden and a simpler UI only showing the published controls in the Parameter Editor and a fullscreen viewer is shown. You
-        can switch back to the standard flowgraph view by pressing the publish icon again.
+        can switch back to the standard flowgraph view by pressing the publish <i class="bi bi-shop-window"></i> icon again.
     </p>
     <img src="./assets/ui_publish_view.gif" />
 
