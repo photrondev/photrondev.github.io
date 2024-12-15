@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Copyright (c) 2024 Photron USA Inc. - All rights reserved. -->
@@ -587,7 +587,7 @@
             <td>Filebrowser</td>
             <td> <img src="/assets/ui_file_control.jpg" width="300" /> </td>
             <td>
-                Opens the IO dialog that allows you to to set the filename using a textfield. The prefix ${/assets} is used to specifiy the file location is in the /assets folder.
+                Opens the IO dialog that allows you to to set the filename using a textfield. The prefix ${assets} is used to specifiy the file location is in the assets folder.
                 An icon <i class="bi bi-folder-fill"></i> when pressed opens the IO Dialog that allows you to set the file location
             </td>
         </tr>
@@ -681,8 +681,8 @@
     <h3 id="ImportExport">Import/Export</h3>
     <p>
         Input and Export files are shown in a custom file selector dialog. Files <i class="bi bi-file-earmark-fill"></i>icons and Folder <i class="bi bi-folder-fill"></i> icons are selectable.
-        You have restricted access to the files that are located in either the ${/assets} or ${demos} folders
-        where INFINIWORKFLOW is installed. To import your own images, copy the files to the ${/assets} folder and then they will be available to
+        You have restricted access to the files that are located in either the ${assets} or ${demos} folders
+        where INFINIWORKFLOW is installed. To import your own images, copy the files to the ${assets} folder and then they will be available to
         select in the file selector dialog.
     </p>
     <img src="/assets/ui_import_workflow.gif" />
@@ -804,7 +804,7 @@
             <td>
                 <a href="https://github.com/opencv/opencv/tree/master/data/haarcascades">Face Detect Inference using Haarcascades using OpenCV</a>
             </td>
-            <td>  <a href=https://drive.google.com/file/d/1YxrXt4Amkc278NuYUO9eK-wpaO_-Q3YP/view?usp=drive_link">haarcascades</a> </td>
+            <td>  <a href=https://drive.google.com/file/d/1YxrXt4Amkc278NuYUO9eK-wpaO_-Q3YP/view?usp=drive_link">haarcascades</a> </td> 
         </tr>
 
         <tr>
@@ -922,7 +922,7 @@
             patch.bat /folder/to/infiniworkflow_patch_v1_0.zip
         </pre>
 
-        The feature patches are meant to allow new functionaility including demos and /assets such as the ML model.
+        The feature patches are meant to allow new functionaility including demos and assets such as the ML model.
         For example you can download the YOLO classifier feature patch, yolo_v1_0.zip, from the Photron website and then install by open a Windows Powershell prompt
         and then change the directory to your INFINIWORKFLOW folder and type the following where you
         should replace /folder/to/ to the actual folder you downloaded the feature patch:
@@ -1679,7 +1679,7 @@ result = DayOfWeekNode()
         <tr>
             <td>get_input_filename_value</td>
             <td>
-                A helper method that calls get_input_value and returns a str Python type and resolves the path (replacing the <i>${/assets}</i> with the correct path)
+                A helper method that calls get_input_value and returns a str Python type and resolves the path (replacing the <i>${assets}</i> with the correct path)
             </td>
             <td><pre>value = self.get_input_filename_value(3)</pre></td>
         </tr>
@@ -1954,7 +1954,7 @@ result = DayOfWeekNode()
         <tr>
             <td>std::string &getAsFilename(BlobHandle blob)</td>
             <td>
-                From the blob handle get the filename value it represents, resolving the prefix <i>${/assets}</i>
+                From the blob handle get the filename value it represents, resolving the prefix <i>${assets}</i>
             </td>
         </tr>
 
