@@ -110,7 +110,7 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="http://www.photron.com" target="_blank"> <img id="logo" src="/assets/photron.png" height="20" alt="Photron" /> </a></li>
+                    <li><a href="http://www.photron.com" target="_blank"> <img id="logo" src="./assets/photron.png" height="20" alt="Photron" /> </a></li>
                 </ul>
             </div>
         </div>
@@ -120,7 +120,7 @@
     <h2>Introduction</h2>
     <p>A platform for building AI, ML, & Computer Vision pipelines using real-time sensing data</p>
 
-    <img src="/assets/ui.jpg" style="width:800px; height:440px;" />
+    <img src="./assets/ui.jpg" style="width:800px; height:440px;" />
 
     <h2>User Interface Elements</h2>
     <p>INFINIWORKFLOW runs in a browser with the following main UI components</p>
@@ -135,7 +135,7 @@
     </ul>
 
     <h3 id="Menu">Application Menu</h3>
-    <img src="/assets/ui_app_menu.jpg"  />
+    <img src="./assets/ui_app_menu.jpg" />
     <p>The application menu allows the following functionality</p>
 
     <ul>
@@ -168,7 +168,7 @@
     <h2 id="Catalog">Tools Catalog</h2>
     <p>The tool catalog allows you to add new tools as nodes into your flowgraph</p>
     <div style="overflow: hidden; height:250px; ">
-        <img src="/assets/ui.jpg" style="margin-top: -982px;  " />
+        <img src="./assets/ui.jpg" style="margin-top: -982px;  " />
     </div>
 
     <p>
@@ -179,7 +179,7 @@
     </p>
 
     <div style="overflow: hidden; height: 250px; ">
-        <img src="/assets/ui_tool_select.gif" style="margin-top: -100px; " />
+        <img src="./assets/ui_tool_select.gif" style="margin-top: -100px; " />
     </div>
 
 
@@ -192,19 +192,19 @@
             <p>
                 Drag and Drop
             </p>
-            <img src="/assets/ui_node_drag_drop.gif" />
+            <img src="./assets/ui_node_drag_drop.gif" />
         </li>
         <li>
             <p>
                 Insert a node with edge
             </p>
-            <img src="/assets/ui_node_double_click_add.gif" />
+            <img src="./assets/ui_node_double_click_add.gif" />
         </li>
     </ul>
 
     <h3 id="Flowgraph">Flowgraph</h3>
     <div style="overflow: hidden; width:1800px; height:800px; ">
-        <img src="/assets/ui.jpg" style="margin-top: -100px; margin-bottom: -400px; margin-right: -400px; " />
+        <img src="./assets/ui.jpg" style="margin-top: -100px; margin-bottom: -400px; margin-right: -400px; " />
     </div>
     <p>
         The flowgraph is used to construct your worflow that comprises of Nodes and Edges. Nodes represents functions that have input and generate outputs.
@@ -243,9 +243,9 @@
                 Adding an Edge to connect the output of an upstream node to the input of a downstream node. In this example, we want to have the Yolo Classification be done on a Movie Reader, we thus connect the output of the Movie Reader node to the input of the Yolo Classification node.
                 Click on the source port of the upstream node and the drag to the destination port of the downstream node. A green line color indicates that the edge is allowed which is based on the type matching between the two ports
             </p>
-            <img src="/assets/ui_connect_edge.gif" />
+            <img src="./assets/ui_connect_edge.gif" />
             <p>If the types do not match then a red line color indicates that the edge is invalid</p>
-            <img src="/assets/ui_invalid_connect_edge.gif" />
+            <img src="./assets/ui_invalid_connect_edge.gif" />
             <p>
                 There are a few exceptions to allow different types to be connected can be connected to each other. For example, the image2D type,
                 which represents a 2D image in system memory, can be connected to a type cuda2D, a 2D image in GPU memory and vice-versa. The exceptions are as follows:
@@ -294,7 +294,7 @@
                 Removing an Edge disonnects the output of upstream node to the input of a downstream node. In this example we no longer want the Yolo Classification be done on the output of the Movie Reader.
                 Hover over the edge, it will indicate it can be deleted when a change in cursor happens, then click on the edge to delete it
             </p>
-            <img src="/assets/ui_disconnect_edge.gif" />
+            <img src="./assets/ui_disconnect_edge.gif" />
         </li>
     </ul>
 
@@ -305,31 +305,31 @@
             <p>
                 Select a node can be done with a single click on the node. The node is shown highlighted in blue when it is selected
             </p>
-            <img src="/assets/ui_select_node.gif" />
+            <img src="./assets/ui_select_node.gif" />
         </li>
         <li>
             <p>
                 Clicking and dragging on a node will select it and also allow you to move the node around in the flowgraph
             </p>
-            <img src="/assets/ui_node_move.gif" />
+            <img src="./assets/ui_node_move.gif" />
         </li>
         <li>
             <p>
                 Holding the shift key whilst clicking allows you to add more nodes to the selection
             </p>
-            <img src="/assets/ui_node_shift_select.gif" />
+            <img src="./assets/ui_node_shift_select.gif" />
         </li>
         <li>
             <p>
                 To deselect all the nodes you can click on the flowgraph
             </p>
-            <img src="/assets/ui_deselect_all.gif" />
+            <img src="./assets/ui_deselect_all.gif" />
         </li>
         <li>
             <p>
                 Multiple nodes can also be selected by doing a rectangular selection, hold the alt key and drag the mouse which shows a box selection which will select all the nodes in the rectangle intersection after the mouse is released
             </p>
-            <img src="/assets/ui_boundbox_select.gif" />
+            <img src="./assets/ui_boundbox_select.gif" />
         </li>
         <li>
             <p>
@@ -340,7 +340,7 @@
             <p>
                 You can also 'rip' a node to remove it from the edges by shaking the node quickly
             </p>
-            <img src="/assets/ui_node_rip_edge.gif" />
+            <img src="./assets/ui_node_rip_edge.gif" />
         </li>
         <li>
             <p>
@@ -360,27 +360,27 @@
             <p>
                 To pan the flowgraph you can click and then drag the mouse. This allows you to navigate the workflow in the flowgraph when it becomes more complex
             </p>
-            <img src="/assets/ui_flowgraph_pan.gif" />
+            <img src="./assets/ui_flowgraph_pan.gif" />
         </li>
         <li>
             <p>
                 You can also zoom in and out using mouse scroll wheel or zoom gesture
             </p>
-            <img src="/assets/ui_flowgraph_zoom.gif" />
+            <img src="./assets/ui_flowgraph_zoom.gif" />
         </li>
         <li>
             <p>
                 When nodes are not in the visible viewport then indicators are shown on the boundary of the viewport.
                 This indicators are useful to highlight scrolling or zooming will yield hidden nodes.
             </p>
-            <img src="/assets/ui_flowgraph_indicators.gif" />
+            <img src="./assets/ui_flowgraph_indicators.gif" />
         </li>
     </ul>
 
 
     <h3 id="NodeMenu">Node Context Menu</h3>
     <p>Clicking the left mouse button over the node brings up the node context menu and also selects the node</p>
-    <img src="/assets/ui_node_menu.gif" />
+    <img src="./assets/ui_node_menu.gif" />
     <p id="InspectAdjustNodeMenuFuncs">Inspect and adjust functions</p>
     <ul>
         <li>
@@ -476,7 +476,7 @@
     <h3 id="Editor">Parameter Editor</h3>
     <p>The parameter editor allows you to edit the parameters of the currently edited node</p>
     <div style="overflow: hidden; width:2000px; height:500px; ">
-        <img src="/assets/ui.jpg" style="margin-bottom: -500px; margin-left: -2000px; " />
+        <img src="./assets/ui.jpg" style="margin-bottom: -500px; margin-left: -2000px; " />
     </div>
 
     <p>
@@ -486,7 +486,7 @@
         not visible. You can also hide parameter inputs using the <a href="#IONodeMenuFuncs">IO functions</a>.
     </p>
     <p>
-        Hovering over the parameter will show the description of the parameter <img src="/assets/ui_tooltip_control.jpg" />
+        Hovering over the parameter will show the description of the parameter <img src="./assets/ui_tooltip_control.jpg" />
     </p>
     <p>
         The dialog buttons allow you to close the dialog either you can accept the changes made by clicking OK or reject any changes made to the
@@ -503,22 +503,22 @@
         </tr>
         <tr>
             <td>Numeric textfield</td>
-            <td> <img src="/assets/ui_numeric_control.jpg" width="300" /> </td>
+            <td> <img src="./assets/ui_numeric_control.jpg" width="300" /> </td>
             <td> A numeric input allows you to enter the value. There are also step controls that allow you to increment one unit up and down. </td>
         </tr>
         <tr>
             <td>Numeric2 textfield</td>
-            <td> <img src="/assets/ui_numeric2_control.jpg" width="300" /> </td>
+            <td> <img src="./assets/ui_numeric2_control.jpg" width="300" /> </td>
             <td> Two numeric inputs allow you to enter both numerical inputs </td>
         </tr>
         <tr>
             <td>Numeric slider</td>
-            <td> <img src="/assets/ui_slider_control.jpg" width="300" /> </td>
+            <td> <img src="./assets/ui_slider_control.jpg" width="300" /> </td>
             <td> If the slider has minimum and maximum values a slider look appears </td>
         </tr>
         <tr>
             <td>Numeric2 slider</td>
-            <td> <img src="/assets/ui_slider2_control.jpg" width="300" /> </td>
+            <td> <img src="./assets/ui_slider2_control.jpg" width="300" /> </td>
             <td>
                 Two numeric inputs with sliders that can optionally be locked together to modify both values
                 to the same value
@@ -526,12 +526,12 @@
         </tr>
         <tr>
             <td>Checkbox</td>
-            <td> <img src="/assets/ui_checkbox_control.jpg" width="300" /> </td>
+            <td> <img src="./assets/ui_checkbox_control.jpg" width="300" /> </td>
             <td> A checkbox toggle to allow you to set inputs of type bool </td>
         </tr>
         <tr>
             <td>Selection menu</td>
-            <td> <img src="/assets/ui_select_control.jpg" width="300" /> </td>
+            <td> <img src="./assets/ui_select_control.jpg" width="300" /> </td>
             <td>
                 A selection menu allows you to set the value to one of the predefined
                 values from a pulldown menu
@@ -539,7 +539,7 @@
         </tr>
         <tr>
             <td>Multi selection menu</td>
-            <td> <img src="/assets/ui_multi_select_control.jpg" width="300" /> </td>
+            <td> <img src="./assets/ui_multi_select_control.jpg" width="300" /> </td>
             <td>
                 Multi selection allows you to add tags of permitted values. In some
                 cases you can add tags to any custom value
@@ -547,12 +547,12 @@
         </tr>
         <tr>
             <td>Textfield</td>
-            <td> <img src="/assets/ui_text_control.jpg" width="300" /> </td>
+            <td> <img src="./assets/ui_text_control.jpg" width="300" /> </td>
             <td> A multi line textfield to allow you to set inputs of type string </td>
         </tr>
         <tr>
             <td>Point</td>
-            <td> <img src="/assets/ui_point_control.jpg" width="300" /> </td>
+            <td> <img src="./assets/ui_point_control.jpg" width="300" /> </td>
             <td>
                 A point allows you to set the values with a textfield and also
                 has an icon <i class="bi bi-plus-circle"></i> when pressed opens the viewer and you can select a point by clicking
@@ -561,31 +561,31 @@
         </tr>
         <tr>
             <td>Color</td>
-            <td> <img src="/assets/ui_color_control.jpg" width="300" /> </td>
+            <td> <img src="./assets/ui_color_control.jpg" width="300" /> </td>
             <td>
                 A color button when clicked allows you to set the color using a color dialog <br>
-                <img src="/assets/ui_color_dialog_control.jpg" width="300" />
+                <img src="./assets/ui_color_dialog_control.jpg" width="300" />
             </td>
         </tr>
         <tr>
             <td>Curve</td>
-            <td> <img src="/assets/ui_curve_control.jpg" width="300" /> </td>
+            <td> <img src="./assets/ui_curve_control.jpg" width="300" /> </td>
             <td>
                 An icon <i class="bi bi-bezier2"></i> when pressed opens the bezier curve editor<br>
-                <img src="/assets/ui_graph_control.jpg" width="300" />
+                <img src="./assets/ui_graph_control.jpg" width="300" />
             </td>
         </tr>
         <tr>
             <td>Map</td>
-            <td> <img src="/assets/ui_map_control.jpg" width="300" /> </td>
+            <td> <img src="./assets/ui_map_control.jpg" width="300" /> </td>
             <td>
                 Clicking on the empty area in the dialog opens the Key/Value editor together with documentation about the hyperparameters<br>
-                <img src="/assets/ui_map_dialog_control.jpg" width="700" />
+                <img src="./assets/ui_map_dialog_control.jpg" width="700" />
             </td>
         </tr>
         <tr>
             <td>Filebrowser</td>
-            <td> <img src="/assets/ui_file_control.jpg" width="300" /> </td>
+            <td> <img src="./assets/ui_file_control.jpg" width="300" /> </td>
             <td>
                 Opens the IO dialog that allows you to to set the filename using a textfield. The prefix ${assets} is used to specifiy the file location is in the assets folder.
                 An icon <i class="bi bi-folder-fill"></i> when pressed opens the IO Dialog that allows you to set the file location
@@ -593,7 +593,7 @@
         </tr>
         <tr>
             <td>Tabs</td>
-            <td> <img src="/assets/ui_tabs_control.jpg" width="300" /> </td>
+            <td> <img src="./assets/ui_tabs_control.jpg" width="300" /> </td>
             <td>
                 Some of the tools also have a tab UI to simplify the controls into logical groups
             </td>
@@ -605,14 +605,14 @@
     <h3 id="Viewer">Viewer</h3>
     <p>The viewer allows you to view the outputs of the currently viewed node</p>
     <div style="overflow: hidden; width:770px; height:580px; ">
-        <img src="/assets/ui.jpg" style="margin-top: -220px; margin-bottom: -400px; margin-left: -150px; margin-right: -400px;" />
+        <img src="./assets/ui.jpg" style="margin-top: -220px; margin-bottom: -400px; margin-left: -150px; margin-right: -400px;" />
     </div>
 
     <p id="PointViewer">
         A node can be viewed using the node context menu and selecting <a href="#InspectAdjustNodeMenuFuncs">'View' or 'View & Edit'</a>. When viewing a node with multiple outputs a menu
         will ask which output to view:
     </p>
-    <img src="/assets/ui_viewer_outputs.gif" />
+    <img src="./assets/ui_viewer_outputs.gif" />
 
     <ul>
         <li><i class="bi bi-info-circle"></i> Resolution Information: Shows the resolution, bit depth and whether the image is in system or GPU memory</li>
@@ -624,19 +624,19 @@
         The viewer also has controls to zoom in and pan. Using the mouse scroll wheel or zoom gesture you can also then pan by dragging the image. When zoomed in, a thumbnail is shown of the full image
         together with a slider to set the zoom amount.
     </p>
-    <img src="/assets/ui_viewer_zoom.gif" />
+    <img src="./assets/ui_viewer_zoom.gif" />
 
     <p id="PointViewer">
         Point input parameters in the Parameter Editor can be set in the overlay. Select the overlay <i class="bi bi-plus-circle"></i> icon and then click in the viewer
         to set the location of the point:
     </p>
-    <img src="/assets/ui_viewer_point.gif" />
+    <img src="./assets/ui_viewer_point.gif" />
 
     <p id="ThumbnailViewer">
         Only one node can be viewed at one time in the viewer. However, the flowgraph can also show a thumbnail viewer that shows the results of the output of the node using the 'Image Viewer' tool. This allows you to
         show multiple viewers at the same time on the workflow.
     </p>
-    <img src="/assets/ui_thumbnail_viewer.gif" />
+    <img src="./assets/ui_thumbnail_viewer.gif" />
 
     <p>The viewer as well as displaying images has specific UI to display</p>
     <ul>
@@ -651,7 +651,7 @@
         The icon <i class="bi bi-arrow-repeat"></i> allows different representations of the table including show the sliced rows and columns,
         and red cells represent missing data; a summary description of the statistics of each column and the description of the types of each column:
     </p>
-    <img src="/assets/ui_viewer_dataframe.gif" width="400" />
+    <img src="./assets/ui_viewer_dataframe.gif" width="400" />
 
     <h3 id="Tensors">Tensors</h3>
     <p>
@@ -663,19 +663,19 @@
     <p>
         A 1D dimensional tensors can be viewed as a histogram; a dot plot; a line chart and a histogram chart:
     </p>
-    <img src="/assets/ui_viewer_tensor1d.gif" width="400" />
+    <img src="./assets/ui_viewer_tensor1d.gif" width="400" />
     <p>
         A 2D dimensional tensors can be viewed as a heatmap; a 3D height map plot; a line chart and a table:
     </p>
-    <img src="/assets/ui_viewer_tensor2d.gif" width="400" />
+    <img src="./assets/ui_viewer_tensor2d.gif" width="400" />
     <p>
         A 3D dimensional tensors can be viewed as a 3D plot and abbrevaited tensor list:
     </p>
-    <img src="/assets/ui_viewer_tensor3d.gif" width="400" />
+    <img src="./assets/ui_viewer_tensor3d.gif" width="400" />
     <p>
         Images can also be converted to tensors(using the 'Image to Tensor' tool) and they will be viewed as a 3D image; a 3D height map plot; a 3D color space plot, and abbrevaited tensor list:
     </p>
-    <img src="/assets/ui_viewer_tensor_image.gif" width="400" />
+    <img src="./assets/ui_viewer_tensor_image.gif" width="400" />
 
 
     <h3 id="ImportExport">Import/Export</h3>
@@ -685,7 +685,7 @@
         where INFINIWORKFLOW is installed. To import your own images, copy the files to the ${assets} folder and then they will be available to
         select in the file selector dialog.
     </p>
-    <img src="/assets/ui_import_workflow.gif" />
+    <img src="./assets/ui_import_workflow.gif" />
 
 
     <h3 id="Hyperparamereters">Hyperparamereters</h3>
@@ -694,7 +694,7 @@
         This brings up a dialog that allows you to select each input parameter and also set the range of values you want to have as part
         of the grid search. The dialog also includes the documentation for the model including the values expected for each paremeter argument.
     </p>
-    <img src="/assets/ui_hyperparams.gif" />
+    <img src="./assets/ui_hyperparams.gif" />
 
     <h3 id="GridSearch">Grid Search</h3>
     <p>
@@ -705,7 +705,7 @@
         indicators to show which is the highest or lowest value so far found.
         You can select a link in one of the rows to optimize your model which sets the hyperparameters values to the row.
     </p>
-    <img src="/assets/ui_gridsearch.gif" />
+    <img src="./assets/ui_gridsearch.gif" />
 
     <h3 id="CreateMacro">Create Macro</h3>
     <p>
@@ -714,13 +714,14 @@
         the future and promotes sharing of models. When you create a macro you open the node context menu and select <a href="#MLNodeNodeMenuFuncs">'Create Macro'</a>.
         The dialog allows you to name and set optional notes that will be associated with this new tool.
     </p>
-    <img src="/assets/ui_create_macro.gif" />
+    <img src="./assets/ui_create_macro.gif" />
 
 
     <h2>Installation</h2>
     <h3 id="SystemRequirements">System Requirements</h3>
     <p>
-        INFINIWORKFLOW runs on a modern PC with Windows 11 or higher with an Intel or AMD processor and a NVIDIA GPU. It is highly recommended to have a multicore processor as
+        INFINIWORKFLOW runs on a modern PC with Windows 11 or higher with an Intel or AMD processor and a NVIDIA GPU with 30GB+ of disk space.
+        It is highly recommended to have a multicore processor as
         the execution will be more smoother. The software will run on machines without a NVIDIA GPU but that will significantly reduce the performance especially
         for ML workflows. You must also have the latest Google Chrome browser installed : 131.0.6778.140 or higher.
     </p>
@@ -756,7 +757,7 @@
             <td>
                 SDK to allow you to write your own Python and C++ Plugins for INFINIWORKFLOW
             </td>
-            <td>  <a href=""https://drive.google.com/file/d/1_RekPTKjxQTA-WMk_qCf6rbRMoyeYIf5/view?usp=drive_link>external_sdk</a> </td>
+            <td>  <a href="" https: //drive.google.com/file/d/1_RekPTKjxQTA-WMk_qCf6rbRMoyeYIf5/view?usp =drive_link>external_sdk</a> </td>
         </tr>
 
         <tr>
@@ -804,7 +805,7 @@
             <td>
                 <a href="https://github.com/opencv/opencv/tree/master/data/haarcascades">Face Detect Inference using Haarcascades using OpenCV</a>
             </td>
-            <td>  <a href=https://drive.google.com/file/d/1YxrXt4Amkc278NuYUO9eK-wpaO_-Q3YP/view?usp=drive_link">haarcascades</a> </td> 
+            <td>  <a href=https://drive.google.com/file/d/1YxrXt4Amkc278NuYUO9eK-wpaO_-Q3YP/view?usp =drive_link">haarcascades</a> </td>
         </tr>
 
         <tr>
@@ -879,19 +880,23 @@
 
     <h3 id="InstallationSteps">Installation Steps</h3>
     <p>
-        Download the INFINWORKFLOW package from Photron's website. There are multiple packages, the first package to download is infiniworkflow_v1_0.zip.
-        Unzip this file and then double click on the infiniworkflow.bat file in the unzipped folder:
-    </p>
-    <img src="/assets/ui_bat_file.jpg" />
-
-    <p>
-        A webpage displayed in the Google Chrome browser should
-        appear - if another browser shows up then change your default browser to Chrome and redo this step.
+        Make sure you have the latest Google Chrome browser installed : 131.0.6778.140 or higher and it is set to your default browser.
+        Then download the INFINWORKFLOW package from Photron's website. There are multiple packages, the first package to download is infiniworkflow_v1_0.zip.
+        Unzip this file and then double click on the <i>install.bat</i> file in the unzipped folder - the installation will install the required Python modules
     </p>
 
     <p>
-        The first thing that will be displayed in the browser is the INFINIWORKFLOW EULA which you must agree to. You will also see a Windows dialog that requests "Do you want to allow public and private networks to access the app?" for Python
-        - you must allow access.
+        After is is completed, to run INFINIWORKFLOW, double click on the <i>infiniworkflow.bat</i> file in the unzipped folder:
+</p>
+    <img src="./assets/ui_bat_file.jpg" />
+
+    <p>
+        A webpage displayed in the Google Chrome browser should appear - if another browser shows up then change your default browser to Chrome and redo this step.
+    </p>
+
+    <p>
+        The first thing that will be displayed in the browser is the INFINIWORKFLOW EULA which you must agree to. 
+        You will also see a Windows dialog that requests "Do you want to allow public and private networks to access the app?" for Python - you must allow access.
     </p>
 
     <h3 id="FirewallAccess">Firewall Access</h3>
@@ -944,7 +949,7 @@
         node will send data from your system to the distrbuted server and the Source node will receive data from
         the distributed server.
     </p>
-    <img src="/assets/ui_distributed_processing.gif" />
+    <img src="./assets/ui_distributed_processing.gif" />
 
     <h3 id="Publish">Publish</h3>
     <p>
@@ -955,14 +960,14 @@
         The first step is to select the nodes you want to publish parameters by selecting a contigious set of nodes
         and then using the node context menu and selecting <a href="#ExperimentalNodeMenuFuncs">'Publish'</a>
     </p>
-    <img src="/assets/ui_publishing.gif" />
+    <img src="./assets/ui_publishing.gif" />
 
     <p>
         Once you have selected the subset of input and outputs then you can click on the publish <i class="bi bi-pencil-square"></i> icon in the application menu
         and the flowgraph is hidden and a simpler UI only showing the published controls in the Parameter Editor and a fullscreen viewer is shown. You
         can switch back to the standard flowgraph view by pressing the publish icon again.
     </p>
-    <img src="/assets/ui_publish_view.gif" />
+    <img src="./assets/ui_publish_view.gif" />
 
     <h2>Plugin SDK</h2>
     <p>
