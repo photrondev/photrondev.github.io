@@ -1595,27 +1595,67 @@ class DayOfWeekNode(PythonNode):
 		super().__init__()
 		self.value = None
 
-	def execute(self):
-		if not self.is_enabled():
+	def execute(self, host):
+		if not host.is_enabled():
 			self.value =  False
 		else:
-			year = self.get_input_int_value(0)
-			month = self.get_input_int_value(1)
-			day = self.get_input_int_value(2)
+			year = host.get_input_int_value(0)
+			month = host.get_input_int_value(1)
+			day = host.get_input_int_value(2)
 
 			self.value = datetime.datetime.strptime(str(day) + "/" + str(month+1) + "/" + str(year), "%d/%m/%Y").strftime('%A')
 
-		self.set_output_value(0, self.value)
+		host.set_output_value(0, self.value)
 	
 	....
 		
-	def copy(self):
+	def copy(self, host):
 		return DayOfWeekNode()
 
 result = DayOfWeekNode()
 </pre>
 
-    <p>The following methods should be overriden by your derived class of <i>PythonNode</i></p>
+    <p>The Python API for the PluginApi is requires 3 methods to be implemented: copy, execute and view_html:</p>
+<pre>
+class PluginApi:
+	''' 
+	Constructor
+	''' 
+	def __init__(self):
+		pass
+
+	'''
+	Copy Constructor
+	'''
+	def copy(self, host):
+		raise NotImplementedError
+
+	''' 
+	Executes the plugin
+	''' 
+	def execute(self, host):
+		raise NotImplementedError
+
+	''' 
+	Return a HTML string that represents the nth output
+	''' 
+	def view_html(self, host, nth_output):
+		raise NotImplementedError
+
+	''' 
+	Returns true if the node allows dynamic number of inputs
+	''' 
+	def has_dynamic_inputs(self, host):
+		return False
+
+	''' 
+	Returns true if the node allows dynamic number of outputs
+	''' 
+	def has_dynamic_outputs(self, host):
+		return False
+</pre>
+
+    <p>The following methods should be overriden by your derived class of <i>PluginApi</i></p>
     <table>
         <tr>
             <th>Instance method</th>
@@ -1628,7 +1668,7 @@ result = DayOfWeekNode()
         <tr>
             <td>copy</td>
             <td><i class="bi bi-check"></i></td>
-            <td><pre>self</pre></td>
+            <td><pre>self, host : PluginHost</pre></td>
             <td><pre>instance of this plugin class</pre></td>
             <td>You should make a copy of the class instance and return it</td>
         </tr>
@@ -1636,7 +1676,7 @@ result = DayOfWeekNode()
         <tr>
             <td>execute</td>
             <td><i class="bi bi-check"></i></td>
-            <td><pre>self</pre></td>
+            <td><pre>self, host : PluginHost</pre></td>
             <td><pre>None</pre></td>
             <td>The method called when the plugin is executed usually when some input parameters have changed</td>
         </tr>
@@ -1644,7 +1684,7 @@ result = DayOfWeekNode()
         <tr>
             <td>view_html</td>
             <td><i class="bi bi-check"></i></td>
-            <td><pre>self, output_port_num : int</pre></td>
+            <td><pre>self, host : PluginHost, nth_output : int</pre></td>
             <td><pre>string</pre></td>
             <td>The method is called when the output oif viewed, should return a html string that represents the output</td>
         </tr>
@@ -1652,7 +1692,7 @@ result = DayOfWeekNode()
         <tr>
             <td>has_dynamic_inputs</td>
             <td></td>
-            <td><pre>self</pre></td>
+            <td><pre>self, host : PluginHost</pre></td>
             <td><pre>bool</pre></td>
             <td>
                 Returns if the plugin has dynamic inputs, defaults to False
@@ -1662,7 +1702,7 @@ result = DayOfWeekNode()
         <tr>
             <td>has_dynamic_outputs</td>
             <td></td>
-            <td><pre>self</pre></td>
+            <td><pre>self, host : PluginHost</pre></td>
             <td><pre>bool</pre></td>
             <td>
                 Returns if the plugin has dynamic outputs, defaults to False
@@ -1671,7 +1711,106 @@ result = DayOfWeekNode()
 
     </table>
 
-    <p>The following methods should can be called on the <i>PythonNode</i></p>
+
+
+    <a>It uses a helper class called PluginHost, which is as follows:</a>
+<pre>
+class PluginHost:
+	''' 
+	Inform the host - set value to False if executing was successful, otherwise set value to True to indicate you want subsequent execution calls
+	'''
+	def set_dirty(self, value):
+		raise NotImplementedError
+
+	''' 
+	Gets the number of current inputs should be same as your JSON file unless you have dynamic inputs 
+	'''
+	def get_num_inputs(self):
+		raise NotImplementedError
+
+	''' 
+	Gets the number of current outputs, should be same as your JSON file unless you have dynamic outputs
+	'''
+	def get_num_outputs(self):
+		raise NotImplementedError
+
+	''' 
+	Gets the value of the nth input index
+	'''
+	def get_input_value(self, nth_index):
+		raise NotImplementedError
+
+	''' 
+	Gets the nth input index value as int
+	'''
+	def get_input_int_value(self, nth_index):
+		raise NotImplementedError
+
+	''' 
+	Gets the nth input index value as numeric (float, int or bool)
+	'''
+	def get_input_numeric_value(self, nth_index):
+		raise NotImplementedError
+
+	''' 
+	Gets the nth input index value as numeric (bool)
+	'''
+	def get_input_bool_value(self, nth_index):
+		raise NotImplementedError
+
+	''' 
+	Gets the nth input index value as str
+	'''
+	def get_input_string_value(self, nth_index):
+		raise NotImplementedError
+
+	''' 
+	Gets the nth input index value as str and resolves ${assets}
+	'''
+	def get_input_filename_value(self, nth_index):
+		raise NotImplementedError
+
+	''' 
+	Gets the nth input index value as dict
+	'''
+	def get_input_map_value(self, nth_index):
+		raise NotImplementedError
+
+	''' 
+	Gets the nth input index value as bool list
+	'''
+	def get_input_bool_list_value(self, nth_index):
+		raise NotImplementedError
+
+	''' 
+	Gets the nth input index value as numeric (float, int or bool) list
+	'''
+	def get_input_numeric_list_value(self, nth_index):
+		raise NotImplementedError
+
+	''' 
+	Gets the nth input index value as str list
+	'''
+	def get_input_string_list_value(self, nth_index):
+		raise NotImplementedError
+
+	''' 
+	Sets the nth output_port to value argument
+	Will also set the firsty flag to False to indicate rendering was completed
+	'''
+	def set_output_value(self, nth_output, value):
+		raise NotImplementedError
+
+	def set_error_message(self, error_message):
+		raise NotImplementedError
+
+	def is_enabled(self):
+		raise NotImplementedError
+</pre>
+
+
+
+    <p>The following methods should can be called on the <i>PluginHost</i></p>
     <table>
         <tr>
             <th>Instance method</th>
@@ -1685,7 +1824,7 @@ result = DayOfWeekNode()
                 During exeuction you can get the value of an input to the plugin, where you pass the order of the parameter
                 E.g. pass 0 for the first input parameter
             </td>
-            <td><pre>value = self.get_input_value(3)</pre></td>
+            <td><pre>value = host.get_input_value(3)</pre></td>
         </tr>
 
         <tr>
@@ -1693,7 +1832,7 @@ result = DayOfWeekNode()
             <td>
                 A helper method that calls get_input_value and returns the value as a bool Python type
             </td>
-            <td><pre>value = self.get_input_bool_value(3)</pre></td>
+            <td><pre>value = host.get_input_bool_value(3)</pre></td>
         </tr>
 
         <tr>
@@ -1701,7 +1840,7 @@ result = DayOfWeekNode()
             <td>
                 A helper method that calls get_input_value and returns the value as a int Pythontype
             </td>
-            <td><pre>value = self.get_input_int_value(3)</pre></td>
+            <td><pre>value = host.get_input_int_value(3)</pre></td>
         </tr>
 
         <tr>
@@ -1709,7 +1848,7 @@ result = DayOfWeekNode()
             <td>
                 A helper method that calls get_input_value and returns a float, int or bool Python type
             </td>
-            <td><pre>value = self.get_input_numeric_value(3)</pre></td>
+            <td><pre>value = host.get_input_numeric_value(3)</pre></td>
         </tr>
 
         <tr>
@@ -1717,7 +1856,7 @@ result = DayOfWeekNode()
             <td>
                 A helper method that calls get_input_value and returns a str Python type
             </td>
-            <td><pre>value = self.get_input_string_value(3)</pre></td>
+            <td><pre>value = host.get_input_string_value(3)</pre></td>
         </tr>
 
         <tr>
@@ -1725,7 +1864,7 @@ result = DayOfWeekNode()
             <td>
                 A helper method that calls get_input_value and returns a str Python type and resolves the path (replacing the <i>${assets}</i> with the correct path)
             </td>
-            <td><pre>value = self.get_input_filename_value(3)</pre></td>
+            <td><pre>value = host.get_input_filename_value(3)</pre></td>
         </tr>
 
         <tr>
@@ -1733,7 +1872,7 @@ result = DayOfWeekNode()
             <td>
                 A helper method that calls get_input_value and returns a dict Python type
             </td>
-            <td><pre>value = self.get_input_map_value(3)</pre></td>
+            <td><pre>value = host.get_input_map_value(3)</pre></td>
         </tr>
 
         <tr>
@@ -1741,7 +1880,7 @@ result = DayOfWeekNode()
             <td>
                 A helper method that calls get_input_value and returns a list of bool Python type
             </td>
-            <td><pre>value = self.get_input_bool_list_value(3)</pre></td>
+            <td><pre>value = host.get_input_bool_list_value(3)</pre></td>
         </tr>
 
         <tr>
@@ -1749,7 +1888,7 @@ result = DayOfWeekNode()
             <td>
                 A helper method that calls get_input_value and returns a list of float, int or bool Python type
             </td>
-            <td><pre>value = self.get_input_numeric_list_value(3)</pre></td>
+            <td><pre>value = host.get_input_numeric_list_value(3)</pre></td>
         </tr>
 
         <tr>
@@ -1757,7 +1896,7 @@ result = DayOfWeekNode()
             <td>
                 A helper method that calls get_input_value and returns a list of str Python type
             </td>
-            <td><pre>value = self.get_input_string_list_value(3)</pre></td>
+            <td><pre>value = host.get_input_string_list_value(3)</pre></td>
         </tr>
 
         <tr>
@@ -1767,7 +1906,7 @@ result = DayOfWeekNode()
                 E.g. pass 0 for the first input parameter
                 This also will set the dirty flag to False (see set_dirty)
             </td>
-            <td><pre>self.set_output_value(0, result)</pre></td>
+            <td><pre>host.set_output_value(0, result)</pre></td>
         </tr>
 
         <tr>
@@ -1776,7 +1915,7 @@ result = DayOfWeekNode()
                 During exeuction you can set if the node has been executed by setting dirty flag to False. This is automatically set when you
                 set the outputs but you can set it to True if you want to have the node get executed again
             </td>
-            <td><pre>self.set_dirty(True)</pre></td>
+            <td><pre>host.set_dirty(True)</pre></td>
         </tr>
 
         <tr>
@@ -1784,7 +1923,7 @@ result = DayOfWeekNode()
             <td>
                 Returns the number of inputs that plugin has
             </td>
-            <td><pre>value = self.get_num_inputs()</pre></td>
+            <td><pre>value = host.get_num_inputs()</pre></td>
         </tr>
 
         <tr>
@@ -1792,7 +1931,7 @@ result = DayOfWeekNode()
             <td>
                 Returns the number of outputs that plugin has
             </td>
-            <td><pre>value = self.get_num_outputs()</pre></td>
+            <td><pre>value = host.get_num_outputs()</pre></td>
         </tr>
 
         <tr>
@@ -1800,7 +1939,7 @@ result = DayOfWeekNode()
             <td>
                 Sets an error message that will be shown in the UI
             </td>
-            <td><pre>self.error_message("Something bad happened")</pre></td>
+            <td><pre>host.error_message("Something bad happened")</pre></td>
         </tr>
 
         <tr>
@@ -1808,7 +1947,7 @@ result = DayOfWeekNode()
             <td>
                 Returns if the node is enabled
             </td>
-            <td><pre>value = self.is_enabled()</pre></td>
+            <td><pre>value = host.is_enabled()</pre></td>
         </tr>
 
     </table>
