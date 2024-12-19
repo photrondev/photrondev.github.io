@@ -1677,7 +1677,10 @@ class PluginApi:
             <td><i class="bi bi-check"></i></td>
             <td><pre>self, host : PluginHost</pre></td>
             <td><pre>instance of this plugin class</pre></td>
-            <td>You should make a copy of the class instance and return it</td>
+            <td>
+                This method will be called when INFINWORKFLOW requests a copy of an instance of this class
+                which should return a deep copy.
+            </td>
         </tr>
 
         <tr>
@@ -1685,7 +1688,13 @@ class PluginApi:
             <td><i class="bi bi-check"></i></td>
             <td><pre>self, host : PluginHost</pre></td>
             <td><pre>None</pre></td>
-            <td>The method called when the plugin is executed usually when some input parameters have changed</td>
+            <td>
+                The method called when the plugin is executed usually when some input parameters have changed.
+                You can call the host to get input values, e.g. host.get_input_int_value(...), and finally set the output value.
+                If the execution was unsuccessful then you can call host.set_error_message with the error message
+                If you want to have the node to be executed you can call host.set_dirty(True) otherwise
+                the node will only get re-executed when input parameters have been modified
+            </td>
         </tr>
 
         <tr>
@@ -1693,7 +1702,12 @@ class PluginApi:
             <td><i class="bi bi-check"></i></td>
             <td><pre>self, host : PluginHost, nth_output : int</pre></td>
             <td><pre>string</pre></td>
-            <td>The method is called when the output oif viewed, should return a html string that represents the output</td>
+            <td>
+                The method is called after the execute method, when the output of node is viewed
+                The view_html should return a html string that represents the output of the nth output.
+                Typically, in the execute method you can compute output values and store them in instance variables of the class
+                and then later in the view_html you can use those values to establish what HTML string you will pass back.
+            </td>
         </tr>
 
         <tr>
@@ -1720,7 +1734,11 @@ class PluginApi:
 
 
 
-    <a>It uses a helper class called PluginHost, which is as follows:</a>
+    <a>
+        The methods for <i>PluginApi</i> have a instance of <i>PluginHost</i>, the host, which is a helper class that allows you to call 
+        INFINIWORKFLOW related functions. The execute method should for example call the methods to get input values (e.g. get_input_int_value) 
+        and set the output value (i.e. set_output_value). The full API is as follows:
+    </a>
 <pre>
 class PluginHost:
 	''' 
