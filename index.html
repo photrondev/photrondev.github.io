@@ -50,6 +50,7 @@
                             <li><a href="#Flowgraph">Flowgraph</a></li>
                             <li><a href="#Editor">Parameter Editor</a></li>
                             <li><a href="#Viewer">Viewer</a></li>
+                            <li><a href="#Widgets">Widgets</a></li>
                             <li><a href="#ImportExport">IO</a></li>
                         </ul>
                     </li>
@@ -121,7 +122,7 @@
     <h2>Introduction</h2>
     <p>A platform for building AI, ML, & Computer Vision pipelines using real-time sensing data</p>
 
-    <img src="./assets/ui.jpg"width="65%" />
+    <img src="./assets/ui.jpg" width="65%" />
 
     <h2>User Interface Elements</h2>
     <p>INFINIWORKFLOW runs in a browser with the following main UI components</p>
@@ -225,6 +226,10 @@
         <tr>
             <td><div style="background-color: #76B900; width: 50px; height: 50px; "> </div></td>
             <td>Cuda Kernels (always executed on the GPU)</td>
+        </tr>
+        <tr>
+            <td><div style="background-color: rgb(100,100,100); width: 50px; height: 50px; "> </div></td>
+            <td><a href="#Widgets">Widget nodes (executed on the CPU)</a></td>
         </tr>
     </table>
 
@@ -475,8 +480,7 @@
         </li>
         <li>
             <i class="glyphicon glyphicon-shopping-cart"></i> Publish: an experimental <a href="#Publish">feature</a>  that allows you mark which of the nodes inputs and outputs will be available in the publish view.
-            The published view is a simplification of the UI where the flowgraph no longer is shown and instead the editor has only the list of published inputs and the viewer can only show the list of
-            published outputs. The future goal of this feature is to allow you to publish a simple app that has the critical controls that are needed in the deployment of your
+            The published view is a simplification of the UI where the flowgraph no longer is shown and instead the published <a href="#Widgets">Widgets</a> are only displayed in the Parameter Editor and Viewer. The future goal of this feature is to allow you to publish a simple app that has the critical controls that are needed in the deployment of your
             workflow in production and whilst hiding the complexity of the workflow
         </li>
         <li><i class="bi bi-chat"></i> Chatbox: an experimental feature that allows you to type a question and get an answer in the form of a automatically generated workflow</li>
@@ -698,6 +702,31 @@
         Images can also be converted to tensors(using the 'Image to Tensor' tool) and they will be viewed as a 3D image; a 3D height map plot; a 3D color space plot, and abbrevaited tensor list:
     </p>
     <img src="./assets/ui_viewer_tensor_image.gif" width="400" />
+
+
+    <h3 id="Widgets">Widgets</h3>
+    <p>A set of tools, called Widgets, is available that provide user interface controls directly in the flowgraph</p>
+    <img src="./assets/ui_widgets.jpg" width="80%" />
+    <p>
+        These widgets are an easy way to modify the parameters without having to open the parameter editor - you can
+        selectively decide which parameters are important enough to add as widgets to that graph. For example he following
+        flowgraph has a number of widgets added: a Filebrowser, Selection List and Slider are added to the flowgraph as well as two output view widgets:
+    </p>
+    <img src="./assets/ui_widgets_graph.jpg" width="40%"  />
+
+    <p>
+        You can now modify those controls direcly in the flowgraph. Furthermore, the widgets can be used in conjuction with the <a href="#Publish">'Publish'</a>
+        feature. Each widgets can be opening in the Parameter Editor and you can set the attributes such as the name which will show in the published view for each
+        widget. Widgets such as Sliders allow you to set their specific attributes such as the minimum, maximum and step value for the Slider widget.
+        All widgets have the common attributes of the name and description (used for tooltips) as well as layouts. The layouts allow you to specifiy an optional
+        Tab widget the widget will be placed in and also the order in which the control, a lower number will allow the control to be higher up in the
+        layout. An example of the Widget Slider's parameters are as follows:
+    </p>
+    <img src="./assets/ui_publishing_controls.gif" />
+
+    <p>
+        See the section on <a href="#Publish">'publishing'</a> to understand how you can leverage widgets in published workflows.
+    </p>
 
 
     <h3 id="ImportExport">Import/Export</h3>
@@ -930,7 +959,7 @@
         Then download the INFINWORKFLOW package from Photron's website. There are multiple packages, the first package to download is infiniworkflow_v1_0.zip.
         Unzip this file to a location where you want to maintain the INFINIWORKFLOW application, for example in your <i>Documents</i> folder.
         To install, double click on the <i>install.bat</i> file in the unzipped folder - the installation will install the required Python modules.
-        The installation of Python modules will take around 30 minutes and requires network access, please let it run to completion before you 
+        The installation of Python modules will take around 30 minutes and requires network access, please let it run to completion before you
         proceed to the next step.
     </p>
 
@@ -1014,22 +1043,45 @@
     <img src="./assets/ui_distributed_processing.gif" />
 
     <h3 id="Publish">Publish</h3>
+
+    <img src="./assets/ui_widgets_publish.jpg" width="70%" />
+
     <p>
-        This feature allows you to simplify your worflow to just a subset of input parameters you want to expose as well as a limted subset of outputs that
-        can be viewed. The future goal of this feature is to allow you to publish a simple app that has the critical controls that are needed in the deployment of your
+        This feature allows you to simplify your worflow to just a subset of <a href="#Widgets">'Widgets'</a>. The future goal of this feature is to allow you to publish a simple app that has the critical controls that are needed in the deployment of your
         workflow in production whilst hiding the complexity of the workflow.
 
-        The first step is to select the nodes you want to publish parameters by selecting a contigious set of nodes
-        and then using the node context menu and selecting <a href="#ExperimentalNodeMenuFuncs">'Publish'</a>
+        The first step is to add <a href="#Widgets">'Widgets'</a> on the node inputs you want to publish as well as widget outputs to the node outputs. An example of this
+        is as follows, where a Filebrowser, Selection List and Slider are added to the flowgraph as well as two output view widgets:
+
     </p>
-    <img src="./assets/ui_publishing.gif" />
+    <img src="./assets/ui_widgets_graph.jpg" width="60%" />
+
+    <p>
+        You can further, refine the widgets by opening the editor and you can set the attributes such as the name which will show in the published view for each
+        widget. Widgets such as Sliders allow you to set their specific attributes such as the minimum, maximum and step value for the Slider widget.
+        All widgets have the common attributes of the name and description (used for tooltips) as well as layouts. The layouts allow you to specifiy an optional
+        Tab widget the widget will be placed in and also the order in which the control, a lower number will allow the control to be higher up in the
+        layout. An example of the Widget Slider's parameters are as follows:
+    </p>
+
+    <img src="./assets/ui_publishing_controls.gif" width="400px" />
+
+    <p>
+        The widget outputs allow you to specify the name of the output, used in the tooltip, as well as an optional order of the view output and an optional icon.
+        If no icon is present then a standard set of numbers will be shown. The views are shown in the toolbar when the published view is shown, for example for the
+        two widget outputs, you would see the following icons in the toolbar. Hovering over the icons will show the tooltip and clicking on them will view
+        the particular output
+    </p>
+
+    <img src="./assets/ui_widgets_publish_views.jpg" />
 
     <p>
         Once you have selected the subset of input and outputs then you can click on the publish <i class="bi bi-shop-window"></i> icon in the application menu
         and the flowgraph is hidden and a simpler UI only showing the published controls in the Parameter Editor and a fullscreen viewer is shown. You
-        can switch back to the standard flowgraph view by pressing the publish <i class="bi bi-shop-window"></i> icon again.
+        can switch back to the standard flowgraph view by pressing the publish <i class="bi bi-shop-window"></i> icon again. The Parameter Editor will show
+        the widgets you have defined in your flowgraph using their attributes such as their name and layouts:
     </p>
-    <img src="./assets/ui_publish_view.gif" />
+    <img src="./assets/ui_widgets_publish_editor.jpg" />
 
     <h2>Plugin SDK</h2>
     <p>
@@ -1650,14 +1702,18 @@ class DayOfWeekNode(PythonNode):
 result = DayOfWeekNode()
 </pre>
 
-<p>If you wish to instead use an existing Node but with a different JSON, e.g. you want to use the GenericDataset tool but set the parameters and hide them, then
-no code is needed any instead the result variable should return the identifier of the existing tool:</p>
+    <p>
+        If you wish to instead use an existing Node but with a different JSON, e.g. you want to use the GenericDataset tool but set the parameters and hide them, then
+        no code is needed any instead the result variable should return the identifier of the existing tool:
+    </p>
 <pre>
 result = "torch.generic_loader"
 </pre>
 
-    <p>However, using the Python API provides you full capability as long as you override the PluginApi class
-    which requires 3 at least methods to be implemented: copy, execute and view_html:</p>
+    <p>
+        However, using the Python API provides you full capability as long as you override the PluginApi class
+        which requires 3 at least methods to be implemented: copy, execute and view_html:
+    </p>
 <pre>
 class PluginApi:
 	''' 
@@ -1770,8 +1826,8 @@ class PluginApi:
 
 
     <a>
-        The methods for <i>PluginApi</i> have a instance of <i>PluginHost</i>, the host, which is a helper class that allows you to call 
-        INFINIWORKFLOW related functions. The execute method should for example call the methods to get input values (e.g. get_input_int_value) 
+        The methods for <i>PluginApi</i> have a instance of <i>PluginHost</i>, the host, which is a helper class that allows you to call
+        INFINIWORKFLOW related functions. The execute method should for example call the methods to get input values (e.g. get_input_int_value)
         and set the output value (i.e. set_output_value). The full API is as follows:
     </a>
 <pre>
