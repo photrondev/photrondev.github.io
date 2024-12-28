@@ -209,7 +209,7 @@
         <img src="./assets/ui.jpg" style="margin-top: -100px; margin-bottom: -400px; margin-right: -400px; " />
     </div>
     <p>
-        The flowgraph is used to construct your worflow that comprises of Nodes and Edges. Nodes represents functions that have input and generate outputs.
+        The flowgraph is used to construct your workflow that comprises of Nodes and Edges. Nodes represents functions that have input and generate outputs.
         These nodes are created by dragging tools into your workflow from the Tools Catalog. A node's input and output have 'ports' which are where edges can
         be connected. Edges are connections between the output port of an upstream node to the input port of a upstream node. Any inputs ports that are unconnected
         can also be set to specific values using the Parameter Editor. The color of the node indicates the implementation language for the as follows:
@@ -253,7 +253,7 @@
             <p>If the types do not match then a red line color indicates that the edge is invalid</p>
             <img src="./assets/ui_invalid_connect_edge.gif" />
             <p>
-                There are a few exceptions to allow different types to be connected can be connected to each other. For example, the image2D type,
+                There are a few exceptions to allow different types to be connected to each other. For example, the image2D type,
                 which represents a 2D image in system memory, can be connected to a type cuda2D, a 2D image in GPU memory and vice-versa. The exceptions are as follows:
             </p>
             <table>
@@ -297,7 +297,7 @@
         </li>
         <li>
             <p>
-                Removing an Edge disonnects the output of upstream node to the input of a downstream node. In this example we no longer want the Yolo Classification be done on the output of the Movie Reader.
+                Removing an Edge disconnects the output of upstream node to the input of a downstream node. In this example we no longer want the Yolo Classification be done on the output of the Movie Reader.
                 Hover over the edge, it will indicate it can be deleted when a change in cursor happens, then click on the edge to delete it
             </p>
             <img src="./assets/ui_disconnect_edge.gif" />
@@ -309,7 +309,7 @@
     <ul>
         <li>
             <p>
-                To see the type of a node's input ot output, hover over the port and it will show as a tooltip
+                To see the type of a node's input or output, hover over the port and it will show as a tooltip
             </p>
             <img src="./assets/ui_tooltip_port.gif" />
         </li>
@@ -350,7 +350,12 @@
         </li>
         <li>
             <p>
-                To 'View & Edit' a node, double click the node
+                To 'View & Edit' a node, double click the node, if there are multiple outputs a menu will allow you to select which output you wish to view
+            </p>
+        </li>
+        <li>
+            <p>
+                To View a specific output you can double click on the output port of the node
             </p>
         </li>
         <li>
@@ -398,7 +403,7 @@
         <li>
             <p>
                 When nodes are not in the visible viewport then indicators are shown on the boundary of the viewport.
-                This indicators are useful to highlight scrolling or zooming will yield hidden nodes.
+                The indicators are useful to highlight scrolling or zooming will yield hidden nodes.
             </p>
             <img src="./assets/ui_flowgraph_indicators.gif" />
         </li>
@@ -428,7 +433,7 @@
             will automatically be made a unique name by prefixing with numbers.
         </li>
         <li><i class="glyphicon glyphicon-ok-circle"></i> Enable: enable a node so that it is used in processing, by default all nodes are enabled</li>
-        <li><i class="glyphicon glyphicon-remove-circle"></i> Disable: disable a node so that it is not used in processing, in which case tyically the first input is passed as the output for this node to bypass the node processing</li>
+        <li><i class="glyphicon glyphicon-remove-circle"></i> Disable: disable a node so that it is not used in processing, in which case typically the first input is passed as the output for this node to bypass the node processing</li>
     </ul>
     <p id="PerformanceNodeMenuFuncs">Performance related functions</p>
     <ul>
@@ -474,7 +479,7 @@
     <p id="ExperimentalNodeMenuFuncs">Experimental functions</p>
     <ul>
         <li>
-            <i class="bi bi-distribute-horizontal"></i> Distribute: This is an experimental <a href="#DistributionProcessing">feature</a> that allows you to select a contigious set of nodes and do the execution on
+            <i class="bi bi-distribute-horizontal"></i> Distribute: This is an experimental <a href="#DistributionProcessing">feature</a> that allows you to select a contiguous set of nodes and do the execution on
             a different process on the same system, a different machine altogether. The selected nodes are removed and two distribution nodes, Source and Sink, are added to
             receive and send data to the external process.
         </li>
@@ -506,9 +511,9 @@
     </div>
 
     <p>
-        The UI consits of a tool description link, followed by the input parameters of the edited node and the dialog buttons.
+        The UI consists of a tool description link, followed by the input parameters of the edited node and the dialog buttons.
         The description link, which shows the tool this node represents, when clicked will open a webpage that has the description of the tool.
-        The inputs parameters are the ones that are able to be edited with manual values and any inputs that are connected via the flowgraph are
+        The input parameters are the ones that are able to be edited with manual values and any inputs that are connected via the flowgraph are
         not visible. You can also hide parameter inputs using the <a href="#IONodeMenuFuncs">IO functions</a>.
     </p>
     <p>
@@ -613,7 +618,7 @@
             <td>Filebrowser</td>
             <td> <img src="./assets/ui_file_control.jpg" width="300" /> </td>
             <td>
-                Opens the IO dialog that allows you to to set the filename using a textfield. The prefix ${assets} is used to specifiy the file location is in the assets folder.
+                Opens the IO dialog that allows you to to set the filename using a textfield. The prefix ${assets} is used to specify the file location is in the assets folder.
                 An icon <i class="bi bi-folder-fill"></i> when pressed opens the IO Dialog that allows you to set the file location
             </td>
         </tr>
@@ -634,11 +639,16 @@
         <img src="./assets/ui.jpg" style="margin-top: -220px; margin-bottom: -400px; margin-left: -140px; margin-right: -380px;" />
     </div>
 
-    <p id="PointViewer">
-        A node can be viewed using the node context menu and selecting <a href="#InspectAdjustNodeMenuFuncs">'View' or 'View & Edit'</a>. When viewing a node with multiple outputs a menu
-        will ask which output to view:
+    <p>
+        A node can be viewed using the node context menu and selecting <a href="#InspectAdjustNodeMenuFuncs">'View' or 'View & Edit'</a>.
+        When viewing a node with multiple outputs a menu will ask which output to view (alternatively, if you wish to view a specific output of a node,
+        you can double click the output port directly and avoid needing to select from the menu)
     </p>
     <img src="./assets/ui_viewer_outputs.gif" />
+
+    <p>
+        
+    </p>
 
     <ul>
         <li><i class="bi bi-info-circle"></i> Resolution Information: Shows the resolution, bit depth and whether the image is in system or GPU memory</li>
@@ -695,11 +705,11 @@
     </p>
     <img src="./assets/ui_viewer_tensor2d.gif" width="400" />
     <p>
-        A 3D dimensional tensors can be viewed as a 3D plot and abbrevaited tensor list:
+        A 3D dimensional tensors can be viewed as a 3D plot and abbreviated tensor list:
     </p>
     <img src="./assets/ui_viewer_tensor3d.gif" width="400" />
     <p>
-        Images can also be converted to tensors(using the 'Image to Tensor' tool) and they will be viewed as a 3D image; a 3D height map plot; a 3D color space plot, and abbrevaited tensor list:
+        Images can also be converted to tensors(using the 'Image to Tensor' tool) and they will be viewed as a 3D image; a 3D height map plot; a 3D color space plot, and abbreviated tensor list:
     </p>
     <img src="./assets/ui_viewer_tensor_image.gif" width="400" />
 
@@ -712,13 +722,13 @@
         selectively decide which parameters are important enough to add as widgets to that graph. For example he following
         flowgraph has a number of widgets added: a Filebrowser, Selection List and Slider are added to the flowgraph as well as two output view widgets:
     </p>
-    <img src="./assets/ui_widgets_graph.jpg" width="40%"  />
+    <img src="./assets/ui_widgets_graph.jpg" width="40%" />
 
     <p>
-        You can now modify those controls direcly in the flowgraph. Furthermore, the widgets can be used in conjuction with the <a href="#Publish">'Publish'</a>
-        feature. Each widgets can be opening in the Parameter Editor and you can set the attributes such as the name which will show in the published view for each
+        You can now modify those controls directly in the flowgraph. Furthermore, the widgets can be used in conjunction with the <a href="#Publish">'Publish'</a>
+        feature. Each widget can be opened in the Parameter Editor and you can set the attributes such as the name which will show in the published view for each
         widget. Widgets such as Sliders allow you to set their specific attributes such as the minimum, maximum and step value for the Slider widget.
-        All widgets have the common attributes of the name and description (used for tooltips) as well as layouts. The layouts allow you to specifiy an optional
+        All widgets have the common attributes of the name and description (used for tooltips) as well as layouts. The layouts allow you to specify an optional
         Tab widget the widget will be placed in and also the order in which the control, a lower number will allow the control to be higher up in the
         layout. An example of the Widget Slider's parameters are as follows:
     </p>
@@ -743,7 +753,7 @@
     <p>
         You can set the hyperparameters using the node context menu and selecting <a href="#MLNodeNodeMenuFuncs">'Hyperparameters'</a>.
         This brings up a dialog that allows you to select each input parameter and also set the range of values you want to have as part
-        of the grid search. The dialog also includes the documentation for the model including the values expected for each paremeter argument.
+        of the grid search. The dialog also includes the documentation for the model including the values expected for each parameter argument.
     </p>
     <img src="./assets/ui_hyperparams.gif" />
 
@@ -751,7 +761,7 @@
     <p>
         Once you have refined your <a href="#Hyperparameters">'Hyperparameters'</a> then you can start a Grid Search
         on a metric node you wish to maximize or minimize using the node context menu and selecting <a href="#MLNodeNodeMenuFuncs">'Grid Search'</a>. The results of the Grid Search
-        are done in an different process but you can see the results by clicking the <i class="bi bi-grid-3x3-gap-fill"></i> icon in
+        are done in a different process but you can see the results by clicking the <i class="bi bi-grid-3x3-gap-fill"></i> icon in
         the application menu. The dialog will show the latest progress for each combination in the grid search and color
         indicators to show which is the highest or lowest value so far found.
         You can select a link in one of the rows to optimize your model which sets the hyperparameters values to the row.
@@ -761,7 +771,7 @@
     <h3 id="CreateMacro">Create Macro</h3>
     <p>
         When building models using the PyTorch nodes, the neural networks can get large with multiple nodes to generate
-        the entire neural networl. You can create a macro to create a tool that replaces all the nodes which can be further used in
+        the entire neural network. You can create a macro to create a tool that replaces all the nodes which can be further used in
         the future and promotes sharing of models. When you create a macro you open the node context menu and select <a href="#MLNodeNodeMenuFuncs">'Create Macro'</a>.
         The dialog allows you to name and set optional notes that will be associated with this new tool.
     </p>
@@ -790,7 +800,7 @@
         <tr>
             <td> INFINIWORKFLOW </td>
             <td>
-                Full install including Python distrbution
+                Full install including Python distribution
             </td>
             <td>  <a href="https://drive.google.com/file/d/1dfze_jLPksITOxe_h2gN53e-iCvrEvVh/view?usp=drive_link">infiniworkflow</a> </td>
         </tr>
@@ -999,7 +1009,7 @@
         installation of different demos and packages. See the <a href="#DownloadablePackages">Downloadable Packages</a> for the full list.
 
         The application patch is meant to patch your exisiting installation with a smaller set of files and thus has a substantially smaller download size. It is expected
-        that the application patch will be frequently updated when bugs are fixes and small features added. To patch you exisiting isntallation
+        that the application patch will be frequently updated when bugs are fixed and small features added. To patch your exisiting installation
         you should download the patch, and then open a Windows Powershell prompt
         and then change the directory to your existing INFINIWORKFLOW installation (i.e. where you unzipped your original installation). Then type the following where you
         should replace /folder/to/ to the actual folder you downloaded the application patch:
@@ -1033,11 +1043,11 @@
     <p>
         This feature allows you to do processing on a different process on the same machine or a different machine on the network.
 
-        You can start the distributed rendering by selecting a contigious set of nodes
+        You can start the distributed rendering by selecting a contiguous set of nodes
         and then using the node context menu and selecting <a href="#ExperimentalNodeMenuFuncs">'Distributed'</a>.
         This brings up a dialog that allows you to set the URL for the server that will be performing the processing. Once
-        you click Ok then the selected nodes are replaced by two nodes, the Distrubuted Sink and Distributed Source. The Sink
-        node will send data from your system to the distrbuted server and the Source node will receive data from
+        you click Ok then the selected nodes are replaced by two nodes, the Distributed Sink and Distributed Source. The Sink
+        node will send data from your system to the distributed server and the Source node will receive data from
         the distributed server.
     </p>
     <img src="./assets/ui_distributed_processing.gif" />
@@ -1047,7 +1057,7 @@
     <img src="./assets/ui_widgets_publish.jpg" width="70%" />
 
     <p>
-        This feature allows you to simplify your worflow to just a subset of <a href="#Widgets">'Widgets'</a>. The future goal of this feature is to allow you to publish a simple app that has the critical controls that are needed in the deployment of your
+        This feature allows you to simplify your workflow to just a subset of <a href="#Widgets">'Widgets'</a>. The future goal of this feature is to allow you to publish a simple app that has the critical controls that are needed in the deployment of your
         workflow in production whilst hiding the complexity of the workflow.
 
         The first step is to add <a href="#Widgets">'Widgets'</a> on the node inputs you want to publish as well as widget outputs to the node outputs. An example of this
@@ -1057,9 +1067,9 @@
     <img src="./assets/ui_widgets_graph.jpg" width="60%" />
 
     <p>
-        You can further, refine the widgets by opening the editor and you can set the attributes such as the name which will show in the published view for each
+        You can further refine the widgets by opening the editor and you can set the attributes such as the name which will show in the published view for each
         widget. Widgets such as Sliders allow you to set their specific attributes such as the minimum, maximum and step value for the Slider widget.
-        All widgets have the common attributes of the name and description (used for tooltips) as well as layouts. The layouts allow you to specifiy an optional
+        All widgets have the common attributes of the name and description (used for tooltips) as well as layouts. The layouts allow you to specify an optional
         Tab widget the widget will be placed in and also the order in which the control, a lower number will allow the control to be higher up in the
         layout. An example of the Widget Slider's parameters are as follows:
     </p>
@@ -1086,13 +1096,13 @@
     <h2>Plugin SDK</h2>
     <p>
         Plugins can be implemented in C++ or Python and both will require a JSON file. The JSON Schema specifies the input and output parameters as well
-        as the name and description of the plugin amonst other things.
+        as the name and description of the plugin amongst other things.
     </p>
 
     <h3 id="JsonSchema">JSON Schema</h3>
     <p>
         All plugins must have an accompanying JSON file. The JSON file specifies the input and output parameters as well
-        as the name and description of the plugin amonst other things. The specification of the schema is as follows:
+        as the name and description of the plugin amongst other things. The specification of the schema is as follows:
     </p>
 
     <table>
