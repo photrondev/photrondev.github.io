@@ -91,6 +91,7 @@
                             <li><a href="#Widgets">Widgets</a></li>
                             <li><a href="#Displays">Displays</a></li>
                             <li><a href="#Triggers">Triggers</a></li>
+                            <li><a href="#Plots">Plots</a></li>
                         </ul>
                     </li>
 
@@ -795,8 +796,47 @@
         an int trigger generates a staircase function. Both are useful to manually trigger a node or use one trigger to manually trigger multiple nodes
         to execute.
     </p>
-    <img src="./assets/ui_manual_trigger.gif"  />
+    <img src="./assets/ui_manual_trigger.gif" />
 
+
+    <h3 id="Plots">Plots</h3>
+    <p>
+        A number of tools are available to create charts for DataFrames. These tools are all under the <i class="bi bi-bar-chart-fill"> Plot</i> category.
+        Each plot tool has parameters placed into two tabs: Data and Layout.
+        The Data parameters allow you to set the columns you wish to plot and the Layout parameters allow you to adjust the title of the chart etc.
+        For example, the "Line Plot" tool has the following Data parameters:
+    </p>
+    <img src="./assets/ui_lineplot_data.jpg" width="20%" />
+    <p>
+        The X and Y allow you to set the columns you wish for the X and Y-axis. If no columns are set for the Y-axis then the plot will include all
+        numerical columns in the DataFrame. If the X parameter is not set then the index of the DataFrame will be used as the X-axis.
+        In the example, below two columns (sbp and tobacco) are plotted for Y against the "row.names" column:
+    </p>
+    <img src="./assets/ui_lineplot_data2.jpg" width="60%" />
+    <p>
+        The Layout tab allows you to specify the title for the chart as well as the labels for the axis. You can also hide or show the Legend and
+        the size of the figure in inches. The "color" parameter is a list that you can set colors such as "red", or #6580ab etc. If you have two Y columns you plot
+        then if you set one color both line charts will use the same color but if you set two colors in the list then you can distinguish each line chart.
+    </p>
+    <img src="./assets/ui_lineplot_layout.jpg" width="60%" />
+
+    <p>
+        An subset of the plot tool visualizations are as follows:
+    </p>
+    <table   >
+        <tr>
+            <td> <img src="./assets/ui_histogram_plot.jpg" /> </td>
+            <td> <img src="./assets/ui_areaplot_plot.jpg" /> </td>
+        </tr>
+        <tr>
+            <td> <img src="./assets/ui_density_plot.jpg" /> </td>
+            <td><img src="./assets/ui_hexbin_plot.jpg" /> </td>
+        </tr>
+        <tr>
+            <td> <img src="./assets/ui_line_plot.jpg" /> </td>
+            <td><img src="./assets/ui_scatter_plot.jpg" /> </td>
+        </tr>
+    </table>
 
 
 
