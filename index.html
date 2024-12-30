@@ -50,7 +50,6 @@
                             <li><a href="#Flowgraph">Flowgraph</a></li>
                             <li><a href="#Editor">Parameter Editor</a></li>
                             <li><a href="#Viewer">Viewer</a></li>
-                            <li><a href="#Widgets">Widgets</a></li>
                             <li><a href="#ImportExport">IO</a></li>
                         </ul>
                     </li>
@@ -85,6 +84,16 @@
                             <li><a href="#ThumbnailViewer">Thumbnail Flowgraph Viewer</a></li>
                         </ul>
                     </li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tools <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#Widgets">Widgets</a></li>
+                            <li><a href="#Displays">Displays</a></li>
+                            <li><a href="#Triggers">Triggers</a></li>
+                        </ul>
+                    </li>
+
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">ML <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -505,7 +514,7 @@
 
 
     <h3 id="Editor">Parameter Editor</h3>
-    <p>The parameter editor allows you to edit the parameters of the currently edited node</p>
+    <p>The Parameter Editor allows you to edit the parameters of the currently edited node</p>
     <div style="overflow: hidden; width:2000px; height:500px; ">
         <img src="./assets/ui.jpg" style="margin-bottom: -500px; margin-left: -2000px; " />
     </div>
@@ -647,7 +656,7 @@
     <img src="./assets/ui_viewer_outputs.gif" />
 
     <p>
-        
+
     </p>
 
     <ul>
@@ -669,8 +678,8 @@
     <img src="./assets/ui_viewer_point.gif" />
 
     <p id="ThumbnailViewer">
-        Only one node can be viewed at one time in the viewer. However, the flowgraph can also show a thumbnail viewer that shows the results of the output of the node using the 'Image Viewer' tool. This allows you to
-        show multiple viewers at the same time on the workflow.
+        Only one node can be viewed at one time in the viewer. However, the flowgraph can also show a thumbnail display that shows the results of the output of the node using the 'Thumbnail Image Display' tool. This allows you to
+        show multiple viewers at the same time on the workflow. Multiple other <a href="#Displays">Display Nodes</a> can view different types of outputs directly on the flowgraph.
     </p>
     <img src="./assets/ui_thumbnail_viewer.gif" />
 
@@ -715,11 +724,11 @@
 
 
     <h3 id="Widgets">Widgets</h3>
-    <p>A set of tools, called Widgets, is available that provide user interface controls directly in the flowgraph</p>
+    <p>A set of tools, called Widgets, are available that provide user interface controls directly in the flowgraph</p>
     <img src="./assets/ui_widgets.jpg" width="80%" />
     <p>
-        These widgets are an easy way to modify the parameters without having to open the parameter editor - you can
-        selectively decide which parameters are important enough to add as widgets to that graph. For example he following
+        These widgets are an easy way to modify the parameters without having to open the Parameter Editor - you can
+        selectively decide which parameters are important enough to add as widgets to the flowgraph. For example he following
         flowgraph has a number of widgets added: a Filebrowser, Selection List and Slider are added to the flowgraph as well as two output view widgets:
     </p>
     <img src="./assets/ui_widgets_graph.jpg" width="40%" />
@@ -737,6 +746,59 @@
     <p>
         See the section on <a href="#Publish">'publishing'</a> to understand how you can leverage widgets in published workflows.
     </p>
+
+    <h3 id="Displays">Displays</h3>
+    <p>
+        A set of tools, called Displays, are available that provide viewing displays directly in the flowgraph
+        This allows you to constantly monitor the output of multiple nodes and avoid switching back and for using the <a href="#Viewer">Viewer</a>.
+        A common display is the thumbnail display that shows the results of the output of the node using the 'Thumbnail Image Display' tool.
+    </p>
+    <img src="./assets/ui_thumbnail_viewer.gif" />
+
+    <p>
+        If you instead want to visualize the full size image rather than the thumbnail, you can use the 'Full Image Display' tool. This shows the image at the actual resolution in pixels:
+    </p>
+    <img src="./assets/ui_display_fullimage.jpg" width="50%" />
+
+    <p>
+        You can also display the matrix (matrix2D) of nodes using the 'Matrix2D Display' tool that shows the results in a table:
+    </p>
+    <img src="./assets/ui_display_matrix.jpg" width="50%" />
+
+    <p>
+        DataFrames can also be displayed as tables on the flowgraph using the 'DataFrame Display'. The first few rows of the table are shown, and double clicking the node will show
+        the other visualizations (statistics and datatypes):
+    </p>
+    <img src="./assets/ui_display_dataframe.jpg" width="50%" />
+
+    <p>
+        Tensors can be displayed using the 'Tensor Display'. Double clicking the node will show the other visualizations for the tensor:
+    </p>
+    <img src="./assets/ui_display_tensor.jpg" width="30%" />
+
+    <p>
+        Additionally, displays are available for all the primitive types such as integers, doubles, booleans etc. These displays are useful to get
+        realtime visualization of the various outputs of your node:
+    </p>
+    <img src="./assets/ui_display_primitives.gif" width="50%" />
+
+    <h3 id="Triggers">Triggers</h3>
+    <p>
+        You can create triggers to activate certain nodes that require a trigger to execute. Typically, you can use the various boolean expression - for example,
+        in the workflow below, the number of detected faces is applied to a ""Numeric a>b" tool, this will yield whenever the number of faces is greater than a certain
+        amount you can set. The output of this node is a "trigger" that is used to execute a "Text to Speech" node.
+    </p>
+    <img src="./assets/ui_trigger_example.jpg" width="40%" />
+    <p>
+        As well as creating triggers automatically based on your outputs of the nodes on your flowgraph, you can also create add manual triggers.
+        The <a href="#Widgets">Widgets</a> include a "Widget Bool Trigger" and a "Widget Int Trigger". A bool trigger creates a "binary pulse", whereas
+        an int trigger generates a staircase function. Both are useful to manually trigger a node or use one trigger to manually trigger multiple nodes
+        to execute.
+    </p>
+    <img src="./assets/ui_manual_trigger.gif"  />
+
+
+
 
 
     <h3 id="ImportExport">Import/Export</h3>
