@@ -88,6 +88,14 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tools <span class="caret"></span></a>
                         <ul class="dropdown-menu">
+                            <li><a href="#Color">Color</a></li>
+                            <li><a href="#Composite">Composite</a></li>
+                            <li><a href="#ImageProcessing">Image Processing</a></li>
+                            <li><a href="#Inputs">Inputs</a></li>
+                            <li><a href="#Logic">Logic</a></li>
+                            <li><a href="#Masks">Masks</a></li>
+                            <li><a href="#Math">Math</a></li>
+                            <li><a href="#Matrix">Matrix</a></li>
                             <li><a href="#Widgets">Widgets</a></li>
                             <li><a href="#Displays">Displays</a></li>
                             <li><a href="#Triggers">Triggers</a></li>
@@ -100,6 +108,7 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">ML <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#DataFrame">Data frames</a></li>
+                            <li><a href="#DataScience">Data Science</a></li>
                             <li><a href="#GridSearch">Grid Search</a></li>
                             <li><a href="#Hyperparameters">Hyperparameters</a></li>
                             <li><a href="#Tensors">Tensors</a></li>
@@ -745,134 +754,184 @@
     </p>
     <img src="./assets/ui_publishing_controls.gif" />
 
-    <p>The full list of Widget tools is as follows:</p>
-    <table>
+    <p>The User Interface Widgets tools are all under the <i class="bi bi-sliders"> Widgets</i> category.The full list of display tools is as follows:</p><table>
         <tr>
             <th>Name</th>
             <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
             <th>Description</th>
         </tr>
         <tr>
             <td>Widget Bool Trigger</td>
             <td><i class='bi bi-fire'></i></td>
-            <td>Widget to triggers a perodic burst</td>
+            <td><ul><li>event : int</li><li>name : string</li><li>description : string</li><li>period : int</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>A widget to triggers a perodic burst to represents bool types</td>
         </tr>
         <tr>
             <td>Widget Checkbox</td>
             <td><i class='bi bi-card-text'></i></td>
-            <td>Widget Checkbox</td>
+            <td><ul><li>value : bool</li><li>name : string</li><li>description : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>A checkbox widget that represents bool types</td>
         </tr>
         <tr>
             <td>Widget Color</td>
             <td><i class='bi bi-eyedropper'></i></td>
-            <td>Widget Color</td>
+            <td><ul><li>value : color</li><li>name : string</li><li>description : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : color</li>        </ul></td>
+            <td>A color dialog widget that represents color types</td>
         </tr>
         <tr>
             <td>Widget Curve</td>
             <td><i class='bi bi-bezier2'></i></td>
-            <td>Widget Bezier Curve</td>
+            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>A curve widget that represents bezier curve types</td>
         </tr>
         <tr>
             <td>Widget Double2 Slider</td>
             <td><i class='bi bi-sliders'></i></td>
-            <td>Widget Double2 Slider</td>
+            <td><ul><li>value : double2</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : double2</li>        </ul></td>
+            <td>Two slider widgets that represents double2 types</td>
         </tr>
         <tr>
             <td>Widget Double2 Textfield</td>
             <td><i class='bi bi-cursor-text'></i></td>
-            <td>Widget Double2 Textfield</td>
+            <td><ul><li>value : double2</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : double2</li>        </ul></td>
+            <td>Two textfield widgets that represents double types</td>
         </tr>
         <tr>
             <td>Widget Double Slider</td>
             <td><i class='bi bi-sliders'></i></td>
-            <td>Widget Double Slider</td>
+            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : double</li>        </ul></td>
+            <td>A slider widget that represents double types</td>
         </tr>
         <tr>
             <td>Widget Double Textfield</td>
             <td><i class='bi bi-input-cursor-text'></i></td>
-            <td>Widget Double Textfield</td>
+            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : double</li>        </ul></td>
+            <td>A textfield widget that represents double types</td>
         </tr>
         <tr>
             <td>Widget Filebrowser</td>
             <td><i class='bi bi-folder-fill'></i></td>
-            <td>Widget File Browser</td>
+            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>filters : filters</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>A filebrowser widget that represents string types</td>
         </tr>
         <tr>
             <td>Widget Int2 Slider</td>
             <td><i class='bi bi-sliders'></i></td>
-            <td>Widget Int2 Slider</td>
+            <td><ul><li>value : int2</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : int2</li>        </ul></td>
+            <td>Two slider widget that represents int2 types</td>
         </tr>
         <tr>
             <td>Widget Int2 Textfield</td>
             <td><i class='bi bi-cursor-text'></i></td>
-            <td>Widget Int2 Textfield</td>
+            <td><ul><li>value : int2</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : int2</li>        </ul></td>
+            <td>A slider textfield that represents int types</td>
         </tr>
         <tr>
             <td>Widget Int Slider</td>
             <td><i class='bi bi-sliders'></i></td>
-            <td>Widget Int Slider</td>
+            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : double</li>        </ul></td>
+            <td>A slider widget that represents int types</td>
         </tr>
         <tr>
             <td>Widget Int Textfield</td>
             <td><i class='bi bi-input-cursor-text'></i></td>
-            <td>Widget Int Textfield</td>
+            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : int</li>        </ul></td>
+            <td>A textfield widget that represents int types</td>
         </tr>
         <tr>
             <td>Widget Int Trigger</td>
             <td><i class='bi bi-fire'></i></td>
-            <td>Widget to triggers a step jump</td>
+            <td><ul><li>event : int</li><li>name : string</li><li>description : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : int</li>        </ul></td>
+            <td>A button widget to triggers a step jump</td>
         </tr>
         <tr>
             <td>Widget Map</td>
             <td><i class='bi bi-braces'></i></td>
-            <td>Widget Map</td>
+            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>url : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : map</li>        </ul></td>
+            <td>A widget that represents map types</td>
         </tr>
         <tr>
             <td>Widget Output</td>
             <td><i class='bi bi-display'></i></td>
-            <td>A published output</td>
+            <td><ul><li>output : *</li><li>name : string</li><li>order : int</li><li>icon : string</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>A widget that represent a published output</td>
         </tr>
         <tr>
             <td>Widget Password</td>
             <td><i class='bi bi-asterisk'></i></td>
-            <td>Widget Password</td>
+            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>publish : bool</li><li>tab : string</li><li>order : inr</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>A password widget that represents string types</td>
         </tr>
         <tr>
             <td>Widget Path</td>
             <td><i class='bi bi-bounding-box-circles'></i></td>
-            <td>Widget Path</td>
+            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>A overlay drawing path widget that represents path types</td>
         </tr>
         <tr>
             <td>Widget Double2 Point</td>
             <td><i class='bi bi-plus-circle'></i></td>
-            <td>Widget Double2 Point</td>
+            <td><ul><li>value : double2</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : double2</li>        </ul></td>
+            <td>A point widget that represents double2 types</td>
         </tr>
         <tr>
             <td>Widget Int2 Point</td>
             <td><i class='bi bi-plus-circle'></i></td>
-            <td>Widget Int2 Point</td>
+            <td><ul><li>value : int2</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : int2</li>        </ul></td>
+            <td>A point widget that represents int2 types</td>
         </tr>
         <tr>
             <td>Widget Select List</td>
             <td><i class='bi bi-list'></i></td>
-            <td>Widget Select List</td>
+            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>permitted : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>A multi select widget that represents string types</td>
         </tr>
         <tr>
             <td>Widget Select Menu</td>
             <td><i class='bi bi-menu-button'></i></td>
-            <td>Widget Select Menu</td>
+            <td><ul><li>value : int</li><li>name : string</li><li>description : string</li><li>permitted : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : int</li>        </ul></td>
+            <td>A select widget that represents int types</td>
         </tr>
         <tr>
             <td>Widget String Textfield</td>
             <td><i class='bi bi-card-text'></i></td>
-            <td>Widget String Textfield</td>
+            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>A textfield widget that represents string types</td>
         </tr>
         <tr>
             <td>Widget Textarea</td>
             <td><i class='bi bi-body-text'></i></td>
-            <td>Widget Textarea</td>
+            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>A textarea widget that represents string types</td>
         </tr>
     </table>
+
 
     <p>
         See the section on <a href="#Publish">'publishing'</a> to understand how you can leverage widgets in published workflows.
@@ -913,72 +972,110 @@
     </p>
     <img src="./assets/ui_display_primitives.gif" width="50%" />
 
-    <p>The full list of display tools is as follows:</p>
-
-    <table>
+    <p>The Display tools that allow you to visualize directly in the flowgraph tools are all under the <i class="bi bi-display"> Outputs</i> category.The full list of display tools is as follows:</p><table>
         <tr>
             <th>Name</th>
             <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
             <th>Description</th>
         </tr>
         <tr>
             <td>Bool Display</td>
             <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : bool</li>        </ul></td>
+            <td><ul>        </ul></td>
             <td>Show Bool</td>
         </tr>
         <tr>
             <td>Color Display</td>
             <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : color</li>        </ul></td>
+            <td><ul>        </ul></td>
             <td>Show Color</td>
         </tr>
         <tr>
             <td>DataFrame Display</td>
             <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : DataFrame</li>        </ul></td>
+            <td><ul>        </ul></td>
             <td>DataFrame Viewer</td>
         </tr>
         <tr>
             <td>Double2 Display</td>
             <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : double2</li>        </ul></td>
+            <td><ul>        </ul></td>
             <td>Show Double2</td>
         </tr>
         <tr>
             <td>Double Display</td>
             <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : double</li>        </ul></td>
+            <td><ul>        </ul></td>
             <td>Show Double Number</td>
+        </tr>
+        <tr>
+            <td>Fullscreen</td>
+            <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : *2D</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Show Image</td>
         </tr>
         <tr>
             <td>Full Image Display</td>
             <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul>        </ul></td>
             <td>Show Full Image</td>
+        </tr>
+        <tr>
+            <td>imshow Display</td>
+            <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : *2D</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>imshow Image Viewer - only displays on the server</td>
         </tr>
         <tr>
             <td>Int2 Display</td>
             <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : int2</li>        </ul></td>
+            <td><ul>        </ul></td>
             <td>Show Int2</td>
         </tr>
         <tr>
             <td>Int Display</td>
             <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : int</li>        </ul></td>
+            <td><ul>        </ul></td>
             <td>Show Int</td>
         </tr>
         <tr>
             <td>Matrix2D Display</td>
             <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : matrix2D</li>        </ul></td>
+            <td><ul>        </ul></td>
             <td>Show Matrix2D</td>
         </tr>
         <tr>
             <td>String Display</td>
             <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : string</li>        </ul></td>
+            <td><ul>        </ul></td>
             <td>Show String</td>
         </tr>
         <tr>
             <td>Tensor Display</td>
             <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : tensor</li>        </ul></td>
+            <td><ul>        </ul></td>
             <td>Tensor Viewer</td>
         </tr>
         <tr>
             <td>Thumbnail Image Display</td>
             <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : *2D</li>        </ul></td>
+            <td><ul>        </ul></td>
             <td>Show Thumbnail of Image</td>
         </tr>
     </table>
@@ -1008,209 +1105,288 @@
         A Data Frame can be loaded with the "Read CSV" or "Read Excel" tools or created programtically with the "Random Table" tool or converting from
         numpy or tensors. For many of the tools, they will use "Column" or "Columns" properties representing a choice of a single column or a subset of columns.
         Some of the tools also have an "arg" property which is a map that allows you to pass in additional optional arguments - the Key/Value Dialog UI
-        will show the corresponding Pandas function's webpage documentation which you can determine the additional parameters you wish to provide. The full list
-        of Datascience tools is as follows:
+        will show the corresponding Pandas function's webpage documentation which you can determine the additional parameters you wish to provide
     </p>
 
-    <table>
+    <p>The Datascience filters tools are all under the <i class="bi bi-table"> Datascience</i> category.The full list of display tools is as follows:</p><table>
         <tr>
             <th>Name</th>
             <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
             <th>Description</th>
         </tr>
         <tr>
             <td>Bool Cell</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>row : int</li><li>column : int</li>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
             <td>Get bool cell value.</td>
         </tr>
         <tr>
             <td>Columns</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>columns : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Returns a subset of columns</td>
         </tr>
         <tr>
             <td>Columns Table</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Returns the columns of the table</td>
         </tr>
         <tr>
             <td>Count Table</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Returns the count of the table</td>
         </tr>
         <tr>
             <td>Group By Count Table</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>columns : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Returns the table with grouped count</td>
         </tr>
         <tr>
             <td>Double Cell</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>row : int</li><li>column : int</li>        </ul></td>
+            <td><ul><li>out : double</li>        </ul></td>
             <td>Get double cell value.</td>
         </tr>
         <tr>
             <td>Drop Columns Table</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>drop : string</li><li>index_col : bool</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Returns the table with some columns dropped</td>
         </tr>
         <tr>
             <td>Drop Nan Columns</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Drop any columns with Not a Number</td>
         </tr>
         <tr>
             <td>Drop Nan Rows</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Drop any rows with Not a Number</td>
         </tr>
         <tr>
             <td>Drop Rows Table</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>drop : string</li><li>index_col : bool</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Returns the table with some rows dropped</td>
         </tr>
         <tr>
             <td>Fill Nan Columns</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>value : string</li><li>index_col : bool</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Fill any columns with Not a Number</td>
         </tr>
         <tr>
             <td>Fill Nan Rows</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>value : string</li><li>index_col : bool</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Fills any rows with Not a Number</td>
         </tr>
         <tr>
             <td>Index Location Table</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>row : string</li><li>column : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Integer-location based indexing for selection by position.</td>
         </tr>
         <tr>
             <td>Int Cell</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>row : int</li><li>column : int</li>        </ul></td>
+            <td><ul><li>out : int</li>        </ul></td>
             <td>Get int cell value.</td>
         </tr>
         <tr>
             <td>Join Table</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>other : DataFrame</li><li>on : string</li><li>how : string</li><li>lsuffix : string</li><li>rsuffix : string</li><li>sort : bool</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Join Two Tables</td>
         </tr>
         <tr>
             <td>Max Table</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Returns the max of the table</td>
         </tr>
         <tr>
             <td>Group By Max Table</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>columns : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Returns the table with grouped max</td>
         </tr>
         <tr>
             <td>Mean Table</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Returns the mean of the table</td>
         </tr>
         <tr>
             <td>Group By Mean Table</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>columns : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Returns the table with grouped mean</td>
         </tr>
         <tr>
             <td>Merge Table</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>left : DataFrame</li><li>right : DataFrame</li><li>left_on : string</li><li>right_on : string</li><li>how : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Merges Two Tables</td>
         </tr>
         <tr>
             <td>Min Table</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Returns the min of the table</td>
         </tr>
         <tr>
             <td>Group By Min Table</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>columns : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Returns the table with grouped min</td>
         </tr>
         <tr>
             <td>Numpy To Table</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : matrix2D</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Converts numpy to dataframe</td>
         </tr>
         <tr>
             <td>One Hot Encoding</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Reflect the DataFrame over its main diagonal by writing rows as columns and vice-versa</td>
         </tr>
         <tr>
             <td>Random Table</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>rows : int</li><li>columns : int</li><li>seed : numeric</li><li>min_value : double</li><li>max_value : double</li><li>round : int</li><li>alwaysDirty : bool</li><li>delay : double</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Return random table</td>
         </tr>
         <tr>
             <td>Read CSV</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>filename : string</li><li>seperator : string</li><li>index_col : bool</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Read CSV file into Panda Table</td>
         </tr>
         <tr>
             <td>Read Excel</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>filename : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Read Excel into Panda Table</td>
         </tr>
         <tr>
             <td>Sample Table</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>fraction : float</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Returns the sampled table</td>
         </tr>
         <tr>
             <td>Table Shape</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li>        </ul></td>
+            <td><ul><li>out : int2</li>        </ul></td>
             <td>Returns the number of rows and columns</td>
         </tr>
         <tr>
             <td>Sort Columns</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>by : string</li><li>ascending : bool</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Sort Columns</td>
         </tr>
         <tr>
             <td>Sort Rows</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>by : string</li><li>ascending : bool</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Sort Rows</td>
         </tr>
         <tr>
             <td>STD Table</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Returns the standard deviation of the table</td>
         </tr>
         <tr>
             <td>Group By STD Table</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>columns : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Returns the table with grouped standard deviations</td>
         </tr>
         <tr>
             <td>String Cell</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>row : int</li><li>column : int</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
             <td>Get string cell value.</td>
         </tr>
         <tr>
             <td>Sum Table</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Returns the sum of the table</td>
         </tr>
         <tr>
             <td>Group By Sum Table</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>columns : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Returns the table with grouped sums</td>
         </tr>
         <tr>
             <td>Transpose Table</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Reflect the DataFrame over its main diagonal by writing rows as columns and vice-versa</td>
         </tr>
         <tr>
             <td>Value Counts Table</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>subset : string</li><li>dropna : bool</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Returns the number of unique rows of the table</td>
         </tr>
         <tr>
             <td>Where Table</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>filter : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
             <td>Returns the table after a query is performed</td>
         </tr>
     </table>
@@ -1254,75 +1430,1704 @@
         </tr>
     </table>
 
-    <p>The full list of plot tools is as follows:</p>
-
-    <table>
+    <p>The Plot figures tools are all under the <i class="bi bi-bar-chart-fill"> Plot</i> category.The full list of display tools is as follows:</p><table>
         <tr>
             <th>Name</th>
             <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
             <th>Description</th>
         </tr>
         <tr>
             <td>Area Plot</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>x : string</li><li>y : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li><li>stacked : bool</li><li>alpha : double</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
             <td>Pandas area plot</td>
         </tr>
         <tr>
             <td>Bar Plot</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>x : string</li><li>y : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li><li>stacked : bool</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
             <td>Pandas bar plot</td>
         </tr>
         <tr>
             <td>Bar Horizontal Plot</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>x : string</li><li>y : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li><li>stacked : bool</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
             <td>Pandas line plot</td>
         </tr>
         <tr>
             <td>Box Plot</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>by : string</li><li>columns : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li><li>vertical : bool</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
             <td>Pandas box plot</td>
         </tr>
         <tr>
             <td>Confusion Matrix Plot</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>truth : DataFrame</li><li>predicted : DataFrame</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
             <td>Plot truth vs prediced</td>
         </tr>
         <tr>
             <td>Density Plot</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
             <td>Pandas density plot</td>
         </tr>
         <tr>
             <td>Hexbin Plot</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>x : string</li><li>y : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li><li>gridsize : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
             <td>Pandas hexbin plot</td>
         </tr>
         <tr>
             <td>Histogram Plot</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>by : string</li><li>columns : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li><li>stacked : bool</li><li>alpha : double</li><li>bins : int</li><li>cumulative : bool</li><li>horizontal : bool</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
             <td>Pandas histogram plot</td>
         </tr>
         <tr>
             <td>Line Plot</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>x : string</li><li>y : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
             <td>Pandas line plot</td>
         </tr>
         <tr>
             <td>Metric Plot</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>truth : DataFrame</li><li>predicted : DataFrame</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
             <td>Plot truth vs prediced</td>
         </tr>
         <tr>
             <td>Pie Plot</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>x : string</li><li>y : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
             <td>Pandas scatter pechart</td>
         </tr>
         <tr>
             <td>Scatter Plot</td>
             <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>x : string</li><li>y : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li><li>size : string</li><li>color : string</li><li>colormap : string</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
             <td>Pandas scatter plot</td>
         </tr>
     </table>
+
+    <!-- START OF AUTO GENERATED DOCS  -->
+
+
+
+
+    <h3 id='Color'>Color</h3><p>The Color Correction tools are all under the <i class="bi bi-palette"> Color</i> category.The full list of display tools is as follows:</p><table>
+        <tr>
+            <th>Name</th>
+            <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Adaptive Threshold</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : image2D</li><li>maxval : double</li><li>adaptiveMethod : int</li><li>thresholdType : int</li><li>blockSize : int</li><li>C : double</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>The function is typically used to get a bi-level (binary) image out of a grayscale image</td>
+        </tr>
+        <tr>
+            <td>Color Brightness</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : image2D</li><li>brightness : double</li><li>redBrightness : double</li><li>greenBrightness : double</li><li>blueBrightness : double</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Change the Brightness thorugh a Look Up Table (L.U.T.) for a Colored Image</td>
+        </tr>
+        <tr>
+            <td>Color Contrast</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : image2D</li><li>contrast : double</li><li>redContrast : double</li><li>greenContrast : double</li><li>blueContrast : double</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Change the Contrast thorugh a Look Up Table (L.U.T.) for a Colored Image</td>
+        </tr>
+        <tr>
+            <td>Color Curve</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : image2D</li><li>redCurve : string</li><li>greenCurve : string</li><li>blueCurve : string</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Create a Curve Mask Thorugh a Look Up Table (L.U.T.) for a Colored Image</td>
+        </tr>
+        <tr>
+            <td>Convert Colorspace</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : image2D</li><li>from : int</li><li>to : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Convert Colorspace</td>
+        </tr>
+        <tr>
+            <td>BGR->YUV</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : cuda2D</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>BGR to YUV of Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>Brightness</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : cuda2D</li><li>brightness : double</li><li>red : double</li><li>green : double</li><li>blue : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Change Brightness of Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>Chroma Keyer</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : cuda2D</li><li>inEdges : double2</li><li>mode : int</li><li>outputChannels : int</li><li>invert : bool</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Chroma Key of Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>CIELAB Threshold</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : cuda2D</li><li>targetColor : color</li><li>radius : double2</li><li>scale : double</li><li>outputChannels : int</li><li>invert : bool</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>CIELAB Threshold of Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>Contrast</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : cuda2D</li><li>contrast : double</li><li>red : double</li><li>green : double</li><li>blue : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Change Contrast of Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>Crop</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : image2D</li><li>point1 : int2</li><li>point2 : int2</li><li>mode : int</li><li>fillColor : color</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Crop input image</td>
+        </tr>
+        <tr>
+            <td>Gamma</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : cuda2D</li><li>gamma : double</li><li>red : double</li><li>green : double</li><li>blue : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Change Gamma of Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>Gamma Fwd</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : cuda2D</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Gamma Fwd of Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>Gamma Inv</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : cuda2D</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Gamma Inv Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>Grayscale</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : cuda2D</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Grayscale of Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>HLS->RGB</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : cuda2D</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>HLS to RGB of Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>HSL Correct</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : cuda2D</li><li>hue : double</li><li>sat : double</li><li>luma : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Modify Color of Cuda Buffer Using HSL Sliders</td>
+        </tr>
+        <tr>
+            <td>HSV->RGB</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : cuda2D</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>HSV to RGB of Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>HSV Correct</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : cuda2D</li><li>hue : double</li><li>sat : double</li><li>bright : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Modify Color of Cuda Buffer Using HSV/HSB Sliders</td>
+        </tr>
+        <tr>
+            <td>Hue Threshold</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : cuda2D</li><li>targetColor : color</li><li>radius : double2</li><li>outputChannels : int</li><li>invert : bool</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Hue Threshold of Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>Invert</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : cuda2D</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Inverts RGB channels of Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>Levels</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : cuda2D</li><li>inEdges : double2</li><li>outEdges : double2</li><li>gamma : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Smoothstep leveling of Cuda Buffer Using Gamma Function</td>
+        </tr>
+        <tr>
+            <td>Lift</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : cuda2D</li><li>lift : double</li><li>red : double</li><li>green : double</li><li>blue : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Change Lift of Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>RGB->HLS</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : cuda2D</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>RGB to HLS of Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>RGB->HSV</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : cuda2D</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>RGB to HSV of Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>RGB->YUV</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : cuda2D</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>RGB to YUV of Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>RGB Threshold</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : cuda2D</li><li>targetColor : color</li><li>radius : double2</li><li>outputChannels : int</li><li>invert : bool</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>RGB Threshold of Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>Smoothstep</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : cuda2D</li><li>inEdges : double2</li><li>outEdges : double2</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Smoothstep of Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>YUV->BGR</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : cuda2D</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>YUV to BGR of Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>YUV->RGB</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : cuda2D</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>YUV to RGB of Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>Debayer</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : image2D</li><li>from : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Debayer</td>
+        </tr>
+        <tr>
+            <td>Histogram Equalization</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : image2D</li><li>adaptive : bool</li><li>clipLimit : double</li><li>tileGridSize : int2</li>        </ul></td>
+            <td><ul><li>out : image2D</li><li>histogram : histogram</li>        </ul></td>
+            <td>Histogram Equalization</td>
+        </tr>
+        <tr>
+            <td>Color Gamma</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : image2D</li><li>gamma : double</li><li>redGamma : double</li><li>greenGamma : double</li><li>blueGamma : double</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Change the Gamma thorugh a Look Up Table (L.U.T.) for a Colored Image</td>
+        </tr>
+        <tr>
+            <td>Grayscale</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Convert to grayscale</td>
+        </tr>
+        <tr>
+            <td>HSL->HSV</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Convert Colorspace</td>
+        </tr>
+        <tr>
+            <td>HSL->RGB</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Convert Colorspace</td>
+        </tr>
+        <tr>
+            <td>HSV->RGB</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Convert Colorspace</td>
+        </tr>
+        <tr>
+            <td>In Range</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : image2D</li><li>min : color</li><li>max : color</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Threshold if between min and max</td>
+        </tr>
+        <tr>
+            <td>Invert Color</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Invert Color Using Bitwise Not</td>
+        </tr>
+        <tr>
+            <td>Color Lift</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : image2D</li><li>lift : double</li><li>redLift : double</li><li>greenLift : double</li><li>blueLift : double</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Lifts the Brightness thorugh a Look Up Table (L.U.T.) for a Colored Image</td>
+        </tr>
+        <tr>
+            <td>RGB->HSL</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Convert Colorspace</td>
+        </tr>
+        <tr>
+            <td>RGB->HSV</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Convert Colorspace</td>
+        </tr>
+        <tr>
+            <td>RGB->YUV</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Convert Colorspace</td>
+        </tr>
+        <tr>
+            <td>Threshold</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : image2D</li><li>thresh : double</li><li>maxval : double</li><li>type : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>The function is typically used to get a bi-level (binary) image out of a grayscale image</td>
+        </tr>
+        <tr>
+            <td>YUV->HSV</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Convert Colorspace</td>
+        </tr>
+        <tr>
+            <td>YUV->RGB</td>
+            <td><i class='bi bi-palette'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Convert Colorspace</td>
+        </tr>
+    </table>
+    <h3 id='Composite'>Composite</h3><p>The Combine and Split Images tools are all under the <i class="bi bi-stack"> Composite</i> category.The full list of display tools is as follows:</p><table>
+        <tr>
+            <th>Name</th>
+            <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Absolute Difference</td>
+            <td><i class='bi bi-eye-fill'></i></td>
+            <td><ul><li>srcA : image2D</li><li>srcB : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Absolute Difference Operations on Two Images</td>
+        </tr>
+        <tr>
+            <td>Add</td>
+            <td><i class='bi bi-eye-fill'></i></td>
+            <td><ul><li>srcA : image2D</li><li>srcB : image2D</li><li>mask : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Add Operations on Two Images</td>
+        </tr>
+        <tr>
+            <td>Bitwise And</td>
+            <td><i class='bi bi-eye-fill'></i></td>
+            <td><ul><li>srcA : image2D</li><li>srcB : image2D</li><li>mask : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Bitwise And Operations on Two Images</td>
+        </tr>
+        <tr>
+            <td>Binary</td>
+            <td><i class='bi bi-eye-fill'></i></td>
+            <td><ul><li>srcA : image2D</li><li>srcB : image2D</li><li>mask : image2D</li><li>mode : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Binary Operations on Two Images</td>
+        </tr>
+        <tr>
+            <td>Add</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Composite with Add blend mode</td>
+        </tr>
+        <tr>
+            <td>Average</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Composite with Average blend mode</td>
+        </tr>
+        <tr>
+            <td>Blend</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mode : int</li><li>opacity : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Change Blend of Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>Color Burn</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Composite with Color Burn blend mode</td>
+        </tr>
+        <tr>
+            <td>Color Dodge</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Composite with Color Dodge blend mode</td>
+        </tr>
+        <tr>
+            <td>Darken</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Composite with Darken blend mode</td>
+        </tr>
+        <tr>
+            <td>Difference</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Composite with Difference blend mode</td>
+        </tr>
+        <tr>
+            <td>Exclusion</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Composite with Exclusion blend mode</td>
+        </tr>
+        <tr>
+            <td>Glow</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Composite with Glow blend mode</td>
+        </tr>
+        <tr>
+            <td>Hard Light</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Composite with Hard Light blend mode</td>
+        </tr>
+        <tr>
+            <td>Hard Mix</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Composite with Hard Mix blend mode</td>
+        </tr>
+        <tr>
+            <td>Lighten</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Composite with Lighten blend mode</td>
+        </tr>
+        <tr>
+            <td>Linear Burn</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Composite with Linear Burn blend mode</td>
+        </tr>
+        <tr>
+            <td>Linear Dodge</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Composite with Linear Dodge blend mode</td>
+        </tr>
+        <tr>
+            <td>Linear Light</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Composite with Linear Light blend mode</td>
+        </tr>
+        <tr>
+            <td>Multiply</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Composite with Multiply blend mode</td>
+        </tr>
+        <tr>
+            <td>Negation</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Composite with Negation blend mode</td>
+        </tr>
+        <tr>
+            <td>Normal</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Composite with Normal blend mode</td>
+        </tr>
+        <tr>
+            <td>Overlay</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Composite with Overlay blend mode</td>
+        </tr>
+        <tr>
+            <td>Phoenix</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Composite with Phoenix blend mode</td>
+        </tr>
+        <tr>
+            <td>Pin Light</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Composite with Pin Light blend mode</td>
+        </tr>
+        <tr>
+            <td>Reflect</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Composite with Reflect blend mode</td>
+        </tr>
+        <tr>
+            <td>Screen</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Composite with Screen blend mode</td>
+        </tr>
+        <tr>
+            <td>Soft Light</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Composite with Soft Light blend mode</td>
+        </tr>
+        <tr>
+            <td>Subtract</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Composite with Subtract blend mode</td>
+        </tr>
+        <tr>
+            <td>Vivid Light</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Composite with Vivid Light blend mode</td>
+        </tr>
+        <tr>
+            <td>Divide</td>
+            <td><i class='bi bi-eye-fill'></i></td>
+            <td><ul><li>srcA : image2D</li><li>srcB : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Divide Operations on Two Images</td>
+        </tr>
+        <tr>
+            <td>Draw Circles</td>
+            <td><i class='bi bi-brush'></i></td>
+            <td><ul><li>source : image2D</li><li>circles : float3[]</li><li>color : color</li><li>thickness : int</li><li>lineType : int</li><li>shift : int</li><li>blend : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Draws Circles</td>
+        </tr>
+        <tr>
+            <td>Draw Contours</td>
+            <td><i class='bi bi-brush'></i></td>
+            <td><ul><li>source : image2D</li><li>contours : contours</li><li>hierarchy : int4[]</li><li>idx : int</li><li>color : color</li><li>thickness : int</li><li>lineType : int</li><li>maxLevel : int</li><li>offset : int2</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Draws contours outlines or filled contours</td>
+        </tr>
+        <tr>
+            <td>Draw Lines</td>
+            <td><i class='bi bi-brush'></i></td>
+            <td><ul><li>source : image2D</li><li>lines : int4[]</li><li>color : color</li><li>thickness : int</li><li>lineType : int</li><li>shift : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Draws Lines</td>
+        </tr>
+        <tr>
+            <td>Draw Paths</td>
+            <td><i class='bi bi-brush'></i></td>
+            <td><ul><li>source : image2D</li><li>path : int2[]</li><li>color : color</li><li>thickness : int</li><li>lineType : int</li><li>shift : int</li><li>blend : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Draws Paths</td>
+        </tr>
+        <tr>
+            <td>Draw Rectangles</td>
+            <td><i class='bi bi-brush'></i></td>
+            <td><ul><li>source : image2D</li><li>rectangles : int4[]</li><li>color : color</li><li>thickness : int</li><li>lineType : int</li><li>shift : int</li><li>blend : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Draws Rectangles</td>
+        </tr>
+        <tr>
+            <td>Draw Shapes</td>
+            <td><i class='bi bi-brush'></i></td>
+            <td><ul><li>source : image2D</li><li>lines : int4[]</li><li>circles : float3[]</li><li>rectangles : int4[]</li><li>path : int2[]</li><li>color : color</li><li>thickness : int</li><li>lineType : int</li><li>shift : int</li><li>blend : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Draws Lines, Circles, and/or Rectangles</td>
+        </tr>
+        <tr>
+            <td>Draw Text</td>
+            <td><i class='bi bi-brush'></i></td>
+            <td><ul><li>source : image2D</li><li>text : string</li><li>origin : int2</li><li>font : int</li><li>scale : double</li><li>color : color</li><li>thickness : int</li><li>lineType : int</li><li>bottomLeftOrigin : bool</li><li>lineHeight : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Draws Text String</td>
+        </tr>
+        <tr>
+            <td>Extract Channel</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>source : image2D</li><li>channel : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Extract One Channel</td>
+        </tr>
+        <tr>
+            <td>Horizontal Combine</td>
+            <td><i class='bi bi-eye-fill'></i></td>
+            <td><ul><li>srcA : image2D</li><li>srcB : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Horizontally Combine Two Images</td>
+        </tr>
+        <tr>
+            <td>Maximum</td>
+            <td><i class='bi bi-eye-fill'></i></td>
+            <td><ul><li>srcA : image2D</li><li>srcB : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Maximum Operations on Two Images</td>
+        </tr>
+        <tr>
+            <td>Merge</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>in.1 : image2D</li><li>in.2 : image2D</li><li>in.3 : image2D</li><li>in.4 : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Merges inputs into one channel.</td>
+        </tr>
+        <tr>
+            <td>Minimum</td>
+            <td><i class='bi bi-eye-fill'></i></td>
+            <td><ul><li>srcA : image2D</li><li>srcB : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Minimum Operations on Two Images</td>
+        </tr>
+        <tr>
+            <td>Multiply</td>
+            <td><i class='bi bi-eye-fill'></i></td>
+            <td><ul><li>srcA : image2D</li><li>srcB : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Multiply Operations on Two Images</td>
+        </tr>
+        <tr>
+            <td>Bitwise Not</td>
+            <td><i class='bi bi-eye-fill'></i></td>
+            <td><ul><li>source : matrix2D</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li>        </ul></td>
+            <td>Inverts every bit of an array</td>
+        </tr>
+        <tr>
+            <td>Bitwise Or</td>
+            <td><i class='bi bi-eye-fill'></i></td>
+            <td><ul><li>srcA : image2D</li><li>srcB : image2D</li><li>mask : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Bitwise Or And Operations on Two Images</td>
+        </tr>
+        <tr>
+            <td>Split</td>
+            <td><i class='bi bi-stack'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>out.1 : image2D</li><li>out.2 : image2D</li><li>out.3 : image2D</li><li>out.4 : image2D</li>        </ul></td>
+            <td>Splits image into individual channels.</td>
+        </tr>
+        <tr>
+            <td>Per Element Sqrt</td>
+            <td><i class='bi bi-eye-fill'></i></td>
+            <td><ul><li>source : matrix2D</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li>        </ul></td>
+            <td>Calculates a square root of array elements</td>
+        </tr>
+        <tr>
+            <td>Subtract</td>
+            <td><i class='bi bi-eye-fill'></i></td>
+            <td><ul><li>srcA : image2D</li><li>srcB : image2D</li><li>mask : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Subtract Operations on Two Images</td>
+        </tr>
+        <tr>
+            <td>Switch Image2D</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>switch : int</li><li>Input #0 : image2D</li><li>Input #1 : image2D</li><li>Input #2 : image2D</li><li>Input #3 : image2D</li><li>Input #4 : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Outputs one of the selected inputs</td>
+        </tr>
+        <tr>
+            <td>Vertical Combine</td>
+            <td><i class='bi bi-eye-fill'></i></td>
+            <td><ul><li>srcA : image2D</li><li>srcB : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Vertically Combine Two Images</td>
+        </tr>
+        <tr>
+            <td>Bitwise XOR</td>
+            <td><i class='bi bi-eye-fill'></i></td>
+            <td><ul><li>srcA : image2D</li><li>srcB : image2D</li><li>mask : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Bitwise XOR Operations on Two Images</td>
+        </tr>
+    </table>
+    <h3 id='ImageProcessing'>Image Processing</h3><p>The Image Processing Filters tools are all under the <i class="bi bi-stars"> ImageProcessing</i> category.The full list of display tools is as follows:</p><table>
+        <tr>
+            <th>Name</th>
+            <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Bilateral Filter</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li><li>d : int</li><li>sigmaColor : double</li><li>sigmaSpace : double</li><li>borderType : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Applies bilateral filter to image</td>
+        </tr>
+        <tr>
+            <td>Blur</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li><li>ksize : int2</li><li>anchor : int2</li><li>borderType : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Blurs an image using the normalized box filter</td>
+        </tr>
+        <tr>
+            <td>Box Filter</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li><li>ddepth : int</li><li>ksize : int2</li><li>anchor : int2</li><li>normalize : bool</li><li>borderType : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Blurs an image using the box filter</td>
+        </tr>
+        <tr>
+            <td>Build Pyramid</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li><li>borderType : int</li>        </ul></td>
+            <td><ul><li>out1 : image2D</li><li>out2 : image2D</li><li>out3 : image2D</li><li>out4 : image2D</li>        </ul></td>
+            <td>Constructs the Gaussian pyramid for an image. 4 images outputted.</td>
+        </tr>
+        <tr>
+            <td>Cam Shift</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li><li>center : float2</li><li>width : int</li><li>height : int</li><li>start : int</li><li>stop : int</li>        </ul></td>
+            <td><ul><li>out : float2[]</li><li>preview : image2D</li>        </ul></td>
+            <td>Finds the rotated rectangle with the maximum number of points. When the object moves, the movement is reflected in the meanshift algorithm</td>
+        </tr>
+        <tr>
+            <td>Canny Edge Detector</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li><li>threshold1 : double</li><li>threshold2 : double</li><li>apertureSize : int</li><li>L2gradient : bool</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Canny Edge Detection is a popular edge detection algorithm</td>
+        </tr>
+        <tr>
+            <td>Convert Depth</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li><li>precision : int</li><li>normalize : bool</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Convert Depth Precision between 8u, 8s, 16u, 16s, and 32f</td>
+        </tr>
+        <tr>
+            <td>Detect Circles</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : cuda2D</li><li>dp : double</li><li>minDist : double</li><li>param1 : double</li><li>param2 : double</li><li>minRadius : int</li><li>maxRadius : int</li>        </ul></td>
+            <td><ul><li>circles : float3[]</li><li>preview : image2D</li><li>numCircles : int</li><li>maxRadius : double</li>        </ul></td>
+            <td>Detects circles in a grayscale image using the Hough transform.</td>
+        </tr>
+        <tr>
+            <td>Detect Lines</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : cuda2D</li><li>rho : double</li><li>theta : double</li><li>minLineLength : double</li><li>maxLineGap : double</li>        </ul></td>
+            <td><ul><li>lines : int4[]</li><li>preview : image2D</li><li>numLines : int</li><li>maxLength : double</li>        </ul></td>
+            <td>Detects lines in a grayscale image using the Hough transform.</td>
+        </tr>
+        <tr>
+            <td>Dilate</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : cuda2D</li><li>convolution : double2</li><li>dilate : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Blur and dilate image with vertical and horizontal blur</td>
+        </tr>
+        <tr>
+            <td>Dilate 3x3</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : cuda2D</li><li>dilate : double2</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Blur image based on maximum luminance value of surrounding pixels</td>
+        </tr>
+        <tr>
+            <td>Erode</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : cuda2D</li><li>convolution : double2</li><li>erode : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Blur and erode image with vertical and horizontal blur</td>
+        </tr>
+        <tr>
+            <td>Erode 3x3</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : cuda2D</li><li>erode : double2</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Blur image based on minimum luminance value of surrounding pixels. 3x3 pixels are blurred at a time.</td>
+        </tr>
+        <tr>
+            <td>Gauss</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : cuda2D</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Gauss Filter on Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>High Pass</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : cuda2D</li><li>maskSize : int</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>High Pass Filter on Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>Iterative Blur</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : cuda2D</li><li>radius : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Blur image using iterative 3x3 blurs</td>
+        </tr>
+        <tr>
+            <td>Laplace</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : cuda2D</li><li>maskSize : int</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Laplace Filter on Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>Low Pass</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : cuda2D</li><li>maskSize : int</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Low Pass Filter on Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>Median Blur</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : cuda2D</li><li>radius : double</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Blur image using median 3x3 blurs</td>
+        </tr>
+        <tr>
+            <td>Prewitt</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : cuda2D</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Combination of Prewitt Horiz and Prewitt Vert on Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>Roberts</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : cuda2D</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Combination of Roberts Filter Down and Roberts Filter Up on Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>Separable Blur</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : cuda2D</li><li>convolution : double2</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Blur image with vertical and horizontal blur</td>
+        </tr>
+        <tr>
+            <td>Sharpen</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : cuda2D</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Filters the Cuda Buffer using a sharpening filter kernel</td>
+        </tr>
+        <tr>
+            <td>Sobel</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : cuda2D</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Combination of Sobel Horiz and Sobel Vert on Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>Delay</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Shows a Delayed Image</td>
+        </tr>
+        <tr>
+            <td>Dilate</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li><li>shape : int</li><li>ksize : int2</li><li>anchor : int2</li><li>iterations : int</li><li>borderType : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Dilates an image (expands the primary object) by using a specific structuring element that determines the shape of a pixel neighborhood over which the maximum is taken</td>
+        </tr>
+        <tr>
+            <td>Erode</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li><li>shape : int</li><li>ksize : int2</li><li>anchor : int2</li><li>iterations : int</li><li>borderType : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Erodes an image (shrinks the primary object) by using a specific structuring element that determines the shape of a pixel neighborhood over which the minimum is taken</td>
+        </tr>
+        <tr>
+            <td>Filter 2D</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li><li>ddepth : int</li><li>kernel : matrix2D</li><li>anchor : int2</li><li>delta : double</li><li>borderType : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Convolves an image with the kernel, applying an arbitrary linear filter to an image</td>
+        </tr>
+        <tr>
+            <td>Find Countours</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li><li>mode : int</li><li>method : int</li><li>point : int2</li>        </ul></td>
+            <td><ul><li>contours : contours</li><li>hierarchy : int4[]</li>        </ul></td>
+            <td>Finds contours in a binary image</td>
+        </tr>
+        <tr>
+            <td>Detect Circles</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li><li>method : int</li><li>dp : double</li><li>minDist : double</li><li>param1 : double</li><li>param2 : double</li><li>minRadius : int</li><li>maxRadius : int</li>        </ul></td>
+            <td><ul><li>circles : float3[]</li><li>preview : image2D</li><li>numCircles : int</li><li>maxRadius : double</li>        </ul></td>
+            <td>Detects circles in a grayscale image using the Hough transform.</td>
+        </tr>
+        <tr>
+            <td>Detect Lines</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li><li>rho : double</li><li>theta : double</li><li>threshold : int</li><li>minLineLength : double</li><li>maxLineGap : double</li>        </ul></td>
+            <td><ul><li>lines : int4[]</li><li>preview : image2D</li><li>numLines : int</li><li>maxLength : double</li>        </ul></td>
+            <td>Detects lines in a grayscale image using the Hough transform.</td>
+        </tr>
+        <tr>
+            <td>Laplacian Edge Detector</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li><li>ksize : int</li><li>scale : double</li><li>delta : double</li><li>borderType : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Laplacian Edge Detect</td>
+        </tr>
+        <tr>
+            <td>Mean Shift</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li><li>center : float2</li><li>width : int</li><li>height : int</li><li>start : int</li><li>stop : int</li>        </ul></td>
+            <td><ul><li>out : int4[]</li><li>preview : image2D</li>        </ul></td>
+            <td>Finds the rectangle with the maximum number of points. When the object moves, the movement is reflected in the meanshift algorithm</td>
+        </tr>
+        <tr>
+            <td>Mean Color</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>red : double</li><li>green : double</li><li>blue : double</li><li>alpha : double</li>        </ul></td>
+            <td>Calculates an average (mean) value of array elements, independently for each channel</td>
+        </tr>
+        <tr>
+            <td>Mean Mask</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>out : double</li>        </ul></td>
+            <td>Calculates an average (mean) value of array elements for a grayscale image</td>
+        </tr>
+        <tr>
+            <td>Median Blur</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li><li>ksize : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Blurs an image using the median filter</td>
+        </tr>
+        <tr>
+            <td>Pyr Down</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li><li>borderType : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Blurs an image and downsamples it</td>
+        </tr>
+        <tr>
+            <td>Pyr Up</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li><li>borderType : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Upsamples an image and then blurs it</td>
+        </tr>
+        <tr>
+            <td>Scharr Edge Detector</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li><li>dx : int</li><li>dy : int</li><li>scale : double</li><li>delta : double</li><li>borderType : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Scharr Edge Detect</td>
+        </tr>
+        <tr>
+            <td>Sep Filter 2D Gabor</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li><li>ddepth : int</li><li>ksize : int2</li><li>sigma : double</li><li>theta : double</li><li>lambd : double</li><li>gamma : double</li><li>psi : double</li><li>ktype : int</li><li>anchor : int2</li><li>delta : double</li><li>borderType : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Applies a separable linear filter to an image</td>
+        </tr>
+        <tr>
+            <td>Sep Filter 2D Gaussian</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li><li>ddepth : int</li><li>ksize : int</li><li>sigma : double</li><li>ktype : int</li><li>anchor : int2</li><li>delta : double</li><li>borderType : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Applies a separable linear filter to an image</td>
+        </tr>
+        <tr>
+            <td>Sobel</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li><li>ddepth : int</li><li>dx : int</li><li>dy : int</li><li>ksize : int</li><li>scale : double</li><li>delta : double</li><li>borderType : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Detects edges by calculating the first, second, third, or mixed image derivatives using an extended Sobel operator</td>
+        </tr>
+        <tr>
+            <td>Spatial Gradient</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li><li>ksize : int</li><li>borderType : int</li>        </ul></td>
+            <td><ul><li>outX : image2D</li><li>outY : image2D</li>        </ul></td>
+            <td>Calculates the first order image derivative in both x and y using a Sobel operator, which emphasizes regions of high spatial frequency that correspond to edges.</td>
+        </tr>
+        <tr>
+            <td>Sqr Box Filter</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li><li>ddepth : int</li><li>ksize : int2</li><li>anchor : int2</li><li>normalize : bool</li><li>borderType : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Blurs an image using the box filter by calculating the normalized sum of squares of the pixel values overlapping the filter</td>
+        </tr>
+        <tr>
+            <td>Stack Blur</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li><li>ksize : int2</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Blurs an image by creating a kind of moving stack of colors whilst scanning through the image</td>
+        </tr>
+        <tr>
+            <td>Sum Color</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>red : double</li><li>green : double</li><li>blue : double</li><li>alpha : double</li>        </ul></td>
+            <td>Calculates and returns the sum of array elements, independently for each channel</td>
+        </tr>
+        <tr>
+            <td>Sum Mask</td>
+            <td><i class='bi bi-stars'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>out : double</li>        </ul></td>
+            <td>Calculates and returns the sum of array elements for a grayscale image</td>
+        </tr>
+    </table>
+    <h3 id='Inputs'>Inputs</h3><p>The Source Inputs tools are all under the <i class="bi bi-file-earmark-richtext"> Inputs</i> category.The full list of display tools is as follows:</p><table>
+        <tr>
+            <th>Name</th>
+            <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Folder Reader</td>
+            <td><i class='bi bi-folder'></i></td>
+            <td><ul><li>source : string</li><li>trigger : int</li>        </ul></td>
+            <td><ul><li>filename : string</li>        </ul></td>
+            <td>Reads filepaths from a folder</td>
+        </tr>
+        <tr>
+            <td>Image Reader</td>
+            <td><i class='bi bi-file-image'></i></td>
+            <td><ul><li>source : string</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Reads Images from a file</td>
+        </tr>
+        <tr>
+            <td>Movie Reader</td>
+            <td><i class='bi bi-film'></i></td>
+            <td><ul><li>source : string</li><li>cache : int</li><li>realtime : bool</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Reads Images from a movie</td>
+        </tr>
+        <tr>
+            <td>Take Picture</td>
+            <td><i class='bi bi-file-image'></i></td>
+            <td><ul><li>source : image2D</li><li>click : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Takes a picture</td>
+        </tr>
+        <tr>
+            <td>Text File Reader</td>
+            <td><i class='bi bi-file-text'></i></td>
+            <td><ul><li>source : string</li><li>trigger : int</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>Reads from a text file</td>
+        </tr>
+        <tr>
+            <td>Webcam</td>
+            <td><i class='bi bi-webcam-fill'></i></td>
+            <td><ul><li>calibration : matrix2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Reads Images from a webcamera</td>
+        </tr>
+    </table>
+    <h3 id='Logic'>Logic</h3><p>The Logic functions tools are all under the <i class="bi bi-question-square-fill"> Logic</i> category.The full list of display tools is as follows:</p><table>
+        <tr>
+            <th>Name</th>
+            <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>And</td>
+            <td><i class='bi bi-question-square-fill'></i></td>
+            <td><ul><li>Input #1 : bool</li><li>Input #2 : bool</li>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>Logical AND operator</td>
+        </tr>
+        <tr>
+            <td>Conditional Numeric</td>
+            <td><i class='bi bi-question-square-fill'></i></td>
+            <td><ul><li>condition : bool</li><li>trueValue : numeric</li><li>falseValue : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>An 'If' Statement for Numeric Values</td>
+        </tr>
+        <tr>
+            <td>Conditional String</td>
+            <td><i class='bi bi-question-square-fill'></i></td>
+            <td><ul><li>condition : bool</li><li>trueValue : string</li><li>falseValue : string</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>An 'If' Statement for String Values</td>
+        </tr>
+        <tr>
+            <td>False</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>Returns False</td>
+        </tr>
+        <tr>
+            <td>Numeric a == b</td>
+            <td><i class='bi bi-question-square-fill'></i></td>
+            <td><ul><li>value1 : numeric</li><li>value2 : numeric</li>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>Return if inputs are equal</td>
+        </tr>
+        <tr>
+            <td>Numeric a > b</td>
+            <td><i class='bi bi-question-square-fill'></i></td>
+            <td><ul><li>a : numeric</li><li>b : numeric</li>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>Return if input a > input b</td>
+        </tr>
+        <tr>
+            <td>Numeric a >= b</td>
+            <td><i class='bi bi-question-square-fill'></i></td>
+            <td><ul><li>a : numeric</li><li>b : numeric</li>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>Return if input a >= input b</td>
+        </tr>
+        <tr>
+            <td>Numeric a < b</td>
+            <td><i class='bi bi-question-square-fill'></i></td>
+            <td><ul><li>a : numeric</li><li>b : numeric</li>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>Return if input a < input b</td>
+        </tr>
+        <tr>
+            <td>Numeric a <= b</td>
+            <td><i class='bi bi-question-square-fill'></i></td>
+            <td><ul><li>a : numeric</li><li>b : numeric</li>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>Return if input a <= input b</td>
+        </tr>
+        <tr>
+            <td>Numeric Compare a != b</td>
+            <td><i class='bi bi-question-square-fill'></i></td>
+            <td><ul><li>value1 : numeric</li><li>value2 : numeric</li>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>Return if inputs are not equal</td>
+        </tr>
+        <tr>
+            <td>Or</td>
+            <td><i class='bi bi-question-square-fill'></i></td>
+            <td><ul><li>Input #1 : bool</li><li>Input #2 : bool</li>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>Logical OR operator</td>
+        </tr>
+        <tr>
+            <td>Range</td>
+            <td><i class='bi bi-question-square-fill'></i></td>
+            <td><ul><li>value : numeric</li><li>min_value : numeric</li><li>max_value : numeric</li>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>Return if number is in range</td>
+        </tr>
+        <tr>
+            <td>True</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>Returns True</td>
+        </tr>
+    </table>
+    <h3 id='Masks'>Masks</h3><p>The Mask Filters tools are all under the <i class="bi bi-mask"> Masks</i> category.The full list of display tools is as follows:</p><table>
+        <tr>
+            <th>Name</th>
+            <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Mask Brightness</td>
+            <td><i class='bi bi-mask'></i></td>
+            <td><ul><li>source : image2D</li><li>maskBrightness : double</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Change the Brightness thorugh a Look Up Table (L.U.T.) for a Mask</td>
+        </tr>
+        <tr>
+            <td>Mask Circles</td>
+            <td><i class='bi bi-mask'></i></td>
+            <td><ul><li>source : image2D</li><li>circles : float3[]</li><li>blend : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Draws Circles with Masks</td>
+        </tr>
+        <tr>
+            <td>Mask Contrast</td>
+            <td><i class='bi bi-mask'></i></td>
+            <td><ul><li>source : image2D</li><li>maskContrast : double</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Change the Contrast thorugh a Look Up Table (L.U.T.) for a Mask</td>
+        </tr>
+        <tr>
+            <td>Mask Curve</td>
+            <td><i class='bi bi-mask'></i></td>
+            <td><ul><li>source : image2D</li><li>curve : string</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Create a Curve Mask Thorugh a Look Up Table (L.U.T.)</td>
+        </tr>
+        <tr>
+            <td>Mask Gamma</td>
+            <td><i class='bi bi-mask'></i></td>
+            <td><ul><li>source : image2D</li><li>maskGamma : double</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Change the Gamma thorugh a Look Up Table (L.U.T.) for a Mask</td>
+        </tr>
+        <tr>
+            <td>Invert Mask</td>
+            <td><i class='bi bi-mask'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Inverts the Mask using Bitwise Not</td>
+        </tr>
+        <tr>
+            <td>Mask Lift</td>
+            <td><i class='bi bi-mask'></i></td>
+            <td><ul><li>source : image2D</li><li>maskLift : double</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Lifts the Brightness thorugh a Look Up Table (L.U.T.) for a Mask</td>
+        </tr>
+        <tr>
+            <td>Mask Paths</td>
+            <td><i class='bi bi-mask'></i></td>
+            <td><ul><li>source : image2D</li><li>path : int2[]</li><li>blend : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Draws Paths with Masks</td>
+        </tr>
+        <tr>
+            <td>Mask Rectangles</td>
+            <td><i class='bi bi-mask'></i></td>
+            <td><ul><li>source : image2D</li><li>rectangles : int4[]</li><li>blend : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Draws Rectangles with Masks</td>
+        </tr>
+        <tr>
+            <td>Mask Shapes</td>
+            <td><i class='bi bi-mask'></i></td>
+            <td><ul><li>source : image2D</li><li>lines : int4[]</li><li>circles : float3[]</li><li>rectangles : int4[]</li><li>path : int2[]</li><li>blend : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Draws Lines, Circles, and/or Rectangles with Masks</td>
+        </tr>
+    </table>
+    <h3 id='Math'>Math</h3><p>The Math functions tools are all under the <i class="bi bi-calculator"> Math</i> category.The full list of display tools is as follows:</p><table>
+        <tr>
+            <th>Name</th>
+            <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Abs</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul><li>x : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>Return absolute value</td>
+        </tr>
+        <tr>
+            <td>Arccos</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul><li>x : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>Return inverse cosine of input x, result is in degrees</td>
+        </tr>
+        <tr>
+            <td>Arccosh</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul><li>x : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>Return inverse hyperbolic cosine of input x</td>
+        </tr>
+        <tr>
+            <td>Arcsin</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul><li>x : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>Return inverse sine of input x, result is in degrees</td>
+        </tr>
+        <tr>
+            <td>Arcsinh</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul><li>x : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>Return inverse hyperbolic sine of input x</td>
+        </tr>
+        <tr>
+            <td>Atan2</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul><li>x : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>Return inverse hyperbolic tangent of input x</td>
+        </tr>
+        <tr>
+            <td>Arctanh</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul><li>a : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>Return archtan(a)</td>
+        </tr>
+        <tr>
+            <td>Ceil</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul><li>x : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>Return ceil(x)</td>
+        </tr>
+        <tr>
+            <td>Cos</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul><li>x : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>Return cosine of input x (where x is in degrees)</td>
+        </tr>
+        <tr>
+            <td>Cosh</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul><li>x : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>Return hyperbolic cosine of input x</td>
+        </tr>
+        <tr>
+            <td>Counter Double</td>
+            <td><i class='bi bi-stopwatch-fill'></i></td>
+            <td><ul><li>min_value : double</li><li>max_value : double</li><li>step : int</li><li>delay : double</li><li>round : int</li>        </ul></td>
+            <td><ul><li>out : double</li>        </ul></td>
+            <td>Counts numbers</td>
+        </tr>
+        <tr>
+            <td>Counter Int</td>
+            <td><i class='bi bi-stopwatch-fill'></i></td>
+            <td><ul><li>min_value : int</li><li>max_value : int</li><li>step : int</li><li>delay : double</li>        </ul></td>
+            <td><ul><li>out : int</li>        </ul></td>
+            <td>Counts numbers</td>
+        </tr>
+        <tr>
+            <td>Divide</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul><li>a : numeric</li><li>b : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>Return a/b</td>
+        </tr>
+        <tr>
+            <td>e</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul>        </ul></td>
+            <td><ul><li>out : double</li>        </ul></td>
+            <td>Returns eulers number</td>
+        </tr>
+        <tr>
+            <td>Exponential</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul><li>x : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>Return e^x</td>
+        </tr>
+        <tr>
+            <td>Floor</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul><li>x : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>Return floor(x)</td>
+        </tr>
+        <tr>
+            <td>Log</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul><li>x : numeric</li><li>base : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>Return log(x,base)</td>
+        </tr>
+        <tr>
+            <td>Minus</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul><li>a : numeric</li><li>b : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>Return a-b</td>
+        </tr>
+        <tr>
+            <td>Mod</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul><li>a : numeric</li><li>b : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>Return mod(a,b)</td>
+        </tr>
+        <tr>
+            <td>Multiply</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul><li>a : numeric</li><li>b : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>Return a*b</td>
+        </tr>
+        <tr>
+            <td>One</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul>        </ul></td>
+            <td><ul><li>out : double</li>        </ul></td>
+            <td>Return number one</td>
+        </tr>
+        <tr>
+            <td>PI</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul>        </ul></td>
+            <td><ul><li>out : double</li>        </ul></td>
+            <td>Return PI</td>
+        </tr>
+        <tr>
+            <td>Plus</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul><li>a : numeric</li><li>b : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>Return a+b</td>
+        </tr>
+        <tr>
+            <td>Power</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul><li>a : numeric</li><li>b : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>Return a^b</td>
+        </tr>
+        <tr>
+            <td>Random Number</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul><li>seed : numeric</li><li>min_value : double</li><li>max_value : double</li><li>round : int</li><li>alwaysDirty : bool</li><li>delay : double</li>        </ul></td>
+            <td><ul><li>out : double</li>        </ul></td>
+            <td>Return random number</td>
+        </tr>
+        <tr>
+            <td>Sin</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul><li>x : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>Return sine of input x (where x is in degrees)</td>
+        </tr>
+        <tr>
+            <td>Sinh</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul><li>x : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>Return hyperbolic sine of input x</td>
+        </tr>
+        <tr>
+            <td>Sqrt</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul><li>x : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>Return square root of x</td>
+        </tr>
+        <tr>
+            <td>Square</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul><li>x : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>Return x^2</td>
+        </tr>
+        <tr>
+            <td>Tan</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul><li>x : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>Return tangent of input x (where x is in degrees)</td>
+        </tr>
+        <tr>
+            <td>Tanh</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul><li>x : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>Return hyperbolic tangent of input x</td>
+        </tr>
+        <tr>
+            <td>Zero</td>
+            <td><i class='bi bi-calculator'></i></td>
+            <td><ul>        </ul></td>
+            <td><ul><li>out : double</li>        </ul></td>
+            <td>Return number zero</td>
+        </tr>
+    </table>
+    <h3 id='Matrix'>Matrix</h3><p>The Matrix operations tools are all under the <i class="bi bi-grid-3x3"> Matrix</i> category.The full list of display tools is as follows:</p><table>
+        <tr>
+            <th>Name</th>
+            <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Per Element Comparison</td>
+            <td><i class='bi bi-eye-fill'></i></td>
+            <td><ul><li>source1 : matrix2D</li><li>source2 : matrix2D</li><li>cmpop : int</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li>        </ul></td>
+            <td>Performs the per-element comparison of two arrays or an array and scalar value. When the comparison result is true, the corresponding element of output array is set to 255</td>
+        </tr>
+        <tr>
+            <td>Eigen</td>
+            <td><i class='bi bi-grid-3x3'></i></td>
+            <td><ul><li>source : matrix2D</li>        </ul></td>
+            <td><ul><li>eigenvalues : matrix2D</li><li>eigenvectors : matrix2D</li>        </ul></td>
+            <td>Calculates eigenvalues and eigenvectors of a matrix</td>
+        </tr>
+        <tr>
+            <td>Integral</td>
+            <td><i class='bi bi-eye-fill'></i></td>
+            <td><ul><li>source : matrix2D</li><li>sdepth : int</li><li>sqdepth : int</li>        </ul></td>
+            <td><ul><li>Sum : matrix2D</li><li>Squared Sum : matrix2D</li>        </ul></td>
+            <td>Calculates the integral of an image</td>
+        </tr>
+        <tr>
+            <td>Inverse Matrix</td>
+            <td><i class='bi bi-grid-3x3'></i></td>
+            <td><ul><li>source : matrix2D</li><li>flags : int</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li>        </ul></td>
+            <td>Finds the inverse or pseudo-inverse of a matrix</td>
+        </tr>
+        <tr>
+            <td>Matrix Multiply</td>
+            <td><i class='bi bi-grid-3x3'></i></td>
+            <td><ul><li>source1 : matrix2D</li><li>source2 : matrix2D</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li>        </ul></td>
+            <td>Calculates the matrix multiplication of two arrays</td>
+        </tr>
+        <tr>
+            <td>Per Element Multiply</td>
+            <td><i class='bi bi-grid-3x3'></i></td>
+            <td><ul><li>source1 : matrix2D</li><li>source2 : matrix2D</li><li>scale : double</li><li>dtype : int</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li>        </ul></td>
+            <td>Calculates the per-element scaled product of two arrays</td>
+        </tr>
+        <tr>
+            <td>Norm</td>
+            <td><i class='bi bi-grid-3x3'></i></td>
+            <td><ul><li>source : matrix2D</li><li>normType : int</li>        </ul></td>
+            <td><ul><li>out : double</li>        </ul></td>
+            <td>Calculates the absolute norm of an array</td>
+        </tr>
+        <tr>
+            <td>Relative Norm</td>
+            <td><i class='bi bi-grid-3x3'></i></td>
+            <td><ul><li>source1 : matrix2D</li><li>source2 : matrix2D</li><li>normType : int</li>        </ul></td>
+            <td><ul><li>out : double</li>        </ul></td>
+            <td>Calculates an absolute difference norm or a relative difference norm of two arrays</td>
+        </tr>
+        <tr>
+            <td>Select</td>
+            <td><i class='bi bi-eye-fill'></i></td>
+            <td><ul><li>source1 : matrix2D</li><li>source2 : matrix2D</li><li>mask : matrix2D</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li>        </ul></td>
+            <td>Sets the output matrix to the value from the first input matrix if corresponding value of mask matrix is 255, or value from the second input matrix (if value of mask matrix set to 0)</td>
+        </tr>
+        <tr>
+            <td>Trace</td>
+            <td><i class='bi bi-grid-3x3'></i></td>
+            <td><ul><li>source : matrix2D</li>        </ul></td>
+            <td><ul><li>out : double</li>        </ul></td>
+            <td>Returns the trace of a matrix, the sum of its diagonal elements</td>
+        </tr>
+        <tr>
+            <td>Transpose</td>
+            <td><i class='bi bi-grid-3x3'></i></td>
+            <td><ul><li>source : matrix2D</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li>        </ul></td>
+            <td>Transposes a matrix</td>
+        </tr>
+    </table>
+
+
+
+
+
+    <!-- END OF AUTO GENERATED DOCS -->
+
+
 
 
 
