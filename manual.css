@@ -30,3 +30,19 @@ table, th, td {
 th, td {
     padding: 5px;
 }
+
+td {
+    font-size:0.7em;
+}
+
+table ul {
+    -webkit-column-count: 4;
+    -moz-column-count: 4;
+    column-count: 4;
+    -webkit-column-width: 25%;
+    -moz-column-width: 25%;
+    column-width: 25%;
+    -webkit-column-gap: 4em;
+    -moz-column-gap: 4em;
+    column-gap: 4em;
+}
