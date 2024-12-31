@@ -88,21 +88,29 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tools <span class="caret"></span></a>
                         <ul class="dropdown-menu">
+                            <li><a href="#AI">AI Tools</a></li>
                             <li><a href="#Color">Color Tools</a></li>
                             <li><a href="#Composite">Composite Tools</a></li>
+                            <li><a href="#Experimental">Experimental Tools</a></li>
                             <li><a href="#ImageProcessing">Image Processing Tools</a></li>
-                            <li><a href="#Inputs">Input Tools</a></li>
-                            <li><a href="#Photron">Photron Tools</a></li>
+                            <li><a href="#Inputs">Inputs Tools</a></li>
                             <li><a href="#Logic">Logic Tools</a></li>
-                            <li><a href="#DataScience">Data Science Tools</a></li>
-                            <li><a href="#Plots">Plot Tools</a></li>
                             <li><a href="#Masks">Masks Tools</a></li>
                             <li><a href="#Math">Math Tools</a></li>
                             <li><a href="#Matrix">Matrix Tools</a></li>
+                            <li><a href="#ML">ML Tools</a></li>
+                            <li><a href="#Photron">Photron Tools</a></li>
+                            <li><a href="#Pytorch">Pytorch Tools</a></li>
+                            <li><a href="#String">String Tools</a></li>
+                            <li><a href="#Tracking">Tracking Tools</a></li>
+                            <li><a href="#Transform">Transform Tools</a></li>
+                            <li><a href="#Triggers">Triggers Tools</a></li>
+                            <li><a href="#Utilities">Utilities Tools</a></li>
+
+                            <li><a href="#DataScience">Data Science Tools</a></li>
                             <li><a href="#Widgets">Widgets Tools</a></li>
                             <li><a href="#Displays">Displays Tools</a></li>
                             <li><a href="#Triggers">Triggers Tools</a></li>
-                            <li><a href="#Experimental">Experimental</a></li>
                         </ul>
                     </li>
 
@@ -117,6 +125,19 @@
                             <li><a href="#CreateMacro">Create Macro</a></li>
                         </ul>
                     </li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Widgets, Displays and Triggers <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#CreatingTriggers">Creating Triggers</a></li>
+                            <li><a href="#Widgets">Widgets Tools</a></li>
+                            <li><a href="#Displays">Displays Tools</a></li>
+                        </ul>
+                    </li>
+
+                   
+
+
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Experimental <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -1083,7 +1104,7 @@
     </table>
 
 
-    <h3 id="Triggers">Triggers</h3>
+    <h3 id="CreatingTriggers">Creating Triggers</h3>
     <p>
         You can create triggers to activate certain nodes that require a trigger to execute. Typically, you can use the various boolean expression - for example,
         in the workflow below, the number of detected faces is applied to a ""Numeric a>b" tool, this will yield whenever the number of faces is greater than a certain
@@ -1529,7 +1550,148 @@
     <!-- START OF AUTO GENERATED DOCS  -->
 
 
-
+    <h3 id='AI'>AI</h3><p>The AI Inference algorithms including using pretrained models tools are all under the <i class="bi bi-filetype-ai"> AI</i> category.The full list of display tools is as follows:</p><table>
+        <tr>
+            <th>Name</th>
+            <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Body Pose COCO</td>
+            <td><i class='bi bi-filetype-ai'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numPairs : int</li>        </ul></td>
+            <td>Body Pose COCO detection using CAFFE model</td>
+        </tr>
+        <tr>
+            <td>Body Pose MPI</td>
+            <td><i class='bi bi-filetype-ai'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numPairs : int</li>        </ul></td>
+            <td>Body Pose MPI detection using CAFFE model</td>
+        </tr>
+        <tr>
+            <td>Colorization</td>
+            <td><i class='bi bi-filetype-ai'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Colorization</td>
+        </tr>
+        <tr>
+            <td>Depth Inference</td>
+            <td><i class='bi bi-filetype-ai'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Detects depth using ONNX model</td>
+        </tr>
+        <tr>
+            <td>Holistically-Nested Edges</td>
+            <td><i class='bi bi-filetype-ai'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Detects edges using CAFFE model</td>
+        </tr>
+        <tr>
+            <td>Face Tracker</td>
+            <td><i class='bi bi-filetype-ai'></i></td>
+            <td><ul><li>source : image2D</li><li>face : string</li><li>part : string</li>        </ul></td>
+            <td><ul><li>faces : matrix2D</li><li>preview : image2D</li><li>parts : matrix2D</li><li>numFaces : int</li><li>numParts : int</li>        </ul></td>
+            <td>Detects and tracks facial and body features</td>
+        </tr>
+        <tr>
+            <td>Handpose Estimation</td>
+            <td><i class='bi bi-filetype-ai'></i></td>
+            <td><ul><li>source : image2D</li><li>size : int2</li><li>confidenceThreshold : double</li><li>scale : double</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li><li>openClose : bool</li>        </ul></td>
+            <td>Detects palms and fingers based on OpenPose neural network model</td>
+        </tr>
+        <tr>
+            <td>Human Parsing Inference</td>
+            <td><i class='bi bi-filetype-ai'></i></td>
+            <td><ul><li>source : image2D</li><li>filter : string</li><li>blend : double</li>        </ul></td>
+            <td><ul><li>out : image2D</li><li>preview : image2D</li>        </ul></td>
+            <td>Parses (segments) human body parts from an image using opencv's dnn</td>
+        </tr>
+        <tr>
+            <td>Mask Inference</td>
+            <td><i class='bi bi-filetype-ai'></i></td>
+            <td><ul><li>source : image2D</li><li>filter : string</li><li>confidenceThreshold : double</li><li>maskThreshold : double</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li><li>mask : image2D</li><li>cutout : image2D</li>        </ul></td>
+            <td>Mask labels objects based on RCNN neural network model</td>
+        </tr>
+        <tr>
+            <td>ONNX for Basic Classification</td>
+            <td><i class='bi bi-filetype-ai'></i></td>
+            <td><ul><li>source : image2D</li><li>model : string</li><li>outLayerName : string</li><li>classes : string</li><li>scale factor : double</li><li>size : int2</li><li>red mean : double</li><li>green mean : double</li><li>blue mean : double</li><li>swapRB : bool</li><li>crop : bool</li>        </ul></td>
+            <td><ul><li>out : int</li><li>confidence : double</li><li>class : string</li>        </ul></td>
+            <td>Performs basic Classification using custom ONNX model</td>
+        </tr>
+        <tr>
+            <td>ONNX for Basic Segmentation</td>
+            <td><i class='bi bi-filetype-ai'></i></td>
+            <td><ul><li>source : image2D</li><li>model : string</li><li>outLayerName : string</li><li>scale factor : double</li><li>size : int2</li><li>red mean : double</li><li>green mean : double</li><li>blue mean : double</li><li>swapRB : bool</li><li>crop : bool</li><li>colormap : matrix2D</li><li>filter : string</li><li>blend : double</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li><li>preview : image2D</li>        </ul></td>
+            <td>Performs basic Segmentation using custom ONNX model</td>
+        </tr>
+        <tr>
+            <td>ONNX for Regression</td>
+            <td><i class='bi bi-filetype-ai'></i></td>
+            <td><ul><li>source : image2D</li><li>model : string</li><li>outLayerName : string</li><li>scale factor : double</li><li>size : int2</li><li>red mean : double</li><li>green mean : double</li><li>blue mean : double</li><li>swapRB : bool</li><li>crop : bool</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li><li>regression value : double</li>        </ul></td>
+            <td>Performs Regression using custom ONNX model</td>
+        </tr>
+        <tr>
+            <td>Optical Flow Inference</td>
+            <td><i class='bi bi-filetype-ai'></i></td>
+            <td><ul><li>source : image2D</li><li>size : int2</li><li>trigger : int</li><li>delay : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Computes the pattern of apparent motion for a sparse feature set using the iterative Lucas-Kanade method with pyramids</td>
+        </tr>
+        <tr>
+            <td>Person ReID</td>
+            <td><i class='bi bi-filetype-ai'></i></td>
+            <td><ul><li>queryImage : image2D</li><li>galleryList : string</li><li>batchSize : int</li><li>size : int2</li><li>topK : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Matches a person's identity across different cameras or locations in a video or image sequence using features such as appearance, body shape, and clothing to match their identity in different frames</td>
+        </tr>
+        <tr>
+            <td>Segmentation</td>
+            <td><i class='bi bi-filetype-ai'></i></td>
+            <td><ul><li>source : image2D</li><li>filter : string</li><li>blend : double</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li><li>preview : image2D</li>        </ul></td>
+            <td>Parses (segments) various objects from an image using opencv's dnn</td>
+        </tr>
+        <tr>
+            <td>Speech Recognition</td>
+            <td><i class='bi bi-filetype-ai'></i></td>
+            <td><ul><li>source : audio</li>        </ul></td>
+            <td><ul><li>out : string</li><li>preview : image2D</li>        </ul></td>
+            <td>Detects speech</td>
+        </tr>
+        <tr>
+            <td>Text Spotting</td>
+            <td><i class='bi bi-filetype-ai'></i></td>
+            <td><ul><li>source : image2D</li><li>color : bool</li><li>binaryThreshold : double</li><li>polygonThreshold : double</li><li>maxCandidate : int</li><li>unclipRatio : double</li>        </ul></td>
+            <td><ul><li>out : string</li><li>preview : image2D</li>        </ul></td>
+            <td>Spots text in images using DNN</td>
+        </tr>
+        <tr>
+            <td>Tracker Inference</td>
+            <td><i class='bi bi-filetype-ai'></i></td>
+            <td><ul><li>source : image2D</li><li>center : float2</li><li>width : int</li><li>height : int</li><li>start : int</li><li>stop : int</li>        </ul></td>
+            <td><ul><li>out : int2</li><li>preview : image2D</li><li>confidence : double</li>        </ul></td>
+            <td>Tracks a template within an image using dasiamrpn ML algorithm</td>
+        </tr>
+        <tr>
+            <td>YOLO Classification</td>
+            <td><i class='bi bi-filetype-ai'></i></td>
+            <td><ul><li>source : image2D</li><li>filter : string</li><li>scoreThreshold : double</li><li>nmsThreshold : double</li><li>confidenceThreshold : double</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li><li>cutout : image2D</li>        </ul></td>
+            <td>Detects and labels objects based on YOLO neural network model</td>
+        </tr>
+    </table>
     <h3 id='Color'>Color</h3><p>The Color Correction tools are all under the <i class="bi bi-palette"> Color</i> category.The full list of display tools is as follows:</p><table>
         <tr>
             <th>Name</th>
@@ -2439,7 +2601,7 @@
             <td>OpenSceneGraph based Virtual Set</td>
         </tr>
     </table>
-    <h3 id='ImageProcessing'>Image Processing</h3><p>The Image Processing Filters tools are all under the <i class="bi bi-stars"> ImageProcessing</i> category.The full list of display tools is as follows:</p><table>
+    <h3 id='ImageProcessing'>ImageProcessing</h3><p>The Image Processing Filters tools are all under the <i class="bi bi-stars"> Image Processing</i> category.The full list of display tools is as follows:</p><table>
         <tr>
             <th>Name</th>
             <th>Icon</th>
@@ -3326,6 +3488,190 @@
             <td>Transposes a matrix</td>
         </tr>
     </table>
+    <h3 id='ML'>ML</h3><p>The Machine Learning filters based using SciPy tools are all under the <i class="bi bi-lightbulb-fill"> ML</i> category.The full list of display tools is as follows:</p><table>
+        <tr>
+            <th>Name</th>
+            <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Bernoulli NB Classifier</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Bernoulli Naive Bayes Classifier model</td>
+        </tr>
+        <tr>
+            <td>Categorical NB Classifier</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Categorical Naive Bayes Classifier model</td>
+        </tr>
+        <tr>
+            <td>Complement NB Classifier</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Complement Naive Bayes Classifier model</td>
+        </tr>
+        <tr>
+            <td>Gaussian NB Classifier</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Gaussian Naive Bayes Classifier model</td>
+        </tr>
+        <tr>
+            <td>Gaussian Process Classifier</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Gaussian Process Classifier model</td>
+        </tr>
+        <tr>
+            <td>Gaussian Process Regressor</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Gaussian Process Regressor model</td>
+        </tr>
+        <tr>
+            <td>KNeighbors Classifier</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>KNeighbors Classifier model</td>
+        </tr>
+        <tr>
+            <td>KNeighbors Regressor</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>KNeighbors Regressor model</td>
+        </tr>
+        <tr>
+            <td>Lasso Regressor</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Lasso model</td>
+        </tr>
+        <tr>
+            <td>Linear Regression</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Linear regression model</td>
+        </tr>
+        <tr>
+            <td>Linear SVC Model</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Linear Support Vector Classifier model</td>
+        </tr>
+        <tr>
+            <td>Logistic Regression</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>penalty : string</li><li>solver : string</li><li>max_iter : int</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Logistic regression model</td>
+        </tr>
+        <tr>
+            <td>MSE</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>truth : DataFrame</li><li>predicted : DataFrame</li>        </ul></td>
+            <td><ul><li>out : double</li>        </ul></td>
+            <td>Calculates Mean Square Error</td>
+        </tr>
+        <tr>
+            <td>MLP Neural Network</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Neural Network MLP Classifier model</td>
+        </tr>
+        <tr>
+            <td>Model Predict</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>model : ML.Model</li><li>X : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Predicts test data using model</td>
+        </tr>
+        <tr>
+            <td>Multinomial NB Classifier</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Gaussian Naive Bayes Classifier model</td>
+        </tr>
+        <tr>
+            <td>Nearest Centroid</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Nearest Centroid Classifier model</td>
+        </tr>
+        <tr>
+            <td>R2 Score</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>truth : DataFrame</li><li>predicted : DataFrame</li>        </ul></td>
+            <td><ul><li>out : double</li>        </ul></td>
+            <td>Calculates R2 Score</td>
+        </tr>
+        <tr>
+            <td>Random Forest Model</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Random Forest Classifier model</td>
+        </tr>
+        <tr>
+            <td>Ridge Classifier</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Ridge Classifier model</td>
+        </tr>
+        <tr>
+            <td>Ridge Regressor</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Ridge Regressor model</td>
+        </tr>
+        <tr>
+            <td>SGD Classifier</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Stochastic Gradient Descent Classifier model</td>
+        </tr>
+        <tr>
+            <td>SGD Regressor</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Stochastic Gradient Descent Regressor model</td>
+        </tr>
+        <tr>
+            <td>SVC Model</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Support Vector Classifier model</td>
+        </tr>
+        <tr>
+            <td>Train Test Split</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>test_size : double</li>        </ul></td>
+            <td><ul><li>train : DataFrame</li><li>test : DataFrame</li>        </ul></td>
+            <td>Returns train test split.</td>
+        </tr>
+    </table>
     <h3 id='Photron'>Photron</h3><p>The Photron Filters tools are all under the <i class="bi bi-camera-reels-fill"> Photron</i> category.The full list of display tools is as follows:</p><table>
         <tr>
             <th>Name</th>
@@ -3361,6 +3707,1208 @@
             <td><ul><li>shutter : int</li><li>calibration : matrix2D</li>        </ul></td>
             <td><ul><li>out : image2D</li>        </ul></td>
             <td>Playback Images from a Photron Highspeed camera</td>
+        </tr>
+    </table>
+    <h3 id='Pytorch'>Pytorch</h3><p>The Pytorch functions tools are all under the <i class="bi bi-fire"> Pytorch</i> category.The full list of display tools is as follows:</p><table>
+        <tr>
+            <th>Name</th>
+            <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Add</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>input : tensor</li><li>other : tensor</li>        </ul></td>
+            <td><ul><li>out : tensor</li>        </ul></td>
+            <td>Add Other tensor to Input tensor</td>
+        </tr>
+        <tr>
+            <td>Arange</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>start : double</li><li>end : double</li><li>step : double</li>        </ul></td>
+            <td><ul><li>out : tensor</li>        </ul></td>
+            <td>Returns a 1-D tensor of size ceil((end - start) / step) with values from the interval [start, end) taken with common difference step beginning from start.</td>
+        </tr>
+        <tr>
+            <td>BCE Loss</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>weight : tensor</li><li>reduction : int</li>        </ul></td>
+            <td><ul><li>out : torch.loss</li>        </ul></td>
+            <td>Creates a criterion that measures the Binary Cross Entropy between the target and the input probabilities.</td>
+        </tr>
+        <tr>
+            <td>CIFAR10 Dataset</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>batch : int</li><li>train : bool</li><li>shuffle : bool</li>        </ul></td>
+            <td><ul><li>out : torch.dataset</li><li>data size : torch.Size</li>        </ul></td>
+            <td>Loads the CIFAR10 dataset</td>
+        </tr>
+        <tr>
+            <td>Cityscapes Dataset</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>batch : int</li><li>split : int</li><li>shuffle : bool</li>        </ul></td>
+            <td><ul><li>out : torch.dataset</li><li>data size : torch.Size</li>        </ul></td>
+            <td>Loads the Cityscapes dataset</td>
+        </tr>
+        <tr>
+            <td>Concatenate</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>dim : int</li><li>tensor #1 : tensor</li><li>tensor #2 : tensor</li>        </ul></td>
+            <td><ul><li>out : tensor</li>        </ul></td>
+            <td>Concatenates the given sequence of tensors in tensors in the given dimension. All tensors must either have the same shape (except in the concatenating dimension) or be a 1-D empty tensor with size (0,).</td>
+        </tr>
+        <tr>
+            <td>Cross Entropy Loss</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>weight : tensor</li><li>ignore index : int</li><li>reduction : int</li><li>label smoothing : double</li>        </ul></td>
+            <td><ul><li>out : torch.loss</li>        </ul></td>
+            <td>This criterion computes the cross entropy loss between input logits and target.</td>
+        </tr>
+        <tr>
+            <td>DataFrame to Tensor</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>DataFrame : DataFrame</li>        </ul></td>
+            <td><ul><li>out : tensor</li>        </ul></td>
+            <td>Converts a Pandas DataFrame to a Pytorch tensor.</td>
+        </tr>
+        <tr>
+            <td>Dimensions</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>tensor : tensor</li>        </ul></td>
+            <td><ul><li>out : int</li>        </ul></td>
+            <td>Returns the number of dimensions of tensor.</td>
+        </tr>
+        <tr>
+            <td>Divide</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>input : tensor</li><li>other : tensor</li>        </ul></td>
+            <td><ul><li>out : tensor</li>        </ul></td>
+            <td>Divides each element of the input input by the corresponding element of other.</td>
+        </tr>
+        <tr>
+            <td>Export to ONNX</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>model : torch.nn.Module</li><li>state dict : torch.model</li><li>data size : torch.Size</li><li>save ONNX file : string</li><li>opset_version : int</li><li>input_names : string</li><li>output_names : string</li><li>export_params : bool</li><li>trigger : int</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Export a PyTorch model to ONNX.</td>
+        </tr>
+        <tr>
+            <td>FashionMNIST Dataset</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>batch : int</li><li>train : bool</li><li>shuffle : bool</li>        </ul></td>
+            <td><ul><li>out : torch.dataset</li><li>data size : torch.Size</li>        </ul></td>
+            <td>Loads the FashionMNIST dataset</td>
+        </tr>
+        <tr>
+            <td>Flatten Tensor</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>tensor : tensor</li><li>start dim : int</li><li>end dim : int</li>        </ul></td>
+            <td><ul><li>out : tensor</li>        </ul></td>
+            <td>Flattens input by reshaping it into a one-dimensional tensor. If start_dim or end_dim are passed, only dimensions starting with start_dim and ending with end_dim are flattened. The order of elements in input is unchanged.</td>
+        </tr>
+        <tr>
+            <td>Generic Dataset</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>X : string</li><li>Y : string</li><li>classes : string</li><li>batch : int</li><li>split : int</li><li>shuffle : bool</li><li>transform : torchvision.transforms</li><li>directory : string</li><li>length : int</li><li>colormap : string</li>        </ul></td>
+            <td><ul><li>out : torch.dataset</li><li>data size : torch.Size</li>        </ul></td>
+            <td>Loads the Generic dataset</td>
+        </tr>
+        <tr>
+            <td>HStack</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>tensor #1 : tensor</li>        </ul></td>
+            <td><ul><li>out : tensor</li>        </ul></td>
+            <td>Stack tensors in sequence horizontally (column wise).</td>
+        </tr>
+        <tr>
+            <td>Image to Tensor</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>out : tensor</li>        </ul></td>
+            <td>Converts a Image to a Pytorch tensor.</td>
+        </tr>
+        <tr>
+            <td>L1 Loss</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>reduction : int</li>        </ul></td>
+            <td><ul><li>out : torch.loss</li>        </ul></td>
+            <td>Creates a criterion that measures the mean absolute error (MAE) between each element in the input x and target y.</td>
+        </tr>
+        <tr>
+            <td>Linspace</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>start : double</li><li>end : double</li><li>step : int</li>        </ul></td>
+            <td><ul><li>out : tensor</li>        </ul></td>
+            <td>Creates a one-dimensional tensor of size steps whose values are evenly spaced from start to end, inclusive.</td>
+        </tr>
+        <tr>
+            <td>Load Torch Model</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>filename : string</li><li>trigger : int</li>        </ul></td>
+            <td><ul><li>out : torch.model</li>        </ul></td>
+            <td>Load a trained model from a designated file</td>
+        </tr>
+        <tr>
+            <td>Load Tensor</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>filename : string</li><li>trigger : int</li>        </ul></td>
+            <td><ul><li>out : tensor</li>        </ul></td>
+            <td>Load a tensor from a designated file</td>
+        </tr>
+        <tr>
+            <td>Max</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>input : tensor</li>        </ul></td>
+            <td><ul><li>out : tensor</li>        </ul></td>
+            <td>Returns the maximum value of all elements in the input tensor.</td>
+        </tr>
+        <tr>
+            <td>Mean</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>input : tensor</li>        </ul></td>
+            <td><ul><li>out : tensor</li>        </ul></td>
+            <td>Returns the mean value of all elements in the input tensor.</td>
+        </tr>
+        <tr>
+            <td>Min</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>input : tensor</li>        </ul></td>
+            <td><ul><li>out : tensor</li>        </ul></td>
+            <td>Returns the minimum value of all elements in the input tensor.</td>
+        </tr>
+        <tr>
+            <td>MNIST Dataset</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>batch : int</li><li>train : bool</li><li>shuffle : bool</li>        </ul></td>
+            <td><ul><li>out : torch.dataset</li><li>data size : torch.Size</li>        </ul></td>
+            <td>Loads the MNIST dataset</td>
+        </tr>
+        <tr>
+            <td>MSE Loss</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>reduction : int</li>        </ul></td>
+            <td><ul><li>out : torch.loss</li>        </ul></td>
+            <td>Creates a criterion that measures the mean squared error (squared L2 norm) between each element in the input x and target y.</td>
+        </tr>
+        <tr>
+            <td>Multiply</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>input : tensor</li><li>other : tensor</li>        </ul></td>
+            <td><ul><li>out : tensor</li>        </ul></td>
+            <td>Multiply Input tensor by Other tensor</td>
+        </tr>
+        <tr>
+            <td>NLL Loss</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>weight : tensor</li><li>ignore index : int</li><li>reduction : int</li>        </ul></td>
+            <td><ul><li>out : torch.loss</li>        </ul></td>
+            <td>The negative log likelihood loss. It is useful to train a classification problem with C classes.</td>
+        </tr>
+        <tr>
+            <td>Classifier Test</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>model : torch.nn.Module</li><li>state dict : torch.model</li><li>testing dataset : torch.dataset</li><li>trigger : int</li>        </ul></td>
+            <td><ul><li>actual values : tensor</li><li>predicted values : tensor</li><li>accuracy table : DataFrame</li>        </ul></td>
+            <td>Evaluate the performance of a neural network classifier model.</td>
+        </tr>
+        <tr>
+            <td>Classifier Train</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>model : torch.nn.Module</li><li>optimizer : torch.optim</li><li>loss function : torch.loss</li><li>numEpochs : int</li><li>trigger : int</li><li>training dataset : torch.dataset</li><li>save state dict : bool</li><li>save state dict file : string</li>        </ul></td>
+            <td><ul><li>out : torch.model</li>        </ul></td>
+            <td>Train a neural network classifier model.</td>
+        </tr>
+        <tr>
+            <td>Convolution 2D</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>in channels : int</li><li>out channels : int</li><li>kernel size : int</li><li>stride : int</li><li>padding : int</li><li>dilation : int</li>        </ul></td>
+            <td><ul><li>out : torch.nn.Module</li>        </ul></td>
+            <td>Applies a 2D convolution over an input signal composed of several input planes.</td>
+        </tr>
+        <tr>
+            <td>Convolutional Neural Net</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>input image height : int</li><li>input image width : int</li><li># of input channels : int</li><li># of classes : int</li><li># of convolution cycles : int</li><li># of fully connected layers : int</li><li>convolution kernel size : int</li><li>pooling kernel size : int</li><li>logsoftmax on : bool</li>        </ul></td>
+            <td><ul><li>out : torch.nn.Module</li>        </ul></td>
+            <td>Creates a custom convolutoinal neural network (CNN). Follows the common NN structure of feature learning (comprised of multiple layers of convolution, activation, and pooling), then classification (comprised of several linear+ReLU layers). Each input image must be the same dimensions.</td>
+        </tr>
+        <tr>
+            <td>Dropout</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>probability : double</li><li>inplace : bool</li>        </ul></td>
+            <td><ul><li>out : torch.nn.Module</li>        </ul></td>
+            <td>During training, randomly zeroes some of the elements of the input tensor with probability p. The zeroed elements are chosen independently for each forward call and are sampled from a Bernoulli distribution.</td>
+        </tr>
+        <tr>
+            <td>Flatten Module</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>start dim : int</li><li>end dim : int</li>        </ul></td>
+            <td><ul><li>out : torch.nn.Module</li>        </ul></td>
+            <td>Flattens a contiguous range of dims into a tensor. Output is a torch.nn.Module.</td>
+        </tr>
+        <tr>
+            <td>Linear</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>in_features : int</li><li>out_features : int</li><li>bias : bool</li>        </ul></td>
+            <td><ul><li>out : torch.nn.Module</li>        </ul></td>
+            <td>Applies an affine linear transformation to the incoming data: y = x*A^T + b.</td>
+        </tr>
+        <tr>
+            <td>Log Softmax</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>dim : int</li>        </ul></td>
+            <td><ul><li>out : torch.nn.Module</li>        </ul></td>
+            <td>Applies the log(Softmax(x)) function to an n-dimensional input Tensor.</td>
+        </tr>
+        <tr>
+            <td>Max Pooling 2D</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>kernel size : int</li><li>stride : int</li>        </ul></td>
+            <td><ul><li>out : torch.nn.Module</li>        </ul></td>
+            <td>Applies a 2D max pooling over an input signal composed of several input planes.</td>
+        </tr>
+        <tr>
+            <td>Regression Test</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>model : torch.nn.Module</li><li>state dict : torch.model</li><li>testing dataset : DataFrame</li><li>num outputs : int</li><li>trigger : int</li>        </ul></td>
+            <td><ul><li>actual values : tensor</li><li>predicted values : tensor</li><li>r2 score : double</li>        </ul></td>
+            <td>Evaluate the performance of a neural network regression model.</td>
+        </tr>
+        <tr>
+            <td>Regression Train</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>model : torch.nn.Module</li><li>optimizer : torch.optim</li><li>loss function : torch.loss</li><li>numEpochs : int</li><li>trigger : int</li><li>training dataset : DataFrame</li><li>num outputs : int</li><li>save state dict : bool</li><li>save state dict file : string</li>        </ul></td>
+            <td><ul><li>out : torch.model</li>        </ul></td>
+            <td>Train a neural network regression model.</td>
+        </tr>
+        <tr>
+            <td>ReLU</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>inplace : bool</li>        </ul></td>
+            <td><ul><li>out : torch.nn.Module</li>        </ul></td>
+            <td>Applies the rectified linear unit function element-wise.</td>
+        </tr>
+        <tr>
+            <td>Segmentation Test</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>model : torch.nn.Module</li><li>state dict : torch.model</li><li>testing dataset : torch.dataset</li><li>trigger : int</li><li>save predictions : bool</li><li>save predictions file format : string</li><li>save actuals : bool</li><li>save actuals file format : string</li>        </ul></td>
+            <td><ul><li>accuracy table : DataFrame</li><li>numOutputs : int</li>        </ul></td>
+            <td>Evaluate the performance of a neural network segmentation model.</td>
+        </tr>
+        <tr>
+            <td>Segmentation Train</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>model : torch.nn.Module</li><li>optimizer : torch.optim</li><li>loss function : torch.loss</li><li>numEpochs : int</li><li>trigger : int</li><li>training dataset : torch.dataset</li><li>save state dict : bool</li><li>save state dict file : string</li><li>save optimizer : bool</li><li>save optimizer file : string</li>        </ul></td>
+            <td><ul><li>out : torch.model</li><li>optimizer : torch.model</li><li>loss : DataFrame</li>        </ul></td>
+            <td>Train a neural network segmentation model.</td>
+        </tr>
+        <tr>
+            <td>Sequential</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>module #1 : torch.nn.Module</li>        </ul></td>
+            <td><ul><li>out : torch.nn.Module</li>        </ul></td>
+            <td>A sequential container that is then passed into a basic neural network model. Modules will be added to it in the order they are passed into the constructor.</td>
+        </tr>
+        <tr>
+            <td>Sequential Loader</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>args : string</li><li>notes : string</li>        </ul></td>
+            <td><ul><li>out : torch.nn.Module</li>        </ul></td>
+            <td>A sequential container. Modules will be added to it in the order they are passed into the constructor.</td>
+        </tr>
+        <tr>
+            <td>Sigmoid</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul>        </ul></td>
+            <td><ul><li>out : torch.nn.Module</li>        </ul></td>
+            <td>Applies the Sigmoid function element-wise.</td>
+        </tr>
+        <tr>
+            <td>Tanh</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul>        </ul></td>
+            <td><ul><li>out : torch.nn.Module</li>        </ul></td>
+            <td>Applies the Hyperbolic Tangent (Tanh) function element-wise.</td>
+        </tr>
+        <tr>
+            <td>NRandom</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>size #1 : int</li>        </ul></td>
+            <td><ul><li>out : tensor</li>        </ul></td>
+            <td>Returns a tensor filled with random numbers from a normal distribution with mean 0 and variance 1 (also called the standard normal distribution).</td>
+        </tr>
+        <tr>
+            <td>Numeric to Tensor</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>numeric : numeric</li>        </ul></td>
+            <td><ul><li>out : tensor</li>        </ul></td>
+            <td>Converts a numeric (int or double) to a Pytorch tensor.</td>
+        </tr>
+        <tr>
+            <td>Numpy to Tensor</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>ndarray : numpy</li>        </ul></td>
+            <td><ul><li>out : tensor</li>        </ul></td>
+            <td>Converts a Numpy array to a Pytorch tensor.</td>
+        </tr>
+        <tr>
+            <td>Ones</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>size #1 : int</li>        </ul></td>
+            <td><ul><li>out : tensor</li>        </ul></td>
+            <td>Returns a tensor filled with the scalar value 1, with the shape defined by the variable argument size.</td>
+        </tr>
+        <tr>
+            <td>Adam Optimizer</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>model : torch.nn.Module</li><li>lr : double</li><li>weight decay : double</li><li>per-parameter option : torch.param</li>        </ul></td>
+            <td><ul><li>out : torch.optim</li>        </ul></td>
+            <td>Implements Adam algorithm.</td>
+        </tr>
+        <tr>
+            <td>Per Parameter Optimizer</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>model : torch.nn.Module</li><li>parameter name : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : torch.param</li>        </ul></td>
+            <td>Helper node for optimizer nodes. Allows specific values to be applied per-parameter. If a model's parameter is not specified, it will take on the values passed in the main Optimizer node, not in this helper node.</td>
+        </tr>
+        <tr>
+            <td>RMSprop Optimizer</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>model : torch.nn.Module</li><li>lr : double</li><li>momentum : double</li><li>per-parameter option : torch.param</li>        </ul></td>
+            <td><ul><li>out : torch.optim</li>        </ul></td>
+            <td>Implements RMSprop algorithm.</td>
+        </tr>
+        <tr>
+            <td>SGD Optimizer</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>model : torch.nn.Module</li><li>lr : double</li><li>momentum : double</li><li>per-parameter option : torch.param</li>        </ul></td>
+            <td><ul><li>out : torch.optim</li>        </ul></td>
+            <td>Implements stochastic gradient descent (optionally with momentum).</td>
+        </tr>
+        <tr>
+            <td>Random</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>size #1 : int</li>        </ul></td>
+            <td><ul><li>out : tensor</li>        </ul></td>
+            <td>Returns a tensor filled with random numbers from a uniform distribution on the interval [0,1).</td>
+        </tr>
+        <tr>
+            <td>Save Torch Model</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>model : torch.model</li><li>filename : string</li><li>trigger : int</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Save a trained model to a designated file</td>
+        </tr>
+        <tr>
+            <td>Save Tensor</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>tensor : tensor</li><li>filename : string</li><li>trigger : int</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Save a tensor to a designated file</td>
+        </tr>
+        <tr>
+            <td>Set Default Type</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>float type : int</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>Set the default float type of all torch tensors in the workflow.</td>
+        </tr>
+        <tr>
+            <td>Size</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>tensor : tensor</li>        </ul></td>
+            <td><ul><li>out : tensor</li>        </ul></td>
+            <td>Returns the size of tensor as a tensor.</td>
+        </tr>
+        <tr>
+            <td>Slice</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>input : tensor</li><li>slice : string</li>        </ul></td>
+            <td><ul><li>out : tensor</li>        </ul></td>
+            <td>Slice a Torch</td>
+        </tr>
+        <tr>
+            <td>Subtract</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>input : tensor</li><li>other : tensor</li>        </ul></td>
+            <td><ul><li>out : tensor</li>        </ul></td>
+            <td>Subtract Other tensor from Input tensor</td>
+        </tr>
+        <tr>
+            <td>Sum</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>input : tensor</li>        </ul></td>
+            <td><ul><li>out : tensor</li>        </ul></td>
+            <td>Returns the sum of all elements in the input tensor.</td>
+        </tr>
+        <tr>
+            <td>Tensor to DataFrame</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>tensor : tensor</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Converts a Pytorch tensor to a Pandas DataFrame.</td>
+        </tr>
+        <tr>
+            <td>Tensor to Image</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>source : tensor</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Converts a Pytorch tensor to an image.</td>
+        </tr>
+        <tr>
+            <td>Tensor to Numpy</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>tensor : tensor</li>        </ul></td>
+            <td><ul><li>out : ndarray</li>        </ul></td>
+            <td>Converts a Pytorch tensor to a Numpy array.</td>
+        </tr>
+        <tr>
+            <td>Transform Compose</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>transform #1 : torchvision.transforms</li>        </ul></td>
+            <td><ul><li>out : torchvision.transforms</li>        </ul></td>
+            <td>Composes several transforms together. Transform objects will be added to it in the order they are passed into the constructor.</td>
+        </tr>
+        <tr>
+            <td>Transform Compose Loader</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>args : string</li><li>notes : string</li>        </ul></td>
+            <td><ul><li>out : torch.nn.Module</li>        </ul></td>
+            <td>A compose container. Modules will be added to it in the order they are passed into the constructor.</td>
+        </tr>
+        <tr>
+            <td>Transform Normalize</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>num channels : int</li><li>mean : double</li><li>standard deviation : double</li><li>inplace : bool</li>        </ul></td>
+            <td><ul><li>out : torchvision.transforms</li>        </ul></td>
+            <td>Normalize a tensor image with mean and standard deviation. The mean and standard deviation will be applied to each channel of the image. This transform does not support PIL Image.</td>
+        </tr>
+        <tr>
+            <td>Transform Resize</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>interpolation : int</li><li>max_size : int</li><li>antialias : bool</li><li>size #1 : int</li>        </ul></td>
+            <td><ul><li>out : torchvision.transforms</li>        </ul></td>
+            <td>Resize the input image to the given size. If the image is torch Tensor, it is expected to have […, H, W] shape, where … means a maximum of two leading dimensions.</td>
+        </tr>
+        <tr>
+            <td>Transform ToTensor</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul>        </ul></td>
+            <td><ul><li>out : torchvision.transforms</li>        </ul></td>
+            <td>Convert a PIL Image or ndarray to tensor and scale the values accordingly.</td>
+        </tr>
+        <tr>
+            <td>Transpose</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>input : tensor</li><li>dim0 : int</li><li>dim1 : int</li>        </ul></td>
+            <td><ul><li>out : tensor</li>        </ul></td>
+            <td>Returns a tensor that is a transposed version of input. The given dimensions dim0 and dim1 are swapped.</td>
+        </tr>
+        <tr>
+            <td>VStack</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>tensor #1 : tensor</li>        </ul></td>
+            <td><ul><li>out : tensor</li>        </ul></td>
+            <td>Stack tensors in sequence vertically (row wise).</td>
+        </tr>
+        <tr>
+            <td>Zeros</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>size #1 : int</li>        </ul></td>
+            <td><ul><li>out : tensor</li>        </ul></td>
+            <td>Returns a tensor filled with the scalar value 0, with the shape defined by the variable argument size.</td>
+        </tr>
+    </table>
+    <h3 id='String'>String</h3><p>The String functions tools are all under the <i class="bi bi-chat-square-quote-fill"> String</i> category.The full list of display tools is as follows:</p><table>
+        <tr>
+            <th>Name</th>
+            <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>String Length</td>
+            <td><i class='bi bi-chat-square-quote-fill'></i></td>
+            <td><ul><li>value : string</li>        </ul></td>
+            <td><ul><li>out : int</li>        </ul></td>
+            <td>Return string length</td>
+        </tr>
+        <tr>
+            <td>String Replace</td>
+            <td><i class='bi bi-chat-square-quote-fill'></i></td>
+            <td><ul><li>value : string</li><li>from : string</li><li>to : string</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>String replacement</td>
+        </tr>
+        <tr>
+            <td>String Concatenate</td>
+            <td><i class='bi bi-chat-square-quote-fill'></i></td>
+            <td><ul><li>a : string</li><li>b : string</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>Returns concatenated string</td>
+        </tr>
+        <tr>
+            <td>String a == b</td>
+            <td><i class='bi bi-chat-square-quote-fill'></i></td>
+            <td><ul><li>value1 : string</li><li>value2 : string</li>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>Return if inputs are equal</td>
+        </tr>
+        <tr>
+            <td>String Format</td>
+            <td><i class='bi bi-chat-square-quote-fill'></i></td>
+            <td><ul><li>Format : string</li><li>Input #2 : *</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>String Format</td>
+        </tr>
+        <tr>
+            <td>String a > b</td>
+            <td><i class='bi bi-chat-square-quote-fill'></i></td>
+            <td><ul><li>a : string</li><li>b : string</li>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>Return if input a > input b</td>
+        </tr>
+        <tr>
+            <td>String a >= b</td>
+            <td><i class='bi bi-chat-square-quote-fill'></i></td>
+            <td><ul><li>a : string</li><li>b : string</li>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>Return if input a >= input b</td>
+        </tr>
+        <tr>
+            <td>String In</td>
+            <td><i class='bi bi-chat-square-quote-fill'></i></td>
+            <td><ul><li>a : string</li><li>b : string</li>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>Returns if string a is in string b</td>
+        </tr>
+        <tr>
+            <td>String a < b</td>
+            <td><i class='bi bi-chat-square-quote-fill'></i></td>
+            <td><ul><li>a : string</li><li>b : string</li>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>Return if input a < input b</td>
+        </tr>
+        <tr>
+            <td>String a <= b</td>
+            <td><i class='bi bi-chat-square-quote-fill'></i></td>
+            <td><ul><li>a : string</li><li>b : string</li>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>Return if input a <= input b</td>
+        </tr>
+        <tr>
+            <td>String a != b</td>
+            <td><i class='bi bi-chat-square-quote-fill'></i></td>
+            <td><ul><li>value1 : string</li><li>value2 : string</li>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>Return if inputs are not equal</td>
+        </tr>
+    </table>
+    <h3 id='Tracking'>Tracking</h3><p>The Tracking functions tools are all under the <i class="bi bi-compass-fill"> Tracking</i> category.The full list of display tools is as follows:</p><table>
+        <tr>
+            <th>Name</th>
+            <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>AKAZE Feature Detector</td>
+            <td><i class='bi bi-compass-fill'></i></td>
+            <td><ul><li>source1 : image2D</li><li>source2 : image2D</li><li>inlierThreshold : double</li><li>nearestNeighborMatchRatio : double</li>        </ul></td>
+            <td><ul><li>keypoints1 : float3[]</li><li>preview : image2D</li><li>keypoints2 : float3[]</li>        </ul></td>
+            <td>Determines strong corners on an image using the AKAZE detector</td>
+        </tr>
+        <tr>
+            <td>Barcode Detect</td>
+            <td><i class='bi bi-compass-fill'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numBarcodes : int</li><li>info : string</li>        </ul></td>
+            <td>Detects barcodes</td>
+        </tr>
+        <tr>
+            <td>Corner Harris</td>
+            <td><i class='bi bi-compass-fill'></i></td>
+            <td><ul><li>source : image2D</li><li>blockSize : int</li><li>ksize : int</li><li>k : double</li><li>borderType : int</li><li>threshold : int</li><li>maxThreshold : int</li>        </ul></td>
+            <td><ul><li>out : int2[]</li><li>preview : image2D</li><li>mask : image2D</li>        </ul></td>
+            <td>Runs the Harris corner detector on the image</td>
+        </tr>
+        <tr>
+            <td>Corner Sub Pixel</td>
+            <td><i class='bi bi-compass-fill'></i></td>
+            <td><ul><li>source : image2D</li><li>corners : int2[]</li><li>winSize : int2</li><li>zeroZone : int2</li><li>maxCount : int</li><li>epsilon : double</li>        </ul></td>
+            <td><ul><li>out : int2[]</li><li>preview : image2D</li>        </ul></td>
+            <td>Refines the corner locations</td>
+        </tr>
+        <tr>
+            <td>Corner Tracker</td>
+            <td><i class='bi bi-compass-fill'></i></td>
+            <td><ul><li>source : image2D</li><li>maxCorners : int</li><li>qualityLevel : double</li><li>minDistance : double</li><li>blockSize : int</li><li>useHarrisDetector : bool</li><li>k : double</li>        </ul></td>
+            <td><ul><li>out : float2[]</li><li>preview : image2D</li>        </ul></td>
+            <td>Determines strong corners on an image using the goodFeaturesToTrack() function</td>
+        </tr>
+        <tr>
+            <td>Dense Optical Flow</td>
+            <td><i class='bi bi-compass-fill'></i></td>
+            <td><ul><li>source : image2D</li><li>pyr_scale : double</li><li>levels : int</li><li>winsize : int</li><li>iterations : int</li><li>poly_n : int</li><li>poly_sigma : double</li><li>flags : int</li><li>trigger : int</li><li>delay : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Computes the pattern of apparent motion of image objects for all points in the frame</td>
+        </tr>
+        <tr>
+            <td>FLANN Feature Matcher</td>
+            <td><i class='bi bi-compass-fill'></i></td>
+            <td><ul><li>source1 : image2D</li><li>source2 : image2D</li><li>minHessian : int</li>        </ul></td>
+            <td><ul><li>keypoints1 : float3[]</li><li>preview : image2D</li><li>keypoints2 : float3[]</li>        </ul></td>
+            <td>Finds the feature vector correspondent to the keypoints using the FLANN matcher</td>
+        </tr>
+        <tr>
+            <td>Match Template</td>
+            <td><i class='bi bi-compass-fill'></i></td>
+            <td><ul><li>source : image2D</li><li>method : int</li><li>center : float2</li><li>width : int</li><li>height : int</li>        </ul></td>
+            <td><ul><li>out : int2</li><li>preview : image2D</li>        </ul></td>
+            <td>Tracks a template within an image, producing a point of the template's location</td>
+        </tr>
+        <tr>
+            <td>Optical Flow</td>
+            <td><i class='bi bi-compass-fill'></i></td>
+            <td><ul><li>source : image2D</li><li>winsize : int2</li><li>maxLevel : int</li><li>type : int</li><li>maxCount : int</li><li>epsilon : double</li><li>flags : int</li><li>minEigThreshold : double</li><li>trigger : int</li><li>delay : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Computes the pattern of apparent motion for a sparse feature set using the iterative Lucas-Kanade method with pyramids</td>
+        </tr>
+        <tr>
+            <td>QR Code Detect</td>
+            <td><i class='bi bi-compass-fill'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>out : string</li><li>preview : image2D</li><li>corners : int4[]</li><li>qrCode : image2D</li>        </ul></td>
+            <td>Detect QR Code</td>
+        </tr>
+        <tr>
+            <td>SIFT Detector</td>
+            <td><i class='bi bi-compass-fill'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>keypoints : float3[]</li><li>preview : image2D</li>        </ul></td>
+            <td>Determines strong corners on an image using the SIFT detector</td>
+        </tr>
+        <tr>
+            <td>SURF Feature Detector</td>
+            <td><i class='bi bi-compass-fill'></i></td>
+            <td><ul><li>source : image2D</li><li>minHessian : int</li>        </ul></td>
+            <td><ul><li>keypoints : float3[]</li><li>preview : image2D</li>        </ul></td>
+            <td>Determines strong corners on an image using the SURF detector</td>
+        </tr>
+    </table>
+    <h3 id='Transform'>Transform</h3><p>The Transform filters tools are all under the <i class="bi bi-rulers"> Transform</i> category.The full list of display tools is as follows:</p><table>
+        <tr>
+            <th>Name</th>
+            <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Calibrate Camera</td>
+            <td><i class='bi bi-rulers'></i></td>
+            <td><ul><li>source : image2D</li><li>size : int2D</li><li>preview : int</li>        </ul></td>
+            <td><ul><li>image : image2D</li><li>out : matrix2D</li><li>JSON : string</li>        </ul></td>
+            <td>Returns a camera matrix and distortion coefficients to undistort camera images</td>
+        </tr>
+        <tr>
+            <td>Crop</td>
+            <td><i class='bi bi-rulers'></i></td>
+            <td><ul><li>source : image2D</li><li>point1 : int2</li><li>point2 : int2</li><li>crop : bool</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Crops an image down to the specified size</td>
+        </tr>
+        <tr>
+            <td>Resize</td>
+            <td><i class='bi bi-rulers'></i></td>
+            <td><ul><li>source : cuda2D</li><li>resizeScale : double</li><li>resizeMethod : int</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Change Resize of Cuda Buffer</td>
+        </tr>
+        <tr>
+            <td>DCT</td>
+            <td><i class='bi bi-rulers'></i></td>
+            <td><ul><li>source : image2D</li><li>flags : int</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li>        </ul></td>
+            <td>Performs a forward discrete Cosine transform of 1D or 2D array</td>
+        </tr>
+        <tr>
+            <td>DFT</td>
+            <td><i class='bi bi-rulers'></i></td>
+            <td><ul><li>source : image2D</li><li>flags : int</li><li>nonzeroRows : int</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li>        </ul></td>
+            <td>Performs a forward Discrete Fourier transform of a 1D or 2D floating-point array</td>
+        </tr>
+        <tr>
+            <td>Disparity Map</td>
+            <td><i class='bi bi-rulers'></i></td>
+            <td><ul><li>left : image2D</li><li>right : image2D</li><li>numDisparities : int</li><li>blockSize : int</li><li>preFilterType : int</li><li>preFilterSize : int</li><li>preFilterCap : int</li><li>minDisparity : int</li><li>textureThreshold : int</li><li>uniquenessRatio : int</li><li>speckleRange : int</li><li>speckleWindowSize : int</li><li>disp12MaxDiff : int</li><li>stereoMap : string</li>        </ul></td>
+            <td><ul><li>out : image2D</li><li>near : int</li><li>far : int</li>        </ul></td>
+            <td>Shows the Disparity Map Found Using Stereo Images</td>
+        </tr>
+        <tr>
+            <td>Get Affine Transform</td>
+            <td><i class='bi bi-rulers'></i></td>
+            <td><ul><li>source : string</li><li>destination : string</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li>        </ul></td>
+            <td>Calculates an affine transform from the source image to the destination image</td>
+        </tr>
+        <tr>
+            <td>Get Perspective Transform</td>
+            <td><i class='bi bi-rulers'></i></td>
+            <td><ul><li>source : string</li><li>destination : string</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li>        </ul></td>
+            <td>Returns 3x3 perspective transformation for the corresponding 4 point pairs</td>
+        </tr>
+        <tr>
+            <td>Get Rotation Matrix 2D</td>
+            <td><i class='bi bi-rulers'></i></td>
+            <td><ul><li>center : float2</li><li>angle : double</li><li>scale : double</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li>        </ul></td>
+            <td>Calculates an affine matrix of 2D rotation</td>
+        </tr>
+        <tr>
+            <td>IDCT</td>
+            <td><i class='bi bi-rulers'></i></td>
+            <td><ul><li>source : matrix2D</li><li>flags : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Performs an inverse discrete Cosine transform of 1D or 2D array</td>
+        </tr>
+        <tr>
+            <td>IDFT</td>
+            <td><i class='bi bi-rulers'></i></td>
+            <td><ul><li>source : matrix2D</li><li>flags : int</li><li>nonzeroRows : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Performs an inverse Discrete Fourier transform of a 1D or 2D floating-point array</td>
+        </tr>
+        <tr>
+            <td>Linear Polar</td>
+            <td><i class='bi bi-rulers'></i></td>
+            <td><ul><li>source : image2D</li><li>dsize : int2</li><li>center : double2</li><li>maxRadius : double</li><li>inverse : bool</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Remaps an image to polar coordinates space</td>
+        </tr>
+        <tr>
+            <td>Log Polar</td>
+            <td><i class='bi bi-rulers'></i></td>
+            <td><ul><li>source : image2D</li><li>dsize : int2</li><li>center : double2</li><li>M : double</li><li>inverse : bool</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Remaps an image to semilog-polar coordinates space</td>
+        </tr>
+        <tr>
+            <td>Panorama Stitcher</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>Input #1 : image2D</li><li>Input #2 : image2D</li><li>Input #3 : image2D</li><li>Input #4 : image2D</li><li>Input #5 : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>High level image stitcher</td>
+        </tr>
+        <tr>
+            <td>Resize</td>
+            <td><i class='bi bi-rulers'></i></td>
+            <td><ul><li>source : image2D</li><li>dsize : int2</li><li>fx : double</li><li>fy : double</li><li>interpolation : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Resizes an image down to or up to the specified size</td>
+        </tr>
+        <tr>
+            <td>Scan Stitcher</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>Input #1 : image2D</li><li>Input #2 : image2D</li><li>Input #3 : image2D</li><li>Input #4 : image2D</li><li>Input #5 : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>High level image stitcher</td>
+        </tr>
+        <tr>
+            <td>Undistort</td>
+            <td><i class='bi bi-rulers'></i></td>
+            <td><ul><li>source : image2D</li><li>matrix : matrix2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Transforms an image to compensate for lens distortion</td>
+        </tr>
+        <tr>
+            <td>Warp Affine</td>
+            <td><i class='bi bi-rulers'></i></td>
+            <td><ul><li>source : image2D</li><li>M : matrix2D</li><li>dsize : int2</li><li>useSourceResolution : bool</li><li>flags : int</li><li>borderType : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Applies an affine transformation to an image</td>
+        </tr>
+        <tr>
+            <td>Warp Affine Inverse</td>
+            <td><i class='bi bi-rulers'></i></td>
+            <td><ul><li>source : image2D</li><li>M : matrix2D</li><li>dsize : int2</li><li>useSourceResolution : bool</li><li>flags : int</li><li>borderType : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Applies an inverse affine transformation to an image</td>
+        </tr>
+        <tr>
+            <td>Warp Perspective</td>
+            <td><i class='bi bi-rulers'></i></td>
+            <td><ul><li>source : image2D</li><li>M : matrix2D</li><li>dsize : int2</li><li>useSourceResolution : bool</li><li>flags : int</li><li>borderType : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Applies a perspective transformation to an image</td>
+        </tr>
+        <tr>
+            <td>Warp Perspective Inverse</td>
+            <td><i class='bi bi-rulers'></i></td>
+            <td><ul><li>source : image2D</li><li>M : matrix2D</li><li>dsize : int2</li><li>useSourceResolution : bool</li><li>flags : int</li><li>borderType : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Applies an inverse perspective transformation to an image</td>
+        </tr>
+        <tr>
+            <td>Warp Polar</td>
+            <td><i class='bi bi-rulers'></i></td>
+            <td><ul><li>source : image2D</li><li>dsize : int2</li><li>useSourceResolution : bool</li><li>center : double2</li><li>maxRadius : double</li><li>flags : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Remaps an image to polar or semilog-polar coordinates space</td>
+        </tr>
+        <tr>
+            <td>Warp Polar Detailed</td>
+            <td><i class='bi bi-rulers'></i></td>
+            <td><ul><li>source : image2D</li><li>dsize : int2</li><li>useSourceResolution : bool</li><li>center : double2</li><li>maxRadius : double</li><li>flags : int</li><li>inverse : bool</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Remaps an image to polar or semilog-polar coordinates space</td>
+        </tr>
+        <tr>
+            <td>Warp Polar Inverse</td>
+            <td><i class='bi bi-rulers'></i></td>
+            <td><ul><li>source : image2D</li><li>dsize : int2</li><li>useSourceResolution : bool</li><li>center : double2</li><li>maxRadius : double</li><li>flags : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Remaps an from polar or semilog-polar coordinates space to cartesian coordinates</td>
+        </tr>
+    </table>
+    <h3 id='Triggers'>Triggers</h3><p>The Triggers functions tools are all under the <i class="bi bi-magic"> Triggers</i> category.You can create triggers to activate certain nodes that require a trigger to execute - review the section <a href="#CreatingTriggers">Creating Triggers</a>. The full list of display tools is as follows:</p><table>
+        <tr>
+            <th>Name</th>
+            <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Image Writer</td>
+            <td><i class='bi bi-card-image'></i></td>
+            <td><ul><li>source : image2D</li><li>directory : string</li><li>filename : string</li><li>format : int</li><li>trigger : bool</li><li>delay : int</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Saves Image</td>
+        </tr>
+        <tr>
+            <td>Manual Trigger</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>event : int</li><li>period : int</li>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>Triggers a perodic burst</td>
+        </tr>
+        <tr>
+            <td>Microphone</td>
+            <td><i class='bi bi-magic'></i></td>
+            <td><ul><li>trigger : int</li><li>period : int</li>        </ul></td>
+            <td><ul><li>out : audio</li>        </ul></td>
+            <td>Listens and streams the microphone</td>
+        </tr>
+        <tr>
+            <td>Philips Hue</td>
+            <td><i class='bi bi-lightbulb'></i></td>
+            <td><ul><li>username : string</li><li>trigger : int</li><li>hueOn : int</li><li>hueOff : int</li><li>alwaysOn : bool</li><li>delay : int</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Changes Color/Settings on Philips Hue Device</td>
+        </tr>
+        <tr>
+            <td>Save JSON</td>
+            <td><i class='bi bi-filetype-json'></i></td>
+            <td><ul><li>source : string</li><li>directory : string</li><li>filename : string</li><li>trigger : int</li><li>delay : int</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Save JSON file</td>
+        </tr>
+        <tr>
+            <td>Screenshot</td>
+            <td><i class='bi bi-card-image'></i></td>
+            <td><ul><li>directory : string</li><li>filename : string</li><li>format : string</li><li>trigger : int</li><li>delay : int</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Saves Screenshot</td>
+        </tr>
+        <tr>
+            <td>Sound Trigger</td>
+            <td><i class='bi bi-file-music-fill'></i></td>
+            <td><ul><li>source : string</li><li>trigger : int</li><li>delay : int</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Play sound on trigger</td>
+        </tr>
+        <tr>
+            <td>Text to Speech</td>
+            <td><i class='bi bi-mic-fill'></i></td>
+            <td><ul><li>source : string</li><li>trigger : int</li><li>delay : int</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Text to speech</td>
+        </tr>
+        <tr>
+            <td>Video Writer</td>
+            <td><i class='bi bi-card-image'></i></td>
+            <td><ul><li>source : image2D</li><li>directory : string</li><li>filename : string</li><li>format : int</li><li>codec : string</li><li>trigger : int</li><li>duration : double</li><li>delay : double</li><li>fps : double</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Saves Video</td>
+        </tr>
+    </table>
+    <h3 id='Utilities'>Utilities</h3><p>The Utility filters tools are all under the <i class="bi bi-gear"> Utilities</i> category.The full list of display tools is as follows:</p><table>
+        <tr>
+            <th>Name</th>
+            <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Colormap Generator</td>
+            <td><i class='bi bi-file-image'></i></td>
+            <td><ul><li>colormap : string</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li>        </ul></td>
+            <td>Generates a colormap which is 1D LUT image</td>
+        </tr>
+        <tr>
+            <td>Cuda Download</td>
+            <td><i class='bi bi-gear'></i></td>
+            <td><ul><li>source : cuda2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Downloads to CPU System Memory from GPU Buffer Memory</td>
+        </tr>
+        <tr>
+            <td>Cuda Upload</td>
+            <td><i class='bi bi-gear'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>out : cuda2D</li>        </ul></td>
+            <td>Uploads CPU System Memory to GPU Buffer Memory</td>
+        </tr>
+        <tr>
+            <td>Distributed Sink</td>
+            <td><i class='bi bi-gear'></i></td>
+            <td><ul><li>clientUrl : string</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Distributed Sink</td>
+        </tr>
+        <tr>
+            <td>Distributed Source</td>
+            <td><i class='bi bi-gear'></i></td>
+            <td><ul><li>clientUrl : string</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Distributed Source</td>
+        </tr>
+        <tr>
+            <td>Exit</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>trigger : int</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Exit application when trigger is true</td>
+        </tr>
+        <tr>
+            <td>Get Color</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>color : color</li>        </ul></td>
+            <td><ul><li>red : double</li><li>green : double</li><li>blue : double</li>        </ul></td>
+            <td>Extract Red, Green and Blue Color values</td>
+        </tr>
+        <tr>
+            <td>Get Double2</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>point : double2</li>        </ul></td>
+            <td><ul><li>x : double</li><li>y : double</li>        </ul></td>
+            <td>Extract x and y from point value</td>
+        </tr>
+        <tr>
+            <td>Get Int2</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>point : int2</li>        </ul></td>
+            <td><ul><li>x : int</li><li>y : int</li>        </ul></td>
+            <td>Extract x and y from point value</td>
+        </tr>
+        <tr>
+            <td>Load Camera Calibration</td>
+            <td><i class='bi bi-filetype-json'></i></td>
+            <td><ul><li>source : string</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li>        </ul></td>
+            <td>Load Camera Calibration file</td>
+        </tr>
+        <tr>
+            <td>Load JSON</td>
+            <td><i class='bi bi-filetype-json'></i></td>
+            <td><ul><li>source : string</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>Load JSON file</td>
+        </tr>
+        <tr>
+            <td>Note</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>Note : string</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Pin a note</td>
+        </tr>
+        <tr>
+            <td>Print</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>value : string</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Print to standard output</td>
+        </tr>
+        <tr>
+            <td>Run Script</td>
+            <td><i class='bi bi-filetype-py'></i></td>
+            <td><ul><li>source : string</li><li>args : string</li><li>trigger : int</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>Run a python script</td>
+        </tr>
+        <tr>
+            <td>Set Animation</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>path : string</li><li>x : double</li>        </ul></td>
+            <td><ul><li>out : double</li>        </ul></td>
+            <td>Creates a Animation</td>
+        </tr>
+        <tr>
+            <td>Set Bool</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>value : bool</li>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>Sets Bool value</td>
+        </tr>
+        <tr>
+            <td>Set Circle</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>circle : string</li>        </ul></td>
+            <td><ul><li>out : float3[]</li>        </ul></td>
+            <td>Creates a Circle</td>
+        </tr>
+        <tr>
+            <td>Set Color</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>red : double</li><li>green : double</li><li>blue : double</li>        </ul></td>
+            <td><ul><li>out : color</li>        </ul></td>
+            <td>Sets Color value</td>
+        </tr>
+        <tr>
+            <td>Set Double</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>value : double</li>        </ul></td>
+            <td><ul><li>out : double</li>        </ul></td>
+            <td>Sets double value</td>
+        </tr>
+        <tr>
+            <td>Set Image2D</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Sets Image value</td>
+        </tr>
+        <tr>
+            <td>Set Int</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>value : int</li>        </ul></td>
+            <td><ul><li>out : int</li>        </ul></td>
+            <td>Sets Integer value</td>
+        </tr>
+        <tr>
+            <td>Set Path</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>path : string</li>        </ul></td>
+            <td><ul><li>out : int2[]</li>        </ul></td>
+            <td>Creates a Path</td>
+        </tr>
+        <tr>
+            <td>Set Double2</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>x : double</li><li>y : double</li>        </ul></td>
+            <td><ul><li>out : double2</li>        </ul></td>
+            <td>Sets Double Point value</td>
+        </tr>
+        <tr>
+            <td>Set Int2</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>x : int</li><li>y : int</li>        </ul></td>
+            <td><ul><li>out : int2</li>        </ul></td>
+            <td>Sets Integer Point value</td>
+        </tr>
+        <tr>
+            <td>Set Rectangle</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>rectangle : string</li>        </ul></td>
+            <td><ul><li>out : int4[]</li>        </ul></td>
+            <td>Creates a Rectangle</td>
+        </tr>
+        <tr>
+            <td>Set String</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>value : string</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>Sets string value</td>
+        </tr>
+        <tr>
+            <td>Switch Circle</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>switch : int</li><li>Input #0 : float3[]</li><li>Input #1 : float3[]</li><li>Input #2 : float3[]</li><li>Input #3 : float3[]</li><li>Input #4 : float3[]</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>Outputs one of the selected inputs</td>
+        </tr>
+        <tr>
+            <td>Switch Color</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>switch : int</li><li>Input #0 : color</li><li>Input #1 : color</li><li>Input #2 : color</li><li>Input #3 : color</li><li>Input #4 : color</li>        </ul></td>
+            <td><ul><li>out : color</li>        </ul></td>
+            <td>Outputs one of the selected inputs</td>
+        </tr>
+        <tr>
+            <td>Switch Image2D</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>switch : int</li><li>Input #0 : image2D</li><li>Input #1 : image2D</li><li>Input #2 : image2D</li><li>Input #3 : image2D</li><li>Input #4 : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Outputs one of the selected inputs</td>
+        </tr>
+        <tr>
+            <td>Switch Numeric</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>switch : int</li><li>Input #0 : numeric</li><li>Input #1 : numeric</li><li>Input #2 : numeric</li><li>Input #3 : numeric</li><li>Input #4 : numeric</li>        </ul></td>
+            <td><ul><li>out : numeric</li>        </ul></td>
+            <td>Outputs one of the selected inputs</td>
+        </tr>
+        <tr>
+            <td>Switch Path</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>switch : int</li><li>Input #0 : int2[]</li><li>Input #1 : int2[]</li><li>Input #2 : int2[]</li><li>Input #3 : int2[]</li><li>Input #4 : int2[]</li>        </ul></td>
+            <td><ul><li>out : int2[]</li>        </ul></td>
+            <td>Outputs one of the selected inputs</td>
+        </tr>
+        <tr>
+            <td>Switch Double2</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>switch : int</li><li>Input #0 : double2</li><li>Input #1 : double2</li><li>Input #2 : double2</li><li>Input #3 : double2</li><li>Input #4 : double2</li>        </ul></td>
+            <td><ul><li>out : double2</li>        </ul></td>
+            <td>Outputs one of the selected inputs</td>
+        </tr>
+        <tr>
+            <td>Switch Int2</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>switch : int</li><li>Input #0 : int2</li><li>Input #1 : int2</li><li>Input #2 : int2</li><li>Input #3 : int2</li><li>Input #4 : int2</li>        </ul></td>
+            <td><ul><li>out : int2</li>        </ul></td>
+            <td>Outputs one of the selected inputs</td>
+        </tr>
+        <tr>
+            <td>Switch Rectangle</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>switch : int</li><li>Input #0 : int4[]</li><li>Input #1 : int4[]</li><li>Input #2 : int4[]</li><li>Input #3 : int4[]</li><li>Input #4 : int4[]</li>        </ul></td>
+            <td><ul><li>out : int4[]</li>        </ul></td>
+            <td>Outputs one of the selected inputs</td>
+        </tr>
+        <tr>
+            <td>Switch String</td>
+            <td><i class='bi bi-plugin'></i></td>
+            <td><ul><li>switch : int</li><li>Input #0 : string</li><li>Input #0 : string</li><li>Input #1 : string</li><li>Input #2 : string</li><li>Input #3 : string</li><li>Input #4 : string</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>Outputs one of the selected inputs</td>
+        </tr>
+        <tr>
+            <td>System Performance</td>
+            <td><i class='bi bi-gear'></i></td>
+            <td><ul><li>background : bool</li><li>delay : double</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Informs the current System Performance</td>
         </tr>
     </table>
 
