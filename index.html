@@ -101,6 +101,7 @@
                             <li><a href="#Triggers">Triggers</a></li>
                             <li><a href="#DataScience">Data Science</a></li>
                             <li><a href="#Plots">Plots</a></li>
+                            <li><a href="#Experimental">Experimental</a></li>
                         </ul>
                     </li>
 
@@ -1527,8 +1528,6 @@
     <!-- START OF AUTO GENERATED DOCS  -->
 
 
-
-
     <h3 id='Color'>Color</h3><p>The Color Correction tools are all under the <i class="bi bi-palette"> Color</i> category.The full list of display tools is as follows:</p><table>
         <tr>
             <th>Name</th>
@@ -2233,7 +2232,205 @@
             <td>Bitwise XOR Operations on Two Images</td>
         </tr>
     </table>
-    <h3 id='ImageProcessing'>Image Processing</h3><p>The Image Processing Filters tools are all under the <i class="bi bi-stars"> ImageProcessing</i> category.The full list of display tools is as follows:</p><table>
+    <h3 id='Experimental'>Experimental</h3><p>The Experimental Tools tools are all under the <i class="bi bi-cone"> Experimental</i> category.The full list of display tools is as follows:</p><table>
+        <tr>
+            <th>Name</th>
+            <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Abs Subtraction Shaders</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>source : texture2D</li><li>source2 : texture2D</li><li>absAmount : double</li>        </ul></td>
+            <td><ul><li>out : texture2D</li>        </ul></td>
+            <td>Find Absolute Value of Difference Between 2 Images using a GPU Shader</td>
+        </tr>
+        <tr>
+            <td>Add Shaders</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>source : texture2D</li><li>source2 : texture2D</li><li>addAmount : double</li>        </ul></td>
+            <td><ul><li>out : texture2D</li>        </ul></td>
+            <td>Add 2 Images Together using a GPU Shader</td>
+        </tr>
+        <tr>
+            <td>Beams Shader</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>source : texture2D</li><li>mix : double</li>        </ul></td>
+            <td><ul><li>out : texture2D</li>        </ul></td>
+            <td>Applies Beam Rendering</td>
+        </tr>
+        <tr>
+            <td>Brightness Shader</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>source : texture2D</li><li>brightness : double</li><li>redBrightness : double</li><li>greenBrightness : double</li><li>blueBrightness : double</li>        </ul></td>
+            <td><ul><li>out : texture2D</li>        </ul></td>
+            <td>Change the Brightness using a GPU Shader</td>
+        </tr>
+        <tr>
+            <td>Clouds Shader</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>source : texture2D</li><li>mix : double</li><li>color : color</li>        </ul></td>
+            <td><ul><li>out : texture2D</li>        </ul></td>
+            <td>Applies Cloud Rendering</td>
+        </tr>
+        <tr>
+            <td>Contrast Shader</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>source : texture2D</li><li>contrast : double</li><li>redContrast : double</li><li>greenContrast : double</li><li>blueContrast : double</li>        </ul></td>
+            <td><ul><li>out : texture2D</li>        </ul></td>
+            <td>Change the Contrast using a GPU Shader</td>
+        </tr>
+        <tr>
+            <td>Dissolve Shaders</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>source : texture2D</li><li>source2 : texture2D</li><li>mixAmount : double</li>        </ul></td>
+            <td><ul><li>out : texture2D</li>        </ul></td>
+            <td>Dissolve 2 Images Together using a GPU Shader</td>
+        </tr>
+        <tr>
+            <td>Texture Download</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>source : texture2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Downloads to CPU System Memory from GPU Texture Memory</td>
+        </tr>
+        <tr>
+            <td>Flip Shader</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>source : texture2D</li>        </ul></td>
+            <td><ul><li>out : texture2D</li>        </ul></td>
+            <td>Flips horizontal/vertical</td>
+        </tr>
+        <tr>
+            <td>Gamma Shader</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>source : texture2D</li><li>gamma : double</li><li>redGamma : double</li><li>greenGamma : double</li><li>blueGamma : double</li>        </ul></td>
+            <td><ul><li>out : texture2D</li>        </ul></td>
+            <td>Change the Gamma using a GPU Shader</td>
+        </tr>
+        <tr>
+            <td>Geo Api</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>city : string</li>        </ul></td>
+            <td><ul><li>city : string</li><li>latitude : double</li><li>longitude : double</li>        </ul></td>
+            <td>Geo Api</td>
+        </tr>
+        <tr>
+            <td>Grayscale Shader</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>source : texture2D</li><li>redAmount : double</li><li>greenAmount : double</li><li>blueAmount : double</li>        </ul></td>
+            <td><ul><li>out : texture2D</li>        </ul></td>
+            <td>Change a Color Texture to Grayscale using a GPU Shader</td>
+        </tr>
+        <tr>
+            <td>Horizontal Ramp</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>source : texture2D</li><li>mixAmount : double</li>        </ul></td>
+            <td><ul><li>out : texture2D</li>        </ul></td>
+            <td>Change Color Texture with Vertical Ramp using a GPU Shader</td>
+        </tr>
+        <tr>
+            <td>Invert Shader</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>source : texture2D</li>        </ul></td>
+            <td><ul><li>out : texture2D</li>        </ul></td>
+            <td>Inverts RGB channels of OpenGL Texture</td>
+        </tr>
+        <tr>
+            <td>Lift Shader</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>source : texture2D</li><li>lift : double</li><li>redLift : double</li><li>greenLift : double</li><li>blueLift : double</li>        </ul></td>
+            <td><ul><li>out : texture2D</li>        </ul></td>
+            <td>Change the Lift using a GPU Shader</td>
+        </tr>
+        <tr>
+            <td>Max Shaders</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>source : texture2D</li><li>source2 : texture2D</li><li>maxAmount : double</li>        </ul></td>
+            <td><ul><li>out : texture2D</li>        </ul></td>
+            <td>Find Max of 2 Images Together using a GPU Shader</td>
+        </tr>
+        <tr>
+            <td>Min Shaders</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>source : texture2D</li><li>source2 : texture2D</li><li>minAmount : double</li>        </ul></td>
+            <td><ul><li>out : texture2D</li>        </ul></td>
+            <td>Find Min of 2 Images Together using a GPU Shader</td>
+        </tr>
+        <tr>
+            <td>Multiply Shaders</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>source : texture2D</li><li>source2 : texture2D</li><li>multiplyAmount : double</li>        </ul></td>
+            <td><ul><li>out : texture2D</li>        </ul></td>
+            <td>Multiply 2 Images Together using a GPU Shader</td>
+        </tr>
+        <tr>
+            <td>Reverse Geo Api</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>latitude : double</li><li>longitude : double</li>        </ul></td>
+            <td><ul><li>address : string</li>        </ul></td>
+            <td>Reverse Geo Api</td>
+        </tr>
+        <tr>
+            <td>Sobel Shader</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>source : texture2D</li><li>mix : double</li>        </ul></td>
+            <td><ul><li>out : texture2D</li>        </ul></td>
+            <td>Applies Soberl Edge Filter</td>
+        </tr>
+        <tr>
+            <td>Stock Price</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>ticker : string</li>        </ul></td>
+            <td><ul><li>shortName : string</li><li>currentPrice : double</li><li>bid : double</li><li>ask : double</li>        </ul></td>
+            <td>Stock Price using Yahoo Finance</td>
+        </tr>
+        <tr>
+            <td>Subtract Shaders</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>source : texture2D</li><li>source2 : texture2D</li><li>subtractAmount : double</li>        </ul></td>
+            <td><ul><li>out : texture2D</li>        </ul></td>
+            <td>Subtract 2 Images Together using a GPU Shader</td>
+        </tr>
+        <tr>
+            <td>Texture Output</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>source : texture2D</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Outputs Native Viewer</td>
+        </tr>
+        <tr>
+            <td>Transform Shader</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>source : texture2D</li><li>scale : double</li><li>scaleX : double</li><li>scaleY : double</li><li>backgroundColor : color</li>        </ul></td>
+            <td><ul><li>out : texture2D</li>        </ul></td>
+            <td>Transform 2D Shader using a GPU Shader</td>
+        </tr>
+        <tr>
+            <td>Texture Upload</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul><li>out : texture2D</li>        </ul></td>
+            <td>Uploads CPU System Memory to GPU Texture Memory</td>
+        </tr>
+        <tr>
+            <td>Vertical Ramp</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>source : texture2D</li><li>mixAmount : double</li>        </ul></td>
+            <td><ul><li>out : texture2D</li>        </ul></td>
+            <td>Change Color Texture with Vertical Ramp using a GPU Shader</td>
+        </tr>
+        <tr>
+            <td>Virtual Set</td>
+            <td><i class='bi bi-cone'></i></td>
+            <td><ul><li>source : texture2D</li><li>background : texture2D</li><li>model : string</li>        </ul></td>
+            <td><ul><li>out : texture2D</li>        </ul></td>
+            <td>OpenSceneGraph based Virtual Set</td>
+        </tr>
+    </table>
+    <h3 id='ImageProcessing'>ImageProcessing</h3><p>The Image Processing Filters tools are all under the <i class="bi bi-stars"> ImageProcessing</i> category.The full list of display tools is as follows:</p><table>
         <tr>
             <th>Name</th>
             <th>Icon</th>
