@@ -88,19 +88,20 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tools <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#Color">Color</a></li>
-                            <li><a href="#Composite">Composite</a></li>
-                            <li><a href="#ImageProcessing">Image Processing</a></li>
-                            <li><a href="#Inputs">Inputs</a></li>
-                            <li><a href="#Logic">Logic</a></li>
-                            <li><a href="#Masks">Masks</a></li>
-                            <li><a href="#Math">Math</a></li>
-                            <li><a href="#Matrix">Matrix</a></li>
-                            <li><a href="#Widgets">Widgets</a></li>
-                            <li><a href="#Displays">Displays</a></li>
-                            <li><a href="#Triggers">Triggers</a></li>
-                            <li><a href="#DataScience">Data Science</a></li>
-                            <li><a href="#Plots">Plots</a></li>
+                            <li><a href="#Color">Color Tools</a></li>
+                            <li><a href="#Composite">Composite Tools</a></li>
+                            <li><a href="#ImageProcessing">Image Processing Tools</a></li>
+                            <li><a href="#Inputs">Input Tools</a></li>
+                            <li><a href="#Photron">Photron Tools</a></li>
+                            <li><a href="#Logic">Logic Tools</a></li>
+                            <li><a href="#DataScience">Data Science Tools</a></li>
+                            <li><a href="#Plots">Plot Tools</a></li>
+                            <li><a href="#Masks">Masks Tools</a></li>
+                            <li><a href="#Math">Math Tools</a></li>
+                            <li><a href="#Matrix">Matrix Tools</a></li>
+                            <li><a href="#Widgets">Widgets Tools</a></li>
+                            <li><a href="#Displays">Displays Tools</a></li>
+                            <li><a href="#Triggers">Triggers Tools</a></li>
                             <li><a href="#Experimental">Experimental</a></li>
                         </ul>
                     </li>
@@ -1528,6 +1529,7 @@
     <!-- START OF AUTO GENERATED DOCS  -->
 
 
+
     <h3 id='Color'>Color</h3><p>The Color Correction tools are all under the <i class="bi bi-palette"> Color</i> category.The full list of display tools is as follows:</p><table>
         <tr>
             <th>Name</th>
@@ -2365,6 +2367,13 @@
             <td><ul><li>source : texture2D</li><li>source2 : texture2D</li><li>multiplyAmount : double</li>        </ul></td>
             <td><ul><li>out : texture2D</li>        </ul></td>
             <td>Multiply 2 Images Together using a GPU Shader</td>
+        </tr>
+        <tr>
+            <td>Primatte AI</td>
+            <td><i class='bi bi-bookmark-heart'></i></td>
+            <td><ul><li>foreground : image2D</li><li>backrground : image2D</li><li>fgRange : double</li><li>bgRange : double</li><li>spillSupressLevel : double</li><li>colorPrecision : int</li>        </ul></td>
+            <td><ul><li>rgba : image2D</li><li>matte : image2D</li>        </ul></td>
+            <td>Primatte AI</td>
         </tr>
         <tr>
             <td>Reverse Geo Api</td>
@@ -3317,8 +3326,43 @@
             <td>Transposes a matrix</td>
         </tr>
     </table>
-
-
+    <h3 id='Photron'>Photron</h3><p>The Photron Filters tools are all under the <i class="bi bi-camera-reels-fill"> Photron</i> category.The full list of display tools is as follows:</p><table>
+        <tr>
+            <th>Name</th>
+            <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Depth Reader</td>
+            <td><i class='bi bi-file-image'></i></td>
+            <td><ul><li>source : string</li><li>depth : string</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Reads Depth Images from a file</td>
+        </tr>
+        <tr>
+            <td>Infinicam</td>
+            <td><i class='bi bi-camera-reels-fill'></i></td>
+            <td><ul><li>config : int</li><li>calibration : matrix2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>View live Images from a Photron Infinicam</td>
+        </tr>
+        <tr>
+            <td>Photron Live</td>
+            <td><i class='bi bi-camera-reels-fill'></i></td>
+            <td><ul><li>shutter : int</li><li>calibration : matrix2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>View live Images from a Photron Highspeed camera</td>
+        </tr>
+        <tr>
+            <td>Photron Playback</td>
+            <td><i class='bi bi-camera-reels-fill'></i></td>
+            <td><ul><li>shutter : int</li><li>calibration : matrix2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Playback Images from a Photron Highspeed camera</td>
+        </tr>
+    </table>
 
 
 
