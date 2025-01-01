@@ -5067,20 +5067,79 @@
     <p>
         When building models using the Torch nodes, the neural networks can get large with multiple nodes to generate
         the entire neural network. You can create a macro to create a tool that replaces all the nodes with a new tool which can be further used in
-        the future and promotes sharing of models. To create a macro, select the node in your flowgraph that is a "Sequential" Torch Tool 
+        the future and promotes sharing of models. To create a macro, select the node in your flowgraph that is a "Sequential" Torch Tool
         , then show the context menu for the node and select <a href="#MLNodeNodeMenuFuncs">'Create Macro'</a>.
         The dialog allows you to name and set optional notes that will be associated with this new tool.
     </p>
     <img src="./assets/ui_create_macro.gif" />
 
 
+
+    <h2>Experimental Features</h2>
+    <h3 id="DistributionProcessing">Distributed Processing</h3>
+    <p>
+        This feature allows you to do processing on a different process on the same machine or a different machine on the network.
+
+        You can start the distributed rendering by selecting a contiguous set of nodes
+        and then using the node context menu and selecting <a href="#ExperimentalNodeMenuFuncs">'Distributed'</a>.
+        This brings up a dialog that allows you to set the URL for the server that will be performing the processing. Once
+        you click Ok then the selected nodes are replaced by two nodes, the Distributed Sink and Distributed Source. The Sink
+        node will send data from your system to the distributed server and the Source node will receive data from
+        the distributed server.
+    </p>
+    <img src="./assets/ui_distributed_processing.gif" />
+
+    <h3 id="Publish">Publish</h3>
+
+    <img src="./assets/ui_widgets_publish.jpg" width="70%" />
+
+    <p>
+        The Publish feature allows you to simplify your workflow to just a subset of <a href="#Widgets">'Widgets'</a>. The future goal of this feature is to allow you to publish a simple app that has 
+        the critical controls that are needed in the deployment of your workflow in production whilst hiding the complexity of the workflow.
+
+        The first step is to add <a href="#Widgets">'Widgets'</a> on the node inputs you want to publish as well as widget outputs to the node outputs. An example of this
+        is as follows, where a Filebrowser, Selection List and Slider are added to the flowgraph as well as two output view widgets:
+
+    </p>
+    <img src="./assets/ui_widgets_graph.jpg" width="60%" />
+
+    <p>
+        You can further refine the widgets by opening the editor and you can set the attributes such as the name which will show in the published view for each
+        widget. Widgets such as Sliders allow you to set their specific attributes such as the minimum, maximum and step value for the Slider widget.
+        All widgets have the common attributes of the name and description (used for tooltips) as well as layouts. The layouts allow you to specify an optional
+        Tab widget the widget will be placed in and also the order in which the control, a lower number will allow the control to be higher up in the
+        layout. An example of the Widget Slider's parameters are as follows:
+    </p>
+
+    <img src="./assets/ui_publishing_controls.gif" width="400px" />
+
+    <p>
+        The widget outputs allow you to specify the name of the output, used in the tooltip, as well as an optional order of the view output and an optional icon.
+        If no icon is present then a standard set of numbers will be shown. The views are shown in the toolbar when the published view is shown, for example for the
+        two widget outputs, you would see the following icons in the toolbar. Hovering over the icons will show the tooltip and clicking on them will view
+        the particular output
+    </p>
+
+    <img src="./assets/ui_widgets_publish_views.jpg" />
+
+    <p>
+        Once you have selected the subset of input and outputs then you can click on the publish <i class="bi bi-shop-window"></i> icon in the application menu
+        and the flowgraph is hidden and a simpler UI only showing the published controls in the Parameter Editor and a fullscreen viewer is shown. You
+        can switch back to the standard flowgraph view by pressing the publish <i class="bi bi-shop-window"></i> icon again. The Parameter Editor will show
+        the widgets you have defined in your flowgraph using their attributes such as their name and layouts:
+    </p>
+    <img src="./assets/ui_widgets_publish_editor.jpg" />
+
+
     <h2>Installation</h2>
     <h3 id="SystemRequirements">System Requirements</h3>
     <p>
         INFINIWORKFLOW runs on a modern PC with Windows 11 or higher. It requires an Intel or AMD processor and ideally a NVIDIA GPU with 12GB+ of disk space.
-        It is highly recommended to have a multicore processor as
-        the execution will be more smoother. The software will run on machines without a NVIDIA GPU but that will significantly reduce the performance especially
-        for ML workflows. You must also have the latest Google Chrome browser installed : 131.0.6778.140 or higher.
+        It is highly recommended to have a multicore processor as the execution will be more smoother. The software will run on machines without a NVIDIA GPU
+        but that will significantly reduce the performance especially for ML workflows. 
+        A package with no dependencies on Cuda or PyTorch is also available to download - this will not require a NVIDIA GPU to be present on your system and
+        is substantially smaller in size but does not allow you to build deep learning models and is slower for AI inference.
+        You must also have the latest Google Chrome browser installed : 131.0.6778.140 or higher.
     </p>
 
 
@@ -5099,6 +5158,16 @@
                 Full install including Python distribution
             </td>
             <td>  <a href="https://drive.google.com/file/d/1dfze_jLPksITOxe_h2gN53e-iCvrEvVh/view?usp=drive_link">infiniworkflow</a> </td>
+        </tr>
+
+
+        <tr>
+            <td> INFINIWORKFLOW NON CUDA/PYTORCH VERSION </td>
+            <td>
+                This is a reduced size of the application which has no depedencies on CUDA or PyTorch. It is substantially smaller and does not
+                require a NVIDIA GPU on the system
+            </td>
+            <td>  <a href="https://drive.google.com/file/d/1CmU66I-DMvO9aKUYKmp2blBrSq-oDcNL/view?usp=sharing">infiniworkflow_noncuda</a> </td>
         </tr>
 
         <tr>
@@ -5333,61 +5402,6 @@
             <li>If INFINIWORFLOW bring up a different browser than Google Chrome then make sure you have <a target="_blank" href="https://support.google.com/chrome/answer/95417?hl=en&co=GENIE.Platform%3DDesktop#zippy=%2Cwindows"> set your default browser to Google Chrome</a> </li>
         </ul>
     </p>
-
-    <h2>Experimental Features</h2>
-    <h3 id="DistributionProcessing">Distributed Processing</h3>
-    <p>
-        This feature allows you to do processing on a different process on the same machine or a different machine on the network.
-
-        You can start the distributed rendering by selecting a contiguous set of nodes
-        and then using the node context menu and selecting <a href="#ExperimentalNodeMenuFuncs">'Distributed'</a>.
-        This brings up a dialog that allows you to set the URL for the server that will be performing the processing. Once
-        you click Ok then the selected nodes are replaced by two nodes, the Distributed Sink and Distributed Source. The Sink
-        node will send data from your system to the distributed server and the Source node will receive data from
-        the distributed server.
-    </p>
-    <img src="./assets/ui_distributed_processing.gif" />
-
-    <h3 id="Publish">Publish</h3>
-
-    <img src="./assets/ui_widgets_publish.jpg" width="70%" />
-
-    <p>
-        This feature allows you to simplify your workflow to just a subset of <a href="#Widgets">'Widgets'</a>. The future goal of this feature is to allow you to publish a simple app that has the critical controls that are needed in the deployment of your
-        workflow in production whilst hiding the complexity of the workflow.
-
-        The first step is to add <a href="#Widgets">'Widgets'</a> on the node inputs you want to publish as well as widget outputs to the node outputs. An example of this
-        is as follows, where a Filebrowser, Selection List and Slider are added to the flowgraph as well as two output view widgets:
-
-    </p>
-    <img src="./assets/ui_widgets_graph.jpg" width="60%" />
-
-    <p>
-        You can further refine the widgets by opening the editor and you can set the attributes such as the name which will show in the published view for each
-        widget. Widgets such as Sliders allow you to set their specific attributes such as the minimum, maximum and step value for the Slider widget.
-        All widgets have the common attributes of the name and description (used for tooltips) as well as layouts. The layouts allow you to specify an optional
-        Tab widget the widget will be placed in and also the order in which the control, a lower number will allow the control to be higher up in the
-        layout. An example of the Widget Slider's parameters are as follows:
-    </p>
-
-    <img src="./assets/ui_publishing_controls.gif" width="400px" />
-
-    <p>
-        The widget outputs allow you to specify the name of the output, used in the tooltip, as well as an optional order of the view output and an optional icon.
-        If no icon is present then a standard set of numbers will be shown. The views are shown in the toolbar when the published view is shown, for example for the
-        two widget outputs, you would see the following icons in the toolbar. Hovering over the icons will show the tooltip and clicking on them will view
-        the particular output
-    </p>
-
-    <img src="./assets/ui_widgets_publish_views.jpg" />
-
-    <p>
-        Once you have selected the subset of input and outputs then you can click on the publish <i class="bi bi-shop-window"></i> icon in the application menu
-        and the flowgraph is hidden and a simpler UI only showing the published controls in the Parameter Editor and a fullscreen viewer is shown. You
-        can switch back to the standard flowgraph view by pressing the publish <i class="bi bi-shop-window"></i> icon again. The Parameter Editor will show
-        the widgets you have defined in your flowgraph using their attributes such as their name and layouts:
-    </p>
-    <img src="./assets/ui_widgets_publish_editor.jpg" />
 
     <h2>Plugin SDK</h2>
     <p>
