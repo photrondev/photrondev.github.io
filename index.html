@@ -6404,6 +6404,24 @@ result = "torch.generic_loader"
                 <td><pre>updated_path = host.convert_filepath_to_relative_path(path)</pre></td>
             </tr>
 
+            <tr>
+                <td>get_source_time</td>
+                <td>
+                    Returns the source time depending on where the source originated from upstream
+                    e.g. if the source is from a Movie it will be frame number
+                    or if it is a web camera then it will be the epoch time
+                </td>
+                <td><pre>source_time = host.get_source_time(path)</pre></td>
+            </tr>
+
+            <tr>
+                <td>set_source_time</td>
+                <td>
+                    Sets the source time, all further downstream nodes will inherit this time
+                </td>
+                <td><pre>host.get_source_time(source_time)</pre></td>
+            </tr>
+
         </table>
 
 
