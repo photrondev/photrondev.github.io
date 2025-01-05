@@ -1809,6 +1809,9 @@
 
 
     <!-- START OF AUTO GENERATED DOCS  -->
+
+
+
     <h3 id='AI'>AI</h3><p>The AI Inference algorithms including using pretrained models tools are all under the <i class="bi bi-filetype-ai"> AI</i> category. The full list of display tools is as follows:</p><table>
         <tr>
             <th>Name</th>
@@ -1937,18 +1940,18 @@
             <td>Spots text in images using DNN</td>
         </tr>
         <tr>
-            <td>Tracker Inference</td>
+            <td>YOLO3 Classification</td>
             <td><i class='bi bi-filetype-ai'></i></td>
-            <td><ul><li>source : image2D</li><li>center : float2</li><li>width : int</li><li>height : int</li><li>start : int</li><li>stop : int</li>        </ul></td>
-            <td><ul><li>out : int2</li><li>preview : image2D</li><li>confidence : double</li>        </ul></td>
-            <td>Tracks a template within an image using dasiamrpn ML algorithm</td>
+            <td><ul><li>source : image2D</li><li>weights : string</li><li>cfg : string</li><li>classes : string</li><li>resolution : int2</li><li>filter : string</li><li>scoreThreshold : double</li><li>nmsThreshold : double</li><li>confidenceThreshold : double</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li><li>cutout : image2D</li>        </ul></td>
+            <td>Detects and labels objects based on YOLO neural network model</td>
         </tr>
         <tr>
-            <td>YOLO Classification</td>
+            <td>YOLO5 Classification</td>
             <td><i class='bi bi-filetype-ai'></i></td>
             <td><ul><li>source : image2D</li><li>filter : string</li><li>scoreThreshold : double</li><li>nmsThreshold : double</li><li>confidenceThreshold : double</li>        </ul></td>
             <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li><li>cutout : image2D</li>        </ul></td>
-            <td>Detects and labels objects based on YOLO neural network model</td>
+            <td>Detects and labels objects based on YOLO5 neural network model</td>
         </tr>
     </table>
     <h3 id='Color'>Color</h3><p>The Color Correction tools are all under the <i class="bi bi-palette"> Color</i> category. The full list of display tools is as follows:</p><table>
@@ -2899,8 +2902,8 @@
         <tr>
             <td>Cam Shift</td>
             <td><i class='bi bi-stars'></i></td>
-            <td><ul><li>source : image2D</li><li>center : float2</li><li>width : int</li><li>height : int</li><li>start : int</li><li>stop : int</li>        </ul></td>
-            <td><ul><li>out : float2[]</li><li>preview : image2D</li>        </ul></td>
+            <td><ul><li>source : image2D</li><li>center : double2</li><li>width : int</li><li>height : int</li><li>start : int</li><li>stop : int</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li><li>preview : image2D</li>        </ul></td>
             <td>Finds the rotated rectangle with the maximum number of points. When the object moves, the movement is reflected in the meanshift algorithm</td>
         </tr>
         <tr>
@@ -3095,7 +3098,7 @@
         <tr>
             <td>Mean Shift</td>
             <td><i class='bi bi-stars'></i></td>
-            <td><ul><li>source : image2D</li><li>center : float2</li><li>width : int</li><li>height : int</li><li>start : int</li><li>stop : int</li>        </ul></td>
+            <td><ul><li>source : image2D</li><li>center : double2</li><li>width : int</li><li>height : int</li><li>start : int</li><li>stop : int</li>        </ul></td>
             <td><ul><li>out : int4[]</li><li>preview : image2D</li>        </ul></td>
             <td>Finds the rectangle with the maximum number of points. When the object moves, the movement is reflected in the meanshift algorithm</td>
         </tr>
@@ -3219,6 +3222,13 @@
             <td><ul><li>source : string</li>        </ul></td>
             <td><ul><li>out : image2D</li>        </ul></td>
             <td>Reads Images from a file</td>
+        </tr>
+        <tr>
+            <td>JSON File Reader</td>
+            <td><i class='bi bi-file-json'></i></td>
+            <td><ul><li>source : string</li><li>trigger : int</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>Reads from a JSON file</td>
         </tr>
         <tr>
             <td>Movie Reader</td>
@@ -3817,14 +3827,14 @@
             <td>CIFAR10 Dataset</td>
             <td><i class='bi bi-fire'></i></td>
             <td><ul><li>batch : int</li><li>train : bool</li><li>shuffle : bool</li>        </ul></td>
-            <td><ul><li>out : torch.dataset</li><li>data size : torch.Size</li>        </ul></td>
+            <td><ul><li>out : torch.dataset</li>        </ul></td>
             <td>Loads the CIFAR10 dataset</td>
         </tr>
         <tr>
             <td>Cityscapes Dataset</td>
             <td><i class='bi bi-fire'></i></td>
             <td><ul><li>batch : int</li><li>split : int</li><li>shuffle : bool</li>        </ul></td>
-            <td><ul><li>out : torch.dataset</li><li>data size : torch.Size</li>        </ul></td>
+            <td><ul><li>out : torch.dataset</li>        </ul></td>
             <td>Loads the Cityscapes dataset</td>
         </tr>
         <tr>
@@ -3865,7 +3875,7 @@
         <tr>
             <td>Export to ONNX</td>
             <td><i class='bi bi-fire'></i></td>
-            <td><ul><li>model : torch.nn.Module</li><li>state dict : torch.model</li><li>data size : torch.Size</li><li>save ONNX file : string</li><li>opset_version : int</li><li>input_names : string</li><li>output_names : string</li><li>export_params : bool</li><li>trigger : int</li>        </ul></td>
+            <td><ul><li>model : torch.nn.Module</li><li>state dict : torch.model</li><li>dataset : torch.dataset</li><li>save ONNX file : string</li><li>opset_version : int</li><li>input_names : string</li><li>output_names : string</li><li>export_params : bool</li><li>trigger : int</li>        </ul></td>
             <td><ul>        </ul></td>
             <td>Export a PyTorch model to ONNX.</td>
         </tr>
@@ -3873,7 +3883,7 @@
             <td>FashionMNIST Dataset</td>
             <td><i class='bi bi-fire'></i></td>
             <td><ul><li>batch : int</li><li>train : bool</li><li>shuffle : bool</li>        </ul></td>
-            <td><ul><li>out : torch.dataset</li><li>data size : torch.Size</li>        </ul></td>
+            <td><ul><li>out : torch.dataset</li>        </ul></td>
             <td>Loads the FashionMNIST dataset</td>
         </tr>
         <tr>
@@ -3886,8 +3896,8 @@
         <tr>
             <td>Generic Dataset</td>
             <td><i class='bi bi-fire'></i></td>
-            <td><ul><li>X : string</li><li>Y : string</li><li>classes : string</li><li>batch : int</li><li>split : int</li><li>shuffle : bool</li><li>transform : torchvision.transforms</li><li>directory : string</li><li>length : int</li><li>colormap : string</li>        </ul></td>
-            <td><ul><li>out : torch.dataset</li><li>data size : torch.Size</li>        </ul></td>
+            <td><ul><li>X : string</li><li>Y : string</li><li>classes : string</li><li>batch : int</li><li>split : int</li><li>shuffle : bool</li><li>transform : torchvision.transforms</li><li>directory : string</li><li>length : int</li><li>colormap : string</li><li>scale factor : double</li><li>red mean : double</li><li>green mean : double</li><li>blue mean : double</li><li>type : int</li>        </ul></td>
+            <td><ul><li>out : torch.dataset</li>        </ul></td>
             <td>Loads the Generic dataset</td>
         </tr>
         <tr>
@@ -3957,7 +3967,7 @@
             <td>MNIST Dataset</td>
             <td><i class='bi bi-fire'></i></td>
             <td><ul><li>batch : int</li><li>train : bool</li><li>shuffle : bool</li>        </ul></td>
-            <td><ul><li>out : torch.dataset</li><li>data size : torch.Size</li>        </ul></td>
+            <td><ul><li>out : torch.dataset</li>        </ul></td>
             <td>Loads the MNIST dataset</td>
         </tr>
         <tr>
@@ -4395,7 +4405,7 @@
             <td>AKAZE Feature Detector</td>
             <td><i class='bi bi-compass-fill'></i></td>
             <td><ul><li>source1 : image2D</li><li>source2 : image2D</li><li>inlierThreshold : double</li><li>nearestNeighborMatchRatio : double</li>        </ul></td>
-            <td><ul><li>keypoints1 : float3[]</li><li>preview : image2D</li><li>keypoints2 : float3[]</li>        </ul></td>
+            <td><ul><li>keypoints1 : matrix2D</li><li>preview : image2D</li><li>keypoints2 : matrix2D</li>        </ul></td>
             <td>Determines strong corners on an image using the AKAZE detector</td>
         </tr>
         <tr>
@@ -4409,21 +4419,21 @@
             <td>Corner Harris</td>
             <td><i class='bi bi-compass-fill'></i></td>
             <td><ul><li>source : image2D</li><li>blockSize : int</li><li>ksize : int</li><li>k : double</li><li>borderType : int</li><li>threshold : int</li><li>maxThreshold : int</li>        </ul></td>
-            <td><ul><li>out : int2[]</li><li>preview : image2D</li><li>mask : image2D</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>mask : image2D</li>        </ul></td>
             <td>Runs the Harris corner detector on the image</td>
         </tr>
         <tr>
             <td>Corner Sub Pixel</td>
             <td><i class='bi bi-compass-fill'></i></td>
             <td><ul><li>source : image2D</li><li>corners : int2[]</li><li>winSize : int2</li><li>zeroZone : int2</li><li>maxCount : int</li><li>epsilon : double</li>        </ul></td>
-            <td><ul><li>out : int2[]</li><li>preview : image2D</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li><li>preview : image2D</li>        </ul></td>
             <td>Refines the corner locations</td>
         </tr>
         <tr>
             <td>Corner Tracker</td>
             <td><i class='bi bi-compass-fill'></i></td>
             <td><ul><li>source : image2D</li><li>maxCorners : int</li><li>qualityLevel : double</li><li>minDistance : double</li><li>blockSize : int</li><li>useHarrisDetector : bool</li><li>k : double</li>        </ul></td>
-            <td><ul><li>out : float2[]</li><li>preview : image2D</li>        </ul></td>
+            <td><ul><li>out : matrix2D</li><li>preview : image2D</li>        </ul></td>
             <td>Determines strong corners on an image using the goodFeaturesToTrack() function</td>
         </tr>
         <tr>
@@ -4437,14 +4447,14 @@
             <td>FLANN Feature Matcher</td>
             <td><i class='bi bi-compass-fill'></i></td>
             <td><ul><li>source1 : image2D</li><li>source2 : image2D</li><li>minHessian : int</li>        </ul></td>
-            <td><ul><li>keypoints1 : float3[]</li><li>preview : image2D</li><li>keypoints2 : float3[]</li>        </ul></td>
+            <td><ul><li>keypoints1 : matrix2D</li><li>preview : image2D</li><li>keypoints2 : matrix2D</li>        </ul></td>
             <td>Finds the feature vector correspondent to the keypoints using the FLANN matcher</td>
         </tr>
         <tr>
             <td>Match Template</td>
             <td><i class='bi bi-compass-fill'></i></td>
-            <td><ul><li>source : image2D</li><li>method : int</li><li>center : float2</li><li>width : int</li><li>height : int</li>        </ul></td>
-            <td><ul><li>out : int2</li><li>preview : image2D</li>        </ul></td>
+            <td><ul><li>source : image2D</li><li>method : int</li><li>center : double2</li><li>width : int</li><li>height : int</li><li>start/pause : int</li><li>restart : int</li>        </ul></td>
+            <td><ul><li>output : matrix2D</li><li>preview : image2D</li><li>location : int2</li><li>confidence : double</li>        </ul></td>
             <td>Tracks a template within an image, producing a point of the template's location</td>
         </tr>
         <tr>
@@ -4458,14 +4468,14 @@
             <td>QR Code Detect</td>
             <td><i class='bi bi-compass-fill'></i></td>
             <td><ul><li>source : image2D</li>        </ul></td>
-            <td><ul><li>out : string</li><li>preview : image2D</li><li>corners : int4[]</li><li>qrCode : image2D</li>        </ul></td>
+            <td><ul><li>out : string</li><li>preview : image2D</li><li>corners : matrix2D</li><li>qrCode : image2D</li>        </ul></td>
             <td>Detect QR Code</td>
         </tr>
         <tr>
             <td>SIFT Detector</td>
             <td><i class='bi bi-compass-fill'></i></td>
             <td><ul><li>source : image2D</li>        </ul></td>
-            <td><ul><li>keypoints : float3[]</li><li>preview : image2D</li>        </ul></td>
+            <td><ul><li>keypoints : matrix2D</li><li>preview : image2D</li>        </ul></td>
             <td>Determines strong corners on an image using the SIFT detector</td>
         </tr>
         <tr>
@@ -4474,6 +4484,27 @@
             <td><ul><li>source : image2D</li><li>minHessian : int</li>        </ul></td>
             <td><ul><li>keypoints : float3[]</li><li>preview : image2D</li>        </ul></td>
             <td>Determines strong corners on an image using the SURF detector</td>
+        </tr>
+        <tr>
+            <td>Track Data Plot</td>
+            <td><i class='bi bi-compass-fill'></i></td>
+            <td><ul><li>source : matrix2D</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Tracking line plot</td>
+        </tr>
+        <tr>
+            <td>Tracker Inference</td>
+            <td><i class='bi bi-compass-fill'></i></td>
+            <td><ul><li>source : image2D</li><li>center : double2</li><li>width : int</li><li>height : int</li><li>start/pause : int</li><li>restart : int</li>        </ul></td>
+            <td><ul><li>output : matrix2D</li><li>preview : image2D</li><li>location : int2</li><li>confidence : double</li>        </ul></td>
+            <td>Tracks a template within an image using dasiamrpn ML algorithm</td>
+        </tr>
+        <tr>
+            <td>Export Tracking Data</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : matrix2D</li><li>directory : string</li><li>filename : string</li><li>trigger : int</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Exports CSV file from Tracking Data</td>
         </tr>
     </table>
     <h3 id='Transform'>Transform</h3><p>The Transform filters tools are all under the <i class="bi bi-rulers"> Transform</i> category. The full list of display tools is as follows:</p><table>
@@ -4669,13 +4700,6 @@
             <td>Saves Image</td>
         </tr>
         <tr>
-            <td>Manual Trigger</td>
-            <td><i class='bi bi-plugin'></i></td>
-            <td><ul><li>event : int</li><li>period : int</li>        </ul></td>
-            <td><ul><li>out : bool</li>        </ul></td>
-            <td>Triggers a perodic burst</td>
-        </tr>
-        <tr>
             <td>Microphone</td>
             <td><i class='bi bi-magic'></i></td>
             <td><ul><li>trigger : int</li><li>period : int</li>        </ul></td>
@@ -4690,11 +4714,18 @@
             <td>Changes Color/Settings on Philips Hue Device</td>
         </tr>
         <tr>
-            <td>Save JSON</td>
+            <td>Save JSON File</td>
             <td><i class='bi bi-filetype-json'></i></td>
             <td><ul><li>source : string</li><li>directory : string</li><li>filename : string</li><li>trigger : int</li><li>delay : int</li>        </ul></td>
             <td><ul>        </ul></td>
             <td>Save JSON file</td>
+        </tr>
+        <tr>
+            <td>Save Text File</td>
+            <td><i class='bi bi-filetype-text'></i></td>
+            <td><ul><li>source : string</li><li>directory : string</li><li>filename : string</li><li>trigger : int</li><li>delay : int</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Save Text file</td>
         </tr>
         <tr>
             <td>Screenshot</td>
@@ -4811,13 +4842,6 @@
             <td>Load Camera Calibration file</td>
         </tr>
         <tr>
-            <td>Load JSON</td>
-            <td><i class='bi bi-filetype-json'></i></td>
-            <td><ul><li>source : string</li>        </ul></td>
-            <td><ul><li>out : string</li>        </ul></td>
-            <td>Load JSON file</td>
-        </tr>
-        <tr>
             <td>Print</td>
             <td><i class='bi bi-plugin'></i></td>
             <td><ul><li>value : string</li>        </ul></td>
@@ -4884,7 +4908,7 @@
             <td>Set Image2D</td>
             <td><i class='bi bi-plugin'></i></td>
             <td><ul><li>source : image2D</li>        </ul></td>
-            <td><ul><li>out : image2D</li>        </ul></td>
+            <td><ul><li>out : image2D</li><li>sourceTime : double</li>        </ul></td>
             <td>Sets Image value</td>
         </tr>
         <tr>
@@ -5007,6 +5031,10 @@
             <td>Set X and Y to create Int2</td>
         </tr>
     </table>
+
+
+
+
 
 
 
@@ -5516,7 +5544,7 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
 
         </ul>
     </p>
-    
+
 
     <h3 id="JsonSchema">JSON Schema</h3>
     <p>
@@ -6245,408 +6273,409 @@ result = "torch.generic_loader"
 
 
 
-        <p>
+    <p>
         The methods for <i>PluginApi</i> have a instance of <i>PluginHost</i>, the host, which is a helper class that allows you to call
         INFINIWORKFLOW related functions. The execute method should for example call the methods to get input values (e.g. get_input_int_value)
-        and set the output value (i.e. set_output_value). The following methods should can be called on the <i>PluginHost</i></p>
-        <table>
-            <tr>
-                <th>Instance method</th>
-                <th>Purpose</th>
-                <th>Example</th>
-            </tr>
+        and set the output value (i.e. set_output_value). The following methods should can be called on the <i>PluginHost</i>
+    </p>
+    <table>
+        <tr>
+            <th>Instance method</th>
+            <th>Purpose</th>
+            <th>Example</th>
+        </tr>
 
-            <tr>
-                <td>get_input_value</td>
-                <td>
-                    During exeuction you can get the value of an input to the plugin, where you pass the order of the parameter
-                    E.g. pass 0 for the first input parameter
-                </td>
-                <td><pre>value = host.get_input_value(3)</pre></td>
-            </tr>
+        <tr>
+            <td>get_input_value</td>
+            <td>
+                During exeuction you can get the value of an input to the plugin, where you pass the order of the parameter
+                E.g. pass 0 for the first input parameter
+            </td>
+            <td><pre>value = host.get_input_value(3)</pre></td>
+        </tr>
 
-            <tr>
-                <td>get_input_bool_value</td>
-                <td>
-                    A helper method that calls get_input_value and returns the value as a bool Python type
-                </td>
-                <td><pre>value = host.get_input_bool_value(3)</pre></td>
-            </tr>
+        <tr>
+            <td>get_input_bool_value</td>
+            <td>
+                A helper method that calls get_input_value and returns the value as a bool Python type
+            </td>
+            <td><pre>value = host.get_input_bool_value(3)</pre></td>
+        </tr>
 
-            <tr>
-                <td>get_input_int_value</td>
-                <td>
-                    A helper method that calls get_input_value and returns the value as a int Pythontype
-                </td>
-                <td><pre>value = host.get_input_int_value(3)</pre></td>
-            </tr>
+        <tr>
+            <td>get_input_int_value</td>
+            <td>
+                A helper method that calls get_input_value and returns the value as a int Pythontype
+            </td>
+            <td><pre>value = host.get_input_int_value(3)</pre></td>
+        </tr>
 
-            <tr>
-                <td>get_input_numeric_value</td>
-                <td>
-                    A helper method that calls get_input_value and returns a float, int or bool Python type
-                </td>
-                <td><pre>value = host.get_input_numeric_value(3)</pre></td>
-            </tr>
+        <tr>
+            <td>get_input_numeric_value</td>
+            <td>
+                A helper method that calls get_input_value and returns a float, int or bool Python type
+            </td>
+            <td><pre>value = host.get_input_numeric_value(3)</pre></td>
+        </tr>
 
-            <tr>
-                <td>get_input_string_value</td>
-                <td>
-                    A helper method that calls get_input_value and returns a str Python type
-                </td>
-                <td><pre>value = host.get_input_string_value(3)</pre></td>
-            </tr>
+        <tr>
+            <td>get_input_string_value</td>
+            <td>
+                A helper method that calls get_input_value and returns a str Python type
+            </td>
+            <td><pre>value = host.get_input_string_value(3)</pre></td>
+        </tr>
 
-            <tr>
-                <td>get_input_filename_value</td>
-                <td>
-                    A helper method that calls get_input_value and returns a str Python type and resolves the path (replacing the <i>${assets}</i> with the correct path)
-                </td>
-                <td><pre>value = host.get_input_filename_value(3)</pre></td>
-            </tr>
+        <tr>
+            <td>get_input_filename_value</td>
+            <td>
+                A helper method that calls get_input_value and returns a str Python type and resolves the path (replacing the <i>${assets}</i> with the correct path)
+            </td>
+            <td><pre>value = host.get_input_filename_value(3)</pre></td>
+        </tr>
 
-            <tr>
-                <td>get_input_map_value</td>
-                <td>
-                    A helper method that calls get_input_value and returns a dict Python type
-                </td>
-                <td><pre>value = host.get_input_map_value(3)</pre></td>
-            </tr>
+        <tr>
+            <td>get_input_map_value</td>
+            <td>
+                A helper method that calls get_input_value and returns a dict Python type
+            </td>
+            <td><pre>value = host.get_input_map_value(3)</pre></td>
+        </tr>
 
-            <tr>
-                <td>get_input_bool_list_value</td>
-                <td>
-                    A helper method that calls get_input_value and returns a list of bool Python type
-                </td>
-                <td><pre>value = host.get_input_bool_list_value(3)</pre></td>
-            </tr>
+        <tr>
+            <td>get_input_bool_list_value</td>
+            <td>
+                A helper method that calls get_input_value and returns a list of bool Python type
+            </td>
+            <td><pre>value = host.get_input_bool_list_value(3)</pre></td>
+        </tr>
 
-            <tr>
-                <td>get_input_numeric_list_value</td>
-                <td>
-                    A helper method that calls get_input_value and returns a list of float, int or bool Python type
-                </td>
-                <td><pre>value = host.get_input_numeric_list_value(3)</pre></td>
-            </tr>
+        <tr>
+            <td>get_input_numeric_list_value</td>
+            <td>
+                A helper method that calls get_input_value and returns a list of float, int or bool Python type
+            </td>
+            <td><pre>value = host.get_input_numeric_list_value(3)</pre></td>
+        </tr>
 
-            <tr>
-                <td>get_input_string_list_value</td>
-                <td>
-                    A helper method that calls get_input_value and returns a list of str Python type
-                </td>
-                <td><pre>value = host.get_input_string_list_value(3)</pre></td>
-            </tr>
+        <tr>
+            <td>get_input_string_list_value</td>
+            <td>
+                A helper method that calls get_input_value and returns a list of str Python type
+            </td>
+            <td><pre>value = host.get_input_string_list_value(3)</pre></td>
+        </tr>
 
-            <tr>
-                <td>set_output_value</td>
-                <td>
-                    During exeuction you can set the value of an output to the plugin, where you pass the order of the parameter and the value
-                    E.g. pass 0 for the first input parameter
-                    This also will set the dirty flag to False (see set_dirty)
-                </td>
-                <td><pre>host.set_output_value(0, result)</pre></td>
-            </tr>
+        <tr>
+            <td>set_output_value</td>
+            <td>
+                During exeuction you can set the value of an output to the plugin, where you pass the order of the parameter and the value
+                E.g. pass 0 for the first input parameter
+                This also will set the dirty flag to False (see set_dirty)
+            </td>
+            <td><pre>host.set_output_value(0, result)</pre></td>
+        </tr>
 
-            <tr>
-                <td>set_dirty</td>
-                <td>
-                    During exeuction you can set if the node has been executed by setting dirty flag to False. This is automatically set when you
-                    set the outputs but you can set it to True if you want to have the node get executed again
-                </td>
-                <td><pre>host.set_dirty(True)</pre></td>
-            </tr>
+        <tr>
+            <td>set_dirty</td>
+            <td>
+                During exeuction you can set if the node has been executed by setting dirty flag to False. This is automatically set when you
+                set the outputs but you can set it to True if you want to have the node get executed again
+            </td>
+            <td><pre>host.set_dirty(True)</pre></td>
+        </tr>
 
-            <tr>
-                <td>get_num_inputs</td>
-                <td>
-                    Returns the number of inputs that plugin has
-                </td>
-                <td><pre>value = host.get_num_inputs()</pre></td>
-            </tr>
+        <tr>
+            <td>get_num_inputs</td>
+            <td>
+                Returns the number of inputs that plugin has
+            </td>
+            <td><pre>value = host.get_num_inputs()</pre></td>
+        </tr>
 
-            <tr>
-                <td>get_num_outputs</td>
-                <td>
-                    Returns the number of outputs that plugin has
-                </td>
-                <td><pre>value = host.get_num_outputs()</pre></td>
-            </tr>
+        <tr>
+            <td>get_num_outputs</td>
+            <td>
+                Returns the number of outputs that plugin has
+            </td>
+            <td><pre>value = host.get_num_outputs()</pre></td>
+        </tr>
 
-            <tr>
-                <td>set_error_message</td>
-                <td>
-                    Sets an error message that will be shown in the UI
-                </td>
-                <td><pre>host.error_message("Something bad happened")</pre></td>
-            </tr>
+        <tr>
+            <td>set_error_message</td>
+            <td>
+                Sets an error message that will be shown in the UI
+            </td>
+            <td><pre>host.error_message("Something bad happened")</pre></td>
+        </tr>
 
-            <tr>
-                <td>is_enabled</td>
-                <td>
-                    Returns if the node is enabled
-                </td>
-                <td><pre>value = host.is_enabled()</pre></td>
-            </tr>
+        <tr>
+            <td>is_enabled</td>
+            <td>
+                Returns if the node is enabled
+            </td>
+            <td><pre>value = host.is_enabled()</pre></td>
+        </tr>
 
-            <tr>
-                <td>is_cancel_render</td>
-                <td>
-                    Returns true if the user has pressed cancel during the execution, in which case you should return from execution
-                </td>
-                <td><pre>value = host.is_cancel_render()</pre></td>
-            </tr>
+        <tr>
+            <td>is_cancel_render</td>
+            <td>
+                Returns true if the user has pressed cancel during the execution, in which case you should return from execution
+            </td>
+            <td><pre>value = host.is_cancel_render()</pre></td>
+        </tr>
 
-            <tr>
-                <td>convert_filepath_to_relative_path</td>
-                <td>
-                    Returns the argument path from an absolute path to relative path
-                    i.e. will prefix the path with ${assets} as appropriate
-                </td>
-                <td><pre>updated_path = host.convert_filepath_to_relative_path(path)</pre></td>
-            </tr>
+        <tr>
+            <td>convert_filepath_to_relative_path</td>
+            <td>
+                Returns the argument path from an absolute path to relative path
+                i.e. will prefix the path with ${assets} as appropriate
+            </td>
+            <td><pre>updated_path = host.convert_filepath_to_relative_path(path)</pre></td>
+        </tr>
 
-            <tr>
-                <td>get_source_time</td>
-                <td>
-                    Returns the source time depending on where the source originated from upstream
-                    e.g. if the source is from a Movie it will be frame number
-                    or if it is a web camera then it will be the epoch time
-                </td>
-                <td><pre>source_time = host.get_source_time(path)</pre></td>
-            </tr>
+        <tr>
+            <td>get_source_time</td>
+            <td>
+                Returns the source time depending on where the source originated from upstream
+                e.g. if the source is from a Movie it will be frame number
+                or if it is a web camera then it will be the epoch time
+            </td>
+            <td><pre>source_time = host.get_source_time(path)</pre></td>
+        </tr>
 
-            <tr>
-                <td>set_source_time</td>
-                <td>
-                    Sets the source time, all further downstream nodes will inherit this time
-                </td>
-                <td><pre>host.get_source_time(source_time)</pre></td>
-            </tr>
+        <tr>
+            <td>set_source_time</td>
+            <td>
+                Sets the source time, all further downstream nodes will inherit this time
+            </td>
+            <td><pre>host.get_source_time(source_time)</pre></td>
+        </tr>
 
-        </table>
-
-
-        <h3 id="CppSDK">C++ SDK</h3>
-        <p>
-            The C++ SDK is based on compiling a DLL using some standard headers and libraries provided in the INFINIWORFLOW SDK patch package.
-            You can use the exisiting Canny2 example as a starting point and rename all the files to your plugin name.
-            The final plugin will be a DLL but prefixed with the .plugin extension and should be placed in the Extensions folder together with its
-            JSON file.
-            The SDK is based on Microsoft Visual Studio 2022 and only supports x86_64 builds.
-        </p>
-
-        <p>The following methods should be overriden by your derived class of <i>PluginApi</i></p>
-        <table>
-            <tr>
-                <th>Instance method</th>
-                <th>signature</th>
-                <th>Purpose</th>
-            </tr>
+    </table>
 
 
+    <h3 id="CppSDK">C++ SDK</h3>
+    <p>
+        The C++ SDK is based on compiling a DLL using some standard headers and libraries provided in the INFINIWORFLOW SDK patch package.
+        You can use the exisiting Canny2 example as a starting point and rename all the files to your plugin name.
+        The final plugin will be a DLL but prefixed with the .plugin extension and should be placed in the Extensions folder together with its
+        JSON file.
+        The SDK is based on Microsoft Visual Studio 2022 and only supports x86_64 builds.
+    </p>
 
-            <tr>
-                <td>setup</td>
-                <td><pre>bool setup(PluginHost * host);</pre></td>
-                <td>
-                    Setup a Plugin and will be called anytime the thread to run the plugin is started
-                </td>
-            </tr>
-
-            <tr>
-                <td>update</td>
-                <td><pre>bool update(PluginHost * host, BlobHandle blob, int inputIndex);</pre></td>
-                <td>
-                    Update the Plugin instance based on a change of the input blob
-                    This will be called anytime the user changes a property, the inputIndex is the index into the "inputs" array in the JSON representing the parameters
-                    Typically you can copy the value of the contents of the Blob instance (using the host API such as getAsDouble) and then copy this into your plugin instance
-                </td>
-            </tr>
-
-            <tr>
-                <td>superviseInputs</td>
-                <td><pre>bool superviseInputs(PluginHost * host, int* inputsFlags);</pre></td>
-                <td>
-                    Called if the plugin sets "supervise" in the JSON and will allow you to enable/disable and/or hide or show parameters
-                    The inputsFlags is an array that is the size of the number of inputs and you are responsible to set the values
-                    You can set the flags SUPERVISE_FLAG_NORMAL (0) to have it shown regularly
-                    Or set it to the flag SUPERVISE_FLAG_HIDDEN (1) to have it hidden
-                    Or set it to the flag SUPERVISE_FLAG_DISABLED (2) to have it disabled
-                </td>
-            </tr>
-
-            <tr>
-                <td>execute</td>
-                <td><pre>bool execute(PluginHost * host);</pre></td>
-                <td>
-                    Execute a Plugin - you can call the pluginGetOutputBlob to get the output blob
-                    Return true if success or false otherwise
-                </td>
-            </tr>
-
-            <tr>
-                <td>isCached</td>
-                <td><pre>bool isCached(PluginHost * host);</pre></td>
-                <td>
-                    Asks node if it has cached any blob values inits instance variables
-                    If so then the host may call flushCache
-                </td>
-            </tr>
-
-            <tr>
-                <td>flushCache</td>
-                <td><pre>bool flushCache(PluginHost * host);</pre></td>
-                <td>
-                    Asks node to flush its cache - anything it has stored must be released
-                    For example, if you have cached the image as a Mat then release it
-                </td>
-            </tr>
-
-            <tr>
-                <td>teardown</td>
-                <td><pre>bool teardown(PluginHost * host);</pre></td>
-                <td>
-                    Teardown called anytime the thread to run the plugin is stopped
-                </td>
-            </tr>
-
-            <tr>
-                <td>destroy</td>
-                <td><pre>bool destroy(PluginHost * host);</pre></td>
-                <td>
-                    Destroy a Plugin which is you can destroy your plugin instance data
-                </td>
-            </tr>
+    <p>The following methods should be overriden by your derived class of <i>PluginApi</i></p>
+    <table>
+        <tr>
+            <th>Instance method</th>
+            <th>signature</th>
+            <th>Purpose</th>
+        </tr>
 
 
-        </table>
+
+        <tr>
+            <td>setup</td>
+            <td><pre>bool setup(PluginHost * host);</pre></td>
+            <td>
+                Setup a Plugin and will be called anytime the thread to run the plugin is started
+            </td>
+        </tr>
+
+        <tr>
+            <td>update</td>
+            <td><pre>bool update(PluginHost * host, BlobHandle blob, int inputIndex);</pre></td>
+            <td>
+                Update the Plugin instance based on a change of the input blob
+                This will be called anytime the user changes a property, the inputIndex is the index into the "inputs" array in the JSON representing the parameters
+                Typically you can copy the value of the contents of the Blob instance (using the host API such as getAsDouble) and then copy this into your plugin instance
+            </td>
+        </tr>
+
+        <tr>
+            <td>superviseInputs</td>
+            <td><pre>bool superviseInputs(PluginHost * host, int* inputsFlags);</pre></td>
+            <td>
+                Called if the plugin sets "supervise" in the JSON and will allow you to enable/disable and/or hide or show parameters
+                The inputsFlags is an array that is the size of the number of inputs and you are responsible to set the values
+                You can set the flags SUPERVISE_FLAG_NORMAL (0) to have it shown regularly
+                Or set it to the flag SUPERVISE_FLAG_HIDDEN (1) to have it hidden
+                Or set it to the flag SUPERVISE_FLAG_DISABLED (2) to have it disabled
+            </td>
+        </tr>
+
+        <tr>
+            <td>execute</td>
+            <td><pre>bool execute(PluginHost * host);</pre></td>
+            <td>
+                Execute a Plugin - you can call the pluginGetOutputBlob to get the output blob
+                Return true if success or false otherwise
+            </td>
+        </tr>
+
+        <tr>
+            <td>isCached</td>
+            <td><pre>bool isCached(PluginHost * host);</pre></td>
+            <td>
+                Asks node if it has cached any blob values inits instance variables
+                If so then the host may call flushCache
+            </td>
+        </tr>
+
+        <tr>
+            <td>flushCache</td>
+            <td><pre>bool flushCache(PluginHost * host);</pre></td>
+            <td>
+                Asks node to flush its cache - anything it has stored must be released
+                For example, if you have cached the image as a Mat then release it
+            </td>
+        </tr>
+
+        <tr>
+            <td>teardown</td>
+            <td><pre>bool teardown(PluginHost * host);</pre></td>
+            <td>
+                Teardown called anytime the thread to run the plugin is stopped
+            </td>
+        </tr>
+
+        <tr>
+            <td>destroy</td>
+            <td><pre>bool destroy(PluginHost * host);</pre></td>
+            <td>
+                Destroy a Plugin which is you can destroy your plugin instance data
+            </td>
+        </tr>
 
 
-        <p>The following methods should can be called on the <i>PluginHost</i> that is passed into the API methods of <i>PluginApi</i></p>
-        <table>
-            <tr>
-                <th>Signiture</th>
-                <th>Purpose</th>
-            </tr>
-
-            <tr>
-                <td>BlobHandle getOutputBlob(int outputNum)</td>
-                <td>
-                    Get the Output Blob handle which can be callied during the executePlugin call, the outputNum is the index into the "outputs" array in the JSON representing the output
-                </td>
-            </tr>
-
-            <tr>
-                <td>void setNumOutputs(int numOutputs)</td>
-                <td>
-                    Sets the number of outputs the blob supports and can be called during makePlugin
-                </td>
-            </tr>
-
-            <tr>
-                <td>void setErrorMessage(const char *message)</td>
-                <td>
-                    Notifies an error has occurred which will be shown in the UI
-                </td>
-            </tr>
-
-            <tr>
-                <td>void isEnabled()</td>
-                <td>
-                    Checks if the node is enabled, if not then the plugin should usually just copy source to output
-                </td>
-            </tr>
-
-            <tr>
-                <td>bool hasOutputObservers(int outputIndex)</td>
-                <td>
-                    Returns if the output is currently connected - only render the output if it has observers
-                </td>
-            </tr>
-
-            <tr>
-                <td>cv::Mat& getAsImage2D(BlobHandle blob)</td>
-                <td>
-                    From the blob handle get the reference to a two dimensional image represented by OpenCV matrix
-                </td>
-            </tr>
-
-            <tr>
-                <td>cv::Mat& getAsMatrix2D(BlobHandle blob)</td>
-                <td>
-                    From the blob handle get the reference to a two dimensional matrix represented by OpenCV matrix
-                </td>
-            </tr>
+    </table>
 
 
-            <tr>
-                <td>double &getAsDouble(BlobHandle blob)</td>
-                <td>
-                    From the blob handle get the double value it represents
-                </td>
-            </tr>
+    <p>The following methods should can be called on the <i>PluginHost</i> that is passed into the API methods of <i>PluginApi</i></p>
+    <table>
+        <tr>
+            <th>Signiture</th>
+            <th>Purpose</th>
+        </tr>
 
-            <tr>
-                <td>int &getAsInt(BlobHandle blob)</td>
-                <td>
-                    From the blob handle get the int value it represents
-                </td>
-            </tr>
+        <tr>
+            <td>BlobHandle getOutputBlob(int outputNum)</td>
+            <td>
+                Get the Output Blob handle which can be callied during the executePlugin call, the outputNum is the index into the "outputs" array in the JSON representing the output
+            </td>
+        </tr>
 
-            <tr>
-                <td>bool &getAsBool(BlobHandle blob)</td>
-                <td>
-                    From the blob handle get the bool value it represents
-                </td>
-            </tr>
+        <tr>
+            <td>void setNumOutputs(int numOutputs)</td>
+            <td>
+                Sets the number of outputs the blob supports and can be called during makePlugin
+            </td>
+        </tr>
 
-            <tr>
-                <td>std::string &getAsString(BlobHandle blob)</td>
-                <td>
-                    From the blob handle get the string value it represents
-                </td>
-            </tr>
+        <tr>
+            <td>void setErrorMessage(const char *message)</td>
+            <td>
+                Notifies an error has occurred which will be shown in the UI
+            </td>
+        </tr>
 
-            <tr>
-                <td>std::string &getAsFilename(BlobHandle blob)</td>
-                <td>
-                    From the blob handle get the filename value it represents, resolving the prefix <i>${assets}</i>
-                </td>
-            </tr>
+        <tr>
+            <td>void isEnabled()</td>
+            <td>
+                Checks if the node is enabled, if not then the plugin should usually just copy source to output
+            </td>
+        </tr>
 
-            <tr>
-                <td>double *getAsDouble2(BlobHandle blob)</td>
-                <td>
-                    From the blob handle get the 2D double point value it represents
-                </td>
-            </tr>
+        <tr>
+            <td>bool hasOutputObservers(int outputIndex)</td>
+            <td>
+                Returns if the output is currently connected - only render the output if it has observers
+            </td>
+        </tr>
 
-            <tr>
-                <td>int *getAsInt2(BlobHandle blob)</td>
-                <td>
-                    From the blob handle get the 2D integer point value it represents
-                </td>
-            </tr>
+        <tr>
+            <td>cv::Mat& getAsImage2D(BlobHandle blob)</td>
+            <td>
+                From the blob handle get the reference to a two dimensional image represented by OpenCV matrix
+            </td>
+        </tr>
 
-            <tr>
-                <td>float *getAsColor3f(BlobHandle blob)</td>
-                <td>
-                    From the blob handle get the color RGB value it represents
-                </td>
-            </tr>
-
-            <tr>
-                <td>void cloneFromImage(BlobHandle blob, cv::Mat& dest)</td>
-                <td>
-                    From the blob handle gets a cloned copy (which may be opencv mat or cuda memory)
-                </td>
-            </tr>
-
-        </table>
+        <tr>
+            <td>cv::Mat& getAsMatrix2D(BlobHandle blob)</td>
+            <td>
+                From the blob handle get the reference to a two dimensional matrix represented by OpenCV matrix
+            </td>
+        </tr>
 
 
-        <div style="height:100px;">
+        <tr>
+            <td>double &getAsDouble(BlobHandle blob)</td>
+            <td>
+                From the blob handle get the double value it represents
+            </td>
+        </tr>
 
-        </div>
+        <tr>
+            <td>int &getAsInt(BlobHandle blob)</td>
+            <td>
+                From the blob handle get the int value it represents
+            </td>
+        </tr>
+
+        <tr>
+            <td>bool &getAsBool(BlobHandle blob)</td>
+            <td>
+                From the blob handle get the bool value it represents
+            </td>
+        </tr>
+
+        <tr>
+            <td>std::string &getAsString(BlobHandle blob)</td>
+            <td>
+                From the blob handle get the string value it represents
+            </td>
+        </tr>
+
+        <tr>
+            <td>std::string &getAsFilename(BlobHandle blob)</td>
+            <td>
+                From the blob handle get the filename value it represents, resolving the prefix <i>${assets}</i>
+            </td>
+        </tr>
+
+        <tr>
+            <td>double *getAsDouble2(BlobHandle blob)</td>
+            <td>
+                From the blob handle get the 2D double point value it represents
+            </td>
+        </tr>
+
+        <tr>
+            <td>int *getAsInt2(BlobHandle blob)</td>
+            <td>
+                From the blob handle get the 2D integer point value it represents
+            </td>
+        </tr>
+
+        <tr>
+            <td>float *getAsColor3f(BlobHandle blob)</td>
+            <td>
+                From the blob handle get the color RGB value it represents
+            </td>
+        </tr>
+
+        <tr>
+            <td>void cloneFromImage(BlobHandle blob, cv::Mat& dest)</td>
+            <td>
+                From the blob handle gets a cloned copy (which may be opencv mat or cuda memory)
+            </td>
+        </tr>
+
+    </table>
+
+
+    <div style="height:100px;">
+
+    </div>
 </body>
 </html>
