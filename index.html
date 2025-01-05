@@ -2638,7 +2638,7 @@
         </tr>
         <tr>
             <td>Switch Image2D</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>switch : int</li><li>Input #0 : image2D</li><li>Input #1 : image2D</li><li>Input #2 : image2D</li><li>Input #3 : image2D</li><li>Input #4 : image2D</li>        </ul></td>
             <td><ul><li>out : image2D</li>        </ul></td>
             <td>Outputs one of the selected inputs</td>
@@ -3225,7 +3225,7 @@
         </tr>
         <tr>
             <td>JSON File Reader</td>
-            <td><i class='bi bi-file-json'></i></td>
+            <td><i class='bi bi-filetype-json'></i></td>
             <td><ul><li>source : string</li><li>trigger : int</li>        </ul></td>
             <td><ul><li>out : string</li>        </ul></td>
             <td>Reads from a JSON file</td>
@@ -4608,7 +4608,7 @@
         </tr>
         <tr>
             <td>Panorama Stitcher</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>Input #1 : image2D</li><li>Input #2 : image2D</li><li>Input #3 : image2D</li><li>Input #4 : image2D</li><li>Input #5 : image2D</li>        </ul></td>
             <td><ul><li>out : image2D</li>        </ul></td>
             <td>High level image stitcher</td>
@@ -4622,7 +4622,7 @@
         </tr>
         <tr>
             <td>Scan Stitcher</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>Input #1 : image2D</li><li>Input #2 : image2D</li><li>Input #3 : image2D</li><li>Input #4 : image2D</li><li>Input #5 : image2D</li>        </ul></td>
             <td><ul><li>out : image2D</li>        </ul></td>
             <td>High level image stitcher</td>
@@ -4722,7 +4722,7 @@
         </tr>
         <tr>
             <td>Save Text File</td>
-            <td><i class='bi bi-filetype-text'></i></td>
+            <td><i class='bi bi-file-text'></i></td>
             <td><ul><li>source : string</li><li>directory : string</li><li>filename : string</li><li>trigger : int</li><li>delay : int</li>        </ul></td>
             <td><ul>        </ul></td>
             <td>Save Text file</td>
@@ -4801,38 +4801,94 @@
         </tr>
         <tr>
             <td>Exit</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>trigger : int</li>        </ul></td>
             <td><ul>        </ul></td>
             <td>Exit application when trigger is true</td>
         </tr>
         <tr>
             <td>Get Color</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>color : color</li>        </ul></td>
             <td><ul><li>red : double</li><li>green : double</li><li>blue : double</li>        </ul></td>
             <td>Extract Red, Green and Blue Color values</td>
         </tr>
         <tr>
             <td>Get Double2</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>point : double2</li>        </ul></td>
             <td><ul><li>x : double</li><li>y : double</li>        </ul></td>
             <td>Extract x and y from point value</td>
         </tr>
         <tr>
             <td>Get Int2</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>point : int2</li>        </ul></td>
             <td><ul><li>x : int</li><li>y : int</li>        </ul></td>
             <td>Extract x and y from point value</td>
         </tr>
         <tr>
+            <td>In JSON?</td>
+            <td><i class='bi bi-gear'></i></td>
+            <td><ul><li>json : string</li><li>key : string</li>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>Has Key in JSON</td>
+        </tr>
+        <tr>
             <td>Is Batch</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul>        </ul></td>
             <td><ul><li>isBatch : bool</li>        </ul></td>
             <td>Returns true if running in batch (command line) mode - useful to decide if to save models</td>
+        </tr>
+        <tr>
+            <td>Get JSON Bool</td>
+            <td><i class='bi bi-gear'></i></td>
+            <td><ul><li>json : string</li><li>key : string</li><li>default : bool</li>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>Get JSON Bool</td>
+        </tr>
+        <tr>
+            <td>Get JSON Color</td>
+            <td><i class='bi bi-gear'></i></td>
+            <td><ul><li>json : string</li><li>key : string</li><li>default : color</li>        </ul></td>
+            <td><ul><li>out : color</li>        </ul></td>
+            <td>Get JSON Color</td>
+        </tr>
+        <tr>
+            <td>Get JSON Double</td>
+            <td><i class='bi bi-gear'></i></td>
+            <td><ul><li>json : string</li><li>key : string</li><li>default : double</li>        </ul></td>
+            <td><ul><li>out : double</li>        </ul></td>
+            <td>Get JSON Double</td>
+        </tr>
+        <tr>
+            <td>Get JSON Double2</td>
+            <td><i class='bi bi-gear'></i></td>
+            <td><ul><li>json : string</li><li>key : string</li><li>default : double2</li>        </ul></td>
+            <td><ul><li>out : double2</li>        </ul></td>
+            <td>Get JSON Double2</td>
+        </tr>
+        <tr>
+            <td>Get JSON Int</td>
+            <td><i class='bi bi-gear'></i></td>
+            <td><ul><li>json : string</li><li>key : string</li><li>default : int</li>        </ul></td>
+            <td><ul><li>out : int</li>        </ul></td>
+            <td>Get JSON Int</td>
+        </tr>
+        <tr>
+            <td>Get JSON Int2</td>
+            <td><i class='bi bi-gear'></i></td>
+            <td><ul><li>json : string</li><li>key : string</li><li>default : int2</li>        </ul></td>
+            <td><ul><li>out : int2</li>        </ul></td>
+            <td>Get JSON Int2</td>
+        </tr>
+        <tr>
+            <td>Get JSON String</td>
+            <td><i class='bi bi-gear'></i></td>
+            <td><ul><li>json : string</li><li>key : string</li><li>default : string</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>Get JSON String</td>
         </tr>
         <tr>
             <td>Load Camera Calibration</td>
@@ -4843,14 +4899,14 @@
         </tr>
         <tr>
             <td>Print</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>value : string</li>        </ul></td>
             <td><ul>        </ul></td>
             <td>Print to standard output</td>
         </tr>
         <tr>
             <td>RGB To Color</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>red : double</li><li>green : double</li><li>blue : double</li>        </ul></td>
             <td><ul><li>out : color</li>        </ul></td>
             <td>From RGB to Color value</td>
@@ -4864,147 +4920,154 @@
         </tr>
         <tr>
             <td>Set Animation</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>path : string</li><li>x : double</li>        </ul></td>
             <td><ul><li>out : double</li>        </ul></td>
             <td>Creates a Animation</td>
         </tr>
         <tr>
             <td>Set Bool</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>value : bool</li>        </ul></td>
             <td><ul><li>out : bool</li>        </ul></td>
             <td>Sets Bool value</td>
         </tr>
         <tr>
             <td>Set Circle</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>circle : string</li>        </ul></td>
             <td><ul><li>out : float3[]</li>        </ul></td>
             <td>Creates a Circle</td>
         </tr>
         <tr>
             <td>Set Color</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>value : color</li>        </ul></td>
             <td><ul><li>out : color</li>        </ul></td>
             <td>Sets color value</td>
         </tr>
         <tr>
             <td>Set Double</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>value : double</li>        </ul></td>
             <td><ul><li>out : double</li>        </ul></td>
             <td>Sets double value</td>
         </tr>
         <tr>
             <td>Set Double2</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>value : double2</li>        </ul></td>
             <td><ul><li>out : double2</li>        </ul></td>
             <td>Sets Double Point value</td>
         </tr>
         <tr>
             <td>Set Image2D</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>source : image2D</li>        </ul></td>
             <td><ul><li>out : image2D</li><li>sourceTime : double</li>        </ul></td>
             <td>Sets Image value</td>
         </tr>
         <tr>
             <td>Set Int</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>value : int</li>        </ul></td>
             <td><ul><li>out : int</li>        </ul></td>
             <td>Sets Integer value</td>
         </tr>
         <tr>
             <td>Set Int2</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>value : int2</li>        </ul></td>
             <td><ul><li>out : int2</li>        </ul></td>
             <td>Sets Integer Point value</td>
         </tr>
         <tr>
+            <td>Set JSON</td>
+            <td><i class='bi bi-gear'></i></td>
+            <td><ul><li>value : string</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>Sets JSON dictionary</td>
+        </tr>
+        <tr>
             <td>Set Path</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>path : string</li>        </ul></td>
             <td><ul><li>out : int2[]</li>        </ul></td>
             <td>Creates a Path</td>
         </tr>
         <tr>
             <td>Set Rectangle</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>rectangle : string</li>        </ul></td>
             <td><ul><li>out : int4[]</li>        </ul></td>
             <td>Creates a Rectangle</td>
         </tr>
         <tr>
             <td>Set String</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>value : string</li>        </ul></td>
             <td><ul><li>out : string</li>        </ul></td>
             <td>Sets string value</td>
         </tr>
         <tr>
             <td>Switch Circle</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>switch : int</li><li>Input #0 : float3[]</li><li>Input #1 : float3[]</li><li>Input #2 : float3[]</li><li>Input #3 : float3[]</li><li>Input #4 : float3[]</li>        </ul></td>
             <td><ul><li>out : string</li>        </ul></td>
             <td>Outputs one of the selected inputs</td>
         </tr>
         <tr>
             <td>Switch Color</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>switch : int</li><li>Input #0 : color</li><li>Input #1 : color</li><li>Input #2 : color</li><li>Input #3 : color</li><li>Input #4 : color</li>        </ul></td>
             <td><ul><li>out : color</li>        </ul></td>
             <td>Outputs one of the selected inputs</td>
         </tr>
         <tr>
             <td>Switch Image2D</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>switch : int</li><li>Input #0 : image2D</li><li>Input #1 : image2D</li><li>Input #2 : image2D</li><li>Input #3 : image2D</li><li>Input #4 : image2D</li>        </ul></td>
             <td><ul><li>out : image2D</li>        </ul></td>
             <td>Outputs one of the selected inputs</td>
         </tr>
         <tr>
             <td>Switch Numeric</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>switch : int</li><li>Input #0 : numeric</li><li>Input #1 : numeric</li><li>Input #2 : numeric</li><li>Input #3 : numeric</li><li>Input #4 : numeric</li>        </ul></td>
             <td><ul><li>out : numeric</li>        </ul></td>
             <td>Outputs one of the selected inputs</td>
         </tr>
         <tr>
             <td>Switch Path</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>switch : int</li><li>Input #0 : int2[]</li><li>Input #1 : int2[]</li><li>Input #2 : int2[]</li><li>Input #3 : int2[]</li><li>Input #4 : int2[]</li>        </ul></td>
             <td><ul><li>out : int2[]</li>        </ul></td>
             <td>Outputs one of the selected inputs</td>
         </tr>
         <tr>
             <td>Switch Double2</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>switch : int</li><li>Input #0 : double2</li><li>Input #1 : double2</li><li>Input #2 : double2</li><li>Input #3 : double2</li><li>Input #4 : double2</li>        </ul></td>
             <td><ul><li>out : double2</li>        </ul></td>
             <td>Outputs one of the selected inputs</td>
         </tr>
         <tr>
             <td>Switch Int2</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>switch : int</li><li>Input #0 : int2</li><li>Input #1 : int2</li><li>Input #2 : int2</li><li>Input #3 : int2</li><li>Input #4 : int2</li>        </ul></td>
             <td><ul><li>out : int2</li>        </ul></td>
             <td>Outputs one of the selected inputs</td>
         </tr>
         <tr>
             <td>Switch Rectangle</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>switch : int</li><li>Input #0 : int4[]</li><li>Input #1 : int4[]</li><li>Input #2 : int4[]</li><li>Input #3 : int4[]</li><li>Input #4 : int4[]</li>        </ul></td>
             <td><ul><li>out : int4[]</li>        </ul></td>
             <td>Outputs one of the selected inputs</td>
         </tr>
         <tr>
             <td>Switch String</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>switch : int</li><li>Input #0 : string</li><li>Input #0 : string</li><li>Input #1 : string</li><li>Input #2 : string</li><li>Input #3 : string</li><li>Input #4 : string</li>        </ul></td>
             <td><ul><li>out : string</li>        </ul></td>
             <td>Outputs one of the selected inputs</td>
@@ -5018,23 +5081,19 @@
         </tr>
         <tr>
             <td>XY to Double2</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>x : double</li><li>y : double</li>        </ul></td>
             <td><ul><li>out : double2</li>        </ul></td>
             <td>Set X and Y to create Double2</td>
         </tr>
         <tr>
             <td>XY to Int2</td>
-            <td><i class='bi bi-plugin'></i></td>
+            <td><i class='bi bi-gear'></i></td>
             <td><ul><li>x : int</li><li>y : int</li>        </ul></td>
             <td><ul><li>out : int2</li>        </ul></td>
             <td>Set X and Y to create Int2</td>
         </tr>
     </table>
-
-
-
-
 
 
 
