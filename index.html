@@ -1130,7 +1130,7 @@
     </p>
     <img src="./assets/ui_manual_trigger.gif" />
 
-    <h3 id="PostTrigger">Post Trigger</h3>
+    <h3 id="PostTriggers">Post Triggers</h3>
     <p>
         You can create "Post Triggers" based on when downstream Python nodes have executed and trigger a Python node upstream. This allows you to do "for" loops as
         the workflow graph is acyclic - meaning no edges can connect a downstream node to an upstream node. However, with this feature you can make a
@@ -1141,6 +1141,12 @@
         when the value is less than 10:
     </p>
     <img src="./assets/ui_create_trigger.gif" />
+
+    <p>
+       Once you set a Post Trigger, whenever you select the downstream node, you will see an animation of the trigger to highlight which
+        upstream node that has the trigger input:
+    </p>
+    <img src="./assets/ui_show_trigger.gif" />
 
     <p>
         To remove all Post Triggers by double clicking the trigger port but ensuring no other nodes are selected:
