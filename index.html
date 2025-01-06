@@ -91,8 +91,8 @@
                             <li><a href="#AI">AI Tools</a></li>
                             <li><a href="#Color">Color Tools</a></li>
                             <li><a href="#Composite">Composite Tools</a></li>
-                            <li><a href="#DataScience">Data Science Tools</a></li>
-                            <li><a href="#Displays">Displays Tools</a></li>
+                            <li><a href="#Datascience">Data Science Tools</a></li>
+                            <li><a href="#Outputs">Displays Tools</a></li>
                             <li><a href="#Experimental">Experimental Tools</a></li>
                             <li><a href="#ImageProcessing">Image Processing Tools</a></li>
                             <li><a href="#Inputs">Inputs Tools</a></li>
@@ -120,9 +120,9 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">ML <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#DataFrame">Data frames</a></li>
-                            <li><a href="#DataScience">Data Science</a></li>
-                            <li><a href="#Plot">Ploting Tools</a></li>
-                            <li><a href="#ML">ML Tools</a></li>
+                            <li><a href="#DataScienceSection">Data Science</a></li>
+                            <li><a href="#PlotsSection">Ploting</a></li>
+                            <li><a href="#MLSection">Machine Learning</a></li>
                             <li><a href="#GridSearch">Grid Search</a></li>
                             <li><a href="#Hyperparameters">Hyperparameters</a></li>
                             <li><a href="#Tensors">Tensors</a></li>
@@ -135,8 +135,8 @@
                         <ul class="dropdown-menu">
                             <li><a href="#CreatingTriggers">Creating Triggers</a></li>
                             <li><a href="#PostTriggers">Post Triggers</a></li>
-                            <li><a href="#Widgets">Widgets Tools</a></li>
-                            <li><a href="#Displays">Displays Tools</a></li>
+                            <li><a href="#WidgetsSection">Widgets Tools</a></li>
+                            <li><a href="#DisplaysSection">Displays Tools</a></li>
                         </ul>
                     </li>
 
@@ -279,7 +279,7 @@
         </tr>
         <tr>
             <td><div style="background-color: rgb(100,100,100); width: 50px; height: 50px; "> </div></td>
-            <td><a href="#Widgets">Widget nodes (executed on the CPU)</a></td>
+            <td><a href="#WidgetsSection">Widget nodes (executed on the CPU)</a></td>
         </tr>
     </table>
 
@@ -715,7 +715,7 @@
         Only one node can be viewed at one time in the viewer. However, the flowgraph can also show multiple the output of multiple nodes
         at the same time. For example, using the 'Thumbnail Image Display' tool allows you to
         show images that are drawn in the flowgraph directly.
-        Additional <a href="#Displays">Display Nodes</a> are available that can be used to view different types of outputs directly on the flowgraph.
+        Additional <a href="#DisplaysSection">Display Nodes</a> are available that can be used to view different types of outputs directly on the flowgraph.
     </p>
     <img src="./assets/ui_thumbnail_viewer.gif" />
 
@@ -760,7 +760,7 @@
     <img src="./assets/ui_viewer_tensor_image.gif" width="400" />
 
 
-    <h3 id="Widgets">Widgets</h3>
+    <h3 id="WidgetsSection">Widgets</h3>
     <p>A set of tools, called Widgets, are available that provide user interface controls directly in the flowgraph</p>
     <img src="./assets/ui_widgets.jpg" width="80%" />
     <p>
@@ -781,197 +781,17 @@
         layout). An example of the Widget Slider's parameters are as follows:
     </p>
     <img src="./assets/ui_publishing_controls.gif" />
+    <p>
+        See the reference section for the full list of <a href="#Widgets">Widget Tools</a>
+    </p>
 
-    <p>The User Interface Widgets tools are all under the <i class="bi bi-sliders"> Widgets</i> category. The full list of display tools is as follows:</p><table>
-        <tr>
-            <th>Name</th>
-            <th>Icon</th>
-            <th>Inputs</th>
-            <th>Outputs</th>
-            <th>Description</th>
-        </tr>
-        <tr>
-            <td>Widget Note</td>
-            <td><i class='bi bi-info-square'></i></td>
-            <td><ul><li>note : string</li>        </ul></td>
-            <td><ul>        </ul></td>
-            <td>Pin a note</td>
-        </tr>
-        <tr>
-            <td>Widget Bool Trigger</td>
-            <td><i class='bi bi-fire'></i></td>
-            <td><ul><li>event : int</li><li>name : string</li><li>description : string</li><li>period : int</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
-            <td><ul><li>out : bool</li>        </ul></td>
-            <td>A widget to triggers a perodic burst to represents bool types</td>
-        </tr>
-        <tr>
-            <td>Widget Checkbox</td>
-            <td><i class='bi bi-card-text'></i></td>
-            <td><ul><li>value : bool</li><li>name : string</li><li>description : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
-            <td><ul><li>out : bool</li>        </ul></td>
-            <td>A checkbox widget that represents bool types</td>
-        </tr>
-        <tr>
-            <td>Widget Color</td>
-            <td><i class='bi bi-eyedropper'></i></td>
-            <td><ul><li>value : color</li><li>name : string</li><li>description : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
-            <td><ul><li>out : color</li>        </ul></td>
-            <td>A color dialog widget that represents color types</td>
-        </tr>
-        <tr>
-            <td>Widget Curve</td>
-            <td><i class='bi bi-bezier2'></i></td>
-            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
-            <td><ul><li>out : string</li>        </ul></td>
-            <td>A curve widget that represents bezier curve types</td>
-        </tr>
-        <tr>
-            <td>Widget Double2 Slider</td>
-            <td><i class='bi bi-sliders'></i></td>
-            <td><ul><li>value : double2</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
-            <td><ul><li>out : double2</li>        </ul></td>
-            <td>Two slider widgets that represents double2 types</td>
-        </tr>
-        <tr>
-            <td>Widget Double2 Textfield</td>
-            <td><i class='bi bi-cursor-text'></i></td>
-            <td><ul><li>value : double2</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
-            <td><ul><li>out : double2</li>        </ul></td>
-            <td>Two textfield widgets that represents double types</td>
-        </tr>
-        <tr>
-            <td>Widget Double Slider</td>
-            <td><i class='bi bi-sliders'></i></td>
-            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
-            <td><ul><li>out : double</li>        </ul></td>
-            <td>A slider widget that represents double types</td>
-        </tr>
-        <tr>
-            <td>Widget Double Textfield</td>
-            <td><i class='bi bi-input-cursor-text'></i></td>
-            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
-            <td><ul><li>out : double</li>        </ul></td>
-            <td>A textfield widget that represents double types</td>
-        </tr>
-        <tr>
-            <td>Widget Filebrowser</td>
-            <td><i class='bi bi-folder-fill'></i></td>
-            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>filters : filters</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
-            <td><ul><li>out : string</li>        </ul></td>
-            <td>A filebrowser widget that represents string types</td>
-        </tr>
-        <tr>
-            <td>Widget Int2 Slider</td>
-            <td><i class='bi bi-sliders'></i></td>
-            <td><ul><li>value : int2</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
-            <td><ul><li>out : int2</li>        </ul></td>
-            <td>Two slider widget that represents int2 types</td>
-        </tr>
-        <tr>
-            <td>Widget Int2 Textfield</td>
-            <td><i class='bi bi-cursor-text'></i></td>
-            <td><ul><li>value : int2</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
-            <td><ul><li>out : int2</li>        </ul></td>
-            <td>A slider textfield that represents int types</td>
-        </tr>
-        <tr>
-            <td>Widget Int Slider</td>
-            <td><i class='bi bi-sliders'></i></td>
-            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
-            <td><ul><li>out : double</li>        </ul></td>
-            <td>A slider widget that represents int types</td>
-        </tr>
-        <tr>
-            <td>Widget Int Textfield</td>
-            <td><i class='bi bi-input-cursor-text'></i></td>
-            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
-            <td><ul><li>out : int</li>        </ul></td>
-            <td>A textfield widget that represents int types</td>
-        </tr>
-        <tr>
-            <td>Widget Int Trigger</td>
-            <td><i class='bi bi-fire'></i></td>
-            <td><ul><li>event : int</li><li>name : string</li><li>description : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
-            <td><ul><li>out : int</li>        </ul></td>
-            <td>A button widget to triggers a step jump</td>
-        </tr>
-        <tr>
-            <td>Widget Map</td>
-            <td><i class='bi bi-braces'></i></td>
-            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>url : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
-            <td><ul><li>out : map</li>        </ul></td>
-            <td>A widget that represents map types</td>
-        </tr>
-        <tr>
-            <td>Widget Output</td>
-            <td><i class='bi bi-display'></i></td>
-            <td><ul><li>output : *</li><li>name : string</li><li>order : int</li><li>icon : string</li>        </ul></td>
-            <td><ul>        </ul></td>
-            <td>A widget that represent a published output</td>
-        </tr>
-        <tr>
-            <td>Widget Password</td>
-            <td><i class='bi bi-asterisk'></i></td>
-            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>publish : bool</li><li>tab : string</li><li>order : inr</li>        </ul></td>
-            <td><ul><li>out : string</li>        </ul></td>
-            <td>A password widget that represents string types</td>
-        </tr>
-        <tr>
-            <td>Widget Path</td>
-            <td><i class='bi bi-bounding-box-circles'></i></td>
-            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
-            <td><ul><li>out : string</li>        </ul></td>
-            <td>A overlay drawing path widget that represents path types</td>
-        </tr>
-        <tr>
-            <td>Widget Double2 Point</td>
-            <td><i class='bi bi-plus-circle'></i></td>
-            <td><ul><li>value : double2</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
-            <td><ul><li>out : double2</li>        </ul></td>
-            <td>A point widget that represents double2 types</td>
-        </tr>
-        <tr>
-            <td>Widget Int2 Point</td>
-            <td><i class='bi bi-plus-circle'></i></td>
-            <td><ul><li>value : int2</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
-            <td><ul><li>out : int2</li>        </ul></td>
-            <td>A point widget that represents int2 types</td>
-        </tr>
-        <tr>
-            <td>Widget Select List</td>
-            <td><i class='bi bi-list'></i></td>
-            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>permitted : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
-            <td><ul><li>out : string</li>        </ul></td>
-            <td>A multi select widget that represents string types</td>
-        </tr>
-        <tr>
-            <td>Widget Select Menu</td>
-            <td><i class='bi bi-menu-button'></i></td>
-            <td><ul><li>value : int</li><li>name : string</li><li>description : string</li><li>permitted : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
-            <td><ul><li>out : int</li>        </ul></td>
-            <td>A select widget that represents int types</td>
-        </tr>
-        <tr>
-            <td>Widget String Textfield</td>
-            <td><i class='bi bi-card-text'></i></td>
-            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
-            <td><ul><li>out : string</li>        </ul></td>
-            <td>A textfield widget that represents string types</td>
-        </tr>
-        <tr>
-            <td>Widget Textarea</td>
-            <td><i class='bi bi-body-text'></i></td>
-            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
-            <td><ul><li>out : string</li>        </ul></td>
-            <td>A textarea widget that represents string types</td>
-        </tr>
-    </table>
+
 
     <p>
         See the section on <a href="#Publish">'publishing'</a> to understand how you can leverage widgets in published workflows.
     </p>
 
-    <h3 id="Displays">Displays</h3>
+    <h3 id="DisplaysSection">Displays</h3>
     <p>
         A set of tools, called Displays, are available that provide viewing displays directly in the flowgraph
         This allows you to constantly monitor the output of multiple nodes and avoid switching back and for using the <a href="#Viewer">Viewer</a>.
@@ -1007,114 +827,10 @@
     </p>
     <img src="./assets/ui_display_primitives.gif" width="50%" />
 
-    <p>The Display tools that allow you to visualize directly in the flowgraph tools are all under the <i class="bi bi-display"> Outputs</i> category. The full list of display tools is as follows:</p><table>
-        <tr>
-            <th>Name</th>
-            <th>Icon</th>
-            <th>Inputs</th>
-            <th>Outputs</th>
-            <th>Description</th>
-        </tr>
-        <tr>
-            <td>Bool Display</td>
-            <td><i class='bi bi-window'></i></td>
-            <td><ul><li>source : bool</li>        </ul></td>
-            <td><ul>        </ul></td>
-            <td>Show Bool</td>
-        </tr>
-        <tr>
-            <td>Color Display</td>
-            <td><i class='bi bi-window'></i></td>
-            <td><ul><li>source : color</li>        </ul></td>
-            <td><ul>        </ul></td>
-            <td>Show Color</td>
-        </tr>
-        <tr>
-            <td>DataFrame Display</td>
-            <td><i class='bi bi-window'></i></td>
-            <td><ul><li>source : DataFrame</li>        </ul></td>
-            <td><ul>        </ul></td>
-            <td>DataFrame Viewer</td>
-        </tr>
-        <tr>
-            <td>Double2 Display</td>
-            <td><i class='bi bi-window'></i></td>
-            <td><ul><li>source : double2</li>        </ul></td>
-            <td><ul>        </ul></td>
-            <td>Show Double2</td>
-        </tr>
-        <tr>
-            <td>Double Display</td>
-            <td><i class='bi bi-window'></i></td>
-            <td><ul><li>source : double</li>        </ul></td>
-            <td><ul>        </ul></td>
-            <td>Show Double Number</td>
-        </tr>
-        <tr>
-            <td>Fullscreen</td>
-            <td><i class='bi bi-window'></i></td>
-            <td><ul><li>source : *2D</li>        </ul></td>
-            <td><ul>        </ul></td>
-            <td>Show Image</td>
-        </tr>
-        <tr>
-            <td>Full Image Display</td>
-            <td><i class='bi bi-window'></i></td>
-            <td><ul><li>source : image2D</li>        </ul></td>
-            <td><ul>        </ul></td>
-            <td>Show Full Image</td>
-        </tr>
-        <tr>
-            <td>imshow Display</td>
-            <td><i class='bi bi-window'></i></td>
-            <td><ul><li>source : *2D</li>        </ul></td>
-            <td><ul>        </ul></td>
-            <td>imshow Image Viewer - only displays on the server</td>
-        </tr>
-        <tr>
-            <td>Int2 Display</td>
-            <td><i class='bi bi-window'></i></td>
-            <td><ul><li>source : int2</li>        </ul></td>
-            <td><ul>        </ul></td>
-            <td>Show Int2</td>
-        </tr>
-        <tr>
-            <td>Int Display</td>
-            <td><i class='bi bi-window'></i></td>
-            <td><ul><li>source : int</li>        </ul></td>
-            <td><ul>        </ul></td>
-            <td>Show Int</td>
-        </tr>
-        <tr>
-            <td>Matrix2D Display</td>
-            <td><i class='bi bi-window'></i></td>
-            <td><ul><li>source : matrix2D</li>        </ul></td>
-            <td><ul>        </ul></td>
-            <td>Show Matrix2D</td>
-        </tr>
-        <tr>
-            <td>String Display</td>
-            <td><i class='bi bi-window'></i></td>
-            <td><ul><li>source : string</li>        </ul></td>
-            <td><ul>        </ul></td>
-            <td>Show String</td>
-        </tr>
-        <tr>
-            <td>Tensor Display</td>
-            <td><i class='bi bi-window'></i></td>
-            <td><ul><li>source : tensor</li>        </ul></td>
-            <td><ul>        </ul></td>
-            <td>Tensor Viewer</td>
-        </tr>
-        <tr>
-            <td>Thumbnail Image Display</td>
-            <td><i class='bi bi-window'></i></td>
-            <td><ul><li>source : *2D</li>        </ul></td>
-            <td><ul>        </ul></td>
-            <td>Show Thumbnail of Image</td>
-        </tr>
-    </table>
 
+    <p>
+        See the reference section for the full list of <a href="#Outputs">Display Tools</a>
+    </p>
 
     <h3 id="CreatingTriggers">Creating Triggers</h3>
     <p>
@@ -1125,7 +841,7 @@
     <img src="./assets/ui_trigger_example.jpg" width="40%" />
     <p>
         As well as creating triggers automatically based on your outputs of the nodes on your flowgraph, you can also create manual triggers.
-        The <a href="#Widgets">Widgets</a> include a "Widget Bool Trigger" and a "Widget Int Trigger". A bool trigger creates a "binary pulse", whereas
+        The <a href="#WidgetsSection">Widgets</a> include a "Widget Bool Trigger" and a "Widget Int Trigger". A bool trigger creates a "binary pulse", whereas
         an int trigger generates a staircase function. Both are useful to manually trigger a node or use one trigger to manually trigger multiple nodes.
     </p>
     <img src="./assets/ui_manual_trigger.gif" />
@@ -1143,7 +859,7 @@
     <img src="./assets/ui_create_trigger.gif" />
 
     <p>
-       Once you set a Post Trigger, whenever you select the downstream node, you will see an animation of the trigger to highlight which
+        Once you set a Post Trigger, whenever you select the downstream node, you will see an animation of the trigger to highlight which
         upstream node that has the trigger input, the trigger port will flash and a tooltip will indicate the condition which will exeucte the trigger:
     </p>
     <img src="./assets/ui_show_trigger.gif" />
@@ -1157,7 +873,7 @@
     </p>
 
 
-    <h3 id="DataScience">Data Science</h3>
+    <h3 id="DataScienceSection">Data Science</h3>
     <p>
         The Data Science tools are all under the <i class="bi bi-table"> Data Frame</i> category.
         The implementation is based on <a target="_blank" href="https://pandas.pydata.org/">Pandas</a>, an open source data analysis and manipulation library.
@@ -1167,290 +883,11 @@
         The Key/Value Dialog UI will show the corresponding Pandas function's documentation which is useful to determine the additional parameters you wish to set.
     </p>
 
-    <p>The Datascience filters tools are all under the <i class="bi bi-table"> Datascience</i> category. The full list of display tools is as follows:</p><table>
-        <tr>
-            <th>Name</th>
-            <th>Icon</th>
-            <th>Inputs</th>
-            <th>Outputs</th>
-            <th>Description</th>
-        </tr>
-        <tr>
-            <td>Bool Cell</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>row : int</li><li>column : int</li>        </ul></td>
-            <td><ul><li>out : bool</li>        </ul></td>
-            <td>Get bool cell value.</td>
-        </tr>
-        <tr>
-            <td>Columns</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>columns : string</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Returns a subset of columns</td>
-        </tr>
-        <tr>
-            <td>Columns Table</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Returns the columns of the table</td>
-        </tr>
-        <tr>
-            <td>Count Table</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Returns the count of the table</td>
-        </tr>
-        <tr>
-            <td>Group By Count Table</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>columns : string</li><li>args : string</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Returns the table with grouped count</td>
-        </tr>
-        <tr>
-            <td>Double Cell</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>row : int</li><li>column : int</li>        </ul></td>
-            <td><ul><li>out : double</li>        </ul></td>
-            <td>Get double cell value.</td>
-        </tr>
-        <tr>
-            <td>Drop Columns Table</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>drop : string</li><li>index_col : bool</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Returns the table with some columns dropped</td>
-        </tr>
-        <tr>
-            <td>Drop Nan Columns</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Drop any columns with Not a Number</td>
-        </tr>
-        <tr>
-            <td>Drop Nan Rows</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Drop any rows with Not a Number</td>
-        </tr>
-        <tr>
-            <td>Drop Rows Table</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>drop : string</li><li>index_col : bool</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Returns the table with some rows dropped</td>
-        </tr>
-        <tr>
-            <td>Fill Nan Columns</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>value : string</li><li>index_col : bool</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Fill any columns with Not a Number</td>
-        </tr>
-        <tr>
-            <td>Fill Nan Rows</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>value : string</li><li>index_col : bool</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Fills any rows with Not a Number</td>
-        </tr>
-        <tr>
-            <td>Index Location Table</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>row : string</li><li>column : string</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Integer-location based indexing for selection by position.</td>
-        </tr>
-        <tr>
-            <td>Int Cell</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>row : int</li><li>column : int</li>        </ul></td>
-            <td><ul><li>out : int</li>        </ul></td>
-            <td>Get int cell value.</td>
-        </tr>
-        <tr>
-            <td>Join Table</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>other : DataFrame</li><li>on : string</li><li>how : string</li><li>lsuffix : string</li><li>rsuffix : string</li><li>sort : bool</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Join Two Tables</td>
-        </tr>
-        <tr>
-            <td>Max Table</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Returns the max of the table</td>
-        </tr>
-        <tr>
-            <td>Group By Max Table</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>columns : string</li><li>args : string</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Returns the table with grouped max</td>
-        </tr>
-        <tr>
-            <td>Mean Table</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Returns the mean of the table</td>
-        </tr>
-        <tr>
-            <td>Group By Mean Table</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>columns : string</li><li>args : string</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Returns the table with grouped mean</td>
-        </tr>
-        <tr>
-            <td>Merge Table</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>left : DataFrame</li><li>right : DataFrame</li><li>left_on : string</li><li>right_on : string</li><li>how : string</li><li>args : string</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Merges Two Tables</td>
-        </tr>
-        <tr>
-            <td>Min Table</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Returns the min of the table</td>
-        </tr>
-        <tr>
-            <td>Group By Min Table</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>columns : string</li><li>args : string</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Returns the table with grouped min</td>
-        </tr>
-        <tr>
-            <td>Numpy To Table</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : matrix2D</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Converts numpy to dataframe</td>
-        </tr>
-        <tr>
-            <td>One Hot Encoding</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Reflect the DataFrame over its main diagonal by writing rows as columns and vice-versa</td>
-        </tr>
-        <tr>
-            <td>Random Table</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>rows : int</li><li>columns : int</li><li>seed : numeric</li><li>min_value : double</li><li>max_value : double</li><li>round : int</li><li>alwaysDirty : bool</li><li>delay : double</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Return random table</td>
-        </tr>
-        <tr>
-            <td>Read CSV</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>filename : string</li><li>seperator : string</li><li>index_col : bool</li><li>args : string</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Read CSV file into Panda Table</td>
-        </tr>
-        <tr>
-            <td>Read Excel</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>filename : string</li><li>args : string</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Read Excel into Panda Table</td>
-        </tr>
-        <tr>
-            <td>Sample Table</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>fraction : float</li><li>args : string</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Returns the sampled table</td>
-        </tr>
-        <tr>
-            <td>Table Shape</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li>        </ul></td>
-            <td><ul><li>out : int2</li>        </ul></td>
-            <td>Returns the number of rows and columns</td>
-        </tr>
-        <tr>
-            <td>Sort Columns</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>by : string</li><li>ascending : bool</li><li>args : string</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Sort Columns</td>
-        </tr>
-        <tr>
-            <td>Sort Rows</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>by : string</li><li>ascending : bool</li><li>args : string</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Sort Rows</td>
-        </tr>
-        <tr>
-            <td>STD Table</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Returns the standard deviation of the table</td>
-        </tr>
-        <tr>
-            <td>Group By STD Table</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>columns : string</li><li>args : string</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Returns the table with grouped standard deviations</td>
-        </tr>
-        <tr>
-            <td>String Cell</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>row : int</li><li>column : int</li>        </ul></td>
-            <td><ul><li>out : string</li>        </ul></td>
-            <td>Get string cell value.</td>
-        </tr>
-        <tr>
-            <td>Sum Table</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Returns the sum of the table</td>
-        </tr>
-        <tr>
-            <td>Group By Sum Table</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>columns : string</li><li>args : string</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Returns the table with grouped sums</td>
-        </tr>
-        <tr>
-            <td>Transpose Table</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Reflect the DataFrame over its main diagonal by writing rows as columns and vice-versa</td>
-        </tr>
-        <tr>
-            <td>Value Counts Table</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>subset : string</li><li>dropna : bool</li><li>args : string</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Returns the number of unique rows of the table</td>
-        </tr>
-        <tr>
-            <td>Where Table</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>filter : string</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Returns the table after a query is performed</td>
-        </tr>
-    </table>
+    <p>
+        See the reference section for the full list of <a href="#Datascience">Data Science Tools</a>
+    </p>
 
-    <h3 id="Plots">Plotting Tools</h3>
+    <h3 id="PlotsSection">Plotting</h3>
     <p>
         A number of tools are available to create charts for DataFrames. These tools are all under the <i class="bi bi-bar-chart-fill"> Plot</i> category.
         Each plot tool has parameters placed into two different tabs: Data and Layout.
@@ -1489,101 +926,14 @@
         </tr>
     </table>
 
-    <p>The Plot figures tools are all under the <i class="bi bi-bar-chart-fill"> Plot</i> category. The full list of display tools is as follows:</p><table>
-        <tr>
-            <th>Name</th>
-            <th>Icon</th>
-            <th>Inputs</th>
-            <th>Outputs</th>
-            <th>Description</th>
-        </tr>
-        <tr>
-            <td>Area Plot</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>x : string</li><li>y : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li><li>stacked : bool</li><li>alpha : double</li>        </ul></td>
-            <td><ul><li>out : image2D</li>        </ul></td>
-            <td>Pandas area plot</td>
-        </tr>
-        <tr>
-            <td>Bar Plot</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>x : string</li><li>y : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li><li>stacked : bool</li>        </ul></td>
-            <td><ul><li>out : image2D</li>        </ul></td>
-            <td>Pandas bar plot</td>
-        </tr>
-        <tr>
-            <td>Bar Horizontal Plot</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>x : string</li><li>y : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li><li>stacked : bool</li>        </ul></td>
-            <td><ul><li>out : image2D</li>        </ul></td>
-            <td>Pandas line plot</td>
-        </tr>
-        <tr>
-            <td>Box Plot</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>by : string</li><li>columns : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li><li>vertical : bool</li>        </ul></td>
-            <td><ul><li>out : image2D</li>        </ul></td>
-            <td>Pandas box plot</td>
-        </tr>
-        <tr>
-            <td>Confusion Matrix Plot</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>truth : DataFrame</li><li>predicted : DataFrame</li><li>args : string</li>        </ul></td>
-            <td><ul><li>out : image2D</li>        </ul></td>
-            <td>Plot truth vs prediced</td>
-        </tr>
-        <tr>
-            <td>Density Plot</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li>        </ul></td>
-            <td><ul><li>out : image2D</li>        </ul></td>
-            <td>Pandas density plot</td>
-        </tr>
-        <tr>
-            <td>Hexbin Plot</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>x : string</li><li>y : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li><li>gridsize : int</li>        </ul></td>
-            <td><ul><li>out : image2D</li>        </ul></td>
-            <td>Pandas hexbin plot</td>
-        </tr>
-        <tr>
-            <td>Histogram Plot</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>by : string</li><li>columns : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li><li>stacked : bool</li><li>alpha : double</li><li>bins : int</li><li>cumulative : bool</li><li>horizontal : bool</li>        </ul></td>
-            <td><ul><li>out : image2D</li>        </ul></td>
-            <td>Pandas histogram plot</td>
-        </tr>
-        <tr>
-            <td>Line Plot</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>x : string</li><li>y : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li>        </ul></td>
-            <td><ul><li>out : image2D</li>        </ul></td>
-            <td>Pandas line plot</td>
-        </tr>
-        <tr>
-            <td>Metric Plot</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>truth : DataFrame</li><li>predicted : DataFrame</li><li>args : string</li>        </ul></td>
-            <td><ul><li>out : image2D</li>        </ul></td>
-            <td>Plot truth vs prediced</td>
-        </tr>
-        <tr>
-            <td>Pie Plot</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>x : string</li><li>y : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li>        </ul></td>
-            <td><ul><li>out : image2D</li>        </ul></td>
-            <td>Pandas scatter pechart</td>
-        </tr>
-        <tr>
-            <td>Scatter Plot</td>
-            <td><i class='bi bi-table'></i></td>
-            <td><ul><li>source : DataFrame</li><li>x : string</li><li>y : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li><li>size : string</li><li>color : string</li><li>colormap : string</li>        </ul></td>
-            <td><ul><li>out : image2D</li>        </ul></td>
-            <td>Pandas scatter plot</td>
-        </tr>
-    </table>
+    <p>
+        See the reference section for the full list of <a href="#Plot">Plot Tools</a>
+    </p>
 
-    <h3 id="ML">ML Tools</h3>
+
+
+
+    <h3 id="MLSection">ML</h3>
     <p>
         The Machine Learning filters are based using <a target="_blank" href="https://scikit-learn.org/stable/">scikit-learn</a> Python module
         are all under the <i class="bi bi-lightbulb-fill"> ML</i> category.
@@ -1631,210 +981,16 @@
         and it can be further used to initiate a <a href="#GridSearch">Grid Search</a>.
     </p>
 
+    <p>
+        See the reference section for the full list of <a href="#ML">ML Tools</a>
+    </p>
 
 
-
-    <p>The Machine Learning filters based using scikit-learn tools are all under the <i class="bi bi-lightbulb-fill"> ML</i> category. The full list of display tools is as follows:</p><table>
-        <tr>
-            <th>Name</th>
-            <th>Icon</th>
-            <th>Inputs</th>
-            <th>Outputs</th>
-            <th>Description</th>
-        </tr>
-        <tr>
-            <td>Bernoulli NB Classifier</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>alpha : double</li><li>force_alpha : bool</li><li>binarize : double</li><li>fit_prior : bool</li>        </ul></td>
-            <td><ul><li>out : ML.Model</li>        </ul></td>
-            <td>Bernoulli Naive Bayes Classifier model</td>
-        </tr>
-        <tr>
-            <td>Categorical NB Classifier</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>alpha : double</li><li>force_alpha : bool</li><li>fit_prior : bool</li><li>min_categories : int</li>        </ul></td>
-            <td><ul><li>out : ML.Model</li>        </ul></td>
-            <td>Categorical Naive Bayes Classifier model</td>
-        </tr>
-        <tr>
-            <td>Complement NB Classifier</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>alpha : double</li><li>force_alpha : bool</li><li>fit_prior : bool</li><li>norm : bool</li>        </ul></td>
-            <td><ul><li>out : ML.Model</li>        </ul></td>
-            <td>Complement Naive Bayes Classifier model</td>
-        </tr>
-        <tr>
-            <td>Gaussian NB Classifier</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>var_smoothing : double</li>        </ul></td>
-            <td><ul><li>out : ML.Model</li>        </ul></td>
-            <td>Gaussian Naive Bayes Classifier model</td>
-        </tr>
-        <tr>
-            <td>Gaussian Process Classifier</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>optimizer : bool</li><li>n_restarts_optimizer : int</li><li>max_iter_predict : int</li><li>warm_start : bool</li><li>random_state : int</li>        </ul></td>
-            <td><ul><li>out : ML.Model</li>        </ul></td>
-            <td>Gaussian Process Classifier model</td>
-        </tr>
-        <tr>
-            <td>Gaussian Process Regressor</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>alpha : double</li><li>optimizer : bool</li><li>n_restarts_optimizer : int</li><li>normalize_y : bool</li><li>random_state : int</li>        </ul></td>
-            <td><ul><li>out : ML.Model</li>        </ul></td>
-            <td>Gaussian Process Regressor model</td>
-        </tr>
-        <tr>
-            <td>KNeighbors Classifier</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>n_neighbors : int</li><li>weights : bool</li><li>algorithm : string</li><li>leaf_size : int</li><li>p : double</li><li>metric : string</li>        </ul></td>
-            <td><ul><li>out : ML.Model</li>        </ul></td>
-            <td>KNeighbors Classifier model</td>
-        </tr>
-        <tr>
-            <td>KNeighbors Regressor</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>n_neighbors : int</li><li>weights : bool</li><li>algorithm : string</li><li>leaf_size : int</li><li>p : double</li><li>metric : string</li>        </ul></td>
-            <td><ul><li>out : ML.Model</li>        </ul></td>
-            <td>KNeighbors Regressor model</td>
-        </tr>
-        <tr>
-            <td>Lasso Regressor</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>alpha : double</li><li>fit_intercept : bool</li><li>precompute : bool</li><li>max_iter : int</li><li>tol : double</li><li>warm_start : bool</li><li>positive : bool</li><li>random_state : int</li><li>selection : bool</li>        </ul></td>
-            <td><ul><li>out : ML.Model</li>        </ul></td>
-            <td>Lasso model</td>
-        </tr>
-        <tr>
-            <td>Linear Regression</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>fit_intercept : bool</li><li>positive : bool</li>        </ul></td>
-            <td><ul><li>out : ML.Model</li>        </ul></td>
-            <td>Linear regression model</td>
-        </tr>
-        <tr>
-            <td>Linear SVC Model</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>penalty : string</li><li>loss : string</li><li>tol : double</li><li>C : double</li><li>multi_class : string</li><li>fit_intercept : bool</li><li>intercept_scaling : double</li><li>random_state : int</li><li>max_iter : int</li>        </ul></td>
-            <td><ul><li>out : ML.Model</li>        </ul></td>
-            <td>Linear Support Vector Classifier model</td>
-        </tr>
-        <tr>
-            <td>Logistic Regression</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>penalty : string</li><li>solver : string</li><li>max_iter : int</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li>        </ul></td>
-            <td><ul><li>out : ML.Model</li>        </ul></td>
-            <td>Logistic regression model</td>
-        </tr>
-        <tr>
-            <td>MSE</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>truth : DataFrame</li><li>predicted : DataFrame</li>        </ul></td>
-            <td><ul><li>out : double</li>        </ul></td>
-            <td>Calculates Mean Square Error</td>
-        </tr>
-        <tr>
-            <td>MLP Neural Network</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>activation : string</li><li>solver : string</li><li>alpha : double</li><li>learning_rate : string</li><li>learning_rate_init : double</li><li>power_t : double</li><li>max_iter : int</li><li>shuffle : bool</li><li>random_state : int</li><li>tol : double</li><li>warm_start : bool</li><li>momentum : double</li><li>nesterovs_momentum : bool</li><li>early_stopping : bool</li><li>validation_fraction : double</li><li>beta_1 : double</li><li>beta_2 : double</li><li>epsilon : double</li>        </ul></td>
-            <td><ul><li>out : ML.Model</li>        </ul></td>
-            <td>Neural Network MLP Classifier model</td>
-        </tr>
-        <tr>
-            <td>Load ML Model</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>filename : string</li><li>trigger : int</li>        </ul></td>
-            <td><ul><li>out : ML.Model</li>        </ul></td>
-            <td>Load a ML model from a designated file</td>
-        </tr>
-        <tr>
-            <td>Model Predict</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>source : DataFrame</li><li>model : ML.Model</li><li>X : string</li>        </ul></td>
-            <td><ul><li>out : DataFrame</li>        </ul></td>
-            <td>Predicts test data using model</td>
-        </tr>
-        <tr>
-            <td>Save ML Model</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>source : ML.Model</li><li>filename : string</li><li>trigger : int</li>        </ul></td>
-            <td><ul>        </ul></td>
-            <td>Save a ML model to a designated file</td>
-        </tr>
-        <tr>
-            <td>Multinomial NB Classifier</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>alpha : double</li><li>force_alpha : bool</li><li>fit_prior : bool</li>        </ul></td>
-            <td><ul><li>out : ML.Model</li>        </ul></td>
-            <td>The multinomial Naive Bayes classifier is suitable for classification with discrete features (e.g., word counts for text classification).</td>
-        </tr>
-        <tr>
-            <td>Nearest Centroid</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>metric : string</li><li>shrink_threshold : double</li>        </ul></td>
-            <td><ul><li>out : ML.Model</li>        </ul></td>
-            <td>Nearest Centroid Classifier model</td>
-        </tr>
-        <tr>
-            <td>R2 Score</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>truth : DataFrame</li><li>predicted : DataFrame</li>        </ul></td>
-            <td><ul><li>out : double</li>        </ul></td>
-            <td>Calculates R2 Score</td>
-        </tr>
-        <tr>
-            <td>Random Forest Model</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>n_estimators : int</li><li>criterion : string</li><li>max_depth : int</li><li>min_samples_split : double</li><li>min_samples_leaf : double</li><li>min_weight_fraction_leaf : double</li><li>max_features : string</li><li>max_leaf_nodes : int</li><li>min_impurity_decrease : double</li><li>bootstrap : bool</li><li>oob_score : bool</li><li>random_state : int</li><li>warm_start : bool</li><li>ccp_alpha : double</li><li>max_samples : double</li>        </ul></td>
-            <td><ul><li>out : ML.Model</li>        </ul></td>
-            <td>Random Forest Classifier model</td>
-        </tr>
-        <tr>
-            <td>Ridge Classifier</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>alpha : double</li><li>fit_intercept : bool</li><li>max_iter : int</li><li>tol : double</li><li>solver : string</li><li>positive : bool</li><li>random_state : int</li>        </ul></td>
-            <td><ul><li>out : ML.Model</li>        </ul></td>
-            <td>Ridge Classifier model</td>
-        </tr>
-        <tr>
-            <td>Ridge Regressor</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>alpha : double</li><li>fit_intercept : bool</li><li>max_iter : int</li><li>tol : double</li><li>solver : string</li><li>positive : bool</li><li>random_state : int</li>        </ul></td>
-            <td><ul><li>out : ML.Model</li>        </ul></td>
-            <td>Ridge Regressor model</td>
-        </tr>
-        <tr>
-            <td>SGD Classifier</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>loss : string</li><li>penalty : string</li><li>alpha : double</li><li>l1_ratio : double</li><li>fit_intercept : bool</li><li>max_iter : int</li><li>tol : double</li><li>shuffle : bool</li><li>epsilon : double</li><li>random_state : int</li><li>learning_rate : string</li><li>eta0 : double</li><li>power_t : double</li><li>early_stopping : bool</li><li>validation_fraction : double</li><li>n_iter_no_change : int</li><li>warm_start : bool</li><li>average : int</li>        </ul></td>
-            <td><ul><li>out : ML.Model</li>        </ul></td>
-            <td>Stochastic Gradient Descent Classifier model</td>
-        </tr>
-        <tr>
-            <td>SGD Regressor</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>loss : string</li><li>penalty : string</li><li>alpha : double</li><li>l1_ratio : double</li><li>fit_intercept : bool</li><li>max_iter : int</li><li>tol : double</li><li>shuffle : bool</li><li>epsilon : double</li><li>random_state : int</li><li>learning_rate : string</li><li>eta0 : double</li><li>power_t : double</li><li>early_stopping : bool</li><li>validation_fraction : double</li><li>n_iter_no_change : int</li><li>warm_start : bool</li><li>average : int</li>        </ul></td>
-            <td><ul><li>out : ML.Model</li>        </ul></td>
-            <td>Stochastic Gradient Descent Regressor model</td>
-        </tr>
-        <tr>
-            <td>SVC Model</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>C : double</li><li>kernel : string</li><li>degree : int</li><li>gamma : string</li><li>coef0 : double</li><li>shrinking : bool</li><li>probability : bool</li><li>tol : double</li><li>cache_size : double</li><li>max_iter : int</li><li>decision_function_shape : string</li><li>break_ties : bool</li><li>random_state : int</li>        </ul></td>
-            <td><ul><li>out : ML.Model</li>        </ul></td>
-            <td>Support Vector Classifier model</td>
-        </tr>
-        <tr>
-            <td>Train Test Split</td>
-            <td><i class='bi bi-lightbulb-fill'></i></td>
-            <td><ul><li>source : DataFrame</li><li>test_size : double</li>        </ul></td>
-            <td><ul><li>train : DataFrame</li><li>test : DataFrame</li>        </ul></td>
-            <td>Returns train test split.</td>
-        </tr>
-    </table>
 
 
     <!-- START OF AUTO GENERATED DOCS  -->
+
+
 
 
 
@@ -2682,6 +1838,302 @@
             <td><ul><li>srcA : image2D</li><li>srcB : image2D</li><li>mask : image2D</li>        </ul></td>
             <td><ul><li>out : image2D</li>        </ul></td>
             <td>Bitwise XOR Operations on Two Images</td>
+        </tr>
+    </table>
+    <h3 id='Datascience'>Datascience</h3><p>The Datascience filters tools are all under the <i class="bi bi-table"> Datascience</i> category. The full list of display tools is as follows:</p><table>
+        <tr>
+            <th>Name</th>
+            <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Bool Cell</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>row : int</li><li>column : int</li>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>Get bool cell value.</td>
+        </tr>
+        <tr>
+            <td>Columns</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>columns : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Returns a subset of columns</td>
+        </tr>
+        <tr>
+            <td>Columns Table</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Returns the columns of the table</td>
+        </tr>
+        <tr>
+            <td>Count Table</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Returns the count of the table</td>
+        </tr>
+        <tr>
+            <td>Group By Count Table</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>columns : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Returns the table with grouped count</td>
+        </tr>
+        <tr>
+            <td>Double Cell</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>row : int</li><li>column : int</li>        </ul></td>
+            <td><ul><li>out : double</li>        </ul></td>
+            <td>Get double cell value.</td>
+        </tr>
+        <tr>
+            <td>Drop Columns Table</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>drop : string</li><li>index_col : bool</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Returns the table with some columns dropped</td>
+        </tr>
+        <tr>
+            <td>Drop Nan Columns</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Drop any columns with Not a Number</td>
+        </tr>
+        <tr>
+            <td>Drop Nan Rows</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Drop any rows with Not a Number</td>
+        </tr>
+        <tr>
+            <td>Drop Rows Table</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>drop : string</li><li>index_col : bool</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Returns the table with some rows dropped</td>
+        </tr>
+        <tr>
+            <td>Fill Nan Columns</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>value : string</li><li>index_col : bool</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Fill any columns with Not a Number</td>
+        </tr>
+        <tr>
+            <td>Fill Nan Rows</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>value : string</li><li>index_col : bool</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Fills any rows with Not a Number</td>
+        </tr>
+        <tr>
+            <td>Index Location Table</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>row : string</li><li>column : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Integer-location based indexing for selection by position.</td>
+        </tr>
+        <tr>
+            <td>Int Cell</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>row : int</li><li>column : int</li>        </ul></td>
+            <td><ul><li>out : int</li>        </ul></td>
+            <td>Get int cell value.</td>
+        </tr>
+        <tr>
+            <td>Join Table</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>other : DataFrame</li><li>on : string</li><li>how : string</li><li>lsuffix : string</li><li>rsuffix : string</li><li>sort : bool</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Join Two Tables</td>
+        </tr>
+        <tr>
+            <td>Export Matrix2D</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : matrix2D</li><li>directory : string</li><li>filename : string</li><li>seperator : string</li><li>index_col : bool</li><li>header : bool</li><li>args : string</li><li>trigger : int</li><li>columns : string</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Exports CSV file from Matrix2D</td>
+        </tr>
+        <tr>
+            <td>Max Table</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Returns the max of the table</td>
+        </tr>
+        <tr>
+            <td>Group By Max Table</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>columns : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Returns the table with grouped max</td>
+        </tr>
+        <tr>
+            <td>Mean Table</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Returns the mean of the table</td>
+        </tr>
+        <tr>
+            <td>Group By Mean Table</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>columns : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Returns the table with grouped mean</td>
+        </tr>
+        <tr>
+            <td>Merge Table</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>left : DataFrame</li><li>right : DataFrame</li><li>left_on : string</li><li>right_on : string</li><li>how : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Merges Two Tables</td>
+        </tr>
+        <tr>
+            <td>Min Table</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Returns the min of the table</td>
+        </tr>
+        <tr>
+            <td>Group By Min Table</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>columns : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Returns the table with grouped min</td>
+        </tr>
+        <tr>
+            <td>Numpy To Table</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : matrix2D</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Converts numpy to dataframe</td>
+        </tr>
+        <tr>
+            <td>One Hot Encoding</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Reflect the DataFrame over its main diagonal by writing rows as columns and vice-versa</td>
+        </tr>
+        <tr>
+            <td>Random Table</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>rows : int</li><li>columns : int</li><li>seed : numeric</li><li>min_value : double</li><li>max_value : double</li><li>round : int</li><li>alwaysDirty : bool</li><li>delay : double</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Return random table</td>
+        </tr>
+        <tr>
+            <td>Read CSV</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>filename : string</li><li>seperator : string</li><li>index_col : bool</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Read CSV file into Panda Table</td>
+        </tr>
+        <tr>
+            <td>Read Excel</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>filename : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Read Excel into Panda Table</td>
+        </tr>
+        <tr>
+            <td>Sample Table</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>fraction : float</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Returns the sampled table</td>
+        </tr>
+        <tr>
+            <td>Table Shape</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li>        </ul></td>
+            <td><ul><li>out : int2</li>        </ul></td>
+            <td>Returns the number of rows and columns</td>
+        </tr>
+        <tr>
+            <td>Sort Columns</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>by : string</li><li>ascending : bool</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Sort Columns</td>
+        </tr>
+        <tr>
+            <td>Sort Rows</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>by : string</li><li>ascending : bool</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Sort Rows</td>
+        </tr>
+        <tr>
+            <td>STD Table</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Returns the standard deviation of the table</td>
+        </tr>
+        <tr>
+            <td>Group By STD Table</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>columns : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Returns the table with grouped standard deviations</td>
+        </tr>
+        <tr>
+            <td>String Cell</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>row : int</li><li>column : int</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>Get string cell value.</td>
+        </tr>
+        <tr>
+            <td>Sum Table</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Returns the sum of the table</td>
+        </tr>
+        <tr>
+            <td>Group By Sum Table</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>columns : string</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Returns the table with grouped sums</td>
+        </tr>
+        <tr>
+            <td>Export CSV</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>directory : string</li><li>filename : string</li><li>seperator : string</li><li>index_col : bool</li><li>header : bool</li><li>args : string</li><li>trigger : int</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Exports CSV file from Panda Table</td>
+        </tr>
+        <tr>
+            <td>Transpose Table</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Reflect the DataFrame over its main diagonal by writing rows as columns and vice-versa</td>
+        </tr>
+        <tr>
+            <td>Value Counts Table</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>subset : string</li><li>dropna : bool</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Returns the number of unique rows of the table</td>
+        </tr>
+        <tr>
+            <td>Where Table</td>
+            <td><i class='bi bi-table'></i></td>
+            <td><ul><li>source : DataFrame</li><li>filter : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Returns the table after a query is performed</td>
         </tr>
     </table>
     <h3 id='Experimental'>Experimental</h3><p>The Experimental Tools tools are all under the <i class="bi bi-cone"> Experimental</i> category. The full list of display tools is as follows:</p><table>
@@ -3783,6 +3235,311 @@
             <td>Transposes a matrix</td>
         </tr>
     </table>
+    <h3 id='ML'>ML</h3><p>The Machine Learning filters based using scikit-learn tools are all under the <i class="bi bi-lightbulb-fill"> ML</i> category. The full list of display tools is as follows:</p><table>
+        <tr>
+            <th>Name</th>
+            <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Bernoulli NB Classifier</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>alpha : double</li><li>force_alpha : bool</li><li>binarize : double</li><li>fit_prior : bool</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Bernoulli Naive Bayes Classifier model</td>
+        </tr>
+        <tr>
+            <td>Categorical NB Classifier</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>alpha : double</li><li>force_alpha : bool</li><li>fit_prior : bool</li><li>min_categories : int</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Categorical Naive Bayes Classifier model</td>
+        </tr>
+        <tr>
+            <td>Complement NB Classifier</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>alpha : double</li><li>force_alpha : bool</li><li>fit_prior : bool</li><li>norm : bool</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Complement Naive Bayes Classifier model</td>
+        </tr>
+        <tr>
+            <td>Gaussian NB Classifier</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>var_smoothing : double</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Gaussian Naive Bayes Classifier model</td>
+        </tr>
+        <tr>
+            <td>Gaussian Process Classifier</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>optimizer : bool</li><li>n_restarts_optimizer : int</li><li>max_iter_predict : int</li><li>warm_start : bool</li><li>random_state : int</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Gaussian Process Classifier model</td>
+        </tr>
+        <tr>
+            <td>Gaussian Process Regressor</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>alpha : double</li><li>optimizer : bool</li><li>n_restarts_optimizer : int</li><li>normalize_y : bool</li><li>random_state : int</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Gaussian Process Regressor model</td>
+        </tr>
+        <tr>
+            <td>KNeighbors Classifier</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>n_neighbors : int</li><li>weights : bool</li><li>algorithm : string</li><li>leaf_size : int</li><li>p : double</li><li>metric : string</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>KNeighbors Classifier model</td>
+        </tr>
+        <tr>
+            <td>KNeighbors Regressor</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>n_neighbors : int</li><li>weights : bool</li><li>algorithm : string</li><li>leaf_size : int</li><li>p : double</li><li>metric : string</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>KNeighbors Regressor model</td>
+        </tr>
+        <tr>
+            <td>Lasso Regressor</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>alpha : double</li><li>fit_intercept : bool</li><li>precompute : bool</li><li>max_iter : int</li><li>tol : double</li><li>warm_start : bool</li><li>positive : bool</li><li>random_state : int</li><li>selection : bool</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Lasso model</td>
+        </tr>
+        <tr>
+            <td>Linear Regression</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>fit_intercept : bool</li><li>positive : bool</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Linear regression model</td>
+        </tr>
+        <tr>
+            <td>Linear SVC Model</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>penalty : string</li><li>loss : string</li><li>tol : double</li><li>C : double</li><li>multi_class : string</li><li>fit_intercept : bool</li><li>intercept_scaling : double</li><li>random_state : int</li><li>max_iter : int</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Linear Support Vector Classifier model</td>
+        </tr>
+        <tr>
+            <td>Logistic Regression</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>penalty : string</li><li>solver : string</li><li>max_iter : int</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Logistic regression model</td>
+        </tr>
+        <tr>
+            <td>MSE</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>truth : DataFrame</li><li>predicted : DataFrame</li>        </ul></td>
+            <td><ul><li>out : double</li>        </ul></td>
+            <td>Calculates Mean Square Error</td>
+        </tr>
+        <tr>
+            <td>MLP Neural Network</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>activation : string</li><li>solver : string</li><li>alpha : double</li><li>learning_rate : string</li><li>learning_rate_init : double</li><li>power_t : double</li><li>max_iter : int</li><li>shuffle : bool</li><li>random_state : int</li><li>tol : double</li><li>warm_start : bool</li><li>momentum : double</li><li>nesterovs_momentum : bool</li><li>early_stopping : bool</li><li>validation_fraction : double</li><li>beta_1 : double</li><li>beta_2 : double</li><li>epsilon : double</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Neural Network MLP Classifier model</td>
+        </tr>
+        <tr>
+            <td>Load ML Model</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>filename : string</li><li>trigger : int</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Load a ML model from a designated file</td>
+        </tr>
+        <tr>
+            <td>Model Predict</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>model : ML.Model</li><li>X : string</li>        </ul></td>
+            <td><ul><li>out : DataFrame</li>        </ul></td>
+            <td>Predicts test data using model</td>
+        </tr>
+        <tr>
+            <td>Save ML Model</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : ML.Model</li><li>filename : string</li><li>trigger : int</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Save a ML model to a designated file</td>
+        </tr>
+        <tr>
+            <td>Multinomial NB Classifier</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>alpha : double</li><li>force_alpha : bool</li><li>fit_prior : bool</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>The multinomial Naive Bayes classifier is suitable for classification with discrete features (e.g., word counts for text classification).</td>
+        </tr>
+        <tr>
+            <td>Nearest Centroid</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>metric : string</li><li>shrink_threshold : double</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Nearest Centroid Classifier model</td>
+        </tr>
+        <tr>
+            <td>R2 Score</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>truth : DataFrame</li><li>predicted : DataFrame</li>        </ul></td>
+            <td><ul><li>out : double</li>        </ul></td>
+            <td>Calculates R2 Score</td>
+        </tr>
+        <tr>
+            <td>Random Forest Model</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>n_estimators : int</li><li>criterion : string</li><li>max_depth : int</li><li>min_samples_split : double</li><li>min_samples_leaf : double</li><li>min_weight_fraction_leaf : double</li><li>max_features : string</li><li>max_leaf_nodes : int</li><li>min_impurity_decrease : double</li><li>bootstrap : bool</li><li>oob_score : bool</li><li>random_state : int</li><li>warm_start : bool</li><li>ccp_alpha : double</li><li>max_samples : double</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Random Forest Classifier model</td>
+        </tr>
+        <tr>
+            <td>Ridge Classifier</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>alpha : double</li><li>fit_intercept : bool</li><li>max_iter : int</li><li>tol : double</li><li>solver : string</li><li>positive : bool</li><li>random_state : int</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Ridge Classifier model</td>
+        </tr>
+        <tr>
+            <td>Ridge Regressor</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>alpha : double</li><li>fit_intercept : bool</li><li>max_iter : int</li><li>tol : double</li><li>solver : string</li><li>positive : bool</li><li>random_state : int</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Ridge Regressor model</td>
+        </tr>
+        <tr>
+            <td>SGD Classifier</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>loss : string</li><li>penalty : string</li><li>alpha : double</li><li>l1_ratio : double</li><li>fit_intercept : bool</li><li>max_iter : int</li><li>tol : double</li><li>shuffle : bool</li><li>epsilon : double</li><li>random_state : int</li><li>learning_rate : string</li><li>eta0 : double</li><li>power_t : double</li><li>early_stopping : bool</li><li>validation_fraction : double</li><li>n_iter_no_change : int</li><li>warm_start : bool</li><li>average : int</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Stochastic Gradient Descent Classifier model</td>
+        </tr>
+        <tr>
+            <td>SGD Regressor</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>loss : string</li><li>penalty : string</li><li>alpha : double</li><li>l1_ratio : double</li><li>fit_intercept : bool</li><li>max_iter : int</li><li>tol : double</li><li>shuffle : bool</li><li>epsilon : double</li><li>random_state : int</li><li>learning_rate : string</li><li>eta0 : double</li><li>power_t : double</li><li>early_stopping : bool</li><li>validation_fraction : double</li><li>n_iter_no_change : int</li><li>warm_start : bool</li><li>average : int</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Stochastic Gradient Descent Regressor model</td>
+        </tr>
+        <tr>
+            <td>SVC Model</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>C : double</li><li>kernel : string</li><li>degree : int</li><li>gamma : string</li><li>coef0 : double</li><li>shrinking : bool</li><li>probability : bool</li><li>tol : double</li><li>cache_size : double</li><li>max_iter : int</li><li>decision_function_shape : string</li><li>break_ties : bool</li><li>random_state : int</li>        </ul></td>
+            <td><ul><li>out : ML.Model</li>        </ul></td>
+            <td>Support Vector Classifier model</td>
+        </tr>
+        <tr>
+            <td>Train Test Split</td>
+            <td><i class='bi bi-lightbulb-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>test_size : double</li>        </ul></td>
+            <td><ul><li>train : DataFrame</li><li>test : DataFrame</li>        </ul></td>
+            <td>Returns train test split.</td>
+        </tr>
+    </table>
+    <h3 id='Outputs'>Outputs</h3><p>The Display tools that allow you to visualize directly in the flowgraph tools are all under the <i class="bi bi-display"> Outputs</i> category. The full list of display tools is as follows:</p><table>
+        <tr>
+            <th>Name</th>
+            <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Bool Display</td>
+            <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : bool</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Show Bool</td>
+        </tr>
+        <tr>
+            <td>Color Display</td>
+            <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : color</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Show Color</td>
+        </tr>
+        <tr>
+            <td>DataFrame Display</td>
+            <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : DataFrame</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>DataFrame Viewer</td>
+        </tr>
+        <tr>
+            <td>Double2 Display</td>
+            <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : double2</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Show Double2</td>
+        </tr>
+        <tr>
+            <td>Double Display</td>
+            <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : double</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Show Double Number</td>
+        </tr>
+        <tr>
+            <td>Fullscreen</td>
+            <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : *2D</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Show Image</td>
+        </tr>
+        <tr>
+            <td>Full Image Display</td>
+            <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : image2D</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Show Full Image</td>
+        </tr>
+        <tr>
+            <td>imshow Display</td>
+            <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : *2D</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>imshow Image Viewer - only displays on the server</td>
+        </tr>
+        <tr>
+            <td>Int2 Display</td>
+            <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : int2</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Show Int2</td>
+        </tr>
+        <tr>
+            <td>Int Display</td>
+            <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : int</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Show Int</td>
+        </tr>
+        <tr>
+            <td>Matrix2D Display</td>
+            <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : matrix2D</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Show Matrix2D</td>
+        </tr>
+        <tr>
+            <td>String Display</td>
+            <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : string</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Show String</td>
+        </tr>
+        <tr>
+            <td>Tensor Display</td>
+            <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : tensor</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Tensor Viewer</td>
+        </tr>
+        <tr>
+            <td>Thumbnail Image Display</td>
+            <td><i class='bi bi-window'></i></td>
+            <td><ul><li>source : *2D</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Show Thumbnail of Image</td>
+        </tr>
+    </table>
     <h3 id='Photron'>Photron</h3><p>The Photron Filters tools are all under the <i class="bi bi-camera-reels-fill"> Photron</i> category. The full list of display tools is as follows:</p><table>
         <tr>
             <th>Name</th>
@@ -3818,6 +3575,99 @@
             <td><ul><li>shutter : int</li><li>calibration : matrix2D</li>        </ul></td>
             <td><ul><li>out : image2D</li>        </ul></td>
             <td>Playback Images from a Photron Highspeed camera</td>
+        </tr>
+    </table>
+    <h3 id='Plot'>Plot</h3><p>The Plot figures tools are all under the <i class="bi bi-bar-chart-fill"> Plot</i> category. The full list of display tools is as follows:</p><table>
+        <tr>
+            <th>Name</th>
+            <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Area Plot</td>
+            <td><i class='bi bi-bar-chart-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>x : string</li><li>y : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li><li>stacked : bool</li><li>alpha : double</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Pandas area plot</td>
+        </tr>
+        <tr>
+            <td>Bar Plot</td>
+            <td><i class='bi bi-bar-chart-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>x : string</li><li>y : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li><li>stacked : bool</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Pandas bar plot</td>
+        </tr>
+        <tr>
+            <td>Bar Horizontal Plot</td>
+            <td><i class='bi bi-bar-chart-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>x : string</li><li>y : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li><li>stacked : bool</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Pandas line plot</td>
+        </tr>
+        <tr>
+            <td>Box Plot</td>
+            <td><i class='bi bi-bar-chart-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>by : string</li><li>columns : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li><li>vertical : bool</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Pandas box plot</td>
+        </tr>
+        <tr>
+            <td>Confusion Matrix Plot</td>
+            <td><i class='bi bi-bar-chart-fill'></i></td>
+            <td><ul><li>truth : DataFrame</li><li>predicted : DataFrame</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Plot truth vs prediced</td>
+        </tr>
+        <tr>
+            <td>Density Plot</td>
+            <td><i class='bi bi-bar-chart-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Pandas density plot</td>
+        </tr>
+        <tr>
+            <td>Hexbin Plot</td>
+            <td><i class='bi bi-bar-chart-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>x : string</li><li>y : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li><li>gridsize : int</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Pandas hexbin plot</td>
+        </tr>
+        <tr>
+            <td>Histogram Plot</td>
+            <td><i class='bi bi-bar-chart-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>by : string</li><li>columns : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li><li>stacked : bool</li><li>alpha : double</li><li>bins : int</li><li>cumulative : bool</li><li>horizontal : bool</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Pandas histogram plot</td>
+        </tr>
+        <tr>
+            <td>Line Plot</td>
+            <td><i class='bi bi-bar-chart-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>x : string</li><li>y : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Pandas line plot</td>
+        </tr>
+        <tr>
+            <td>Metric Plot</td>
+            <td><i class='bi bi-bar-chart-fill'></i></td>
+            <td><ul><li>truth : DataFrame</li><li>predicted : DataFrame</li><li>args : string</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Plot truth vs prediced</td>
+        </tr>
+        <tr>
+            <td>Pie Plot</td>
+            <td><i class='bi bi-bar-chart-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>x : string</li><li>y : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Pandas scatter pechart</td>
+        </tr>
+        <tr>
+            <td>Scatter Plot</td>
+            <td><i class='bi bi-bar-chart-fill'></i></td>
+            <td><ul><li>source : DataFrame</li><li>x : string</li><li>y : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li><li>size : string</li><li>color : string</li><li>colormap : string</li>        </ul></td>
+            <td><ul><li>out : image2D</li>        </ul></td>
+            <td>Pandas scatter plot</td>
         </tr>
     </table>
     <h3 id='Pytorch'>Pytorch</h3><p>The Pytorch functions tools are all under the <i class="bi bi-fire"> Pytorch</i> category. The full list of display tools is as follows:</p><table>
@@ -5120,6 +4970,202 @@
             <td>Set X and Y to create Int2</td>
         </tr>
     </table>
+    <h3 id='Widgets'>Widgets</h3><p>The User Interface Widgets tools are all under the <i class="bi bi-sliders"> Widgets</i> category. The full list of display tools is as follows:</p><table>
+        <tr>
+            <th>Name</th>
+            <th>Icon</th>
+            <th>Inputs</th>
+            <th>Outputs</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Widget Note</td>
+            <td><i class='bi bi-info-square'></i></td>
+            <td><ul><li>note : string</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>Pin a note</td>
+        </tr>
+        <tr>
+            <td>Widget Bool Trigger</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>event : int</li><li>name : string</li><li>description : string</li><li>period : int</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>A widget to triggers a perodic burst to represents bool types</td>
+        </tr>
+        <tr>
+            <td>Widget Checkbox</td>
+            <td><i class='bi bi-card-text'></i></td>
+            <td><ul><li>value : bool</li><li>name : string</li><li>description : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : bool</li>        </ul></td>
+            <td>A checkbox widget that represents bool types</td>
+        </tr>
+        <tr>
+            <td>Widget Color</td>
+            <td><i class='bi bi-eyedropper'></i></td>
+            <td><ul><li>value : color</li><li>name : string</li><li>description : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : color</li>        </ul></td>
+            <td>A color dialog widget that represents color types</td>
+        </tr>
+        <tr>
+            <td>Widget Curve</td>
+            <td><i class='bi bi-bezier2'></i></td>
+            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>A curve widget that represents bezier curve types</td>
+        </tr>
+        <tr>
+            <td>Widget Double2 Slider</td>
+            <td><i class='bi bi-sliders'></i></td>
+            <td><ul><li>value : double2</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : double2</li>        </ul></td>
+            <td>Two slider widgets that represents double2 types</td>
+        </tr>
+        <tr>
+            <td>Widget Double2 Textfield</td>
+            <td><i class='bi bi-cursor-text'></i></td>
+            <td><ul><li>value : double2</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : double2</li>        </ul></td>
+            <td>Two textfield widgets that represents double types</td>
+        </tr>
+        <tr>
+            <td>Widget Double Slider</td>
+            <td><i class='bi bi-sliders'></i></td>
+            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : double</li>        </ul></td>
+            <td>A slider widget that represents double types</td>
+        </tr>
+        <tr>
+            <td>Widget Double Textfield</td>
+            <td><i class='bi bi-input-cursor-text'></i></td>
+            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : double</li>        </ul></td>
+            <td>A textfield widget that represents double types</td>
+        </tr>
+        <tr>
+            <td>Widget Filebrowser</td>
+            <td><i class='bi bi-folder-fill'></i></td>
+            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>filters : filters</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>A filebrowser widget that represents string types</td>
+        </tr>
+        <tr>
+            <td>Widget Int2 Slider</td>
+            <td><i class='bi bi-sliders'></i></td>
+            <td><ul><li>value : int2</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : int2</li>        </ul></td>
+            <td>Two slider widget that represents int2 types</td>
+        </tr>
+        <tr>
+            <td>Widget Int2 Textfield</td>
+            <td><i class='bi bi-cursor-text'></i></td>
+            <td><ul><li>value : int2</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : int2</li>        </ul></td>
+            <td>A slider textfield that represents int types</td>
+        </tr>
+        <tr>
+            <td>Widget Int Slider</td>
+            <td><i class='bi bi-sliders'></i></td>
+            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : double</li>        </ul></td>
+            <td>A slider widget that represents int types</td>
+        </tr>
+        <tr>
+            <td>Widget Int Textfield</td>
+            <td><i class='bi bi-input-cursor-text'></i></td>
+            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : int</li>        </ul></td>
+            <td>A textfield widget that represents int types</td>
+        </tr>
+        <tr>
+            <td>Widget Int Trigger</td>
+            <td><i class='bi bi-fire'></i></td>
+            <td><ul><li>event : int</li><li>name : string</li><li>description : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : int</li>        </ul></td>
+            <td>A button widget to triggers a step jump</td>
+        </tr>
+        <tr>
+            <td>Widget Map</td>
+            <td><i class='bi bi-braces'></i></td>
+            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>url : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : map</li>        </ul></td>
+            <td>A widget that represents map types</td>
+        </tr>
+        <tr>
+            <td>Widget Output</td>
+            <td><i class='bi bi-display'></i></td>
+            <td><ul><li>output : *</li><li>name : string</li><li>order : int</li><li>icon : string</li>        </ul></td>
+            <td><ul>        </ul></td>
+            <td>A widget that represent a published output</td>
+        </tr>
+        <tr>
+            <td>Widget Password</td>
+            <td><i class='bi bi-asterisk'></i></td>
+            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>publish : bool</li><li>tab : string</li><li>order : inr</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>A password widget that represents string types</td>
+        </tr>
+        <tr>
+            <td>Widget Path</td>
+            <td><i class='bi bi-bounding-box-circles'></i></td>
+            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>A overlay drawing path widget that represents path types</td>
+        </tr>
+        <tr>
+            <td>Widget Double2 Point</td>
+            <td><i class='bi bi-plus-circle'></i></td>
+            <td><ul><li>value : double2</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : double2</li>        </ul></td>
+            <td>A point widget that represents double2 types</td>
+        </tr>
+        <tr>
+            <td>Widget Int2 Point</td>
+            <td><i class='bi bi-plus-circle'></i></td>
+            <td><ul><li>value : int2</li><li>name : string</li><li>description : string</li><li>min : string</li><li>max : string</li><li>step : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : int2</li>        </ul></td>
+            <td>A point widget that represents int2 types</td>
+        </tr>
+        <tr>
+            <td>Widget Select List</td>
+            <td><i class='bi bi-list'></i></td>
+            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>permitted : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>A multi select widget that represents string types</td>
+        </tr>
+        <tr>
+            <td>Widget Select Menu</td>
+            <td><i class='bi bi-menu-button'></i></td>
+            <td><ul><li>value : int</li><li>name : string</li><li>description : string</li><li>permitted : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : int</li>        </ul></td>
+            <td>A select widget that represents int types</td>
+        </tr>
+        <tr>
+            <td>Widget String Textfield</td>
+            <td><i class='bi bi-card-text'></i></td>
+            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>A textfield widget that represents string types</td>
+        </tr>
+        <tr>
+            <td>Widget Textarea</td>
+            <td><i class='bi bi-body-text'></i></td>
+            <td><ul><li>value : string</li><li>name : string</li><li>description : string</li><li>publish : bool</li><li>tab : string</li><li>order : int</li>        </ul></td>
+            <td><ul><li>out : string</li>        </ul></td>
+            <td>A textarea widget that represents string types</td>
+        </tr>
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -5150,7 +5196,7 @@
 
     <h3 id="GridSearch">Grid Search</h3>
     <p>
-        Once you have created a ML model using the <a href="#ML">ML Tools</a>you have refined your <a href="#Hyperparameters">'Hyperparameters'</a> then you can start a
+        Once you have created a ML model using the <a href="#MLSection">ML Tools</a>you have refined your <a href="#Hyperparameters">'Hyperparameters'</a> then you can start a
         Grid Search on a metric node you wish to maximize or minimize such as the "R2 Score" ML tool.
         Select the metric node and then bring up the context menu and select <a href="#MLNodeNodeMenuFuncs">'Grid Search'</a>:.
     </p>
@@ -5212,10 +5258,10 @@
     <img src="./assets/ui_widgets_publish.jpg" width="70%" />
 
     <p>
-        The Publish feature allows you to simplify your workflow to just a subset of <a href="#Widgets">'Widgets'</a>. The future goal of this feature is to allow you to publish a simple app that has
+        The Publish feature allows you to simplify your workflow to just a subset of <a href="#WidgetsSection">'Widgets'</a>. The future goal of this feature is to allow you to publish a simple app that has
         the critical controls that are needed in the deployment of your workflow in production whilst hiding the complexity of the workflow.
 
-        The first step is to add <a href="#Widgets">'Widgets'</a> on the node inputs you want to publish as well as widget outputs to the node outputs. An example of this
+        The first step is to add <a href="#WidgetsSection">'Widgets'</a> on the node inputs you want to publish as well as widget outputs to the node outputs. An example of this
         is as follows, where a Filebrowser, Selection List and Slider are added to the flowgraph as well as two output view widgets:
 
     </p>
