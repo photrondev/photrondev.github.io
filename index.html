@@ -148,6 +148,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="#Publish">Publish</a></li>
                             <li><a href="#DistributionProcessing">Distributed Processing</a></li>
+                            <li><a href="#PostTriggers">Post Triggers</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -848,9 +849,9 @@
 
     <h3 id="PostTriggers">Post Triggers</h3>
     <p>
-        You can create "Post Triggers" based on when downstream Python nodes have executed and trigger a Python node upstream. This allows you to do "for" loops as
-        the workflow graph is acyclic - meaning no edges can connect a downstream node to an upstream node. However, with this feature you can make a
-        trigger happen upstream when a downstream node is executed. The first step to create a trigger is to select the downstream node you wish to generate the trigger,
+        Post Triggers is an experimental feature that allows you to update a Trigger based on when downstream Python nodes have executed and trigger an upstream Python node. 
+        This allows you to do "for" loops as the workflow graph is acyclic - meaning no edges can connect a downstream node to an upstream node, so loops are not allowed. 
+        However, with this feature you can make a trigger happen upstream when a downstream node is executed. The first step to create a trigger is to select the downstream node you wish to generate the trigger,
         then double click the trigger input port of the upstream node. Then you will select the type of modification you wish for the trigger : increment, decrement
         or reset the trigger. Then, you will select the condition on when the trigger modification will take place: always, &lt;, &le;, &#61;, &ge; or &gt;.
         And finally, the condition value associated with when you wish to make this trigger occur. In the following, we create an increment on the trigger
