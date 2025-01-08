@@ -154,6 +154,7 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Plugin SDK <span class="caret"></span></a>
                         <ul class="dropdown-menu">
+                            <li class=""><a href="#Args">Command line arguments</a></li>
                             <li><a href="#CustomizingTools">Customizing your own Tools</a></li>
                             <li><a href="#JsonSchema">JSON Schema</a></li>
                             <li><a href="#PythonSDK">Python SDK</a></li>
@@ -849,8 +850,8 @@
 
     <h3 id="PostTriggers">Post Triggers</h3>
     <p>
-        Post Triggers is an experimental feature that allows you to update a Trigger based on when downstream Python nodes have executed and trigger an upstream Python node. 
-        This allows you to do "for" loops as the workflow graph is acyclic - meaning no edges can connect a downstream node to an upstream node, so loops are not allowed. 
+        Post Triggers is an experimental feature that allows you to update a Trigger based on when downstream Python nodes have executed and trigger an upstream Python node.
+        This allows you to do "for" loops as the workflow graph is acyclic - meaning no edges can connect a downstream node to an upstream node, so loops are not allowed.
         However, with this feature you can make a trigger happen upstream when a downstream node is executed. The first step to create a trigger is to select the downstream node you wish to generate the trigger,
         then double click the trigger input port of the upstream node. Then you will select the type of modification you wish for the trigger : increment, decrement
         or reset the trigger. Then, you will select the condition on when the trigger modification will take place: always, &lt;, &le;, &#61;, &ge; or &gt;.
@@ -5632,6 +5633,73 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
         Plugins can be implemented in C++ or Python and both will require a JSON file. The JSON Schema specifies the input and output parameters as well
         as the name and description of the plugin amongst other things.
     </p>
+
+    <h3 id="Args">Command line arguments</h3> 
+    
+    <p>
+        You can start INFINIWORKFLOW from the command line and pass in arguments as follows:
+    </p>
+
+    <pre> python app.py [-help] [-device #] [-noncuda] [-batch] [-final node name or node uuid] [-override json] [workflow ....]</pre>
+    
+    <table>
+        <tr>
+            <th>Argument name</th>
+            <th>Description</th>
+            <th>Default Value</th>
+            <th>Example</th>
+        </tr>
+
+        <tr>
+            <td>-device</td>
+            <td>allows you to set the default GPU device used</td>
+            <td></td>
+            <td><pre>python app.py -device 1</pre></td>
+        </tr>
+
+        <tr>
+            <td>-noncuda</td>
+            <td>will switch to the non cuda based rendering</td>
+            <td></td>
+            <td><pre>python app.py -noncuda</pre></td>
+        </tr>
+
+        <tr>
+            <td>-batch</td>
+            <td>batch mode will not show UI</td>
+            <td></td>
+            <td><pre>python app.py -batch</pre></td>
+        </tr>
+
+        <tr>
+            <td>-final</td>
+            <td>if in batch mode you can set the final node that you wish to execute before you exit. Either pass in node name or node uuid</td>
+            <td></td>
+            <td><pre>python app.py -final R2Score</pre></td>
+        </tr>
+
+        <tr>
+            <td>-override</td>
+            <td>a json string that allows you to override attributes in the workflow you pass</td>
+            <td></td>
+            <td><pre>python app.py -final "{'Set Int.value' : '5', 'Set Int1.value' : '11' }"</pre></td>
+        </tr>
+
+        <tr>
+            <td>-help</td>
+            <td>shows a help message</td>
+            <td></td>
+            <td><pre>python app.py -help"</pre></td>
+        </tr>
+
+        <tr>
+            <td>workflow</td>
+            <td>The final argument is the workflow json file</td>
+            <td></td>
+            <td><pre>python app.py ..\demos\Untitled\Untitiled.json"</pre></td>
+        </tr>
+   </table>
+
 
     <h3 id="CustomizingTools">Customizing Your own Tools</h3>
     <p>
