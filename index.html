@@ -5248,8 +5248,9 @@
 
         You can start the distributed rendering by selecting a contiguous set of nodes
         and then using the node context menu and selecting <a href="#ExperimentalNodeMenuFuncs">'Distributed'</a>.
-        This brings up a dialog that allows you to set the URL for the server that will be performing the processing. Once
-        you click Ok then the selected nodes are replaced by two nodes, the Distributed Sink and Distributed Source. The Sink
+        This brings up a dialog that allows you to set the URL for the server as well as the CUDA Device on that system that will be performing the processing. 
+        The default URL is for the same system you are running INFINIWORKFLOW.
+        Once you click Ok then the selected nodes are replaced by two nodes, the Distributed Sink and Distributed Source. The Sink
         node will send data from your system to the distributed server and the Source node will receive data from
         the distributed server.
     </p>
