@@ -127,6 +127,7 @@
                             <li><a href="#Hyperparameters">Hyperparameters</a></li>
                             <li><a href="#Tensors">Tensors</a></li>
                             <li><a href="#CreateMacro">Create Macro</a></li>
+                            <li><a href="#PyTorchTutorial">PyTorch Deep Learning</a></li>
                         </ul>
                     </li>
 
@@ -5240,6 +5241,87 @@
     <img src="./assets/ui_create_macro.gif" />
 
 
+    <h3 id="PyTorchTutorial">PyTorch Deep Learning</h3>
+
+    <p>PyTorch is an open source machine learning framework that is excellent in performing Deep Learning.</p>
+
+    <h4>Tensor Manipulation & Conversion</h4>
+
+    <p>You can find the properties of a tensor by using nodes such as Size, Dimension, Mean, Sum, Standard Deviation, and more. Further, you can combine two or more tensors together via either basic arithmetic (add, subtract, multiply, divide, etc.) or concatenation (concatenate, horizontal stack, vertical stack, etc.).</p>
+
+    <p>Additionally, you can convert tensors to and from DataFrames, NumpyArrays, and Images.</p>
+
+    <h4>Tensor Default Types</h4>
+
+    <img src="./assets/ui_torch_default_type.jpg" />
+
+    <p>In PyTorch, a tensor can be one of many data types. In Infiniworkflow, all tensors are of data type torch.float32 by default (as this is the standard default within PyTorch as well). However, if you wish to change the data type of a tensor, simply drag in a Set Default Type node into the workflow and select one of 4 data types: torch.float32, torch.float64, torch.float16, and torch.bfloat16. This will change the data type of ALL tensors within the workflow. Note that this node doesn’t need to be connected to any other node to work; simply having it somewhere within the workflow is enough.</p>
+
+    <h4>Neural Networks</h4>
+    <p>Neural Networks in Infiniworkflow can be Trained, Tested, and finally exported to a custom AI Inference node or exported to ONNX. The following sections will break down how to create a neural network, along with bringing in custom datasets and creating your own Inference Macros based on the neural nets you create.</p>
+
+    <h4>Neural Networks: Regression, Classification, & Segmentation</h4>
+
+    <img src="./assets/ui_torch_regression.jpg" width="40%" />
+
+    <p>The steps for creating a Neural Network, whether that be for Regression, Classification, or Segmentation, are more or less the same. The following section will describe in detail how to create a Neural Network for Regression, but most all steps can be copied for Classification or Segmentation. Exceptions and differences to note for creating Classification or Segmentation Neural Networks will be detailed at the end of this section.</p>
+
+    <p>To begin regression training (or any kind of training for that matter), we need 4 key inputs: a Neural Network Model, an Optimizer function, a Loss/Criterion Function, and the Data that the model will train on. </p>
+
+    <p>The Sequential node performs two actions behind the scenes. Firstly, it combines all machine learning modules that are provided as inputs (including nodes such as Linear, ReLU, Conv2D, MaxPooling2D, LogSoftmax, etc.) into a PyTorch Sequential container; to adjust the amount of input modules the Sequential node takes in, simply right-click on the Sequential node and click “Add Input” or “Remove Input”. Then, the Sequential node takes the Sequential Container and creates a neural network model out of it, with a base class of torch.nn.Module. The output of the Sequential node will thus be the “model” input of the Regression Train node.</p>
+
+    <p>Several optimizer functions are included in InfiniWorkflow. Most are intuitive (simply set the Neural Network Model as an input, set the Learning Rate and Weight Decay as needed, then set the output of the Optimizer node as an input to Regression Train), but the Per Parameter Optimizer is easy to misunderstand. The Per Parameter Optimizer node only works in tandem with another Optimizer node (such as Adam Optimizer), so make sure to connect the output of Per Parameter Optimizer as an input to the standard Optimizer node.</p>
+
+    <p>Using the Per Parameter Optimizer, specify the individual penalization weights you wish to set for specific parameter groups from your model; note that, if you wanted, you could set an individual penalization weight for each of your model’s parameter groups, but you would need to have a Per Parameter Optimizer node for each of these weights (additionally, you would need to Add Inputs to your standard Optimizer like an Adam Optimizer, and then feed each of your Per Parameter Optimizer nodes into your standard Optimizer). Any parameter groups that are not explicitly specified in any Per Parameter Optimizer nodes will take on the weights specified by the standard Optimizer node.</p>
+
+    <p>The output of the standard Optimizers is a torch.optim. Connect this as an input to the Regression Train node.</p>
+
+    <p> </p>
+
+    <p>Several loss functions are included in InfiniWorkflow. Simply connect the one you would like to use as input to Regression Train.</p>
+
+    <p>In order to perform Regression, you need clean, numerical data. Assuming that your data is viable, set it as the input to the Train Test Split node. This will allow you to split data into Training data and Testing data. Set the Training data as an input to the Regression Train node.</p>
+
+    <p>Edit the Regression Train node and hit the Trigger button to initiate training. You can see the status of the training in real-time by hitting the [Render Status] icon in the application menu. If at any point you want to stop training, simply hit the Abort button within the Render Status Console. If you would like to save the output model once training is complete, click the “save state dict” box to enable saving, and specify where on your local machine you would like the output to be saved to.</p>
+
+    <p>With training complete, you can now begin testing your data, which you can do in 2 main ways. The first way is to have a Regression Test node in the same workflow as your Training, and connect the nodes appropriately. The second way is to use a Load Torch Model node, which you can only do if you saved the training output model to your local machine. Note that if you do want to use the Load Torch Model, you need to hit the Trigger in order to bring the data in from your local machine into Infiniworkflow. Furthermore, if you use this method you can have your training and testing in different workflows entirely. However, you would need to either recreate your model entirely (i.e. the Sequential node and all modules that feed into it in your Training workflow), or alternatively create a Macro on the Sequential node in the Training workflow such that the Macro can then be instantly brought into your Testing workflow (and any other workflow you want).</p>
+
+    <p>Your training and testing is now complete. The same steps can be repeated for performing Classification or Segmentation, with the biggest exception being the way that the datasets for Classification or Segmentation will appear in Infiniworkflow. An example from the CIFAR10 Dataset can be seen below. View and edit the node and set the “train” input to either Train, Test, or Validate (if Validate is an option).</p>
+
+    <img src="./assets/ui_cifar_dataset_gif.gif" />
+
+    <p>Below is an example of a training workflow for a Convolutional Neural Network that performs Classification on the MNIST Dataset. Note the similarities between this and the Regression example seen above, with the principal exception being the number of layers that are fed into the Sequential node.</p>
+
+    <img src="./assets/ui_cifar_workflow.jpg" width="40%" />
+
+    <p>If you wish to create a Convolutional Neural Network (like the one depicted above) but do not want to immediately attempt creating the neural net from scratch, you can use the Convolutional Neural Net node instead to rapidly prototype your desired neural net.</p>
+
+    <img src="./assets/ui_cnn_node.jpg" width="30%" />
+
+    <p>The first three inputs relate to information on the input image data that this CNN will be trained on. The fourth input is how many classes the CNN will be trained to identify. All CNNs are composed of various convolution cycles followed by various fully connected layers. Since this node is meant for rapid prototyping, what is within each of these layers is already set. Each convolution layer is composed of a Convolution 2D, ReLU, and Max Pooling 2D node; each fully connected layer is composed of a Linear and ReLU node, apart from the last fully connected layer, which only has a Linear node. A Flatten node separates the convolution layers from the fully connected layers. Specifications for kernel size can be set in the convolution kernel size and pooling kernel size inputs. The final input is a boolean of whether the CNN ends with a LogSoftmax node at the end. Once again, this node is meant for primitive prototyping, and therefore is not fully robust; each fully connected layer only halves the number of filters until it gets to the desired number of classes the dataset identifies.</p>
+
+    <h4>Datasets In INFINIWORKFLOW</h4>
+
+    <p>A few common datasets are already implemented in Infiniworkflow for classification and segmentation. These include CIFAR10, MNIST, FashionMNIST, and Cityscapes.</p>
+
+    <p>Bringing in custom datasets can be done in one of two ways. The first is via the Generic Dataset node; simply specify the naming convention of your inputs and outputs (X and Y), list all the classes, set the directory of where the dataset is coming from on your local machine, and set a colormap if one exists (for the purpose of segmentation).</p>
+
+    <img src="./assets/ui_generic_dataset_node.jpg" width="30%"/>
+
+    <p>The second (and probably more useful) approach is to create a plugin for your desired dataset. Refer to the <a href="#CustomizingTools">Customizing Tools</a> section on how to do so.</p>
+
+    <h4>Create AI Inference Tools Using Your ML Models</h4>
+
+    <p>Once a model has been trained, users can then take their model and immediately begin using them within Infiniworkflow as a custom node for AI Inference. These nodes are called Inference Tools. (Alternatively, after a model is trained, the model and its weights can be exported to ONNX, a popular machine learning framework, using the Convert To Onnx node.)</p>
+
+    <p>To create an Inference Tool, simply right-click and select “Create Inference Tool” after your model has been trained. NOTE: The “Create Inference Tool” option will only appear under a Training Node (i.e. any node that is capable of training a model) after the model has been trained, not before.</p>
+
+    <p>Fill in the name of your Tool and any notes associated with it, and hit “Ok”. A prompt should inform you that “New tool has been added”, one which you can find in the toolbox alongside your other nodes. This node will now be able to perform AI Inference using the machine learning model you created and trained.</p>
+
+    <img src="./assets/ui_create_inference_tool.gif" />
+
+
+
 
     <h2>Experimental Features</h2>
     <h3 id="DistributionProcessing">Distributed Processing</h3>
@@ -5248,7 +5330,7 @@
 
         You can start the distributed rendering by selecting a contiguous set of nodes
         and then using the node context menu and selecting <a href="#ExperimentalNodeMenuFuncs">'Distributed'</a>.
-        This brings up a dialog that allows you to set the URL for the server as well as the CUDA Device on that system that will be performing the processing. 
+        This brings up a dialog that allows you to set the URL for the server as well as the CUDA Device on that system that will be performing the processing.
         The default URL is for the same system you are running INFINIWORKFLOW.
         Once you click Ok then the selected nodes are replaced by two nodes, the Distributed Sink and Distributed Source. The Sink
         node will send data from your system to the distributed server and the Source node will receive data from
@@ -5635,14 +5717,14 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
         as the name and description of the plugin amongst other things.
     </p>
 
-    <h3 id="Args">Command line arguments</h3> 
-    
+    <h3 id="Args">Command line arguments</h3>
+
     <p>
         You can start INFINIWORKFLOW from the command line and pass in arguments as follows:
     </p>
 
     <pre> python app.py [-help] [-device #] [-noncuda] [-batch] [-final node name or node uuid] [-override json] [workflow ....]</pre>
-    
+
     <table>
         <tr>
             <th>Argument name</th>
@@ -5699,7 +5781,7 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
             <td></td>
             <td><pre>python app.py ..\demos\Untitled\Untitiled.json"</pre></td>
         </tr>
-   </table>
+    </table>
 
 
     <h3 id="CustomizingTools">Customizing Your own Tools</h3>
@@ -5720,6 +5802,9 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
                 This naming scheme tells INFINIWORKFLOW that this is a new tool but its base tool is "cv.color_lift".
                 i.e. what follows the ":" is the base tool. Make sure you do not have any spaces. The prefix can be anything as long as
                 the whole indentifier is unique.
+
+                <pre>"identifier": "red_lift:cv.color_lift",</pre>
+
             </li>
             <li>
                 You can optionally add the category you wish to place it and the icon:
