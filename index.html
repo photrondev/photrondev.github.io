@@ -121,7 +121,8 @@
                         <ul class="dropdown-menu">
                             <li><a href="#DataFrame">Data frames</a></li>
                             <li><a href="#DataScienceSection">Data Science</a></li>
-                            <li><a href="#PlotsSection">Ploting</a></li>
+                            <li><a href="#PlotsSection">Plotting</a></li>
+                            <li><a href="#NumpyArrays">Numpy Arrays</a></li>
                             <li><a href="#MLSection">Machine Learning</a></li>
                             <li><a href="#GridSearch">Grid Search</a></li>
                             <li><a href="#Hyperparameters">Hyperparameters</a></li>
@@ -135,7 +136,6 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Widgets, Displays and Triggers <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#CreatingTriggers">Creating Triggers</a></li>
-                            <li><a href="#PostTriggers">Post Triggers</a></li>
                             <li><a href="#WidgetsSection">Widgets Tools</a></li>
                             <li><a href="#DisplaysSection">Displays Tools</a></li>
                         </ul>
@@ -722,7 +722,7 @@
     </p>
     <img src="./assets/ui_thumbnail_viewer.gif" />
 
-    <p>The viewer as well as displaying images has specific UI to display mutli-dimensional data:</p>
+    <p>The viewer, on top of displaying images, has specific UI to display mutli-dimensional data:</p>
     <ul>
         <li><a href="#DataFrame">Data frames, 2D dimensional tables</a></li>
         <li><a href="#Tensor">Tensors, multidimensional numerical arrays used in ML</a></li>
@@ -738,6 +738,31 @@
     </p>
     <img src="./assets/ui_viewer_dataframe.gif" width="400" />
 
+    <h3 id="NumpyArrays">Numpy Arrays</h3>
+    <p>
+        Numpy represent multidimensional numerical arrays and are implemented using the <a target="_blank" href="https://numpy.org/">Numpy</a> Python module.
+        You can set a matrix using the Set Matrix tool
+        The viewer can display Numpy arrays in a variety of different visualizations where it will select the most useful
+        visualization first and by clicking the <i class="bi bi-arrow-repeat"></i> allows you to visualize other representations of the arrays.
+        Slicing controls are also available to reduce the tensor to a subset of its numerical data.
+    </p>
+    <p>
+        A 1D dimensional array can be randomly generated or set using the Set Matrix tool, with numbers separated by spaces, commas, semicolons, or tabs.
+        It can be viewed as a histogram; a dot plot; a line chart and a histogram chart:
+    </p>
+    <img src="./assets/ui_viewer_numpy1d.gif" width="400" />
+    <p>
+        A 2D dimensional array can be randomly generated or set using the Set Matrix tool, with rows of numbers each separated by spaces, commas, semicolons, or tabs.
+        It can be viewed as a heatmap; a 3D height map plot; a line chart and a table:
+    </p>
+    <img src="./assets/ui_viewer_numpy2d.gif" width="400" />
+    <p>
+        A 2D dimensional array can be randomly generated or set using the Set Matrix tool,
+        with entries separated by commas where each entry can be a number or a list denoted by [].
+        A 3D dimensional tensor can be viewed as a 3D plot and as a list of lists:
+    </p>
+    <img src="./assets/ui_viewer_numpy3d.gif" width="400" />
+
     <h3 id="Tensors">Tensors</h3>
     <p>
         Tensors represent multi-dimensional numerical arrays and are implemented using the <a target="_blank" href="https://pytorch.org/">PyTorch</a> Python module.
@@ -746,15 +771,15 @@
         Slicing controls are also available to reduce the tensor to a subset of its numerical data.
     </p>
     <p>
-        A 1D dimensional tensors can be viewed as a istogram; a dot plot; a line chart and a histogram chart:
+        A 1D dimensional tensor can be viewed as a histogram; a dot plot; a line chart and a histogram chart:
     </p>
     <img src="./assets/ui_viewer_tensor1d.gif" width="400" />
     <p>
-        A 2D dimensional tensors can be viewed as a heatmap; a 3D height map plot; a line chart and a table:
+        A 2D dimensional tensor can be viewed as a heatmap; a 3D height map plot; a line chart and a table:
     </p>
     <img src="./assets/ui_viewer_tensor2d.gif" width="400" />
     <p>
-        A 3D dimensional tensors can be viewed as a 3D plot and abbreviated tensor list:
+        A 3D dimensional tensor can be viewed as a 3D plot and abbreviated tensor list:
     </p>
     <img src="./assets/ui_viewer_tensor3d.gif" width="400" />
     <p>
@@ -5306,7 +5331,7 @@
 
     <p>Bringing in custom datasets can be done in one of two ways. The first is via the Generic Dataset node; simply specify the naming convention of your inputs and outputs (X and Y), list all the classes, set the directory of where the dataset is coming from on your local machine, and set a colormap if one exists (for the purpose of segmentation).</p>
 
-    <img src="./assets/ui_generic_dataset_node.jpg" width="30%"/>
+    <img src="./assets/ui_generic_dataset_node.jpg" width="30%" />
 
     <p>The second (and probably more useful) approach is to create a plugin for your desired dataset. Refer to the <a href="#CustomizingTools">Customizing Tools</a> section on how to do so.</p>
 
