@@ -106,7 +106,7 @@
 <li><a href="#Photron">Photron Tools</a></li>
 <li><a href="#Plot">Plot Tools</a></li>
 <li><a href="#Pytorch">Pytorch Tools</a></li>
-<li><a href="#3D Rendering">3D Rendering Tools</a></li>
+<li><a href="#Rendering">Rendering Tools</a></li>
 <li><a href="#String">String Tools</a></li>
 <li><a href="#Tracking">Tracking Tools</a></li>
 <li><a href="#Transform">Transform Tools</a></li>
@@ -2307,14 +2307,49 @@
         <td><ul><li>Input #1 : bool</li><li>Input #2 : bool</li>        </ul></td>        <td><ul><li>out : bool</li>        </ul></td>        <td>Logical AND operator</td>
     </tr>
     <tr>
-        <td>Conditional Numeric</td>
-        <td><i class='bi bi-question-square-fill'></i></td>
-        <td><ul><li>condition : bool</li><li>trueValue : numeric</li><li>falseValue : numeric</li>        </ul></td>        <td><ul><li>out : numeric</li>        </ul></td>        <td>An 'If' Statement for Numeric Values</td>
+        <td>Conditional Color Operator</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>condition : bool</li><li>True : color</li><li>False : color</li>        </ul></td>        <td><ul><li>out : color</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
     </tr>
     <tr>
-        <td>Conditional String</td>
-        <td><i class='bi bi-question-square-fill'></i></td>
-        <td><ul><li>condition : bool</li><li>trueValue : string</li><li>falseValue : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>An 'If' Statement for String Values</td>
+        <td>Conditional Double2 Operator</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>condition : bool</li><li>True : double2</li><li>False : double2</li>        </ul></td>        <td><ul><li>out : double2</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
+    </tr>
+    <tr>
+        <td>Conditional Double3 Operator</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>condition : bool</li><li>True : double3</li><li>False : double3</li>        </ul></td>        <td><ul><li>out : double3</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
+    </tr>
+    <tr>
+        <td>Conditional Image2D Operator</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>condition : bool</li><li>True : image2D</li><li>False : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
+    </tr>
+    <tr>
+        <td>Conditional Int2 Operator</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>condition : bool</li><li>True : int2</li><li>False : int2</li>        </ul></td>        <td><ul><li>out : int2</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
+    </tr>
+    <tr>
+        <td>Conditional Int3 Operator</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>condition : bool</li><li>True : int3</li><li>False : int3</li>        </ul></td>        <td><ul><li>out : int3</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
+    </tr>
+    <tr>
+        <td>Conditional Matrix Operator</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>condition : bool</li><li>True : matrix2D</li><li>False : matrix2D</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
+    </tr>
+    <tr>
+        <td>Conditional Numeric Operator</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>condition : bool</li><li>True : numeric</li><li>False : numeric</li>        </ul></td>        <td><ul><li>out : numeric</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
+    </tr>
+    <tr>
+        <td>Conditional String Operator</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>condition : bool</li><li>True : string</li><li>False : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
     </tr>
     <tr>
         <td>False</td>
@@ -2667,6 +2702,11 @@
         <td>Equal</td>
         <td><i class='bi bi-grid-3x3'></i></td>
         <td><ul><li>Input #1 : matrix2D</li><li>Input #2 : matrix2D</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Return (x1 == x2) element-wise</td>
+    </tr>
+    <tr>
+        <td>Identity</td>
+        <td><i class='bi bi-grid-3x3'></i></td>
+        <td><ul><li>size : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Return a 2-D array with ones on the diagonal and zeros elsewhere. In other words, an identity matrix of size n</td>
     </tr>
     <tr>
         <td>HStack</td>
@@ -3546,7 +3586,7 @@
     <tr>
         <td>Numpy to Tensor</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>ndarray : numpy</li>        </ul></td>        <td><ul><li>out : tensor</li>        </ul></td>        <td>Converts a Numpy array to a Pytorch tensor.</td>
+        <td><ul><li>numpy : matrix2D</li>        </ul></td>        <td><ul><li>out : tensor</li>        </ul></td>        <td>Converts a Numpy array to a Pytorch tensor.</td>
     </tr>
     <tr>
         <td>Ones</td>
@@ -3631,7 +3671,7 @@
     <tr>
         <td>Tensor to Numpy</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>tensor : tensor</li>        </ul></td>        <td><ul><li>out : ndarray</li>        </ul></td>        <td>Converts a Pytorch tensor to a Numpy array.</td>
+        <td><ul><li>tensor : tensor</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Converts a Pytorch tensor to a Numpy array.</td>
     </tr>
     <tr>
         <td>Transform Compose</td>
@@ -3674,7 +3714,7 @@
         <td><ul><li>size #1 : int</li>        </ul></td>        <td><ul><li>out : tensor</li>        </ul></td>        <td>Returns a tensor filled with the scalar value 0, with the shape defined by the variable argument size.</td>
     </tr>
 </table>
-<h3 id='3D Rendering'>3D Rendering</h3><p>The 3D Rendering functions tools are all under the <i class="bi bi-badge-3d-fill"> 3D Rendering</i> category. The full list of display tools is as follows:</p><table>
+<h3 id='Rendering'>Rendering</h3><p>The 3D Rendering functions tools are all under the <i class="bi bi-badge-3d-fill"> Rendering</i> category. The full list of display tools is as follows:</p><table>
     <tr>
         <th>Name</th>
         <th>Icon</th>
@@ -3685,22 +3725,27 @@
     <tr>
         <td>Create 3DNode</td>
         <td><i class='bi bi-badge-3d-fill'></i></td>
-        <td><ul><li>camera : Camera</li><li>skin : int</li><li>matrix : matrix2d</li><li>mesh : Mesh</li><li>rotation : matrix2d</li><li>scale : matrix2d</li><li>translation : matrix2d</li><li>light : Light</li><li>color : color</li>        </ul></td>        <td><ul><li>3Dnode : 3DNode</li>        </ul></td>        <td>Create a Pyrender 3D Node</td>
+        <td><ul><li>camera : Camera</li><li>skin : int</li><li>matrix : matrix2D</li><li>mesh : Mesh</li><li>rotation : matrix2D</li><li>scale : matrix2D</li><li>translation : matrix2D</li><li>light : Light</li><li>segmentation color : color</li>        </ul></td>        <td><ul><li>3DNode : 3DNode</li>        </ul></td>        <td>Create a Pyrender 3D Node</td>
     </tr>
     <tr>
         <td>Create Perspective Camera</td>
         <td><i class='bi bi-badge-3d-fill'></i></td>
-        <td><ul><li>yfov : double</li><li>znear : double</li><li>zfar : double</li><li>aspect ratio : double</li>        </ul></td>        <td><ul><li>camera : Camera</li>        </ul></td>        <td>Create a Pyrender Perspective Camera.</td>
+        <td><ul><li>yfov : double</li><li>znear : double</li><li>zfar : double</li>        </ul></td>        <td><ul><li>camera : Camera</li>        </ul></td>        <td>Create a Pyrender Perspective Camera.</td>
+    </tr>
+    <tr>
+        <td>Render Scene</td>
+        <td><i class='bi bi-badge-3d-fill'></i></td>
+        <td><ul><li>camera : Camera</li><li>camera pose : matrix2D</li><li>bg_color : color</li><li>ambient_light : color</li><li>dimensions : int2</li><li>node #1 : 3DNode</li>        </ul></td>        <td><ul><li>color : image2D</li><li>depth : matrix2D</li>        </ul></td>        <td>Create a Pyrender Scene with multiple Node inputs.</td>
     </tr>
     <tr>
         <td>Create SpotLight</td>
         <td><i class='bi bi-badge-3d-fill'></i></td>
-        <td><ul><li>color : color</li><li>intensity : double</li><li>range : double</li><li>inner cone angle : double</li><li>outer cone angle : double</li>        </ul></td>        <td><ul><li>light : Light</li>        </ul></td>        <td>Create a Pyrender SpotLight.</td>
+        <td><ul><li>color : color</li><li>intensity : double</li><li>range : double</li><li>inner cone angle : double</li><li>outer cone angle : double</li><li>transformation : matrix2D</li><li>segmentation color : color</li>        </ul></td>        <td><ul><li>light : 3DNode</li>        </ul></td>        <td>Create a Pyrender SpotLight.</td>
     </tr>
     <tr>
         <td>Load Mesh</td>
         <td><i class='bi bi-badge-3d-fill'></i></td>
-        <td><ul><li>trimesh : string</li><li>material : Material</li><li>is visible : bool</li><li>poses : matrix2d</li><li>wireframe : bool</li><li>smooth : bool</li>        </ul></td>        <td><ul><li>mesh : Mesh</li>        </ul></td>        <td>Create a Mesh by loading a Trimesh.</td>
+        <td><ul><li>trimesh : string</li><li>material : Material</li><li>is visible : bool</li><li>poses : matrix2D</li><li>wireframe : bool</li><li>smooth : bool</li><li>transformation : matrix2D</li><li>segmentation color : color</li>        </ul></td>        <td><ul><li>mesh : 3DNode</li>        </ul></td>        <td>Create a Mesh 3DNode by loading a Trimesh.</td>
     </tr>
 </table>
 <h3 id='String'>String</h3><p>The String functions tools are all under the <i class="bi bi-chat-square-quote-fill"> String</i> category. The full list of display tools is as follows:</p><table>
@@ -4026,7 +4071,7 @@
     <tr>
         <td>Send Email</td>
         <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>trigger : int</li><li>recipients : string</li><li>subject : string</li><li>message : string</li><li>matrix attachment #1 : matrix2D</li><li>matrix attachment name #1 : string</li><li>table attachment #1 : DataFrame</li><li>table attachment name #1 : string</li>        </ul></td>        <td><ul><li>success : bool</li>        </ul></td>        <td>Sends an email from the photron test email</td>
+        <td><ul><li>credentials : string</li><li>trigger : int</li><li>recipients : string</li><li>subject : string</li><li>message : string</li><li>matrix : matrix2D</li><li>matrix attachment name : string</li><li>table : DataFrame</li><li>table attachment name : string</li><li>image : image2D</li><li>image attachment name : string</li><li>reset : int</li>        </ul></td>        <td><ul><li>success : bool</li>        </ul></td>        <td>Sends an email from the photron test email</td>
     </tr>
     <tr>
         <td>Sound Trigger</td>
@@ -4263,59 +4308,49 @@
         <td><ul><li>value : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Sets string value</td>
     </tr>
     <tr>
-        <td>Switch Circle</td>
-        <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>switch : int</li><li>Input #0 : matrix2D</li><li>Input #1 : matrix2D</li><li>Input #2 : matrix2D</li><li>Input #3 : matrix2D</li><li>Input #4 : matrix2D</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
-    </tr>
-    <tr>
         <td>Switch Color</td>
         <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>switch : int</li><li>Input #0 : color</li><li>Input #1 : color</li><li>Input #2 : color</li><li>Input #3 : color</li><li>Input #4 : color</li>        </ul></td>        <td><ul><li>out : color</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
-    </tr>
-    <tr>
-        <td>Switch Double3</td>
-        <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>switch : int</li><li>Input #0 : double3</li><li>Input #1 : double3</li><li>Input #2 : double3</li><li>Input #3 : double3</li><li>Input #4 : double3</li>        </ul></td>        <td><ul><li>out : double3</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
-    </tr>
-    <tr>
-        <td>Switch Image2D</td>
-        <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>switch : int</li><li>Input #0 : image2D</li><li>Input #1 : image2D</li><li>Input #2 : image2D</li><li>Input #3 : image2D</li><li>Input #4 : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
-    </tr>
-    <tr>
-        <td>Switch Int3</td>
-        <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>switch : int</li><li>Input #0 : int3</li><li>Input #1 : int3</li><li>Input #2 : int3</li><li>Input #3 : int3</li><li>Input #4 : int3</li>        </ul></td>        <td><ul><li>out : int3</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
-    </tr>
-    <tr>
-        <td>Switch Numeric</td>
-        <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>switch : int</li><li>Input #0 : numeric</li><li>Input #1 : numeric</li><li>Input #2 : numeric</li><li>Input #3 : numeric</li><li>Input #4 : numeric</li>        </ul></td>        <td><ul><li>out : numeric</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
-    </tr>
-    <tr>
-        <td>Switch Path</td>
-        <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>switch : int</li><li>Input #0 : matrix2D</li><li>Input #1 : matrix2D</li><li>Input #2 : matrix2D</li><li>Input #3 : matrix2D</li><li>Input #4 : matrix2D</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
+        <td><ul><li>switch : int</li><li>Input #0 : color</li><li>Input #1 : color</li>        </ul></td>        <td><ul><li>out : color</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
     </tr>
     <tr>
         <td>Switch Double2</td>
         <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>switch : int</li><li>Input #0 : double2</li><li>Input #1 : double2</li><li>Input #2 : double2</li><li>Input #3 : double2</li><li>Input #4 : double2</li>        </ul></td>        <td><ul><li>out : double2</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
+        <td><ul><li>switch : int</li><li>Input #0 : double2</li><li>Input #1 : double2</li>        </ul></td>        <td><ul><li>out : double2</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
+    </tr>
+    <tr>
+        <td>Switch Double3</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>switch : int</li><li>Input #0 : double3</li><li>Input #1 : double3</li>        </ul></td>        <td><ul><li>out : double3</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
+    </tr>
+    <tr>
+        <td>Switch Image2D</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>switch : int</li><li>Input #0 : image2D</li><li>Input #1 : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
     </tr>
     <tr>
         <td>Switch Int2</td>
         <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>switch : int</li><li>Input #0 : int2</li><li>Input #1 : int2</li><li>Input #2 : int2</li><li>Input #3 : int2</li><li>Input #4 : int2</li>        </ul></td>        <td><ul><li>out : int2</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
+        <td><ul><li>switch : int</li><li>Input #0 : int2</li><li>Input #1 : int2</li>        </ul></td>        <td><ul><li>out : int2</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
     </tr>
     <tr>
-        <td>Switch Rectangle</td>
+        <td>Switch Int3</td>
         <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>switch : int</li><li>Input #0 : matrix2D</li><li>Input #1 : matrix2D</li><li>Input #2 : matrix2D</li><li>Input #3 : matrix2D</li><li>Input #4 : matrix2D</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
+        <td><ul><li>switch : int</li><li>Input #0 : int3</li><li>Input #1 : int3</li>        </ul></td>        <td><ul><li>out : int3</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
+    </tr>
+    <tr>
+        <td>Switch Matrix</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>switch : int</li><li>Input #0 : matrix2D</li><li>Input #1 : matrix2D</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
+    </tr>
+    <tr>
+        <td>Switch Numeric</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>switch : int</li><li>Input #0 : numeric</li><li>Input #1 : numeric</li>        </ul></td>        <td><ul><li>out : numeric</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
     </tr>
     <tr>
         <td>Switch String</td>
         <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>switch : int</li><li>Input #0 : string</li><li>Input #0 : string</li><li>Input #1 : string</li><li>Input #2 : string</li><li>Input #3 : string</li><li>Input #4 : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
+        <td><ul><li>switch : int</li><li>Input #0 : string</li><li>Input #0 : string</li><li>Input #1 : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
     </tr>
     <tr>
         <td>System Performance</td>
@@ -4964,6 +4999,13 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
             </td>
             <td>  <a href="https://drive.google.com/file/d/1zWC1DfTvOw806xNke0tMRGFt75s3HgPm/view?usp=sharing">blink1</a> </td>
         </tr>
+        <tr>
+            <td> Send Email</td>
+            <td>
+                <a target="_blank" href="https://docs.python.org/3/library/email.mime.html">Send Email</a>
+            </td>
+            <td>  <a href="https://drive.google.com/file/d/1p66AH8Vz0q85rmxf5N1B1VdysYCg-K9P/view?usp=sharing">send_email</a> </td>
+        </tr>
 
     </table>
 
@@ -5480,7 +5522,7 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
                 The minimum value the input value can be set to
             </td>
             <td>
-                <pre>"min": "5.0"</pre>
+                <pre>"min": 5.0</pre>
             </td>
         </tr>
 
@@ -5489,11 +5531,37 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
             <td></td>
             <td></td>
             <td>
-                Only for numeric types such as int or double.
+                Only for numeric types such as int/int2/int3 or double/double2/double3.
                 The maximum value the input value can be set to
             </td>
             <td>
-                <pre>"max": "10.0"</pre>
+                <pre>"max": 10.0</pre>
+            </td>
+        </tr>
+
+        <tr>
+            <td>softmin</td>
+            <td></td>
+            <td><pre>"softmin": false</pre></td>
+            <td>
+                Only for numeric types such as int/int2/int3 or double/double2/double3 that are not sliders but textfields.
+                If softmin is true then the limit is only via the dragging of the UI, if you enter manually in the textfield the limit does not apply
+            </td>
+            <td>
+                <pre>"softmin": true</pre>
+            </td>
+        </tr>
+
+        <tr>
+            <td>softmax</td>
+            <td></td>
+            <td><pre>"softmax": false</pre></td>
+            <td>
+                Only for numeric types such as int/int2/int3 or double/double2/double3 that are not sliders but textfields.
+                If softmax is true then the limit is only via the dragging of the UI, if you enter manually in the textfield the limit does not apply
+            </td>
+            <td>
+                <pre>"softmax": true</pre>
             </td>
         </tr>
 
@@ -5506,7 +5574,7 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
                 The step value the increments of the parameter UI will jump up and down
             </td>
             <td>
-                <pre>"step": "1.0"</pre>
+                <pre>"step": 1.0</pre>
             </td>
         </tr>
 
