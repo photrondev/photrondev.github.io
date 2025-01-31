@@ -134,6 +134,7 @@
                             <li><a href="#Tensors">Tensors</a></li>
                             <li><a href="#CreateMacro">Create Macro</a></li>
                             <li><a href="#PyTorchTutorial">PyTorch Deep Learning</a></li>
+                            <li><a href="#PyrenderTutorial">Pyrender</a></li>
                         </ul>
                     </li>
 
@@ -2292,6 +2293,11 @@
         <td><i class='bi bi-webcam-fill'></i></td>
         <td><ul><li>calibration : matrix2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Reads Images from a webcamera</td>
     </tr>
+    <tr>
+        <td>YouTube Reader</td>
+        <td><i class='bi bi-tv'></i></td>
+        <td><ul><li>URL : string</li><li>trigger : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Streams data from a YouTube video</td>
+    </tr>
 </table>
 <h3 id='Logic'>Logic</h3><p>The Logic functions tools are all under the <i class="bi bi-question-square-fill"> Logic</i> category. The full list of display tools is as follows:</p><table>
     <tr>
@@ -3102,6 +3108,11 @@
         <td><ul><li>source : double2</li>        </ul></td>        <td><ul>        </ul></td>        <td>Show Double2</td>
     </tr>
     <tr>
+        <td>Double3 Display</td>
+        <td><i class='bi bi-window'></i></td>
+        <td><ul><li>source : double3</li>        </ul></td>        <td><ul>        </ul></td>        <td>Show Double3</td>
+    </tr>
+    <tr>
         <td>Double Display</td>
         <td><i class='bi bi-window'></i></td>
         <td><ul><li>source : double</li>        </ul></td>        <td><ul>        </ul></td>        <td>Show Double Number</td>
@@ -3125,6 +3136,11 @@
         <td>Int2 Display</td>
         <td><i class='bi bi-window'></i></td>
         <td><ul><li>source : int2</li>        </ul></td>        <td><ul>        </ul></td>        <td>Show Int2</td>
+    </tr>
+    <tr>
+        <td>Int3 Display</td>
+        <td><i class='bi bi-window'></i></td>
+        <td><ul><li>source : int3</li>        </ul></td>        <td><ul>        </ul></td>        <td>Show Int3</td>
     </tr>
     <tr>
         <td>Int Display</td>
@@ -3728,14 +3744,34 @@
         <td><ul><li>camera : Camera</li><li>skin : int</li><li>matrix : matrix2D</li><li>mesh : Mesh</li><li>rotation : matrix2D</li><li>scale : matrix2D</li><li>translation : matrix2D</li><li>light : Light</li><li>segmentation color : color</li>        </ul></td>        <td><ul><li>3DNode : 3DNode</li>        </ul></td>        <td>Create a Pyrender 3D Node</td>
     </tr>
     <tr>
+        <td>Create DirectionalLight</td>
+        <td><i class='bi bi-lightbulb'></i></td>
+        <td><ul><li>color : color</li><li>intensity : double</li><li>transformation : matrix2D</li><li>segmentation color : color</li>        </ul></td>        <td><ul><li>light : 3DNode</li>        </ul></td>        <td>Create a Pyrender DirectionalLight.</td>
+    </tr>
+    <tr>
+        <td>Create Intrinsics Camera</td>
+        <td><i class='bi bi-camera-reels'></i></td>
+        <td><ul><li>fx : double</li><li>fy : double</li><li>cx : double</li><li>cy : double</li><li>znear : double</li><li>zfar : double</li><li>dimensions : int2</li>        </ul></td>        <td><ul><li>camera : Camera</li>        </ul></td>        <td>Create a Pyrender Intrinsics Camera.</td>
+    </tr>
+    <tr>
+        <td>Create Orthographic Camera</td>
+        <td><i class='bi bi-camera-reels'></i></td>
+        <td><ul><li>xmag : double</li><li>ymag : double</li><li>znear : double</li><li>zfar : double</li><li>dimensions : int2</li>        </ul></td>        <td><ul><li>camera : Camera</li>        </ul></td>        <td>Create a Pyrender Orthographic Camera.</td>
+    </tr>
+    <tr>
         <td>Create Perspective Camera</td>
         <td><i class='bi bi-camera-reels'></i></td>
-        <td><ul><li>yfov : double</li><li>znear : double</li><li>zfar : double</li>        </ul></td>        <td><ul><li>camera : Camera</li>        </ul></td>        <td>Create a Pyrender Perspective Camera.</td>
+        <td><ul><li>yfov : double</li><li>znear : double</li><li>zfar : double</li><li>aspect ratio : double</li><li>dimensions : int2</li>        </ul></td>        <td><ul><li>camera : Camera</li>        </ul></td>        <td>Create a Pyrender Perspective Camera.</td>
+    </tr>
+    <tr>
+        <td>Create PointLight</td>
+        <td><i class='bi bi-lightbulb'></i></td>
+        <td><ul><li>color : color</li><li>intensity : double</li><li>range : double</li><li>transformation : matrix2D</li><li>segmentation color : color</li>        </ul></td>        <td><ul><li>light : 3DNode</li>        </ul></td>        <td>Create a Pyrender PointLight.</td>
     </tr>
     <tr>
         <td>Render Scene</td>
         <td><i class='bi bi-badge-3d-fill'></i></td>
-        <td><ul><li>camera : Camera</li><li>camera pose : matrix2D</li><li>bg_color : color</li><li>ambient_light : color</li><li>dimensions : int2</li><li>node #1 : 3DNode</li>        </ul></td>        <td><ul><li>color : image2D</li><li>depth : matrix2D</li>        </ul></td>        <td>Create a Pyrender Scene with multiple Node inputs.</td>
+        <td><ul><li>camera : Camera</li><li>camera pose : matrix2D</li><li>bg_color : color</li><li>ambient_light : color</li><li>toggle axes on : bool</li><li>use camera controls below : bool</li><li>yfov : double</li><li>znear : double</li><li>zfar : double</li><li>aspect ratio : double</li><li>dimensions : int2</li><li>eye : double3</li><li>target : double3</li><li>up : double3</li><li>node #1 : 3DNode</li>        </ul></td>        <td><ul><li>color : image2D</li><li>depth : matrix2D</li><li>segmentation : image2D</li>        </ul></td>        <td>Create a Pyrender Scene with multiple Node inputs.</td>
     </tr>
     <tr>
         <td>Create SpotLight</td>
@@ -3745,7 +3781,52 @@
     <tr>
         <td>Load Mesh</td>
         <td><i class='bi bi-badge-3d-fill'></i></td>
-        <td><ul><li>trimesh : string</li><li>material : Material</li><li>is visible : bool</li><li>poses : matrix2D</li><li>wireframe : bool</li><li>smooth : bool</li><li>transformation : matrix2D</li><li>segmentation color : color</li>        </ul></td>        <td><ul><li>mesh : 3DNode</li>        </ul></td>        <td>Create a Mesh 3DNode by loading a Trimesh.</td>
+        <td><ul><li>trimesh : string</li><li>material : Material</li><li>is visible : bool</li><li>wireframe : bool</li><li>smooth : bool</li><li>transformation : matrix2D</li><li>segmentation color : color</li><li>pose #1 : matrix2D</li>        </ul></td>        <td><ul><li>mesh : 3DNode</li>        </ul></td>        <td>Create a Mesh 3DNode by loading a Trimesh.</td>
+    </tr>
+    <tr>
+        <td>LookAt Matrix</td>
+        <td><i class='bi bi-badge-3d-fill'></i></td>
+        <td><ul><li>eye : double3</li><li>target : double3</li><li>up : double3</li>        </ul></td>        <td><ul><li>lookat : matrix2D</li>        </ul></td>        <td>Returns a 4x4 matrix for camera positioning.</td>
+    </tr>
+    <tr>
+        <td>Transformation Matrix</td>
+        <td><i class='bi bi-badge-3d-fill'></i></td>
+        <td><ul><li>translate : double3</li><li>rotate : double3</li><li>scale : double3</li>        </ul></td>        <td><ul><li>transformation : matrix2D</li>        </ul></td>        <td>Returns a 4x4 matrix for transformation (translation, rotation, and scale).</td>
+    </tr>
+    <tr>
+        <td>Trimesh Box</td>
+        <td><i class='bi bi-badge-3d-fill'></i></td>
+        <td><ul><li>edge lengths : double3</li><li>transform : matrix2D</li><li>set bounds : bool</li><li>min bounds : double3</li><li>max bounds : double3</li><li>color : color</li><li>segmentation color : color</li>        </ul></td>        <td><ul><li>box : 3DNode</li>        </ul></td>        <td>Create a Trimesh box / cuboid.</td>
+    </tr>
+    <tr>
+        <td>Trimesh Capsule</td>
+        <td><i class='bi bi-badge-3d-fill'></i></td>
+        <td><ul><li>height : double</li><li>radius : double</li><li>ends subdivision : int2</li><li>transform : matrix2D</li><li>color : color</li><li>segmentation color : color</li>        </ul></td>        <td><ul><li>capsule : 3DNode</li>        </ul></td>        <td>Create a Trimesh capsule.</td>
+    </tr>
+    <tr>
+        <td>Trimesh Cone</td>
+        <td><i class='bi bi-badge-3d-fill'></i></td>
+        <td><ul><li>radius : double</li><li>height : double</li><li>subdivisions : int</li><li>transform : matrix2D</li><li>color : color</li><li>segmentation color : color</li>        </ul></td>        <td><ul><li>cone : 3DNode</li>        </ul></td>        <td>Create a Trimesh cone along Z centered at the origin.</td>
+    </tr>
+    <tr>
+        <td>Trimesh Icosphere</td>
+        <td><i class='bi bi-badge-3d-fill'></i></td>
+        <td><ul><li>subdivisions : int</li><li>radius : double</li><li>transform : matrix2D</li><li>color : color</li><li>segmentation color : color</li>        </ul></td>        <td><ul><li>icosphere : 3DNode</li>        </ul></td>        <td>Create a Trimesh isophere.</td>
+    </tr>
+    <tr>
+        <td>Trimesh Quad</td>
+        <td><i class='bi bi-badge-3d-fill'></i></td>
+        <td><ul><li>point 1 : double3</li><li>point 2 : double3</li><li>point 3 : double3</li><li>point 4 : double3</li><li>color 1 : color</li><li>color 2 : color</li><li>color 3 : color</li><li>color 4 : color</li><li>segmentation color : color</li>        </ul></td>        <td><ul><li>quad : 3DNode</li>        </ul></td>        <td>Create a Gouraud shaded quad.</td>
+    </tr>
+    <tr>
+        <td>Trimesh Torus</td>
+        <td><i class='bi bi-badge-3d-fill'></i></td>
+        <td><ul><li>major radius : double</li><li>minor radius : double</li><li>major subdivisions : int</li><li>minor subdivisions : int</li><li>transform : matrix2D</li><li>color : color</li><li>segmentation color : color</li>        </ul></td>        <td><ul><li>torus : 3DNode</li>        </ul></td>        <td>Create a Trimesh torus around Z centered at the origin.</td>
+    </tr>
+    <tr>
+        <td>Trimesh Triangle</td>
+        <td><i class='bi bi-badge-3d-fill'></i></td>
+        <td><ul><li>point 1 : double3</li><li>point 2 : double3</li><li>point 3 : double3</li><li>color 1 : color</li><li>color 2 : color</li><li>color 3 : color</li><li>segmentation color : color</li>        </ul></td>        <td><ul><li>triangle : 3DNode</li>        </ul></td>        <td>Create a Gouraud shaded triangle.</td>
     </tr>
 </table>
 <h3 id='String'>String</h3><p>The String functions tools are all under the <i class="bi bi-chat-square-quote-fill"> String</i> category. The full list of display tools is as follows:</p><table>
@@ -4044,6 +4125,11 @@
         <td><ul><li>source : image2D</li><li>directory : string</li><li>filename : string</li><li>format : int</li><li>trigger : bool</li><li>delay : int</li>        </ul></td>        <td><ul>        </ul></td>        <td>Saves Image</td>
     </tr>
     <tr>
+        <td>Live Stream</td>
+        <td><i class='bi bi-youtube'></i></td>
+        <td><ul><li>source : image2D</li><li>stream key : string</li><li>trigger : int</li>        </ul></td>        <td><ul><li>preview : image2D</li>        </ul></td>        <td>Livestreams to your YouTube channel</td>
+    </tr>
+    <tr>
         <td>Microphone</td>
         <td><i class='bi bi-magic'></i></td>
         <td><ul><li>trigger : int</li><li>period : int</li>        </ul></td>        <td><ul><li>out : audio</li>        </ul></td>        <td>Listens and streams the microphone</td>
@@ -4070,8 +4156,8 @@
     </tr>
     <tr>
         <td>Send Email</td>
-        <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>credentials : string</li><li>trigger : int</li><li>recipients : string</li><li>subject : string</li><li>message : string</li><li>matrix : matrix2D</li><li>matrix attachment name : string</li><li>table : DataFrame</li><li>table attachment name : string</li><li>image : image2D</li><li>image attachment name : string</li><li>reset : int</li>        </ul></td>        <td><ul><li>success : bool</li>        </ul></td>        <td>Sends an email from the photron test email</td>
+        <td><i class='bi bi-envelope'></i></td>
+        <td><ul><li>credentials : string</li><li>trigger : int</li><li>recipients : string</li><li>subject : string</li><li>message : string</li><li>matrix : matrix2D</li><li>matrix attachment name : string</li><li>table : DataFrame</li><li>table attachment name : string</li><li>image : image2D</li><li>image attachment name : string</li><li>reset : int</li>        </ul></td>        <td><ul><li>success : bool</li>        </ul></td>        <td>Sends an email from your Gmail email address</td>
     </tr>
     <tr>
         <td>Sound Trigger</td>
@@ -4082,6 +4168,11 @@
         <td>Text to Speech</td>
         <td><i class='bi bi-mic-fill'></i></td>
         <td><ul><li>source : string</li><li>trigger : int</li><li>delay : int</li>        </ul></td>        <td><ul>        </ul></td>        <td>Text to speech</td>
+    </tr>
+    <tr>
+        <td>Upload Video</td>
+        <td><i class='bi bi-upload'></i></td>
+        <td><ul><li>credentials : string</li><li>trigger : int</li><li>source : string</li><li>thumbnail : string</li><li>title : string</li><li>description : string</li><li>tags : string</li><li>category : int</li><li>privacy : int</li><li>reset : int</li>        </ul></td>        <td><ul><li>success : bool</li>        </ul></td>        <td>Uploads a video to your YouTube channel</td>
     </tr>
     <tr>
         <td>Video Writer</td>
@@ -4672,6 +4763,46 @@
     <img src="./assets/ui_create_inference_tool.gif" />
 
 
+    <h3 id="PyrenderTutorial">Pyrender</h3>
+
+    <p>Pyrender is a Python library for physically-based rendering and visualization.</p>
+
+    <h4>Basic Object Types in Pyrender</h4>
+
+    <p>There are three primary object types to know to render a Scene; these are Meshes, Lights, and Cameras.</p>
+
+    <p>A Mesh node is basically a wrapper of any number of primitive types. These primitive types represent the physical geometry that can be drawn to the screen. Infiniworkflow allows users to load meshes from existing Trimesh objects. In the assets folder, ensure all necessary files (including the object file, material file, and UV file) are included in order for the mesh to appear correctly when brought into a Scene, as seen below.</p>
+
+    <img src="./assets/ui_pyrender_obj_files.jpg" width="40%" />
+
+    <p> The output of a Mesh node is a 3DNode (in Pyrender, “Node” is the name of one of the most commonly-used classes when creating a Scene; in order to avoid confusion between Pyrender Nodes and Infiniworkflow’s Nodes, we have elected to denote Pyrender Nodes as a “3DNode”). </p>
+
+    <p>In addition to Meshes that come from existing Trimesh objects, you can also create your own basic 3D objects from scratch using the Trimesh Creator nodes. These basic objects include boxes, capsules, cones, icospheres, and toruses. The output of each of these Trimesh Creator nodes (such as “Trimesh Box” or “Trimesh Capsule”) is a 3DNode.</p>
+
+    <p>Pyrender supports 3 types of Light: PointLight, SpotLight, and DirectionalLight. The output of any of these 3 Light nodes is a 3DNode.</p>
+
+    <p>Pyrender supports 3 Camera types: PerspectiveCamera, IntrinsicsCamera, and OrthogonalCamera. The output of any of these 3 Camera nodes is a Camera (NOT a 3D Node). </p>
+
+    <h4>Creating a Scene using Pyrender</h4>
+
+    <p>To begin creating a Scene, bring in a Render Scene node from the Pyrender toolbox (marked with a 3D icon). The camera that you choose to view your scene with is the first input to the Render Scene node. The final input is for any 3DNodes you want to be present in your scene (i.e. Lights, Meshes, etc.); the Render Scene node allows users to add as many 3DNode inputs as they wish. The output of the Render Scene node is a Color (or Default) viewer, Depth viewer, and Segmentation viewer. Each of these viewers will be explained in further detail below.</p>
+
+    <p>If you have been following these steps so far, it is likely that your scene does not show anything. This is because you need to position your Camera and your 3DNodes where you want them. To do this, use a Transformation Matrix node or a LookAt Matrix (generally Transformation Matrices are used for nodes that output a 3DNode and LookAt Matrices are used for nodes that output a Camera, but any of these matrix nodes could be used in practice). Your final workflow might look something like this:</p>
+
+    <img src="./assets/ui_pyrender_workflow.jpg" width="40%" />
+
+    <p>The following is a description of each of the three output views from the Render Scene node. The first output is Color, which presents a Pyrender Scene in full color; this can be considered as the Default view. Behind the scenes the Render Scene node is performing offscreen rendering, which Infiniworkflow then displays.</p>
+
+    <img src="./assets/ui_pyrender_color.jpg" width="30%" />
+
+    <p>The second output is Depth, which presents the Pyrender scene as a depth map using Matplotlib.</p>
+
+    <img src="./assets/ui_pyrender_depth.jpg" width="30%" />
+
+    <p>The third output is Segmentation, which presents the scene in a divided view where each object has a single color view. All Pyrender nodes that output a 3DNode have an input field called “Segmentation Color”, so if you wish to change the color a particular object has in the Segmentation view, you may do so there.</p>
+
+    <img src="./assets/ui_pyrender_seg.jpg" width="30%" />
+
 
 
     <h2>Experimental Features</h2>
@@ -5109,7 +5240,7 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
         You can start INFINIWORKFLOW from the command line and pass in arguments as follows:
     </p>
 
-    <pre> python app.py [-help] [-device #] [-noncuda] [-batch] [-final node name or node uuid] [-override json] [workflow ....]</pre>
+    <pre> python app.py [-help] [-device #] [-noncuda] [-batch] [-final node name or node uuid] [-override json] [-media ...] [workflow ....]</pre>
 
     <table>
         <tr>
@@ -5159,6 +5290,13 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
             <td>shows a help message</td>
             <td></td>
             <td><pre>python app.py -help"</pre></td>
+        </tr>
+
+        <tr>
+            <td>-media</td>
+            <td>creates a workflow with a movie reader with this media</td>
+            <td></td>
+            <td><pre>python app.py -media /path/to/media.mp4"</pre></td>
         </tr>
 
         <tr>
