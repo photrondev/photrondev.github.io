@@ -5248,7 +5248,7 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
         You can start INFINIWORKFLOW from the command line and pass in arguments as follows:
     </p>
 
-    <pre> python app.py [-help] [-device #] [-noncuda] [-batch] [-final node name or node uuid] [-override json] [-media ...] [workflow ....]</pre>
+    <pre> python app.py [-help] [-device #] [-noncuda] [-batch] [-final node name or node uuid] [-override json] [-path ...] [-media ...] [workflow ...]</pre>
 
     <table>
         <tr>
@@ -5309,9 +5309,9 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
 
         <tr>
             <td>-media</td>
-            <td>creates a workflow with a movie reader with this media</td>
+            <td>creates a workflow with a movie reader with this media, the directory of the media will be assumed to be the <pre>-path</pre> argument if set, otherwise <pre>${assets}</pre></td>
             <td></td>
-            <td><pre>python app.py -media /path/to/media.mp4"</pre></td>
+            <td><pre>python app.py -path downloads=C:\Users\imagi\Downloads -media media.mp4</pre></td>
         </tr>
 
         <tr>
