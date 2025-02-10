@@ -222,6 +222,7 @@
         <li><i class="bi bi-info-circle"></i> Displays the rendering status console which also indicates progress, warnings and errors</li>
         <li><i class="bi bi-grid-3x3-gap-fill"></i> Shows the Grid Search dialog that is used to optimize your ML models using the <a href="#GridSearch">GridSearch UI</a></li>
         <li><i class="bi bi-book"></i> Opens this manual</li>
+        <li><i class="bi bi-boxes"></i> Opens the Installed Packages Dialog</li>
         <li><i class="bi bi-chat-right-quote"></i> Localize the UI to different languages</li>
         <li><i class="bi bi-power"></i> Exit the application</li>
     </ul>
@@ -3740,6 +3741,11 @@
         <th>Description</th>
     </tr>
     <tr>
+        <td>Aruco Marker Data</td>
+        <td><i class='bi bi-badge-3d-fill'></i></td>
+        <td><ul><li>matrix : matrix2D</li><li>aruco id : int</li>        </ul></td>        <td><ul><li>translation data : double3</li><li>rotation data : double3</li>        </ul></td>        <td>Find specific Aruco Marker based on ID value in a scene. Return Aruco marker translational/rotational data if found.</td>
+    </tr>
+    <tr>
         <td>Create 3DNode</td>
         <td><i class='bi bi-badge-3d-fill'></i></td>
         <td><ul><li>camera : Camera</li><li>skin : int</li><li>matrix : matrix2D</li><li>mesh : Mesh</li><li>rotation : matrix2D</li><li>scale : matrix2D</li><li>translation : matrix2D</li><li>light : Light</li><li>segmentation color : color</li>        </ul></td>        <td><ul><li>3DNode : 3DNode</li>        </ul></td>        <td>Create a Pyrender 3D Node</td>
@@ -3772,7 +3778,7 @@
     <tr>
         <td>Render Scene</td>
         <td><i class='bi bi-badge-3d-fill'></i></td>
-        <td><ul><li>camera : Camera</li><li>camera pose : matrix2D</li><li>bg_color : color</li><li>ambient_light : color</li><li>toggle axes on : bool</li><li>use camera controls below : bool</li><li>yfov : double</li><li>znear : double</li><li>zfar : double</li><li>aspect ratio : double</li><li>dimensions : int2</li><li>eye : double3</li><li>target : double3</li><li>up : double3</li><li>node #1 : 3DNode</li>        </ul></td>        <td><ul><li>color : image2D</li><li>depth : matrix2D</li><li>segmentation : image2D</li>        </ul></td>        <td>Create a Pyrender Scene with multiple Node inputs.</td>
+        <td><ul><li>camera : Camera</li><li>camera pose : matrix2D</li><li>bg_color : color</li><li>Background opacity : double</li><li>ambient_light : color</li><li>toggle axes on : bool</li><li>use camera controls below : bool</li><li>yfov : double</li><li>znear : double</li><li>zfar : double</li><li>aspect ratio : double</li><li>dimensions : int2</li><li>eye : double3</li><li>target : double3</li><li>up : double3</li><li>node #1 : 3DNode</li>        </ul></td>        <td><ul><li>color : image2D</li><li>depth : matrix2D</li><li>segmentation : image2D</li>        </ul></td>        <td>Create a Pyrender Scene with multiple Node inputs.</td>
     </tr>
     <tr>
         <td>Create SpotLight</td>
@@ -3788,6 +3794,11 @@
         <td>LookAt Matrix</td>
         <td><i class='bi bi-badge-3d-fill'></i></td>
         <td><ul><li>eye : double3</li><li>target : double3</li><li>up : double3</li>        </ul></td>        <td><ul><li>lookat : matrix2D</li>        </ul></td>        <td>Returns a 4x4 matrix for camera positioning.</td>
+    </tr>
+    <tr>
+        <td>Matrix to Double3</td>
+        <td><i class='bi bi-badge-3d-fill'></i></td>
+        <td><ul><li>matrix : matrix2D</li>        </ul></td>        <td><ul><li>out : double3</li>        </ul></td>        <td>Convert 3x1 Matrix into Double3.</td>
     </tr>
     <tr>
         <td>Transformation Matrix</td>
@@ -3906,6 +3917,11 @@
         <td>AKAZE Feature Detector</td>
         <td><i class='bi bi-compass-fill'></i></td>
         <td><ul><li>source1 : image2D</li><li>source2 : image2D</li><li>inlierThreshold : double</li><li>nearestNeighborMatchRatio : double</li>        </ul></td>        <td><ul><li>keypoints1 : matrix2D</li><li>preview : image2D</li><li>keypoints2 : matrix2D</li>        </ul></td>        <td>Determines strong corners on an image using the AKAZE detector</td>
+    </tr>
+    <tr>
+        <td>Aruco Detector</td>
+        <td><i class='bi bi-compass-fill'></i></td>
+        <td><ul><li>source : image2D</li><li>camera calibration : matrix2D</li><li>dictionary : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li>        </ul></td>        <td>Tracks Aruco marker</td>
     </tr>
     <tr>
         <td>Barcode Detect</td>
@@ -4139,6 +4155,16 @@
         <td>Philips Hue</td>
         <td><i class='bi bi-lightbulb'></i></td>
         <td><ul><li>username : string</li><li>trigger : int</li><li>hueOn : int</li><li>hueOff : int</li><li>alwaysOn : bool</li><li>delay : int</li>        </ul></td>        <td><ul>        </ul></td>        <td>Changes Color/Settings on Philips Hue Device</td>
+    </tr>
+    <tr>
+        <td>RTC Keyboard</td>
+        <td><i class='bi bi-keyboard'></i></td>
+        <td><ul><li>trigger : int</li>        </ul></td>        <td><ul><li>alt : bool</li><li>shift : bool</li><li>out : string</li><li>key down : bool</li>        </ul></td>        <td>Receive keyboard inputs</td>
+    </tr>
+    <tr>
+        <td>RTC Web</td>
+        <td><i class='bi bi-browser-chrome'></i></td>
+        <td><ul><li>trigger : int</li><li>message : string</li><li>send : int</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Talk to Infiniworkflow from your browser</td>
     </tr>
     <tr>
         <td>Save JSON File</td>
@@ -4877,7 +4903,11 @@
 
     <h3 id="DownloadablePackages">Downloadable Packages</h3>
     <p>The following are the full set of downloads packages:</p>
-    <table>
+
+
+    <!-- PACKAGES START -->
+
+    <table class="downloadable_table">
         <tr>
             <th>Name</th>
             <th>Description</th>
@@ -5173,6 +5203,8 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
         </tr>
 
     </table>
+
+    <!-- PACKAGES END -->
 
     <h3 id="InstallationSteps">Installation Steps</h3>
     <p>
