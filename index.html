@@ -4164,12 +4164,12 @@
     <tr>
         <td>RTC Keyboard</td>
         <td><i class='bi bi-keyboard'></i></td>
-        <td><ul><li>trigger : int</li>        </ul></td>        <td><ul><li>alt : bool</li><li>shift : bool</li><li>out : string</li><li>key down : bool</li>        </ul></td>        <td>Receive keyboard inputs</td>
+        <td><ul><li>host : string</li><li>port : int</li><li>trigger : int</li>        </ul></td>        <td><ul><li>alt : bool</li><li>shift : bool</li><li>out : string</li><li>key down : bool</li>        </ul></td>        <td>Receive keyboard inputs</td>
     </tr>
     <tr>
         <td>RTC Web</td>
         <td><i class='bi bi-browser-chrome'></i></td>
-        <td><ul><li>trigger : int</li><li>message : string</li><li>send : int</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Talk to Infiniworkflow from your browser</td>
+        <td><ul><li>host : string</li><li>port : int</li><li>trigger : int</li><li>message : string</li><li>send : int</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Talk to Infiniworkflow from your browser</td>
     </tr>
     <tr>
         <td>Save JSON File</td>
@@ -4190,6 +4190,11 @@
         <td>Send Email</td>
         <td><i class='bi bi-envelope'></i></td>
         <td><ul><li>credentials : string</li><li>trigger : int</li><li>recipients : string</li><li>subject : string</li><li>message : string</li><li>matrix : matrix2D</li><li>matrix attachment name : string</li><li>table : DataFrame</li><li>table attachment name : string</li><li>image : image2D</li><li>image attachment name : string</li><li>reset : int</li>        </ul></td>        <td><ul><li>success : bool</li>        </ul></td>        <td>Sends an email from your Gmail email address</td>
+    </tr>
+    <tr>
+        <td>Serial</td>
+        <td><i class='bi bi-ethernet'></i></td>
+        <td><ul><li>port : string</li><li>baud rate : int</li><li>trigger : int</li><li>message : string</li><li>send : int</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Communicate with a device through serial</td>
     </tr>
     <tr>
         <td>Sound Trigger</td>
