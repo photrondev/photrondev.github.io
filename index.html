@@ -2298,7 +2298,7 @@
     <tr>
         <td>YouTube Reader</td>
         <td><i class='bi bi-tv'></i></td>
-        <td><ul><li>URL : string</li><li>trigger : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Streams data from a YouTube video</td>
+        <td><ul><li>URL : string</li><li>trigger : int</li><li>fps : int</li><li>size : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Streams data from a YouTube video</td>
     </tr>
 </table>
 <h3 id='Logic'>Logic</h3><p>The Logic functions tools are all under the <i class="bi bi-question-square-fill"> Logic</i> category. The full list of display tools is as follows:</p><table>
@@ -3741,11 +3741,6 @@
         <th>Description</th>
     </tr>
     <tr>
-        <td>Aruco Marker Data</td>
-        <td><i class='bi bi-badge-3d-fill'></i></td>
-        <td><ul><li>matrix : matrix2D</li><li>aruco id : int</li>        </ul></td>        <td><ul><li>translation data : double3</li><li>rotation data : double3</li>        </ul></td>        <td>Find specific Aruco Marker based on ID value in a scene. Return Aruco marker translational/rotational data if found.</td>
-    </tr>
-    <tr>
         <td>Create 3DNode</td>
         <td><i class='bi bi-badge-3d-fill'></i></td>
         <td><ul><li>camera : Camera</li><li>skin : int</li><li>matrix : matrix2D</li><li>mesh : Mesh</li><li>rotation : matrix2D</li><li>scale : matrix2D</li><li>translation : matrix2D</li><li>light : Light</li><li>segmentation color : color</li>        </ul></td>        <td><ul><li>3DNode : 3DNode</li>        </ul></td>        <td>Create a Pyrender 3D Node</td>
@@ -3922,6 +3917,11 @@
         <td>Aruco Detector</td>
         <td><i class='bi bi-compass-fill'></i></td>
         <td><ul><li>source : image2D</li><li>camera calibration : matrix2D</li><li>dictionary : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li>        </ul></td>        <td>Tracks Aruco marker</td>
+    </tr>
+    <tr>
+        <td>Aruco Marker Data</td>
+        <td><i class='bi bi-compass-fill'></i></td>
+        <td><ul><li>matrix : matrix2D</li><li>aruco id : int</li>        </ul></td>        <td><ul><li>translation data : double3</li><li>rotation data : double3</li>        </ul></td>        <td>Find specific Aruco Marker based on ID value in a scene. Return Aruco marker translational/rotational data if found.</td>
     </tr>
     <tr>
         <td>Barcode Detect</td>
@@ -4145,6 +4145,11 @@
         <td>Live Stream</td>
         <td><i class='bi bi-youtube'></i></td>
         <td><ul><li>source : image2D</li><li>stream key : string</li><li>trigger : int</li>        </ul></td>        <td><ul><li>preview : image2D</li>        </ul></td>        <td>Livestreams to your YouTube channel</td>
+    </tr>
+    <tr>
+        <td>Live Stream Chat</td>
+        <td><i class='bi bi-chat-right-text-fill'></i></td>
+        <td><ul><li>URL : string</li><li>trigger : int</li>        </ul></td>        <td><ul><li>time : string</li><li>author : string</li><li>message : string</li><li>out : string</li><li>new message : bool</li>        </ul></td>        <td>Gets chat from livestream</td>
     </tr>
     <tr>
         <td>Microphone</td>
@@ -5200,6 +5205,14 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
                 <a target="_blank" href="https://github.com/abhiTronix/vidgear">YouTube Reader</a>
             </td>
             <td>  <a href="https://drive.google.com/file/d/1PvUc9H6HsUBHjceEtPAufwRRxj6bkE_n/view?usp=sharing">youtube_reader</a> </td>
+        </tr>
+
+        <tr>
+            <td> Livestream Chat </td>
+            <td>
+                <a target="_blank" href="https://github.com/xenova/chat-downloader">Livestream Chat</a>
+            </td>
+            <td>  <a href="https://drive.google.com/file/d/1YDGYsVBigIwccrbAm-vWELuIXWT4vcE5/view?usp=sharing">livestream_chat</a> </td>
         </tr>
 
     </table>
