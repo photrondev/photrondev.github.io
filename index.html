@@ -18,6 +18,9 @@
 <body>
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
+
+        <!-- TRANSLATION  -->
+
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -215,7 +218,6 @@
         <li><i class="bi bi-star"></i> Add authoring notes to the workflow to include your name and description of the workflow</li>
         <li><i class="bi bi-shop-window"></i> Show the published view of the workflow. This is an experimental <a href="#Publish">feature</a> that allows you to simplify the workflow into a list of published parameters and hide the workflow. When in publish mode, click on this icon to switch back to the flowgraph mode again.</li>
         <li><i class="bi bi-rulers"></i> Sets the preferred numeric range for some of the standard parameters that can be normalized, percentage and other ranges</li>
-        <li><i class="bi bi-circle-half"></i> Light or dark theme switching of the UI colors</li>
         <li><i class="bi bi-nvidia"></i> Sets the current CUDA device when you have multiple GPUs. Any new nodes powered by CUDA will be executed on this current GPU device.</li>
         <li><i class="bi bi-cloud-download"></i> Saves the workflow using the <a href="#ImportExport">Export UI</a></li>
         <li><i class="bi bi-trash"></i> Clears the workflow to start a new one from scratch</li>
@@ -223,6 +225,7 @@
         <li><i class="bi bi-grid-3x3-gap-fill"></i> Shows the Grid Search dialog that is used to optimize your ML models using the <a href="#GridSearch">GridSearch UI</a></li>
         <li><i class="bi bi-book"></i> Opens this manual</li>
         <li><i class="bi bi-boxes"></i> Opens the Installed Packages Dialog</li>
+        <li><i class="bi bi-robot"></i> Plays narratives that explain how to use the app</li>
         <li><i class="bi bi-chat-right-quote"></i> Localize the UI to different languages</li>
         <li><i class="bi bi-power"></i> Exit the application</li>
     </ul>
@@ -4215,6 +4218,11 @@
         <td>Video Writer</td>
         <td><i class='bi bi-card-image'></i></td>
         <td><ul><li>source : image2D</li><li>directory : string</li><li>filename : string</li><li>format : int</li><li>codec : string</li><li>trigger : int</li><li>duration : double</li><li>delay : double</li><li>fps : double</li>        </ul></td>        <td><ul>        </ul></td>        <td>Saves Video</td>
+    </tr>
+    <tr>
+        <td>Wi-Fi Server</td>
+        <td><i class='bi bi-wifi'></i></td>
+        <td><ul><li>host : string</li><li>port : int</li><li>trigger : int</li><li>message : string</li><li>send : int</li>        </ul></td>        <td><ul><li>client address : int</li><li>out : string</li>        </ul></td>        <td>Communicate with a device through Wi-Fi</td>
     </tr>
 </table>
 <h3 id='Utilities'>Utilities</h3><p>The Utility filters tools are all under the <i class="bi bi-gear"> Utilities</i> category. The full list of display tools is as follows:</p><table>
