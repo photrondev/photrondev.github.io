@@ -2270,6 +2270,11 @@
         <td><ul><li>source : string</li><li>extension : string</li><li>trigger : int</li>        </ul></td>        <td><ul><li>filename : string</li>        </ul></td>        <td>Reads filepaths from a folder</td>
     </tr>
     <tr>
+        <td>Grayscale Image Reader</td>
+        <td><i class='bi bi-file-image'></i></td>
+        <td><ul><li>source : string</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Reads Grayscale Images from a file</td>
+    </tr>
+    <tr>
         <td>Image Reader</td>
         <td><i class='bi bi-file-image'></i></td>
         <td><ul><li>source : string</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Reads Images from a file</td>
@@ -2666,6 +2671,11 @@
         <td><ul><li>source : matrix2D</li>        </ul></td>        <td><ul><li>out : bool</li>        </ul></td>        <td>Test whether all array elements evaluate to True</td>
     </tr>
     <tr>
+        <td>All Close</td>
+        <td><i class='bi bi-grid-3x3'></i></td>
+        <td><ul><li>Input #1 : matrix2D</li><li>Input #2 : matrix2D</li>        </ul></td>        <td><ul><li>out : bool</li>        </ul></td>        <td>Returns if all elements x1 and x2 are within 1e-5 of one another (not suited for very small-valued matrices)</td>
+    </tr>
+    <tr>
         <td>Any</td>
         <td><i class='bi bi-grid-3x3'></i></td>
         <td><ul><li>source : matrix2D</li>        </ul></td>        <td><ul><li>out : int</li>        </ul></td>        <td>Test whether any array element evaluates to True</td>
@@ -2728,7 +2738,7 @@
     <tr>
         <td>Index</td>
         <td><i class='bi bi-grid-3x3'></i></td>
-        <td><ul><li>source : matrix2D</li><li>index #1 : int</li>        </ul></td>        <td><ul><li>out : int</li>        </ul></td>        <td>Accesses an array at a given matrix index</td>
+        <td><ul><li>source : matrix2D</li><li>index #1 : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Accesses an array at a given matrix index</td>
     </tr>
     <tr>
         <td>Integral</td>
@@ -3190,7 +3200,12 @@
     <tr>
         <td>Infinicam</td>
         <td><i class='bi bi-camera-reels-fill'></i></td>
-        <td><ul><li>config : int</li><li>calibration : matrix2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>View live Images from a Photron Infinicam</td>
+        <td><ul><li>calibration : matrix2D</li><li>preroll & postroll frames : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>View live Images from a Photron Infinicam</td>
+    </tr>
+    <tr>
+        <td>Infinicam Save</td>
+        <td><i class='bi bi-card-image'></i></td>
+        <td><ul><li>directory : string</li><li>filename : string</li><li>format : int</li><li>codec : string</li><li>trigger : int</li><li>delay : double</li><li>fps : double</li>        </ul></td>        <td><ul>        </ul></td>        <td>Saves Infinicam Video</td>
     </tr>
     <tr>
         <td>Photron Live</td>
@@ -3201,6 +3216,11 @@
         <td>Photron Playback</td>
         <td><i class='bi bi-camera-reels-fill'></i></td>
         <td><ul><li>shutter : int</li><li>calibration : matrix2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Playback Images from a Photron Highspeed camera</td>
+    </tr>
+    <tr>
+        <td>Quad Debayer</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li><li>performance : double</li>        </ul></td>        <td>Quad Debayer</td>
     </tr>
 </table>
 <h3 id='Plot'>Plot</h3><p>The Plot figures tools are all under the <i class="bi bi-bar-chart-fill"> Plot</i> category. The full list of display tools is as follows:</p><table>
@@ -3339,6 +3359,11 @@
         <td>FashionMNIST Dataset</td>
         <td><i class='bi bi-fire'></i></td>
         <td><ul><li>batch : int</li><li>train : bool</li><li>shuffle : bool</li>        </ul></td>        <td><ul><li>out : torch.dataset</li>        </ul></td>        <td>Loads the FashionMNIST dataset</td>
+    </tr>
+    <tr>
+        <td>Finetune Trained Model</td>
+        <td><i class='bi bi-fire'></i></td>
+        <td><ul><li>trigger : int</li><li>data : string</li><li>model : torch.model</li><li>optimizer : torch.optim</li><li>loss function : torch.loss</li><li>numClasses : int</li><li>classes : string</li><li>batchSize : int</li><li>numEpochs : int</li><li>featureExtract : bool</li><li>transforms : torchvision.transforms</li>        </ul></td>        <td><ul><li>out : torch.model</li><li>meta data : WeightsEnum</li>        </ul></td>        <td>Finetune or feature train a pre-existing torchvision model.</td>
     </tr>
     <tr>
         <td>Flatten Tensor</td>
@@ -4143,7 +4168,7 @@
     <tr>
         <td>Image Writer</td>
         <td><i class='bi bi-card-image'></i></td>
-        <td><ul><li>source : image2D</li><li>directory : string</li><li>filename : string</li><li>format : int</li><li>trigger : bool</li><li>delay : int</li>        </ul></td>        <td><ul>        </ul></td>        <td>Saves Image</td>
+        <td><ul><li>source : image2D</li><li>directory : string</li><li>filename : string</li><li>format : int</li><li>trigger : int</li><li>delay : int</li>        </ul></td>        <td><ul>        </ul></td>        <td>Saves Image</td>
     </tr>
     <tr>
         <td>Live Stream</td>
@@ -4198,7 +4223,7 @@
     <tr>
         <td>Serial</td>
         <td><i class='bi bi-ethernet'></i></td>
-        <td><ul><li>port : string</li><li>baud rate : int</li><li>trigger : int</li><li>message : string</li><li>send : int</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Communicate with a device through serial</td>
+        <td><ul><li>port : string</li><li>baud rate : int</li><li>trigger : int</li><li>message : string</li><li>send : int</li><li>stream : bool</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Communicate with a device through serial</td>
     </tr>
     <tr>
         <td>Sound Trigger</td>
