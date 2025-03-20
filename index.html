@@ -6261,6 +6261,16 @@ result = "torch.generic_loader"
             </td>
         </tr>
 
+        <tr>
+            <td>reset_trigger_counters</td>
+            <td></td>
+            <td><pre>self, host : PluginHost, nth_index : int</pre></td>
+            <td><pre>None</pre></td>
+            <td>
+                The trigger at the nth index should reset any internal state that you maintain
+            </td>
+        </tr>
+
     </table>
 
 
@@ -6442,6 +6452,14 @@ result = "torch.generic_loader"
                 Sets the source time, all further downstream nodes will inherit this time
             </td>
             <td><pre>host.get_source_time(source_time)</pre></td>
+        </tr>
+
+        <tr>
+            <td>is_triggered</td>
+            <td>
+                Returns if the trigger parameter at the nth input has been triggered or not
+            </td>
+            <td><pre>host.is_triggered(counter, nth_index)</pre></td>
         </tr>
 
     </table>
