@@ -6290,6 +6290,16 @@ result = "torch.generic_loader"
             </td>
         </tr>
 
+        <tr>
+            <td>get_adornment</td>
+            <td></td>
+            <td><pre>self, host : PluginHost, output_port_num : int, output_type : str</pre></td>
+            <td><pre>None</pre></td>
+            <td>
+                Returns the adornment in the UI, returning "1" adds the slicing adornment
+            </td>
+        </tr>
+
     </table>
 
 
@@ -6479,6 +6489,14 @@ result = "torch.generic_loader"
                 Returns if the trigger parameter at the nth input has been triggered or not
             </td>
             <td><pre>host.is_triggered(counter, nth_index)</pre></td>
+        </tr>
+
+        <tr>
+            <td>get_view_slice</td>
+            <td>
+                Returns the view slice value in viewer
+            </td>
+            <td><pre>host.get_view_slice()</pre></td>
         </tr>
 
     </table>
