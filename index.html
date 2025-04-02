@@ -2115,9 +2115,29 @@
         <td><ul><li>source : cuda2D</li><li>erode : double2</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Blur image based on minimum luminance value of surrounding pixels. 3x3 pixels are blurred at a time.</td>
     </tr>
     <tr>
+        <td>Gauss</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Gauss Filter on Cuda Buffer</td>
+    </tr>
+    <tr>
+        <td>High Pass</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : cuda2D</li><li>maskSize : int</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>High Pass Filter on Cuda Buffer</td>
+    </tr>
+    <tr>
         <td>Iterative Blur</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : cuda2D</li><li>radius : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Blur image using iterative 3x3 blurs</td>
+    </tr>
+    <tr>
+        <td>Laplace</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : cuda2D</li><li>maskSize : int</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Laplace Filter on Cuda Buffer</td>
+    </tr>
+    <tr>
+        <td>Low Pass</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : cuda2D</li><li>maskSize : int</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Low Pass Filter on Cuda Buffer</td>
     </tr>
     <tr>
         <td>Median Blur</td>
@@ -2125,9 +2145,29 @@
         <td><ul><li>source : cuda2D</li><li>radius : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Blur image using median 3x3 blurs</td>
     </tr>
     <tr>
+        <td>Prewitt</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Combination of Prewitt Horiz and Prewitt Vert on Cuda Buffer</td>
+    </tr>
+    <tr>
+        <td>Roberts</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Combination of Roberts Filter Down and Roberts Filter Up on Cuda Buffer</td>
+    </tr>
+    <tr>
         <td>Separable Blur</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : cuda2D</li><li>convolution : double2</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Blur image with vertical and horizontal blur</td>
+    </tr>
+    <tr>
+        <td>Sharpen</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Filters the Cuda Buffer using a sharpening filter kernel</td>
+    </tr>
+    <tr>
+        <td>Sobel</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Combination of Sobel Horiz and Sobel Vert on Cuda Buffer</td>
     </tr>
     <tr>
         <td>Delay</td>
