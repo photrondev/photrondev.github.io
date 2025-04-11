@@ -6339,19 +6339,98 @@
     <h2>Installation</h2>
     <h3 id="SystemRequirements">System Requirements</h3>
     <p>
-        INFINIWORKFLOW runs on a modern PC with Windows 11 or higher. It requires an Intel or AMD processor and ideally a NVIDIA GPU with 12GB+ of disk space.
-        It is highly recommended to have a multicore processor as the execution will be more smoother. The software will run on machines without a NVIDIA GPU
+        INFINIWORKFLOW runs on a modern PC with Windows 11 or higher or MacOS 12.6.2 or higher. It requires an Intel or AMD processor and ideally a NVIDIA GPU with 12GB+ of disk space.
+        It is highly recommended to have a multicore processor as the execution will be more smoother. 
+
+        On Windows the software will run on machines without a NVIDIA GPU
         but that will significantly reduce the performance especially for ML workflows.
         A package with no dependencies on Cuda or PyTorch is also available to download - this will not require a NVIDIA GPU to be present on your system and
         is substantially smaller in size but does not allow you to build deep learning models and is slower for AI inference.
+        
         You must also have the latest Google Chrome browser installed : 131.0.6778.140 or higher.
     </p>
 
 
-    <h3 id="DownloadablePackages">Downloadable Packages</h3>
+    <h2 id="DownloadablePackages">Downloadable Packages</h2>
     <p>The following are the full set of downloads packages:</p>
 
+    <ul>
+        <li>CUDA Version: Full application installation including Python distribution. Requires Nvidia GPU on system. </li>
+        <li>Non-CUDA Version: A reduced size of the application with no depedencies on CUDA or PyTorch and does not require Nvidia GPU on system.</li>
+    </ul>
+ 
+    <h3>Application Packages</h3>
 
+
+    <table style="width:60%;">
+        <tr>
+            <th>Operating System</th>
+            <th>CUDA Installation</th>
+            <th>Non-CUDA Installation</th>
+        </tr>
+
+        <tr>
+            <td> <i class="bi bi-windows"></i> Windows</td>
+            <td>
+                <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1dfze_jLPksITOxe_h2gN53e-iCvrEvVh/view?usp=drive_link">infiniworkflow</a> 
+            </td>
+            <td>  
+                <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1CmU66I-DMvO9aKUYKmp2blBrSq-oDcNL/view?usp=sharing">infiniworkflow_noncuda</a> 
+            </td>
+        </tr>
+
+        <tr>
+            <td> <i class="bi bi-apple"></i> MacOSX</td>
+            <td>  
+                Not available
+            </td>
+            <td>  
+                <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1EjrcvMzyLsMDJnEsDXbG8i0Y0iaotzeW/view?usp=sharing">infiniworkflow_osx</a> 
+            </td>
+        </tr>
+
+        <tr>
+            <td> <i class="bi bi-ubuntu"></i> Linux x86_64 (Ubuntu22.04.5 LTS)</td>
+            <td> 
+                <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1yjgh5xD5Qw9wBj9FhH-n1bMYwN0AdfTB/view?usp=sharing">infiniworkflow_linux</a>  
+            </td>
+            <td>  
+                Not available
+            </td>
+        </tr>
+    </table>  
+
+
+    <h3>Patch Update Packages</h3>
+
+    Patch install of latest binary build with reduced size (does not include Python or bin folder)
+
+    <table style="width:60%;">
+        <tr>
+            <th>Operating System</th>
+            <th>Link</th>
+        </tr>
+
+        <tr>
+            <td> <i class="bi bi-windows"></i> INFINIWORKFLOW PATCH - Windows </td>
+
+            <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/18Tnyxs0EwZXkAG_XHb2ceHrBc7hlSZY5/view?usp=drive_link">infiniworkflow_patch</a> </td>
+        </tr>
+
+        <tr>
+            <td> <i class="bi bi-apple"></i> INFINIWORKFLOW PATCH - MacOSX  </td>
+
+            <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1RyxzJBd7QQLSJmRhVRFYWGh6CiXIz0b2/view?usp=sharing">infiniworkflow_osx_patch</a> </td>
+        </tr>
+
+        <tr>
+            <td> <i class="bi bi-ubuntu"></i> INFINIWORKFLOW PATCH - Linux </td>
+
+            <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1tYvuAj0lgWLd58EF-hCswQzIOvEBUWOQ/view?usp=sharing">infiniworkflow_linux_patch</a> </td>
+        </tr>
+    </table>
+
+    <h3>Feature Packages</h3>
     <!-- PACKAGES START -->
 
     <table class="downloadable_table">
@@ -6359,32 +6438,6 @@
             <th>Name</th>
             <th>Description</th>
             <th>Link</th>
-        </tr>
-
-        <tr>
-            <td> INFINIWORKFLOW </td>
-            <td>
-                Full install including Python distribution
-            </td>
-            <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1dfze_jLPksITOxe_h2gN53e-iCvrEvVh/view?usp=drive_link">infiniworkflow</a> </td>
-        </tr>
-
-
-        <tr>
-            <td> INFINIWORKFLOW NON CUDA/PYTORCH VERSION </td>
-            <td>
-                This is a reduced size of the application which has no depedencies on CUDA or PyTorch. It is substantially smaller and does not
-                require a NVIDIA GPU on the system
-            </td>
-            <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1CmU66I-DMvO9aKUYKmp2blBrSq-oDcNL/view?usp=sharing">infiniworkflow_noncuda</a> </td>
-        </tr>
-
-        <tr>
-            <td> INFINIWORKFLOW PATCH </td>
-            <td>
-                Patch install of latest binary build with reduced size (does not include Python or bin folder)
-            </td>
-            <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/18Tnyxs0EwZXkAG_XHb2ceHrBc7hlSZY5/view?usp=drive_link">infiniworkflow_patch</a> </td>
         </tr>
 
         <tr>
@@ -6700,15 +6753,27 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
         Make sure you have the latest Google Chrome browser installed : 131.0.6778.140 or higher and it is set to your default browser.
         Then download the INFINWORKFLOW package from Photron's website. There are multiple packages, the first package to download is infiniworkflow_v1_0.zip.
         Unzip this file to a location where you want to maintain the INFINIWORKFLOW application, for example in your <i>Documents</i> folder.
-        To install, double click on the <i>install.bat</i> file in the unzipped folder - the installation will install the required Python modules.
-        The installation of Python modules will take around 30 minutes and requires network access, please let it run to completion before you
-        proceed to the next step.
+        <ul>
+            <li>Windows: To install, double click on the <i>install.bat</i> file in the unzipped folder - the installation will install the required Python modules.
+            The installation of Python modules will take around 30 minutes and requires network access, please let it run to completion before you
+            proceed to the next step.</li>
+
+            <li>OSX: Make sure you have a valid Python installation, as additional modules will be installed into the existing Python installation. It is recommended you have Python v3.12.
+            To install, type <i>sudo sh install.sh</i> file in the unzipped folder, then type your
+            password. The installation will install the required Python modules.
+            The installation of Python modules will take around 5 minutes and requires network access, please let it run to completion before you proceed to the next step.</li>
+            
+        </ul>
     </p>
 
-    <p>
-        After is is completed, to run INFINIWORKFLOW, double click on the <i>infiniworkflow.bat</i> file in the unzipped folder:
-    </p>
-    <img src="./assets/ui_bat_file.jpg" />
+    <ul>
+            <li>Windows: After is is completed, to run INFINIWORKFLOW, double click on the <i>INFINIWORKFLOW.bat</i> file in the unzipped folder:
+                <img src="./assets/ui_bat_file.jpg" />
+            </li>
+
+            <li>OSX: After is is completed, to run INFINIWORKFLOW, type <i>sh INFINIWORKFLOW.bat</i> file in the unzipped folder.
+            </li>
+    </ul>     
 
     <p>
         A webpage displayed in the Google Chrome browser should appear - if another browser shows up then change your default browser to Chrome and redo this step.
@@ -6719,7 +6784,7 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
         You will also see a Windows dialog that requests "Do you want to allow public and private networks to access the app?" for Python - you must allow access.
     </p>
 
-    <h3 id="FirewallAccess">Firewall Access</h3>
+    <h3 id="FirewallAccess">Firewall Access (Windows only)</h3>
     <p>
         When you install INFINIWORKFLOW and run it the first time, you should see a Windows dialog that requests "Do you want to allow public and private networks to access the app?" for Python
         - you must allow access. If this dialog does not pop up and INFINWORKFLOW does not show images in the viewer then you have to manually grant access to
@@ -6751,18 +6816,32 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
         and then change the directory to your existing INFINIWORKFLOW installation (i.e. where you unzipped your original installation). Then type the following where you
         should replace /folder/to/ to the actual folder you downloaded the application patch:
 
-        <pre>
-            patch.bat /folder/to/infiniworkflow_patch_v1_0.zip
-        </pre>
+        <ul>
+            <li>Windows: 
+                <pre>patch.bat /folder/to/infiniworkflow_patch_v1_0.zip</pre>
+            </li>
+
+            <li>OSX: 
+                <pre>sh patch.sh /folder/to/infiniworkflow_patch_v1_0.zip</pre>
+            </li>
+        </ul> 
+
+
 
         The feature patches are meant to allow new functionaility including demos and assets such as the ML model.
         For example you can download the YOLO classifier feature patch, yolo_v1_0.zip then install by open a Windows Powershell prompt
         and then change the directory to your existing INFINIWORKFLOW installation (i.e. where you unzipped your original installation) and type the following where you
         should replace /folder/to/ to the actual folder you downloaded the feature patch:
-        <pre>
-            patch.bat /folder/to/yolo_v1_0.zip
-        </pre>
 
+        <ul>
+            <li>Windows: 
+                <pre>patch.bat /folder/to/yolo_v1_0.zip</pre>
+            </li>
+
+            <li>OSX: 
+                <pre>sh patch.sh /folder/to/yolo_v1_0.zip</pre>
+            </li>
+        </ul> 
     </p>
 
     <div id="KnownIssues" style="height:100px"> </div>
@@ -7067,6 +7146,19 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
                 <pre>"gpu": true</pre>
             </td>
         </tr>
+
+        <tr>
+            <td>os</td>
+            <td></td>
+            <td><pre>"os": ["windows", "osx", "linux"]</pre></td>
+            <td>
+                Specifies if the plugin wants to limit which Operating Systems the plugin will be available
+            </td>
+            <td>
+                <pre>"os": ["osx"]</pre>
+            </td>
+        </tr>
+
 
         <tr>
             <td>supervise</td>
