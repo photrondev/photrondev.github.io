@@ -6372,29 +6372,39 @@
         <tr>
             <td> <i class="bi bi-windows"></i> Windows</td>
             <td>
-                <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1dfze_jLPksITOxe_h2gN53e-iCvrEvVh/view?usp=drive_link">infiniworkflow</a> 
+                <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1dfze_jLPksITOxe_h2gN53e-iCvrEvVh/view?usp=drive_link">infiniworkflow</a>
             </td>
-            <td>  
-                <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1CmU66I-DMvO9aKUYKmp2blBrSq-oDcNL/view?usp=sharing">infiniworkflow_noncuda</a> 
+            <td>
+                <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1CmU66I-DMvO9aKUYKmp2blBrSq-oDcNL/view?usp=sharing">infiniworkflow_noncuda</a>
             </td>
         </tr>
 
         <tr>
-            <td> <i class="bi bi-apple"></i> MacOSX</td>
-            <td>  
-                Not available
+            <td> <i class="bi bi-apple"></i> MacOSX x86_64</td>
+            <td>
+                Not applicable
             </td>
-            <td>  
-                <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1EjrcvMzyLsMDJnEsDXbG8i0Y0iaotzeW/view?usp=sharing">infiniworkflow_osx</a> 
+            <td>
+                <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1EjrcvMzyLsMDJnEsDXbG8i0Y0iaotzeW/view?usp=sharing">infiniworkflow_osx_x86_64</a>
+            </td>
+        </tr>
+
+        <tr>
+            <td> <i class="bi bi-apple"></i> MacOSX arm64</td>
+            <td>
+                Not applicable
+            </td>
+            <td>
+                <a target="_blank" class="ziplink" href="TODO">infiniworkflow_osx_arm64</a>
             </td>
         </tr>
 
         <tr>
             <td> <i class="bi bi-ubuntu"></i> Linux x86_64 (Ubuntu22.04.5 LTS)</td>
-            <td> 
-                <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1yjgh5xD5Qw9wBj9FhH-n1bMYwN0AdfTB/view?usp=drive_link">infiniworkflow_linux</a>  
+            <td>
+                <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1yjgh5xD5Qw9wBj9FhH-n1bMYwN0AdfTB/view?usp=drive_link">infiniworkflow_linux</a>
             </td>
-            <td>  
+            <td>
                 Not available
             </td>
         </tr>
@@ -6418,10 +6428,17 @@
         </tr>
 
         <tr>
-            <td> <i class="bi bi-apple"></i> INFINIWORKFLOW PATCH - MacOSX  </td>
+            <td> <i class="bi bi-apple"></i> INFINIWORKFLOW PATCH - MacOSX x86_64  </td>
 
             <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1RyxzJBd7QQLSJmRhVRFYWGh6CiXIz0b2/view?usp=sharing">infiniworkflow_osx_patch</a> </td>
         </tr>
+
+        <tr>
+            <td> <i class="bi bi-apple"></i> INFINIWORKFLOW PATCH - MacOSX arm64  </td>
+
+            <td>  <a target="_blank" class="ziplink" href="TODO">infiniworkflow_osx_patch</a> </td>
+        </tr>
+
 
         <tr>
             <td> <i class="bi bi-ubuntu"></i> INFINIWORKFLOW PATCH - Linux </td>
@@ -6707,7 +6724,7 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
             <td>
                 <a target="_blank" href="https://github.com/abhiTronix/vidgear">YouTube Reader</a>
             </td>
-            <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1PvUc9H6HsUBHjceEtPAufwRRxj6bkE_n/view?usp=sharing">youtube_reader</a> </td>
+            <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1hj4oA3WsfFSqaqfmCAiDWxDT0HIjOwZH/view?usp=sharing">youtube_reader</a> </td>
         </tr>
 
         <tr>
@@ -6744,6 +6761,13 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
             <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/16zsoeMp5YIILz_081xgblZpHOuyoW_oH/view?usp=drive_link">onnx_runtime</a> </td>
         </tr>
 
+        <tr>
+            <td> YOLOX Train </td>
+            <td>
+                <a target="_blank" href="https://github.com/Megvii-BaseDetection/YOLOX/blob/main/README.md">YOLOX Train</a>
+            </td>
+            <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/18NAR17OLwfrXAIFzWXYLgdYRKx8b9-C5/view?usp=sharing">yolox_train</a> </td>
+        </tr>
     </table>
 
     <!-- PACKAGES END -->
@@ -6864,6 +6888,9 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
     <p>
         Plugins can be implemented in C++ or Python and both will require a JSON file. The JSON Schema specifies the input and output parameters as well
         as the name and description of the plugin amongst other things.
+    </p>
+    <p>
+        To start creating your own plugin, it is recommended you base your code on the Canny2 plugin that is provided upon installation. For Windows users, you can immeadiately run the Canny2 plugin via the Visual Studios solution. For Mac and Linux users, the process of creating a plugin will require a few more steps. These steps are detailed below in the section "Creating Plugins for Mac/Linux"
     </p>
 
     <h3 id="Args">Command line arguments</h3>
@@ -8231,6 +8258,16 @@ result = "torch.generic_loader"
 
     </table>
 
+    <h3 id="CreatingPluginsOnMacOrLunux">Creating Plugins for Mac/Linux</h3>
+    <p>
+        As with the C++ SDK instructions, you can use the exisiting Canny2 example as a starting point and rename all the files to your plugin name. See the section above for instructions on how to do this.
+    </p>
+    <p>
+        With your JSON now set up, you will need to construct the CMakeLists.txt file for your plugin. Open Canny2's CMakeLists.txt for reference. In your plugin's CMakeLists.txt file, rename any instance of "canny2" to the name of your plugin. Everything else should be kept the same.
+    </p>
+    <p>
+        In your console, "cd" into the folder containing your plugin. For Canny2, this is in "infini-workflow/sdk/examples/Canny2". Once you are in this folder in your console, enter the following command: <pre>cmake -B build . -G "Unix Makefiles"</pre> This will create a folder called "build" within the directory you are currently in. Then enter the following commands: <pre>cd build</pre> <pre>make</pre> This should output a few lines of text, with the last one being "[100%] Built target {NAME_OF_PLUGIN}". Now when you run INFINIWORKFLOW on a Mac or Linux device, the plugin will be available and usable.
+    </p>
 
     <div style="height:100px;">
 
