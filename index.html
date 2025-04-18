@@ -6385,7 +6385,7 @@
                 Not applicable
             </td>
             <td>
-                <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1EjrcvMzyLsMDJnEsDXbG8i0Y0iaotzeW/view?usp=sharing">infiniworkflow_osx_x86_64</a>
+                <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1RyxzJBd7QQLSJmRhVRFYWGh6CiXIz0b2/view?usp=sharing">infiniworkflow_osx_x86_64</a>
             </td>
         </tr>
 
@@ -6395,7 +6395,7 @@
                 Not applicable
             </td>
             <td>
-                <a target="_blank" class="ziplink" href="TODO">infiniworkflow_osx_arm64</a>
+                <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1WqXVV5fMXj9teQHxLPSZC_Wx-be8l176/view?usp=sharing">infiniworkflow_osx_arm64</a>
             </td>
         </tr>
 
@@ -6436,7 +6436,7 @@
         <tr>
             <td> <i class="bi bi-apple"></i> INFINIWORKFLOW PATCH - MacOSX arm64  </td>
 
-            <td>  <a target="_blank" class="ziplink" href="TODO">infiniworkflow_osx_patch</a> </td>
+            <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1WqXVV5fMXj9teQHxLPSZC_Wx-be8l176/view?usp=sharing">infiniworkflow_osx_patch</a> </td>
         </tr>
 
 
@@ -8266,7 +8266,13 @@ result = "torch.generic_loader"
         With your JSON now set up, you will need to construct the CMakeLists.txt file for your plugin. Open Canny2's CMakeLists.txt for reference. In your plugin's CMakeLists.txt file, rename any instance of "canny2" to the name of your plugin. Everything else should be kept the same.
     </p>
     <p>
-        In your console, "cd" into the folder containing your plugin. For Canny2, this is in "infini-workflow/sdk/examples/Canny2". Once you are in this folder in your console, enter the following command: <pre>cmake -B build . -G "Unix Makefiles"</pre> This will create a folder called "build" within the directory you are currently in. Then enter the following commands: <pre>cd build</pre> <pre>make</pre> This should output a few lines of text, with the last one being "[100%] Built target {NAME_OF_PLUGIN}". Now when you run INFINIWORKFLOW on a Mac or Linux device, the plugin will be available and usable.
+        In your console, "cd" into the folder containing your plugin. For Canny2, this is in "infini-workflow/sdk/examples/Canny2". Once you are in this folder in your console, enter the following command to build x86_64 architecture: <pre>cmake -B build . -G "Unix Makefiles"</pre>For arm64 architecture enter the following command to build x86_64 architecture: <pre>cmake -DCMAKE_VS_PLATFORM_NAME="arm64" -B build . -G "Unix Makefiles"</pre>
+
+
+        This will create a folder called "build" within the directory you are currently in. Then enter the following commands: 
+<pre>cd build
+make</pre> 
+This should output a few lines of text, with the last one being "[100%] Built target {NAME_OF_PLUGIN}". Now when you run INFINIWORKFLOW on a Mac or Linux device, the plugin will be available and usable.
     </p>
 
     <div style="height:100px;">
