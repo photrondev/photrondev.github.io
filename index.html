@@ -41,6 +41,7 @@
                             <li class=""><a href="#InstallationSteps">Installation Steps</a></li>
                             <li class=""><a href="#FirewallAccess">Firewall Access</a></li>
                             <li class=""><a href="#InstallPatches">Installing Patches</a></li>
+                            <li class=""><a href="#Args">Command line arguments</a></li>
                             <li class=""><a href="#KnownIssues">Known Issues</a></li>
                         </ul>
                     </li>
@@ -165,7 +166,6 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Plugin SDK <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li class=""><a href="#Args">Command line arguments</a></li>
                             <li><a href="#CustomizingTools">Customizing your own Tools</a></li>
                             <li><a href="#JsonSchema">JSON Schema</a></li>
                             <li><a href="#PythonSDK">Python SDK</a></li>
@@ -6340,13 +6340,13 @@
     <h3 id="SystemRequirements">System Requirements</h3>
     <p>
         INFINIWORKFLOW runs on a modern PC with Windows 11 or higher or MacOS 12.6.2 or higher. It requires an Intel or AMD processor and ideally a NVIDIA GPU with 12GB+ of disk space.
-        It is highly recommended to have a multicore processor as the execution will be more smoother. 
+        It is highly recommended to have a multicore processor as the execution will be more smoother.
 
         On Windows the software will run on machines without a NVIDIA GPU
         but that will significantly reduce the performance especially for ML workflows.
         A package with no dependencies on Cuda or PyTorch is also available to download - this will not require a NVIDIA GPU to be present on your system and
         is substantially smaller in size but does not allow you to build deep learning models and is slower for AI inference.
-        
+
         You must also have the latest Google Chrome browser installed : 131.0.6778.140 or higher.
     </p>
 
@@ -6358,7 +6358,7 @@
         <li>CUDA Version: Full application installation including Python distribution. Requires Nvidia GPU on system. </li>
         <li>Non-CUDA Version: A reduced size of the application with no depedencies on CUDA or PyTorch and does not require Nvidia GPU on system.</li>
     </ul>
- 
+
     <h3>Application Packages</h3>
 
 
@@ -6408,7 +6408,7 @@
                 Not available
             </td>
         </tr>
-    </table>  
+    </table>
 
 
     <h3>Patch Update Packages</h3>
@@ -6471,7 +6471,7 @@
             <td id="INFINICAM_Package"> INFINICAM </td>
             <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i>  </td>
             <td>
-                <a target="_blank" href=https://photron.com/infinicam/?gad_source=1&gclid=Cj0KCQiA2oW-BhC2ARIsADSIAWrh-psBvXvSEdbl-6DE4kdpvDlIG8D1WQ_n1Ez7-viazYks1R2yGuUaAjHDEALw_wcB">INFINICAM Viewer and Control Application Integration</a>
+                <a target="_blank" href=https://photron.com/infinicam/?gad_source =1&gclid =Cj0KCQiA2oW-BhC2ARIsADSIAWrh-psBvXvSEdbl-6DE4kdpvDlIG8D1WQ_n1Ez7-viazYks1R2yGuUaAjHDEALw_wcB">INFINICAM Viewer and Control Application Integration</a>
             </td>
             <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1m_aH3de8-pG8tA1EoWlu0OWx7LBM9vVf/view?usp=drive_link">infinicam_viewer</a> </td>
         </tr>
@@ -6812,29 +6812,33 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
         Unzip this file to a location where you want to maintain the INFINIWORKFLOW application, for example in your <i>Documents</i> folder.
         <ul>
             <li>
-                Windows: To install, double click on the <i>install.bat</i> file in the unzipped folder and click to grant Admin privledges 
-                (INFINWORKFLOW runs a local webserver to host the user interface and installation will request 
+                Windows: To install, double click on the <i>install.bat</i> file in the unzipped folder and click to grant Admin privledges
+                (INFINWORKFLOW runs a local webserver to host the user interface and installation will request
                 Admin privileges which is only used to allow INFINWORKFLOW to have access through the Firewall for the local webserver).
                 The installation will install the required Python modules and will take around 30 minutes and requires network access, please let it run to completion before you
                 proceed to the next step.
             </li>
 
-            <li>OSX: Make sure you have a valid Python installation, as additional modules will be installed into the existing Python installation. It is recommended you have Python v3.12.
-            To install, type <i>sudo sh install.sh</i> file in the unzipped folder, then type your
-            password. The installation will install the required Python modules.
-            The installation of Python modules will take around 5 minutes and requires network access, please let it run to completion before you proceed to the next step.</li>
-            
+            <li>
+                OSX: Make sure you have a valid Python installation, as additional modules will be installed into the existing Python installation. It is recommended you have Python v3.12.
+                To install, type <i>sudo sh install.sh</i> file in the unzipped folder, then type your
+                password. The installation will install the required Python modules.
+                The installation of Python modules will take around 5 minutes and requires network access, please let it run to completion before you proceed to the next step.
+            </li>
+
         </ul>
     </p>
 
     <ul>
-            <li>Windows: After is is completed, to run INFINIWORKFLOW, double click on the <i>INFINIWORKFLOW.bat</i> file in the unzipped folder:
-                <img src="./assets/ui_bat_file.jpg" />
-            </li>
+        <li>
+            Windows: After is is completed, to run INFINIWORKFLOW, double click on the <i>INFINIWORKFLOW.bat</i> file in the unzipped folder:
+            <img src="./assets/ui_bat_file.jpg" />
+        </li>
 
-            <li>OSX: After is is completed, to run INFINIWORKFLOW, type <i>sh INFINIWORKFLOW.bat</i> file in the unzipped folder.
-            </li>
-    </ul>     
+        <li>
+            OSX: After is is completed, to run INFINIWORKFLOW, type <i>sh INFINIWORKFLOW.bat</i> file in the unzipped folder.
+        </li>
+    </ul>
 
     <p>
         A webpage displayed in the Google Chrome browser should appear - if another browser shows up then change your default browser to Chrome and redo this step.
@@ -6878,14 +6882,16 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
         should replace /folder/to/ to the actual folder you downloaded the application patch:
 
         <ul>
-            <li>Windows: 
+            <li>
+                Windows:
                 <pre>patch.bat /folder/to/infiniworkflow_patch_v1_0.zip</pre>
             </li>
 
-            <li>OSX: 
+            <li>
+                OSX:
                 <pre>sh patch.sh /folder/to/infiniworkflow_patch_v1_0.zip</pre>
             </li>
-        </ul> 
+        </ul>
 
 
 
@@ -6895,39 +6901,16 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
         should replace /folder/to/ to the actual folder you downloaded the feature patch:
 
         <ul>
-            <li>Windows: 
+            <li>
+                Windows:
                 <pre>patch.bat /folder/to/yolo_v1_0.zip</pre>
             </li>
 
-            <li>OSX: 
+            <li>
+                OSX:
                 <pre>sh patch.sh /folder/to/yolo_v1_0.zip</pre>
             </li>
-        </ul> 
-    </p>
-
-    <div id="KnownIssues" style="height:100px"> </div>
-    <h3 >Known Issues</h3>
-    <p>
-        <ul>
-            <li>If you do not see any images in the Viewer then check to see if you have <a href="#FirewallAccess">set up your firewall</a> to allow INFINIWORKFLOW public network access</li>
-            <li>If the browser just shows an empty page, then click the 'Reload this page' in Google Chrome</li>
-            <li>If the webpage does not load or exhibits issues then make sure you have the latest Google Chrome browser installed : 131.0.6778.140 or higher </li>
-            <li>If INFINIWORFLOW bring up a different browser than Google Chrome then make sure you have <a target="_blank" href="https://support.google.com/chrome/answer/95417?hl=en&co=GENIE.Platform%3DDesktop#zippy=%2Cwindows"> set your default browser to Google Chrome</a> </li>
-            <li>
-                If your display resolution size is small and scale settings is high then the UI will not look correct, you can correct this by opening the Display Settings and increasing
-                your reducing your scale to reduce it to 125% or lower, and/or increase your display resolution
-            </li>
         </ul>
-    </p>
-    <div style="height:800px"> </div>
-
-    <h2>Plugin SDK</h2>
-    <p>
-        Plugins can be implemented in C++ or Python and both will require a JSON file. The JSON Schema specifies the input and output parameters as well
-        as the name and description of the plugin amongst other things.
-    </p>
-    <p>
-        To start creating your own plugin, it is recommended you base your code on the Canny2 plugin that is provided upon installation. For Windows users, you can immeadiately run the Canny2 plugin via the Visual Studios solution. For Mac and Linux users, the process of creating a plugin will require a few more steps. These steps are detailed below in the section "Creating Plugins for Mac/Linux"
     </p>
 
     <h3 id="Args">Command line arguments</h3>
@@ -6936,7 +6919,7 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
         You can start INFINIWORKFLOW from the command line and pass in arguments as follows:
     </p>
 
-    <pre> python app.py [-help] [-device #] [-noncuda] [-batch] [-final node name or node uuid] [-override json] [-path ...] [-media ...] [workflow ...]</pre>
+<pre> python app.py [-help] [-device #] [-noncuda] [-batch] [-final node name or node uuid] [-override json] [-nobrowser] [-source ...] [-path ...] [-port ...] [workflow ....]</pre>
 
     <table>
         <tr>
@@ -6949,7 +6932,7 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
         <tr>
             <td>-device</td>
             <td>allows you to set the default GPU device used</td>
-            <td></td>
+            <td>0</td>
             <td><pre>python app.py -device 1</pre></td>
         </tr>
 
@@ -6989,6 +6972,20 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
         </tr>
 
         <tr>
+            <td>-port</td>
+            <td>specify which network port to use, if none specified then 5000 is used</td>
+            <td>5000</td>
+            <td><pre>python app.py -port 8888"</pre></td>
+        </tr>
+
+        <tr>
+            <td>-nobrowser</td>
+            <td>does not automatically open a browser</td>
+            <td></td>
+            <td><pre>python app.py -nobrowser"</pre></td>
+        </tr>
+
+        <tr>
             <td>-path</td>
             <td>establishes paths that can be used as a prefix</td>
             <td></td>
@@ -6996,7 +6993,7 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
         </tr>
 
         <tr>
-            <td>-media</td>
+            <td>-source</td>
             <td>creates a workflow with a movie reader with this media</td>
             <td></td>
             <td><pre>python app.py -path "media=C:\media_folder" -source media:movie.mp4</pre></td>
@@ -7010,6 +7007,35 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
         </tr>
     </table>
 
+
+    <div id="KnownIssues" style="height:100px"> </div>
+    <h3>Known Issues</h3>
+    <p>
+        <ul>
+            <li>If you do not see any images in the Viewer then check to see if you have <a href="#FirewallAccess">set up your firewall</a> to allow INFINIWORKFLOW public network access</li>
+            <br>
+            <li>If the browser just shows an empty page, then click the 'Reload this page' in Google Chrome</li>
+            <br>
+            <li>If the webpage does not load or exhibits issues then make sure you have the latest Google Chrome browser installed : 131.0.6778.140 or higher </li>
+            <br>
+            <li>If INFINIWORFLOW bring up a different browser than Google Chrome then make sure you have <a target="_blank" href="https://support.google.com/chrome/answer/95417?hl=en&co=GENIE.Platform%3DDesktop#zippy=%2Cwindows"> set your default browser to Google Chrome</a> </li>
+            <br>
+            <li>
+                If your display resolution size is small and scale settings is high then the UI will not look correct, you can correct this by opening the Display Settings and increasing
+                your reducing your scale to reduce it to 125% or lower, and/or increase your display resolution
+            </li>
+        </ul>
+    </p>
+    <div style="height:800px"> </div>
+
+    <h2>Plugin SDK</h2>
+    <p>
+        Plugins can be implemented in C++ or Python and both will require a JSON file. The JSON Schema specifies the input and output parameters as well
+        as the name and description of the plugin amongst other things.
+    </p>
+    <p>
+        To start creating your own plugin, it is recommended you base your code on the Canny2 plugin that is provided upon installation. For Windows users, you can immeadiately run the Canny2 plugin via the Visual Studios solution. For Mac and Linux users, the process of creating a plugin will require a few more steps. These steps are detailed below in the section "Creating Plugins for Mac/Linux"
+    </p>
 
     <h3 id="CustomizingTools">Customizing Your own Tools</h3>
     <p>
@@ -8306,10 +8332,10 @@ result = "torch.generic_loader"
         In your console, "cd" into the folder containing your plugin. For Canny2, this is in "infini-workflow/sdk/examples/Canny2". Once you are in this folder in your console, enter the following command to build x86_64 architecture: <pre>cmake -B build . -G "Unix Makefiles"</pre>For arm64 architecture enter the following command to build x86_64 architecture: <pre>cmake -DCMAKE_VS_PLATFORM_NAME="arm64" -B build . -G "Unix Makefiles"</pre>
 
 
-        This will create a folder called "build" within the directory you are currently in. Then enter the following commands: 
+        This will create a folder called "build" within the directory you are currently in. Then enter the following commands:
 <pre>cd build
-make</pre> 
-This should output a few lines of text, with the last one being "[100%] Built target {NAME_OF_PLUGIN}". Now when you run INFINIWORKFLOW on a Mac or Linux device, the plugin will be available and usable.
+make</pre>
+        This should output a few lines of text, with the last one being "[100%] Built target {NAME_OF_PLUGIN}". Now when you run INFINIWORKFLOW on a Mac or Linux device, the plugin will be available and usable.
     </p>
 
     <div style="height:100px;">
