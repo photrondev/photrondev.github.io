@@ -6811,40 +6811,45 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
         Then download the INFINWORKFLOW package from Photron's website. There are multiple packages, the first package to download is infiniworkflow_v1_0.zip.
         Unzip this file to a location where you want to maintain the INFINIWORKFLOW application, for example in your <i>Documents</i> folder.
         <ul>
+            <br>
             <li>
                 Windows: To install, double click on the <i>install.bat</i> file in the unzipped folder and click to grant Admin privledges
                 (INFINWORKFLOW runs a local webserver to host the user interface and installation will request
                 Admin privileges which is only used to allow INFINWORKFLOW to have access through the Firewall for the local webserver).
                 The installation will install the required Python modules and will take around 30 minutes and requires network access, please let it run to completion before you
-                proceed to the next step.
+                proceed to the next step. After is is completed, to run INFINIWORKFLOW, double click on the <i>INFINIWORKFLOW.bat</i> file in the unzipped folder
             </li>
-
+            <br>
+            <br>
             <li>
-                OSX: Make sure you have a valid Python installation, as additional modules will be installed into the existing Python installation. It is recommended you have Python v3.12.
+                OSX: Type the following with your python distribution you want to use (you may change python3 to a particular version of python you want to use instead)
+
+                <pre> python3 -c "import platform; print(platform.processor())"</pre>
+
+                If that returns <i>i386</i> then install the OSX <i>x86_64</i> version of INFINIWORKFLOW version of OSX, otherwise if that returns <i>arm</i> then install the OSX <i>arm64</i> version of INFINIWORKFLOW.
+
+                Make sure you have a valid Python installation, as additional modules will be installed into the existing Python installation. It is recommended you have Python v3.12.
                 To install, type <i>sudo sh install.sh</i> file in the unzipped folder, then type your
                 password. The installation will install the required Python modules.
                 The installation of Python modules will take around 5 minutes and requires network access, please let it run to completion before you proceed to the next step.
+                After is is completed, to run INFINIWORKFLOW, type <i>sh INFINIWORKFLOW.sh</i> file in the unzipped folder.
             </li>
-
+            <br>
+            <br>
+            <li>
+                Linux: To install, type <i>sudo sh install.sh</i> file in the unzipped folder, then type your
+                password. The installation will install the required Python modules.
+                The installation of Python modules will take around 30 minutes and requires network access, please let it run to completion before you proceed to the next step.
+                After is is completed, to run INFINIWORKFLOW, type <i>sh INFINIWORKFLOW.sh</i> file in the unzipped folder.
+            </li>
+            <br>
         </ul>
     </p>
 
-    <ul>
-        <li>
-            Windows: After is is completed, to run INFINIWORKFLOW, double click on the <i>INFINIWORKFLOW.bat</i> file in the unzipped folder:
-            <img src="./assets/ui_bat_file.jpg" />
-        </li>
 
-        <li>
-            OSX: After is is completed, to run INFINIWORKFLOW, type <i>sh INFINIWORKFLOW.bat</i> file in the unzipped folder.
-        </li>
-    </ul>
-
+    <h3 id="PostInstallationSteps">Post Installation</h3>
     <p>
         A webpage displayed in the Google Chrome browser should appear - if another browser shows up then change your default browser to Chrome and redo this step.
-    </p>
-
-    <p>
         The first thing that will be displayed in the browser is the INFINIWORKFLOW EULA which you must agree to.
         You will also see a Windows dialog that requests "Do you want to allow public and private networks to access the app?" for Python - you must allow access.
     </p>
