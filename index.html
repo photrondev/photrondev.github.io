@@ -96,6 +96,7 @@
 
                             <!-- START OF AUTO GENERATED TOC  -->
 <li><a href="#AI">AI Tools</a></li>
+<li><a href="#Audio">Audio Tools</a></li>
 <li><a href="#Color">Color Tools</a></li>
 <li><a href="#Composite">Composite Tools</a></li>
 <li><a href="#Database">Database Tools</a></li>
@@ -1181,6 +1182,65 @@
         <td><ul><li>source : image2D</li><li>filter : string</li><li>scoreThreshold : double</li><li>nmsThreshold : double</li><li>confidenceThreshold : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li><li>cutout : image2D</li>        </ul></td>        <td>Detects and labels objects based on YOLO5 neural network model</td>
     </tr>
 </table>
+<h3 id='Audio'>Audio</h3><p>The Audio filters tools are all under the <i class="bi volume-up-fill"> Audio</i> category. The full list of display tools is as follows:</p><table>
+    <tr>
+        <th>Name</th>
+        <th>Icon</th>
+        <th>Inputs</th>
+        <th>Outputs</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>Amplify Audio</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>volume : int</li><li>output directory : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Makes audio file louder or quieter and saves it</td>
+    </tr>
+    <tr>
+        <td>Bandpass Audio</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>low cutoff frequency : int</li><li>low cutoff : int</li><li>output directory : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Filters out low and high frequencies and saves it</td>
+    </tr>
+    <tr>
+        <td>Classify Audio</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>confidenceThreshold : double</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Outputs the sounds detected and their confidence scores</td>
+    </tr>
+    <tr>
+        <td>Concat Audio</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>trigger : int</li><li>output directory : string</li><li>crossfade : int</li><li>source #1 : string</li><li>source #2 : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Combines audio files and saves it</td>
+    </tr>
+    <tr>
+        <td>Fade Audio</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>start : int</li><li>end : int</li><li>output directory : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Saves audio file with slowly fading in from quiet and fading out to quiet</td>
+    </tr>
+    <tr>
+        <td>Highpass Audio</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>cutoff frequency : int</li><li>output directory : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Filters out low frequencies and saves it</td>
+    </tr>
+    <tr>
+        <td>Lowpass Audio</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>cutoff frequency : int</li><li>output directory : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Filters out high frequencies and saves it</td>
+    </tr>
+    <tr>
+        <td>Reverse Audio</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>output directory : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Reverses audio file and saves it</td>
+    </tr>
+    <tr>
+        <td>Slice Audio</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>start : int</li><li>end : int</li><li>output directory : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Trims audio file and saves it</td>
+    </tr>
+    <tr>
+        <td>Variable Speed Audio</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>speedup : double</li><li>output directory : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Makes audio file faster or slower and saves it</td>
+    </tr>
+</table>
 <h3 id='Color'>Color</h3><p>The Color Correction tools are all under the <i class="bi bi-palette"> Color</i> category. The full list of display tools is as follows:</p><table>
     <tr>
         <th>Name</th>
@@ -1699,57 +1759,57 @@
     </tr>
     <tr>
         <td>Connect Generic Database</td>
-        <td><i class='bi bi-table'></i></td>
+        <td><i class='bi bi-database'></i></td>
         <td><ul><li>connection type : string</li><li>driver : string</li><li>user : string</li><li>password : string</li><li>host : string</li><li>port : string</li><li>database name : string</li><li>args : string</li>        </ul></td>        <td><ul><li>connection : db.connection</li>        </ul></td>        <td>Connect to a database</td>
     </tr>
     <tr>
-        <td>Connect PostgreSQL</td>
-        <td><i class='bi bi-table'></i></td>
+        <td>Connect MySQL</td>
+        <td><i class='bi bi-database'></i></td>
         <td><ul><li>driver : string</li><li>user : string</li><li>password : string</li><li>host : string</li><li>port : string</li><li>database name : string</li><li>args : string</li>        </ul></td>        <td><ul><li>connection : db.connection</li>        </ul></td>        <td>Connect to a MySQL database</td>
     </tr>
     <tr>
         <td>Connect Oracle</td>
-        <td><i class='bi bi-table'></i></td>
+        <td><i class='bi bi-database'></i></td>
         <td><ul><li>driver : string</li><li>user : string</li><li>password : string</li><li>host : string</li><li>port : string</li><li>database name : string</li><li>args : string</li>        </ul></td>        <td><ul><li>connection : db.connection</li>        </ul></td>        <td>Connect to a Oracle database</td>
     </tr>
     <tr>
         <td>Connect PostgreSQL</td>
-        <td><i class='bi bi-table'></i></td>
+        <td><i class='bi bi-database'></i></td>
         <td><ul><li>driver : string</li><li>user : string</li><li>password : string</li><li>host : string</li><li>port : string</li><li>database name : string</li><li>args : string</li>        </ul></td>        <td><ul><li>connection : db.connection</li>        </ul></td>        <td>Connect to a PostgreSQL database</td>
     </tr>
     <tr>
-        <td>Connect SQLLite</td>
-        <td><i class='bi bi-table'></i></td>
+        <td>Connect SQLite</td>
+        <td><i class='bi bi-database'></i></td>
         <td><ul><li>filename : string</li>        </ul></td>        <td><ul><li>connection : db.connection</li>        </ul></td>        <td>Connect to a SQLite database</td>
     </tr>
     <tr>
         <td>Connect Teradata</td>
-        <td><i class='bi bi-table'></i></td>
+        <td><i class='bi bi-database'></i></td>
         <td><ul><li>driver : string</li><li>user : string</li><li>password : string</li><li>host : string</li><li>port : string</li><li>database name : string</li><li>args : string</li>        </ul></td>        <td><ul><li>connection : db.connection</li>        </ul></td>        <td>Connect to a Teradara database</td>
     </tr>
     <tr>
         <td>Get Table Names</td>
-        <td><i class='bi bi-table'></i></td>
+        <td><i class='bi bi-database'></i></td>
         <td><ul><li>connection : db.connection</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Get names of all tables in Database</td>
     </tr>
     <tr>
         <td>Query Database</td>
-        <td><i class='bi bi-table'></i></td>
+        <td><i class='bi bi-database'></i></td>
         <td><ul><li>connection : db.connection</li><li>query : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Query Database table</td>
     </tr>
     <tr>
         <td>Read Database Chunk</td>
-        <td><i class='bi bi-table'></i></td>
+        <td><i class='bi bi-database'></i></td>
         <td><ul><li>connection : db.connection</li><li>schema name : string</li><li>table name : string</li><li>chunk size : int</li><li>trigger : int</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Read tables from Database in chunks</td>
     </tr>
     <tr>
         <td>Read Database Table</td>
-        <td><i class='bi bi-table'></i></td>
+        <td><i class='bi bi-database'></i></td>
         <td><ul><li>connection : db.connection</li><li>schema name : string</li><li>table name : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Read Database table</td>
     </tr>
     <tr>
         <td>Store Table to Database</td>
-        <td><i class='bi bi-table'></i></td>
+        <td><i class='bi bi-database'></i></td>
         <td><ul><li>connection : db.connection</li><li>table : DataFrame</li><li>table name : string</li><li>if_exists : int</li><li>index : bool</li><li>trigger : int</li>        </ul></td>        <td><ul><li>out : bool</li>        </ul></td>        <td>Store Table to Database</td>
     </tr>
 </table>
@@ -4364,29 +4424,9 @@
         <th>Description</th>
     </tr>
     <tr>
-        <td>Amplify Audio</td>
-        <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>volume : int</li><li>output directory : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Makes audio file louder or quieter and saves it</td>
-    </tr>
-    <tr>
-        <td>Bandpass Audio</td>
-        <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>low cutoff frequency : int</li><li>low cutoff : int</li><li>output directory : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Filters out low and high frequencies and saves it</td>
-    </tr>
-    <tr>
-        <td>Classify Audio</td>
-        <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>confidenceThreshold : double</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Outputs the sounds detected and their confidence scores</td>
-    </tr>
-    <tr>
         <td>Colormap Generator</td>
         <td><i class='bi bi-file-image'></i></td>
         <td><ul><li>colormap : string</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Generates a colormap which is 1D LUT image</td>
-    </tr>
-    <tr>
-        <td>Concat Audio</td>
-        <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>trigger : int</li><li>output directory : string</li><li>crossfade : int</li><li>source #1 : string</li><li>source #2 : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Combines audio files and saves it</td>
     </tr>
     <tr>
         <td>Cuda Download</td>
@@ -4414,11 +4454,6 @@
         <td><ul><li>trigger : int</li>        </ul></td>        <td><ul>        </ul></td>        <td>Exit application when trigger is true</td>
     </tr>
     <tr>
-        <td>Fade Audio</td>
-        <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>start : int</li><li>end : int</li><li>output directory : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Saves audio file with slowly fading in from quiet and fading out to quiet</td>
-    </tr>
-    <tr>
         <td>Get Color</td>
         <td><i class='bi bi-gear'></i></td>
         <td><ul><li>color : color</li>        </ul></td>        <td><ul><li>red : double</li><li>green : double</li><li>blue : double</li>        </ul></td>        <td>Extract Red, Green and Blue Color values</td>
@@ -4442,11 +4477,6 @@
         <td>Get Int2</td>
         <td><i class='bi bi-gear'></i></td>
         <td><ul><li>point : int2</li>        </ul></td>        <td><ul><li>x : int</li><li>y : int</li>        </ul></td>        <td>Extract x and y from point value</td>
-    </tr>
-    <tr>
-        <td>Highpass Audio</td>
-        <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>cutoff frequency : int</li><li>output directory : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Filters out low frequencies and saves it</td>
     </tr>
     <tr>
         <td>In JSON?</td>
@@ -4509,19 +4539,9 @@
         <td><ul><li>source : string</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Load Camera Calibration file</td>
     </tr>
     <tr>
-        <td>Lowpass Audio</td>
-        <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>cutoff frequency : int</li><li>output directory : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Filters out high frequencies and saves it</td>
-    </tr>
-    <tr>
         <td>Print</td>
         <td><i class='bi bi-gear'></i></td>
         <td><ul><li>value : string</li>        </ul></td>        <td><ul>        </ul></td>        <td>Print to standard output</td>
-    </tr>
-    <tr>
-        <td>Reverse Audio</td>
-        <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>output directory : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Reverses audio file and saves it</td>
     </tr>
     <tr>
         <td>RGB To Color</td>
@@ -4614,11 +4634,6 @@
         <td><ul><li>value : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Sets string value</td>
     </tr>
     <tr>
-        <td>Slice Audio</td>
-        <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>start : int</li><li>end : int</li><li>output directory : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Trims audio file and saves it</td>
-    </tr>
-    <tr>
         <td>Switch Color</td>
         <td><i class='bi bi-gear'></i></td>
         <td><ul><li>switch : int</li><li>Input #0 : color</li><li>Input #1 : color</li>        </ul></td>        <td><ul><li>out : color</li>        </ul></td>        <td>Outputs one of the selected inputs</td>
@@ -4667,11 +4682,6 @@
         <td>System Performance</td>
         <td><i class='bi bi-gear'></i></td>
         <td><ul><li>background : bool</li><li>delay : double</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Informs the current System Performance</td>
-    </tr>
-    <tr>
-        <td>Variable Speed Audio</td>
-        <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>speedup : double</li><li>output directory : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Makes audio file faster or slower and saves it</td>
     </tr>
     <tr>
         <td>XYZ to Double3</td>
@@ -5551,6 +5561,24 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
                 <a target="_blank" href="https://github.com/Megvii-BaseDetection/YOLOX/blob/main/README.md">YOLOX Train</a>
             </td>
             <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/18NAR17OLwfrXAIFzWXYLgdYRKx8b9-C5/view?usp=sharing">yolox_train</a> </td>
+        </tr>
+
+        <tr>
+            <td> Audio</td>
+            <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
+            <td>
+                <a target="_blank" href="https://github.com/vinta/awesome-python?tab=readme-ov-file#audio">Audio</a>
+            </td>
+            <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1mQse59aiJaYhGLnyn0DBFSKsAXdAl5Rl/view?usp=sharing">audio</a> </td>
+        </tr>
+
+        <tr>
+            <td> Audio Classify</td>
+            <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
+            <td>
+                <a target="_blank" href="https://ai.google.dev/edge/mediapipe/solutions/audio/audio_classifier/python">Audio Classify</a>
+            </td>
+            <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1ysej5wOPjN1FtcyIvw6syhkh2uRgWlPb/view?usp=sharing">audio_classify</a> </td>
         </tr>
     </table>
 
