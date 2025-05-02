@@ -1193,52 +1193,62 @@
     <tr>
         <td>Amplify Audio</td>
         <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>volume : int</li><li>output directory : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Makes audio file louder or quieter and saves it</td>
+        <td><ul><li>source : audio</li><li>sample rate : int</li><li>volume : int</li>        </ul></td>        <td><ul><li>out : audio</li><li>sample rate : int</li>        </ul></td>        <td>Makes audio louder or quieter</td>
     </tr>
     <tr>
         <td>Bandpass Audio</td>
         <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>low cutoff frequency : int</li><li>low cutoff : int</li><li>output directory : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Filters out low and high frequencies and saves it</td>
+        <td><ul><li>source : audio</li><li>sample rate : int</li><li>low cutoff frequency : int</li><li>low cutoff : int</li>        </ul></td>        <td><ul><li>out : audio</li><li>sample rate : int</li>        </ul></td>        <td>Filters out low and high frequencies</td>
     </tr>
     <tr>
         <td>Classify Audio</td>
         <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>confidenceThreshold : double</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Outputs the sounds detected and their confidence scores</td>
+        <td><ul><li>source : audio</li><li>sample rate : int</li><li>confidenceThreshold : double</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Outputs the sounds detected and their confidence scores</td>
     </tr>
     <tr>
         <td>Concat Audio</td>
         <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>trigger : int</li><li>output directory : string</li><li>crossfade : int</li><li>source #1 : string</li><li>source #2 : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Combines audio files and saves it</td>
+        <td><ul><li>sample rate : int</li><li>crossfade : int</li><li>source #1 : audio</li><li>source #2 : audio</li>        </ul></td>        <td><ul><li>out : audio</li><li>sample rate : int</li>        </ul></td>        <td>Combines audio files and saves it</td>
     </tr>
     <tr>
         <td>Fade Audio</td>
         <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>start : int</li><li>end : int</li><li>output directory : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Saves audio file with slowly fading in from quiet and fading out to quiet</td>
+        <td><ul><li>source : audio</li><li>sample rate : int</li><li>start : int</li><li>end : int</li>        </ul></td>        <td><ul><li>out : audio</li><li>sample rate : int</li>        </ul></td>        <td>Fades into and out of audio</td>
     </tr>
     <tr>
         <td>Highpass Audio</td>
         <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>cutoff frequency : int</li><li>output directory : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Filters out low frequencies and saves it</td>
+        <td><ul><li>source : audio</li><li>sample rate : int</li><li>cutoff frequency : int</li>        </ul></td>        <td><ul><li>out : audio</li><li>sample rate : int</li>        </ul></td>        <td>Filters out low frequencies</td>
     </tr>
     <tr>
         <td>Lowpass Audio</td>
         <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>cutoff frequency : int</li><li>output directory : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Filters out high frequencies and saves it</td>
+        <td><ul><li>source : audio</li><li>sample rate : int</li><li>cutoff frequency : int</li>        </ul></td>        <td><ul><li>out : audio</li><li>sample rate : int</li>        </ul></td>        <td>Filters out high frequencies</td>
+    </tr>
+    <tr>
+        <td>Read Audio</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>trigger : int</li><li>source filepath : string</li>        </ul></td>        <td><ul><li>out : audio</li><li>sample rate : int</li>        </ul></td>        <td>Reads Audio from a file</td>
     </tr>
     <tr>
         <td>Reverse Audio</td>
         <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>output directory : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Reverses audio file and saves it</td>
+        <td><ul><li>source : audio</li><li>sample rate : int</li>        </ul></td>        <td><ul><li>out : audio</li><li>sample rate : int</li>        </ul></td>        <td>Reverses audio</td>
+    </tr>
+    <tr>
+        <td>Save Audio</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>trigger : int</li><li>source : audio</li><li>sample rate : int</li><li>result filepath : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Saves Audio to a file</td>
     </tr>
     <tr>
         <td>Slice Audio</td>
         <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>start : int</li><li>end : int</li><li>output directory : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Trims audio file and saves it</td>
+        <td><ul><li>source : audio</li><li>sample rate : int</li><li>start : int</li><li>end : int</li>        </ul></td>        <td><ul><li>out : audio</li><li>sample rate : int</li>        </ul></td>        <td>Trims audio file and saves it</td>
     </tr>
     <tr>
         <td>Variable Speed Audio</td>
         <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>trigger : int</li><li>source filepath : string</li><li>speedup : double</li><li>output directory : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Makes audio file faster or slower and saves it</td>
+        <td><ul><li>source : audio</li><li>sample rate : int</li><li>speedup : double</li>        </ul></td>        <td><ul><li>out : audio</li><li>sample rate : int</li>        </ul></td>        <td>Plays audio faster or slower</td>
     </tr>
 </table>
 <h3 id='Color'>Color</h3><p>The Color Correction tools are all under the <i class="bi bi-palette"> Color</i> category. The full list of display tools is as follows:</p><table>
@@ -1756,6 +1766,11 @@
         <th>Inputs</th>
         <th>Outputs</th>
         <th>Description</th>
+    </tr>
+    <tr>
+        <td>Store Row to Database</td>
+        <td><i class='bi bi-database'></i></td>
+        <td><ul><li>connection : db.connection</li><li>row : DataFrame</li><li>table name : string</li><li>index : bool</li><li>trigger : int</li>        </ul></td>        <td><ul><li>out : bool</li>        </ul></td>        <td>Store Row to Database</td>
     </tr>
     <tr>
         <td>Connect Generic Database</td>
