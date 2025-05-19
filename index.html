@@ -474,22 +474,6 @@
         </li>
     </ul>
 
-    <h3 id="NodeGestures">Node Gestures</h3>
-    <ul>
-        <li>
-            <p>
-                To see the type of a node's input or output, hover over the port and it will show as a tooltip
-            </p>
-            <img src="./assets/ui_tooltip_port.gif" />
-        </li>
-        <li>
-            <p>
-                Select a node can be done with a single click on the node. The node is shown highlighted in blue when it is selected
-            </p>
-            <img src="./assets/ui_select_node.gif" />
-        </li>
-    </ul>
-
     <h3 id="FlowgraphGestures">Flowgraph Gestures</h3>
     <ul>
         <li>
@@ -1193,62 +1177,97 @@
     <tr>
         <td>Amplify Audio</td>
         <td><i class='bi bi-volume-up-fill'></i></td>
-        <td><ul><li>source : audio</li><li>sample rate : int</li><li>volume : int</li>        </ul></td>        <td><ul><li>out : audio</li><li>sample rate : int</li>        </ul></td>        <td>Makes audio louder or quieter</td>
+        <td><ul><li>source : audio</li><li>volume : int</li>        </ul></td>        <td><ul><li>out : audio</li>        </ul></td>        <td>Makes audio louder or quieter</td>
     </tr>
     <tr>
         <td>Bandpass Audio</td>
         <td><i class='bi bi-volume-up-fill'></i></td>
-        <td><ul><li>source : audio</li><li>sample rate : int</li><li>low cutoff frequency : int</li><li>low cutoff : int</li>        </ul></td>        <td><ul><li>out : audio</li><li>sample rate : int</li>        </ul></td>        <td>Filters out low and high frequencies</td>
+        <td><ul><li>source : audio</li><li>low cutoff frequency : int</li><li>high cutoff : int</li>        </ul></td>        <td><ul><li>out : audio</li>        </ul></td>        <td>Filters out low and high frequencies</td>
     </tr>
     <tr>
         <td>Classify Audio</td>
         <td><i class='bi bi-volume-up-fill'></i></td>
-        <td><ul><li>source : audio</li><li>sample rate : int</li><li>confidenceThreshold : double</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Outputs the sounds detected and their confidence scores</td>
+        <td><ul><li>source : audio</li><li>confidenceThreshold : double</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Outputs the sounds detected and their confidence scores</td>
     </tr>
     <tr>
         <td>Concat Audio</td>
         <td><i class='bi bi-volume-up-fill'></i></td>
-        <td><ul><li>sample rate : int</li><li>crossfade : int</li><li>source #1 : audio</li><li>source #2 : audio</li>        </ul></td>        <td><ul><li>out : audio</li><li>sample rate : int</li>        </ul></td>        <td>Combines audio files and saves it</td>
+        <td><ul><li>crossfade : int</li><li>source #1 : audio</li><li>source #2 : audio</li>        </ul></td>        <td><ul><li>out : audio</li>        </ul></td>        <td>Combines audio files and saves it</td>
     </tr>
     <tr>
         <td>Fade Audio</td>
         <td><i class='bi bi-volume-up-fill'></i></td>
-        <td><ul><li>source : audio</li><li>sample rate : int</li><li>start : int</li><li>end : int</li>        </ul></td>        <td><ul><li>out : audio</li><li>sample rate : int</li>        </ul></td>        <td>Fades into and out of audio</td>
+        <td><ul><li>source : audio</li><li>start : int</li><li>end : int</li>        </ul></td>        <td><ul><li>out : audio</li>        </ul></td>        <td>Fades into and out of audio</td>
+    </tr>
+    <tr>
+        <td>Frequency Audio</td>
+        <td><i class='bi bi-volume-up-fill'></i></td>
+        <td><ul><li>source : audio</li>        </ul></td>        <td><ul><li>average frequency : double</li><li>min frequency : double</li><li>max frequency : double</li>        </ul></td>        <td>Returns min, max, average, and harmonic volume of audio</td>
     </tr>
     <tr>
         <td>Highpass Audio</td>
         <td><i class='bi bi-volume-up-fill'></i></td>
-        <td><ul><li>source : audio</li><li>sample rate : int</li><li>cutoff frequency : int</li>        </ul></td>        <td><ul><li>out : audio</li><li>sample rate : int</li>        </ul></td>        <td>Filters out low frequencies</td>
+        <td><ul><li>source : audio</li><li>cutoff frequency : int</li>        </ul></td>        <td><ul><li>out : audio</li>        </ul></td>        <td>Filters out low frequencies</td>
+    </tr>
+    <tr>
+        <td>Input Audio</td>
+        <td><i class='bi bi-volume-up-fill'></i></td>
+        <td><ul>        </ul></td>        <td><ul><li>out : audio</li>        </ul></td>        <td>Streams audio from microphone</td>
+    </tr>
+    <tr>
+        <td>Length Audio</td>
+        <td><i class='bi bi-volume-up-fill'></i></td>
+        <td><ul><li>source : audio</li>        </ul></td>        <td><ul><li>num seconds : double</li><li>num samples : int</li>        </ul></td>        <td>Returns length of audio</td>
     </tr>
     <tr>
         <td>Lowpass Audio</td>
         <td><i class='bi bi-volume-up-fill'></i></td>
-        <td><ul><li>source : audio</li><li>sample rate : int</li><li>cutoff frequency : int</li>        </ul></td>        <td><ul><li>out : audio</li><li>sample rate : int</li>        </ul></td>        <td>Filters out high frequencies</td>
+        <td><ul><li>source : audio</li><li>cutoff frequency : int</li>        </ul></td>        <td><ul><li>out : audio</li>        </ul></td>        <td>Filters out high frequencies</td>
+    </tr>
+    <tr>
+        <td>Output Audio</td>
+        <td><i class='bi bi-volume-up-fill'></i></td>
+        <td><ul><li>source : audio</li>        </ul></td>        <td><ul><li>out : audio</li>        </ul></td>        <td>Plays audio stream</td>
+    </tr>
+    <tr>
+        <td>Play Audio</td>
+        <td><i class='bi bi-volume-up-fill'></i></td>
+        <td><ul><li>trigger : int</li><li>source : audio</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Plays Audio from an audio object</td>
+    </tr>
+    <tr>
+        <td>PYIN Audio</td>
+        <td><i class='bi bi-volume-up-fill'></i></td>
+        <td><ul><li>source : audio</li>        </ul></td>        <td><ul><li>fund frequency : double</li>        </ul></td>        <td>Uses the probabilistic YIN algorithm to return fundamental frequency of audio</td>
     </tr>
     <tr>
         <td>Read Audio</td>
         <td><i class='bi bi-volume-up-fill'></i></td>
-        <td><ul><li>trigger : int</li><li>source filepath : string</li>        </ul></td>        <td><ul><li>out : audio</li><li>sample rate : int</li>        </ul></td>        <td>Reads Audio from a file</td>
+        <td><ul><li>trigger : int</li><li>source filepath : string</li>        </ul></td>        <td><ul><li>out : audio</li>        </ul></td>        <td>Reads Audio from a file</td>
     </tr>
     <tr>
         <td>Reverse Audio</td>
         <td><i class='bi bi-volume-up-fill'></i></td>
-        <td><ul><li>source : audio</li><li>sample rate : int</li>        </ul></td>        <td><ul><li>out : audio</li><li>sample rate : int</li>        </ul></td>        <td>Reverses audio</td>
+        <td><ul><li>source : audio</li>        </ul></td>        <td><ul><li>out : audio</li>        </ul></td>        <td>Reverses audio</td>
     </tr>
     <tr>
         <td>Save Audio</td>
         <td><i class='bi bi-volume-up-fill'></i></td>
-        <td><ul><li>trigger : int</li><li>source : audio</li><li>sample rate : int</li><li>result filepath : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Saves Audio to a file</td>
+        <td><ul><li>trigger : int</li><li>source : audio</li><li>result filepath : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Saves Audio to a file</td>
     </tr>
     <tr>
         <td>Slice Audio</td>
         <td><i class='bi bi-volume-up-fill'></i></td>
-        <td><ul><li>source : audio</li><li>sample rate : int</li><li>start : int</li><li>end : int</li>        </ul></td>        <td><ul><li>out : audio</li><li>sample rate : int</li>        </ul></td>        <td>Trims audio file and saves it</td>
+        <td><ul><li>source : audio</li><li>start : int</li><li>end : int</li>        </ul></td>        <td><ul><li>out : audio</li>        </ul></td>        <td>Trims audio file and saves it</td>
     </tr>
     <tr>
         <td>Variable Speed Audio</td>
         <td><i class='bi bi-volume-up-fill'></i></td>
-        <td><ul><li>source : audio</li><li>sample rate : int</li><li>speedup : double</li>        </ul></td>        <td><ul><li>out : audio</li><li>sample rate : int</li>        </ul></td>        <td>Plays audio faster or slower</td>
+        <td><ul><li>source : audio</li><li>speedup : double</li>        </ul></td>        <td><ul><li>out : audio</li>        </ul></td>        <td>Plays audio faster or slower</td>
+    </tr>
+    <tr>
+        <td>Volume Audio</td>
+        <td><i class='bi bi-volume-up-fill'></i></td>
+        <td><ul><li>source : audio</li>        </ul></td>        <td><ul><li>average volume : double</li><li>max volume : double</li>        </ul></td>        <td>Returns min, max, and average volume of audio</td>
     </tr>
 </table>
 <h3 id='Color'>Color</h3><p>The Color Correction tools are all under the <i class="bi bi-palette"> Color</i> category. The full list of display tools is as follows:</p><table>
@@ -1265,14 +1284,14 @@
         <td><ul><li>source : image2D</li><li>maxval : double</li><li>adaptiveMethod : int</li><li>thresholdType : int</li><li>blockSize : int</li><li>C : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>The function is typically used to get a bi-level (binary) image out of a grayscale image</td>
     </tr>
     <tr>
-        <td>Color Brightness</td>
+        <td>Brightness</td>
         <td><i class='bi bi-palette'></i></td>
-        <td><ul><li>source : image2D</li><li>brightness : double</li><li>redBrightness : double</li><li>greenBrightness : double</li><li>blueBrightness : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change the Brightness thorugh a Look Up Table (L.U.T.) for a Colored Image</td>
+        <td><ul><li>source : image2D</li><li>brightness : double</li><li>red : double</li><li>green : double</li><li>blue : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change the Brightness thorugh a Look Up Table (L.U.T.) for a Colored Image</td>
     </tr>
     <tr>
-        <td>Color Contrast</td>
+        <td>Contrast</td>
         <td><i class='bi bi-palette'></i></td>
-        <td><ul><li>source : image2D</li><li>contrast : double</li><li>redContrast : double</li><li>greenContrast : double</li><li>blueContrast : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change the Contrast thorugh a Look Up Table (L.U.T.) for a Colored Image</td>
+        <td><ul><li>source : image2D</li><li>contrast : double</li><li>red : double</li><li>green : double</li><li>blue : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change the Contrast thorugh a Look Up Table (L.U.T.) for a Colored Image</td>
     </tr>
     <tr>
         <td>Color Curve</td>
@@ -1420,9 +1439,9 @@
         <td><ul><li>source : image2D</li><li>adaptive : bool</li><li>clipLimit : double</li><li>tileGridSize : int2</li>        </ul></td>        <td><ul><li>out : image2D</li><li>histogram : histogram</li>        </ul></td>        <td>Histogram Equalization</td>
     </tr>
     <tr>
-        <td>Color Gamma</td>
+        <td>Gamma</td>
         <td><i class='bi bi-palette'></i></td>
-        <td><ul><li>source : image2D</li><li>gamma : double</li><li>redGamma : double</li><li>greenGamma : double</li><li>blueGamma : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change the Gamma thorugh a Look Up Table (L.U.T.) for a Colored Image</td>
+        <td><ul><li>source : image2D</li><li>gamma : double</li><li>red : double</li><li>green : double</li><li>blue : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change the Gamma thorugh a Look Up Table (L.U.T.) for a Colored Image</td>
     </tr>
     <tr>
         <td>Grayscale</td>
@@ -4243,12 +4262,12 @@
     <tr>
         <td>Get Affine Transform</td>
         <td><i class='bi bi-rulers'></i></td>
-        <td><ul><li>source : string</li><li>destination : string</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Calculates an affine transform from the source image to the destination image</td>
+        <td><ul><li>src[0] : double2</li><li>src[1] : double2</li><li>src[2] : double2</li><li>dst[0] : double2</li><li>dst[1] : double2</li><li>dst[2] : double2</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Calculates an affine transform from the source image to the destination image</td>
     </tr>
     <tr>
         <td>Get Perspective Transform</td>
         <td><i class='bi bi-rulers'></i></td>
-        <td><ul><li>source : string</li><li>destination : string</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Returns 3x3 perspective transformation for the corresponding 4 point pairs</td>
+        <td><ul><li>src[0] : double2</li><li>src[1] : double2</li><li>src[2] : double2</li><li>src[3] : double2</li><li>dst[0] : double2</li><li>dst[1] : double2</li><li>dst[2] : double2</li><li>dst[3] : double2</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Returns 3x3 perspective transformation for the corresponding 4 point pairs</td>
     </tr>
     <tr>
         <td>Get Rotation Matrix 2D</td>
@@ -4368,6 +4387,26 @@
         <td>Philips Hue</td>
         <td><i class='bi bi-lightbulb'></i></td>
         <td><ul><li>username : string</li><li>trigger : int</li><li>hueOn : int</li><li>hueOff : int</li><li>alwaysOn : bool</li><li>delay : int</li>        </ul></td>        <td><ul>        </ul></td>        <td>Changes Color/Settings on Philips Hue Device</td>
+    </tr>
+    <tr>
+        <td>ROS2 Action Client</td>
+        <td><i class='bi bi-lightning'></i></td>
+        <td><ul><li>trigger : int</li><li>ROS action : string</li><li>action type : string</li><li>args : string</li><li>feedback : bool</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Executes a ROS action</td>
+    </tr>
+    <tr>
+        <td>ROS2 Publisher</td>
+        <td><i class='bi bi-file-arrow-up'></i></td>
+        <td><ul><li>trigger : int</li><li>ROS topic : string</li><li>message data : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Publishes data to a ROS topic</td>
+    </tr>
+    <tr>
+        <td>ROS2 Service Client</td>
+        <td><i class='bi bi-telephone-forward'></i></td>
+        <td><ul><li>trigger : int</li><li>ROS service : string</li><li>service type : string</li><li>args : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Calls a ROS service</td>
+    </tr>
+    <tr>
+        <td>ROS2 Subscriber</td>
+        <td><i class='bi bi-file-arrow-down'></i></td>
+        <td><ul><li>trigger : int</li><li>ROS topic : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Subscribes to a ROS topic</td>
     </tr>
     <tr>
         <td>RTC Keyboard</td>
@@ -5240,7 +5279,7 @@
             <td>
                 SDK to allow you to write your own Python and C++ Plugins for INFINIWORKFLOW
             </td>
-            <td>  <a target="_blank" class="ziplink" href="" https: //drive.google.com/file/d/1_RekPTKjxQTA-WMk_qCf6rbRMoyeYIf5/view?usp =drive_link>infiniworkflow_sdk</a> </td>
+            <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1_RekPTKjxQTA-WMk_qCf6rbRMoyeYIf5/view?usp=drive_link">infiniworkflow_sdk</a> </td>
         </tr>
 
         <tr>
@@ -5271,7 +5310,7 @@
         </tr>
 
         <tr>
-            <td> Colorizarion Inference </td>
+            <td> Colorization Inference </td>
             <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
             <td>
                 <a target="_blank" href="https://github.com/alexellis/faas-colorization/blob/master/function/README.md">Colorful Image Colorization</a>
@@ -5692,7 +5731,7 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
         <ul>
             <li>
                 Windows:
-                <pre>patch.bat /folder/to/infiniworkflow_patch_v1_0.zip</pre>
+                <pre>.\patch.bat /folder/to/infiniworkflow_patch_v1_0.zip</pre>
             </li>
 
             <li>
@@ -5727,7 +5766,7 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
         You can start INFINIWORKFLOW from the command line and pass in arguments as follows:
     </p>
 
-<pre> python app.py [-help] [-device #] [-noncuda] [-batch] [-final node name or node uuid] [-override json] [-nobrowser] [-source ...] [-path ...] [-port ...] [workflow ....]</pre>
+<pre> python app.pyc c [-help] [-device #] [-noncuda] [-batch] [-final node name or node uuid] [-override json] [-nobrowser] [-source ...] [-path ...] [-port ...] [workflow ....]</pre>
 
     <table>
         <tr>
@@ -5741,77 +5780,77 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
             <td>-device</td>
             <td>allows you to set the default GPU device used</td>
             <td>0</td>
-            <td><pre>python app.py -device 1</pre></td>
+            <td><pre>python app.pyc -device 1</pre></td>
         </tr>
 
         <tr>
             <td>-noncuda</td>
             <td>will switch to the non cuda based rendering</td>
             <td></td>
-            <td><pre>python app.py -noncuda</pre></td>
+            <td><pre>python app.pyc -noncuda</pre></td>
         </tr>
 
         <tr>
             <td>-batch</td>
             <td>batch mode will not show UI</td>
             <td></td>
-            <td><pre>python app.py -batch</pre></td>
+            <td><pre>python app.pyc -batch</pre></td>
         </tr>
 
         <tr>
             <td>-final</td>
             <td>if in batch mode you can set the final node that you wish to execute before you exit. Either pass in node name or node uuid</td>
             <td></td>
-            <td><pre>python app.py -final R2Score</pre></td>
+            <td><pre>python app.pyc -final R2Score</pre></td>
         </tr>
 
         <tr>
             <td>-override</td>
             <td>a json string that allows you to override attributes in the workflow you pass</td>
             <td></td>
-            <td><pre>python app.py -final "{'Set Int.value' : '5', 'Set Int1.value' : '11' }"</pre></td>
+            <td><pre>python app.pyc -final "{'Set Int.value' : '5', 'Set Int1.value' : '11' }"</pre></td>
         </tr>
 
         <tr>
             <td>-help</td>
             <td>shows a help message</td>
             <td></td>
-            <td><pre>python app.py -help"</pre></td>
+            <td><pre>python app.pyc -help"</pre></td>
         </tr>
 
         <tr>
             <td>-port</td>
             <td>specify which network port to use, if none specified then 5000 is used</td>
             <td>5000</td>
-            <td><pre>python app.py -port 8888"</pre></td>
+            <td><pre>python app.pyc -port 8888"</pre></td>
         </tr>
 
         <tr>
             <td>-nobrowser</td>
             <td>does not automatically open a browser</td>
             <td></td>
-            <td><pre>python app.py -nobrowser"</pre></td>
+            <td><pre>python app.pyc -nobrowser"</pre></td>
         </tr>
 
         <tr>
             <td>-path</td>
             <td>establishes paths that can be used as a prefix</td>
             <td></td>
-            <td><pre>python app.py -path "captures=C:\Users\imagi\CapturesFolder;media=C:\media"</pre></td>
+            <td><pre>python app.pyc -path "captures=C:\Users\imagi\CapturesFolder;media=C:\media"</pre></td>
         </tr>
 
         <tr>
             <td>-source</td>
             <td>creates a workflow with a movie reader with this media</td>
             <td></td>
-            <td><pre>python app.py -path "media=C:\media_folder" -source media:movie.mp4</pre></td>
+            <td><pre>python app.pyc -path "media=C:\media_folder" -source media:movie.mp4</pre></td>
         </tr>
 
         <tr>
             <td>workflow</td>
             <td>The final argument is the workflow json file</td>
             <td></td>
-            <td><pre>python app.py ..\demos\Untitled\Untitiled.json"</pre></td>
+            <td><pre>python app.pyc  ..\demos\Untitled\Untitiled.json"</pre></td>
         </tr>
     </table>
 
