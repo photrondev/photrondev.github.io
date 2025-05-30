@@ -85,7 +85,9 @@
                         <ul class="dropdown-menu">
                             <li><a href="#Viewer">Image Viewer</a></li>
                             <li><a href="#DataFrame">Data frames</a></li>
+                            <li><a href="#NumpyArrays">Numpy Arrays</a></li>
                             <li><a href="#Tensors">Tensors</a></li>
+                            <li><a href="#Audio">Audio</a></li>
                             <li><a href="#ThumbnailViewer">Thumbnail Flowgraph Viewer</a></li>
                         </ul>
                     </li>
@@ -142,6 +144,7 @@
                             <li><a href="#CreateMacro">Create Macro</a></li>
                             <li><a href="#PyTorchTutorial">PyTorch Deep Learning</a></li>
                             <li><a href="#PyrenderTutorial">Pyrender</a></li>
+                            <li><a href="#YOLOX">YOLOX</a></li>
                         </ul>
                     </li>
 
@@ -162,6 +165,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="#Publish">Publish</a></li>
                             <li><a href="#DistributionProcessing">Distributed Processing</a></li>
+                            <li><a href="#ROS">Robot Operating System (ROS)</a></li>
                             <li><a href="#PostTriggers">Post Triggers</a></li>
                         </ul>
                     </li>
@@ -339,12 +343,12 @@
                     <td>*</td>
                 </tr>
                 <tr>
-                    <td>image2D, matrix2D, buffer2D, cuda2D or texture2D</td>
-                    <td>*2D</td>
+                    <td>image2D</td>
+                    <td>cuda2D</td>
                 </tr>
                 <tr>
-                    <td>image2D, matrix2D or cuda2D</td>
-                    <td>image2D, matrix2D or cuda2D</td>
+                    <td>cuda2D</td>
+                    <td>image2D</td>
                 </tr>
                 <tr>
                     <td>double, int, bool or numeric</td>
@@ -780,8 +784,8 @@
 
     <h3 id="NumpyArrays">Numpy Arrays</h3>
     <p>
-        Numpy represent multidimensional numerical arrays and are implemented using the <a target="_blank" href="https://numpy.org/">Numpy</a> Python module.
-        You can set a matrix using the Set Matrix tool
+        Numpy represents multidimensional numerical arrays and are implemented using the <a target="_blank" href="https://numpy.org/">Numpy</a> Python module.
+        You can set a matrix using the Set Matrix tool.
         The viewer can display Numpy arrays in a variety of different visualizations where it will select the most useful
         visualization first and by clicking the <i class="bi bi-arrow-repeat"></i> allows you to visualize other representations of the arrays.
         Slicing controls are also available to reduce the tensor to a subset of its numerical data.
@@ -826,6 +830,19 @@
         Images can also be converted to tensors (using the 'Image to Tensor' tool) and they will be viewed as a 3D image; a 3D height map plot; a 3D color space plot, and abbreviated tensor list:
     </p>
     <img src="./assets/ui_viewer_tensor_image.gif" width="400" />
+
+    <p>Beyond displaying images and matrices, INFINIWORKFLOW has specific UI to display one-dimensional audio data:</p>
+
+    <h3 id="Audio">Audio</h3>
+    <p>
+        Audio is represented by a list of numerical intensity values over time and they are implemented using the <a target="_blank" href="https://numpy.org/">Numpy</a> Python module.
+        You can get audio using the Read Audio tool for audio files or the Input Audio tool for streaming input through the microphone.
+        The viewers in Audio nodes can display audio arrays in two different ways: a waveform and a spectrogram.
+        It will default to the waveform visualization first, which shows the loudness of the sound at every sample over time.
+        By clicking the <i class="bi bi-arrow-repeat"></i>, it allows you to cycle through visualizations.
+        The other visualization is a spectrogram, which is a colormap of frequencies over time where colors represent the volume of each frequency in decibels (dB).
+    </p>
+    <img src="./assets/ui_viewer_audio.gif" width="400" />
 
 
     <h3 id="WidgetsSection">Widgets</h3>
@@ -1464,6 +1481,11 @@
         <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Convert Colorspace</td>
     </tr>
     <tr>
+        <td>Image2D to Matrix2D</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Convert Image2D to Matrix2D</td>
+    </tr>
+    <tr>
         <td>In Range</td>
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : image2D</li><li>min : color</li><li>max : color</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Threshold if between min and max</td>
@@ -1477,6 +1499,11 @@
         <td>Color Lift</td>
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : image2D</li><li>lift : double</li><li>redLift : double</li><li>greenLift : double</li><li>blueLift : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Lifts the Brightness thorugh a Look Up Table (L.U.T.) for a Colored Image</td>
+    </tr>
+    <tr>
+        <td>Matrix2D to Image2D</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : matrix2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Convert Matrix2D to Image2D</td>
     </tr>
     <tr>
         <td>RGB->HSL</td>
@@ -2254,9 +2281,14 @@
         <td><ul><li>source : image2D</li><li>precision : int</li><li>normalize : bool</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Convert Depth Precision between 8u, 8s, 16u, 16s, and 32f</td>
     </tr>
     <tr>
+        <td>Bandpass filter</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : cuda2D</li><li>factor : double2</li><li>radius : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Band Pass filter to blur and sharpen</td>
+    </tr>
+    <tr>
         <td>Detect Circles</td>
         <td><i class='bi bi-stars'></i></td>
-        <td><ul><li>source : cuda2D</li><li>dp : double</li><li>minDist : double</li><li>param1 : double</li><li>param2 : double</li><li>minRadius : int</li><li>maxRadius : int</li>        </ul></td>        <td><ul><li>circles : matrix2D</li><li>preview : image2D</li><li>numCircles : int</li><li>maxRadius : double</li>        </ul></td>        <td>Detects circles in a grayscale image using the Hough transform.</td>
+        <td><ul><li>source : cuda2D</li><li>dp : double</li><li>minDist : double</li><li>cannyThreshold : int</li><li>votesThreshold : int</li><li>minRadius : int</li><li>maxRadius : int</li><li>maxCircles : int</li>        </ul></td>        <td><ul><li>circles : matrix2D</li><li>preview : image2D</li><li>numCircles : int</li><li>maxRadius : double</li>        </ul></td>        <td>Detects circles in a grayscale image using the Hough transform.</td>
     </tr>
     <tr>
         <td>Detect Lines</td>
@@ -2359,7 +2391,7 @@
         <td><ul><li>source : image2D</li><li>ddepth : int</li><li>kernel : matrix2D</li><li>anchor : int2</li><li>delta : double</li><li>borderType : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Convolves an image with the kernel, applying an arbitrary linear filter to an image</td>
     </tr>
     <tr>
-        <td>Find Countours</td>
+        <td>Find Contours</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>mode : int</li><li>method : int</li><li>point : int2</li>        </ul></td>        <td><ul><li>contours : contours</li><li>hierarchy : matrix2D</li>        </ul></td>        <td>Finds contours in a binary image</td>
     </tr>
@@ -2397,6 +2429,16 @@
         <td>Median Blur</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>ksize : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Blurs an image using the median filter</td>
+    </tr>
+    <tr>
+        <td>Morphological Skeleton</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : image2D</li><li>element : matrix2D</li><li>threshold : double</li><li>max iterations : int</li><li>cutoff : double</li>        </ul></td>        <td><ul><li>out : image2D</li><li>thresh : image2D</li>        </ul></td>        <td>Create compact representation of image using skeleton.</td>
+    </tr>
+    <tr>
+        <td>Morphological Ex</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : image2D</li><li>element : matrix2D</li><li>operation : int</li><li>anchor : int2</li><li>iterations : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Performs advanced morphological transformations using an erosion and dilation as basic operations.</td>
     </tr>
     <tr>
         <td>Pyr Down</td>
@@ -2442,6 +2484,11 @@
         <td>Stack Blur</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>ksize : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Blurs an image by creating a kind of moving stack of colors whilst scanning through the image</td>
+    </tr>
+    <tr>
+        <td>Get Structuring Element</td>
+        <td><i class='bi bi-eye-fill'></i></td>
+        <td><ul><li>shape : int</li><li>ksize : int2</li><li>anchor : int2</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Returns a structuring element of the specified size and shape for morphological operations.</td>
     </tr>
     <tr>
         <td>Sum Color</td>
@@ -3339,7 +3386,7 @@
     <tr>
         <td>Fullscreen</td>
         <td><i class='bi bi-window'></i></td>
-        <td><ul><li>source : *2D</li>        </ul></td>        <td><ul>        </ul></td>        <td>Show Image</td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul>        </ul></td>        <td>Show Image</td>
     </tr>
     <tr>
         <td>Full Image Display</td>
@@ -3349,7 +3396,7 @@
     <tr>
         <td>imshow Display</td>
         <td><i class='bi bi-window'></i></td>
-        <td><ul><li>source : *2D</li>        </ul></td>        <td><ul>        </ul></td>        <td>imshow Image Viewer - only displays on the server</td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul>        </ul></td>        <td>imshow Image Viewer - only displays on the server</td>
     </tr>
     <tr>
         <td>Int2 Display</td>
@@ -3384,7 +3431,7 @@
     <tr>
         <td>Thumbnail Image Display</td>
         <td><i class='bi bi-window'></i></td>
-        <td><ul><li>source : *2D</li>        </ul></td>        <td><ul>        </ul></td>        <td>Show Thumbnail of Image</td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul>        </ul></td>        <td>Show Thumbnail of Image</td>
     </tr>
 </table>
 <h3 id='Photron'>Photron</h3><p>The Photron Filters tools are all under the <i class="bi bi-camera-reels-fill"> Photron</i> category. The full list of display tools is as follows:</p><table>
@@ -4247,12 +4294,12 @@
     <tr>
         <td>DCT</td>
         <td><i class='bi bi-rulers'></i></td>
-        <td><ul><li>source : image2D</li><li>flags : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Performs a forward discrete Cosine transform of 1D or 2D array</td>
+        <td><ul><li>source : image2D</li><li>flags : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Performs a forward discrete Cosine transform of 1D or 2D array</td>
     </tr>
     <tr>
         <td>DFT</td>
         <td><i class='bi bi-rulers'></i></td>
-        <td><ul><li>source : image2D</li><li>flags : int</li><li>nonzeroRows : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Performs a forward Discrete Fourier transform of a 1D or 2D floating-point array</td>
+        <td><ul><li>source : image2D</li><li>flags : int</li><li>nonzeroRows : int</li>        </ul></td>        <td><ul><li>real : image2D</li><li>imaginary : image2D</li>        </ul></td>        <td>Performs a forward Discrete Fourier transform of a 1D or 2D floating-point array</td>
     </tr>
     <tr>
         <td>Disparity Map</td>
@@ -4277,12 +4324,12 @@
     <tr>
         <td>IDCT</td>
         <td><i class='bi bi-rulers'></i></td>
-        <td><ul><li>source : matrix2D</li><li>flags : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Performs an inverse discrete Cosine transform of 1D or 2D array</td>
+        <td><ul><li>source : image2D</li><li>flags : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Performs an inverse discrete Cosine transform of 1D or 2D array</td>
     </tr>
     <tr>
         <td>IDFT</td>
         <td><i class='bi bi-rulers'></i></td>
-        <td><ul><li>source : matrix2D</li><li>flags : int</li><li>nonzeroRows : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Performs an inverse Discrete Fourier transform of a 1D or 2D floating-point array</td>
+        <td><ul><li>real : image2D</li><li>imaginary : image2D</li><li>flags : int</li><li>nonzeroRows : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Performs an inverse Discrete Fourier transform of a 1D or 2D floating-point array</td>
     </tr>
     <tr>
         <td>Linear Polar</td>
@@ -4391,7 +4438,7 @@
     <tr>
         <td>ROS2 Action Client</td>
         <td><i class='bi bi-lightning'></i></td>
-        <td><ul><li>trigger : int</li><li>ROS action : string</li><li>action type : string</li><li>args : string</li><li>feedback : bool</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Executes a ROS action</td>
+        <td><ul><li>trigger : int</li><li>ROS action : string</li><li>action type : string</li><li>args : string</li><li>feedback : bool</li>        </ul></td>        <td><ul><li>response : string</li>        </ul></td>        <td>Executes a ROS action</td>
     </tr>
     <tr>
         <td>ROS2 Publisher</td>
@@ -4399,9 +4446,14 @@
         <td><ul><li>trigger : int</li><li>ROS topic : string</li><li>message data : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Publishes data to a ROS topic</td>
     </tr>
     <tr>
+        <td>ROS2 Server</td>
+        <td><i class='bi rocket-takeoff'></i></td>
+        <td><ul><li>trigger : int</li><li>ROS package : string</li><li>executable : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Launches a ROS2 node</td>
+    </tr>
+    <tr>
         <td>ROS2 Service Client</td>
         <td><i class='bi bi-telephone-forward'></i></td>
-        <td><ul><li>trigger : int</li><li>ROS service : string</li><li>service type : string</li><li>args : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Calls a ROS service</td>
+        <td><ul><li>trigger : int</li><li>ROS service : string</li><li>service type : string</li><li>args : string</li>        </ul></td>        <td><ul><li>response : string</li>        </ul></td>        <td>Calls a ROS service</td>
     </tr>
     <tr>
         <td>ROS2 Subscriber</td>
@@ -5093,6 +5145,51 @@
     <img src="./assets/ui_pyrender_seg.jpg" width="30%" />
 
 
+    <h3 id="YOLOX">YOLOX</h3>
+
+    <p>YOLOX is a version of the computer vision object detection model YOLO (You Only Look Once) that is better for fine-tuning.</p>
+
+    <h4>YOLOX Train</h4>
+
+    <p>Training a pretrained YOLOX model on custom data requires a dataset as well as some hyperparameters. <a target="_blank" href="https://github.com/Megvii-BaseDetection/YOLOX/blob/main/docs/train_custom_data.md">YOLOX Train Custom Data</a></p>
+
+    <p>The image dataset must be in COCO or VOC format and labeled using Labelme or CVAT. The YOLOX Train node takes in the COCO/VOC dataset directory, train annotation/labels JSON, and validation annotation/labels JSON.</p>
+
+    <p>The hyperparameters include image size (416x416 for YOLOX light models, 640x640 for standard YOLOX models), the number of unique classes in the dataset, and the filepath to the checkpoint or pretrained PyTorch (.pth) model.</p>
+
+    <p>The experiment (exp) file contains all the other hyperparameters that can be adjusted, with args exposing a select few for ease of use.</p>
+
+    <p>The name and output directory determine the name of the fine-tuned model (.onnx) and the output directory where the log data is written to, as seen below:</p>
+
+    <img src="./assets/ui_yolox_output_files.png" width="40%" />
+
+    <p>The YOLOX Train node outputs a model that is trained on the input dataset, so it can classify things outside of the 80 COCO classes that it is originally trained on, like manholes.</p>
+
+    <h4>Tensorboard Visualization</h4>
+
+    <p>Tensorboard is a web-based visualization tool for tracking machine learning training and validation errors.</p>
+
+    <p>It simply takes in the output directory of an ML training process and a localhost port to be hosted on.</p>
+
+    <p>If port is 6006, then triggering the node and opening localhost:6006 will show graphs like these updating live as the model trains:</p>
+
+    <img src="./assets/ui_tensorboard_val1.png" width="40%" />
+    <img src="./assets/ui_tensorboard_val2.png" width="40%" />
+
+    <h4>YOLOX Inference</h4>
+
+    <p>ONNXRuntime is a high-performance engine tool for ONNX models.</p>
+
+    <p>INFINIWORKFLOW features an general-purpose ONNXRuntime node as well as a YoloxOnnxRuntime node.</p>
+
+    <p>Fortunately, the YOLOX Train node outputs an .onnx model, so the YoloxOnnxRuntime node can be used.</p>
+
+    <p>The relevant inputs for running inference on YOLOX are the model input, the list of class labels if they are not the standard COCO classes, and the input size (416x416 for YOLOX light models, 640x640 for standard YOLOX models).</p>
+
+    <img src="./assets/ui_yolox_manhole.png" width="40%" />
+
+    <p>The YoloxOnnxRuntime node outputs a preview of the detected objects as well as an output matrix.</p>
+
 
     <h2>Experimental Features</h2>
     <h3 id="DistributionProcessing">Distributed Processing</h3>
@@ -5108,6 +5205,72 @@
         the distributed server.
     </p>
     <img src="./assets/ui_distributed_processing.gif" />
+
+    <h3 id="ROS">Robot Operating System (ROS)</h3>
+
+    <p>ROS is a set of libraries used to communicate with robotic devices including robotic cars and arms.</p>
+
+    <p>Everything in a ROS system is a node, communicating with one another through topics, services, and actions.</p>
+
+    <p>Every ROS node in INFINIWORKFLOW corresponds to a ROS node in a ROS system.</p>
+
+    <p>Technically, INFINIWORKFLOW only supports ROS2, but they are referred to interchangeably in this manual.</p>
+
+    <br />
+
+    <p>ROS Publishers and Subscribers communicate by streaming data to and from a ROS topic.</p>
+
+    <h4>ROS Publisher</h4>
+
+    <p>The ROS2 Publisher node takes in a ROS topic name and a string message.</p>
+
+    <p>On trigger, it broadcasts the string message to the specified ROS topic once a second.</p>
+
+    <h4>ROS Subscriber</h4>
+
+    <p>The ROS2 Subscriber node takes in a ROS topic name as input.</p>
+
+    <p>On trigger, it outputs received messages from the specified ROS topic.</p>
+
+    <br />
+
+    <p>Devices that support ROS manifest themselves as ROS servers, which typically contain both service servers and action servers.</p>
+
+    <p>Instead of getting continual updates like publishers and subscribers, services only provide data or take effect when requested to by a client.</p>
+
+    <p>Like services, actions are only executed when called by a client. Unlike services, actions typically involve sending a goal and the action server can provide feedback on its progress towards that goal.</p>
+
+    <h4>ROS Server</h4>
+
+    <p>The ROS2 Server node takes in a ROS package name and executable file.</p>
+
+    <p>On trigger, this launches a ROS server that includes service and action servers.</p>
+
+    <p>By default, the ROS2 Server node launches the turtlesim_node of the turtlesim package, but this can be robotic arms, cars, or any other ROS node.</p>
+
+    <img src="./assets/ui_turtlesim.png" width="40%" />
+
+    <h4>ROS Service Client</h4>
+
+    <p>The ROS2 Service Client node takes in a ROS service name, the input type of the service, and args representing the input.</p>
+
+    <p>On trigger, this queries the specified ROS service with the args input for some information or effect.</p>
+
+    <p>By default, the node calls the /spawn service of the turtlesim_node, which spawns a turtle at its default position in the bottom left corner.</p>
+
+    <img src="./assets/ui_ros2_service_client.gif" width="40%" />
+
+    <h4>ROS Action Client</h4>
+
+    <p>The ROS2 Action Client node takes in a ROS action name, the input type of the action, args representing the input, and a feedback bool.</p>
+
+    <p>On trigger, this uses the args input to set an objective for the specified ROS action and outputs its progression to that goal if feedback is true.</p>
+
+    <p>By default, the node calls the /turtle1/rotate_absolute action of the turtlesim_node, which rotates turtle1 to a specified angle; in this case, {theta: 1.57}.</p>
+
+    <p>The service can be any supported service on any ROS node, so the ROS2 Service and Action Client nodes can interact with devices like robotic arms and cars.</p>
+
+    <img src="./assets/ui_ros2_action_client.gif" width="40%" />
 
     <h3 id="Publish">Publish</h3>
 
@@ -5412,7 +5575,7 @@
             <td> UTKFace Dataset </td>
             <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
             <td>
-                <a target="_blank" target="_blank" href="https://susanqq.github.io/UTKFace/">UTKFace dataset is a large-scale face dataset with long age span </a>
+                <a target="_blank" href="https://susanqq.github.io/UTKFace/">UTKFace dataset is a large-scale face dataset with long age span </a>
             </td>
             <td>  <a>utkface</a> </td>
         </tr>
@@ -5426,7 +5589,7 @@
                 <p>
                     Photron does not distribute YOLO5 as part of INFINIWORKFLOW, if you wish to use YOLO5, you must download it separately and agree to the license
                     terms on your usage:
-                    <a target="_blank" target="_blank" href="https://github.com/ultralytics/yolov5/blob/master/LICENSE">YOLO5 LICENSE</a>
+                    <a target="_blank" href="https://github.com/ultralytics/yolov5/blob/master/LICENSE">YOLO5 LICENSE</a>
                     <pre>
 Additional steps:
 
@@ -5643,6 +5806,34 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
             </td>
             <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1nw0esWIcZra8TdDipzW67W1so-tLhFAz/view?usp=sharing">database</a> </td>
         </tr>
+
+        <tr>
+            <td> Robot Operating System (ROS) </td>
+            <td> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu24.04 LTS"></i>  </td>
+            <td>
+                <a target="_blank" href="https://docs.ros.org/en/jazzy/index.html">A set of libraries that communicates data and actions across sensors and robotic devices.</a>
+                <p>
+                    Photron does not distribute ROS as part of INFINIWORKFLOW, if you wish to use ROS, you must download it separately and agree to the license
+                    terms on your usage:
+                    <a target="_blank" target="_blank" href="https://github.com/ros2/tutorials/blob/master/LICENSE">ROS2 LICENSE</a>
+                    <pre>
+Additional steps:
+
+1. Install ROS2: https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html
+
+2. Make sure you source the ROS environment:
+
+source /opt/ros/jazzy/setup.bash
+
+3. Start INFINIWORKFLOW using
+
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/opencv2/:../external/bin/ python3 app.py
+</pre>
+
+                </p>
+            </td>
+            <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1fGdMlRJci3bVzhuAR26bvbri_o9-YRq9/view?usp=sharing">ros2</a> </td>
+        </tr>
     </table>
 
     <!-- PACKAGES END -->
@@ -5763,10 +5954,14 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
     <h3 id="Args">Command line arguments</h3>
 
     <p>
-        You can start INFINIWORKFLOW from the command line and pass in arguments as follows:
+        You can start INFINIWORKFLOW from the command line. To successfully execute you need to change the current directory to the app folder located under INFINIWORKFLOW and then run the command:
     </p>
 
-<pre> python app.pyc c [-help] [-device #] [-noncuda] [-batch] [-final node name or node uuid] [-override json] [-nobrowser] [-source ...] [-path ...] [-port ...] [workflow ....]</pre>
+    <p>
+        Note, one OSX and Linux instead of using "..\python.exe", you should use "python3"
+    </p>
+
+<pre>..\python.exe app.pyc c [-help] [-device #] [-noncuda] [-batch] [-final node name or node uuid] [-override json] [-nobrowser] [-source ...] [-path ...] [-port ...] [workflow ....]</pre>
 
     <table>
         <tr>
@@ -5780,77 +5975,77 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
             <td>-device</td>
             <td>allows you to set the default GPU device used</td>
             <td>0</td>
-            <td><pre>python app.pyc -device 1</pre></td>
+            <td><pre>..\python.exe app.pyc -device 1</pre></td>
         </tr>
 
         <tr>
             <td>-noncuda</td>
             <td>will switch to the non cuda based rendering</td>
             <td></td>
-            <td><pre>python app.pyc -noncuda</pre></td>
+            <td><pre>..\python.exe app.pyc -noncuda</pre></td>
         </tr>
 
         <tr>
             <td>-batch</td>
             <td>batch mode will not show UI</td>
             <td></td>
-            <td><pre>python app.pyc -batch</pre></td>
+            <td><pre>..\python.exe app.pyc -batch</pre></td>
         </tr>
 
         <tr>
             <td>-final</td>
             <td>if in batch mode you can set the final node that you wish to execute before you exit. Either pass in node name or node uuid</td>
             <td></td>
-            <td><pre>python app.pyc -final R2Score</pre></td>
+            <td><pre>..\python.exe app.pyc -final R2Score</pre></td>
         </tr>
 
         <tr>
             <td>-override</td>
             <td>a json string that allows you to override attributes in the workflow you pass</td>
             <td></td>
-            <td><pre>python app.pyc -final "{'Set Int.value' : '5', 'Set Int1.value' : '11' }"</pre></td>
+            <td><pre>..\python.exe app.pyc -final "{'Set Int.value' : '5', 'Set Int1.value' : '11' }"</pre></td>
         </tr>
 
         <tr>
             <td>-help</td>
             <td>shows a help message</td>
             <td></td>
-            <td><pre>python app.pyc -help"</pre></td>
+            <td><pre>..\python.exe app.pyc -help"</pre></td>
         </tr>
 
         <tr>
             <td>-port</td>
             <td>specify which network port to use, if none specified then 5000 is used</td>
             <td>5000</td>
-            <td><pre>python app.pyc -port 8888"</pre></td>
+            <td><pre>..\python.exe app.pyc -port 8888"</pre></td>
         </tr>
 
         <tr>
             <td>-nobrowser</td>
             <td>does not automatically open a browser</td>
             <td></td>
-            <td><pre>python app.pyc -nobrowser"</pre></td>
+            <td><pre>..\python.exe app.pyc -nobrowser"</pre></td>
         </tr>
 
         <tr>
             <td>-path</td>
             <td>establishes paths that can be used as a prefix</td>
             <td></td>
-            <td><pre>python app.pyc -path "captures=C:\Users\imagi\CapturesFolder;media=C:\media"</pre></td>
+            <td><pre>..\python.exe app.pyc -path "captures=C:\Users\imagi\CapturesFolder;media=C:\media"</pre></td>
         </tr>
 
         <tr>
             <td>-source</td>
             <td>creates a workflow with a movie reader with this media</td>
             <td></td>
-            <td><pre>python app.pyc -path "media=C:\media_folder" -source media:movie.mp4</pre></td>
+            <td><pre>..\python.exe app.pyc -path "media=C:\media_folder" -source media:movie.mp4</pre></td>
         </tr>
 
         <tr>
             <td>workflow</td>
             <td>The final argument is the workflow json file</td>
             <td></td>
-            <td><pre>python app.pyc  ..\demos\Untitled\Untitiled.json"</pre></td>
+            <td><pre>..\python.exe app.pyc  ..\demos\Untitled\Untitiled.json"</pre></td>
         </tr>
     </table>
 
