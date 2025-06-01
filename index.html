@@ -10046,6 +10046,207 @@ test summary: 0 out of 2 pass
             </td>
         </tr>
 
+
+        <tr>
+            <td>
+                togglePlay
+            </td>
+            <td>
+                Toggles the playback between paused and playing
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>duration</td>
+                        <td>int</td>
+                        <td>number of milliseconds to move the mouse to perform the operation</td>
+                    </tr>
+                    <tr>
+                        <td>delay</td>
+                        <td>int</td>
+                        <td>[optional] number of milliseconds delay after which the task will be executed</td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <pre>    
+                {
+                    "name": "togglePlay",
+                    "duration": 1000,
+                    "delay": 2000
+                }
+                </pre>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                firstFrame
+            </td>
+            <td>
+                Goes to the first frame
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>duration</td>
+                        <td>int</td>
+                        <td>number of milliseconds to move the mouse to perform the operation</td>
+                    </tr>
+                    <tr>
+                        <td>delay</td>
+                        <td>int</td>
+                        <td>[optional] number of milliseconds delay after which the task will be executed</td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <pre>    
+                {
+                    "name": "firstFrame",
+                    "duration": 1000,
+                    "delay": 2000
+                }
+                </pre>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>
+                previousFrame
+            </td>
+            <td>
+                Goes to the prior frame
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>duration</td>
+                        <td>int</td>
+                        <td>number of milliseconds to move the mouse to perform the operation</td>
+                    </tr>
+                    <tr>
+                        <td>delay</td>
+                        <td>int</td>
+                        <td>[optional] number of milliseconds delay after which the task will be executed</td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <pre>    
+                {
+                    "name": "previousFrame",
+                    "duration": 1000,
+                    "delay": 2000
+                }
+                </pre>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                nextFrame
+            </td>
+            <td>
+                Goes to the next frame
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>duration</td>
+                        <td>int</td>
+                        <td>number of milliseconds to move the mouse to perform the operation</td>
+                    </tr>
+                    <tr>
+                        <td>delay</td>
+                        <td>int</td>
+                        <td>[optional] number of milliseconds delay after which the task will be executed</td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <pre>    
+                {
+                    "name": "previousFrame",
+                    "duration": 1000,
+                    "delay": 2000
+                }
+                </pre>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                lastFrame
+            </td>
+            <td>
+                Goes to the last frame
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>duration</td>
+                        <td>int</td>
+                        <td>number of milliseconds to move the mouse to perform the operation</td>
+                    </tr>
+                    <tr>
+                        <td>delay</td>
+                        <td>int</td>
+                        <td>[optional] number of milliseconds delay after which the task will be executed</td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <pre>    
+                {
+                    "name": "lastFrame",
+                    "duration": 1000,
+                    "delay": 2000
+                }
+                </pre>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                setCurrentFrame
+            </td>
+            <td>
+                Sets the current frame
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>frame</td>
+                        <td>int</td>
+                        <td>the frame to jump to</td>
+                    </tr>
+                    <tr>
+                        <td>duration</td>
+                        <td>int</td>
+                        <td>number of milliseconds to move the mouse to perform the operation</td>
+                    </tr>
+                    <tr>
+                        <td>delay</td>
+                        <td>int</td>
+                        <td>[optional] number of milliseconds delay after which the task will be executed</td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <pre>    
+                {
+                    "name": "setCurrentFrame",
+                    "frame": 10",
+                    "duration": 1000,
+                    "delay": 2000
+                }
+                </pre>
+            </td>
+        </tr>
+
+
         <tr>
             <td>
                 click
@@ -10076,8 +10277,8 @@ test summary: 0 out of 2 pass
                 <pre>    
                 {
                     "name": "click",
-                    "id": "#toggle-play",
-                    "duration": 100,
+                    "id": "#publish-workflow",
+                    "duration": 1000,
                     "delay": 2000
                 }
                 </pre>
