@@ -376,6 +376,14 @@
                     <td>double3, int3</td>
                     <td>numeric3</td>
                 </tr>
+                <tr>
+                    <td>torch.nn.Module</td>
+                    <td>torchvision.model</td>
+                </tr>
+                <tr>
+                    <td>torchvision.model</td>
+                    <td>torch.nn.Module</td>
+                </tr>
             </table>
         </li>
         <li>
@@ -1157,7 +1165,7 @@
     <tr>
         <td>Onnx Runtime YOLOX</td>
         <td><i class='bi bi-plugin'></i></td>
-        <td><ul><li>source : image2D</li><li>model : string</li><li>outLayerName : string</li><li>classes : string</li><li>scale factor : double</li><li>size : int2</li><li>red mean : double</li><li>green mean : double</li><li>blue mean : double</li><li>swapRB : bool</li><li>crop : bool</li><li>color images : bool</li>        </ul></td>        <td><ul><li>out : int</li><li>preview : image2d</li>        </ul></td>        <td>Onnx Runtime Inference for YOLOX<p style='color:red;'>The following package is required: onnx_runtime_windows</p></td>
+        <td><ul><li>source : image2D</li><li>model : string</li><li>outLayerName : string</li><li>classes : string</li><li>scale factor : double</li><li>size : int2</li><li>red mean : double</li><li>green mean : double</li><li>blue mean : double</li><li>swapRB : bool</li><li>crop : bool</li><li>color images : bool</li>        </ul></td>        <td><ul><li>out : int</li><li>preview : image2D</li>        </ul></td>        <td>Onnx Runtime Inference for YOLOX<p style='color:red;'>The following package is required: onnx_runtime_windows</p></td>
     </tr>
     <tr>
         <td>Person ReID</td>
@@ -2418,6 +2426,11 @@
         <td><ul><li>source : image2D</li><li>mode : int</li><li>method : int</li><li>point : int2</li>        </ul></td>        <td><ul><li>contours : contours</li><li>hierarchy : matrix2D</li>        </ul></td>        <td>Finds contours in a binary image</td>
     </tr>
     <tr>
+        <td>Frequency Bandpass</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : image2D</li><li>flags : int</li><li>nonzeroRows : int</li><li>radius : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Applies a bandpass filter to a 1D or 2D floating-point array</td>
+    </tr>
+    <tr>
         <td>Detect Circles</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>method : int</li><li>dp : double</li><li>minDist : double</li><li>param1 : double</li><li>param2 : double</li><li>minRadius : int</li><li>maxRadius : int</li>        </ul></td>        <td><ul><li>circles : matrix2D</li><li>preview : image2D</li><li>numCircles : int</li><li>maxRadius : double</li>        </ul></td>        <td>Detects circles in a grayscale image using the Hough transform.</td>
@@ -2560,6 +2573,11 @@
         <td>Take Picture</td>
         <td><i class='bi bi-file-image'></i></td>
         <td><ul><li>source : image2D</li><li>click : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Takes a picture</td>
+    </tr>
+    <tr>
+        <td>Text</td>
+        <td><i class='bi bi-type'></i></td>
+        <td><ul><li>text : string</li><li>font size : int</li><li>Color text : color</li><li>Color background : color</li><li>opacity : double</li><li>font : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Outputs text as an image</td>
     </tr>
     <tr>
         <td>Text File Reader</td>
@@ -3322,6 +3340,11 @@
         <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>metric : string</li><li>shrink_threshold : double</li>        </ul></td>        <td><ul><li>out : ML.Model</li>        </ul></td>        <td>Nearest Centroid Classifier model</td>
     </tr>
     <tr>
+        <td>Optical Character Recognition</td>
+        <td><i class='bi bi-lightbulb-fill'></i></td>
+        <td><ul><li>source : image2D</li><li>confidenceThreshold : double</li><li>language : int</li>        </ul></td>        <td><ul><li>out : DataFrame</li><li>preview : image2D</li>        </ul></td>        <td>Reads text in an image using EasyOCR<p style='color:red;'>The following package is required: ocr</p></td>
+    </tr>
+    <tr>
         <td>R2 Score</td>
         <td><i class='bi bi-lightbulb-fill'></i></td>
         <td><ul><li>truth : DataFrame</li><li>predicted : DataFrame</li>        </ul></td>        <td><ul><li>out : double</li>        </ul></td>        <td>Calculates R2 Score</td>
@@ -3618,9 +3641,14 @@
         <td><ul><li>input : tensor</li><li>other : tensor</li>        </ul></td>        <td><ul><li>out : tensor</li>        </ul></td>        <td>Divides each element of the input input by the corresponding element of other.</td>
     </tr>
     <tr>
+        <td>Export Torchvision to ONNX</td>
+        <td><i class='bi bi-fire'></i></td>
+        <td><ul><li>model : torchvision.model</li><li>save ONNX file : string</li><li>opset_version : int</li><li>input_names : string</li><li>output_names : string</li><li>export_params : bool</li><li>trigger : int</li>        </ul></td>        <td><ul>        </ul></td>        <td>Export PRE-MADE Torchvision model to ONNX.</td>
+    </tr>
+    <tr>
         <td>Export to ONNX</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>model : torch.nn.Module</li><li>state dict : torch.model</li><li>dataset : torch.dataset</li><li>save ONNX file : string</li><li>opset_version : int</li><li>input_names : string</li><li>output_names : string</li><li>export_params : bool</li><li>trigger : int</li>        </ul></td>        <td><ul>        </ul></td>        <td>Export a PyTorch model to ONNX.</td>
+        <td><ul><li>model : torch.nn.Module</li><li>state dict : torch.nn.Module</li><li>dataset : torch.dataset</li><li>save ONNX file : string</li><li>opset_version : int</li><li>input_names : string</li><li>output_names : string</li><li>export_params : bool</li><li>trigger : int</li>        </ul></td>        <td><ul>        </ul></td>        <td>Export CUSTOM-MADE PyTorch model to ONNX.</td>
     </tr>
     <tr>
         <td>FashionMNIST Dataset</td>
@@ -3630,7 +3658,7 @@
     <tr>
         <td>Finetune Trained Model</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>trigger : int</li><li>data : string</li><li>model : torch.model</li><li>optimizer : torch.optim</li><li>loss function : torch.loss</li><li>numClasses : int</li><li>classes : string</li><li>batchSize : int</li><li>numEpochs : int</li><li>featureExtract : bool</li><li>transforms : torchvision.transforms</li>        </ul></td>        <td><ul><li>out : torch.model</li><li>meta data : WeightsEnum</li>        </ul></td>        <td>Finetune or feature train a pre-existing torchvision model.</td>
+        <td><ul><li>trigger : int</li><li>data : string</li><li>model : torchvision.model</li><li>optimizer : torch.optim</li><li>loss function : torch.loss</li><li>numClasses : int</li><li>classes : string</li><li>batchSize : int</li><li>numEpochs : int</li><li>featureExtract : bool</li><li>transforms : torchvision.transforms</li>        </ul></td>        <td><ul><li>out : torchvision.model</li>        </ul></td>        <td>Finetune or feature train a pre-existing torchvision model.</td>
     </tr>
     <tr>
         <td>Flatten Tensor</td>
@@ -3650,7 +3678,7 @@
     <tr>
         <td>Image Classification</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>source : image2D</li><li>model : torch.model</li><li>meta data : WeightsEnum</li><li>export to ONNX : bool</li><li>save ONNX file : string</li><li>opset_version : int</li><li>input_names : string</li><li>output_names : string</li><li>export_params : bool</li><li>trigger : int</li>        </ul></td>        <td><ul><li>class : string</li><li>score : double</li>        </ul></td>        <td>Perform image classification on pre-trained model.</td>
+        <td><ul><li>source : image2D</li><li>model : torchvision.model</li><li>export to ONNX : bool</li><li>save ONNX file : string</li><li>opset_version : int</li><li>input_names : string</li><li>output_names : string</li><li>export_params : bool</li><li>trigger : int</li>        </ul></td>        <td><ul><li>class : string</li><li>score : double</li>        </ul></td>        <td>Perform image classification on pre-trained model.</td>
     </tr>
     <tr>
         <td>Image to Tensor</td>
@@ -3670,82 +3698,82 @@
     <tr>
         <td>Alexnet Model</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torch.model</li><li>meta data : WeightsEnum</li>        </ul></td>        <td>Loads alexnet model from pytorch/vision repo</td>
+        <td><ul><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torchvision.model</li>        </ul></td>        <td>Loads alexnet model from pytorch/vision repo</td>
     </tr>
     <tr>
         <td>Convnext Model</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torch.model</li><li>meta data : WeightsEnum</li>        </ul></td>        <td>Loads convnext model from pytorch/vision repo</td>
+        <td><ul><li>model : string</li><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torchvision.model</li>        </ul></td>        <td>Loads convnext model from pytorch/vision repo</td>
     </tr>
     <tr>
         <td>DeeplabV3 Model</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torch.model</li><li>meta data : WeightsEnum</li>        </ul></td>        <td>Loads DeeplabV3 model from pytorch/vision repo</td>
+        <td><ul><li>model : string</li><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torchvision.model</li>        </ul></td>        <td>Loads DeeplabV3 model from pytorch/vision repo</td>
     </tr>
     <tr>
         <td>Densenet Model</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torch.model</li><li>meta data : WeightsEnum</li>        </ul></td>        <td>Loads densenet model from pytorch/vision repo</td>
+        <td><ul><li>model : string</li><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torchvision.model</li>        </ul></td>        <td>Loads densenet model from pytorch/vision repo</td>
     </tr>
     <tr>
         <td>EfficientNet Model</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torch.model</li><li>meta data : WeightsEnum</li>        </ul></td>        <td>Loads EfficientNet model from pytorch/vision repo</td>
+        <td><ul><li>model : string</li><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torchvision.model</li>        </ul></td>        <td>Loads EfficientNet model from pytorch/vision repo</td>
     </tr>
     <tr>
         <td>FCN Model</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torch.model</li><li>meta data : WeightsEnum</li>        </ul></td>        <td>Loads Fully Convolutional Network model from pytorch/vision repo</td>
+        <td><ul><li>model : string</li><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torchvision.model</li>        </ul></td>        <td>Loads Fully Convolutional Network model from pytorch/vision repo</td>
     </tr>
     <tr>
         <td>Load Torchvision Model</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>model : string</li><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torch.model</li><li>meta data : WeightsEnum</li>        </ul></td>        <td>Loads a model from the pytorch/vision GitHub repo</td>
+        <td><ul><li>model : string</li><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torchvision.model</li>        </ul></td>        <td>Loads a model from the pytorch/vision GitHub repo</td>
     </tr>
     <tr>
         <td>Googlenet Model</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torch.model</li><li>meta data : WeightsEnum</li>        </ul></td>        <td>Loads googlenet model from pytorch/vision repo</td>
+        <td><ul><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torchvision.model</li>        </ul></td>        <td>Loads googlenet model from pytorch/vision repo</td>
     </tr>
     <tr>
         <td>InceptionV3 Model</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torch.model</li><li>meta data : WeightsEnum</li>        </ul></td>        <td>Loads Inception v3 model from pytorch/vision repo</td>
+        <td><ul><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torchvision.model</li>        </ul></td>        <td>Loads Inception v3 model from pytorch/vision repo</td>
     </tr>
     <tr>
         <td>MnasNet Model</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torch.model</li><li>meta data : WeightsEnum</li>        </ul></td>        <td>Loads MnasNet model from pytorch/vision repo</td>
+        <td><ul><li>model : string</li><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torchvision.model</li>        </ul></td>        <td>Loads MnasNet model from pytorch/vision repo</td>
     </tr>
     <tr>
         <td>MobileNet Model</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torch.model</li><li>meta data : WeightsEnum</li>        </ul></td>        <td>Loads MobileNet model from pytorch/vision repo</td>
+        <td><ul><li>model : string</li><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torchvision.model</li>        </ul></td>        <td>Loads MobileNet model from pytorch/vision repo</td>
     </tr>
     <tr>
         <td>Load Torch Model</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>filename : string</li>        </ul></td>        <td><ul><li>out : torch.model</li>        </ul></td>        <td>Load a trained model from a designated file</td>
+        <td><ul><li>filename : string</li>        </ul></td>        <td><ul><li>out : torch.nn.Module</li>        </ul></td>        <td>Load a trained model from a designated file</td>
     </tr>
     <tr>
         <td>Regnet Model</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>model : string</li><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torch.model</li><li>meta data : WeightsEnum</li>        </ul></td>        <td>Loads regnet model from pytorch/vision repo</td>
+        <td><ul><li>model : string</li><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torchvision.model</li>        </ul></td>        <td>Loads regnet model from pytorch/vision repo</td>
     </tr>
     <tr>
         <td>Resnet Model</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>model : string</li><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torch.model</li><li>meta data : WeightsEnum</li>        </ul></td>        <td>Loads resnet model from pytorch/vision repo</td>
+        <td><ul><li>model : string</li><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torchvision.model</li>        </ul></td>        <td>Loads resnet model from pytorch/vision repo</td>
     </tr>
     <tr>
         <td>Shufflenet Model</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>model : string</li><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torch.model</li><li>meta data : WeightsEnum</li>        </ul></td>        <td>Loads shufflenet model from pytorch/vision repo</td>
+        <td><ul><li>model : string</li><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torchvision.model</li>        </ul></td>        <td>Loads shufflenet model from pytorch/vision repo</td>
     </tr>
     <tr>
         <td>Swin Transformer Model</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>model : string</li><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torch.model</li><li>meta data : WeightsEnum</li>        </ul></td>        <td>Loads Swin Transformer model from pytorch/vision repo</td>
+        <td><ul><li>model : string</li><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torchvision.model</li>        </ul></td>        <td>Loads Swin Transformer model from pytorch/vision repo</td>
     </tr>
     <tr>
         <td>Load Tensor</td>
@@ -3755,12 +3783,12 @@
     <tr>
         <td>VGG Model</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>model : string</li><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torch.model</li><li>meta data : WeightsEnum</li>        </ul></td>        <td>Loads VGG model from pytorch/vision repo</td>
+        <td><ul><li>model : string</li><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torchvision.model</li>        </ul></td>        <td>Loads VGG model from pytorch/vision repo</td>
     </tr>
     <tr>
         <td>Vision Transformer Model</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>model : string</li><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torch.model</li><li>meta data : WeightsEnum</li>        </ul></td>        <td>Loads Vision Transformer (ViT) model from pytorch/vision repo</td>
+        <td><ul><li>model : string</li><li>weights trained : bool</li>        </ul></td>        <td><ul><li>out : torchvision.model</li>        </ul></td>        <td>Loads Vision Transformer (ViT) model from pytorch/vision repo</td>
     </tr>
     <tr>
         <td>Max</td>
@@ -3800,12 +3828,12 @@
     <tr>
         <td>Classifier Test</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>model : torch.nn.Module</li><li>state dict : torch.model</li><li>testing dataset : torch.dataset</li><li>trigger : int</li>        </ul></td>        <td><ul><li>actual values : tensor</li><li>predicted values : tensor</li><li>accuracy table : DataFrame</li>        </ul></td>        <td>Evaluate the performance of a neural network classifier model.</td>
+        <td><ul><li>model : torch.nn.Module</li><li>state dict : torch.nn.Module</li><li>testing dataset : torch.dataset</li><li>trigger : int</li>        </ul></td>        <td><ul><li>actual values : tensor</li><li>predicted values : tensor</li><li>accuracy table : DataFrame</li>        </ul></td>        <td>Evaluate the performance of a neural network classifier model.</td>
     </tr>
     <tr>
         <td>Classifier Train</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>model : torch.nn.Module</li><li>optimizer : torch.optim</li><li>loss function : torch.loss</li><li>numEpochs : int</li><li>trigger : int</li><li>training dataset : torch.dataset</li><li>save state dict : bool</li><li>save state dict file : string</li>        </ul></td>        <td><ul><li>out : torch.model</li>        </ul></td>        <td>Train a neural network classifier model.</td>
+        <td><ul><li>model : torch.nn.Module</li><li>optimizer : torch.optim</li><li>loss function : torch.loss</li><li>numEpochs : int</li><li>trigger : int</li><li>training dataset : torch.dataset</li><li>save state dict : bool</li><li>save state dict file : string</li>        </ul></td>        <td><ul><li>out : torch.nn.Module</li>        </ul></td>        <td>Train a neural network classifier model.</td>
     </tr>
     <tr>
         <td>Convolution 2D</td>
@@ -3845,12 +3873,12 @@
     <tr>
         <td>Regression Test</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>model : torch.nn.Module</li><li>state dict : torch.model</li><li>testing dataset : DataFrame</li><li>num outputs : int</li><li>trigger : int</li>        </ul></td>        <td><ul><li>actual values : tensor</li><li>predicted values : tensor</li><li>r2 score : double</li>        </ul></td>        <td>Evaluate the performance of a neural network regression model.</td>
+        <td><ul><li>model : torch.nn.Module</li><li>state dict : torch.nn.Module</li><li>testing dataset : DataFrame</li><li>num outputs : int</li><li>trigger : int</li>        </ul></td>        <td><ul><li>actual values : tensor</li><li>predicted values : tensor</li><li>r2 score : double</li>        </ul></td>        <td>Evaluate the performance of a neural network regression model.</td>
     </tr>
     <tr>
         <td>Regression Train</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>model : torch.nn.Module</li><li>optimizer : torch.optim</li><li>loss function : torch.loss</li><li>numEpochs : int</li><li>trigger : int</li><li>training dataset : DataFrame</li><li>num outputs : int</li><li>save state dict : bool</li><li>save state dict file : string</li>        </ul></td>        <td><ul><li>out : torch.model</li>        </ul></td>        <td>Train a neural network regression model.</td>
+        <td><ul><li>model : torch.nn.Module</li><li>optimizer : torch.optim</li><li>loss function : torch.loss</li><li>numEpochs : int</li><li>trigger : int</li><li>training dataset : DataFrame</li><li>num outputs : int</li><li>save state dict : bool</li><li>save state dict file : string</li>        </ul></td>        <td><ul><li>out : torch.nn.Module</li>        </ul></td>        <td>Train a neural network regression model.</td>
     </tr>
     <tr>
         <td>ReLU</td>
@@ -3860,12 +3888,12 @@
     <tr>
         <td>Segmentation Test</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>model : torch.nn.Module</li><li>state dict : torch.model</li><li>testing dataset : torch.dataset</li><li>trigger : int</li><li>save predictions : bool</li><li>save predictions file format : string</li><li>save actuals : bool</li><li>save actuals file format : string</li>        </ul></td>        <td><ul><li>accuracy table : DataFrame</li><li>numOutputs : int</li>        </ul></td>        <td>Evaluate the performance of a neural network segmentation model.</td>
+        <td><ul><li>model : torch.nn.Module</li><li>state dict : torch.nn.Module</li><li>testing dataset : torch.dataset</li><li>trigger : int</li><li>save predictions : bool</li><li>save predictions file format : string</li><li>save actuals : bool</li><li>save actuals file format : string</li>        </ul></td>        <td><ul><li>accuracy table : DataFrame</li><li>numOutputs : int</li>        </ul></td>        <td>Evaluate the performance of a neural network segmentation model.</td>
     </tr>
     <tr>
         <td>Segmentation Train</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>model : torch.nn.Module</li><li>optimizer : torch.optim</li><li>loss function : torch.loss</li><li>numEpochs : int</li><li>trigger : int</li><li>training dataset : torch.dataset</li><li>save state dict : bool</li><li>save state dict file : string</li><li>save optimizer : bool</li><li>save optimizer file : string</li>        </ul></td>        <td><ul><li>out : torch.model</li><li>optimizer : torch.model</li><li>loss : DataFrame</li>        </ul></td>        <td>Train a neural network segmentation model.</td>
+        <td><ul><li>model : torch.nn.Module</li><li>optimizer : torch.optim</li><li>loss function : torch.loss</li><li>numEpochs : int</li><li>trigger : int</li><li>training dataset : torch.dataset</li><li>save state dict : bool</li><li>save state dict file : string</li><li>save optimizer : bool</li><li>save optimizer file : string</li>        </ul></td>        <td><ul><li>out : torch.nn.Module</li><li>optimizer : torch.nn.Module</li><li>loss : DataFrame</li>        </ul></td>        <td>Train a neural network segmentation model.</td>
     </tr>
     <tr>
         <td>Sequential</td>
@@ -3935,7 +3963,7 @@
     <tr>
         <td>Save Torch Model</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>model : torch.model</li><li>filename : string</li><li>trigger : int</li>        </ul></td>        <td><ul>        </ul></td>        <td>Save a trained model to a designated file</td>
+        <td><ul><li>model : torch.nn.Module</li><li>filename : string</li><li>trigger : int</li>        </ul></td>        <td><ul>        </ul></td>        <td>Save a trained model to a designated file</td>
     </tr>
     <tr>
         <td>Save Tensor</td>
@@ -4252,7 +4280,7 @@
     <tr>
         <td>Match Template</td>
         <td><i class='bi bi-compass-fill'></i></td>
-        <td><ul><li>source : image2D</li><li>method : int</li><li>center : double2</li><li>width : int</li><li>height : int</li><li>start/pause : int</li><li>restart : int</li>        </ul></td>        <td><ul><li>output : matrix2D</li><li>preview : image2D</li><li>location : int2</li><li>confidence : double</li>        </ul></td>        <td>Tracks a template within an image, producing a point of the template's location</td>
+        <td><ul><li>source : image2D</li><li>template : image2D</li><li>method : int</li><li>start/pause : int</li><li>restart : int</li>        </ul></td>        <td><ul><li>output : matrix2D</li><li>preview : image2D</li><li>location : int2</li><li>confidence : double</li>        </ul></td>        <td>Matches a template within an image, producing a point of the template's location</td>
     </tr>
     <tr>
         <td>Optical Flow</td>
@@ -4283,6 +4311,11 @@
         <td>Tracker Inference</td>
         <td><i class='bi bi-compass-fill'></i></td>
         <td><ul><li>source : image2D</li><li>center : double2</li><li>width : int</li><li>height : int</li><li>start/pause : int</li><li>restart : int</li>        </ul></td>        <td><ul><li>output : matrix2D</li><li>preview : image2D</li><li>location : int2</li><li>confidence : double</li>        </ul></td>        <td>Tracks a template within an image using dasiamrpn ML algorithm<p style='color:red;'>The following package is required: dasiamrpn</p></td>
+    </tr>
+    <tr>
+        <td>Tracking Template</td>
+        <td><i class='bi bi-compass-fill'></i></td>
+        <td><ul><li>source : image2D</li><li>method : int</li><li>center : double2</li><li>width : int</li><li>height : int</li><li>start/pause : int</li><li>restart : int</li>        </ul></td>        <td><ul><li>output : matrix2D</li><li>preview : image2D</li><li>location : int2</li><li>confidence : double</li>        </ul></td>        <td>Tracks a template within an image, producing a point of the template's location</td>
     </tr>
     <tr>
         <td>Export Tracking Data</td>
@@ -4545,7 +4578,7 @@
     <tr>
         <td>Video Writer</td>
         <td><i class='bi bi-card-image'></i></td>
-        <td><ul><li>source : image2D</li><li>directory : string</li><li>filename : string</li><li>format : int</li><li>codec : string</li><li>trigger : int</li><li>duration : double</li><li>delay : double</li><li>fps : double</li>        </ul></td>        <td><ul>        </ul></td>        <td>Saves Video</td>
+        <td><ul><li>source : image2D</li><li>directory : string</li><li>filename : string</li><li>format : int</li><li>trigger : int</li><li>duration : double</li><li>delay : double</li><li>fps : double</li>        </ul></td>        <td><ul>        </ul></td>        <td>Saves Video</td>
     </tr>
     <tr>
         <td>Wi-Fi Server</td>
@@ -5883,6 +5916,15 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
                 <a target="_blank" href="https://pyserial.readthedocs.io/en/latest/">Serial</a>
             </td>
             <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1HfbJkRcjX9ZaRi6ERVqfDGvNeXZo-T73/view?usp=sharing">serial</a> </td>
+        </tr>
+
+        <tr>
+            <td> OCR </td>
+            <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
+            <td>
+                <a target="_blank" href="https://github.com/JaidedAI/EasyOCR">OCR</a>
+            </td>
+            <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1YbIu4Ag7tjtzpx3H2VjISiOPHrZwJGRi/view?usp=sharing">ocr</a> </td>
         </tr>
     </table>
 
