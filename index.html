@@ -111,6 +111,7 @@
 <li><a href="#Math">Math Tools</a></li>
 <li><a href="#Matrix">Matrix Tools</a></li>
 <li><a href="#ML">ML Tools</a></li>
+<li><a href="#New">New Tools</a></li>
 <li><a href="#Outputs">Outputs Tools</a></li>
 <li><a href="#Photron">Photron Tools</a></li>
 <li><a href="#Plot">Plot Tools</a></li>
@@ -119,6 +120,7 @@
 <li><a href="#String">String Tools</a></li>
 <li><a href="#Tracking">Tracking Tools</a></li>
 <li><a href="#Transform">Transform Tools</a></li>
+<li><a href="#Trash">Trash Tools</a></li>
 <li><a href="#Triggers">Triggers Tools</a></li>
 <li><a href="#Utilities">Utilities Tools</a></li>
 <li><a href="#Widgets">Widgets Tools</a></li>
@@ -126,6 +128,7 @@
                             <!-- END OF AUTO GENERATED TOC -->
 
                             <li><a href="#CustomizingTools">Customizing your own Tools</a></li>
+                            <li class=""><a href="#SystemPerformance">System Performance</a></li>
 
                         </ul>
                     </li>
@@ -2428,7 +2431,7 @@
     <tr>
         <td>Frequency Bandpass</td>
         <td><i class='bi bi-stars'></i></td>
-        <td><ul><li>source : image2D</li><li>flags : int</li><li>nonzeroRows : int</li><li>radius : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Applies a bandpass filter to a 1D or 2D floating-point array</td>
+        <td><ul><li>source : image2D</li><li>radius : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Applies a bandpass filter to a 1D or 2D floating-point array</td>
     </tr>
     <tr>
         <td>Detect Circles</td>
@@ -2474,6 +2477,11 @@
         <td>Morphological Ex</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>element : matrix2D</li><li>operation : int</li><li>anchor : int2</li><li>iterations : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Performs advanced morphological transformations using an erosion and dilation as basic operations.</td>
+    </tr>
+    <tr>
+        <td>Morph Hit or Miss</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : image2D</li><li>element : matrix2D</li><li>anchor : int2</li><li>iterations : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Applies kernel onto binary input image to produce 1 channel output image of all pixels that match the kernel's pattern.</td>
     </tr>
     <tr>
         <td>Pyr Down</td>
@@ -3388,6 +3396,15 @@
         <td>Train Test Split</td>
         <td><i class='bi bi-lightbulb-fill'></i></td>
         <td><ul><li>source : DataFrame</li><li>test_size : double</li>        </ul></td>        <td><ul><li>train : DataFrame</li><li>test : DataFrame</li>        </ul></td>        <td>Returns train test split.</td>
+    </tr>
+</table>
+<h3 id='New'>New</h3><p>The Add a new tool category tools are all under the <i class="bi bi-folder-plus"> New</i> category. The full list of display tools is as follows:</p><table>
+    <tr>
+        <th>Name</th>
+        <th>Icon</th>
+        <th>Inputs</th>
+        <th>Outputs</th>
+        <th>Description</th>
     </tr>
 </table>
 <h3 id='Outputs'>Outputs</h3><p>The Display tools that allow you to visualize directly in the flowgraph tools are all under the <i class="bi bi-display"> Outputs</i> category. The full list of display tools is as follows:</p><table>
@@ -4462,6 +4479,15 @@
         <td><ul><li>source : image2D</li><li>dsize : int2</li><li>useSourceResolution : bool</li><li>center : double2</li><li>maxRadius : double</li><li>flags : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Remaps an from polar or semilog-polar coordinates space to cartesian coordinates</td>
     </tr>
 </table>
+<h3 id='Trash'>Trash</h3><p>The Tools that have been placed in Trash tools are all under the <i class="bi bi-trash"> Trash</i> category. The full list of display tools is as follows:</p><table>
+    <tr>
+        <th>Name</th>
+        <th>Icon</th>
+        <th>Inputs</th>
+        <th>Outputs</th>
+        <th>Description</th>
+    </tr>
+</table>
 <h3 id='Triggers'>Triggers</h3><p>The Triggers functions tools are all under the <i class="bi bi-magic"> Triggers</i> category. You can create triggers to activate certain nodes that require a trigger to execute - review the section <a href="#CreatingTriggers">Creating Triggers</a>. The full list of display tools is as follows:</p><table>
     <tr>
         <th>Name</th>
@@ -5022,7 +5048,65 @@
 
     <!-- END OF AUTO GENERATED DOCS -->
 
+    <h2 id="SystemPerformance">System Performance</h2>
+    <p>
+        The "System Performance" tool can be used to report performance metrics of your workflow. You can add it to your
+        workflow and it will output a table of counters that will refresh regularly to show the performance for each node.
+        The output table format is described below:
+    </p>
+    <table>
+        <tr>
+            <th>Column</th>
+            <th>Description</th>
+        </tr>
 
+        <tr>
+            <td>name</td>
+            <td>Name of the node</td>
+        </tr>
+
+        <tr>
+            <td>Work(ms)</td>
+            <td>Average time in milliseconds to process one frame</td>
+        </tr>
+
+        <tr>
+            <td>#Wait</td>
+            <td>Number of times since last update the node waited as inputs were not ready or didnt change</td>
+        </tr>
+
+        <tr>
+            <td>#Render</td>
+            <td>Number of times since last update the node executed</td>
+        </tr>
+
+        <tr>
+            <td>Host to Host(MB)</td>
+            <td>Amount of System CPU Host memory copied in megabytes</td>
+        </tr>
+
+        <tr>
+            <td>Host to Device(MB)</td>
+            <td>Amount of System CPU Host memory uploaded to the GPU memory in megabytes</td>
+        </tr>
+
+        <tr>
+            <td>Device to Host(MB)</td>
+            <td>Amount of GPU memory to the System CPU Host memory in megabytes</td>
+        </tr>
+
+
+        <tr>
+            <td>Device to Device(MB)</td>
+            <td>Amount of GPU memory copied in megabytes</td>
+        </tr>
+
+        <tr>
+            <td>Peer to Peer(MB)</td>
+            <td>Amount of GPU memory in megabytes copied between different GPUs when multiple GPU are available on the system</td>
+        </tr>
+
+    </table>
 
 
 
@@ -6183,7 +6267,9 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
     </p>
     <div style="height:800px"> </div>
 
-    <h2>Plugin SDK</h2>
+
+
+    <h2 id="CustomizingTools">Plugin SDK</h2>
     <p>
         Plugins can be implemented in C++ or Python and both will require a JSON file. The JSON Schema specifies the input and output parameters as well
         as the name and description of the plugin amongst other things.
@@ -6192,7 +6278,7 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
         To start creating your own plugin, it is recommended you base your code on the Canny2 plugin that is provided upon installation. For Windows users, you can immeadiately run the Canny2 plugin via the Visual Studios solution. For Mac and Linux users, the process of creating a plugin will require a few more steps. These steps are detailed below in the section "Creating Plugins for Mac/Linux"
     </p>
 
-    <h3 id="CustomizingTools">Customizing Your own Tools</h3>
+    <h3>Customizing Your own Tools</h3>
     <p>
         A simple way to make your own tool without writing Python or C++ code is to simply use an existing tool and customize its parameters.
         You simply create an updated JSON for the tool and place it in the extensions folder.
