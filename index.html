@@ -3495,6 +3495,11 @@
         <td><i class='bi bi-window'></i></td>
         <td><ul><li>source : image2D</li>        </ul></td>        <td><ul>        </ul></td>        <td>Show Thumbnail of Image</td>
     </tr>
+    <tr>
+        <td>Thumbnail Image Display</td>
+        <td><i class='bi bi-window'></i></td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul>        </ul></td>        <td>Show Thumbnail of Image</td>
+    </tr>
 </table>
 <h3 id='Photron'>Photron</h3><p>The Photron Filters tools are all under the <i class="bi bi-camera-reels-fill"> Photron</i> category. The full list of display tools is as follows:</p><table>
     <tr>
@@ -3860,7 +3865,7 @@
     <tr>
         <td>Convolutional Neural Net</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>input image height : int</li><li>input image width : int</li><li># of input channels : int</li><li># of classes : int</li><li># of convolution cycles : int</li><li># of fully connected layers : int</li><li>convolution kernel size : int</li><li>pooling kernel size : int</li><li>logsoftmax on : bool</li>        </ul></td>        <td><ul><li>out : torch.nn.Module</li>        </ul></td>        <td>Creates a custom convolutoinal neural network (CNN). Follows the common NN structure of feature learning (comprised of multiple layers of convolution, activation, and pooling), then classification (comprised of several linear+ReLU layers). Each input image must be the same dimensions.</td>
+        <td><ul><li>input image height : int</li><li>input image width : int</li><li># of input channels : int</li><li># of classes : int</li><li># of convolution cycles : int</li><li># of fully connected layers : int</li><li>convolution kernel size : int</li><li>pooling kernel size : int</li><li>softmax on : bool</li>        </ul></td>        <td><ul><li>out : torch.nn.Module</li>        </ul></td>        <td>Creates a custom convolutoinal neural network (CNN). Follows the common NN structure of feature learning (comprised of multiple layers of convolution, activation, and pooling), then classification (comprised of several linear+ReLU layers). Each input image must be the same dimensions. WARNING: setting input parameters too high may cause CUDA to run out of memory on your GPU.</td>
     </tr>
     <tr>
         <td>Dropout</td>
@@ -3926,6 +3931,11 @@
         <td>Sigmoid</td>
         <td><i class='bi bi-fire'></i></td>
         <td><ul>        </ul></td>        <td><ul><li>out : torch.nn.Module</li>        </ul></td>        <td>Applies the Sigmoid function element-wise.</td>
+    </tr>
+    <tr>
+        <td>Softmax</td>
+        <td><i class='bi bi-fire'></i></td>
+        <td><ul><li>dim : int</li>        </ul></td>        <td><ul><li>out : torch.nn.Module</li>        </ul></td>        <td>Applies the Softmax(x) function to an n-dimensional input Tensor.</td>
     </tr>
     <tr>
         <td>Tanh</td>
@@ -5934,6 +5944,18 @@ INFINIWORKFLOW_PATH/assets/yolov3/yolov3.cfg
             <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
             <td>
                 <a target="_blank" href="https://github.com/vinta/awesome-python?tab=readme-ov-file#audio">Audio</a>
+
+                <pre>
+Additional steps:
+
+After installing the patch
+
+1. Download FFMPEG:
+
+https://ffmpeg.org/download.html
+
+2. Place the ffmpeg executable in your path, or in external/bin folder
+</pre>
             </td>
             <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1mQse59aiJaYhGLnyn0DBFSKsAXdAl5Rl/view?usp=sharing">audio</a> </td>
         </tr>
