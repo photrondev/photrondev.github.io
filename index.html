@@ -1324,11 +1324,6 @@
         <td><ul><li>source : image2D</li><li>brightness : double</li><li>red : double</li><li>green : double</li><li>blue : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change the Brightness thorugh a Look Up Table (L.U.T.) for a Colored Image</td>
     </tr>
     <tr>
-        <td>Create Color Image</td>
-        <td><i class='bi bi-palette'></i></td>
-        <td><ul><li>color : color</li><li>resolution : int2</li><li>alpha : double</li><li>outChannels : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Output a RGB, RGBA, or Alpha-only image.</td>
-    </tr>
-    <tr>
         <td>Contrast</td>
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : image2D</li><li>contrast : double</li><li>red : double</li><li>green : double</li><li>blue : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change the Contrast thorugh a Look Up Table (L.U.T.) for a Colored Image</td>
@@ -1362,11 +1357,6 @@
         <td>CIELAB Threshold</td>
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : cuda2D</li><li>targetColor : color</li><li>radius : double2</li><li>scale : double</li><li>outputChannels : int</li><li>invert : bool</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>CIELAB Threshold of Cuda Buffer</td>
-    </tr>
-    <tr>
-        <td>Create Color Image</td>
-        <td><i class='bi bi-palette'></i></td>
-        <td><ul><li>color : color</li><li>resolution : int2</li><li>alpha : double</li><li>outChannels : int</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Output a RGB, RGBA, or Alpha-only image.</td>
     </tr>
     <tr>
         <td>Contrast</td>
@@ -2576,6 +2566,16 @@
         <td>Movie Reader</td>
         <td><i class='bi bi-film'></i></td>
         <td><ul><li>source : string</li><li>cache : int</li><li>realtime : bool</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Reads Images from a movie</td>
+    </tr>
+    <tr>
+        <td>Solid Color Image</td>
+        <td><i class='bi bi-file-earmark-richtext'></i></td>
+        <td><ul><li>color : color</li><li>resolution : int2</li><li>alpha : double</li><li>outChannels : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Output a RGB, RGBA, or Alpha-only image.</td>
+    </tr>
+    <tr>
+        <td>Solid Color Image</td>
+        <td><i class='bi bi-file-earmark-richtext'></i></td>
+        <td><ul><li>color : color</li><li>resolution : int2</li><li>alpha : double</li><li>outChannels : int</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Output a RGB, RGBA, or Alpha-only image.</td>
     </tr>
     <tr>
         <td>Take Picture</td>
