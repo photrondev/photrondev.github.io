@@ -1148,7 +1148,7 @@
     <tr>
         <td>ONNX for Basic Classification</td>
         <td><i class='bi bi-filetype-ai'></i></td>
-        <td><ul><li>source : image2D</li><li>model : string</li><li>outLayerName : string</li><li>classes : string</li><li>scale factor : double</li><li>size : int2</li><li>red mean : double</li><li>green mean : double</li><li>blue mean : double</li><li>swapRB : bool</li><li>crop : bool</li><li>color images : bool</li>        </ul></td>        <td><ul><li>out : int</li><li>confidence : double</li><li>class : string</li>        </ul></td>        <td>Performs basic Classification using custom ONNX model<p style='color:red;'>The following package is required: onnx_runtime_windows</p></td>
+        <td><ul><li>source : image2D</li><li>model : string</li><li>outLayerName : string</li><li>classes : string</li><li>scale factor : double</li><li>size : int2</li><li>red mean : double</li><li>green mean : double</li><li>blue mean : double</li><li>swapRB : bool</li><li>crop : bool</li><li>color images : bool</li><li>logsoftmax on : bool</li>        </ul></td>        <td><ul><li>out : int</li><li>confidence : double</li><li>class : string</li>        </ul></td>        <td>Performs basic Classification using custom ONNX model<p style='color:red;'>The following package is required: onnx_runtime_windows</p></td>
     </tr>
     <tr>
         <td>ONNX for Basic Segmentation</td>
@@ -1163,7 +1163,7 @@
     <tr>
         <td>Onnx Runtime Classification</td>
         <td><i class='bi bi-filetype-ai'></i></td>
-        <td><ul><li>source : image2D</li><li>model : string</li><li>outLayerName : string</li><li>classes : string</li><li>scale factor : double</li><li>size : int2</li><li>red mean : double</li><li>green mean : double</li><li>blue mean : double</li><li>swapRB : bool</li><li>crop : bool</li><li>color images : bool</li>        </ul></td>        <td><ul><li>out : int</li><li>confidence : double</li><li>class : string</li>        </ul></td>        <td>Onnx Runtime Inference for Classifications<p style='color:red;'>The following package is required: onnx_runtime_windows</p></td>
+        <td><ul><li>source : image2D</li><li>model : string</li><li>outLayerName : string</li><li>classes : string</li><li>scale factor : double</li><li>size : int2</li><li>red mean : double</li><li>green mean : double</li><li>blue mean : double</li><li>swapRB : bool</li><li>crop : bool</li><li>color images : bool</li><li>logsoftmax on : bool</li>        </ul></td>        <td><ul><li>out : int</li><li>confidence : double</li><li>class : string</li>        </ul></td>        <td>Onnx Runtime Inference for Classifications<p style='color:red;'>The following package is required: onnx_runtime_windows</p></td>
     </tr>
     <tr>
         <td>Onnx Runtime YOLOX</td>
@@ -3865,7 +3865,7 @@
     <tr>
         <td>Convolutional Neural Net</td>
         <td><i class='bi bi-fire'></i></td>
-        <td><ul><li>input image height : int</li><li>input image width : int</li><li># of input channels : int</li><li># of classes : int</li><li># of convolution cycles : int</li><li># of fully connected layers : int</li><li>convolution kernel size : int</li><li>pooling kernel size : int</li><li>softmax on : bool</li>        </ul></td>        <td><ul><li>out : torch.nn.Module</li>        </ul></td>        <td>Creates a custom convolutoinal neural network (CNN). Follows the common NN structure of feature learning (comprised of multiple layers of convolution, activation, and pooling), then classification (comprised of several linear+ReLU layers). Each input image must be the same dimensions. WARNING: setting input parameters too high may cause CUDA to run out of memory on your GPU.</td>
+        <td><ul><li>input image height : int</li><li>input image width : int</li><li># of input channels : int</li><li># of classes : int</li><li># of convolution cycles : int</li><li># of fully connected layers : int</li><li>convolution kernel size : int</li><li>pooling kernel size : int</li><li>softmax setting : int</li>        </ul></td>        <td><ul><li>out : torch.nn.Module</li>        </ul></td>        <td>Creates a custom convolutoinal neural network (CNN). Follows the common NN structure of feature learning (comprised of multiple layers of convolution, activation, and pooling), then classification (comprised of several linear+ReLU layers). Each input image must be the same dimensions. WARNING: setting input parameters too high may cause CUDA to run out of memory on your GPU.</td>
     </tr>
     <tr>
         <td>Dropout</td>
