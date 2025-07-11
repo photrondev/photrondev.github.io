@@ -3510,6 +3510,11 @@
         <th>Description</th>
     </tr>
     <tr>
+        <td>Infinicam Movie Reader</td>
+        <td><i class='bi bi-film'></i></td>
+        <td><ul><li>source : string</li><li>maxMemoryCache : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Reads Images from a Photron Compression movie (mdat/cih)</td>
+    </tr>
+    <tr>
         <td>Depth Reader</td>
         <td><i class='bi bi-file-image'></i></td>
         <td><ul><li>source : string</li><li>depth : string</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Reads Depth Images from a file</td>
@@ -3520,9 +3525,14 @@
         <td><ul><li>calibration : matrix2D</li><li>preroll & postroll frames : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>View live Images from a Photron Infinicam</td>
     </tr>
     <tr>
-        <td>Infinicam Save</td>
+        <td>Infinicam Save Movie</td>
         <td><i class='bi bi-card-image'></i></td>
-        <td><ul><li>directory : string</li><li>filename : string</li><li>format : int</li><li>codec : string</li><li>trigger : int</li><li>delay : double</li><li>fps : double</li>        </ul></td>        <td><ul>        </ul></td>        <td>Saves Infinicam Video</td>
+        <td><ul><li>directory : string</li><li>filename : string</li><li>format : int</li><li>codec : string</li><li>trigger : int</li><li>delay : double</li><li>fps : double</li>        </ul></td>        <td><ul><li>status : string</li>        </ul></td>        <td>Saves Infinicam Video to Movie format</td>
+    </tr>
+    <tr>
+        <td>Infinicam Save Compressed</td>
+        <td><i class='bi bi-card-image'></i></td>
+        <td><ul><li>directory : string</li><li>filename : string</li><li>trigger : int</li><li>delay : double</li><li>fps : double</li><li>constant saving : bool</li><li>file size : int</li>        </ul></td>        <td><ul><li>status : string</li>        </ul></td>        <td>Saves Infinicam to mdat Compressed Video format</td>
     </tr>
     <tr>
         <td>Photron Live</td>
@@ -4794,6 +4804,11 @@
         <td>Set Double3</td>
         <td><i class='bi bi-gear'></i></td>
         <td><ul><li>value : double3</li>        </ul></td>        <td><ul><li>out : double3</li>        </ul></td>        <td>Sets Double 3D value</td>
+    </tr>
+    <tr>
+        <td>Set Ellipse</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>center : double2</li><li>radius : double2</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Creates an Ellipse</td>
     </tr>
     <tr>
         <td>Set Image2D</td>
