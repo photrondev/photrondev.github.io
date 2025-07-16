@@ -126,7 +126,7 @@
 <li><a href="#Widgets">Widgets Tools</a></li>
 
                             <!-- END OF AUTO GENERATED TOC -->
-
+                            <li><a href="#Infinicam">Infinicam</a></li>
                             <li><a href="#CustomizingTools">Customizing your own Tools</a></li>
                             <li class=""><a href="#SystemPerformance">System Performance</a></li>
 
@@ -975,6 +975,37 @@
         As mentioned, Post Triggers are only allowed between Python nodes.
     </p>
 
+    <h3 id="Infinicam">Photron's Infinicam</h3>
+
+    <p>Infinicam is a high-speed streaming camera capable of capturing and transferring 1.2-megapixel of image data to PC memory at 1,000fps via USB 3.1. Infiniworkflow, on top of all of its many other functionalities, is designed to be a platform for using Infinicam(s) and saving Infinicam footage. There are certain differences between nodes related to Infinicam and most other nodes, so if you will be using an Infinicam, reading through this section is the fastest way to understand everything Infiniworkflow can do with your Infinicam.</p>
+
+    <p>The following section will be broken into 3 parts: the Infinicam viewer node, the Infinicam saving nodes, and the Infinicam Settings editor.</p>
+
+    <h4>1. Infinicam Viewer node:</h4>
+
+    <p>When an Infinicam is plugged in, a node called "Infinicam" will come up. This node allows you to view the Infinicam, and also set the preroll and postroll frames (pre/postroll frames will be discussed later). If multiple Infinicams are connected, each Infinicam will show up as its own node (i.e. "Infinicam", "Infinicam #2", etc). Note that the Infinicam may take a few seconds to open. Also note that this node only allows you to view the Infinicam; saving is done separately.</p>
+
+    <h4>2. Infinicam Saving nodes:</h4>
+
+    <p>Infiniworkflow has 2 ways of saving Infinicam footage - "Infinicam Save Movie" and "Infinicam Save Compressed". These 2 saving nodes will come up for each respective Infinicam that is connected to your machine (in other words, if you have 2 Infinicams connected, "Infinicam Save Movie" and "Infinicam Save Compressed" save footage from the first Infinicam, and "Infinicam Save Movie #2" and "Infinicam Save Compressed #2" save footage from the second Infinicam). Note that these saving nodes do not need to be connected to the "Infinicam" viewer node itself; all that is required is that the Trigger is clicked.</p>
+    <img src="/assets/infinicam_save_nodes.jpg" width="50%" />
+
+    <p>The "Infinicam Save Movie" node, upon hitting the Trigger, saves footage from the selected Infinicam in any file type (.MP4, .MDAT, etc.) and to any file location. The total number of frames of Infinicam footafe that will be saved by this node when the Trigger is clicked is based on your Infinicam's pre-roll and post-roll number of frames. To explain what these terms means, consider the following example: you wish to save footage whenever an object falls off a conveyor belt in a factory. You have a workflow that will set a Trigger to True as soon as it detects that an object has just begun to fall off the belt. To understand why objects sometimes fall off the belt, you want to save the 2000 frames of footage from before the moment the object begins falling, as well as 1000 frames of footage after that point for good measure. Thus, you will set your pre-roll to 2000, and your post-roll to 1000. When Infinicam Save Movie node is Triggered, a total of 3000 frames will be saved precisely as you want them to.</p>
+
+    <p>The "Infinicam Save Movie" node tends to be slower, as it needs to compress and decompress data on the fly. The "Infinicam Save Compressed" node, on the other hand, saves out compressed images, which means that the footage gets saved to your computer faster and is more informationally dense (a single 2 second video can be a few hundred megabytes). Whereas the prior node allows users to select the Codec and the File format, the "Infinicam Save Compressed" node hardcodes both, so 2 files are always returned: a MDAT file of the footage itself and a CIH file of the footage metadata.</p>
+
+    <p>Note for both saving nodes: if the Trigger has already been pressed and you wish to stop saving (i.e. save a shorter clip of footage), you can simply click the Trigger again to immediately save out all frames already gathered to your machine.</p>
+
+    <p>If you wish to view the footage that is saved from the "Infinicam Save Compressed" node, use the "Infinicam Movie Reader" node, which reads MDAT/CIH files.</p>
+
+    <p>Important note: by default, when "Infinicam Save Compressed" is Triggered, the number of frames that will be saved will be equal to the Infinicam's preroll plus postroll. However, if you wish to save out Infinicam footage continually, you can click the checkbox in the "Infinicam Save Compressed" editing menu for "Constant Saving". When true, you may set the maximum file size you wish for the saved Infinicam footage. When the node is Triggered now, footage will continue to save into the file you created until the maximum file size limit has been reached.</p>
+
+
+    <h4>3. Infinicam Settings editor:</h4>
+
+    <p>Infiniworkflow allows you to view and save Infinicam footage. However, changing the settings of your Infinicam must be done outside of Infiniworkflow, in a Infinicam Settings application (this is done due to legacy code from Infinicam). To open the Infinicam Settings application, click on the camera icon on the top bar of Infiniworkflow. Note that if you have multiple Infinicams connected, you will be prompted to select which Infinicam you wish to adjust the settings for; Infinicam settings cannot be saved to multiple Infinicams at once, and must instead be done individually. After making your desired changes, hit the "Accept Changes" button; if you made changes but do not wish to save them, hit the "Close Application" button or simply close the application manually. Now when you go into Infiniworkflow, your changes will be reflected for the Infinicam you selected.</p> 
+    <img src="/assets/infinicam_settings_application.jpg" width="50%" />
+
 
     <h3 id="DataScienceSection">Data Science</h3>
     <p>
@@ -1087,8 +1118,6 @@
     <p>
         See the reference section for the full list of <a href="#ML">ML Tools</a>
     </p>
-
-
 
 
     <!-- START OF AUTO GENERATED DOCS  -->
@@ -3532,7 +3561,7 @@
     <tr>
         <td>Infinicam Save Compressed</td>
         <td><i class='bi bi-card-image'></i></td>
-        <td><ul><li>directory : string</li><li>filename : string</li><li>trigger : int</li><li>delay : double</li><li>fps : double</li><li>constant saving : bool</li><li>file size : int</li>        </ul></td>        <td><ul><li>status : string</li>        </ul></td>        <td>Saves Infinicam to mdat Compressed Video format</td>
+        <td><ul><li>directory : string</li><li>filename : string</li><li>trigger : int</li><li>delay : double</li><li>constant saving : bool</li><li>file size : int</li>        </ul></td>        <td><ul><li>status : string</li>        </ul></td>        <td>Saves Infinicam to mdat Compressed Video format</td>
     </tr>
     <tr>
         <td>Photron Live</td>
