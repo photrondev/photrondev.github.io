@@ -226,7 +226,6 @@
         <li><i class="bi bi-zoom-out"></i> Zoom out the flowgraph so you can see more of the nodes in the workflow</li>
         <li><i class="bi bi-aspect-ratio"></i> Zoom fit the flowgraph to show the default zoom and pan which will show all the nodes in the workflow</li>
         <li><i class="bi bi-zoom-in"></i> Zoom in the flowgraph so you can see focus on the nodes in center of the workflow</li>
-        <li><i class="bi bi-camera-reels"></i> Opens the <a href="#INFINICAM_Package">INFINICAM Viewer</a></li>
         <li><i class="bi bi-star"></i> Add authoring notes to the workflow to include your name and description of the workflow</li>
         <li><i class="bi bi-shop-window"></i> Show the published view of the workflow. This is an experimental <a href="#Publish">feature</a> that allows you to simplify the workflow into a list of published parameters and hide the workflow. When in publish mode, click on this icon to switch back to the flowgraph mode again.</li>
         <li><i class="bi bi-rulers"></i> Sets the preferred numeric range for some of the standard parameters that can be normalized, percentage and other ranges</li>
@@ -999,12 +998,6 @@
     <p>If you wish to view the footage that is saved from the "Infinicam Save Compressed" node, use the "Infinicam Movie Reader" node, which reads MDAT/CIH files.</p>
 
     <p>Important note: by default, when "Infinicam Save Compressed" is Triggered, the number of frames that will be saved will be equal to the Infinicam's preroll plus postroll. However, if you wish to save out Infinicam footage continually, you can click the checkbox in the "Infinicam Save Compressed" editing menu for "Constant Saving". When true, you may set the maximum file size you wish for the saved Infinicam footage. When the node is Triggered now, footage will continue to save into the file you created until the maximum file size limit has been reached.</p>
-
-
-    <h4>3. Infinicam Settings editor:</h4>
-
-    <p>Infiniworkflow allows you to view and save Infinicam footage. However, changing the settings of your Infinicam must be done outside of Infiniworkflow, in a Infinicam Settings application (this is done due to legacy code from Infinicam). To open the Infinicam Settings application, click on the camera icon on the top bar of Infiniworkflow. Note that if you have multiple Infinicams connected, you will be prompted to select which Infinicam you wish to adjust the settings for; Infinicam settings cannot be saved to multiple Infinicams at once, and must instead be done individually. After making your desired changes, hit the "Accept Changes" button; if you made changes but do not wish to save them, hit the "Close Application" button or simply close the application manually. Now when you go into Infiniworkflow, your changes will be reflected for the Infinicam you selected.</p> 
-    <img src="/assets/infinicam_settings_application.jpg" width="50%" />
 
 
     <h3 id="DataScienceSection">Data Science</h3>
@@ -3551,7 +3544,7 @@
     <tr>
         <td>Infinicam</td>
         <td><i class='bi bi-camera-reels-fill'></i></td>
-        <td><ul><li>calibration : matrix2D</li><li>preroll & postroll frames : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>View live Images from a Photron Infinicam</td>
+        <td><ul><li>calibration : matrix2D</li><li>preroll & postroll frames : int2</li><li>fps, shutter, resolution : string</li><li>expose on : int</li><li>expose off : int</li><li>syncIn mode : int</li><li>syncIn signal : int</li><li>syncOut signal : int</li><li>delay (nsec) : int</li><li>width (nsec) : int</li><li>magnification : int</li><li>reconfigure : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>View live Images from a Photron Infinicam</td>
     </tr>
     <tr>
         <td>Infinicam Save Movie</td>
@@ -3561,7 +3554,7 @@
     <tr>
         <td>Infinicam Save Compressed</td>
         <td><i class='bi bi-card-image'></i></td>
-        <td><ul><li>directory : string</li><li>filename : string</li><li>trigger : int</li><li>delay : double</li><li>constant saving : bool</li><li>file size : int</li>        </ul></td>        <td><ul><li>status : string</li>        </ul></td>        <td>Saves Infinicam to mdat Compressed Video format</td>
+        <td><ul><li>directory : string</li><li>filename : string</li><li>trigger : int</li><li>delay : double</li><li>constant saving : bool</li><li>file size (mb) : int</li>        </ul></td>        <td><ul><li>status : string</li>        </ul></td>        <td>Saves Infinicam to mdat Compressed Video format</td>
     </tr>
     <tr>
         <td>Photron Live</td>
@@ -5646,15 +5639,6 @@
                 SDK to allow you to write your own Python and C++ Plugins for INFINIWORKFLOW
             </td>
             <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1_RekPTKjxQTA-WMk_qCf6rbRMoyeYIf5/view?usp=drive_link">infiniworkflow_sdk</a> </td>
-        </tr>
-
-        <tr>
-            <td id="INFINICAM_Package"> INFINICAM </td>
-            <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i>  </td>
-            <td>
-                <a target="_blank" href=https://photron.com/infinicam/?gad_source =1&gclid =Cj0KCQiA2oW-BhC2ARIsADSIAWrh-psBvXvSEdbl-6DE4kdpvDlIG8D1WQ_n1Ez7-viazYks1R2yGuUaAjHDEALw_wcB">INFINICAM Viewer and Control Application Integration</a>
-            </td>
-            <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1m_aH3de8-pG8tA1EoWlu0OWx7LBM9vVf/view?usp=drive_link">infinicam_viewer</a> </td>
         </tr>
 
         <tr>
