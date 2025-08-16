@@ -8,6 +8,11 @@ html, body {
     font-size: 1.1em;
 }
 
+.navbar-toggler {
+    margin-right: auto;
+    margin-left: 0;
+}
+
 i {
     font-size: 1.2em;
     color:white;
