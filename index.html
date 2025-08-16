@@ -5582,6 +5582,16 @@
                 Not available
             </td>
         </tr>
+
+        <tr>
+            <td> <i class="bi bi-nvidia" title="Supports Nvidia Jetson"></i> Nvidia Jetson</td>
+            <td>
+                <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1NsUNzYbhS2SVvSK999scpSqHW0cPNko4/view?usp=sharing">infiniworkflow_jetson</a>
+            </td>
+            <td>
+                Not available
+            </td>
+        </tr>
     </table>
 
 
@@ -5613,11 +5623,16 @@
             <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1WqXVV5fMXj9teQHxLPSZC_Wx-be8l176/view?usp=sharing">infiniworkflow_osx_patch</a> </td>
         </tr>
 
-
         <tr>
             <td> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i> INFINIWORKFLOW PATCH - Linux </td>
 
             <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1F8d48OSFohRD0NxJTNgKsInPlQ7JShlR/view?usp=drive_link">infiniworkflow_linux_patch</a> </td>
+        </tr>
+
+        <tr>
+            <td> <i class="bi bi-nvidia" title="Supports Nvidia Jetson"></i> INFINIWORKFLOW PATCH - Jetson </td>
+
+            <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1CnDzVYl7LD3wKTPsa3HEvuoQdzu5u99K/view?usp=sharing">infiniworkflow_jetson_patch</a> </td>
         </tr>
     </table>
 
@@ -6076,7 +6091,7 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
                 (INFINWORKFLOW runs a local webserver to host the user interface and installation will request
                 Admin privileges which is only used to allow INFINWORKFLOW to have access through the Firewall for the local webserver).
                 The installation will install the required Python modules and will take around 30 minutes and requires network access, please let it run to completion before you
-                proceed to the next step. After is is completed, to run INFINIWORKFLOW, double click on the <i>INFINIWORKFLOW.bat</i> file in the unzipped folder
+                proceed to the next step. After is is completed, to run INFINIWORKFLOW, double click on the <i>infiniworkflow.bat</i> file in the unzipped folder
             </li>
             <br>
             <br>
@@ -6100,6 +6115,14 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
                 password. The installation will install the required Python modules.
                 The installation of Python modules will take around 30 minutes and requires network access, please let it run to completion before you proceed to the next step.
                 After is is completed, to run INFINIWORKFLOW, type <i>sh INFINIWORKFLOW.sh</i> file in the unzipped folder.
+            </li>
+            <br>
+            <br>
+            <li>
+                Jetson: To install, type <i>./install.sh</i> file in the unzipped folder, then type your
+                password. The installation will install the required Python modules.
+                The installation of Python modules will take around 30 minutes and requires network access, please let it run to completion before you proceed to the next step.
+                After is is completed, to run INFINIWORKFLOW, type <i>./infiniworkflow.sh</i> file in the unzipped folder.
             </li>
             <br>
         </ul>
