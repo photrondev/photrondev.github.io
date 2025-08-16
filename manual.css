@@ -6,11 +6,7 @@ html, body {
     font-family: 'Trebuchet MS', sans-serif;
     color: rgb(200,200,200);
     font-size: 1.1em;
-}
-
-.navbar-toggler {
-    margin-right: auto;
-    margin-left: 0;
+    width:100%;
 }
 
 i {
