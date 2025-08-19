@@ -41,6 +41,7 @@
                             <li class=""><a href="#InstallationSteps">Installation Steps</a></li>
                             <li class=""><a href="#FirewallAccess">Firewall Access</a></li>
                             <li class=""><a href="#InstallPatches">Installing Patches</a></li>
+                            <li class=""><a href="#UserAuthentication">User Authentication</a></li>
                             <li class=""><a href="#Args">Command line arguments</a></li>
                             <li class=""><a href="#KnownIssues">Known Issues</a></li>
                         </ul>
@@ -1039,17 +1040,17 @@
         An subset of the plot tool visualizations are as follows:
     </p>
     <table style="width: 100%; table-layout: fixed;">
-        <tr style="width: 100%;" >
-            <td style="width: 100%;" > <img style="width: 100%;" src="/assets/ui_histogram_plot.jpg" /> </td>
-            <td style="width: 100%;" > <img style="width: 100%;" src="/assets/ui_areaplot_plot.jpg" /> </td>
+        <tr style="width: 100%;">
+            <td style="width: 100%;"> <img style="width: 100%;" src="/assets/ui_histogram_plot.jpg" /> </td>
+            <td style="width: 100%;"> <img style="width: 100%;" src="/assets/ui_areaplot_plot.jpg" /> </td>
         </tr>
-        <tr style="width: 100%;" >
-            <td style="width: 100%;" > <img style="width: 100%;" src="/assets/ui_density_plot.jpg" /> </td>
-            <td style="width: 100%;" ><img style="width: 100%;" src="/assets/ui_hexbin_plot.jpg" /> </td>
+        <tr style="width: 100%;">
+            <td style="width: 100%;"> <img style="width: 100%;" src="/assets/ui_density_plot.jpg" /> </td>
+            <td style="width: 100%;"><img style="width: 100%;" src="/assets/ui_hexbin_plot.jpg" /> </td>
         </tr>
-        <tr style="width: 100%;" >
-            <td style="width: 100%;" > <img style="width: 100%;" src="/assets/ui_line_plot.jpg" /> </td>
-            <td style="width: 100%;" ><img style="width: 100%;" src="/assets/ui_scatter_plot.jpg" /> </td>
+        <tr style="width: 100%;">
+            <td style="width: 100%;"> <img style="width: 100%;" src="/assets/ui_line_plot.jpg" /> </td>
+            <td style="width: 100%;"><img style="width: 100%;" src="/assets/ui_scatter_plot.jpg" /> </td>
         </tr>
     </table>
 
@@ -7695,6 +7696,31 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
             </li>
         </ul>
     </p>
+
+    <h3 id="UserAuthentication">User Authentication</h3>
+    <p>
+        To ensure security, INFINIWORKFLOW provides the ability to check User Authentication before users may access the application.
+        This is not enabled by default, but can be enabled easily by your administrator by running the following python script
+        to create a INFINIWORKFLOW superuser:
+    </p>
+    <pre>
+        cd /path/to/INFINIWORKFLOW/app
+        python3 create_superuser_script.py
+    </pre>
+    <p>
+        With a superuser created, User Authentication is enabled. Now, when starting INFINIWORKFLOW, users will reach the login page (as seen below) 
+        and have to enter their login information to continue to INFINIWORKFLOW.
+    </p>
+    <img src="/assets/ui_user_login_page.jpg" width="30%" />
+    <p>
+        When a user is finished using Infiniworkflow, they may click "Yes" or "Save and Exit" to exit the application, or they may click "Logout",
+        which saves the current workflow and logs out of the session, returning back to the login screen.
+    </p>
+    <p>
+        As an Admin, you will have extended permissions that regular users won't, which includes making and removing users and groups. To access these controls, 
+        click on the Admin link and enter your admin username and password to continue. You will then reach a page like this, with all of the Admin controls available.
+    </p>
+    <img src="/assets/ui_user_admin_page.jpg" width="40%" />
 
     <h3 id="Args">Command line arguments</h3>
 
