@@ -107,9 +107,9 @@
 <li><a href="#Datascience">Datascience Tools</a></li>
 <li><a href="#Experimental">Experimental Tools</a></li>
 <li><a href="#ImageProcessing">Image Processing Tools</a></li>
+<li><a href="#Grayscale">Grayscale Tools</a></li>
 <li><a href="#Inputs">Inputs Tools</a></li>
 <li><a href="#Logic">Logic Tools</a></li>
-<li><a href="#Masks">Masks Tools</a></li>
 <li><a href="#Math">Math Tools</a></li>
 <li><a href="#Matrix">Matrix Tools</a></li>
 <li><a href="#ML">ML Tools</a></li>
@@ -698,24 +698,34 @@
         <tr>
             <td>Numeric textfield</td>
             <td> <img src="/assets/ui_numeric_control.jpg" width="300" /> </td>
-            <td> A numeric input allows you to enter a value. There are also step controls that allow you to increment one unit up and down. </td>
+            <td>
+                A numeric input allows you to enter a value. There are also step controls that allow you to increment one unit up and down.
+                Below the numeric input you can drag, a range UI will appear. Whilst dragging, holding the shift key will do smaller step changes whilst holding control key will do larger step changes.
+            </td>
         </tr>
         <tr>
             <td>Numeric2 textfield</td>
             <td> <img src="/assets/ui_numeric2_control.jpg" width="300" /> </td>
-            <td> Two numeric inputs allow you to enter both numerical values </td>
+            <td>
+                Two numeric inputs allow you to enter both numerical values.
+                Below the numeric input you can drag, a range UI will appear. Whilst dragging, holding the shift key will do smaller step changes whilst holding control key will do larger step changes.
+            </td>
         </tr>
         <tr>
             <td>Numeric slider</td>
             <td> <img src="/assets/ui_slider_control.jpg" width="300" /> </td>
-            <td> If the slider has minimum and maximum values a slider appears </td>
+            <td>
+                If the slider has minimum and maximum values a slider appears
+                Whilst dragging, holding the shift key will do smaller step changes whilst holding control key will do larger step changes.
+            </td>
         </tr>
         <tr>
             <td>Numeric2 slider</td>
             <td> <img src="/assets/ui_slider2_control.jpg" width="300" /> </td>
             <td>
                 Two numeric inputs with sliders that can optionally be locked together to modify both values
-                at the same time
+                at the same time.
+                Whilst dragging, holding the shift key will do smaller step changes whilst holding control key will do larger step changes.
             </td>
         </tr>
         <tr>
@@ -1406,6 +1416,11 @@
         <td><ul><li>source : image2D</li><li>brightness : double</li><li>red : double</li><li>green : double</li><li>blue : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change the Brightness thorugh a Look Up Table (L.U.T.) for a Colored Image</td>
     </tr>
     <tr>
+        <td>CLAHE Histogram Equalization</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li><li>clipLimit : double</li><li>tileGridSize : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>CLAHE, or Contrast Limited Adaptive Histogram Equalization, is an image processing technique used to enhance the local contrast of images, best used when the overall image contrast is low or uneven.</td>
+    </tr>
+    <tr>
         <td>Contrast</td>
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : image2D</li><li>contrast : double</li><li>red : double</li><li>green : double</li><li>blue : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change the Contrast thorugh a Look Up Table (L.U.T.) for a Colored Image</td>
@@ -1429,16 +1444,6 @@
         <td>Brightness</td>
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : cuda2D</li><li>brightness : double</li><li>red : double</li><li>green : double</li><li>blue : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Change Brightness of Cuda Buffer</td>
-    </tr>
-    <tr>
-        <td>Chroma Keyer</td>
-        <td><i class='bi bi-palette'></i></td>
-        <td><ul><li>source : cuda2D</li><li>inEdges : double2</li><li>mode : int</li><li>outputChannels : int</li><li>invert : bool</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Chroma Key of Cuda Buffer</td>
-    </tr>
-    <tr>
-        <td>CIELAB Threshold</td>
-        <td><i class='bi bi-palette'></i></td>
-        <td><ul><li>source : cuda2D</li><li>targetColor : color</li><li>radius : double2</li><li>scale : double</li><li>outputChannels : int</li><li>invert : bool</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>CIELAB Threshold of Cuda Buffer</td>
     </tr>
     <tr>
         <td>Contrast</td>
@@ -1466,11 +1471,6 @@
         <td><ul><li>source : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Gamma Inv Cuda Buffer</td>
     </tr>
     <tr>
-        <td>Grayscale</td>
-        <td><i class='bi bi-palette'></i></td>
-        <td><ul><li>source : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Grayscale of Cuda Buffer</td>
-    </tr>
-    <tr>
         <td>HLS->RGB</td>
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>HLS to RGB of Cuda Buffer</td>
@@ -1489,11 +1489,6 @@
         <td>HSV Correct</td>
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : cuda2D</li><li>hue : double</li><li>sat : double</li><li>bright : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Modify Color of Cuda Buffer Using HSV/HSB Sliders</td>
-    </tr>
-    <tr>
-        <td>Hue Threshold</td>
-        <td><i class='bi bi-palette'></i></td>
-        <td><ul><li>source : cuda2D</li><li>targetColor : color</li><li>radius : double2</li><li>outputChannels : int</li><li>invert : bool</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Hue Threshold of Cuda Buffer</td>
     </tr>
     <tr>
         <td>Invert</td>
@@ -1526,11 +1521,6 @@
         <td><ul><li>source : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>RGB to YUV of Cuda Buffer</td>
     </tr>
     <tr>
-        <td>RGB Threshold</td>
-        <td><i class='bi bi-palette'></i></td>
-        <td><ul><li>source : cuda2D</li><li>targetColor : color</li><li>radius : double2</li><li>outputChannels : int</li><li>invert : bool</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>RGB Threshold of Cuda Buffer</td>
-    </tr>
-    <tr>
         <td>Smoothstep</td>
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : cuda2D</li><li>inEdges : double2</li><li>outEdges : double2</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Smoothstep of Cuda Buffer</td>
@@ -1561,11 +1551,6 @@
         <td><ul><li>source : image2D</li><li>gamma : double</li><li>red : double</li><li>green : double</li><li>blue : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change the Gamma thorugh a Look Up Table (L.U.T.) for a Colored Image</td>
     </tr>
     <tr>
-        <td>Grayscale</td>
-        <td><i class='bi bi-palette'></i></td>
-        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Convert to grayscale</td>
-    </tr>
-    <tr>
         <td>HSL->HSV</td>
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Convert Colorspace</td>
@@ -1584,11 +1569,6 @@
         <td>Image2D to Matrix2D</td>
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Convert Image2D to Matrix2D</td>
-    </tr>
-    <tr>
-        <td>In Range</td>
-        <td><i class='bi bi-palette'></i></td>
-        <td><ul><li>source : image2D</li><li>min : color</li><li>max : color</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Threshold if between min and max</td>
     </tr>
     <tr>
         <td>Invert Color</td>
@@ -1629,11 +1609,6 @@
         <td>Smoothstep</td>
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : image2D</li><li>inEdges : double2</li><li>outEdges : double2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Smoothstep to set in and out black levels</td>
-    </tr>
-    <tr>
-        <td>Threshold</td>
-        <td><i class='bi bi-palette'></i></td>
-        <td><ul><li>source : image2D</li><li>thresh : double</li><li>maxval : double</li><li>type : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>The function is typically used to get a bi-level (binary) image out of a grayscale image</td>
     </tr>
     <tr>
         <td>YUV->HSV</td>
@@ -2636,6 +2611,110 @@
         <td><ul><li>source : image2D</li><li>region size : int</li><li>ratio : double</li><li>numIterations : int</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>numSuperpixels : int</li><li>labelsMap : image2D</li><li>contourMask : image2D</li>        </ul></td>        <td>Initializes a SuperpixelLSC (Linear Spectral Clustering) object for the input image.</td>
     </tr>
 </table>
+<h3 id='Grayscale'>Grayscale</h3><p>The Grayscale Filters tools are all under the <i class="bi bi-mask"> Grayscale</i> category. The full list of display tools is as follows:</p><table>
+    <tr>
+        <th>Name</th>
+        <th>Icon</th>
+        <th>Inputs</th>
+        <th>Outputs</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>Chroma Keyer</td>
+        <td><i class='bi bi-mask'></i></td>
+        <td><ul><li>source : cuda2D</li><li>inEdges : double2</li><li>mode : int</li><li>outputChannels : int</li><li>invert : bool</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Chroma Key of Cuda Buffer</td>
+    </tr>
+    <tr>
+        <td>CIELAB Threshold</td>
+        <td><i class='bi bi-mask'></i></td>
+        <td><ul><li>source : cuda2D</li><li>targetColor : color</li><li>radius : double2</li><li>scale : double</li><li>outputChannels : int</li><li>invert : bool</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>CIELAB Threshold of Cuda Buffer</td>
+    </tr>
+    <tr>
+        <td>Grayscale</td>
+        <td><i class='bi bi-mask'></i></td>
+        <td><ul><li>source : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Grayscale of Cuda Buffer</td>
+    </tr>
+    <tr>
+        <td>Hue Threshold</td>
+        <td><i class='bi bi-mask'></i></td>
+        <td><ul><li>source : cuda2D</li><li>targetColor : color</li><li>radius : double2</li><li>outputChannels : int</li><li>invert : bool</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Hue Threshold of Cuda Buffer</td>
+    </tr>
+    <tr>
+        <td>RGB Threshold</td>
+        <td><i class='bi bi-mask'></i></td>
+        <td><ul><li>source : cuda2D</li><li>targetColor : color</li><li>radius : double2</li><li>outputChannels : int</li><li>invert : bool</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>RGB Threshold of Cuda Buffer</td>
+    </tr>
+    <tr>
+        <td>Grayscale</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Convert to grayscale</td>
+    </tr>
+    <tr>
+        <td>Color In Range</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li><li>min : color</li><li>max : color</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Threshold if between min and max</td>
+    </tr>
+    <tr>
+        <td>Mask Brightness</td>
+        <td><i class='bi bi-mask'></i></td>
+        <td><ul><li>source : image2D</li><li>maskBrightness : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change the Brightness thorugh a Look Up Table (L.U.T.) for a Mask</td>
+    </tr>
+    <tr>
+        <td>Mask Circles</td>
+        <td><i class='bi bi-mask'></i></td>
+        <td><ul><li>source : image2D</li><li>circles : matrix2D</li><li>blend : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Draws Circles with Masks</td>
+    </tr>
+    <tr>
+        <td>Mask Contrast</td>
+        <td><i class='bi bi-mask'></i></td>
+        <td><ul><li>source : image2D</li><li>maskContrast : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change the Contrast thorugh a Look Up Table (L.U.T.) for a Mask</td>
+    </tr>
+    <tr>
+        <td>Mask Curve</td>
+        <td><i class='bi bi-mask'></i></td>
+        <td><ul><li>source : image2D</li><li>curve : string</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Create a Curve Mask Thorugh a Look Up Table (L.U.T.)</td>
+    </tr>
+    <tr>
+        <td>Mask Gamma</td>
+        <td><i class='bi bi-mask'></i></td>
+        <td><ul><li>source : image2D</li><li>maskGamma : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change the Gamma thorugh a Look Up Table (L.U.T.) for a Mask</td>
+    </tr>
+    <tr>
+        <td>Invert Mask</td>
+        <td><i class='bi bi-mask'></i></td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Inverts the Mask using Bitwise Not</td>
+    </tr>
+    <tr>
+        <td>Mask Lift</td>
+        <td><i class='bi bi-mask'></i></td>
+        <td><ul><li>source : image2D</li><li>maskLift : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Lifts the Brightness thorugh a Look Up Table (L.U.T.) for a Mask</td>
+    </tr>
+    <tr>
+        <td>Mask Paths</td>
+        <td><i class='bi bi-mask'></i></td>
+        <td><ul><li>source : image2D</li><li>path : matrix2D</li><li>blend : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Draws Paths with Masks</td>
+    </tr>
+    <tr>
+        <td>Mask Rectangles</td>
+        <td><i class='bi bi-mask'></i></td>
+        <td><ul><li>source : image2D</li><li>rectangles : matrix2D</li><li>blend : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Draws Rectangles with Masks</td>
+    </tr>
+    <tr>
+        <td>Mask Shapes</td>
+        <td><i class='bi bi-mask'></i></td>
+        <td><ul><li>source : image2D</li><li>lines : matrix2D</li><li>circles : matrix2D</li><li>rectangles : matrix2D</li><li>path : matrix2D</li><li>blend : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Draws Lines, Circles, and/or Rectangles with Masks</td>
+    </tr>
+    <tr>
+        <td>Threshold</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li><li>thresh : double</li><li>maxval : double</li><li>type : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>The function is typically used to get a bi-level (binary) image out of a grayscale image</td>
+    </tr>
+    <tr>
+        <td>Mask In Range</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li><li>min : double</li><li>max : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Mask Threshold if between min and max</td>
+    </tr>
+</table>
 <h3 id='Inputs'>Inputs</h3><p>The Source Inputs tools are all under the <i class="bi bi-file-earmark-richtext"> Inputs</i> category. The full list of display tools is as follows:</p><table>
     <tr>
         <th>Name</th>
@@ -2812,65 +2891,6 @@
         <td>True</td>
         <td><i class='bi bi-calculator'></i></td>
         <td><ul>        </ul></td>        <td><ul><li>out : bool</li>        </ul></td>        <td>Returns True</td>
-    </tr>
-</table>
-<h3 id='Masks'>Masks</h3><p>The Mask Filters tools are all under the <i class="bi bi-mask"> Masks</i> category. The full list of display tools is as follows:</p><table>
-    <tr>
-        <th>Name</th>
-        <th>Icon</th>
-        <th>Inputs</th>
-        <th>Outputs</th>
-        <th>Description</th>
-    </tr>
-    <tr>
-        <td>Mask Brightness</td>
-        <td><i class='bi bi-mask'></i></td>
-        <td><ul><li>source : image2D</li><li>maskBrightness : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change the Brightness thorugh a Look Up Table (L.U.T.) for a Mask</td>
-    </tr>
-    <tr>
-        <td>Mask Circles</td>
-        <td><i class='bi bi-mask'></i></td>
-        <td><ul><li>source : image2D</li><li>circles : matrix2D</li><li>blend : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Draws Circles with Masks</td>
-    </tr>
-    <tr>
-        <td>Mask Contrast</td>
-        <td><i class='bi bi-mask'></i></td>
-        <td><ul><li>source : image2D</li><li>maskContrast : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change the Contrast thorugh a Look Up Table (L.U.T.) for a Mask</td>
-    </tr>
-    <tr>
-        <td>Mask Curve</td>
-        <td><i class='bi bi-mask'></i></td>
-        <td><ul><li>source : image2D</li><li>curve : string</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Create a Curve Mask Thorugh a Look Up Table (L.U.T.)</td>
-    </tr>
-    <tr>
-        <td>Mask Gamma</td>
-        <td><i class='bi bi-mask'></i></td>
-        <td><ul><li>source : image2D</li><li>maskGamma : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change the Gamma thorugh a Look Up Table (L.U.T.) for a Mask</td>
-    </tr>
-    <tr>
-        <td>Invert Mask</td>
-        <td><i class='bi bi-mask'></i></td>
-        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Inverts the Mask using Bitwise Not</td>
-    </tr>
-    <tr>
-        <td>Mask Lift</td>
-        <td><i class='bi bi-mask'></i></td>
-        <td><ul><li>source : image2D</li><li>maskLift : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Lifts the Brightness thorugh a Look Up Table (L.U.T.) for a Mask</td>
-    </tr>
-    <tr>
-        <td>Mask Paths</td>
-        <td><i class='bi bi-mask'></i></td>
-        <td><ul><li>source : image2D</li><li>path : matrix2D</li><li>blend : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Draws Paths with Masks</td>
-    </tr>
-    <tr>
-        <td>Mask Rectangles</td>
-        <td><i class='bi bi-mask'></i></td>
-        <td><ul><li>source : image2D</li><li>rectangles : matrix2D</li><li>blend : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Draws Rectangles with Masks</td>
-    </tr>
-    <tr>
-        <td>Mask Shapes</td>
-        <td><i class='bi bi-mask'></i></td>
-        <td><ul><li>source : image2D</li><li>lines : matrix2D</li><li>circles : matrix2D</li><li>rectangles : matrix2D</li><li>path : matrix2D</li><li>blend : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Draws Lines, Circles, and/or Rectangles with Masks</td>
     </tr>
 </table>
 <h3 id='Math'>Math</h3><p>The Math functions tools are all under the <i class="bi bi-calculator"> Math</i> category. The full list of display tools is as follows:</p><table>
@@ -3539,6 +3559,11 @@
         <td><ul><li>source : double</li>        </ul></td>        <td><ul>        </ul></td>        <td>Show Double Number</td>
     </tr>
     <tr>
+        <td>Full Image Display</td>
+        <td><i class='bi bi-window'></i></td>
+        <td><ul><li>source : image2D</li><li>size : int</li>        </ul></td>        <td><ul>        </ul></td>        <td>Show Full image</td>
+    </tr>
+    <tr>
         <td>Fullscreen</td>
         <td><i class='bi bi-window'></i></td>
         <td><ul><li>source : image2D</li>        </ul></td>        <td><ul>        </ul></td>        <td>Show Image</td>
@@ -3591,7 +3616,7 @@
     <tr>
         <td>Thumbnail Image Display</td>
         <td><i class='bi bi-window'></i></td>
-        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul>        </ul></td>        <td>Show Thumbnail of Image</td>
+        <td><ul><li>source : image2D</li><li>size : int</li>        </ul></td>        <td><ul>        </ul></td>        <td>Show Thumbnail of Image</td>
     </tr>
 </table>
 <h3 id='Photron'>Photron</h3><p>The Photron Filters tools are all under the <i class="bi bi-camera-reels-fill"> Photron</i> category. The full list of display tools is as follows:</p><table>
