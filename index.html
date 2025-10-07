@@ -1218,6 +1218,11 @@
         <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Detects edges using CAFFE model<p style='color:red;'>The following package is required: edge</p></td>
     </tr>
     <tr>
+        <td>Dexined Edge Detect</td>
+        <td><i class='bi bi-filetype-ai'></i></td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Detects edges using ONNX model<p style='color:red;'>The following package is required: dexined</p></td>
+    </tr>
+    <tr>
         <td>Face Tracker</td>
         <td><i class='bi bi-filetype-ai'></i></td>
         <td><ul><li>source : image2D</li><li>face : string</li><li>part : string</li>        </ul></td>        <td><ul><li>faces : matrix2D</li><li>preview : image2D</li><li>parts : matrix2D</li><li>numFaces : int</li><li>numParts : int</li>        </ul></td>        <td>Detects and tracks facial and body features<p style='color:red;'>The following package is required: haarcascades</p></td>
@@ -1404,11 +1409,6 @@
         <th>Inputs</th>
         <th>Outputs</th>
         <th>Description</th>
-    </tr>
-    <tr>
-        <td>Adaptive Threshold</td>
-        <td><i class='bi bi-palette'></i></td>
-        <td><ul><li>source : image2D</li><li>maxval : double</li><li>adaptiveMethod : int</li><li>thresholdType : int</li><li>blockSize : int</li><li>C : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>The function is typically used to get a bi-level (binary) image out of a grayscale image</td>
     </tr>
     <tr>
         <td>Brightness</td>
@@ -2620,6 +2620,21 @@
         <th>Description</th>
     </tr>
     <tr>
+        <td>Adaptive Threshold</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li><li>maxval : double</li><li>adaptiveMethod : int</li><li>thresholdType : int</li><li>blockSize : int</li><li>C : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>The function is typically used to get a bi-level (binary) image out of a grayscale image</td>
+    </tr>
+    <tr>
+        <td>Adaptive Binary Threshold</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li><li>maxval : double</li><li>adaptiveMethod : int</li><li>blockSize : int</li><li>C : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>The function is typically used to get a bi-level (binary) image out of a grayscale image</td>
+    </tr>
+    <tr>
+        <td>Adaptive Binary Inverse Threshold</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li><li>maxval : double</li><li>adaptiveMethod : int</li><li>blockSize : int</li><li>C : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>The function is typically used to get a bi-level (binary inverse) image out of a grayscale image</td>
+    </tr>
+    <tr>
         <td>Chroma Keyer</td>
         <td><i class='bi bi-mask'></i></td>
         <td><ul><li>source : cuda2D</li><li>inEdges : double2</li><li>mode : int</li><li>outputChannels : int</li><li>invert : bool</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Chroma Key of Cuda Buffer</td>
@@ -2710,9 +2725,49 @@
         <td><ul><li>source : image2D</li><li>thresh : double</li><li>maxval : double</li><li>type : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>The function is typically used to get a bi-level (binary) image out of a grayscale image</td>
     </tr>
     <tr>
+        <td>Threshold Binary</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li><li>thresh : double</li><li>maxval : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>The function is typically used to get a bi-level (binary) image out of a grayscale image</td>
+    </tr>
+    <tr>
+        <td>Threshold Binary Inverse</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li><li>thresh : double</li><li>maxval : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>The function is typically used to get a bi-level (binary inverse) image out of a grayscale image</td>
+    </tr>
+    <tr>
         <td>Mask In Range</td>
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : image2D</li><li>min : double</li><li>max : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Mask Threshold if between min and max</td>
+    </tr>
+    <tr>
+        <td>Threshold Mask</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li><li>thresh : double</li><li>maxval : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>The function is typically used to get a bi-level (mask) image out of a grayscale image</td>
+    </tr>
+    <tr>
+        <td>Threshold Otsu</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li><li>thresh : double</li><li>maxval : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>The function is typically used to get a bi-level (binary inverse) image out of a grayscale image</td>
+    </tr>
+    <tr>
+        <td>Threshold To Zero</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li><li>thresh : double</li><li>maxval : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>The function is typically used to get a bi-level (to zero) image out of a grayscale image</td>
+    </tr>
+    <tr>
+        <td>Threshold To Zero Inverse</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li><li>thresh : double</li><li>maxval : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>The function is typically used to get a bi-level (to zero inverse) image out of a grayscale image</td>
+    </tr>
+    <tr>
+        <td>Threshold Triangle</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li><li>thresh : double</li><li>maxval : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>The function is typically used to get a bi-level (triangle) image out of a grayscale image</td>
+    </tr>
+    <tr>
+        <td>Threshold Trunc</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li><li>thresh : double</li><li>maxval : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>The function is typically used to get a bi-level (binary inverse) image out of a grayscale image</td>
     </tr>
 </table>
 <h3 id='Inputs'>Inputs</h3><p>The Source Inputs tools are all under the <i class="bi bi-file-earmark-richtext"> Inputs</i> category. The full list of display tools is as follows:</p><table>
@@ -5884,6 +5939,15 @@
                 <a target="_blank" href="https://github.com/ashukid/hed-edge-detector/blob/master/README.md">Code for edge detection using pretrained hed model(caffe) using OpenCV</a>
             </td>
             <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1nogdnydjIbQmYWKwTUgssrGdxLs86RiX/view?usp=drive_link">edge</a> </td>
+        </tr>
+
+        <tr>
+            <td> DexiNed Edge Inference </td>
+            <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
+            <td>
+                <a target="_blank" href="https://huggingface.co/opencv/edge_detection_dexined">Code for edge detection using a model(ONNX) using a Convolutional Neural Network (CNN)</a>
+            </td>
+            <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1H8-izdOk3KnFE5OsCA9zyZmgM-JUPn9C/view?usp=sharing">dexined</a> </td>
         </tr>
 
         <tr>
