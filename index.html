@@ -1223,6 +1223,11 @@
         <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Detects edges using ONNX model<p style='color:red;'>The following package is required: dexined</p></td>
     </tr>
     <tr>
+        <td>YuNET Face Detect</td>
+        <td><i class='bi bi-filetype-ai'></i></td>
+        <td><ul><li>source : image2D</li><li>scoreThreshold : double</li><li>nmsThreshold : double</li><li>top K : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li>        </ul></td>        <td>Detect faces using YuNET ONNX model. This model can detect faces of pixels between around 10x10 to 300x300 due to the training scheme.</td>
+    </tr>
+    <tr>
         <td>Face Tracker</td>
         <td><i class='bi bi-filetype-ai'></i></td>
         <td><ul><li>source : image2D</li><li>face : string</li><li>part : string</li>        </ul></td>        <td><ul><li>faces : matrix2D</li><li>preview : image2D</li><li>parts : matrix2D</li><li>numFaces : int</li><li>numParts : int</li>        </ul></td>        <td>Detects and tracks facial and body features<p style='color:red;'>The following package is required: haarcascades</p></td>
@@ -6011,6 +6016,15 @@
                 <a target="_blank" href="https://github.com/iArunava/ENet-Real-Time-Semantic-Segmentation">A Deep Neural Network Architecture for Real-Time Semantic Segmentation</a>
             </td>
             <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1JnitFkD3cnTizT6yCmdSNjmThC4rxMgF/view?usp=drive_link">segmentation</a> </td>
+        </tr>
+
+        <tr>
+            <td> Human Segmentation Inference </td>
+            <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
+            <td>
+                <a target="_blank" href="https://huggingface.co/opencv/human_segmentation_pphumanseg">A Deep Neural Network Architecture for Real-Time Segmentation on Humans Specifically</a>
+            </td>
+            <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/19Ts7kVmwCx_YgTuCofScEnqxYR14UGc2/view?usp=sharing">human_seg_pp</a> </td>
         </tr>
 
         <tr>
