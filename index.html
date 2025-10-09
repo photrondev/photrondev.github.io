@@ -1233,6 +1233,11 @@
         <td><ul><li>source : image2D</li><li>face : string</li><li>part : string</li>        </ul></td>        <td><ul><li>faces : matrix2D</li><li>preview : image2D</li><li>parts : matrix2D</li><li>numFaces : int</li><li>numParts : int</li>        </ul></td>        <td>Detects and tracks facial and body features<p style='color:red;'>The following package is required: haarcascades</p></td>
     </tr>
     <tr>
+        <td>YuNET Facial Expression</td>
+        <td><i class='bi bi-filetype-ai'></i></td>
+        <td><ul><li>source : image2D</li><li>filter : string</li><li>scoreThreshold : double</li><li>nmsThreshold : double</li><li>top K : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li>        </ul></td>        <td>Detect facial expressions using YuNET ONNX model: angry, disgust, fearful, happy, neutral, sad, surprised.</td>
+    </tr>
+    <tr>
         <td>Handpose Estimation</td>
         <td><i class='bi bi-filetype-ai'></i></td>
         <td><ul><li>source : image2D</li><li>size : int2</li><li>confidenceThreshold : double</li><li>scale : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li><li>openClose : bool</li>        </ul></td>        <td>Detects palms and fingers based on OpenPose neural network model. In out, the 1st column is the id of the point, the 2nd and 3rd are the coordinates of that point, and the 4th column is the confidence.<p style='color:red;'>The following package is required: pose</p></td>
@@ -1241,6 +1246,11 @@
         <td>Human Parsing Inference</td>
         <td><i class='bi bi-filetype-ai'></i></td>
         <td><ul><li>source : image2D</li><li>filter : string</li><li>blend : double</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li>        </ul></td>        <td>Parses (segments) human body parts from an image using opencv's dnn<p style='color:red;'>The following package is required: human</p></td>
+    </tr>
+    <tr>
+        <td>Human Segmentation Inference</td>
+        <td><i class='bi bi-filetype-ai'></i></td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li>        </ul></td>        <td>Perform segmentation on humans using PPHumanSeg model.</td>
     </tr>
     <tr>
         <td>Mask Inference</td>
@@ -6034,6 +6044,15 @@
                 <a target="_blank" href="https://docs.opencv.org/4.x/d4/d43/tutorial_dnn_text_spotting.html">An End-to-End Trainable Neural Network for Image-based Sequence Recognition and Its Application to Scene Text Recognition</a>
             </td>
             <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1-lJLtRNaH33FWEJYzf7mT80dL0VrKXkI/view?usp=drive_link">text_spotting</a> </td>
+        </tr>
+
+        <tr>
+            <td> YuNET Face Tracking and Facial Expressions Recognition Inference </td>
+            <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
+            <td>
+                <a target="_blank" href="https://huggingface.co/opencv/facial_expression_recognition">A Light-weight, Fast, and Accurate face Detection Model, with Ability to Track Faces and Points on a Face and Perform Facial Expression Recognition</a>
+            </td>
+            <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1lNwEmj3vDcriUHxQAP_CmobBVYe9b4pd/view?usp=drive_link">yunet</a> </td>
         </tr>
 
         <tr>
