@@ -847,8 +847,10 @@
 
     <p id="ThumbnailViewer">
         Only one node can be viewed at one time in the viewer. However, the flowgraph can also show multiple the output of multiple nodes
-        at the same time. For example, using the 'Thumbnail Image Display' tool allows you to
-        show images that are drawn in the flowgraph directly.
+        at the same time. For example, using the 'Thumbnail Image Display' or 'Full Image Display' tool allows you to
+        show images that are drawn in the flowgraph directly. Both the  'Thumbnail Image Display' or 'Full Image Display' allow you to maximize 
+        or minimize the image view by hovering over the right hand corner and clicking the <i class='bi bi-arrows-angle-expand'></i> icon.
+
         Additional <a href="#DisplaysSection">Display Nodes</a> are available that can be used to view different types of outputs directly on the flowgraph.
     </p>
     <img src="/assets/ui_thumbnail_viewer.gif" />
@@ -3301,6 +3303,11 @@
         <td><ul><li>source : matrix2D</li>        </ul></td>        <td><ul><li>out : numeric</li>        </ul></td>        <td>Matrix or vector norm. Frobenius norm for matrices, L2 norm for vectors.</td>
     </tr>
     <tr>
+        <td>Scalar Multiply</td>
+        <td><i class='bi bi-grid-3x3'></i></td>
+        <td><ul><li>Input #1 : matrix2D</li><li>Input #2 : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Multiply matrix with scalar value</td>
+    </tr>
+    <tr>
         <td>Trace</td>
         <td><i class='bi bi-grid-3x3'></i></td>
         <td><ul><li>source : matrix2D</li>        </ul></td>        <td><ul><li>out : int</li>        </ul></td>        <td>Return the sum along diagonals of the array</td>
@@ -4884,6 +4891,11 @@
         <td><ul><li>point : int2</li>        </ul></td>        <td><ul><li>x : int</li><li>y : int</li>        </ul></td>        <td>Extract x and y from point value</td>
     </tr>
     <tr>
+        <td>Image Information</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : int3</li><li>width : int</li><li>height : int</li><li>numChannels : int</li>        </ul></td>        <td>Return the width, height, and number of channels of an image.</td>
+    </tr>
+    <tr>
         <td>In JSON?</td>
         <td><i class='bi bi-gear'></i></td>
         <td><ul><li>json : string</li><li>key : string</li>        </ul></td>        <td><ul><li>out : bool</li>        </ul></td>        <td>Has Key in JSON</td>
@@ -4942,6 +4954,11 @@
         <td>Load Camera Calibration</td>
         <td><i class='bi bi-filetype-json'></i></td>
         <td><ul><li>source : string</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Load Camera Calibration file</td>
+    </tr>
+    <tr>
+        <td>Pixel Information</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>source : image2D</li><li>position : int2</li><li>normalize : bool</li>        </ul></td>        <td><ul><li>out : image2D</li><li>red : double</li><li>green : double</li><li>blue : double</li><li>alpha : double</li><li>luminance : double</li>        </ul></td>        <td>For a given pixel, find its R,G,B, Alpha value, and Luminance.</td>
     </tr>
     <tr>
         <td>Print</td>
