@@ -118,6 +118,7 @@
 <li><a href="#Plot">Plot Tools</a></li>
 <li><a href="#Pytorch">Pytorch Tools</a></li>
 <li><a href="#Rendering">Rendering Tools</a></li>
+<li><a href="#Statistics">Statistics Tools</a></li>
 <li><a href="#String">String Tools</a></li>
 <li><a href="#Tracking">Tracking Tools</a></li>
 <li><a href="#Transform">Transform Tools</a></li>
@@ -1285,6 +1286,11 @@
         <td><ul><li>source : audio</li>        </ul></td>        <td><ul><li>out : string</li><li>preview : image2D</li>        </ul></td>        <td>Detects speech</td>
     </tr>
     <tr>
+        <td>PPOCR Text Detect</td>
+        <td><i class='bi bi-filetype-ai'></i></td>
+        <td><ul><li>source : image2D</li><li>binaryThreshold : double</li><li>polygonThreshold : double</li><li>maxCandidate : int</li><li>unclipRatio : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>mask : image2D</li><li>numDetects : int</li>        </ul></td>        <td>Text Detection using PP-OCRv3.<p style='color:red;'>The following package is required: text_ppocr</p></td>
+    </tr>
+    <tr>
         <td>Text Spotting</td>
         <td><i class='bi bi-filetype-ai'></i></td>
         <td><ul><li>source : image2D</li><li>color : bool</li><li>binaryThreshold : double</li><li>polygonThreshold : double</li><li>maxCandidate : int</li><li>unclipRatio : double</li>        </ul></td>        <td><ul><li>out : string</li><li>preview : image2D</li>        </ul></td>        <td>Spots text in images using DNN<p style='color:red;'>The following package is required: text_spotting</p></td>
@@ -1550,7 +1556,7 @@
     <tr>
         <td>Histogram Equalization</td>
         <td><i class='bi bi-palette'></i></td>
-        <td><ul><li>source : image2D</li><li>adaptive : bool</li><li>clipLimit : double</li><li>tileGridSize : int2</li>        </ul></td>        <td><ul><li>out : image2D</li><li>histogram : histogram</li>        </ul></td>        <td>Histogram Equalization</td>
+        <td><ul><li>source : image2D</li><li>adaptive : bool</li><li>clipLimit : double</li><li>tileGridSize : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Histogram Equalization</td>
     </tr>
     <tr>
         <td>Gamma</td>
@@ -1591,6 +1597,11 @@
         <td>Color Lift</td>
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : image2D</li><li>lift : double</li><li>redLift : double</li><li>greenLift : double</li><li>blueLift : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Lifts the Brightness thorugh a Look Up Table (L.U.T.) for a Colored Image</td>
+    </tr>
+    <tr>
+        <td>Color LUT</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li><li>red LUT : matrix2D</li><li>green LUT : matrix2D</li><li>blue LUT : matrix2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Use a Look Up Table (L.U.T.) to tonemap a Colored Image</td>
     </tr>
     <tr>
         <td>Matrix2D to Image2D</td>
@@ -2518,16 +2529,6 @@
         <td><ul><li>source : image2D</li><li>center : double2</li><li>width : int</li><li>height : int</li><li>trigger : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li>        </ul></td>        <td>Finds the rectangle with the maximum number of points. When the object moves, the movement is reflected in the meanshift algorithm</td>
     </tr>
     <tr>
-        <td>Mean Color</td>
-        <td><i class='bi bi-stars'></i></td>
-        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>red : double</li><li>green : double</li><li>blue : double</li><li>alpha : double</li>        </ul></td>        <td>Calculates an average (mean) value of array elements, independently for each channel</td>
-    </tr>
-    <tr>
-        <td>Mean Mask</td>
-        <td><i class='bi bi-stars'></i></td>
-        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : double</li>        </ul></td>        <td>Calculates an average (mean) value of array elements for a grayscale image</td>
-    </tr>
-    <tr>
         <td>Median Blur</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>ksize : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Blurs an image using the median filter</td>
@@ -2603,16 +2604,6 @@
         <td><ul><li>shape : int</li><li>ksize : int2</li><li>anchor : int2</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Returns a structuring element of the specified size and shape for morphological operations.</td>
     </tr>
     <tr>
-        <td>Sum Color</td>
-        <td><i class='bi bi-stars'></i></td>
-        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>red : double</li><li>green : double</li><li>blue : double</li><li>alpha : double</li>        </ul></td>        <td>Calculates and returns the sum of array elements, independently for each channel</td>
-    </tr>
-    <tr>
-        <td>Sum Mask</td>
-        <td><i class='bi bi-stars'></i></td>
-        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : double</li>        </ul></td>        <td>Calculates and returns the sum of array elements for a grayscale image</td>
-    </tr>
-    <tr>
         <td>Create Super Pixel</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>region size : int</li><li>ratio : double</li><li>numIterations : int</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>numSuperpixels : int</li><li>labelsMap : image2D</li><li>contourMask : image2D</li>        </ul></td>        <td>Initializes a SuperpixelLSC (Linear Spectral Clustering) object for the input image.</td>
@@ -2677,52 +2668,57 @@
         <td><ul><li>source : image2D</li><li>min : color</li><li>max : color</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Threshold if between min and max</td>
     </tr>
     <tr>
-        <td>Mask Brightness</td>
+        <td>Grayscale LUT</td>
         <td><i class='bi bi-mask'></i></td>
-        <td><ul><li>source : image2D</li><li>maskBrightness : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change the Brightness thorugh a Look Up Table (L.U.T.) for a Mask</td>
+        <td><ul><li>source : image2D</li><li>LUT : matrix2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Use a Look Up Table (L.U.T.) to tonemap a Grayscale Image</td>
     </tr>
     <tr>
-        <td>Mask Circles</td>
+        <td>Grayscale Brightness</td>
+        <td><i class='bi bi-mask'></i></td>
+        <td><ul><li>source : image2D</li><li>maskBrightness : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change the Brightness thorugh a Look Up Table (L.U.T.) for a Grayscale</td>
+    </tr>
+    <tr>
+        <td>Grayscale Circles</td>
         <td><i class='bi bi-mask'></i></td>
         <td><ul><li>source : image2D</li><li>circles : matrix2D</li><li>blend : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Draws Circles with Masks</td>
     </tr>
     <tr>
-        <td>Mask Contrast</td>
+        <td>Grayscale Contrast</td>
         <td><i class='bi bi-mask'></i></td>
-        <td><ul><li>source : image2D</li><li>maskContrast : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change the Contrast thorugh a Look Up Table (L.U.T.) for a Mask</td>
+        <td><ul><li>source : image2D</li><li>maskContrast : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change the Contrast thorugh a Look Up Table (L.U.T.) for a Grayscale</td>
     </tr>
     <tr>
-        <td>Mask Curve</td>
+        <td>Grayscale Curve</td>
         <td><i class='bi bi-mask'></i></td>
-        <td><ul><li>source : image2D</li><li>curve : string</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Create a Curve Mask Thorugh a Look Up Table (L.U.T.)</td>
+        <td><ul><li>source : image2D</li><li>curve : string</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Create a Curve Grayscale Thorugh a Look Up Table (L.U.T.)</td>
     </tr>
     <tr>
-        <td>Mask Gamma</td>
+        <td>Grayscale Gamma</td>
         <td><i class='bi bi-mask'></i></td>
-        <td><ul><li>source : image2D</li><li>maskGamma : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change the Gamma thorugh a Look Up Table (L.U.T.) for a Mask</td>
+        <td><ul><li>source : image2D</li><li>maskGamma : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change the Gamma thorugh a Look Up Table (L.U.T.) for a Grayscale</td>
     </tr>
     <tr>
-        <td>Invert Mask</td>
+        <td>Invert Grayscale</td>
         <td><i class='bi bi-mask'></i></td>
-        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Inverts the Mask using Bitwise Not</td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Inverts the Grayscale using Bitwise Not</td>
     </tr>
     <tr>
-        <td>Mask Lift</td>
+        <td>Grayscale Lift</td>
         <td><i class='bi bi-mask'></i></td>
-        <td><ul><li>source : image2D</li><li>maskLift : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Lifts the Brightness thorugh a Look Up Table (L.U.T.) for a Mask</td>
+        <td><ul><li>source : image2D</li><li>maskLift : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Lifts the Brightness thorugh a Look Up Table (L.U.T.) for a Grayscale</td>
     </tr>
     <tr>
-        <td>Mask Paths</td>
+        <td>Grayscale Paths</td>
         <td><i class='bi bi-mask'></i></td>
         <td><ul><li>source : image2D</li><li>path : matrix2D</li><li>blend : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Draws Paths with Masks</td>
     </tr>
     <tr>
-        <td>Mask Rectangles</td>
+        <td>Grayscale Rectangles</td>
         <td><i class='bi bi-mask'></i></td>
         <td><ul><li>source : image2D</li><li>rectangles : matrix2D</li><li>blend : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Draws Rectangles with Masks</td>
     </tr>
     <tr>
-        <td>Mask Shapes</td>
+        <td>Grayscale Shapes</td>
         <td><i class='bi bi-mask'></i></td>
         <td><ul><li>source : image2D</li><li>lines : matrix2D</li><li>circles : matrix2D</li><li>rectangles : matrix2D</li><li>path : matrix2D</li><li>blend : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Draws Lines, Circles, and/or Rectangles with Masks</td>
     </tr>
@@ -2742,9 +2738,9 @@
         <td><ul><li>source : image2D</li><li>thresh : double</li><li>maxval : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>The function is typically used to get a bi-level (binary inverse) image out of a grayscale image</td>
     </tr>
     <tr>
-        <td>Mask In Range</td>
+        <td>Grayscale In Range</td>
         <td><i class='bi bi-palette'></i></td>
-        <td><ul><li>source : image2D</li><li>min : double</li><li>max : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Mask Threshold if between min and max</td>
+        <td><ul><li>source : image2D</li><li>min : double</li><li>max : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Grayscale Threshold if between min and max</td>
     </tr>
     <tr>
         <td>Threshold Mask</td>
@@ -3016,12 +3012,12 @@
     <tr>
         <td>Counter Double</td>
         <td><i class='bi bi-stopwatch-fill'></i></td>
-        <td><ul><li>min_value : double</li><li>max_value : double</li><li>step : int</li><li>delay : double</li><li>round : int</li>        </ul></td>        <td><ul><li>out : double</li>        </ul></td>        <td>Counts numbers</td>
+        <td><ul><li>min_value : double</li><li>max_value : double</li><li>step : int</li><li>delay : double</li><li>round : int</li><li>start : int</li><li>stop : int</li><li>reset : int</li>        </ul></td>        <td><ul><li>out : double</li>        </ul></td>        <td>Counts numbers</td>
     </tr>
     <tr>
         <td>Counter Int</td>
         <td><i class='bi bi-stopwatch-fill'></i></td>
-        <td><ul><li>min_value : int</li><li>max_value : int</li><li>step : int</li><li>delay : double</li>        </ul></td>        <td><ul><li>out : int</li>        </ul></td>        <td>Counts numbers</td>
+        <td><ul><li>min_value : int</li><li>max_value : int</li><li>step : int</li><li>delay : double</li><li>start : int</li><li>stop : int</li><li>reset : int</li>        </ul></td>        <td><ul><li>out : int</li>        </ul></td>        <td>Counts numbers</td>
     </tr>
     <tr>
         <td>Divide</td>
@@ -3084,6 +3080,11 @@
         <td><ul><li>a : numeric</li><li>b : numeric</li>        </ul></td>        <td><ul><li>out : numeric</li>        </ul></td>        <td>Return a^b</td>
     </tr>
     <tr>
+        <td>Bool Pulse</td>
+        <td><i class='bi bi-stopwatch-fill'></i></td>
+        <td><ul><li>next : int</li><li>duration : double</li><li>delay : double</li><li>clear : int</li>        </ul></td>        <td><ul><li>out : bool</li>        </ul></td>        <td>Bool pulse signal</td>
+    </tr>
+    <tr>
         <td>Random Number</td>
         <td><i class='bi bi-calculator'></i></td>
         <td><ul><li>seed : numeric</li><li>min_value : double</li><li>max_value : double</li><li>round : int</li><li>alwaysDirty : bool</li><li>delay : double</li>        </ul></td>        <td><ul><li>out : double</li>        </ul></td>        <td>Return random number</td>
@@ -3107,6 +3108,11 @@
         <td>Square</td>
         <td><i class='bi bi-calculator'></i></td>
         <td><ul><li>x : numeric</li>        </ul></td>        <td><ul><li>out : numeric</li>        </ul></td>        <td>Return x^2</td>
+    </tr>
+    <tr>
+        <td>State Counter</td>
+        <td><i class='bi bi-stopwatch-fill'></i></td>
+        <td><ul><li>sensor : bool</li><li>readings : int</li><li>steady : double</li><li>delay : double</li><li>reset : int</li>        </ul></td>        <td><ul><li>out : int</li>        </ul></td>        <td>Counts states based on signal if it is on for a steady % during a duration</td>
     </tr>
     <tr>
         <td>Tan</td>
@@ -3238,6 +3244,11 @@
         <td><ul><li>a : matrix2D</li><li>b : matrix2D</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>residuals : matrix2D</li><li>rank : int</li><li>singular values : matrix2D</li>        </ul></td>        <td>Return the least-squares solution to a linear matrix equation. Computes the vector x that approximately solves ax = b</td>
     </tr>
     <tr>
+        <td>Create LUT</td>
+        <td><i class='bi bi-calculator'></i></td>
+        <td><ul><li>range : int</li><li>value : string</li><li>interpolation : int</li><li>levels : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Creates a Look Up Table that can be used to tonemap an image</td>
+    </tr>
+    <tr>
         <td>Matrix Multiply</td>
         <td><i class='bi bi-grid-3x3'></i></td>
         <td><ul><li>source1 : matrix2D</li><li>source2 : matrix2D</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Calculates the matrix multiplication of two arrays</td>
@@ -3295,7 +3306,7 @@
     <tr>
         <td>Scalar Multiply</td>
         <td><i class='bi bi-grid-3x3'></i></td>
-        <td><ul><li>Input #1 : matrix2D</li><li>Input #2 : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Multiply matrix with scalar value</td>
+        <td><ul><li>source : matrix2D</li><li>scalar : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Multiply matrix with scalar value</td>
     </tr>
     <tr>
         <td>Trace</td>
@@ -4377,6 +4388,60 @@
         <td><ul><li>point 1 : double3</li><li>point 2 : double3</li><li>point 3 : double3</li><li>color 1 : color</li><li>color 2 : color</li><li>color 3 : color</li><li>segmentation color : color</li>        </ul></td>        <td><ul><li>triangle : 3DNode</li>        </ul></td>        <td>Create a Gouraud shaded triangle.<p style='color:red;'>The following package is required: pyrender</p></td>
     </tr>
 </table>
+<h3 id='Statistics'>Statistics</h3><p>The Image Statistics tools are all under the <i class="bi bi-graph-up-arrow"> Statistics</i> category. The full list of display tools is as follows:</p><table>
+    <tr>
+        <th>Name</th>
+        <th>Icon</th>
+        <th>Inputs</th>
+        <th>Outputs</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>Color Statistics</td>
+        <td><i class='bi bi-graph-up-arrow'></i></td>
+        <td><ul><li>source : image2D</li><li>normalize : bool</li>        </ul></td>        <td><ul><li>mean : double3</li><li>min : double3</li><li>max : double3</li><li>std : double3</li>        </ul></td>        <td>Compute the Color Statistics of an image</td>
+    </tr>
+    <tr>
+        <td>Compare Histogram</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>aHistogram : matrix2D</li><li>bHistogram : matrix2D</li><li>method : int</li>        </ul></td>        <td><ul><li>result : double</li>        </ul></td>        <td>Histogram</td>
+    </tr>
+    <tr>
+        <td>Create Histogram</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>histogram : matrix2D</li>        </ul></td>        <td>Histogram</td>
+    </tr>
+    <tr>
+        <td>Grayscale Statistics</td>
+        <td><i class='bi bi-graph-up-arrow'></i></td>
+        <td><ul><li>source : image2D</li><li>normalize : bool</li>        </ul></td>        <td><ul><li>mean : double</li><li>min : double</li><li>minPos : int2</li><li>max : double</li><li>maxPos : int2</li><li>std : double</li>        </ul></td>        <td>Compute the Grayscale Statistics of an image</td>
+    </tr>
+    <tr>
+        <td>Mean Color</td>
+        <td><i class='bi bi-graph-up-arrow'></i></td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>red : double</li><li>green : double</li><li>blue : double</li><li>alpha : double</li>        </ul></td>        <td>Calculates an average (mean) value of array elements, independently for each channel</td>
+    </tr>
+    <tr>
+        <td>Mean Mask</td>
+        <td><i class='bi bi-graph-up-arrow'></i></td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : double</li>        </ul></td>        <td>Calculates an average (mean) value of array elements for a grayscale image</td>
+    </tr>
+    <tr>
+        <td>Statistics for Non Zero Pixels</td>
+        <td><i class='bi bi-rulers'></i></td>
+        <td><ul><li>source : image2D</li><li>normalize : bool</li>        </ul></td>        <td><ul><li>mean : double</li><li>min : double</li><li>max : double</li><li>std : double</li><li>count : int</li>        </ul></td>        <td>Statistics for non-zero pixels of image</td>
+    </tr>
+    <tr>
+        <td>Sum Color</td>
+        <td><i class='bi bi-graph-up-arrow'></i></td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>red : double</li><li>green : double</li><li>blue : double</li><li>alpha : double</li>        </ul></td>        <td>Calculates and returns the sum of array elements, independently for each channel</td>
+    </tr>
+    <tr>
+        <td>Sum Mask</td>
+        <td><i class='bi bi-graph-up-arrow'></i></td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : double</li>        </ul></td>        <td>Calculates and returns the sum of array elements for a grayscale image</td>
+    </tr>
+</table>
 <h3 id='String'>String</h3><p>The String functions tools are all under the <i class="bi bi-chat-square-quote-fill"> String</i> category. The full list of display tools is as follows:</p><table>
     <tr>
         <th>Name</th>
@@ -4567,6 +4632,11 @@
         <td>Crop</td>
         <td><i class='bi bi-rulers'></i></td>
         <td><ul><li>source : image2D</li><li>point1 : int2</li><li>point2 : int2</li><li>crop : bool</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Crops an image down to the specified size</td>
+    </tr>
+    <tr>
+        <td>Crop Line</td>
+        <td><i class='bi bi-rulers'></i></td>
+        <td><ul><li>source : image2D</li><li>point1 : int2</li><li>point2 : int2</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li>        </ul></td>        <td>Crops a line of an Image</td>
     </tr>
     <tr>
         <td>Resize</td>
@@ -4814,7 +4884,7 @@
     <tr>
         <td>Text to Speech</td>
         <td><i class='bi bi-mic-fill'></i></td>
-        <td><ul><li>source : string</li><li>trigger : int</li><li>delay : int</li>        </ul></td>        <td><ul>        </ul></td>        <td>Text to speech</td>
+        <td><ul><li>source : string</li><li>trigger : int</li><li>delay : int</li>        </ul></td>        <td><ul>        </ul></td>        <td>Text to speech<p style='color:red;'>The following package is required: text2speech</p></td>
     </tr>
     <tr>
         <td>Upload Video</td>
@@ -6069,6 +6139,15 @@
         </tr>
 
         <tr>
+            <td> Text Detection PP-OCRv3 Inference </td>
+            <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
+            <td>
+                <a target="_blank" href="https://huggingface.co/opencv/text_detection_ppocr">Text Detection using PP-OCRv3 Model.</a>
+            </td>
+            <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/15Ac_01pJhqGZO1lf87IoppBxByySFEO8/view?usp=sharing">text_detect_ppocr</a> </td>
+        </tr>
+
+        <tr>
             <td> YuNET Face Tracking and Facial Expressions Recognition Inference </td>
             <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
             <td>
@@ -6388,6 +6467,15 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
             </td>
             <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1YbIu4Ag7tjtzpx3H2VjISiOPHrZwJGRi/view?usp=sharing">ocr</a> </td>
         </tr>
+
+        <tr>
+            <td> Text to Speech </td>
+            <td> <i class="bi bi-windows" title="Text to Speech"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
+            <td>
+                <a target="_blank" href="https://en.wikipedia.org/wiki/Speech_synthesis">Speech Synthesis</a>
+            </td>
+            <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1cpdocD5dzGN-slMIQP8QgC1A4zthgYO6/view?usp=sharing">text2speech</a> </td>
+        </tr>
     </table>
 
     <!-- PACKAGES END -->
@@ -6470,7 +6558,7 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
         Note, on OSX and Linux instead of using "..\python.exe", you should use "python3"
     </p>
 
-    <pre>..\python.exe app.pyc [-help] [-device #] [-test ...] [-noncuda] [-batch] [-final node name or node uuid] [-override json] [-nobrowser] [-source ...] [-path ...] [-port ...] [-resolution ...] [-test ...] [workflow ....]</pre>
+    <pre>..\python.exe app.pyc [-help] [-device #] [-test ...] [-noncuda] [-batch] [-final node name or node uuid] [-override json] [-nobrowser] [-source ...] [-path ...] [-port ...] [-resolution ...] [-test ...] [-label] [workflow ....]</pre>
 
     <table>
         <tr>
@@ -6569,6 +6657,13 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
             <td>See <a href="#AutomatedTesting">Automated Testing</a></td>
             <td></td>
             <td><pre>..\python.exe app.pyc -test yolo</pre></td>
+        </tr>
+
+        <tr>
+            <td>-label</td>
+            <td>Allow labelling of workflows used for training LLM</td>
+            <td></td>
+            <td><pre>..\python.exe app.pyc -label</pre></td>
         </tr>
 
         <tr>
@@ -7156,6 +7251,30 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
             </td>
             <td>
                 <pre>"icon": "bi-robot"</pre>
+            </td>
+        </tr>
+
+        <tr>
+            <td>maxrows</td>
+            <td></td>
+            <td><pre>"maxrows": 100</pre></td>
+            <td>
+                Only for table looks to set the maximum number of rows for the table
+            </td>
+            <td>
+                <pre>"maxrows": 2</pre>
+            </td>
+        </tr>
+
+        <tr>
+            <td>maxcols</td>
+            <td></td>
+            <td><pre>"maxcols": 100</pre></td>
+            <td>
+                Only for table looks to set the maximum number of columns for the table
+            </td>
+            <td>
+                <pre>"maxcols": 2</pre>
             </td>
         </tr>
 
