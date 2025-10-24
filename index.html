@@ -1241,6 +1241,11 @@
         <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li>        </ul></td>        <td>Perform segmentation on humans using PPHumanSeg model.<p style='color:red;'>The following package is required: human_segmentation</p></td>
     </tr>
     <tr>
+        <td>Inpainting</td>
+        <td><i class='bi bi-filetype-ai'></i></td>
+        <td><ul><li>source : image2D</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Inpainting to replace unwanted parts of an image<p style='color:red;'>The following package is required: inpainting</p></td>
+    </tr>
+    <tr>
         <td>Mask Inference</td>
         <td><i class='bi bi-filetype-ai'></i></td>
         <td><ul><li>source : image2D</li><li>filter : string</li><li>confidenceThreshold : double</li><li>maskThreshold : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li><li>mask : image2D</li><li>cutout : image2D</li>        </ul></td>        <td>Mask labels objects based on RCNN neural network model<p style='color:red;'>The following package is required: mask_rcnn</p></td>
@@ -4403,18 +4408,23 @@
     </tr>
     <tr>
         <td>Compare Histogram</td>
-        <td><i class='bi bi-palette'></i></td>
+        <td><i class='bi bi-graph-up-arrow'></i></td>
         <td><ul><li>aHistogram : matrix2D</li><li>bHistogram : matrix2D</li><li>method : int</li>        </ul></td>        <td><ul><li>result : double</li>        </ul></td>        <td>Histogram</td>
     </tr>
     <tr>
         <td>Create Histogram</td>
-        <td><i class='bi bi-palette'></i></td>
+        <td><i class='bi bi-graph-up-arrow'></i></td>
         <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>histogram : matrix2D</li>        </ul></td>        <td>Histogram</td>
     </tr>
     <tr>
         <td>Grayscale Statistics</td>
         <td><i class='bi bi-graph-up-arrow'></i></td>
         <td><ul><li>source : image2D</li><li>normalize : bool</li>        </ul></td>        <td><ul><li>mean : double</li><li>min : double</li><li>minPos : int2</li><li>max : double</li><li>maxPos : int2</li><li>std : double</li>        </ul></td>        <td>Compute the Grayscale Statistics of an image</td>
+    </tr>
+    <tr>
+        <td>Image Information</td>
+        <td><i class='bi bi-graph-up-arrow'></i></td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : int3</li><li>width : int</li><li>height : int</li><li>numChannels : int</li>        </ul></td>        <td>Return the width, height, and number of channels of an image.</td>
     </tr>
     <tr>
         <td>Mean Color</td>
@@ -4427,8 +4437,13 @@
         <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : double</li>        </ul></td>        <td>Calculates an average (mean) value of array elements for a grayscale image</td>
     </tr>
     <tr>
+        <td>Pixel Information</td>
+        <td><i class='bi bi-graph-up-arrow'></i></td>
+        <td><ul><li>source : image2D</li><li>position : int2</li><li>normalize : bool</li>        </ul></td>        <td><ul><li>out : image2D</li><li>red : double</li><li>green : double</li><li>blue : double</li><li>alpha : double</li><li>luminance : double</li>        </ul></td>        <td>For a given pixel, find its R,G,B, Alpha value, and Luminance.</td>
+    </tr>
+    <tr>
         <td>Statistics for Non Zero Pixels</td>
-        <td><i class='bi bi-rulers'></i></td>
+        <td><i class='bi bi-graph-up-arrow'></i></td>
         <td><ul><li>source : image2D</li><li>normalize : bool</li>        </ul></td>        <td><ul><li>mean : double</li><li>min : double</li><li>max : double</li><li>std : double</li><li>count : int</li>        </ul></td>        <td>Statistics for non-zero pixels of image</td>
     </tr>
     <tr>
@@ -4440,6 +4455,16 @@
         <td>Sum Mask</td>
         <td><i class='bi bi-graph-up-arrow'></i></td>
         <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : double</li>        </ul></td>        <td>Calculates and returns the sum of array elements for a grayscale image</td>
+    </tr>
+    <tr>
+        <td>Time Sample 1D</td>
+        <td><i class='bi bi-graph-up-arrow'></i></td>
+        <td><ul><li>source : double</li><li>number samples : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Generate a 1D time sample</td>
+    </tr>
+    <tr>
+        <td>Time Sample 2D</td>
+        <td><i class='bi bi-graph-up-arrow'></i></td>
+        <td><ul><li>source : image2D</li><li>point1 : int2</li><li>point2 : int2</li><li>number samples : int</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li>        </ul></td>        <td>Generate a 2D time sample along a diagonal line</td>
     </tr>
 </table>
 <h3 id='String'>String</h3><p>The String functions tools are all under the <i class="bi bi-chat-square-quote-fill"> String</i> category. The full list of display tools is as follows:</p><table>
@@ -4966,11 +4991,6 @@
         <td><ul><li>point : int2</li>        </ul></td>        <td><ul><li>x : int</li><li>y : int</li>        </ul></td>        <td>Extract x and y from point value</td>
     </tr>
     <tr>
-        <td>Image Information</td>
-        <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : int3</li><li>width : int</li><li>height : int</li><li>numChannels : int</li>        </ul></td>        <td>Return the width, height, and number of channels of an image.</td>
-    </tr>
-    <tr>
         <td>In JSON?</td>
         <td><i class='bi bi-gear'></i></td>
         <td><ul><li>json : string</li><li>key : string</li>        </ul></td>        <td><ul><li>out : bool</li>        </ul></td>        <td>Has Key in JSON</td>
@@ -5029,11 +5049,6 @@
         <td>Load Camera Calibration</td>
         <td><i class='bi bi-filetype-json'></i></td>
         <td><ul><li>source : string</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Load Camera Calibration file</td>
-    </tr>
-    <tr>
-        <td>Pixel Information</td>
-        <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>source : image2D</li><li>position : int2</li><li>normalize : bool</li>        </ul></td>        <td><ul><li>out : image2D</li><li>red : double</li><li>green : double</li><li>blue : double</li><li>alpha : double</li><li>luminance : double</li>        </ul></td>        <td>For a given pixel, find its R,G,B, Alpha value, and Luminance.</td>
     </tr>
     <tr>
         <td>Print</td>
