@@ -1314,7 +1314,7 @@
     <tr>
         <td>YOLOX Inference</td>
         <td><i class='bi bi-filetype-ai'></i></td>
-        <td><ul><li>source : image2D</li><li>scoreThreshold : double</li><li>nmsThreshold : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li>        </ul></td>        <td>YOLOX is a high-performing object detector<p style='color:red;'>The following package is required: yolox_inference</p></td>
+        <td><ul><li>source : image2D</li><li>filter : string</li><li>scoreThreshold : double</li><li>nmsThreshold : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li>        </ul></td>        <td>YOLOX is a high-performing object detector<p style='color:red;'>The following package is required: yolox_inference</p></td>
     </tr>
 </table>
 <h3 id='Audio'>Audio</h3><p>The Audio filters tools are all under the <i class="bi bi-volume-up-fill"> Audio</i> category. The full list of display tools is as follows:</p><table>
@@ -1472,7 +1472,7 @@
     <tr>
         <td>Crop</td>
         <td><i class='bi bi-palette'></i></td>
-        <td><ul><li>source : image2D</li><li>point1 : int2</li><li>point2 : int2</li><li>mode : int</li><li>fillColor : color</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Crop input image</td>
+        <td><ul><li>source : image2D</li><li>point1 : int2</li><li>point2 : int2</li><li>mode : int</li><li>fillColor : color</li><li>detections : matrix2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Crop input image</td>
     </tr>
     <tr>
         <td>Gamma</td>
@@ -2727,6 +2727,11 @@
         <td>Grayscale Shapes</td>
         <td><i class='bi bi-mask'></i></td>
         <td><ul><li>source : image2D</li><li>lines : matrix2D</li><li>circles : matrix2D</li><li>rectangles : matrix2D</li><li>path : matrix2D</li><li>blend : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Draws Lines, Circles, and/or Rectangles with Masks</td>
+    </tr>
+    <tr>
+        <td>Quick Path</td>
+        <td><i class='bi bi-gear'></i></td>
+        <td><ul><li>source : image2D</li><li>numPaths : int</li><li>path 1 : string</li><li>path 2 : string</li><li>path 3 : string</li><li>path 4 : string</li><li>path 5 : string</li><li>color : color</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li>        </ul></td>        <td>Creates and renders up to 5 Paths</td>
     </tr>
     <tr>
         <td>Threshold</td>
@@ -4682,7 +4687,7 @@
     <tr>
         <td>Crop</td>
         <td><i class='bi bi-rulers'></i></td>
-        <td><ul><li>source : image2D</li><li>point1 : int2</li><li>point2 : int2</li><li>crop : bool</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Crops an image down to the specified size</td>
+        <td><ul><li>source : image2D</li><li>point1 : int2</li><li>point2 : int2</li><li>crop : bool</li><li>detections : matrix2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Crops an image down to the specified size</td>
     </tr>
     <tr>
         <td>Crop Line</td>
