@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Copyright (c) 2024 Photron USA Inc. - All rights reserved. -->
+    <!-- Copyright (c) 2025 Photron USA Inc. - All rights reserved. -->
     <title>INFINIWORKFLOW Manual</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
@@ -3841,6 +3841,11 @@
         <td><ul><li>source : DataFrame</li><li>x : string</li><li>y : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Pandas line plot</td>
     </tr>
     <tr>
+        <td>Matrix2D Line Plot</td>
+        <td><i class='bi bi-bar-chart-fill'></i></td>
+        <td><ul><li>source : matrix2D</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Matrix2D line plot</td>
+    </tr>
+    <tr>
         <td>Metric Plot</td>
         <td><i class='bi bi-bar-chart-fill'></i></td>
         <td><ul><li>truth : DataFrame</li><li>predicted : DataFrame</li><li>args : string</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Plot truth vs prediced</td>
@@ -4491,6 +4496,11 @@
         <td>Statistics for Non Zero Pixels</td>
         <td><i class='bi bi-graph-up-arrow'></i></td>
         <td><ul><li>source : image2D</li><li>normalize : bool</li>        </ul></td>        <td><ul><li>mean : double</li><li>min : double</li><li>max : double</li><li>std : double</li><li>count : int</li>        </ul></td>        <td>Statistics for non-zero pixels of image</td>
+    </tr>
+    <tr>
+        <td>STL Decomposition</td>
+        <td><i class='bi bi-graph-up-arrow'></i></td>
+        <td><ul><li>source : matrix2D</li><li>period : int</li>        </ul></td>        <td><ul><li>seasonalStrength : double</li><li>trendStrength : double</li><li>seasonal : matrix2D</li><li>trend : matrix2D</li><li>remainder : matrix2D</li><li>weights : matrix2D</li>        </ul></td>        <td>Statistics for non-zero pixels of image</td>
     </tr>
     <tr>
         <td>Sum Color</td>
