@@ -1312,9 +1312,19 @@
         <td><ul><li>source : image2D</li><li>weights : string</li><li>cfg : string</li><li>classes : string</li><li>resolution : int2</li><li>filter : string</li><li>scoreThreshold : double</li><li>nmsThreshold : double</li><li>confidenceThreshold : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li><li>cutout : image2D</li>        </ul></td>        <td>Detects and labels objects based on YOLOv3 Darknet neural network model<p style='color:red;'>The following package is required: custom_yolo3</p></td>
     </tr>
     <tr>
+        <td>Darknet YOLO4 Tiny Classification</td>
+        <td><i class='bi bi-filetype-ai'></i></td>
+        <td><ul><li>source : image2D</li><li>filter : string</li><li>scoreThreshold : double</li><li>nmsThreshold : double</li><li>confidenceThreshold : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li><li>cutout : image2D</li>        </ul></td>        <td>Detects and labels objects based on YOLO4 Tiny Darknet neural network model<p style='color:red;'>The following package is required: yolodarknet7</p></td>
+    </tr>
+    <tr>
         <td>Ultralytics YOLO5 Classification</td>
         <td><i class='bi bi-filetype-ai'></i></td>
         <td><ul><li>source : image2D</li><li>filter : string</li><li>scoreThreshold : double</li><li>nmsThreshold : double</li><li>confidenceThreshold : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li><li>cutout : image2D</li>        </ul></td>        <td>Detects and labels objects based on Ultralytics YOLO5 neural network model<p style='color:red;'>The following package is required: yolo</p></td>
+    </tr>
+    <tr>
+        <td>Darknet YOLO7 Tiny Classification</td>
+        <td><i class='bi bi-filetype-ai'></i></td>
+        <td><ul><li>source : image2D</li><li>filter : string</li><li>scoreThreshold : double</li><li>nmsThreshold : double</li><li>confidenceThreshold : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li><li>cutout : image2D</li>        </ul></td>        <td>Detects and labels objects based on YOLO7 Tiny Darknet neural network model<p style='color:red;'>The following package is required: yolodarknet7</p></td>
     </tr>
     <tr>
         <td>Ultralytics YOLO7 Classification</td>
@@ -6303,6 +6313,15 @@
             </tr>
 
             <tr>
+                <td> YOLO4 Tiny Darknet Object Detection Inference </td>
+                <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
+                <td>
+                    <a target="_blank" href="https://github.com/hank-ai/darknet">A computer vision model that uses YOLO4 Tiny deep learning using Darknet to detect objects in images and videos </a>
+                </td>
+                <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/12n_EcrzlAKacvf2jh7fYYX_c_puyWA0Q/view?usp=sharing">yolodarknet4tiny</a> </td>
+            </tr>
+
+            <tr>
                 <td> YOLO7 Darknet Object Detection Inference </td>
                 <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
                 <td>
@@ -6312,15 +6331,24 @@
             </tr>
 
             <tr>
-                <td> YOLO5 Object Detection Inference </td>
+                <td> YOLO7 Tiny Darknet Object Detection Inference </td>
+                <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
+                <td>
+                    <a target="_blank" href="https://github.com/hank-ai/darknet">A computer vision model that uses YOLO7 Tiny deep learning using Darknet to detect objects in images and videos </a>
+                </td>
+                <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/19BC9l9rgJEW6zVmf3CyJd7ZQz1PLCAAd/view?usp=sharing">yolodarknet7tiny</a> </td>
+            </tr>
+
+            <tr>
+                <td> YOLO5 Ultralytics Object Detection Inference </td>
                 <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
                 <td>
                     <a target="_blank" href="https://github.com/ultralytics/yolov5">A computer vision model that uses YOLO5 deep learning to detect objects in images and videos </a>
                     <p>
                         Photron does not distribute YOLO5 as part of INFINIWORKFLOW, if you wish to use YOLO5, you must download it separately and agree to the license
                         terms on your usage:
-                        <a target="_blank" href="https://github.com/ultralytics/yolov5/blob/master/LICENSE">YOLO5 LICENSE</a>
-                        <pre>
+                        <a target="_blank" href="https://www.ultralytics.com/legal/agpl-3-0-software-license">LICENSE</a>
+<pre>
 Additional steps:
 
 After installing the patch
@@ -6353,8 +6381,25 @@ INFINIWORKFLOW_PATH/assets/yolo5/classes.txt
                 <td>
                     <a target="_blank" href="https://github.com/ultralytics/yolov7">A computer vision model that uses YOLO7 deep learning to detect objects in images and videos </a>
                     <p>
-                        <a target="_blank" href="https://roboflow.com/model-licenses/yolov7">YOLO7 LICENSE</a>
+                        <a target="_blank" href="https://www.ultralytics.com/legal/agpl-3-0-software-license">LICENSE</a>
                     </p>
+
+                    <pre>
+Additional steps:
+
+After installing the patch
+
+1. Create a new directory in the assets folder:
+
+INFINIWORKFLOW_PATH/assets/yolo7
+
+1. Download https://dl.opencv.org/models/yolov7/yolov7.onnx
+
+2. Copy yolov7.onnx to:
+
+INFINIWORKFLOW_PATH/assets/yolo7/yolov7.onnx
+</pre>
+
                 </td>
                 <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1HsK_FfXh6RazALN4EAtkZmn1XVFzKZoY/view?usp=sharing">yolo7</a> </td>
             </tr>
@@ -6365,8 +6410,25 @@ INFINIWORKFLOW_PATH/assets/yolo5/classes.txt
                 <td>
                     <a target="_blank" href="https://github.com/ultralytics/yolov8">A computer vision model that uses YOLO8 deep learning to detect objects in images and videos </a>
                     <p>
-                        <a target="_blank" href="https://roboflow.com/model-licenses/yolov8">YOLO8 LICENSE</a>
+                        <a target="_blank" href="https://www.ultralytics.com/legal/agpl-3-0-software-license">LICENSE</a>
                     </p>
+
+                    <pre>
+Additional steps:
+
+After installing the patch
+
+1. Create a new directory in the assets folder:
+
+INFINIWORKFLOW_PATH/assets/yolo8
+
+1. Download https://dl.opencv.org/models/yolov8/yolov8n.onnx
+
+2. Copy yolov8n.onnx to:
+
+INFINIWORKFLOW_PATH/assets/yolo8/yolov8n.onnx
+</pre>
+
                 </td>
                 <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/11yg9X05eb8Wf-0Q4NwY2dqBVP5LZEhgN/view?usp=sharing">yolo8</a> </td>
             </tr>
@@ -6377,8 +6439,25 @@ INFINIWORKFLOW_PATH/assets/yolo5/classes.txt
                 <td>
                     <a target="_blank" href="https://github.com/ultralytics/yolov9">A computer vision model that uses YOLO9 deep learning to detect objects in images and videos </a>
                     <p>
-                        <a target="_blank" href="https://roboflow.com/model-licenses/yolov9">YOLO9 LICENSE</a>
+                        <a target="_blank" href="https://www.ultralytics.com/legal/agpl-3-0-software-license">LICENSE</a>
                     </p>
+
+                    <pre>
+Additional steps:
+
+After installing the patch
+
+1. Create a new directory in the assets folder:
+
+INFINIWORKFLOW_PATH/assets/yolo9
+
+1. Download https://dl.opencv.org/models/yolov9/yolov9t.onnx
+
+2. Copy yolov9t.onnx to:
+
+INFINIWORKFLOW_PATH/assets/yolo9/yolov9t.onnx
+</pre>
+
                 </td>
                 <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/16lDAZ1cwLzhn82NZyMdcMwsqtubrnX2a/view?usp=sharing">yolo9</a> </td>
             </tr>
@@ -6389,8 +6468,25 @@ INFINIWORKFLOW_PATH/assets/yolo5/classes.txt
                 <td>
                     <a target="_blank" href="https://github.com/ultralytics/yolov10">A computer vision model that uses YOLO10 deep learning to detect objects in images and videos </a>
                     <p>
-                        <a target="_blank" href="https://roboflow.com/model-licenses/yolov10">YOLO10 LICENSE</a>
+                        <a target="_blank" href="https://www.ultralytics.com/legal/agpl-3-0-software-license">LICENSE</a>
                     </p>
+
+                    <pre>
+Additional steps:
+
+After installing the patch
+
+1. Create a new directory in the assets folder:
+
+INFINIWORKFLOW_PATH/assets/yolo10
+
+1. Download https://dl.opencv.org/models/yolov10/yolov10s.onnx
+
+2. Copy yolov10s.onnx to:
+
+INFINIWORKFLOW_PATH/assets/yolo10/yolov10s.onnx
+</pre>
+
                 </td>
                 <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/141Jd3BKUuzlVyJOMHHGBmgzkzJz5wHKC/view?usp=sharing">yolo10</a> </td>
             </tr>
@@ -6400,9 +6496,6 @@ INFINIWORKFLOW_PATH/assets/yolo5/classes.txt
                 <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
                 <td>
                     <a target="_blank" href="https://github.com/naseemap47/YOLO-NAS">A computer vision model that uses YOLO7 deep learning to detect objects in images and videos </a>
-                    <p>
-                        <a target="_blank" href="https://roboflow.com/model-licenses/yolo-nas">YOLO NAS LICENSE</a>
-                    </p>
                 </td>
                 <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1hCdDVN0Ws4q3AlA8OxAzSjivvQmWGwQt/view?usp=sharing">yolonas</a> </td>
             </tr>
