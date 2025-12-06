@@ -179,6 +179,7 @@
                             <li><a href="#JsonSchema">JSON Schema</a></li>
                             <li><a href="#PythonSDK">Python SDK</a></li>
                             <li><a href="#CppSDK">C++ SDK</a></li>
+                            <li><a href="#ShaderSDK">Shader SDK</a></li>
                             <li><a href="#AutomatedTesting">Automated Testing</a></li>
                         </ul>
                     </li>
@@ -6375,7 +6376,7 @@
                 <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/19BC9l9rgJEW6zVmf3CyJd7ZQz1PLCAAd/view?usp=sharing">yolodarknet7tiny</a> </td>
             </tr>
 
-            
+
             <tr>
                 <td> YOLO NAS Object Detection Inference </td>
                 <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
@@ -8183,7 +8184,6 @@ result = "torch.generic_loader"
 
     </table>
 
-
     <h3 id="CppSDK">C++ SDK</h3>
     <p>
         The C++ SDK is based on compiling a DLL using some standard headers and libraries provided in the INFINIWORFLOW SDK patch package.
@@ -8477,11 +8477,134 @@ make</pre>
         This should output a few lines of text, with the last one being "[100%] Built target {NAME_OF_PLUGIN}". Now when you run INFINIWORKFLOW on a Mac or Linux device, the plugin will be available and usable.
     </p>
 
+    <h3 id="ShaderSDK">Shader SDK</h3>
+    <p>
+        The Shader SDK is based on OpenGL GLSL shader language.
+        You can use the exisiting "ShaderExample" in the SDK as a starting point and rename all the files to your plugin.
+        The final plugin will be a combination of a JSON file and a GLSL shader file and both should be placed in the Extensions folder.
+        Additonally, the GLSL shader file should also be placed in the assets/shader folder as well.
+        The shader names will match the names of the input parameters in the JSON file, an example GLSL file is as follows:
+    </p>
+    <pre>
+        #version 150 core
+
+        in vec3 Color;
+        in vec2 Texcoord;
+        out vec4 outColor;
+        uniform sampler2D source;
+
+        uniform float brightness;
+        uniform float redBrightness;
+        uniform float greenBrightness;
+        uniform float blueBrightness;
+
+        void main()
+        {
+            vec4 pixel = texture(source, Texcoord);
+            outColor = pixel * vec4(brightness + redBrightness, brightness + greenBrightness, brightness + blueBrightness, 1.0);
+        }
+    </pre>
+    <p>
+        The JSON file should have the name of the identifier the same name as the GLSL file.
+        The first input as a string which defaults to the location of the shader file in the assets shaders directory.
+        Next, the JSON file should have a inputs for each uniform, where the sampler2D input will be of type "texture2D". 
+        Finally, the JSON should have one output will be of type "texture2D"
+        The example JSON is as follows for this GLSL file:
+    </p>
+    <pre>
+{
+  "identifier": "example_shader.glsl",
+  "description": {
+    "en_US": "Example GPU GLSL Shader"
+  },
+  "url": "https://www.khronos.org/opengl/wiki/OpenGL_Shading_Language",
+  "icon": "bi-plugin",
+  "tags": [
+      "opengl",
+      "GLSL",
+      "gain",
+      "texture"
+    ]
+  },
+  "language": "opengl",
+  "inputs": [
+    {
+      "name": "shader",
+      "type": "string",
+      "private": true,
+      "default": "${assets}/shaders/example_shader.glsl",
+      "description": "Shader Source",
+      "identifier": "shader"
+    },
+    {
+      "name": "source",
+      "type": "texture2D",
+      "mandatory": true,
+      "description": "Input texture",
+      "identifier": "source"
+    },
+    {
+      "name": "brightness",
+      "type": "double",
+      "default": "0.0",
+      "min": "-1.0",
+      "max": "4.0",
+      "look": "slider",
+      "mandatory": false,
+      "description": "Overall brightness amount",
+      "identifier": "brightness"
+    },
+    {
+      "name": "redBrightness",
+      "type": "double",
+      "default": "1.0",
+      "min": "0.0",
+      "max": "4.0",
+      "look": "slider",
+      "mandatory": false,
+      "description": "Red brightness amount",
+      "identifier": "redBrightness"
+    },
+    {
+      "name": "greenBrightness",
+      "type": "double",
+      "default": "1.0",
+      "min": "0.0",
+      "max": "4.0",
+      "look": "slider",
+      "mandatory": false,
+      "description": "Green brightness amount",
+      "identifier": "greenBrightness"
+    },
+    {
+      "name": "blueBrightness",
+      "type": "double",
+      "default": "1.0",
+      "min": "0.0",
+      "max": "4.0",
+      "look": "slider",
+      "mandatory": false,
+      "description": "Blue brightness amount",
+      "identifier": "blueBrightness"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "out",
+      "type": "texture2D",
+      "description": "Output texture",
+      "identifier": "out"
+    }
+  ],
+  "title": {
+    "en_US": "Example GLSL Shader"
+  }
+}
+    </pre>
+
     <div style="height:100px;">
 
     </div>
-
-
 
     <h3 id="AutomatedTesting">Automated Testing</h3>
     <p>
