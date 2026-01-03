@@ -240,6 +240,7 @@
         <li><i class="bi bi-grid-3x3-gap-fill"></i> Shows the Grid Search dialog that is used to optimize your ML models using the <a href="#GridSearch">GridSearch UI</a></li>
         <li><i class="bi bi-book"></i> Opens this manual</li>
         <li><i class="bi bi-boxes"></i> Opens the Installed Packages Dialog</li>
+        <li><i class="bi bi-circle-half"></i> Light or Dark Theme</li>
         <li><i class="bi bi-robot"></i> Plays narratives that explain how to use the app</li>
         <li><i class="bi bi-chat-right-quote"></i> Localize the UI to different languages</li>
         <li><i class="bi bi-power"></i> Exit the application</li>
@@ -5053,6 +5054,16 @@
         <th>Description</th>
     </tr>
     <tr>
+        <td>Download AWS</td>
+        <td><i class='bi bi-download'></i></td>
+        <td><ul><li>access_key : string</li><li>secret_key : string</li><li>directory : string</li><li>filename : string</li><li>bucket : string</li><li>object_key : string</li><li>trigger : int</li>        </ul></td>        <td><ul><li>status : string</li><li>completed : bool</li>        </ul></td>        <td>Downloads file from AWS S3 Bucket<p style='color:red;'>The following package is required: aws_s3</p></td>
+    </tr>
+    <tr>
+        <td>Upload AWS</td>
+        <td><i class='bi bi-upload'></i></td>
+        <td><ul><li>access_key : string</li><li>secret_key : string</li><li>source : string</li><li>bucket : string</li><li>object : string</li><li>trigger : int</li>        </ul></td>        <td><ul><li>status : string</li><li>completed : bool</li>        </ul></td>        <td>Uploads file to AWS S3 Bucket<p style='color:red;'>The following package is required: aws_s3</p></td>
+    </tr>
+    <tr>
         <td>Blink1 Fade Color</td>
         <td><i class='bi bi-lightbulb'></i></td>
         <td><ul><li>color : color</li><li>fade length : int</li><li>delay : double</li><li>trigger : int</li>        </ul></td>        <td><ul>        </ul></td>        <td>Fades the Blink1 LED to the specified color over a given time (in ms).<p style='color:red;'>The following package is required: blink</p></td>
@@ -5163,7 +5174,7 @@
         <td><ul><li>source : string</li><li>trigger : int</li><li>delay : int</li>        </ul></td>        <td><ul>        </ul></td>        <td>Text to speech<p style='color:red;'>The following package is required: text2speech</p></td>
     </tr>
     <tr>
-        <td>Upload Video</td>
+        <td>Upload Youtube</td>
         <td><i class='bi bi-upload'></i></td>
         <td><ul><li>credentials : string</li><li>trigger : int</li><li>source : string</li><li>thumbnail : string</li><li>title : string</li><li>description : string</li><li>tags : string</li><li>category : int</li><li>privacy : int</li><li>reset : int</li>        </ul></td>        <td><ul><li>success : bool</li>        </ul></td>        <td>Uploads a video to your YouTube channel<p style='color:red;'>The following package is required: upload_video</p></td>
     </tr>
@@ -6789,6 +6800,15 @@ INFINIWORKFLOW_PATH/assets/yolo10/yolov10s.onnx
             </tr>
 
             <tr>
+                <td> AWS S3 </td>
+                <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
+                <td>
+                    <a target="_blank" href="https://aws.amazon.com/s3/">AWS S3 Upload and Download</a>
+                </td>
+                <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1NzdzYEL9ouD_aH6Ma66L-d6r4Wqnf27U/view?usp=sharing">aws_s3</a> </td>
+            </tr>
+
+            <tr>
                 <td> Live Stream </td>
                 <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
                 <td>
@@ -7049,7 +7069,7 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
         Note, on OSX and Linux instead of using "..\python.exe", you should use "python3"
     </p>
 
-    <pre>..\python.exe app.pyc [-help] [-device #] [-test ...] [-noncuda] [-batch] [-final node name or node uuid] [-override json] [-nobrowser] [-source ...] [-path ...] [-port ...] [-resolution ...] [-test ...] [-label] [workflow ....]</pre>
+    <pre>..\python.exe app.pyc [-help] [-device #] [-test ...] [-cuda ...] [-batch] [-final node name or node uuid] [-override json] [-nobrowser] [-source ...] [-path ...] [-port ...] [-resolution ...] [-test ...] [-label] [workflow ....]</pre>
 
     <table>
         <tr>
@@ -7074,10 +7094,10 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
         </tr>
 
         <tr>
-            <td>-noncuda</td>
-            <td>will switch to the non cuda based rendering</td>
-            <td></td>
-            <td><pre>..\python.exe app.pyc -noncuda</pre></td>
+            <td>-cuda</td>
+            <td>enable or disable cuda<br><i>system</i> will test system again to determine if cuda is available<br><i>auto</i> will use prior system check<br>options: [auto|on|off|system]</td>
+            <td>auto</td>
+            <td><pre>..\python.exe app.pyc -cuda off</pre></td>
         </tr>
 
         <tr>
