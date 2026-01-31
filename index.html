@@ -1343,6 +1343,16 @@
         <td><ul><li>queryImage : image2D</li><li>galleryList : string</li><li>batchSize : int</li><li>size : int2</li><li>topK : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Matches a person's identity across different cameras or locations in a video or image sequence using features such as appearance, body shape, and clothing to match their identity in different frames<p style='color:red;'>The following package is required: personReiD</p></td>
     </tr>
     <tr>
+        <td>Road Crack Detection</td>
+        <td><i class='bi bi-filetype-ai'></i></td>
+        <td><ul><li>source : image2D</li><li>model : string</li><li>confidence : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : double</li>        </ul></td>        <td>Detects road pavement cracks using a YOLOv8 detection model. It provides bounding box coordinates and confidence levels for identified cracks.<p style='color:red;'>The following package is required: road_infrastructure</p></td>
+    </tr>
+    <tr>
+        <td>Road Crack Segmentation</td>
+        <td><i class='bi bi-filetype-ai'></i></td>
+        <td><ul><li>source : image2D</li><li>model : string</li><li>confidence : double</li><li>blend : double</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li>        </ul></td>        <td>Detect and segment road pavement cracks using YOLOv8-segmentation.<p style='color:red;'>The following package is required: road_infrastructure</p></td>
+    </tr>
+    <tr>
         <td>Segmentation</td>
         <td><i class='bi bi-filetype-ai'></i></td>
         <td><ul><li>source : image2D</li><li>filter : string</li><li>blend : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li>        </ul></td>        <td>Parses (segments) various objects from an image using opencv's dnn<p style='color:red;'>The following package is required: segmentation</p></td>
@@ -2501,6 +2511,11 @@
         <td><ul><li>source : image2D</li><li>d : int</li><li>sigmaColor : double</li><li>sigmaSpace : double</li><li>borderType : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Applies bilateral filter to image</td>
     </tr>
     <tr>
+        <td>Bioinspired Retina</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : image2D</li><li>colorMode : bool</li><li>colorSamplingMethod : int</li><li>useRetinaLogSampling : bool</li><li>reductionFactor : double</li><li>samplingStrength : double</li>        </ul></td>        <td><ul><li>parvo : image2D</li><li>magno : image2D</li>        </ul></td>        <td>Allows spatio-temporal image processing: applies a spectral whithening, high frequency spatio-temporal noise reduction, luminance range compression, enhanced details in low light conditions.</td>
+    </tr>
+    <tr>
         <td>Blur</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>ksize : int2</li><li>anchor : int2</li><li>borderType : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Blurs an image using the normalized box filter</td>
@@ -2755,6 +2770,11 @@
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>region size : int</li><li>ratio : double</li><li>numIterations : int</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>numSuperpixels : int</li><li>labelsMap : image2D</li><li>contourMask : image2D</li>        </ul></td>        <td>Initializes a SuperpixelLSC (Linear Spectral Clustering) object for the input image.</td>
     </tr>
+    <tr>
+        <td>Tonemap Drago</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>hdr source : image2D</li><li>gamma : double</li><li>saturation : double</li><li>bias : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Blurs an image using the normalized box filter</td>
+    </tr>
 </table>
 <h3 id='Grayscale'>Grayscale</h3><p>The Grayscale Filters tools are all under the <i class="bi bi-mask"> Grayscale</i> category. The full list of display tools is as follows:</p><table>
     <tr>
@@ -2942,6 +2962,11 @@
         <td>Grayscale Image Reader</td>
         <td><i class='bi bi-file-image'></i></td>
         <td><ul><li>source : string</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Reads Grayscale Images from a file</td>
+    </tr>
+    <tr>
+        <td>HDR Reader</td>
+        <td><i class='bi bi-file-image'></i></td>
+        <td><ul><li>source : string</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Reads HDR Images from a file</td>
     </tr>
     <tr>
         <td>Image Reader</td>
@@ -6359,6 +6384,15 @@
                     <a target="_blank" href="https://docs.opencv.org/4.x/d5/d04/classcv_1_1wechat__qrcode_1_1WeChatQRCode.html">WeChat QRCode including CNN models for `wechat_qrcode` module, including the detector model and the super scale model</a>
                 </td>
                 <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1BgSijHoxL8FS3fxM7dfXXWSb3Qlzc6dd/view?usp=drive_link">barcode</a> </td>
+            </tr>
+
+            <tr>
+                <td> Road Infrastructure </td>
+                <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
+                <td>
+                    <a target="_blank" href="https://huggingface.co/OpenSistemas/YOLOv8-crack-seg">Road Crack Detection and Segmentation</a>
+                </td>
+                <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1Rza2CoZMiwPaZHXYr3dOVTpPr9sG6iQl/view?usp=sharing">road_infrastructure</a> </td>
             </tr>
 
             <tr>
