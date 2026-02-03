@@ -1243,6 +1243,11 @@
         <th>Description</th>
     </tr>
     <tr>
+        <td>Blood Cell Detection</td>
+        <td><i class='bi bi-filetype-ai'></i></td>
+        <td><ul><li>source : image2D</li><li>filter : string</li><li>confidence : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li>        </ul></td>        <td>Identifies RBC, WBC, and Platelets in microscopy images using YOLOv8.<p style='color:red;'>The following package is required: medical</p></td>
+    </tr>
+    <tr>
         <td>Body Pose COCO</td>
         <td><i class='bi bi-filetype-ai'></i></td>
         <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numPairs : int</li>        </ul></td>        <td>Body Pose COCO detection using CAFFE model<p style='color:red;'>The following package is required: pose</p></td>
@@ -1288,9 +1293,19 @@
         <td><ul><li>source : image2D</li><li>filter : string</li><li>scoreThreshold : double</li><li>nmsThreshold : double</li><li>top K : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li><li>expressions : string</li>        </ul></td>        <td>Detect facial expressions using YuNET ONNX model: angry, disgust, fearful, happy, neutral, sad, surprised.<p style='color:red;'>The following package is required: yunet</p></td>
     </tr>
     <tr>
+        <td>Forklift Detection</td>
+        <td><i class='bi bi-filetype-ai'></i></td>
+        <td><ul><li>source : image2D</li><li>filter : string</li><li>confidence : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : double</li>        </ul></td>        <td>Detection of forklifts, persons, and pallets in warehouse environments using YOLOv8.<p style='color:red;'>The following package is required: warehouse</p></td>
+    </tr>
+    <tr>
         <td>Handpose Estimation</td>
         <td><i class='bi bi-filetype-ai'></i></td>
         <td><ul><li>source : image2D</li><li>size : int2</li><li>confidenceThreshold : double</li><li>scale : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li><li>openClose : bool</li>        </ul></td>        <td>Detects palms and fingers based on OpenPose neural network model. In out, the 1st column is the id of the point, the 2nd and 3rd are the coordinates of that point, and the 4th column is the confidence.<p style='color:red;'>The following package is required: pose</p></td>
+    </tr>
+    <tr>
+        <td>Hardhat Detection</td>
+        <td><i class='bi bi-filetype-ai'></i></td>
+        <td><ul><li>source : image2D</li><li>model : string</li><li>filter : string</li><li>confidence : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : double</li>        </ul></td>        <td>Hardhat / No Hardhat detection using a YOLOv8 detection model. It provides bounding box coordinates and confidence levels for identified objects.<p style='color:red;'>The following package is required: warehouse</p></td>
     </tr>
     <tr>
         <td>Human Parsing Inference</td>
@@ -1343,6 +1358,16 @@
         <td><ul><li>queryImage : image2D</li><li>galleryList : string</li><li>batchSize : int</li><li>size : int2</li><li>topK : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Matches a person's identity across different cameras or locations in a video or image sequence using features such as appearance, body shape, and clothing to match their identity in different frames<p style='color:red;'>The following package is required: personReiD</p></td>
     </tr>
     <tr>
+        <td>Plane Detection</td>
+        <td><i class='bi bi-filetype-ai'></i></td>
+        <td><ul><li>source : image2D</li><li>filter : string</li><li>confidence : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li>        </ul></td>        <td>Detects airplanes in aerial or satellite imagery using YOLOv8.<p style='color:red;'>The following package is required: aviation</p></td>
+    </tr>
+    <tr>
+        <td>PPE Compliance Detection</td>
+        <td><i class='bi bi-filetype-ai'></i></td>
+        <td><ul><li>source : image2D</li><li>filter : string</li><li>confidence : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li>        </ul></td>        <td>Monitors workplace safety gear compliance (helmets, vests, goggles).<p style='color:red;'>The following package is required: safety</p></td>
+    </tr>
+    <tr>
         <td>Road Crack Detection</td>
         <td><i class='bi bi-filetype-ai'></i></td>
         <td><ul><li>source : image2D</li><li>model : string</li><li>confidence : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : double</li>        </ul></td>        <td>Detects road pavement cracks using a YOLOv8 detection model. It provides bounding box coordinates and confidence levels for identified cracks.<p style='color:red;'>The following package is required: road_infrastructure</p></td>
@@ -1361,6 +1386,11 @@
         <td>Speech Recognition</td>
         <td><i class='bi bi-filetype-ai'></i></td>
         <td><ul><li>source : audio</li>        </ul></td>        <td><ul><li>out : string</li><li>preview : image2D</li>        </ul></td>        <td>Detects speech</td>
+    </tr>
+    <tr>
+        <td>Table Extraction</td>
+        <td><i class='bi bi-filetype-ai'></i></td>
+        <td><ul><li>source : image2D</li><li>filter : string</li><li>confidence : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li>        </ul></td>        <td>Identifies table structures (tables, columns, rows) in document images.<p style='color:red;'>The following package is required: ocr</p></td>
     </tr>
     <tr>
         <td>PPOCR Text Detect</td>
@@ -6393,6 +6423,15 @@
                     <a target="_blank" href="https://huggingface.co/OpenSistemas/YOLOv8-crack-seg">Road Crack Detection and Segmentation</a>
                 </td>
                 <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1Rza2CoZMiwPaZHXYr3dOVTpPr9sG6iQl/view?usp=sharing">road_infrastructure</a> </td>
+            </tr>
+
+            <tr>
+                <td> Warehouse </td>
+                <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
+                <td>
+                    <a target="_blank" href="https://huggingface.co/keremberke/yolov8s-forklift-detection">Warehouse Detection</a>
+                </td>
+                <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1sLjglXPv0qFYJZyV3TnX0w9_jY2EYBPW/view?usp=sharing">warehouse</a> </td>
             </tr>
 
             <tr>
