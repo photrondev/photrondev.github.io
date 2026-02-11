@@ -229,6 +229,8 @@
         <li><i class="bi bi-zoom-out"></i> Zoom out the flowgraph so you can see more of the nodes in the workflow</li>
         <li><i class="bi bi-aspect-ratio"></i> Zoom fit the flowgraph to show the default zoom and pan which will show all the nodes in the workflow</li>
         <li><i class="bi bi-zoom-in"></i> Zoom in the flowgraph so you can see focus on the nodes in center of the workflow</li>
+        <li><i class="bi bi-diagram-3 rotate-90"></i> Auto arrange the nodes</li>
+        <li><i class="bi bi-search"></i> Find a node in the flowgraph, adjusts the viewport and selects the node</li>
         <li><i class="bi bi-star"></i> Add authoring notes to the workflow to include your name and description of the workflow</li>
         <li><i class="bi bi-shop-window"></i> Show the published view of the workflow. This is an experimental <a href="#Publish">feature</a> that allows you to simplify the workflow into a list of published parameters and hide the workflow. When in publish mode, click on this icon to switch back to the flowgraph mode again.</li>
         <li><i class="bi bi-rulers"></i> Sets the preferred numeric range for some of the standard parameters that can be normalized, percentage and other ranges</li>
@@ -561,6 +563,12 @@
                 You can also 'rip' a node to remove it from the edges by shaking the node quickly
             </p>
             <img src="/assets/ui_node_rip_edge.gif" />
+        </li>
+        <li>
+            <p>
+                You can also 'kiss' two nodes with their ports to to insert and edge
+            </p>
+            <img src="/assets/ui_kiss_node.gif" />
         </li>
         <li>
             <p>
@@ -1361,6 +1369,11 @@
         <td>Plane Detection</td>
         <td><i class='bi bi-filetype-ai'></i></td>
         <td><ul><li>source : image2D</li><li>filter : string</li><li>confidence : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li>        </ul></td>        <td>Detects airplanes in aerial or satellite imagery using YOLOv8.<p style='color:red;'>The following package is required: aviation</p></td>
+    </tr>
+    <tr>
+        <td>Pothole Segmentation</td>
+        <td><i class='bi bi-filetype-ai'></i></td>
+        <td><ul><li>source : image2D</li><li>confidence : double</li><li>blend : double</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li>        </ul></td>        <td>Detect and segment road potholes using YOLOv8-segmentation.<p style='color:red;'>The following package is required: road_infrastructure</p></td>
     </tr>
     <tr>
         <td>PPE Compliance Detection</td>
@@ -6417,6 +6430,24 @@
             </tr>
 
             <tr>
+                <td> Medical </td>
+                <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
+                <td>
+                    <a target="_blank" href="https://huggingface.co/keremberke/yolov8s-blood-cell-detection">Blood Cell Detection</a>
+                </td>
+                <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/16Tnrr7z1J5ZIu0xd24Ucn_al0C6c-MiW/view?usp=sharing">medical</a> </td>
+            </tr>
+
+            <tr>
+                <td> Aviation </td>
+                <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
+                <td>
+                    <a target="_blank" href="https://huggingface.co/keremberke/yolov8s-blood-cell-detection">Plane Detection</a>
+                </td>
+                <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1Z4S0zHrJoYcaH2cDdET7BI0v1QwRd178/view?usp=drive_link">aviation</a> </td>
+            </tr>
+
+            <tr>
                 <td> Road Infrastructure </td>
                 <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
                 <td>
@@ -6432,6 +6463,24 @@
                     <a target="_blank" href="https://huggingface.co/keremberke/yolov8s-forklift-detection">Warehouse Detection</a>
                 </td>
                 <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1sLjglXPv0qFYJZyV3TnX0w9_jY2EYBPW/view?usp=sharing">warehouse</a> </td>
+            </tr>
+
+            <tr>
+                <td> Satellite </td>
+                <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
+                <td>
+                    <a target="_blank" href="https://huggingface.co/keremberke/yolov8s-forklift-detection">Satellite Imagery Building Detection</a>
+                </td>
+                <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1LAFOfBFEtVCeYWyVYDxvE5HlVGXlxIvh/view?usp=drive_link">satellite</a> </td>
+            </tr>
+
+            <tr>
+                <td> Emergency </td>
+                <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
+                <td>
+                    <a target="_blank" href="https://huggingface.co/keremberke/yolov8s-forklift-detection">Fire and Smoke Detection for Emergency Response</a>
+                </td>
+                <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1jrsXi-NUzSgRfHNwLxF4-10cbFg8Ujsu/view?usp=sharing">emergency</a> </td>
             </tr>
 
             <tr>
