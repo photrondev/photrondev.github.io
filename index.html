@@ -1301,6 +1301,11 @@
         <td><ul><li>source : image2D</li><li>filter : string</li><li>scoreThreshold : double</li><li>nmsThreshold : double</li><li>top K : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li><li>expressions : string</li>        </ul></td>        <td>Detect facial expressions using YuNET ONNX model: angry, disgust, fearful, happy, neutral, sad, surprised.<p style='color:red;'>The following package is required: yunet</p></td>
     </tr>
     <tr>
+        <td>Fire Smoke Detection</td>
+        <td><i class='bi bi-filetype-ai'></i></td>
+        <td><ul><li>source : image2D</li><li>filter : string</li><li>confidence : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li>        </ul></td>        <td>Identifies Fire and Smoke from images using YOLOv8.<p style='color:red;'>The following package is required: emergency</p></td>
+    </tr>
+    <tr>
         <td>Forklift Detection</td>
         <td><i class='bi bi-filetype-ai'></i></td>
         <td><ul><li>source : image2D</li><li>filter : string</li><li>confidence : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : double</li>        </ul></td>        <td>Detection of forklifts, persons, and pallets in warehouse environments using YOLOv8.<p style='color:red;'>The following package is required: warehouse</p></td>
@@ -1361,6 +1366,11 @@
         <td><ul><li>source : image2D</li><li>model : string</li><li>outLayerName : string</li><li>classes : string</li><li>scale factor : double</li><li>size : int2</li><li>red mean : double</li><li>green mean : double</li><li>blue mean : double</li><li>swapRB : bool</li><li>crop : bool</li><li>color images : bool</li>        </ul></td>        <td><ul><li>out : int</li><li>preview : image2D</li>        </ul></td>        <td>Onnx Runtime Inference for YOLOX<p style='color:red;'>The following package is required: onnx_runtime_windows</p></td>
     </tr>
     <tr>
+        <td>PCB Defect Segmentation</td>
+        <td><i class='bi bi-filetype-ai'></i></td>
+        <td><ul><li>source : image2D</li><li>filter : string</li><li>confidence : double</li><li>blend : double</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li>        </ul></td>        <td>Detect and segment defects on Printed Circuit Boards (PCB) such as missing holes, mouse bites, and short circuits using YOLOv8-segmentation.<p style='color:red;'>The following package is required: industrial_qc</p></td>
+    </tr>
+    <tr>
         <td>Person ReID</td>
         <td><i class='bi bi-filetype-ai'></i></td>
         <td><ul><li>queryImage : image2D</li><li>galleryList : string</li><li>batchSize : int</li><li>size : int2</li><li>topK : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Matches a person's identity across different cameras or locations in a video or image sequence using features such as appearance, body shape, and clothing to match their identity in different frames<p style='color:red;'>The following package is required: personReiD</p></td>
@@ -1389,6 +1399,11 @@
         <td>Road Crack Segmentation</td>
         <td><i class='bi bi-filetype-ai'></i></td>
         <td><ul><li>source : image2D</li><li>model : string</li><li>confidence : double</li><li>blend : double</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li>        </ul></td>        <td>Detect and segment road pavement cracks using YOLOv8-segmentation.<p style='color:red;'>The following package is required: road_infrastructure</p></td>
+    </tr>
+    <tr>
+        <td>Satellite Imagery Segmentation</td>
+        <td><i class='bi bi-filetype-ai'></i></td>
+        <td><ul><li>source : image2D</li><li>filter : string</li><li>confidence : double</li><li>blend : double</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li>        </ul></td>        <td>Segment buildings from satellite and aerial imagery using YOLOv8-segmentation.<p style='color:red;'>The following package is required: geospatial</p></td>
     </tr>
     <tr>
         <td>Segmentation</td>
@@ -2529,6 +2544,11 @@
         <th>Description</th>
     </tr>
     <tr>
+        <td>Anisotropic Diffusion</td>
+        <td><i class='bi bi-droplet-half'></i></td>
+        <td><ul><li>source : image2D</li><li>alpha : double</li><li>K : double</li><li>niters : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Performs Perona-Malik anisotropic diffusion to reduce noise while preserving edges.</td>
+    </tr>
+    <tr>
         <td>Background Subtractor</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>trigger : int</li><li>mode : int</li><li>learningRate : double</li><li>initializationFrames : int</li><li>decisionThreshold : double</li><li>minPixelStability : int</li><li>useHistory : bool</li><li>maxPixelStability : int</li><li>isParallel : bool</li><li>history : int</li><li>nmixtures : int</li><li>backgroundRatio : double</li><li>noiseSigma : double</li>        </ul></td>        <td><ul><li>foreground : image2D</li>        </ul></td>        <td>Background Subtractor Methods.</td>
@@ -2697,6 +2717,11 @@
         <td>Erode</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>shape : int</li><li>ksize : int2</li><li>anchor : int2</li><li>iterations : int</li><li>borderType : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Erodes an image (shrinks the primary object) by using a specific structuring element that determines the shape of a pixel neighborhood over which the minimum is taken</td>
+    </tr>
+    <tr>
+        <td>Fast Line Detector</td>
+        <td><i class='bi bi-slash-lg'></i></td>
+        <td><ul><li>source : image2D</li><li>lengthThreshold : int</li><li>distanceThreshold : double</li><li>cannyTh1 : double</li><li>cannyTh2 : double</li><li>cannyApertureSize : int</li><li>doMerge : bool</li><li>drawArrows : bool</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Finds lines in the input image using the FLD algorithm.</td>
     </tr>
     <tr>
         <td>Filter 2D</td>
@@ -5252,6 +5277,11 @@
         <td><ul><li>port : string</li><li>baud rate : int</li><li>trigger : int</li><li>message : string</li><li>send : int</li><li>stream : bool</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Communicate with a device through serial<p style='color:red;'>The following package is required: serial</p></td>
     </tr>
     <tr>
+        <td>Send Slack Message</td>
+        <td><i class='bi bi-slack'></i></td>
+        <td><ul><li>Bot Token : string</li><li>Send : int</li><li>Channels : string</li><li>Message : string</li><li>Matrix : matrix2D</li><li>Matrix Name : string</li><li>Reset : int</li>        </ul></td>        <td><ul><li>Success : bool</li>        </ul></td>        <td>Sends a message to one or more Slack channels using a Bot Token<p style='color:red;'>The following package is required: slack_utility</p></td>
+    </tr>
+    <tr>
         <td>Sound Trigger</td>
         <td><i class='bi bi-file-music-fill'></i></td>
         <td><ul><li>source : string</li><li>trigger : int</li><li>delay : int</li>        </ul></td>        <td><ul>        </ul></td>        <td>Play sound on trigger</td>
@@ -6484,7 +6514,7 @@
             </tr>
 
             <tr>
-                <td> Cityscapes Segmentation Training & Testing </td>
+                <td> Cityscapes Segmentation Training and Testing </td>
                 <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
                 <td>
                     <a target="_blank" href="https://www.cityscapes-dataset.com/">Semantic Understanding of Urban Street Scenes</a>
@@ -6912,6 +6942,15 @@ INFINIWORKFLOW_PATH/assets/yolo10/yolov10s.onnx
                     <a target="_blank" href="https://geopy.readthedocs.io/en/stable/">Geo and Geo Reverse</a>
                 </td>
                 <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1Jf7MZy_RhuUjHitPCyRjTAJPCM3_xmc9/view?usp=drive_link">geopy</a> </td>
+            </tr>
+
+            <tr>
+                <td> Slack </td>
+                <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
+                <td>
+                    <a target="_blank" href="https://api.slack.com/messaging/sending">Send Slack Message</a>
+                </td>
+                <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1S_eAGTti1_bpdu3IpLnume0VtiM4emdN/view?usp=sharing">slack_utility</a> </td>
             </tr>
 
             <tr>
