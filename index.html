@@ -880,9 +880,57 @@
 
     <h3 id="Viewer">Viewer</h3>
     <p>The viewer allows you to view the outputs of the currently viewed node</p>
-    <div style="overflow: hidden; width:750px; height:530px; ">
-        <img src="/assets/ui.jpg" style="margin-top: -220px; margin-bottom: -400px; margin-left: -140px; margin-right: -380px;" />
-    </div>
+    <img src="/assets/ui_viewer.jpg" />
+    <p>
+        The viewer's toolbar includes the following functions:
+    </p>
+
+    <ul class="viewer-help-list">
+        <li><i class="bi bi-fullscreen"></i> <strong>Toggle Fullscreen:</strong> Switches the viewer between windowed and maximized application view.</li>
+        <li><strong>1:1</strong> <strong>1:1 Pixel Zoom:</strong> Resets zoom so that one image pixel equals exactly one screen pixel.</li>
+        <li><i class="bi bi-zoom-in"></i> <strong>Zoom In:</strong> Increases the magnification of the image.</li>
+        <li><i class="bi bi-aspect-ratio"></i> <strong>Zoom Fit:</strong> Resets the zoom level to fit the entire image within the current window.</li>
+        <li><i class="bi bi-zoom-out"></i> <strong>Zoom Out:</strong> Decreases the magnification of the image.</li>
+        <li><i class="bi bi-crop"></i> <strong>Resolution Information:</strong> Displays resolution, bit depth, and memory usage. Also allows setting project resolution.</li>
+        <li><i class="bi bi-image"></i> <strong>Toggle Border:</strong> Enables or disables a high-contrast guide border 1 pixel outside the image boundary. Useful for checking alignment against the canvas.</li>
+
+        <li><i class="bi bi-chevron-bar-left"></i> <strong>First Frame:</strong> Jumps to the start of the sequence.</li>
+        <li><i class="bi bi-chevron-left"></i> <strong>Previous Frame:</strong> Steps back one frame.</li>
+        <li><i class="bi bi-pause"></i> <strong>Toggle Play:</strong> Starts or stops the sequence playback.</li>
+        <li><i class="bi bi-chevron-right"></i> <strong>Next Frame:</strong> Steps forward one frame.</li>
+        <li><i class="bi bi-chevron-bar-right"></i> <strong>Last Frame:</strong> Jumps to the end of the sequence.</li>
+        <li><i class="bi bi-calculator"></i> <strong>Set Current Frame:</strong> Opens a dialog to jump to a specific frame number.</li>
+
+        <li><i class="bi bi-layout-split"></i> <strong>Toggle Wipe:</strong> Activates Split Screen mode. Drag the vertical divider to compare live view (right) vs reference (left).</li>
+        <li><i class="bi bi-camera"></i> <strong>Capture reference:</strong> Stores the current frame to be used as the reference image for the Wipe tool.</li>
+
+        <li>
+            <span class="doc-channel-wrapper" style="display: inline-flex; align-items: center; padding: 2px 6px; border: 1px solid rgba(255,255,255,0.3); border-radius: 12px; background: rgba(0,0,0,0.2); gap: 3px; vertical-align: middle;">
+                <i class="bi bi-circle-fill" style="color: #ff4d4d; font-size: 10px;"></i>
+                <i class="bi bi-circle-fill" style="color: #2ecc71; font-size: 10px;"></i>
+                <i class="bi bi-circle-fill" style="color: #3498db; font-size: 10px;"></i>
+                <i class="bi bi-circle-fill" style="color: #ffffff; font-size: 10px;"></i>
+            </span>
+            <strong>Color Channels:</strong> Isolate Red, Green, or Blue channels in grayscale. The White dot returns to full color.
+            <em>Note: Active dots flash to indicate filtering.</em>
+        </li>
+
+        <li><i class="bi bi-sliders"></i> <strong>Image Adjustments:</strong> Opens sliders for Gamma, Brightness, and Contrast. Settings reset when closed.</li>
+        <li><i class="bi bi-book"></i> <strong>Gestures:</strong> Opens a guide for mouse and touch interactions.</li>
+
+        <li style="margin-top: 20px; border-top: 1px solid #444; padding-top: 10px; font-weight: bold; color: #aaa;">Path Editor Tools</li>
+        <li><i class="bi bi-circle"></i> <strong>Insert Point:</strong> Places a single coordinate marker.</li>
+        <li><i class="bi bi-square-fill"></i> <strong>Insert Rectangle:</strong> Draws a 4-point rectangular area.</li>
+        <li><i class="bi bi-circle-fill"></i> <strong>Insert Ellipse:</strong> Creates a circular or elliptical region.</li>
+        <li><i class="bi bi-pentagon-fill"></i> <strong>Insert Shape:</strong> Allows drawing of custom polygons by clicking.</li>
+        <li><i class="bi bi-pencil"></i> <strong>Insert Freehand:</strong> Sketch a custom path freely with the mouse.</li>
+        <li><i class="bi bi-magic"></i> <strong>Insert Lasso:</strong> Intelligent selection tool for defining shapes.</li>
+        <li><i class="bi bi-arrows-angle-expand"></i> <strong>Convert to Bezier:</strong> Changes sharp corners into smooth curves.</li>
+        <li><i class="bi bi-arrows-angle-contract"></i> <strong>Convert to Point:</strong> Changes smooth curves back into sharp corners.</li>
+        <li><i class="bi bi-trash-fill" style="color: #e74c3c;"></i> <strong>Delete Selected:</strong> Removes the active point or shape.</li>
+        <li><i class="bi bi-arrow-bar-left"></i> <strong>Undo/Redo:</strong> Revert or repeat your last path editing actions.</li>
+    </ul>
+
 
     <p>
         A node can be viewed using the node context menu and selecting <a href="#InspectAdjustNodeMenuFuncs">'View' or 'View & Edit'</a>.
@@ -890,16 +938,6 @@
         you can double click the output port directly and avoid needing to select from the menu)
     </p>
     <img src="/assets/ui_viewer_outputs.gif" />
-
-    <p>
-
-    </p>
-
-    <ul>
-        <li><i class="bi bi-info-circle"></i> Resolution Information: Shows the resolution, bit depth and whether the image is in system or GPU memory</li>
-        <li><i class="bi bi-fullscreen"></i> Zoom Fit: Sets the size of the viewer window to the size of the image</li>
-        <li><i class="bi bi-aspect-ratio"></i> Maximize/Minimize: the viewer</li>
-    </ul>
 
     <p>
         The viewer also has controls to zoom and pan. Using the mouse scroll wheel or zoom gesture you can also then pan by dragging the image. When zoomed in, a thumbnail is shown of the full image
@@ -2960,7 +2998,7 @@
     <tr>
         <td>Quick Path</td>
         <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>source : image2D</li><li>numPaths : int</li><li>path 1 : string</li><li>path 2 : string</li><li>path 3 : string</li><li>path 4 : string</li><li>path 5 : string</li><li>color : color</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li>        </ul></td>        <td>Creates and renders up to 5 Paths</td>
+        <td><ul><li>source : image2D</li><li>path : string</li><li>color : color</li><li>invert : bool</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li>        </ul></td>        <td>Creates and renders up to 5 Paths</td>
     </tr>
     <tr>
         <td>Threshold</td>
@@ -4880,6 +4918,11 @@
         <th>Description</th>
     </tr>
     <tr>
+        <td>Abandoned Object Detector</td>
+        <td><i class='bi bi-bag-x'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>mask : image2D</li><li>fps : double</li><li>timeThreshold : double</li><li>movementTolerance : double</li><li>targetClasses : string</li><li>reset : int</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>abandonedCount : int</li><li>alarmTriggered : bool</li>        </ul></td>        <td>Detects if specific objects (e.g., backpacks, boxes) remain stationary in a zone for too long.</td>
+    </tr>
+    <tr>
         <td>AKAZE Feature Detector</td>
         <td><i class='bi bi-compass-fill'></i></td>
         <td><ul><li>source1 : image2D</li><li>source2 : image2D</li><li>inlierThreshold : double</li><li>nearestNeighborMatchRatio : double</li>        </ul></td>        <td><ul><li>keypoints1 : matrix2D</li><li>preview : image2D</li><li>keypoints2 : matrix2D</li>        </ul></td>        <td>Determines strong corners on an image using the AKAZE detector</td>
@@ -4898,6 +4941,11 @@
         <td>Barcode Detect</td>
         <td><i class='bi bi-compass-fill'></i></td>
         <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numBarcodes : int</li><li>info : string</li>        </ul></td>        <td>Detects barcodes<p style='color:red;'>The following package is required: barcode</p></td>
+    </tr>
+    <tr>
+        <td>Camera Tamper Detection</td>
+        <td><i class='bi bi-camera-video-off'></i></td>
+        <td><ul><li>source : image2D</li><li>minStdDev : double</li><li>sceneChangePct : double</li><li>learnRate : double</li><li>reset : int</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>tamperType : string</li><li>alarmTriggered : bool</li>        </ul></td>        <td>Detects if a camera has been blinded, covered, spray-painted, or physically moved.</td>
     </tr>
     <tr>
         <td>Corner Harris</td>
@@ -4920,9 +4968,24 @@
         <td><ul><li>source : image2D</li><li>pyr_scale : double</li><li>levels : int</li><li>winsize : int</li><li>iterations : int</li><li>poly_n : int</li><li>poly_sigma : double</li><li>flags : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Computes the pattern of apparent motion of image objects for all points in the frame</td>
     </tr>
     <tr>
+        <td>Fall Detection</td>
+        <td><i class='bi bi-person-x'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>fps : double</li><li>timeThreshold : double</li><li>arThreshold : double</li><li>targetClasses : string</li><li>reset : int</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>fallCount : int</li><li>alarmTriggered : bool</li>        </ul></td>        <td>Detects if a person falls and remains on the ground by monitoring bounding box aspect ratios over time.</td>
+    </tr>
+    <tr>
         <td>FLANN Feature Matcher</td>
         <td><i class='bi bi-compass-fill'></i></td>
         <td><ul><li>source1 : image2D</li><li>source2 : image2D</li><li>minHessian : int</li>        </ul></td>        <td><ul><li>keypoints1 : matrix2D</li><li>preview : image2D</li><li>keypoints2 : matrix2D</li>        </ul></td>        <td>Finds the feature vector correspondent to the keypoints using the FLANN matcher</td>
+    </tr>
+    <tr>
+        <td>Line Crossing Counter</td>
+        <td><i class='bi bi-sign-stop'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>point1 : double2</li><li>point2 : double2</li><li>resetCount : int</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>count : int</li><li>positiveCount : int</li><li>negativeCount : int</li>        </ul></td>        <td>Counts how many times tracked objects cross a user-defined virtual line.</td>
+    </tr>
+    <tr>
+        <td>Loitering Detection</td>
+        <td><i class='bi bi-stopwatch'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>mask : image2D</li><li>fps : double</li><li>timeThreshold : double</li><li>reset : int</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>alarmTriggered : bool</li><li>loiteringCount : int</li>        </ul></td>        <td>Detects if tracked objects remain inside a masked zone longer than an allowed time threshold.</td>
     </tr>
     <tr>
         <td>Match Template</td>
@@ -4945,6 +5008,11 @@
         <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : string</li><li>preview : image2D</li><li>corners : matrix2D</li><li>qrCode : image2D</li>        </ul></td>        <td>Detect QR Code</td>
     </tr>
     <tr>
+        <td>Region Crossing Counter</td>
+        <td><i class='bi bi-bounding-box'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>mask : image2D</li><li>resetCount : int</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>currentInside : int</li><li>enteredCount : int</li><li>exitedCount : int</li>        </ul></td>        <td>Counts how many tracked objects enter and exit a masked area.</td>
+    </tr>
+    <tr>
         <td>SIFT Detector</td>
         <td><i class='bi bi-compass-fill'></i></td>
         <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>keypoints : matrix2D</li><li>preview : image2D</li>        </ul></td>        <td>Determines strong corners on an image using the SIFT detector</td>
@@ -4958,6 +5026,11 @@
         <td>SURF Feature Detector</td>
         <td><i class='bi bi-compass-fill'></i></td>
         <td><ul><li>source : image2D</li><li>minHessian : int</li>        </ul></td>        <td><ul><li>keypoints : matrix2D</li><li>preview : image2D</li>        </ul></td>        <td>Determines strong corners on an image using the SURF detector</td>
+    </tr>
+    <tr>
+        <td>Tailgating Detector</td>
+        <td><i class='bi bi-people'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>point1 : double2</li><li>point2 : double2</li><li>fps : double</li><li>timeWindow : double</li><li>reset : int</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>tailgateCount : int</li><li>alarmTriggered : bool</li>        </ul></td>        <td>Detects if multiple objects cross a tripwire in the same direction within a short time window.</td>
     </tr>
     <tr>
         <td>Target Detection</td>
@@ -4983,6 +5056,11 @@
         <td>Export Tracking Data</td>
         <td><i class='bi bi-table'></i></td>
         <td><ul><li>source : matrix2D</li><li>directory : string</li><li>filename : string</li><li>trigger : int</li>        </ul></td>        <td><ul>        </ul></td>        <td>Exports CSV file from Tracking Data</td>
+    </tr>
+    <tr>
+        <td>WeChat QR Code Decoder</td>
+        <td><i class='bi bi-qr-code-scan'></i></td>
+        <td><ul><li>source : image2D</li><li>drawBoundingBoxes : bool</li>        </ul></td>        <td><ul><li>out : image2D</li><li>texts : string</li>        </ul></td>        <td>Detects and decodes QR codes using the CNN-based WeChatQRCode algorithm.</td>
     </tr>
 </table>
 <h3 id='Transform'>Transform</h3><p>The Transform filters tools are all under the <i class="bi bi-rulers"> Transform</i> category. The full list of display tools is as follows:</p><table>
@@ -5880,7 +5958,7 @@
         to create customized group nodes.
     </p>
 
-        <h3 id="Hyperparameters">Hyperparameters</h3>
+    <h3 id="Hyperparameters">Hyperparameters</h3>
     <p>
         You can set the hyperparameters using the node context menu and selecting <a href="#MLNodeNodeMenuFuncs">'Hyperparameters'</a>.
         This brings up a dialog that allows you to select each input parameter and also set the range of values you want to have as part
@@ -8098,6 +8176,17 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
             </td>
         </tr>
 
+        <tr>
+            <td>smooth</td>
+            <td></td>
+            <td><pre>"smooth": true</pre></td>
+            <td>
+                Only for path types that indicate if the path can have bezier smooth control handles
+            </td>
+            <td>
+                <pre>"smooth": false</pre>
+            </td>
+        </tr>
 
     </table>
 
