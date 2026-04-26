@@ -216,28 +216,23 @@
     </ul>
 
     <h3 id="Menu">Application Menu</h3>
-    <img src="https://photrondev.github.io/assets/ui_app_menu.jpg" style="width:100%;" />
     <p>The application menu allows the following functionality</p>
 
     <ul>
         <li><i class="bi bi-justify"></i> Hide and Show the Tools Catalog</li>
         <li><i class="bi bi-cloud-upload"></i>  Import a workflow will open the import dialog and allow you to select an existing workflow from the demos folder using the <a href="#ImportExport">Import UI</a></li>
+        <li><i class="bi bi-star"></i> Add authoring notes to the workflow to include your name and description of the workflow</li>
         <li><i class="bi bi-lightbulb"></i> Generative AI that creates new workflows based on user prompts</li>
+        <li><i class="bi bi-bookmark"></i> AI Labeling and Fine Tuning</li>
         <li><i class="bi bi-arrow-bar-left"></i>  Undo will undo the last action</li>
         <li><i class="bi bi-arrow-bar-right"></i> Redo will redo the prior action</li>
         <li><i class="bi bi-pause"></i> Pauses all the selected playable nodes which is useful if you are tracking and want to position the tracker marker</li>
         <li><i class="bi bi-calculator"></i> Sets all the selected playable nodes current frame</li>
-        <li><i class="bi bi-chevron-bar-left"></i> Jump to the first frame for all the selected playable nodes such as the Movie Reader</li>
-        <li><i class="bi bi-chevron-left"></i> Jump to the previous frame for all the selected playable nodes such as the Movie Reader</li>
-        <li><i class="bi bi-chevron-right"></i> Jump to the next frame for all the selected playable nodes such as the Movie Reader</li>
-        <li><i class="bi bi-chevron-bar-right"></i> Jump to the last frame for all the selected playable nodes such as the Movie Reader</li>
         <li><i class="bi bi-zoom-out"></i> Zoom out the flowgraph so you can see more of the nodes in the workflow</li>
         <li><i class="bi bi-aspect-ratio"></i> Zoom fit the flowgraph to show the default zoom and pan which will show all the nodes in the workflow</li>
         <li><i class="bi bi-zoom-in"></i> Zoom in the flowgraph so you can see focus on the nodes in center of the workflow</li>
         <li><i class="bi bi-diagram-3 rotate-90"></i> Auto arrange the nodes</li>
         <li><i class="bi bi-search"></i> Find a node in the flowgraph, adjusts the viewport and selects the node</li>
-        <li><i class="bi bi-star"></i> Add authoring notes to the workflow to include your name and description of the workflow</li>
-        <li><i class="bi bi-shop-window"></i> Show the published view of the workflow. This is an experimental <a href="#Publish">feature</a> that allows you to simplify the workflow into a list of published parameters and hide the workflow. When in publish mode, click on this icon to switch back to the flowgraph mode again.</li>
         <li><i class="bi bi-rulers"></i> Sets the preferred numeric range for some of the standard parameters that can be normalized, percentage and other ranges</li>
         <li><i class="bi bi-crop"></i> Sets the <a href="#ProjectResolution">project resolution</a></li>
         <li><i class="bi bi-nvidia"></i> Sets the current CUDA device when you have multiple GPUs. Any new nodes powered by CUDA will be executed on this current GPU device.</li>
@@ -250,6 +245,7 @@
         <li><i class="bi bi-circle-half"></i> Light or Dark Theme</li>
         <li><i class="bi bi-robot"></i> Plays narratives that explain how to use the app</li>
         <li><i class="bi bi-chat-right-quote"></i> Localize the UI to different languages</li>
+        <li><i class="bi bi-shop-window"></i> Show the published view of the workflow. This is an experimental <a href="#Publish">feature</a> that allows you to simplify the workflow into a list of published parameters and hide the workflow. When in publish mode, click on this icon to switch back to the flowgraph mode again.</li>
         <li><i class="bi bi-power"></i> Exit the application</li>
     </ul>
 
@@ -3246,6 +3242,11 @@
         <td>Quick Path</td>
         <td><i class='bi bi-gear'></i></td>
         <td><ul><li>source : image2D</li><li>path : string</li><li>color : color</li><li>invert : bool</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li>        </ul></td>        <td>Creates and renders up to 5 Paths</td>
+    </tr>
+    <tr>
+        <td>Saliency</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li><li>algorithm : int</li><li>showBinaryMap : bool</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Perform a saliency algorithm on an input image or video, i.e. 'where humans would look in a scene'.</td>
     </tr>
     <tr>
         <td>Threshold</td>
