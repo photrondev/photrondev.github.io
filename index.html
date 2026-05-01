@@ -244,6 +244,7 @@
         <li><i class="bi bi-star"></i> Add authoring notes to the workflow to include your name and description of the workflow</li>
         <li><i class="bi bi-lightbulb"></i> <a href="#GenerativeAI">Generative AI</a> that creates new workflows based on user prompts</li>
         <li><i class="bi bi-bookmark"></i> AI Labeling and Fine Tuning</li>
+        <li><i class="bi bi-cloud-download"></i> Saves the workflow using the <a href="#ImportExport">Export UI</a></li>
         <li><i class="bi bi-arrow-bar-left"></i>  Undo will undo the last action</li>
         <li><i class="bi bi-arrow-bar-right"></i> Redo will redo the prior action</li>
         <li><i class="bi bi-pause"></i> Pauses all the selected playable nodes which is useful if you are tracking and want to position the tracker marker</li>
@@ -256,16 +257,15 @@
         <li><i class="bi bi-rulers"></i> Sets the preferred numeric range for some of the standard parameters that can be normalized, percentage and other ranges</li>
         <li><i class="bi bi-crop"></i> Sets the <a href="#ProjectResolution">project resolution</a></li>
         <li><i class="bi bi-nvidia"></i> Sets the current CUDA device when you have multiple GPUs. Any new nodes powered by CUDA will be executed on this current GPU device.</li>
-        <li><i class="bi bi-cloud-download"></i> Saves the workflow using the <a href="#ImportExport">Export UI</a></li>
-        <li><i class="bi bi-trash"></i> Clears the workflow to start a new one from scratch</li>
         <li><i class="bi bi-info-circle"></i> Displays the rendering status console which also indicates progress, warnings and errors</li>
         <li><i class="bi bi-grid-3x3-gap-fill"></i> Shows the Grid Search dialog that is used to optimize your ML models using the <a href="#GridSearch">GridSearch UI</a></li>
+        <li><i class="bi bi-shop-window"></i> Show the published view of the workflow. This is an experimental <a href="#Publish">feature</a> that allows you to simplify the workflow into a list of published parameters and hide the workflow. When in publish mode, click on this icon to switch back to the flowgraph mode again.</li>
         <li><i class="bi bi-book"></i> Opens this manual</li>
         <li><i class="bi bi-boxes"></i> Opens the Installed Packages Dialog</li>
         <li><i class="bi bi-circle-half"></i> Light or Dark Theme</li>
         <li><i class="bi bi-robot"></i> Plays narratives that explain how to use the app</li>
         <li><i class="bi bi-chat-right-quote"></i> Localize the UI to different languages</li>
-        <li><i class="bi bi-shop-window"></i> Show the published view of the workflow. This is an experimental <a href="#Publish">feature</a> that allows you to simplify the workflow into a list of published parameters and hide the workflow. When in publish mode, click on this icon to switch back to the flowgraph mode again.</li>
+        <li><i class="bi bi-trash"></i> Clears the workflow to start a new one from scratch</li>
         <li><i class="bi bi-power"></i> Exit the application</li>
     </ul>
 
@@ -907,7 +907,7 @@
     </p>
 
     <ul class="viewer-help-list">
-        <li><i class="bi bi-fullscreen"></i> <strong>Toggle Fullscreen:</strong> Switches the viewer between windowed and maximized application view.</li>
+        <li><i class="bi bi-window-sidebar"></i> <strong>Toggle Fullscreen:</strong> Switches the viewer between windowed and maximized viewer.</li>
         <li><strong>1:1</strong> <strong>1:1 Pixel Zoom:</strong> Resets zoom so that one image pixel equals exactly one screen pixel.</li>
         <li><i class="bi bi-zoom-in"></i> <strong>Zoom In:</strong> Increases the magnification of the image.</li>
         <li><i class="bi bi-aspect-ratio"></i> <strong>Zoom Fit:</strong> Resets the zoom level to fit the entire image within the current window.</li>
@@ -941,7 +941,7 @@
 
         <li style="margin-top: 20px; border-top: 1px solid #444; padding-top: 10px; font-weight: bold; color: #aaa;">Path Editor Tools</li>
         <li><i class="bi bi-circle"></i> <strong>Insert Point:</strong> Places a single coordinate marker.</li>
-        <li><i class="bi bi-square-fill"></i> <strong>Insert Rectangle:</strong> Draws a 4-point rectangular area.</li>
+        <li><i class="bi bi-square-fill"></i> <strong>Insert Rectangle:</strong> Draws a 4-point rectangular .</li>
         <li><i class="bi bi-circle-fill"></i> <strong>Insert Ellipse:</strong> Creates a circular or elliptical region.</li>
         <li><i class="bi bi-pentagon-fill"></i> <strong>Insert Shape:</strong> Allows drawing of custom polygons by clicking.</li>
         <li><i class="bi bi-pencil"></i> <strong>Insert Freehand:</strong> Sketch a custom path freely with the mouse.</li>
@@ -1072,7 +1072,7 @@
             </li>
             <li>
                 <i class="bi bi-square-fill"></i>
-                <strong>Insert Rectangle:</strong> Creates a 4-point closed rectangular path. Click and drag or click corners to define the area.
+                <strong>Insert Rectangle:</strong> Creates a 4-point closed rectangular path. Click and drag or click corners to define the .
             </li>
             <li>
                 <i class="bi bi-circle-fill"></i>
@@ -1356,7 +1356,7 @@
     <table style="width: 100%; table-layout: fixed;">
         <tr style="width: 100%;">
             <td style="width: 100%;"> <img style="width: 100%;" src="https://photrondev.github.io/assets/ui_histogram_plot.jpg" /> </td>
-            <td style="width: 100%;"> <img style="width: 100%;" src="https://photrondev.github.io/assets/ui_areaplot_plot.jpg" /> </td>
+            <td style="width: 100%;"> <img style="width: 100%;" src="https://photrondev.github.io/assets/ui_plot_plot.jpg" /> </td>
         </tr>
         <tr style="width: 100%;">
             <td style="width: 100%;"> <img style="width: 100%;" src="https://photrondev.github.io/assets/ui_density_plot.jpg" /> </td>
@@ -6690,6 +6690,98 @@ Error Handling: If a requested tool or file cannot be found, report the error us
         and then click Generate and then wait for the workflow to be generated.
     </p>
 
+
+    <section id="introduction">
+        <p>The Generative AI Chatbox, implemented in <code>chatbox.js</code>, is a multimodal interface that allows users to generate complex system workflows and C++ plugins using natural language prompts powered by Google Gemini.</p>
+    </section>
+
+    <section id="interface-modes">
+        <h4>2. Operational Modes</h4>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h5>Workflow Mode</h5>
+                <p>Designed for visual graph creation. It translates descriptions into a series of connected nodes (vertices) and edges.</p>
+                <p><strong>Example:</strong> <em>"Movie Reader then do yolo v7 detection..."</em></p>
+            </div>
+            <div class="feature-card">
+                <h5>Plugin Mode</h5>
+                <p>Generates C++ source code and configuration files for the SDK. This mode requires a specific Plugin Name before generation.</p>
+                <p><strong>Example:</strong> <em>"Create a Plugin that takes a source image2D..."</em></p>
+            </div>
+        </div>
+    </section>
+
+    <section id="configuration">
+        <h4>3. Regional Configuration</h4>
+        <p>Users can specify the Google Cloud Platform (GCP) region for AI inference. Available regions include:</p>
+        <ul>
+            <li><code>us-central1</code> (US Central)</li>
+            <li><code>us-east1</code> (US East 1)</li>
+            <li><code>europe-west1</code> (Belgium)</li>
+            <li><code>asia-northeast1</code> (Tokyo)</li>
+        </ul>
+        <p>Preferences are persisted via the <code>gcp_region</code> cookie.</p>
+    </section>
+
+    <section id="execution">
+        <h4>4. Execution</h4>
+        <p>To use the system, follow the standardized execution workflow:</p>
+
+        <h4>4.1. Initiation</h4>
+        <p>Click the <strong>Generative AI</strong> button (lightbulb icon) in the application toolbox. This initializes the <code>Chatbox</code> class and builds the dark-themed UI overlay.</p>
+
+        <h4>4.2. Prompt Submission</h4>
+        <ol>
+            <li>Select your desired <strong>Mode</strong> (Workflow or Plugin).</li>
+            <li>Verify the <strong>Region</strong> setting.</li>
+            <li>Enter your technical requirements into the text .</li>
+            <li>Click the <strong>Send</strong> (<i class="bi bi-send-fill"></i>) button.</li>
+        </ol>
+
+        <div class="note">
+            <strong>Note for Plugin Mode:</strong> If "Plugin" is selected, a secondary dialog will appear requesting a <strong>Plugin Name</strong>. This name is used to identify the generated file package.
+        </div>
+
+        <h4>4.3. Review and Import</h4>
+        <ul>
+            <li><strong>Workflow Preview:</strong> Displays a DOT-rendered graph. Selecting "Ok" will trigger <code>workflow.importWorkflow</code>, clearing the current editor to load the AI-generated graph.</li>
+            <li><strong>Plugin Viewer:</strong> Opens a multi-file browser. Users can inspect <code>.cpp</code> and <code>.h</code> files before clicking <strong>Save to Disk</strong> to export them to the local SDK folder.</li>
+        </ul>
+    </section>
+
+    <section id="history">
+        <h4>5. History Management</h4>
+        <p>The Chatbox maintains a list of the 10 most recent unique prompts per mode:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Mechanism</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Storage</strong></td>
+                    <td>Cookies (<code>chat_history</code> and <code>plugin_history</code>)</td>
+                </tr>
+                <tr>
+                    <td><strong>Sidebar</strong></td>
+                    <td>Toggled via the <code>#history-toggle</code> button</td>
+                </tr>
+                <tr>
+                    <td><strong>Recall</strong></td>
+                    <td>Clicking a history item auto-populates the prompt </td>
+                </tr>
+                <tr>
+                    <td><strong>Cleanup</strong></td>
+                    <td>Trash icon clears the history for the active mode</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+
+
     <h3 id="Publish">Publish</h3>
 
     <img src="https://photrondev.github.io/assets/ui_widgets_publish.jpg" width="70%" />
@@ -8186,6 +8278,20 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
         </tr>
 
         <tr>
+            <td>supervise_values</td>
+            <td></td>
+            <td><pre>"supervise_values": []</pre></td>
+            <td>
+                Specifies if the plugin wants to handle supervion callbacks to dynamically set values, specify the list of identifiers you want to update their values
+                on a supervised change
+            </td>
+            <td>
+                <pre>"supervise_values": ["color", "opacity"]</pre>
+            </td>
+        </tr>
+
+
+        <tr>
             <td>inputs</td>
             <td></td>
             <td><pre>"inputs": []</pre></td>
@@ -8584,7 +8690,7 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
             <td></td>
             <td><pre>"multiline": false</pre></td>
             <td>
-                Only for string types that indicate if the UI should have a textarea or a single textfield widget
+                Only for string types that indicate if the UI should have a text or a single textfield widget
             </td>
             <td>
                 <pre>"multiline": true</pre>
@@ -8596,7 +8702,7 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
             <td></td>
             <td></td>
             <td>
-                Only for string types with a multiline set to true, indicates the number of rows of the textarea widget
+                Only for string types with a multiline set to true, indicates the number of rows of the text widget
             </td>
             <td>
                 <pre>"rows": 5</pre>
@@ -8608,7 +8714,7 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
             <td></td>
             <td></td>
             <td>
-                Only for string types with a multiline set to true, indicates the number of columns of the textarea widget
+                Only for string types with a multiline set to true, indicates the number of columns of the text widget
             </td>
             <td>
                 <pre>"cols": 10</pre>
@@ -8955,6 +9061,28 @@ result = "torch.generic_loader"
             </td>
         </tr>
 
+        <tr>
+            <td>supervise_inputs</td>
+            <td></td>
+            <td><pre>self, host : PluginHost, inputs_flags : ctypes.c_int_array</pre></td>
+            <td><pre>False</pre></td>
+            <td>
+                Called to dynamically enable/disable or hide/show parameters.
+                Modify <b>inputs_flags</b> using SUPERVISE_FLAG_HIDDEN (1) or SUPERVISE_FLAG_DISABLED (2).
+            </td>
+        </tr>
+
+        <tr>
+            <td>supervise_value</td>
+            <td></td>
+            <td><pre>self, host : PluginHost, nth_index : int</pre></td>
+            <td><pre>None</pre></td>
+            <td>
+                Called for indices listed in <b>update_values</b> in the JSON.
+                Return a string (e.g., "0.0,0.0,1.0") to force a new value in the UI.
+            </td>
+        </tr>
+
     </table>
 
 
@@ -9202,6 +9330,16 @@ result = "torch.generic_loader"
                 You can set the flags SUPERVISE_FLAG_NORMAL (0) to have it shown regularly
                 Or set it to the flag SUPERVISE_FLAG_HIDDEN (1) to have it hidden
                 Or set it to the flag SUPERVISE_FLAG_DISABLED (2) to have it disabled
+            </td>
+        </tr>
+
+        <tr>
+            <td>superviseValue</td>
+            <td><pre>bool superviseValue(PluginHost* host, int index, char* value);</pre></td>
+            <td>
+                Called for indices listed in the "update_values" array in the node JSON[cite: 1, 2].
+                The <b>value</b> parameter is a 512-byte buffer.
+                Return <b>true</b> and write a string to the buffer (e.g., a hex color or status text) to force a new value into the UI widget.
             </td>
         </tr>
 
