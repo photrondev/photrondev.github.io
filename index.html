@@ -265,6 +265,7 @@
         <li><i class="bi bi-circle-half"></i> Light or Dark Theme</li>
         <li><i class="bi bi-robot"></i> Plays narratives that explain how to use the app</li>
         <li><i class="bi bi-chat-right-quote"></i> Localize the UI to different languages</li>
+        <li><i class="bi bi-info-circle"></i> Platform Information & Downloads</li>
         <li><i class="bi bi-trash"></i> Clears the workflow to start a new one from scratch</li>
         <li><i class="bi bi-power"></i> Exit the application</li>
     </ul>
@@ -5629,7 +5630,7 @@
     </tr>
     <tr>
         <td>ROS2 Server</td>
-        <td><i class='bi rocket-takeoff'></i></td>
+        <td><i class='bi bi-rocket-takeoff'></i></td>
         <td><ul><li>trigger : int</li><li>ROS package : string</li><li>executable : string</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Launches a ROS2 node<p style='color:red;'>The following package is required: ros</p></td>
     </tr>
     <tr>
@@ -6742,10 +6743,19 @@ Error Handling: If a requested tool or file cannot be found, report the error us
             <strong>Note for Plugin Mode:</strong> If "Plugin" is selected, a secondary dialog will appear requesting a <strong>Plugin Name</strong>. This name is used to identify the generated file package.
         </div>
 
-        <h4>4.3. Review and Import</h4>
+        <h4>4.3. Review</h4>
         <ul>
             <li><strong>Workflow Preview:</strong> Displays a DOT-rendered graph. Selecting "Ok" will trigger <code>workflow.importWorkflow</code>, clearing the current editor to load the AI-generated graph.</li>
-            <li><strong>Plugin Viewer:</strong> Opens a multi-file browser. Users can inspect <code>.cpp</code> and <code>.h</code> files before clicking <strong>Save to Disk</strong> to export them to the local SDK folder.</li>
+            <li>
+                <strong>Plugin Viewer and Compiler:</strong> Opens a multi-file browser to inspect generated <code>.cpp</code>, <code>.h</code>, and <code>.json</code> files[cite: 8]. Clicking <strong>Save and Compile</strong> initiates a sophisticated automation pipeline:
+                <ul>
+                    <li><strong>Disk Export:</strong> Files are written to the local SDK directory structure at <code>/sdk/gen_ai/[PluginName]</code>[cite: 3].</li>
+                    <li><strong>Automated Build System:</strong> The system creates a dedicated <code>build</code> directory and runs <strong>CMake configuration</strong> tailored to the host operating system (e.g., Visual Studio 2022 for Windows or standard Makefiles for Unix-based systems)[cite: 3].</li>
+                    <li><strong>Real-time Progress Tracking:</strong> A visual <strong>Progress Bar</strong> and live <strong>Status Log</strong> appear directly within the viewer window, replacing the standard code view to show the compiler's output in real-time[cite: 8].</li>
+                    <li><strong>Success Integration:</strong> Upon a successful build, the progress bar turns green, the compiled <code>.plugin</code> is automatically moved to the <code>Extensions</code> directory, and the <strong>Application Catalog</strong> is reinitialized for immediate use without a restart[cite: 3, 8].</li>
+                    <li><strong>Error Reporting:</strong> If compilation fails, the progress bar turns red, and the full compiler error log is displayed in the viewer to assist with debugging[cite: 8].</li>
+                </ul>
+            </li>
         </ul>
     </section>
 
