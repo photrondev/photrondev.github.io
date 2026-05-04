@@ -738,8 +738,6 @@
             a different process on the same system, a different machine altogether. The selected nodes are removed and two distribution nodes, Source and Sink, are added to
             receive and send data to the external process.
         </li>
-        <li><i class="bi bi-chat"></i> Chatbox: an experimental feature that allows you to type a question and get an answer in the form of a automatically generated workflow</li>
-        <li><i class="bi bi-pen"></i> Label: an experimental feature that labels your workflow, to indicate the purpose of your workflow, so that it can be used in Chatbox training</li>
         <li><i class="bi bi-link"></i> Copy URL: is available for viewer nodes that show the thumbnail of the image, the streaming URL of the image is copied to the system clipboard</li>
     </ul>
 
@@ -1430,7 +1428,9 @@
 
     <h3 id="AiLabeler">Labeling and Fine Tuning</h3>
 
-    <p>The AI Labeling Tool is a specialized environment for creating high-quality datasets for machine learning. It facilitates pixel-perfect <strong>Image Segmentation</strong>, <strong>Instance Segmentation</strong>, and object <strong>Detection</strong> by combining automated class management with sequential image processing.</p>
+    <p>The AI Labeling Tool is a specialized environment for creating high-quality datasets for machine learning. It facilitates pixel-perfect 
+    <strong>Image Segmentation</strong>, <strong>Instance Segmentation</strong>, and object <strong>Detection</strong> by combining automated class 
+    management with sequential image processing. Finally, once labeled we can fine tune to create a new ML model.</p>
 
     <div class="tool-section">
         <h3 style="color: #0dcaf0;">Step 1: Workflow Initialization</h3>
@@ -1798,7 +1798,7 @@
         <td><ul><li>source : image2D</li><li>filter : string</li><li>scoreThreshold : double</li><li>nmsThreshold : double</li><li>confidenceThreshold : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li><li>cutout : image2D</li>        </ul></td>        <td>Detects and labels objects based on YOLO9 neural network model</td>
     </tr>
 </table>
-<h3 id='Audio'>Audio</h3><p>The Audio filters tools are all under the <i class="bi bi-volume-up-fill"> Audio</i> category. The full list of display tools is as follows:</p><table>
+<h3 id='Audio'>Audio</h3><p>The Audio signal processing filters tools are all under the <i class="bi bi-volume-up-fill"> Audio</i> category. The full list of display tools is as follows:</p><table>
     <tr>
         <th>Name</th>
         <th>Icon</th>
@@ -1902,7 +1902,7 @@
         <td><ul><li>source : audio</li>        </ul></td>        <td><ul><li>average volume : double</li><li>max volume : double</li>        </ul></td>        <td>Returns min, max, and average volume of audio<p style='color:red;'>The following package is required: audio</p></td>
     </tr>
 </table>
-<h3 id='Color'>Color</h3><p>The Color Correction tools are all under the <i class="bi bi-palette"> Color</i> category. The full list of display tools is as follows:</p><table>
+<h3 id='Color'>Color</h3><p>The Image Color Correction filters tools are all under the <i class="bi bi-palette"> Color</i> category. The full list of display tools is as follows:</p><table>
     <tr>
         <th>Name</th>
         <th>Icon</th>
@@ -2395,7 +2395,7 @@
         <td><ul><li>srcA : image2D</li><li>srcB : image2D</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Bitwise XOR Operations on Two Images</td>
     </tr>
 </table>
-<h3 id='Database'>Database</h3><p>The Database filters tools are all under the <i class="bi bi-database"> Database</i> category. The full list of display tools is as follows:</p><table>
+<h3 id='Database'>Database</h3><p>The Database processing such as reading tables, performing queries and writing to databases tools are all under the <i class="bi bi-database"> Database</i> category. The full list of display tools is as follows:</p><table>
     <tr>
         <th>Name</th>
         <th>Icon</th>
@@ -2464,7 +2464,7 @@
         <td><ul><li>connection : db.connection</li><li>table : DataFrame</li><li>table name : string</li><li>if_exists : int</li><li>index : bool</li><li>trigger : int</li>        </ul></td>        <td><ul><li>out : bool</li>        </ul></td>        <td>Store Table to Database<p style='color:red;'>The following package is required: database</p></td>
     </tr>
 </table>
-<h3 id='Datascience'>Datascience</h3><p>The Datascience filters tools are all under the <i class="bi bi-table"> Datascience</i> category. The full list of display tools is as follows:</p><table>
+<h3 id='Datascience'>Datascience</h3><p>The Datascience filters using the Pandas library tools are all under the <i class="bi bi-table"> Datascience</i> category. The full list of display tools is as follows:</p><table>
     <tr>
         <th>Name</th>
         <th>Icon</th>
@@ -2832,7 +2832,7 @@
         <td><ul><li>source : texture2D</li><li>mixAmount : double</li>        </ul></td>        <td><ul><li>out : texture2D</li>        </ul></td>        <td>Change Color Texture with Vertical Ramp using a GPU Shader</td>
     </tr>
 </table>
-<h3 id='ImageProcessing'>ImageProcessing</h3><p>The Image Processing Filters tools are all under the <i class="bi bi-stars"> Image Processing</i> category. The full list of display tools is as follows:</p><table>
+<h3 id='ImageProcessing'>ImageProcessing</h3><p>The Image Processing Filters such as Blurs, Edge Detetors and Morphological Filters tools are all under the <i class="bi bi-stars"> Image Processing</i> category. The full list of display tools is as follows:</p><table>
     <tr>
         <th>Name</th>
         <th>Icon</th>
@@ -3146,7 +3146,7 @@
         <td><ul><li>hdr source : image2D</li><li>gamma : double</li><li>saturation : double</li><li>bias : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Blurs an image using the normalized box filter</td>
     </tr>
 </table>
-<h3 id='Grayscale'>Grayscale</h3><p>The Grayscale Filters tools are all under the <i class="bi bi-mask"> Grayscale</i> category. The full list of display tools is as follows:</p><table>
+<h3 id='Grayscale'>Grayscale</h3><p>The Grayscale Filters that create single channel images tools are all under the <i class="bi bi-mask"> Grayscale</i> category. The full list of display tools is as follows:</p><table>
     <tr>
         <th>Name</th>
         <th>Icon</th>
@@ -3320,7 +3320,7 @@
         <td><ul><li>source : image2D</li><li>thresh : double</li><li>maxval : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>The function is typically used to get a bi-level (binary inverse) image out of a grayscale image</td>
     </tr>
 </table>
-<h3 id='Inputs'>Inputs</h3><p>The Source Inputs tools are all under the <i class="bi bi-file-earmark-richtext"> Inputs</i> category. The full list of display tools is as follows:</p><table>
+<h3 id='Inputs'>Inputs</h3><p>The Source Inputs such as Webcameras or Reading Movies tools are all under the <i class="bi bi-file-earmark-richtext"> Inputs</i> category. The full list of display tools is as follows:</p><table>
     <tr>
         <th>Name</th>
         <th>Icon</th>
@@ -3399,7 +3399,7 @@
         <td><ul><li>URL : string</li><li>trigger : int</li><li>fps : int</li><li>size : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Streams data from a YouTube video<p style='color:red;'>The following package is required: youtube_reader</p></td>
     </tr>
 </table>
-<h3 id='Logic'>Logic</h3><p>The Logic functions tools are all under the <i class="bi bi-question-square-fill"> Logic</i> category. The full list of display tools is as follows:</p><table>
+<h3 id='Logic'>Logic</h3><p>The Logical functions for conditional processing, useful to create triggers tools are all under the <i class="bi bi-question-square-fill"> Logic</i> category. The full list of display tools is as follows:</p><table>
     <tr>
         <th>Name</th>
         <th>Icon</th>
@@ -3533,7 +3533,7 @@
         <td><ul>        </ul></td>        <td><ul><li>out : bool</li>        </ul></td>        <td>Returns True</td>
     </tr>
 </table>
-<h3 id='Math'>Math</h3><p>The Math functions tools are all under the <i class="bi bi-calculator"> Math</i> category. The full list of display tools is as follows:</p><table>
+<h3 id='Math'>Math</h3><p>The Mathematical and Scientific Operators tools are all under the <i class="bi bi-calculator"> Math</i> category. The full list of display tools is as follows:</p><table>
     <tr>
         <th>Name</th>
         <th>Icon</th>
@@ -3712,7 +3712,7 @@
         <td><ul>        </ul></td>        <td><ul><li>out : double</li>        </ul></td>        <td>Return number zero</td>
     </tr>
 </table>
-<h3 id='Matrix'>Matrix</h3><p>The Matrix operations tools are all under the <i class="bi bi-grid-3x3"> Matrix</i> category. The full list of display tools is as follows:</p><table>
+<h3 id='Matrix'>Matrix</h3><p>The Matrix operations using numpy arrays tools are all under the <i class="bi bi-grid-3x3"> Matrix</i> category. The full list of display tools is as follows:</p><table>
     <tr>
         <th>Name</th>
         <th>Icon</th>
@@ -4319,7 +4319,7 @@
         <td><ul><li>source : image2D</li><li>size : int</li>        </ul></td>        <td><ul>        </ul></td>        <td>Show Thumbnail of Image</td>
     </tr>
 </table>
-<h3 id='Photron'>Photron</h3><p>The Photron Filters tools are all under the <i class="bi bi-camera-reels-fill"> Photron</i> category. The full list of display tools is as follows:</p><table>
+<h3 id='Photron'>Photron</h3><p>The Photron Camera and Processing Tools tools are all under the <i class="bi bi-camera-reels-fill"> Photron</i> category. The full list of display tools is as follows:</p><table>
     <tr>
         <th>Name</th>
         <th>Icon</th>
@@ -4383,7 +4383,7 @@
         <td><ul><li>source : image2D</li><li>config : matrix2D</li><li>reset : int</li><li>drawOpacity : bool</li><li>detectLevelSpatter : int</li><li>threshSpatter : int</li><li>flagCanny : bool</li><li>val1CANNY : int</li><li>val2CANNY : int</li><li>spatterStillThresh : int</li><li>spatterTrackFrame : int</li><li>spatterStillFrameCount : int</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>spatterCount : int</li>        </ul></td>        <td>Analyzes welding video to track spatter.</td>
     </tr>
 </table>
-<h3 id='Plot'>Plot</h3><p>The Plot figures tools are all under the <i class="bi bi-bar-chart-fill"> Plot</i> category. The full list of display tools is as follows:</p><table>
+<h3 id='Plot'>Plot</h3><p>The Plotting tools using Matplotlib tools are all under the <i class="bi bi-bar-chart-fill"> Plot</i> category. The full list of display tools is as follows:</p><table>
     <tr>
         <th>Name</th>
         <th>Icon</th>
@@ -4467,7 +4467,7 @@
         <td><ul><li>matrix : matrix2D</li><li>background color : color</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Plot matrix data into a scatter plot using OpenCV Plot library.</td>
     </tr>
 </table>
-<h3 id='Pytorch'>Pytorch</h3><p>The Pytorch functions tools are all under the <i class="bi bi-fire"> Pytorch</i> category. The full list of display tools is as follows:</p><table>
+<h3 id='Pytorch'>Pytorch</h3><p>The PyTorch deep learning for building ML models tools are all under the <i class="bi bi-fire"> Pytorch</i> category. The full list of display tools is as follows:</p><table>
     <tr>
         <th>Name</th>
         <th>Icon</th>
@@ -4971,7 +4971,7 @@
         <td><ul><li>size #1 : int</li>        </ul></td>        <td><ul><li>out : tensor</li>        </ul></td>        <td>Returns a tensor filled with the scalar value 0, with the shape defined by the variable argument size.</td>
     </tr>
 </table>
-<h3 id='Rendering'>Rendering</h3><p>The 3D Rendering functions tools are all under the <i class="bi bi-badge-3d-fill"> Rendering</i> category. The full list of display tools is as follows:</p><table>
+<h3 id='Rendering'>Rendering</h3><p>The 3D tools to create 3D scenes and render tools are all under the <i class="bi bi-badge-3d-fill"> Rendering</i> category. The full list of display tools is as follows:</p><table>
     <tr>
         <th>Name</th>
         <th>Icon</th>
@@ -5075,7 +5075,7 @@
         <td><ul><li>point 1 : double3</li><li>point 2 : double3</li><li>point 3 : double3</li><li>color 1 : color</li><li>color 2 : color</li><li>color 3 : color</li><li>segmentation color : color</li>        </ul></td>        <td><ul><li>triangle : 3DNode</li>        </ul></td>        <td>Create a Gouraud shaded triangle.<p style='color:red;'>The following package is required: pyrender</p></td>
     </tr>
 </table>
-<h3 id='Statistics'>Statistics</h3><p>The Image Statistics tools are all under the <i class="bi bi-graph-up-arrow"> Statistics</i> category. The full list of display tools is as follows:</p><table>
+<h3 id='Statistics'>Statistics</h3><p>The Image Statistics tools such as mean, median and RMSE tools are all under the <i class="bi bi-graph-up-arrow"> Statistics</i> category. The full list of display tools is as follows:</p><table>
     <tr>
         <th>Name</th>
         <th>Icon</th>
@@ -5159,7 +5159,7 @@
         <td><ul><li>source : image2D</li><li>point1 : int2</li><li>point2 : int2</li><li>number samples : int</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li>        </ul></td>        <td>Generate a 2D time sample along a diagonal line</td>
     </tr>
 </table>
-<h3 id='String'>String</h3><p>The String functions tools are all under the <i class="bi bi-chat-square-quote-fill"> String</i> category. The full list of display tools is as follows:</p><table>
+<h3 id='String'>String</h3><p>The String tools such as string concatentation tools are all under the <i class="bi bi-chat-square-quote-fill"> String</i> category. The full list of display tools is as follows:</p><table>
     <tr>
         <th>Name</th>
         <th>Icon</th>
@@ -5228,7 +5228,7 @@
         <td><ul><li>a : *</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Convert to string</td>
     </tr>
 </table>
-<h3 id='Tracking'>Tracking</h3><p>The Tracking functions tools are all under the <i class="bi bi-compass-fill"> Tracking</i> category. The full list of display tools is as follows:</p><table>
+<h3 id='Tracking'>Tracking</h3><p>The Tracking features in images tools are all under the <i class="bi bi-compass-fill"> Tracking</i> category. The full list of display tools is as follows:</p><table>
     <tr>
         <th>Name</th>
         <th>Icon</th>
@@ -5387,7 +5387,7 @@
         <td><ul><li>source : image2D</li><li>drawBoundingBoxes : bool</li>        </ul></td>        <td><ul><li>out : image2D</li><li>texts : string</li>        </ul></td>        <td>Detects and decodes QR codes using the CNN-based WeChatQRCode algorithm.</td>
     </tr>
 </table>
-<h3 id='Transform'>Transform</h3><p>The Transform filters tools are all under the <i class="bi bi-rulers"> Transform</i> category. The full list of display tools is as follows:</p><table>
+<h3 id='Transform'>Transform</h3><p>The Image Transformation tools tools are all under the <i class="bi bi-rulers"> Transform</i> category. The full list of display tools is as follows:</p><table>
     <tr>
         <th>Name</th>
         <th>Icon</th>
@@ -5540,7 +5540,7 @@
         <th>Description</th>
     </tr>
 </table>
-<h3 id='Triggers'>Triggers</h3><p>The Triggers functions tools are all under the <i class="bi bi-magic"> Triggers</i> category. You can create triggers to activate certain nodes that require a trigger to execute - review the section <a href="#CreatingTriggers">Creating Triggers</a>. The full list of display tools is as follows:</p><table>
+<h3 id='Triggers'>Triggers</h3><p>The Triggers tools which are useful to create signals for control tools are all under the <i class="bi bi-magic"> Triggers</i> category. You can create triggers to activate certain nodes that require a trigger to execute - review the section <a href="#CreatingTriggers">Creating Triggers</a>. The full list of display tools is as follows:</p><table>
     <tr>
         <th>Name</th>
         <th>Icon</th>
@@ -5709,7 +5709,7 @@
         <td><ul><li>host : string</li><li>port : int</li><li>trigger : int</li><li>message : string</li><li>send : int</li>        </ul></td>        <td><ul><li>client address : int</li><li>out : string</li>        </ul></td>        <td>Communicate with a device through Wi-Fi</td>
     </tr>
 </table>
-<h3 id='Utilities'>Utilities</h3><p>The Utility filters tools are all under the <i class="bi bi-gear"> Utilities</i> category. The full list of display tools is as follows:</p><table>
+<h3 id='Utilities'>Utilities</h3><p>The Python Utility tools tools are all under the <i class="bi bi-gear"> Utilities</i> category. The full list of display tools is as follows:</p><table>
     <tr>
         <th>Name</th>
         <th>Icon</th>
@@ -6003,7 +6003,7 @@
         <td><ul><li>x : int</li><li>y : int</li>        </ul></td>        <td><ul><li>out : int2</li>        </ul></td>        <td>Set X and Y to create Int2</td>
     </tr>
 </table>
-<h3 id='Widgets'>Widgets</h3><p>The User Interface Widgets tools are all under the <i class="bi bi-sliders"> Widgets</i> category. The full list of display tools is as follows:</p><table>
+<h3 id='Widgets'>Widgets</h3><p>The User Interface Widgets which can be used for Publishing a simplified UI tools are all under the <i class="bi bi-sliders"> Widgets</i> category. The full list of display tools is as follows:</p><table>
     <tr>
         <th>Name</th>
         <th>Icon</th>
@@ -6697,7 +6697,7 @@ Error Handling: If a requested tool or file cannot be found, report the error us
     </section>
 
     <section id="interface-modes">
-        <h4>2. Operational Modes</h4>
+        <h4  id="GeminiUsage" >2. Operational Modes</h4>
         <div class="feature-grid">
             <div class="feature-card">
                 <h5>Workflow Mode</h5>
