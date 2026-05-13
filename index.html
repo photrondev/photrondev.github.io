@@ -283,10 +283,21 @@
         <li><i class="bi bi-lightbulb"></i> <a href="#GenerativeAI">Generative AI</a> that creates new workflows based on user prompts</li>
         <li><i class="bi bi-bookmark"></i> AI Labeling and Fine Tuning</li>
         <li><i class="bi bi-cloud-download"></i> Saves the workflow using the <a href="#ImportExport">Export UI</a></li>
-        <li><i class="bi bi-arrow-bar-left"></i>  Undo will undo the last action</li>
-        <li><i class="bi bi-arrow-bar-right"></i> Redo will redo the prior action</li>
         <li><i class="bi bi-pause"></i> Pauses all the selected playable nodes which is useful if you are tracking and want to position the tracker marker</li>
         <li><i class="bi bi-calculator"></i> Sets all the selected playable nodes current frame</li>
+
+
+        <li><i class="bi bi-share"></i> Clipboard</li>
+        <ul>
+            <li><i class="bi bi-arrow-bar-left"></i>  Undo will undo the last action</li>
+            <li><i class="bi bi-arrow-bar-right"></i> Redo will redo the prior action</li>
+            <li><i class="bi bi-clipboard2-plus"></i> Copy: copies the selected nodes and connected edges to the clipboard</li>
+            <li><i class="bi bi-copy"></i> Paste: pastes a copy of the selected nodes and connected edges from the clipboard to the workflow. The copied nodes will all be renamed to have unique names in the workflow</li>
+            <li><i class="bi bi-clipboard2-minus"></i> Cut: deletes the selected nodes and connected edges and pastes them to the clipboard</li>
+            <li><i class="bi bi-copy"></i> Duplicate: duplicates the selected nodes and connected edges to the workflow. The duplicated nodes will all be renamed to have unique names in the workflow</li>
+            <li><i class="bi bi-trash"></i> Delete: deletes the selected nodes and connected edges</li>
+        </ul>
+
 
         <li><i class="bi bi-share"></i> Workflow Graph</li>
         <ul>
@@ -768,15 +779,6 @@
                 <li><i class="bi bi-arrow-right-circle"></i> Create Macro: allows you to create a new tool by using the <a href="#CreateMacro">Create Macro UI</a></li>
                 <li><i class="glyphicon glyphicon-certificate"></i> Hyperparameters: allows you to set the range of values on the hyperparameters of your model using the <a href="#Hyperparameters">Hyperparameters UI</a></li>
                 <li><i class="glyphicon glyphicon-search"></i> Grid Search: allows you to perform a grid search to optimize your model using <a href="#GridSearch">Grid Search UI</a></li> </li>
-            </ul>
-
-            <p id="ClipboardNodeMenuFuncs">Clipboard</p>
-            <ul>
-                <li><i class="glyphicon glyphicon-copy"></i> Copy: copies the selected nodes and connected edges to the clipboard</li>
-                <li><i class="glyphicon glyphicon-paste"></i> Paste: pastes a copy of the selected nodes and connected edges from the clipboard to the workflow. The copied nodes will all be renamed to have unique names in the workflow</li>
-                <li><i class="glyphicon glyphicon-scissors"></i> Cut: deletes the selected nodes and connected edges and pastes them to the clipboard</li>
-                <li><i class="glyphicon glyphicon-duplicate"></i> Duplicate: duplicates the selected nodes and connected edges to the workflow. The duplicated nodes will all be renamed to have unique names in the workflow</li>
-                <li><i class="glyphicon glyphicon-trash"></i> Delete: deletes the selected nodes and connected edges</li>
             </ul>
 
             <p id="ExperimentalNodeMenuFuncs">Experimental</p>
