@@ -89,7 +89,6 @@
                             <li><a href="#InspectAdjustNodeMenuFuncs">Inspect & Adjust</a></li>
                             <li><a href="#AttributeNodeMenuFuncs">Node Attributes</a></li>
                             <li><a href="#PerformanceNodeMenuFuncs">Performance</a></li>
-                            <li><a href="#CustomizeGroupingNodeMenuFuncs">Customize &#38; Grouping</a></li>
                             <li><a href="#IONodeMenuFuncs">Input & Output</a></li>
                             <li><a href="#MLNodeNodeMenuFuncs">ML</a></li>
                             <li><a href="#ClipboardNodeMenuFuncs">Clipboard</a></li>
@@ -279,7 +278,7 @@
         <li><i class="bi bi-justify"></i> Hide and Show the Tools Catalog</li>
 
 
-        <li><i class="bi bi-file-earmark-fill"></i> File</li>
+        <li><i class="bi bi-file-earmark"></i> File</li>
         <ul>
             <li><i class="bi bi-cloud-upload"></i>  Import a workflow will open the import dialog and allow you to select an existing workflow from the demos folder using the <a href="#ImportExport">Import UI</a></li>
             <li><i class="bi bi-star"></i> Add authoring notes to the workflow to include your name and description of the workflow</li>
@@ -307,7 +306,35 @@
             <li><i class="bi bi-search"></i> Find a node in the flowgraph, adjusts the viewport and selects the node</li>
             <li><i class="bi bi-diagram-3 rotate-90"></i> Auto arrange the nodes</li>
             <li><i class="bi bi-radar"></i> Flowgraph radar mode, cycles between: (default) show when invisible elements on flowgraph, always show radar, never show radar</li>
-            <li><i class="bi bi-menu-app"></i> Show <a href="#NodeMenu">Flowgraph Context Menu</a> </li>
+            <li><i class="bi bi-arrow-left-circle-fill"></i> Select/deselect before: allows you to change selection of the nodes before the current node in your flowgraph</li>
+            <li><i class="bi bi-arrow-right-circle-fill"></i> Select/deselect after: allows you to change selection of the nodes after the current node in your flowgraph</li>
+
+        </ul>
+
+
+        <li><i class="bi bi-pencil-square"></i> Customize</li>
+        <ul>
+            <li>
+                <i class="glyphicon glyphicon-italic"></i> Rename: allows you to modify the name of the node. The name is initially set to be based on the Tool's name but
+                will automatically be made a unique name by prefixing with numbers.
+            </li>
+            <li>
+                <i class="bi bi-magnet-fill"></i> Group: for the selected nodes, allows you to group them together and become child nodes of the group. See <a href="#Grouping">Group Nodes</a>
+            </li>
+            <li>
+                <i class="bi bi-magnet"></i> Ungroup: for the selected group node, allows you to ungroup to revert the child nodes. See <a href="#Grouping">Group Nodes</a>
+            </li>
+            <li>
+                <i class="bi bi-clipboard-heart"></i> Customize: for the selected node, allows you to hide or show the inputs and outputs
+                in either the flowgraph or editor, as well as change the names of the inputs and outputs. See <a href="#Customize">Customize Nodes</a>
+            </li>
+            <li>
+                <i class="bi bi-file-earmark-spreadsheet"></i> Export Group: for the selected group node, allows you to export it to a new tool. See <a href="#Grouping">Group Nodes</a>
+            </li>
+            <li><i class="glyphicon glyphicon-plus"></i> Insert Output: for the selected node, if the node allows dynamic outputs, allows you to add a new output</li>
+            <li><i class="glyphicon glyphicon-minus"></i> Remove Output: for the selected node, if the node allows dynamic outputs, allows you to remove the last output</li>
+            <li><i class="glyphicon glyphicon-plus"></i> Insert Input: for the selected node, if the node allows dynamic inputs, allows you to add a new input</li>
+            <li><i class="glyphicon glyphicon-minus"></i> Remove Output: for the selected node, if the node allows dynamic inputs, allows you to add a remove the last input</li>
         </ul>
 
         <li><i class="bi bi-gear-fill"></i> Settings</li>
@@ -742,10 +769,6 @@
                     <i class="glyphicon glyphicon-play"></i> Play/Stop: for nodes that are playable, for example a Movie Reader, you can start and stop the streaming to the selected node.
                     The application menu has the same function but that will apply to all nodes that are playable in the workflow.
                 </li>
-                <li>
-                    <i class="glyphicon glyphicon-italic"></i> Rename: allows you to modify the name of the node. The name is initially set to be based on the Tool's name but
-                    will automatically be made a unique name by prefixing with numbers.
-                </li>
                 <li><i class="glyphicon glyphicon-ok-circle"></i> Enable: enable a node so that it is used in processing, by default all nodes are enabled</li>
                 <li><i class="glyphicon glyphicon-remove-circle"></i> Disable: disable a node so that it is not used in processing, in which case typically the first input is passed as the output for this node to bypass the node processing</li>
             </ul>
@@ -760,30 +783,6 @@
                 <li><i class="glyphicon glyphicon-resize-full"></i> Split: For the selected nodes you can split them to run on different CPU threads</li>
             </ul>
 
-            <p id="CustomizeGroupingNodeMenuFuncs">Customize &#38; Grouping</p>
-            <ul>
-                <li>
-                    <i class="bi bi-clipboard-heart"></i> Customize: for the selected node, allows you to hide or show the inputs and outputs
-                    in either the flowgraph or editor, as well as change the names of the inputs and outputs. See <a href="#Customize">Customize Nodes</a>
-                </li>
-                <li>
-                    <i class="bi bi-magnet-fill"></i> Group: for the selected nodes, allows you to group them together and become child nodes of the group. See <a href="#Grouping">Group Nodes</a>
-                </li>
-                <li>
-                    <i class="bi bi-magnet"></i> Ungroup: for the selected group node, allows you to ungroup to revert the child nodes. See <a href="#Grouping">Group Nodes</a>
-                </li>
-                <li>
-                    <i class="bi bi-file-earmark-spreadsheet"></i> Export Group: for the selected group node, allows you to export it to a new tool. See <a href="#Grouping">Group Nodes</a>
-                </li>
-            </ul>
-
-            <p id="IONodeMenuFuncs">Input/output ports</p>
-            <ul>
-                <li><i class="glyphicon glyphicon-plus"></i> Insert Output: for the selected node, if the node allows dynamic outputs, allows you to add a new output</li>
-                <li><i class="glyphicon glyphicon-minus"></i> Remove Output: for the selected node, if the node allows dynamic outputs, allows you to remove the last output</li>
-                <li><i class="glyphicon glyphicon-plus"></i> Insert Input: for the selected node, if the node allows dynamic inputs, allows you to add a new input</li>
-                <li><i class="glyphicon glyphicon-minus"></i> Remove Output: for the selected node, if the node allows dynamic inputs, allows you to add a remove the last input</li>
-            </ul>
 
             <p id="MLNodeNodeMenuFuncs">ML functions are available when ML nodes are selected</p>
             <ul>
@@ -806,8 +805,6 @@
             <p id="SelectionMenu">Selection</p>
             <p>When you bring up the context menu without a node selected, the flowgraphs viewport functions are shown:</p>
             <ul>
-                <li><i class="bi bi-arrow-left-circle-fill"></i> Select/deselect before: allows you to change selection of the nodes before the current node in your flowgraph</li>
-                <li><i class="bi bi-arrow-right-circle-fill"></i> Select/deselect after: allows you to change selection of the nodes after the current node in your flowgraph</li>
                 <li><i class="bi bi-border-all"></i> Select All: allows you to select all the nodes in your flowgraph</li>
             </ul>
 
