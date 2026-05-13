@@ -153,18 +153,18 @@
                     </li>
 
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">ML <span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">AI & ML <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#DataFrame">Data frames</a></li>
                             <li><a href="#DataScienceSection">Data Science</a></li>
                             <li><a href="#PlotsSection">Plotting</a></li>
                             <li><a href="#NumpyArrays">Numpy Arrays</a></li>
                             <li><a href="#MLSection">Machine Learning</a></li>
-                            <li><a href="#AiLabeler">Labeling and Fine Tuning</a></li>
                             <li><a href="#GridSearch">Grid Search</a></li>
                             <li><a href="#Hyperparameters">Hyperparameters</a></li>
                             <li><a href="#Tensors">Tensors</a></li>
                             <li><a href="#CreateMacro">Create Macro</a></li>
+                            <li><a href="#AiLabeler">Labeling and Fine Tuning</a></li>
                             <li><a href="#PyTorchTutorial">PyTorch Deep Learning</a></li>
                             <li><a href="#PyrenderTutorial">Pyrender</a></li>
                             <li><a href="#YOLOX">YOLOX</a></li>
@@ -799,7 +799,6 @@
                 <li><i class="bi bi-arrow-left-circle-fill"></i> Select/deselect before: allows you to change selection of the nodes before the current node in your flowgraph</li>
                 <li><i class="bi bi-arrow-right-circle-fill"></i> Select/deselect after: allows you to change selection of the nodes after the current node in your flowgraph</li>
                 <li><i class="bi bi-border-all"></i> Select All: allows you to select all the nodes in your flowgraph</li>
-                <li id="radar-feature"><i class="bi bi-radar"></i> Flowgraph radar mode, cycles between: (default) show when invisible elements on flowgraph, always show radar, never show radar </li>
             </ul>
 
 
@@ -1524,9 +1523,30 @@
                         <i class="bi bi-arrow-left-square"></i> <strong>Previous / Next</strong> <i class="bi bi-arrow-right-square"></i> <strong>Sequential Navigation:</strong> Cycle through the image list. The system maintains your editor state and active class for high-throughput labeling.
                     </li>
                     <li>
-                        <i class="bi bi-check-circle"></i> <strong>Save Workflow:</strong> Saves current annotations and automatically prompts for the next image in the sequence.
+                        <i class="bi bi-floppy"></i> <strong>Save Workflow:</strong> Saves current annotations and automatically prompts for the next image in the sequence.
                     </li>
                 </ul>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Hotkey</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Insert Point</td><td><kbd>p</kbd></td></tr>
+                        <tr><td>Insert Rectangle</td><td><kbd>r</kbd></td></tr>
+                        <tr><td>Insert Ellipse</td><td><kbd>e</kbd></td></tr>
+                        <tr><td>Insert Shape</td><td><kbd>m</kbd></td></tr>
+                        <tr><td>Insert Freehand</td><td><kbd>f</kbd></td></tr>
+                        <tr><td>Insert Lasso</td><td><kbd>l</kbd></td></tr>
+                        <tr><td>Delete Selected</td><td><kbd>Del</kbd></td></tr>
+                        <tr><td>Save</td><td><kbd>s</kbd></td></tr>
+                        <tr><td>Previous</td><td><kbd>a</kbd></td></tr>
+                        <tr><td>Next</td><td><kbd>d</kbd></td></tr>
+                    </tbody>
+                </table>
             </div>
 
             <div class="tool-section">
@@ -7240,10 +7260,10 @@ Error Handling: If a requested tool or file cannot be found, report the error us
                     </tr>
 
                     <tr>
-                        <td> Edge Inference </td>
+                        <td> Holistic Edge Inference </td>
                         <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu22.04.5 LTS"></i>  </td>
                         <td>
-                            <a target="_blank" href="https://github.com/ashukid/hed-edge-detector/blob/master/README.md">Code for edge detection using pretrained hed model(caffe) using OpenCV</a>
+                            <a target="_blank" href="https://github.com/ashukid/hed-edge-detector/blob/master/README.md">Code for holistic edge detection using pretrained hed model(caffe)</a>
                         </td>
                         <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1nogdnydjIbQmYWKwTUgssrGdxLs86RiX/view?usp=drive_link">edge</a> </td>
                     </tr>
