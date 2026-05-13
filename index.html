@@ -94,7 +94,7 @@
                             <li><a href="#MLNodeNodeMenuFuncs">ML</a></li>
                             <li><a href="#ClipboardNodeMenuFuncs">Clipboard</a></li>
                             <li><a href="#ExperimentalNodeMenuFuncs">Experimental</a></li>
-                            <li><a href="#FlowgraphMenu">Flowgraph Context Menu</a></li>
+                            <li><a href="#SelectionMenu">Selection</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -277,15 +277,16 @@
 
     <ul>
         <li><i class="bi bi-justify"></i> Hide and Show the Tools Catalog</li>
-        <li><i class="bi bi-infinity"></i> INFINIWORKFLOW HUB, Platform Information, Packages & What's New & More</li>
-        <li><i class="bi bi-cloud-upload"></i>  Import a workflow will open the import dialog and allow you to select an existing workflow from the demos folder using the <a href="#ImportExport">Import UI</a></li>
-        <li><i class="bi bi-star"></i> Add authoring notes to the workflow to include your name and description of the workflow</li>
-        <li><i class="bi bi-lightbulb"></i> <a href="#GenerativeAI">Generative AI</a> that creates new workflows based on user prompts</li>
-        <li><i class="bi bi-bookmark"></i> AI Labeling and Fine Tuning</li>
-        <li><i class="bi bi-cloud-download"></i> Saves the workflow using the <a href="#ImportExport">Export UI</a></li>
-        <li><i class="bi bi-pause"></i> Pauses all the selected playable nodes which is useful if you are tracking and want to position the tracker marker</li>
-        <li><i class="bi bi-calculator"></i> Sets all the selected playable nodes current frame</li>
 
+
+        <li><i class="bi bi-file-earmark-fill"></i> File</li>
+        <ul>
+            <li><i class="bi bi-cloud-upload"></i>  Import a workflow will open the import dialog and allow you to select an existing workflow from the demos folder using the <a href="#ImportExport">Import UI</a></li>
+            <li><i class="bi bi-star"></i> Add authoring notes to the workflow to include your name and description of the workflow</li>
+            <li><i class="bi bi-cloud-download"></i> Saves the workflow using the <a href="#ImportExport">Export UI</a></li>
+            <li><i class="bi bi-trash"></i> Clears the workflow to start a new one from scratch</li>
+            <li><i class="bi bi-power"></i> Exit the application</li>
+        </ul>
 
         <li><i class="bi bi-share"></i> Clipboard</li>
         <ul>
@@ -298,7 +299,6 @@
             <li><i class="bi bi-trash"></i> Delete: deletes the selected nodes and connected edges</li>
         </ul>
 
-
         <li><i class="bi bi-share"></i> Workflow Graph</li>
         <ul>
             <li><i class="bi bi-zoom-out"></i> Zoom out the flowgraph so you can see more of the nodes in the workflow</li>
@@ -307,7 +307,7 @@
             <li><i class="bi bi-search"></i> Find a node in the flowgraph, adjusts the viewport and selects the node</li>
             <li><i class="bi bi-diagram-3 rotate-90"></i> Auto arrange the nodes</li>
             <li><i class="bi bi-radar"></i> Flowgraph radar mode, cycles between: (default) show when invisible elements on flowgraph, always show radar, never show radar</li>
-            <li><i class="bi bi-menu-app"></i> Show <a href="#FlowgraphMenu">Flowgraph Context Menu</a> </li>
+            <li><i class="bi bi-menu-app"></i> Show <a href="#NodeMenu">Flowgraph Context Menu</a> </li>
         </ul>
 
         <li><i class="bi bi-gear-fill"></i> Settings</li>
@@ -317,16 +317,27 @@
             <li><i class="bi bi-nvidia"></i> Sets the current CUDA device when you have multiple GPUs. Any new nodes powered by CUDA will be executed on this current GPU device.</li>
             <li><i class="bi bi-circle-half"></i> Light or Dark Theme</li>
             <li><i class="bi bi-chat-right-quote"></i> Localize the UI to different languages</li>
+            <li><i class="bi bi-google-play"></i>Demo mode for showing workflow previews</li>
+        </ul>
+
+        <li><i class="bi bi-gear-fill"></i> Windows</li>
+        <ul>
+            <li><i class="bi bi-info-circle"></i> Displays the rendering status console which also indicates progress, warnings and errors</li>
+            <li><i class="bi bi-grid-3x3-gap-fill"></i> Shows the Grid Search dialog that is used to optimize your ML models using the <a href="#GridSearch">GridSearch UI</a></li>
+            <li><i class="bi bi-robot"></i> Plays narratives that explain how to use the app</li>
+            <li><i class="bi bi-book"></i> Opens a guide for mouse and touch gestures</li>
         </ul>
 
 
-        <li><i class="bi bi-info-circle"></i> Displays the rendering status console which also indicates progress, warnings and errors</li>
-        <li><i class="bi bi-grid-3x3-gap-fill"></i> Shows the Grid Search dialog that is used to optimize your ML models using the <a href="#GridSearch">GridSearch UI</a></li>
+        <li><i class="bi bi-infinity"></i> INFINIWORKFLOW HUB, Platform Information, Packages & What's New & More</li>
+        <li><i class="bi bi-lightbulb"></i> <a href="#GenerativeAI">Generative AI</a> that creates new workflows based on user prompts</li>
+        <li><i class="bi bi-bookmark"></i> AI Labeling and Fine Tuning</li>
+        <li><i class="bi bi-pause"></i> Pauses all the selected playable nodes which is useful if you are tracking and want to position the tracker marker</li>
+        <li><i class="bi bi-calculator"></i> Sets all the selected playable nodes current frame</li>
+
+
         <li><i class="bi bi-shop-window"></i> Show the published view of the workflow. This is an experimental <a href="#Publish">feature</a> that allows you to simplify the workflow into a list of published parameters and hide the workflow. When in publish mode, click on this icon to switch back to the flowgraph mode again.</li>
         <li><i class="bi bi-book"></i> Opens this manual</li>
-        <li><i class="bi bi-robot"></i> Plays narratives that explain how to use the app</li>
-        <li><i class="bi bi-trash"></i> Clears the workflow to start a new one from scratch</li>
-        <li><i class="bi bi-power"></i> Exit the application</li>
     </ul>
 
             <h3 id="Catalog">Tools Catalog</h3>
@@ -504,7 +515,7 @@
                 <li><a href="#PortGestures">Port Gestures</a></li>
                 <li><a href="#FlowgraphGestures">Flowgraph Gestures</a></li>
                 <li><a href="#NodeMenu">Node Context Menu</a></li>
-                <li><a href="#FlowgraphMenu">Flowgraph Context Menu</a></li>
+                <li><a href="#SelectionMenu">Selection Menu</a></li>
             </ul>
 
             <h3 id="EdgeGestures">Edge Gestures</h3>
@@ -792,12 +803,9 @@
             </ul>
 
 
-            <h3 id="FlowgraphMenu">Flowgraph Context Menu</h3>
+            <p id="SelectionMenu">Selection</p>
             <p>When you bring up the context menu without a node selected, the flowgraphs viewport functions are shown:</p>
             <ul>
-                <li><i class="bi bi-zoom-out"></i> Zoom Out: the flowgraph so you can see more of the nodes in the workflow </li>
-                <li><i class="bi bi-aspect-ratio"></i> Zoom Fit: defaults the flowgraph to show the default zoom and pan</li>
-                <li><i class="bi bi-zoom-in"></i> Zoom In: in the flowgraph so you can see focus on the nodes in center of the workflow</li>
                 <li><i class="bi bi-arrow-left-circle-fill"></i> Select/deselect before: allows you to change selection of the nodes before the current node in your flowgraph</li>
                 <li><i class="bi bi-arrow-right-circle-fill"></i> Select/deselect after: allows you to change selection of the nodes after the current node in your flowgraph</li>
                 <li><i class="bi bi-border-all"></i> Select All: allows you to select all the nodes in your flowgraph</li>
@@ -985,7 +993,6 @@
                 </li>
 
                 <li><i class="bi bi-sliders"></i> <strong>Image Adjustments:</strong> Opens sliders for Gamma, Brightness, and Contrast. Settings reset when closed.</li>
-                <li><i class="bi bi-book"></i> <strong>Gestures:</strong> Opens a guide for mouse and touch interactions.</li>
 
                 <li style="margin-top: 20px; border-top: 1px solid #444; padding-top: 10px; font-weight: bold; color: #aaa;">Path Editor Tools</li>
                 <li><i class="bi bi-circle"></i> <strong>Insert Point:</strong> Places a single coordinate marker.</li>
