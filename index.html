@@ -10,6 +10,83 @@
         body {
             padding-top: 70px;
         }
+
+        @media (min-width: 768px) {
+            .dropdown:hover > .dropdown-menu {
+                display: block;
+            }
+
+            /* Submenu hover positioning */
+            .dropdown-submenu:hover > .dropdown-menu {
+                display: block;
+                left: 100%;
+                top: 0;
+                margin-top: -5px;
+            }
+
+            /* Caret rotation for submenus */
+            .dropdown-submenu > a::after {
+                content: " \25B6"; /* Right-pointing triangle */
+                font-size: 8px;
+            }
+        }
+
+        /* Dark Theme for ALL dropdown menus */
+        .dropdown-menu {
+            background-color: #222 !important; /* Dark Background */
+            border: 1px solid #444 !important;
+        }
+
+            /* White text for all dropdown links */
+            .dropdown-menu > li > a {
+                color: #fff !important;
+            }
+
+                /* Hover/Focus effect */
+                .dropdown-menu > li > a:hover,
+                .dropdown-menu > li > a:focus {
+                    background-color: #0056b3 !important; /* Your brand blue */
+                    color: #ffffff !important;
+                }
+
+        /* Ensure sub-menu background is also dark */
+        .dropdown-submenu > .dropdown-menu {
+            background-color: #222 !important;
+        }
+
+        /* Increase vertical space between menu items */
+        .dropdown-menu > li > a {
+            padding: 12px 20px !important; /* Increased from default (usually 3px-8px) */
+            display: block;
+            line-height: 1.5; /* Makes text easier to read */
+        }
+
+        /* Add a slight bottom border to separate items (Optional, but looks nice) */
+        .dropdown-menu > li > a {
+            border-bottom: 1px solid #333;
+        }
+
+        /* Remove border from the last item to keep it clean */
+        .dropdown-menu > li:last-child > a {
+            border-bottom: none;
+        }
+
+        /* Target the dropdown menu containing the long list */
+        /* Adjust the selector if necessary to ensure it only hits the Tools menu */
+        .dropdown-menu:has(a[href="#AI"]) {
+            column-count: 2; /* Splits the list into two columns */
+            column-gap: 20px; /* Space between the columns */
+            column-fill: auto; /* Balances the list items between columns */
+            min-width: 350px; /* Ensures the menu is wide enough for two columns */
+            max-height: 80vh; /* Keeps the menu from growing taller than the screen */
+            overflow-y: auto; /* Adds a scrollbar only if the list is extremely long */
+        }
+
+            /* Ensure the list items behave correctly within columns */
+            .dropdown-menu:has(a[href="#AI"]) > li {
+                break-inside: avoid; /* Prevents items from being cut in half across columns */
+            }
+        
     </style>
 
 
@@ -52,6 +129,7 @@
                             <li class=""><a href="#UserAuthentication">User Authentication</a></li>
                             <li class=""><a href="#Args">Command line arguments</a></li>
                             <li class=""><a href="#KnownIssues">Known Issues</a></li>
+                            <li class=""><a href="#INFINICAM_Setup">INFINICAM Startup Guide</a></li>
                         </ul>
                     </li>
 
@@ -103,13 +181,36 @@
                         </a>
                     </li>
 
+                    <li style="list-style: none; margin: 10px 0;">
+                        <a href="#GenerativeAI" style="
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #d4d4d4;
+        text-decoration: none;
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 0.95rem;
+        font-weight: 500;
+        padding: 8px 16px;
+        line-height: 1;
+        border-left: 3px solid #0056b3;
+        background: rgba(0, 86, 179, 0.05);
+        border-radius: 0 6px 6px 0;
+        transition: all 0.2s ease-in-out;
+    " onmouseover="this.style.background='rgba(0, 86, 179, 0.15)'; this.style.color='#0056b3'; this.style.transform='translateX(4px)';"
+                           onmouseout="this.style.background='rgba(0, 86, 179, 0.05)'; this.style.color='#d4d4d4'; this.style.transform='translateX(0)';">
+                            <span style="margin-right: 6px; display: inline-flex; align-items: center; transform: translateY(-1px);">♾️</span>
+                            <span>Generative AI</span>
+                        </a>
+                    </li>
+
 
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">UI <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#hub">INFINIWORKFLOW HUB</a></li>
                             <li><a href="#Menu">Application Menu</a></li>
-                            <li><a href="#Catalog">Tools Catalog</a></li>
+                            <li><a href="#Catalog">Toolbox</a></li>
                             <li><a href="#Layouts">Layouts</a></li>
                             <li><a href="#Flowgraph">Flowgraph</a></li>
                             <li><a href="#NodeMenu">Node Context Menu</a></li>
@@ -189,6 +290,9 @@
                             <li><a href="#Infinicam">Infinicam</a></li>
                             <li><a href="#CustomizingTools">Customizing your own Tools</a></li>
                             <li class=""><a href="#SystemPerformance">System Performance</a></li>
+                            <li><a href="#CreatingTriggers">Creating Triggers</a></li>
+                            <li><a href="#LoopTriggers">Loop Triggers</a></li>
+
 
                         </ul>
                     </li>
@@ -196,31 +300,44 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">AI & ML <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#DataFrame">Data frames</a></li>
-                            <li><a href="#DataScienceSection">Data Science</a></li>
-                            <li><a href="#PlotsSection">Plotting</a></li>
-                            <li><a href="#NumpyArrays">Numpy Arrays</a></li>
-                            <li><a href="#MLSection">Machine Learning</a></li>
-                            <li><a href="#GridSearch">Grid Search</a></li>
-                            <li><a href="#Hyperparameters">Hyperparameters</a></li>
-                            <li><a href="#Tensors">Tensors</a></li>
-                            <li><a href="#CreateMacro">Create Macro</a></li>
-                            <li><a href="#AiLabeler">Labeling and Fine Tuning</a></li>
-                            <li><a href="#PyTorchTutorial">PyTorch Deep Learning</a></li>
-                            <li><a href="#PyrenderTutorial">Pyrender</a></li>
-                            <li><a href="#YOLOX">YOLOX</a></li>
+
+
+
+                            <li class="dropdown-submenu">
+                                <a href="#">Labeling and Fine Tuning</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#AiLabeler">Labeling</a></li>
+                                    <li><a href="#AiLabeler">Fine Tuning</a></li>
+                                    <li><a href="#PyrenderTutorial">3D Rendering for Synthetic Rendering</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="dropdown-submenu">
+                                <a href="#">Data Science</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#DataFrame">Data frames</a></li>
+                                    <li><a href="#DataScienceSection">Data Science with Pandas</a></li>
+                                    <li><a href="#PlotsSection">Plotting</a></li>
+                                    <li><a href="#NumpyArrays">Numpy Arrays</a></li>
+                                    <li><a href="#MLSection">Machine Learning with scikit-learn</a></li>
+                                    <li><a href="#Hyperparameters">Hyperparameters</a></li>
+                                    <li><a href="#GridSearch">Grid Search</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="dropdown-submenu">
+                                <a href="#">Deep Learning</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#Tensors">Tensors</a></li>
+                                    <li><a href="#PyTorchTutorial">PyTorch Deep Learning</a></li>
+                                    <li><a href="#CreateMacro">Create Macro</a></li>
+                                    <li><a href="#YOLOX">YOLOX</a></li>
+                                </ul>
+                            </li>
+
                         </ul>
                     </li>
 
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Widgets, Displays and Triggers <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#CreatingTriggers">Creating Triggers</a></li>
-                            <li><a href="#LoopTriggers">Loop Triggers</a></li>
-                            <li><a href="#WidgetsSection">Widgets Tools</a></li>
-                            <li><a href="#DisplaysSection">Displays Tools</a></li>
-                        </ul>
-                    </li>
 
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Experimental <span class="caret"></span></a>
@@ -228,7 +345,6 @@
                             <li><a href="#Publish">Publish</a></li>
                             <li><a href="#DistributionProcessing">Distributed Processing</a></li>
                             <li><a href="#ROS">Robot Operating System (ROS)</a></li>
-                            <li><a href="#GenerativeAI">Generative AI</a></li>
                             <li><a href="#mcp">MCP Server</a></li>
                         </ul>
                     </li>
@@ -282,7 +398,7 @@
     <ul>
         <li><a href="#hub">INFINIWORKFLOW HUB</a></li>
         <li><a href="#Menu">Application Menu</a></li>
-        <li><a href="#Catalog">Tools Catalog</a></li>
+        <li><a href="#Catalog">Toolbox</a></li>
         <li><a href="#Flowgraph">Flowgraph</a></li>
         <li><a href="#Editor">Parameter Editor</a></li>
         <li><a href="#Viewer">Viewer</a></li>
@@ -318,7 +434,7 @@
     <p>The application menu allows the following functionality</p>
 
     <ul>
-        <li><i class="bi bi-justify"></i> Hide and Show the Tools Catalog</li>
+        <li><i class="bi bi-justify"></i> Hide and Show the Toolbox</li>
 
 
         <li><i class="bi bi-file-earmark"></i> File</li>
@@ -404,6 +520,7 @@
         <li><i class="bi bi-window-stack"></i> Help</li>
         <ul>
             <li><i class="bi bi-book"></i> Opens this manual</li>
+            <li><i class="bi bi-camera-reels-fill"></i> <a href="#INFINICAM_Setup">INFINICAM Startup Guide</a> </li>
             <li><i class="bi bi-robot"></i>  Plays <a href="#tutorials">Live Tutorials</a> that explain how to use the app</li>
             <li><i class="bi bi-book"></i> Opens a guide for mouse and touch gestures</li>
         </ul>
@@ -413,8 +530,8 @@
 
     </ul>
 
-    <h3 id="Catalog">Tools Catalog</h3>
-    <p>The tool catalog allows you to add new tools as nodes into your flowgraph</p>
+    <h3 id="Catalog">Toolbox</h3>
+    <p>The toolbox allows you to add new tools as nodes into your flowgraph</p>
     <div style="overflow: hidden; width:100%; height:250px; ">
         <img src="https://photrondev.github.io/assets/ui.jpg" style="margin-top: -982px;  " />
     </div>
@@ -495,8 +612,8 @@
     <p>
         Infiniworkflow has several hundred nodes avaialble, which allows for many possibilities but also can be daunting for new users or can stand in the way of users who
         are only looking to build a specific application (if you are building a Data Science workflow, you probably don't need to see the many Color Correction nodes that are
-        available). As such, Layouts have been added as a feature for controlling which categories and nodes show up in your Tool Catalog. They are straightforward to use,
-        but by no means necessary to learn about if you do not wish to change how your Tool Catalog appears, so you may skip this section and not lose any critical information.
+        available). As such, Layouts have been added as a feature for controlling which categories and nodes show up in your Toolbox. They are straightforward to use,
+        but by no means necessary to learn about if you do not wish to change how your Toolbox appears, so you may skip this section and not lose any critical information.
     </p>
     <p>
         Layout can be defined as a set of categories, and the respective nodes inside them, that will appear within the Tool Bar if the Layout is selected. You can switch
@@ -517,7 +634,7 @@
         <img src="https://photrondev.github.io/assets/ui_add_custom_layout.gif" />
     </div>
     <p>
-        To begin changing how the categories / nodes appear within your Layout's Tool Catalog, click on the Layouts button and then click on the Layout you wish to change.
+        To begin changing how the categories / nodes appear within your Layout's Toolbox, click on the Layouts button and then click on the Layout you wish to change.
         Now that you're in, you may begin moving both categories and nodes as you like. The following operations are possible:
     </p>
     <p>
@@ -539,7 +656,7 @@
         <img src="https://photrondev.github.io/assets/ui_layout_move_nodes.gif" style="margin-top: -100px; " />
     </div>
     <p>
-        IV. Moving an entire Category into another Category (the second Category will be the only one to appear in the Categories list on the top of the Tools Catalog,
+        IV. Moving an entire Category into another Category (the second Category will be the only one to appear in the Categories list on the top of the Toolbox,
         but all nodes within both categories can now be found in this Category):
     </p>
     <div style="overflow: hidden; ">
@@ -558,7 +675,7 @@
     </div>
     <p>
         The flowgraph is used to construct your workflow that comprises of Nodes and Edges. Nodes represents functions that have input and generate outputs.
-        These nodes are created by dragging tools into your workflow from the Tools Catalog. A node's input and output have 'ports' which are where edges can
+        These nodes are created by dragging tools into your workflow from the Toolbox. A node's input and output have 'ports' which are where edges can
         be connected. Edges are connections between the output port of an upstream node to the input port of a upstream node. Any inputs ports that are unconnected
         can also be set to specific values using the Parameter Editor. The color of the node indicates the following:
     </p>
@@ -1413,7 +1530,7 @@
     <p>Important note: by default, when "Infinicam Save Compressed" is Triggered, the number of frames that will be saved will be equal to the Infinicam's preroll plus postroll. However, if you wish to save out Infinicam footage continually, you can click the checkbox in the "Infinicam Save Compressed" editing menu for "Constant Saving". When true, you may set the maximum file size you wish for the saved Infinicam footage. When the node is Triggered now, footage will continue to save into the file you created until the maximum file size limit has been reached.</p>
 
 
-    <h3 id="DataScienceSection">Data Science</h3>
+    <h3 id="DataScienceSection">Data Science with Pandas</h3>
     <p>
         The Data Science tools are all under the <i class="bi bi-table"> Data Frame</i> category.
         The implementation is based on <a target="_blank" href="https://pandas.pydata.org/">Pandas</a>, an open source data analysis and manipulation library.
@@ -1473,7 +1590,7 @@
 
 
 
-    <h3 id="MLSection">ML</h3>
+    <h3 id="MLSection">Machine Learning with scikit-learn</h3>
     <p>
         The Machine Learning filters are based using <a target="_blank" href="https://scikit-learn.org/stable/">scikit-learn</a> Python module
         are all under the <i class="bi bi-lightbulb-fill"> ML</i> category.
@@ -1808,7 +1925,7 @@
     <tr id='tiny:cv.yolo_darknet_classification'>
         <td>Darknet YOLO4 Tiny Classification</td>
         <td><i class='bi bi-filetype-ai'></i></td>
-        <td><ul><li>source : image2D</li><li>filter : string</li><li>scoreThreshold : double</li><li>nmsThreshold : double</li><li>confidenceThreshold : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li><li>cutout : image2D</li>        </ul></td>        <td>Detects and labels objects based on YOLO4 Tiny Darknet neural network model<p style='color:red;'>The following package is required: yolodarknet7</p></td>
+        <td><ul><li>source : image2D</li><li>filter : string</li><li>scoreThreshold : double</li><li>nmsThreshold : double</li><li>confidenceThreshold : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li><li>cutout : image2D</li>        </ul></td>        <td>Detects and labels objects based on YOLO4 Tiny Darknet neural network model<p style='color:red;'>The following package is required: yolodarknet4tiny</p></td>
     </tr>
     <tr id='cv.yolo_classification'>
         <td>Ultralytics YOLO5 Classification</td>
@@ -1818,7 +1935,7 @@
     <tr id='tiny:cv.yolo7_darknet_classification'>
         <td>Darknet YOLO7 Tiny Classification</td>
         <td><i class='bi bi-filetype-ai'></i></td>
-        <td><ul><li>source : image2D</li><li>filter : string</li><li>scoreThreshold : double</li><li>nmsThreshold : double</li><li>confidenceThreshold : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li><li>cutout : image2D</li>        </ul></td>        <td>Detects and labels objects based on YOLO7 Tiny Darknet neural network model<p style='color:red;'>The following package is required: yolodarknet7</p></td>
+        <td><ul><li>source : image2D</li><li>filter : string</li><li>scoreThreshold : double</li><li>nmsThreshold : double</li><li>confidenceThreshold : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li><li>cutout : image2D</li>        </ul></td>        <td>Detects and labels objects based on YOLO7 Tiny Darknet neural network model<p style='color:red;'>The following package is required: yolodarknet7tiny</p></td>
     </tr>
     <tr id='yolov7:cv.yolo_generic_classification'>
         <td>Ultralytics YOLO7 Classification</td>
@@ -1828,7 +1945,7 @@
     <tr id='cv.yolo7_darknet_classification'>
         <td>Darknet YOLO7 Classification</td>
         <td><i class='bi bi-filetype-ai'></i></td>
-        <td><ul><li>source : image2D</li><li>filter : string</li><li>scoreThreshold : double</li><li>nmsThreshold : double</li><li>confidenceThreshold : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li><li>cutout : image2D</li>        </ul></td>        <td>Detects and labels objects based on YOLO7 Darknet neural network model<p style='color:red;'>The following package is required: yolodarknet7</p></td>
+        <td><ul><li>source : image2D</li><li>filter : string</li><li>scoreThreshold : double</li><li>nmsThreshold : double</li><li>confidenceThreshold : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li><li>cutout : image2D</li>        </ul></td>        <td>Detects and labels objects based on YOLO7 Darknet neural network model</td>
     </tr>
     <tr id='yolov8:cv.yolo_generic_classification'>
         <td>Ultralytics YOLO8 Classification</td>
@@ -1996,7 +2113,7 @@
     <tr id='cv.clahe'>
         <td>CLAHE Histogram Equalization</td>
         <td><i class='bi bi-palette'></i></td>
-        <td><ul><li>source : image2D</li><li>clipLimit : double</li><li>tileGridSize : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>CLAHE, or Contrast Limited Adaptive Histogram Equalization, is an image processing technique used to enhance the local contrast of images, best used when the overall image contrast is low or uneven.</td>
+        <td><ul><li>source : image2D</li><li>clipLimit : double</li><li>tileGridSize : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Contrast Limited Adaptive Histogram Equalization, enhances the local contrast of images, best used when the overall image contrast is low or uneven.</td>
     </tr>
     <tr id='cv.color_contrast'>
         <td>Contrast</td>
@@ -6492,9 +6609,9 @@
     <img src="https://photrondev.github.io/assets/ui_create_inference_tool.gif" />
 
 
-    <h3 id="PyrenderTutorial">Pyrender</h3>
+    <h3 id="PyrenderTutorial">3D Rendering for Synthetic Rendering</h3>
 
-    <p>Pyrender is a Python library for physically-based rendering and visualization.</p>
+    <p>Pyrender is a Python library for physically-based rendering and visualization and useful for Synthetic Rendering.</p>
 
     <h4>Basic Object Types in Pyrender</h4>
 
@@ -6830,7 +6947,7 @@ Error Handling: If a requested tool or file cannot be found, report the error us
                     <li><strong>Disk Export:</strong> Files are written to the local SDK directory structure at <code>/sdk/gen_ai/[PluginName]</code>[cite: 3].</li>
                     <li><strong>Automated Build System:</strong> The system creates a dedicated <code>build</code> directory and runs <strong>CMake configuration</strong> tailored to the host operating system (e.g., Visual Studio 2022 for Windows or standard Makefiles for Unix-based systems)[cite: 3].</li>
                     <li><strong>Real-time Progress Tracking:</strong> A visual <strong>Progress Bar</strong> and live <strong>Status Log</strong> appear directly within the viewer window, replacing the standard code view to show the compiler's output in real-time[cite: 8].</li>
-                    <li><strong>Success Integration:</strong> Upon a successful build, the progress bar turns green, the compiled <code>.plugin</code> is automatically moved to the <code>Extensions</code> directory, and the <strong>Application Catalog</strong> is reinitialized for immediate use without a restart[cite: 3, 8].</li>
+                    <li><strong>Success Integration:</strong> Upon a successful build, the progress bar turns green, the compiled <code>.plugin</code> is automatically moved to the <code>Extensions</code> directory, and the <strong>Toolbox</strong> is reinitialized for immediate use without a restart.</li>
                     <li><strong>Error Reporting:</strong> If compilation fails, the progress bar turns red, and the full compiler error log is displayed in the viewer to assist with debugging[cite: 8].</li>
                 </ul>
             </li>
@@ -8181,8 +8298,8 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
             "icon": "bi-palette",
 </pre>
                 The category is in the "id" attribute in the app/catalog/toc.json. This will place the "Red Lift" tool in the exisiting Color tab of the
-                Catalog UI.
-                Alternatively, you can create a new category "id" and that will show up in the Catalog UI in a new tab.
+                Toolbox.
+                Alternatively, you can create a new category "id" and that will show up in the Toolbox in a new tab.
 
             </li>
             <li>
@@ -8313,7 +8430,7 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
             <td>category</td>
             <td><i class="bi bi-check"></i></td>
             <td></td>
-            <td>The category the plugin will be placed in the Tool Catalog</td>
+            <td>The category the plugin will be placed in the Toolbox</td>
             <td>
                 If you want to specify your own new category
 <pre>"category": {
@@ -10178,7 +10295,7 @@ test summary: 0 out of 2 pass
                 addNode
             </td>
             <td>
-                Adds a node from the catalog to the workflow
+                Adds a node from the Toolbox to the workflow
             </td>
             <td>
                 <table>
@@ -11921,7 +12038,7 @@ int main() {
     <h2 id="tutorials">Live Tutorials</h2>
 
     <p>
-        <strong>Getting Started:</strong> To begin, a specialized tutorial browser window will appear on your screen. This interface lists all available interactive paths. Simply browse the catalog, select the topic or workflow you want to learn, and launch it to begin the live session.
+        <strong>Getting Started:</strong> To begin, a specialized tutorial browser window will appear on your screen. This interface lists all available interactive paths. Simply browse and select the topic or workflow you want to learn, and launch it to begin the live session.
     <p>Once launched, this interactive system guides you through automated workflows right inside your application interface. Read this guide to understand the visual alerts, messaging system, and safety overrides during an active tutorial.</p>
 
     <h3>1. Visual Interface Cues</h3>
@@ -11949,6 +12066,87 @@ int main() {
         <li><strong>Localization Support:</strong> The base status notice fully respects local system language strings via the built-in <code>tr()</code> module.</li>
     </ul>
 
+    <h1 id="INFINICAM_Setup">INFINICAM Startup Guide</h1>
+
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-family: sans-serif; background-color: #121212; padding: 25px; border-radius: 12px; color: #e0e0e0;">
+
+        <div style="border: 1px solid #333; padding: 15px; border-radius: 10px; background-color: #1e1e1e; display: flex; flex-direction: column;">
+            <h3 style="margin-top: 0; color: #bb86fc;">01. Hardware Prep</h3>
+            <p>Ensure lens and tripod are mounted, then connect the INFINICAM via high-quality USB 3.1 Type-C cable.</p>
+        </div>
+
+        <div style="border: 1px solid #333; padding: 15px; border-radius: 10px; background-color: #1e1e1e; display: flex; flex-direction: column;">
+            <h3 style="margin-top: 0; color: #bb86fc;">02. SDK Driver</h3>
+            <p>Download the INFINICAM SDK, unzip, right-click <code>phrtcam.inf</code>, and select <b>Install</b>.</p>
+        </div>
+
+        <div style="border: 1px solid #333; padding: 15px; border-radius: 10px; background-color: #1e1e1e; display: flex; flex-direction: column;">
+            <h3 style="margin-top: 0; color: #bb86fc;">03. Device Verification</h3>
+            <p>Confirm "Photron USB3.0 Real Time Camera" is detected in Device Manager.</p>
+        </div>
+
+        <div style="border: 1px solid #333; padding: 15px; border-radius: 10px; background-color: #1e1e1e; display: flex; flex-direction: column;">
+            <h3 style="margin-top: 0; color: #03dac6;">04. Download Workflow</h3>
+            <p>Get <code>infiniworkflow_v1_0.zip</code> from the Photron dev portal and unzip to your <i>Documents</i> folder.</p>
+        </div>
+
+        <div style="border: 1px solid #333; padding: 15px; border-radius: 10px; background-color: #1e1e1e; display: flex; flex-direction: column;">
+            <h3 style="margin-top: 0; color: #03dac6;">05. Run Installer</h3>
+            <p>Execute <code>install.bat</code> (Windows) or <code>sudo sh install.sh</code> (Linux/OSX) with admin privileges.</p>
+        </div>
+
+        <div style="border: 1px solid #333; padding: 15px; border-radius: 10px; background-color: #1e1e1e; display: flex; flex-direction: column;">
+            <h3 style="margin-top: 0; color: #03dac6;">06. Wait for Build</h3>
+            <p>Allow the installer to finish configuring Python modules and Firewall access (5–30 min).</p>
+        </div>
+
+        <div style="border: 1px solid #333; padding: 15px; border-radius: 10px; background-color: #1e1e1e; display: flex; flex-direction: column;">
+            <h3 style="margin-top: 0; color: #03dac6;">07. Launch App</h3>
+            <p>Run <code>infiniworkflow.bat</code> or <code>sh INFINIWORKFLOW.sh</code> to start the local server.</p>
+        </div>
+
+        <div style="border: 1px solid #333; padding: 15px; border-radius: 10px; background-color: #1e1e1e; display: flex; flex-direction: column;">
+            <h3 style="margin-top: 0; color: #03dac6;">08. Open Browser</h3>
+            <p>Use Chrome (131.0+) to open the local interface URL.</p>
+        </div>
+
+        <div style="border: 1px solid #333; padding: 15px; border-radius: 10px; background-color: #1e1e1e; display: flex; flex-direction: column;">
+            <h3 style="margin-top: 0; color: #03dac6;">09. Load Hub</h3>
+            <p>Click the <b>HUB</b> icon to view system diagnostics and available tools.</p>
+        </div>
+
+        <div style="border: 1px solid #333; padding: 15px; border-radius: 10px; background-color: #1e1e1e; display: flex; flex-direction: column;">
+            <h3 style="margin-top: 0; color: #03dac6;">10. Start Tutorial</h3>
+            <p>Select a "Live Tutorial" from the Help menu to begin.</p>
+        </div>
+
+        <div style="border: 1px solid #333; padding: 15px; border-radius: 10px; background-color: #1e1e1e; display: flex; flex-direction: column;">
+            <h3 style="margin-top: 0; color: #cf6679;">11. Add INFINICAM Node</h3>
+            <img src="https://photrondev.github.io/assets/ui_node_drag_drop.gif" alt="Node Drag and Drop" style="width: 100%; height: 180px; object-fit: contain; border-radius: 5px; margin-bottom: 10px; background-color: #000;">
+            <p>Open the <b>Photron</b> category and drag the <b>INFINICAM</b> node onto your workspace.</p>
+        </div>
+
+        <div style="border: 1px solid #333; padding: 15px; border-radius: 10px; background-color: #1e1e1e; display: flex; flex-direction: column;">
+            <h3 style="margin-top: 0; color: #cf6679;">12. Apply Canny Edge</h3>
+            <img src="https://photrondev.github.io/assets/ui_node_drag_drop.gif" alt="Node Drag and Drop" style="width: 100%; height: 180px; object-fit: contain; border-radius: 5px; margin-bottom: 10px; background-color: #000;">
+            <p>Search for <b>Canny Edge</b> in the toolbox and connect its input to the INFINICAM node's output port.</p>
+        </div>
+
+        <div style="border: 1px solid #333; padding: 15px; border-radius: 10px; background-color: #1e1e1e; display: flex; flex-direction: column;">
+            <h3 style="margin-top: 0; color: #cf6679;">13. View & Edit</h3>
+            <img src="https://photrondev.github.io/assets/ui_viewer_outputs.gif" alt="View and Edit" style="width: 100%; height: 180px; object-fit: contain; border-radius: 5px; margin-bottom: 10px; background-color: #000;">
+            <p>Drop <b>View</b> and <b>Edit</b> nodes onto the canvas to visualize and refine your pipeline.</p>
+        </div>
+
+        <div style="border: 1px solid #333; padding: 15px; border-radius: 10px; background-color: #1e1e1e; display: flex; flex-direction: column;">
+            <h3 id="Infinicam" style="margin-top: 0; color: #f1c40f;">14. Advanced Details</h3>
+            <img src="https://photrondev.github.io/assets/infinicam_save_nodes.jpg" width="100%" />
+            <p>Check the full documentation for deep dives into <b>detection parameters</b> and <b>data saving</b> configurations.</p>
+            <a href="#Infinicam" style="color: #3498db; text-decoration: none; font-weight: bold;">View Infinicam Section &rarr;</a>
+        </div>
+
+    </div>
 
 </body>
 </html>
