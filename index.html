@@ -449,7 +449,7 @@
             <li><i class="bi bi-power"></i> Exit the application</li>
         </ul>
 
-        <li><i class="bi bi-share"></i> Clipboard</li>
+        <li><i class="bi bi-share"></i> Edit</li>
         <ul>
             <li><i class="bi bi-arrow-bar-left"></i>  Undo will undo the last action</li>
             <li><i class="bi bi-arrow-bar-right"></i> Redo will redo the prior action</li>
@@ -493,14 +493,16 @@
             <li>
                 <i class="bi bi-file-earmark-spreadsheet"></i> Export Group: for the selected group node, allows you to export it to a new tool. See <a href="#Grouping">Group Nodes</a>
             </li>
-            <li><i class="glyphicon glyphicon-plus"></i> Insert Output: for the selected node, if the node allows dynamic outputs, allows you to add a new output</li>
-            <li><i class="glyphicon glyphicon-minus"></i> Remove Output: for the selected node, if the node allows dynamic outputs, allows you to remove the last output</li>
-            <li><i class="glyphicon glyphicon-plus"></i> Insert Input: for the selected node, if the node allows dynamic inputs, allows you to add a new input</li>
-            <li><i class="glyphicon glyphicon-minus"></i> Remove Output: for the selected node, if the node allows dynamic inputs, allows you to add a remove the last input</li>
+            <li><i class="bi bi-plus-circle-dotted"></i> Insert Input: for the selected node, if the node allows dynamic inputs, allows you to add a new input</li>
+            <li><i class="bi bi-dash-circle-dotted"></i> Remove Input: for the selected node, if the node allows dynamic inputs, allows you to add a remove the last input</li>
+            <li><i class="bi bi-plus-circle"></i> Insert Output: for the selected node, if the node allows dynamic outputs, allows you to add a new output</li>
+            <li><i class="bi bi-dash-circle"></i> Remove Output: for the selected node, if the node allows dynamic outputs, allows you to remove the last output</li>
         </ul>
 
         <li><i class="bi bi-gear"></i> Settings</li>
         <ul>
+            <li><i class="bi bi-layout-wtf"></i> Switch between different <a href="#Layouts">Layouts</a> in the Toolbox</li>
+            <li><i class="bi bi-gear"></i> <a href="#Layouts">Toobox Settings</a> such as to Add and Remove Layouts </li>
             <li><i class="bi bi-rulers"></i> Sets the preferred numeric range for some of the standard parameters that can be normalized, percentage and other ranges</li>
             <li><i class="bi bi-crop"></i> Sets the <a href="#ProjectResolution">project resolution</a></li>
             <li><i class="bi bi-nvidia"></i> Sets the current CUDA device when you have multiple GPUs. Any new nodes powered by CUDA will be executed on this current GPU device.</li>
@@ -619,7 +621,7 @@
     </p>
     <p>
         Layout can be defined as a set of categories, and the respective nodes inside them, that will appear within the Tool Bar if the Layout is selected. You can switch
-        between Layouts by clicking on the Layouts button, found in the bottom right corner of the screen (see video below). By default the Layout is "All", as that shows
+        between Layouts. By default the Layout is "All", as that shows
         all categories and all nodes inside those categories. However, this is but 1 of a handful of pre-made Layouts that are available. These pre-made Layouts include
         "Computer Vision", "Data Science", and "Machine Learning"; as can be expected, when we switch to one of those Layouts, only the categories / nodes relevant to the
         respective topic (Computer Vision, for example) will appear. The video below showcases how the toolbar changes when switching between Layouts.
