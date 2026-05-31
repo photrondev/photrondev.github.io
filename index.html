@@ -1917,6 +1917,11 @@
         <td><i class='bi bi-filetype-ai'></i></td>
         <td><ul><li>source : image2D</li><li>color : bool</li><li>binaryThreshold : double</li><li>polygonThreshold : double</li><li>maxCandidate : int</li><li>unclipRatio : double</li>        </ul></td>        <td><ul><li>out : string</li><li>preview : image2D</li>        </ul></td>        <td>Spots text in images using DNN<p style='color:red;'>The following package is required: text_spotting</p></td>
     </tr>
+    <tr id='cv.unet_generic_segmentation'>
+        <td>U-Net Generic Segmentation</td>
+        <td><i class='bi bi-filetype-ai'></i></td>
+        <td><ul><li>source : image2D</li><li>filter : string</li><li>confidence : double</li><li>blend : double</li>        </ul></td>        <td><ul><li>mask : image2D</li><li>preview : image2D</li>        </ul></td>        <td>Generic U-Net inference node for semantic segmentation with configurable confidence and filtering.</td>
+    </tr>
     <tr id='yolov10:cv.yolo_generic_classification'>
         <td>Ultralytics YOLO10 Classification</td>
         <td><i class='bi bi-filetype-ai'></i></td>
@@ -5149,6 +5154,11 @@
         <td>Transpose</td>
         <td><i class='bi bi-fire'></i></td>
         <td><ul><li>input : tensor</li><li>dim0 : int</li><li>dim1 : int</li>        </ul></td>        <td><ul><li>out : tensor</li>        </ul></td>        <td>Returns a tensor that is a transposed version of input. The given dimensions dim0 and dim1 are swapped.</td>
+    </tr>
+    <tr id='torch.unet_finetuning'>
+        <td>U-Net Fine Tuning</td>
+        <td><i class='bi bi-fire'></i></td>
+        <td><ul><li>Dataset : torch.dataset</li><li>Trigger : int</li><li>Base Model : string</li><li>Optimizer : string</li><li>Image Size : int</li><li>Train Split % : int</li><li>Epochs : int</li><li>Export Directory : string</li>        </ul></td>        <td><ul><li>Results : matrix2D</li><li>Graphs : image2D</li>        </ul></td>        <td>Trains a U-Net semantic segmentation model with configurable parameters and exports it to ONNX.<p style='color:red;'>The following package is required: labeling_finetuning</p></td>
     </tr>
     <tr id='torch.vstack'>
         <td>VStack</td>
