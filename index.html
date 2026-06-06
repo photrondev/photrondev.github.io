@@ -204,6 +204,30 @@
                         </a>
                     </li>
 
+                    <li style="list-style: none; margin: 10px 0;">
+    <a href="#AiLabeler" style="
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #d4d4d4;
+        text-decoration: none;
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 0.95rem;
+        font-weight: 500;
+        padding: 8px 16px;
+        line-height: 1;
+        border-left: 3px solid #0056b3;
+        background: rgba(0, 86, 179, 0.05);
+        border-radius: 0 6px 6px 0;
+        transition: all 0.2s ease-in-out;
+    " onmouseover="this.style.background='rgba(0, 86, 179, 0.15)'; this.style.color='#0056b3'; this.style.transform='translateX(4px)';"
+        onmouseout="this.style.background='rgba(0, 86, 179, 0.05)'; this.style.color='#d4d4d4'; this.style.transform='translateX(0)';"
+    >
+        <span style="margin-right: 6px; display: inline-flex; align-items: center; transform: translateY(-1px);" class="bi bi-magic"></span>
+        <span>AI Lab & Tuning</span>
+    </a>
+</li>
+
 
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">UI <span class="caret"></span></a>
@@ -298,10 +322,8 @@
                     </li>
 
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">AI & ML <span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">ML <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-
-
 
                             <li class="dropdown-submenu">
                                 <a href="#">Labeling and Fine Tuning</a>
@@ -334,7 +356,7 @@
                                     <li><a href="#YOLOX">YOLOX</a></li>
                                 </ul>
                             </li>
-
+                            <li><a href="#GenerativeAI">Generative AI</a></li>
                         </ul>
                     </li>
 
@@ -1647,7 +1669,7 @@
         See the reference section for the full list of <a href="#ML">ML Tools</a>
     </p>
 
-    <h3 id="AiLabeler">Labeling, Tracking, and Fine Tuning</h3>
+    <h2 id="AiLabeler">Labeling, Tracking, and Fine Tuning</h2>
 
     <p>
         The AI Labeling Tool is a specialized environment for creating high-quality datasets. It facilitates pixel-perfect
@@ -1665,42 +1687,87 @@
             <li>
                 <i class="bi bi-film"></i> <strong>Video Processing:</strong> Click the <strong>Open Videos</strong> button to trigger the <strong>Video Dialog</strong>. This interface interfaces with the backend to convert raw video files into frame sequences. Once converted, the system enables instant access for labeling.
             </li>
+            <li>
+                <i class="bi bi-box-arrow-in-down"></i> <strong>Import:</strong> Imports manual keyframes (image segmentation), named after the sequence, e.g. 0001.jpg. Select a directory of jpeg files where the image file should be black and white representation of the first class pixels.
+            </li>
         </ul>
     </div>
 
     <div class="tool-section">
         <h3 style="color: #6f42c1;">Step 2: Annotation, Tracking, & Navigation</h3>
-        <p>Annotate files by clicking the <strong>Edit</strong> <i class="bi bi-pencil"></i> button. The tool features an AI-driven tracking workflow to accelerate video annotation.</p>
-        <ul class="viewer-help-list">
-            <li>
-                <i class="bi bi-magic"></i> <strong>AI Tracking (AUTO):</strong> Use the <strong>Track</strong> button to generate automated segmentation masks. These "AUTO" paths are intelligently linked by the AI across the sequence frames.
-            </li>
-            <li>
-                <i class="bi bi-vector-pen"></i> <strong>Vectorization:</strong> Deleting an "AUTO" path triggers <strong>Vectorization</strong>. The system converts the AI's complex mask coordinates into a standard, editable manual path, giving you full control over node placement.
-            </li>
-            <li>
-                <i class="bi bi-exclamation-triangle"></i> <strong>Manual Overrides:</strong> Modifying a manual keyframe automatically invalidates (removes) "AUTO" paths immediately preceding and following that frame. This ensures that your manual corrections do not conflict with stale AI predictions, preventing tracking drift.
-            </li>
-            <li>
-                <i class="bi bi-arrow-left-right"></i> <strong>Sequential Navigation:</strong> Use hotkeys <kbd>a</kbd> (Previous) and <kbd>d</kbd> (Next) to cycle through frames. The system restores your active class and editor state per frame for high-throughput labeling.
-            </li>
-        </ul>
 
-        <table>
-            <thead><tr><th>Name</th><th>Hotkey</th></tr></thead>
+        <p>Annotate files by clicking the <strong>Edit</strong> <i class="bi bi-pencil"></i> button. Once in the viewer, select a class from the list (use the background class to create "holes"), then choose a path tool (e.g., <strong>Add Rectangle</strong>) and click and drag in the viewer to create your shape. Switch between classes as needed; when finished, click the <strong>Save</strong> icon to register your labels.</p>
+
+        <table class="table table-bordered table-sm">
+            <colgroup>
+                <col style="width: 60px;">
+                <col style="width: 20%;">
+                <col style="width: 20%;">
+                <col style="width: auto;">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th style="text-align: center;">Icon</th>
+                    <th>Action</th>
+                    <th>Label Type</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
             <tbody>
-                <tr><td>Insert Point</td><td><kbd>p</kbd></td></tr>
-                <tr><td>Insert Rectangle</td><td><kbd>r</kbd></td></tr>
-                <tr><td>Insert Ellipse</td><td><kbd>e</kbd></td></tr>
-                <tr><td>Insert Shape</td><td><kbd>m</kbd></td></tr>
-                <tr><td>Insert Freehand</td><td><kbd>f</kbd></td></tr>
-                <tr><td>Insert Lasso</td><td><kbd>l</kbd></td></tr>
-                <tr><td>Delete Selected</td><td><kbd>Del</kbd></td></tr>
-                <tr><td>Save</td><td><kbd>s</kbd></td></tr>
-                <tr><td>Previous</td><td><kbd>a</kbd></td></tr>
-                <tr><td>Next</td><td><kbd>d</kbd></td></tr>
+                <tr>
+                    <td style="text-align: center; padding: 10px;">
+                        <a id="path-save" class="bi bi-floppy-fill ai-label-icon"></a>
+                    </td>
+                    <td><strong>Save</strong></td>
+                    <td>All</td>
+                    <td>Click the icon or press <kbd>s</kbd> to register current labels.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; padding: 10px; white-space: nowrap;">
+                        <a id="path-previous" class="bi bi-caret-left-fill ai-label-icon"></a>
+                        <a id="path-next" class="bi bi-caret-right-fill ai-label-icon"></a>
+                    </td>
+                    <td><strong>Navigation</strong></td>
+                    <td>All</td>
+                    <td>Use <kbd>a</kbd> (Prev) and <kbd>d</kbd> (Next) to cycle frames and restore state.</td>
+                </tr>
+
+                <tr>
+                    <td style="text-align: center; padding: 10px;">
+                        <a id="path-sam-prompt" class="bi bi-chat-dots-fill ai-nav-icon"></a>
+                    </td>
+                    <td><strong>AI Smart Segment</strong></td>
+                    <td>Detection & Instance Segmentation</td>
+                    <td>Click the icon to perform AI-assisted segmentation by clicking on targets.</td>
+                </tr>
+
+                <tr>
+                    <td style="text-align: center; padding: 10px;"><i class="bi bi-arrow-right"></i></td>
+                    <td><strong>Track</strong></td>
+                    <td>Image Segmentation</td>
+                    <td>Click the <strong>Track</strong> button to generate "AUTO" paths linked by AI across sequences.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; padding: 10px;"><i class="bi bi-pencil"></i></td>
+                    <td><strong>Vectorization</strong></td>
+                    <td>Image Segmentation</td>
+                    <td>Deleting an "AUTO" path triggers <strong>Vectorization</strong>, converting complex masks to editable paths.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; padding: 10px;"><i class="bi bi-exclamation-triangle"></i></td>
+                    <td><strong>Manual Overrides</strong></td>
+                    <td>Image Segmentation</td>
+                    <td>Modifying a keyframe invalidates nearby "AUTO" paths to prevent tracking drift.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; padding: 10px;"><i class="bi bi-trash"></i></td>
+                    <td><strong>Delete All</strong></td>
+                    <td>Image Segmentation</td>
+                    <td>Deletes all manual and auto keyframes.</td>
+                </tr>
             </tbody>
         </table>
+
     </div>
 
     <div class="tool-section">
@@ -1722,6 +1789,7 @@
         </ul>
     </div>
 
+    <h2>Tools</h2>
 
     <!-- START OF AUTO GENERATED DOCS  -->
 <h3 id='AI'>AI</h3><p>The AI Inference algorithms including using pretrained models tools are all under the <i class="bi bi-filetype-ai"> AI</i> category. The full list of display tools is as follows:</p><table>
@@ -6866,7 +6934,7 @@ Precision: Use exact identifiers from the JSON keys when adding nodes. For examp
 Error Handling: If a requested tool or file cannot be found, report the error using show_message.
 </pre>
 
-    <h3 id="GenerativeAI">Generative AI</h3>
+    <h2 id="GenerativeAI">Generative AI</h2>
 
     <p>The purpose of this feature is to generate workflows automatically from user prompts and relies on using the Google GenAI SDK.</p>
 
@@ -7182,53 +7250,63 @@ Error Handling: If a requested tool or file cannot be found, report the error us
 
 
     <h3 id="InstallationSteps">Installation Steps</h3>
-    <p>
-        Make sure you have the latest Google Chrome browser installed : 131.0.6778.140 or higher and it is set to your default browser.
-        Then download the INFINWORKFLOW package from Photron's website. There are multiple packages, the first package to download is infiniworkflow_v1_0.zip.
-        Unzip this file to a location where you want to maintain the INFINIWORKFLOW application, for example in your <i>Documents</i> folder.
-        <ul>
-            <br>
-            <li>
-                Windows: To install, double click on the <i>install.bat</i> file in the unzipped folder and click to grant Admin privledges
-                (INFINWORKFLOW runs a local webserver to host the user interface and installation will request
-                Admin privileges which is only used to allow INFINWORKFLOW to have access through the Firewall for the local webserver).
-                The installation will install the required Python modules and will take around 30 minutes and requires network access, please let it run to completion before you
-                proceed to the next step. After is is completed, to run INFINIWORKFLOW, double click on the <i>infiniworkflow.bat</i> file in the unzipped folder
-            </li>
-            <br>
-            <br>
-            <li>
-                OSX: Type the following with your python distribution you want to use (you may change python3 to a particular version of python you want to use instead)
 
-                <pre> python3 -c "import platform; print(platform.processor())"</pre>
+        <section>
+            <h4>Windows</h4>
+            <ol>
+                <li>
+                    Double-click <code>install.bat</code> in the unzipped folder and grant Administrative privileges.
+                    <br><small style="color: #aaaaaa;"><em>Note: Admin rights are only used to configure Windows Firewall for the local webserver.</em></small>
+                </li>
+                <li>Allow approximately 30 minutes for the installation of Python modules. Ensure you have an active network connection.</li>
+                <li>Once complete, launch INFINIWORKFLOW using the <strong>Desktop Shortcut</strong> or by running <code>INFINIWORKFLOW.bat</code>.</li>
+            </ol>
 
-                If that returns <i>i386</i> then install the OSX <i>x86_64</i> version of INFINIWORKFLOW version of OSX, otherwise if that returns <i>arm</i> then install the OSX <i>arm64</i> version of INFINIWORKFLOW.
+            <div style="background-color: #2d2d2d; padding: 15px; border-left: 5px solid #ffcc00; border-radius: 4px; color: #e0e0e0; margin: 20px 0;">
+                <strong style="color: #ffcc00;">⚠️ System Requirement:</strong>
+                Please ensure your NVIDIA graphics driver is updated to at least <strong>version 576.88</strong>.
+            </div>
+        </section>
 
-                Make sure you have a valid Python installation, as additional modules will be installed into the existing Python installation. It is recommended you have Python v3.12.
-                To install, type <i>sudo sh install.sh</i> file in the unzipped folder, then type your
-                password. The installation will install the required Python modules.
-                The installation of Python modules will take around 5 minutes and requires network access, please let it run to completion before you proceed to the next step.
-                After is is completed, to run INFINIWORKFLOW, type <i>sh INFINIWORKFLOW.sh</i> file in the unzipped folder.
-            </li>
-            <br>
-            <br>
-            <li>
-                Linux: To install, type <i>sudo sh install.sh</i> file in the unzipped folder, then type your
-                password. The installation will install the required Python modules.
-                The installation of Python modules will take around 30 minutes and requires network access, please let it run to completion before you proceed to the next step.
-                After is is completed, to run INFINIWORKFLOW, type <i>sh INFINIWORKFLOW.sh</i> file in the unzipped folder.
-            </li>
-            <br>
-            <br>
-            <li>
-                Jetson: To install, type <i>./install.sh</i> file in the unzipped folder, then type your
-                password. The installation will install the required Python modules.
-                The installation of Python modules will take around 30 minutes and requires network access, please let it run to completion before you proceed to the next step.
-                After is is completed, to run INFINIWORKFLOW, type <i>./INFINIWORKFLOW.sh</i> file in the unzipped folder.
-            </li>
-            <br>
-        </ul>
-    </p>
+        <hr style="border: 0; border-top: 1px solid #444; margin: 20px 0;">
+
+        <section>
+            <h4>macOS</h4>
+            <p>First, verify your system architecture:</p>
+            <pre style="background: #1a1a1a; padding: 10px; border-radius: 4px; color: #00ffcc;">python3 -c "import platform; print(platform.processor())"</pre>
+            <ul>
+                <li>If result is <code>i386</code>: Install the <code>x86_64</code> version of INFINIWORKFLOW.</li>
+                <li>If result is <code>arm</code>: Install the <code>arm64</code> version of INFINIWORKFLOW.</li>
+            </ul>
+            <ol>
+                <li>Ensure you have Python v3.13.3 installed.</li>
+                <li>In the unzipped folder, run <code>sudo sh install.sh</code> and enter your password.</li>
+                <li>Allow 5 minutes for module installation.</li>
+                <li>Run <code>sh INFINIWORKFLOW.sh</code> to start.</li>
+            </ol>
+        </section>
+
+        <hr style="border: 0; border-top: 1px solid #444; margin: 20px 0;">
+
+        <section>
+            <h4>Linux</h4>
+            <ol>
+                <li>Run <code>sudo sh install.sh</code> in the unzipped folder and provide your password.</li>
+                <li>Allow 30 minutes for Python module installation.</li>
+                <li>Run <code>sh INFINIWORKFLOW.sh</code> to start.</li>
+            </ol>
+        </section>
+
+        <hr style="border: 0; border-top: 1px solid #444; margin: 20px 0;">
+
+        <section>
+            <h4>Jetson</h4>
+            <ol>
+                <li>Run <code>./install.sh</code> in the unzipped folder and provide your password.</li>
+                <li>Allow 30 minutes for module installation.</li>
+                <li>Run <code>./INFINIWORKFLOW.sh</code> to start.</li>
+            </ol>
+        </section>
 
 
     <h3 id="PostInstallationSteps">Post Installation</h3>
@@ -12201,7 +12279,7 @@ int main() {
 
         <div style="border: 1px solid #333; padding: 15px; border-radius: 10px; background-color: #1e1e1e; display: flex; flex-direction: column;">
             <h3 style="margin-top: 0; color: #03dac6;">07. Launch App</h3>
-            <p>Run <code>infiniworkflow.bat</code> or <code>sh INFINIWORKFLOW.sh</code> to start the local server.</p>
+            <p>Run <code>INFINIWORKFLOW.bat</code> or <code>sh INFINIWORKFLOW.sh</code> to start the local server.</p>
         </div>
 
         <div style="border: 1px solid #333; padding: 15px; border-radius: 10px; background-color: #1e1e1e; display: flex; flex-direction: column;">
