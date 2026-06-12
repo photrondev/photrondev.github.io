@@ -205,7 +205,7 @@
                     </li>
 
                     <li style="list-style: none; margin: 10px 0;">
-    <a href="#AiLabeler" style="
+                        <a href="#AiLabeler" style="
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -221,12 +221,11 @@
         border-radius: 0 6px 6px 0;
         transition: all 0.2s ease-in-out;
     " onmouseover="this.style.background='rgba(0, 86, 179, 0.15)'; this.style.color='#0056b3'; this.style.transform='translateX(4px)';"
-        onmouseout="this.style.background='rgba(0, 86, 179, 0.05)'; this.style.color='#d4d4d4'; this.style.transform='translateX(0)';"
-    >
-        <span style="margin-right: 6px; display: inline-flex; align-items: center; transform: translateY(-1px);" class="bi bi-magic"></span>
-        <span>AI Lab & Tuning</span>
-    </a>
-</li>
+                           onmouseout="this.style.background='rgba(0, 86, 179, 0.05)'; this.style.color='#d4d4d4'; this.style.transform='translateX(0)';">
+                            <span style="margin-right: 6px; display: inline-flex; align-items: center; transform: translateY(-1px);" class="bi bi-magic"></span>
+                            <span>AI Lab & Tuning</span>
+                        </a>
+                    </li>
 
 
                     <li class="dropdown">
@@ -1771,6 +1770,13 @@
                     <td>Image Segmentation</td>
                     <td>Deletes ALL manual and AUTO keyframes.</td>
                 </tr>
+
+                <tr>
+                    <td style="text-align: center; padding: 10px;"><i class="bi bi-trash"></i></td>
+                    <td><strong>CHECKPOINT</strong></td>
+                    <td>All</td>
+                    <td>Deletes the prior checkpoint.</td>
+                </tr>
             </tbody>
         </table>
 
@@ -1781,6 +1787,13 @@
         <p>Use the <strong>Fine Tuning</strong> panel to train a custom model once your labeling is complete.</p>
         <ul class="viewer-help-list">
             <li><i class="bi bi-gear"></i> <strong>Training Configuration:</strong> Select model size, splits, and epochs. Training is blocked if no labeled data is detected.</li>
+            <li>
+                <i class="bi bi-file-earmark-play"></i> <strong>Multi-Video Selection:</strong> If your project contains multiple labeled videos, clicking "Train" will trigger a <strong>Fine-Tune Videos</strong> dialog.
+                <ul>
+                    <li>Use <strong>Select All</strong> or <strong>Select Current</strong> to define your training dataset.</li>
+                    <li>The dialog shows thumbnails for quick identification and automatically remembers your preferences via browser cookies for your current project path.</li>
+                </ul>
+            </li>
             <li><i class="bi bi-broadcast"></i> <strong>Live Status Monitoring:</strong> View real-time logs and loss metrics during training.</li>
             <li><i class="bi bi-node-plus"></i> <strong>Create Inference:</strong> Automatically generate a specialized inference node in your main workspace, pre-configured with your new model weights.</li>
         </ul>
@@ -1792,6 +1805,18 @@
             <li><strong>Drift Prevention:</strong> Always verify your path after manually overriding a keyframe, as the system clears dependent "AUTO" segments to maintain sequence integrity.</li>
             <li><strong>Performance:</strong> Images are processed at 1024px using the FastSAM-s model for optimal balance between speed and precision.</li>
             <li><strong>Dataset Integrity:</strong> All AI-assisted labels must be finalized or vectorized before the final training export to ensure the ML model receives high-quality ground truth.</li>
+        </ul>
+    </div>
+
+    <div class="offline-training-section" style="background: rgba(70, 130, 180, 0.05); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid steelblue;">
+        <h4 style="color: steelblue;"><i class="bi bi-code-slash"></i> Offline & Custom Training:</h4>
+        <p style="font-size: 0.9em; color: #ccc;">
+            Need to run training on a dedicated GPU cluster or your own local machine? Our platform provides full transparency and exportability:
+        </p>
+        <ul style="font-size: 0.9em; color: #ccc;">
+            <li><strong>Training Script Export:</strong> Once you initiate a fine-tuning job, you can navigate to the <strong>Code</strong> output of the Fine Tuning node in the workflow.</li>
+            <li><strong>Downloadable Assets:</strong> You can download the complete training script and your finalized dataset package directly from the interface.</li>
+            <li><strong>Run Anywhere:</strong> Execute the exported script in any environment supporting our framework, allowing you to bypass platform limitations and utilize your own hardware resources for heavy training workloads.</li>
         </ul>
     </div>
 
@@ -5665,6 +5690,11 @@
         <td><i class='bi bi-table'></i></td>
         <td><ul><li>source : matrix2D</li><li>directory : string</li><li>filename : string</li><li>trigger : int</li>        </ul></td>        <td><ul>        </ul></td>        <td>Exports CSV file from Tracking Data</td>
     </tr>
+    <tr id='cv.traffic_volume_counting'>
+        <td>Traffic Volume Counting</td>
+        <td><i class='bi bi-car-front'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>counting_line : matrix2D</li><li>class_weights : matrix2D</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>total_vehicles : int</li><li>counts_by_class : matrix2D</li>        </ul></td>        <td>Consumes raw YOLO bounding box detection records. Uses centroid tracking loops to count vehicles as they pass over virtual lines, logging traffic volume data categorized by vehicle profiles.</td>
+    </tr>
     <tr id='cv.wechat_qr_code'>
         <td>WeChat QR Code Decoder</td>
         <td><i class='bi bi-qr-code-scan'></i></td>
@@ -7257,62 +7287,62 @@ Error Handling: If a requested tool or file cannot be found, report the error us
 
     <h3 id="InstallationSteps">Installation Steps</h3>
 
-        <section>
-            <h4>Windows</h4>
-            <ol>
-                <li>
-                    Double-click <code>install.bat</code> in the unzipped folder and grant Administrative privileges.
-                    <br><small style="color: #aaaaaa;"><em>Note: Admin rights are only used to configure Windows Firewall for the local webserver.</em></small>
-                </li>
-                <li>Allow approximately 30 minutes for the installation of Python modules. Ensure you have an active network connection.</li>
-                <li>Once complete, launch INFINIWORKFLOW using the <strong>Desktop Shortcut</strong> or by running <code>INFINIWORKFLOW.bat</code>.</li>
-            </ol>
+    <section>
+        <h4>Windows</h4>
+        <ol>
+            <li>
+                Double-click <code>install.bat</code> in the unzipped folder and grant Administrative privileges.
+                <br><small style="color: #aaaaaa;"><em>Note: Admin rights are only used to configure Windows Firewall for the local webserver.</em></small>
+            </li>
+            <li>Allow approximately 30 minutes for the installation of Python modules. Ensure you have an active network connection.</li>
+            <li>Once complete, launch INFINIWORKFLOW using the <strong>Desktop Shortcut</strong> or by running <code>INFINIWORKFLOW.bat</code>.</li>
+        </ol>
 
-            <div style="background-color: #2d2d2d; padding: 15px; border-left: 5px solid #ffcc00; border-radius: 4px; color: #e0e0e0; margin: 20px 0;">
-                <strong style="color: #ffcc00;">⚠️ System Requirement:</strong>
-                Please ensure your NVIDIA graphics driver is updated to at least <strong>version 576.88</strong>.
-            </div>
-        </section>
+        <div style="background-color: #2d2d2d; padding: 15px; border-left: 5px solid #ffcc00; border-radius: 4px; color: #e0e0e0; margin: 20px 0;">
+            <strong style="color: #ffcc00;">⚠️ System Requirement:</strong>
+            Please ensure your NVIDIA graphics driver is updated to at least <strong>version 576.88</strong>.
+        </div>
+    </section>
 
-        <hr style="border: 0; border-top: 1px solid #444; margin: 20px 0;">
+    <hr style="border: 0; border-top: 1px solid #444; margin: 20px 0;">
 
-        <section>
-            <h4>macOS</h4>
-            <p>First, verify your system architecture:</p>
-            <pre style="background: #1a1a1a; padding: 10px; border-radius: 4px; color: #00ffcc;">python3 -c "import platform; print(platform.processor())"</pre>
-            <ul>
-                <li>If result is <code>i386</code>: Install the <code>x86_64</code> version of INFINIWORKFLOW.</li>
-                <li>If result is <code>arm</code>: Install the <code>arm64</code> version of INFINIWORKFLOW.</li>
-            </ul>
-            <ol>
-                <li>Ensure you have Python v3.13 installed.</li>
-                <li>In the unzipped folder, run <code>sudo sh install.sh</code> and enter your password.</li>
-                <li>Allow 5 minutes for module installation.</li>
-                <li>Run <code>sh INFINIWORKFLOW.sh</code> to start.</li>
-            </ol>
-        </section>
+    <section>
+        <h4>macOS</h4>
+        <p>First, verify your system architecture:</p>
+        <pre style="background: #1a1a1a; padding: 10px; border-radius: 4px; color: #00ffcc;">python3 -c "import platform; print(platform.processor())"</pre>
+        <ul>
+            <li>If result is <code>i386</code>: Install the <code>x86_64</code> version of INFINIWORKFLOW.</li>
+            <li>If result is <code>arm</code>: Install the <code>arm64</code> version of INFINIWORKFLOW.</li>
+        </ul>
+        <ol>
+            <li>Ensure you have Python v3.13 installed.</li>
+            <li>In the unzipped folder, run <code>sudo sh install.sh</code> and enter your password.</li>
+            <li>Allow 5 minutes for module installation.</li>
+            <li>Run <code>sh INFINIWORKFLOW.sh</code> to start.</li>
+        </ol>
+    </section>
 
-        <hr style="border: 0; border-top: 1px solid #444; margin: 20px 0;">
+    <hr style="border: 0; border-top: 1px solid #444; margin: 20px 0;">
 
-        <section>
-            <h4>Linux</h4>
-            <ol>
-                <li>Run <code>sudo sh install.sh</code> in the unzipped folder and provide your password.</li>
-                <li>Allow 30 minutes for Python module installation.</li>
-                <li>Run <code>sh INFINIWORKFLOW.sh</code> to start.</li>
-            </ol>
-        </section>
+    <section>
+        <h4>Linux</h4>
+        <ol>
+            <li>Run <code>sudo sh install.sh</code> in the unzipped folder and provide your password.</li>
+            <li>Allow 30 minutes for Python module installation.</li>
+            <li>Run <code>sh INFINIWORKFLOW.sh</code> to start.</li>
+        </ol>
+    </section>
 
-        <hr style="border: 0; border-top: 1px solid #444; margin: 20px 0;">
+    <hr style="border: 0; border-top: 1px solid #444; margin: 20px 0;">
 
-        <section>
-            <h4>Jetson</h4>
-            <ol>
-                <li>Run <code>./install.sh</code> in the unzipped folder and provide your password.</li>
-                <li>Allow 30 minutes for module installation.</li>
-                <li>Run <code>./INFINIWORKFLOW.sh</code> to start.</li>
-            </ol>
-        </section>
+    <section>
+        <h4>Jetson</h4>
+        <ol>
+            <li>Run <code>./install.sh</code> in the unzipped folder and provide your password.</li>
+            <li>Allow 30 minutes for module installation.</li>
+            <li>Run <code>./INFINIWORKFLOW.sh</code> to start.</li>
+        </ol>
+    </section>
 
 
     <h3 id="PostInstallationSteps">Post Installation</h3>
