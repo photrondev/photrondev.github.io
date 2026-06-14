@@ -1684,7 +1684,7 @@
                 <i class="bi bi-bookmark"></i> <strong>Select Task:</strong> Choose between <strong>Detection</strong>, <strong>Instance Segmentation</strong>, or <strong>Image Segmentation</strong>.
             </li>
             <li>
-                <i class="bi bi-film"></i> <strong>Video Processing:</strong> Click the <strong>Open Videos</strong> button to trigger the <strong>Video Dialog</strong>. This interface interfaces with the backend to convert raw video files into frame sequences. Once converted, the system enables instant access for labeling.
+                <i class="bi bi-film"></i> <strong>Video Processing:</strong> Click the <strong>Open Videos</strong> button to trigger the <strong><a href="#video-management-dialog">Video Management</a></strong>. This interface interfaces with the backend to convert raw video files into frame sequences. Once converted, the system enables instant access for labeling.
             </li>
             <li>
                 <i class="bi bi-box-arrow-in-down"></i> <strong>Import:</strong> Imports manual keyframes (image segmentation), named after the sequence, e.g. 0001.jpg. Select a directory of jpeg files where the image file should be black and white representation of the first class pixels.
@@ -1780,6 +1780,71 @@
             </tbody>
         </table>
 
+    </div>
+
+    <div id="video-management-dialog" style="background: rgba(70, 130, 180, 0.05); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid steelblue; color: white;">
+        <h3 style="color: steelblue;"><i class="bi bi-film"></i> Video Management</h3>
+        <p style="font-size: 0.9em;">
+            The Video Management interface provides a comprehensive set of tools for viewing, organizing, and processing your video files.
+        </p>
+
+        <h4 style="color: steelblue;"><i class="bi bi-layout-text-window"></i> 1. Interface Overview</h4>
+        <p style="font-size: 0.9em;">The video management screen is organized into a table format for quick access and efficient batch management.</p>
+        <ul style="font-size: 0.9em;">
+            <li><strong>Thumbnail:</strong> A quick visual preview of the video content.</li>
+            <li><strong>Filename:</strong> Displays the name of the video file or directory.</li>
+            <li><strong>Actions:</strong> A collection of interactive buttons used to manage the file's lifecycle, state, and properties.</li>
+        </ul>
+
+        <h4 style="color: steelblue;"><i class="bi bi-tools"></i> 2. Action Icons and Functions</h4>
+        <p style="font-size: 0.9em;">The actions available to you depend on the current processing state of the video.</p>
+
+        <table style="width: 100%; font-size: 0.9em; border-collapse: collapse; margin-top: 10px; color: white;">
+            <tr style="border-bottom: 2px solid #cbd5e0; text-align: left;">
+                <th style="padding: 8px; width: 50px;">Icon</th>
+                <th style="padding: 8px;">Function</th>
+            </tr>
+            <tr style="border-bottom: 1px solid #e2e8f0;">
+                <td style="padding: 8px; text-align: center;"><i class="bi bi-folder-symlink"></i></td>
+                <td style="padding: 8px;"><strong>Open:</strong> Opens the directory or workflow for an already processed video.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #e2e8f0;">
+                <td style="padding: 8px; text-align: center;"><i class="bi bi-play-circle"></i></td>
+                <td style="padding: 8px;"><strong>Process:</strong> Starts the frame extraction process for raw video files.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #e2e8f0;">
+                <td style="padding: 8px; text-align: center;"><i class="bi bi-arrow-clockwise"></i></td>
+                <td style="padding: 8px;"><strong>Refresh:</strong> Re-extracts frames for a video that has already been processed.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #e2e8f0;">
+                <td style="padding: 8px; text-align: center;"><i class="bi bi-copy"></i></td>
+                <td style="padding: 8px;"><strong>Duplicate:</strong> Creates a copy of the video file entry. This new entry can be used to create more training images - see <i class="bi bi-infinity"></i> Workflow </td>
+            </tr>
+            <tr style="border-bottom: 1px solid #e2e8f0;">
+                <td style="padding: 8px; text-align: center;"><i class="bi bi-trash"></i></td>
+                <td style="padding: 8px;"><strong>Delete:</strong> Permanently removes the video entry from the management list.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #e2e8f0;">
+                <td style="padding: 8px; text-align: center;"><i class="bi bi-type-italic"></i></td>
+                <td style="padding: 8px;"><strong>Rename:</strong> Opens a dialog to modify the file name.</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; text-align: center;"><i class="bi bi-infinity"></i></td>
+                <td style="padding: 8px;"><strong>Workflow:</strong> Process to generate new input images such as with noise or brighter or darker (keeping same masks).</td>
+            </tr>
+        </table>
+
+        <h4 style="color: steelblue; margin-top: 20px;"><i class="bi bi-diagram-3"></i> 3. Workflow Management</h4>
+        <ul style="font-size: 0.9em;">
+            <li><strong>Processing and Refreshing:</strong> Click the <strong>Process</strong> icon to start extraction. Use the <strong>Refresh</strong> icon to update frames if settings change.</li>
+            <li><strong>Handling Duplicates:</strong> Flagged with an <strong>Infinity icon</strong>, these have restricted access. You may <strong>Rename</strong> or <strong>Delete</strong> them, but you cannot open the standard processing workflow until they are resolved.</li>
+            <li><strong>Renaming Files:</strong> Click the <strong>Rename</strong> icon, enter the new name in the dialog, and confirm.</li>
+        </ul>
+
+        <h4 style="color: steelblue;"><i class="bi bi-eye"></i> 4. Enhanced Previewing</h4>
+        <p style="font-size: 0.9em;">
+            To see a larger preview: Simply <strong>hover your mouse</strong> over the small thumbnail image in the table's first column. The full-sized preview will appear automatically and hide when you move your mouse away.
+        </p>
     </div>
 
     <div class="tool-section">
