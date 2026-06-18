@@ -1997,7 +1997,7 @@
     <tr id='cv.multi_label_path'>
         <td>Multi-Label Path</td>
         <td><i class='bi bi-layers-fill'></i></td>
-        <td><ul><li>Source : image2D</li><li>Path 1 : string</li><li>Label 1 : string</li><li>Color 1 : color</li><li>Path 2 : string</li><li>Label 2 : string</li><li>Color 2 : color</li><li>Path 3 : string</li><li>Label 3 : string</li><li>Color 3 : color</li><li>Path 4 : string</li><li>Label 4 : string</li><li>Color 4 : color</li><li>Path 5 : string</li><li>Label 5 : string</li><li>Color 5 : color</li><li>Path 6 : string</li><li>Label 6 : string</li><li>Color 6 : color</li><li>Path 7 : string</li><li>Label 7 : string</li><li>Color 7 : color</li><li>Path 8 : string</li><li>Label 8 : string</li><li>Color 8 : color</li><li>Path 9 : string</li><li>Label 9 : string</li><li>Color 9 : color</li><li>Path 10 : string</li><li>Label 10 : string</li><li>Color 10 : color</li><li>Auto Matte Path : string</li><li>Clear Path : string</li>        </ul></td>        <td><ul><li>Mask : image2D</li><li>Preview : image2D</li><li>Detect : matrix2D</li><li>Points : matrix2D</li>        </ul></td>        <td>Renders 10 independent labeled paths. Generates a Class-ID mask (0-9) and a preview with bounding boxes and labels.</td>
+        <td><ul><li>Source : image2D</li><li>Path 1 : string</li><li>Label 1 : string</li><li>Color 1 : color</li><li>Path 2 : string</li><li>Label 2 : string</li><li>Color 2 : color</li><li>Path 3 : string</li><li>Label 3 : string</li><li>Color 3 : color</li><li>Path 4 : string</li><li>Label 4 : string</li><li>Color 4 : color</li><li>Path 5 : string</li><li>Label 5 : string</li><li>Color 5 : color</li><li>Path 6 : string</li><li>Label 6 : string</li><li>Color 6 : color</li><li>Path 7 : string</li><li>Label 7 : string</li><li>Color 7 : color</li><li>Path 8 : string</li><li>Label 8 : string</li><li>Color 8 : color</li><li>Path 9 : string</li><li>Label 9 : string</li><li>Color 9 : color</li><li>Path 10 : string</li><li>Label 10 : string</li><li>Color 10 : color</li><li>Auto Matte Path : string</li><li>Clear Path : string</li><li>blend : double</li>        </ul></td>        <td><ul><li>Mask : image2D</li><li>Preview : image2D</li><li>Detect : matrix2D</li><li>Points : matrix2D</li>        </ul></td>        <td>Renders 10 independent labeled paths. Generates a Class-ID mask (0-9) and a preview with bounding boxes and labels.</td>
     </tr>
     <tr id='cv.onnx_basic_classification'>
         <td>ONNX for Basic Classification</td>
@@ -3412,6 +3412,11 @@
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>radius : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Applies a bandpass filter to a 1D or 2D floating-point array</td>
     </tr>
+    <tr id='cv.gaussian_noise'>
+        <td>Gaussian Noise</td>
+        <td><i class='bi bi-broadcast'></i></td>
+        <td><ul><li>source : image2D</li><li>mean : double</li><li>stdDev : double</li>        </ul></td>        <td><ul><li>output : image2D</li>        </ul></td>        <td>Applies gaussian noise to an image.</td>
+    </tr>
     <tr id='cv.homography'>
         <td>Homography</td>
         <td><i class='bi bi-stars'></i></td>
@@ -3457,6 +3462,11 @@
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>element : matrix2D</li><li>anchor : int2</li><li>iterations : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Applies kernel onto binary input image to produce 1 channel output image of all pixels that match the kernel's pattern.</td>
     </tr>
+    <tr id='cv.noise'>
+        <td>Image Noise</td>
+        <td><i class='bi bi-broadcast'></i></td>
+        <td><ul><li>source : image2D</li><li>mode : int</li><li>mean : double</li><li>stdDev : double</li><li>prob : double</li>        </ul></td>        <td><ul><li>output : image2D</li>        </ul></td>        <td>Applies synthetic noise to an image.</td>
+    </tr>
     <tr id='cv.pyr_down'>
         <td>Pyr Down</td>
         <td><i class='bi bi-stars'></i></td>
@@ -3471,6 +3481,11 @@
         <td>Radon Transform</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>theta : double</li><li>start angle : double</li><li>end angle : double</li><li>scale : int</li><li>crop : bool</li><li>norm : bool</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Canny Edge Detection is calculates the projection of an image's intensity along lines at specific angles.</td>
+    </tr>
+    <tr id='cv.saltandpepper_noise'>
+        <td>Salt and Pepper Noise</td>
+        <td><i class='bi bi-broadcast'></i></td>
+        <td><ul><li>source : image2D</li><li>prob : double</li>        </ul></td>        <td><ul><li>output : image2D</li>        </ul></td>        <td>Applies salt and pepper noise to an image.</td>
     </tr>
     <tr id='cv.scharr_edge_detector'>
         <td>Scharr Edge Detector</td>
@@ -3496,6 +3511,11 @@
         <td>Spatial Gradient</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>ksize : int</li><li>borderType : int</li>        </ul></td>        <td><ul><li>outX : image2D</li><li>outY : image2D</li>        </ul></td>        <td>Calculates the first order image derivative in both x and y using a Sobel operator, which emphasizes regions of high spatial frequency that correspond to edges.</td>
+    </tr>
+    <tr id='cv.speckle_noise'>
+        <td>Speckle Noise</td>
+        <td><i class='bi bi-broadcast'></i></td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>output : image2D</li>        </ul></td>        <td>Applies speckle noise to an image.</td>
     </tr>
     <tr id='cv.sqr_box_filter'>
         <td>Sqr Box Filter</td>
