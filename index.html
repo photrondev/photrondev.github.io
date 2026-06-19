@@ -86,6 +86,11 @@
             .dropdown-menu:has(a[href="#AI"]) > li {
                 break-inside: avoid; /* Prevents items from being cut in half across columns */
             }
+
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
         
     </style>
 
@@ -176,7 +181,7 @@
         transition: all 0.2s ease-in-out;
     " onmouseover="this.style.background='rgba(0, 86, 179, 0.15)'; this.style.color='#0056b3'; this.style.transform='translateX(4px)';"
                            onmouseout="this.style.background='rgba(0, 86, 179, 0.05)'; this.style.color='#d4d4d4'; this.style.transform='translateX(0)';">
-                            <span style="margin-right: 6px; display: inline-flex; align-items: center; transform: translateY(-1px);">⚙️</span>
+                            <span style="margin-right: 6px; display: inline-flex; align-items: center; transform: translateY(-1px);" class="bi bi-bookmark"></span>
                             <span>Code Generation</span>
                         </a>
                     </li>
@@ -199,7 +204,7 @@
         transition: all 0.2s ease-in-out;
     " onmouseover="this.style.background='rgba(0, 86, 179, 0.15)'; this.style.color='#0056b3'; this.style.transform='translateX(4px)';"
                            onmouseout="this.style.background='rgba(0, 86, 179, 0.05)'; this.style.color='#d4d4d4'; this.style.transform='translateX(0)';">
-                            <span style="margin-right: 6px; display: inline-flex; align-items: center; transform: translateY(-1px);">♾️</span>
+                            <span style="margin-right: 6px; display: inline-flex; align-items: center; transform: translateY(-1px);" class="bi bi-infinity"></span>
                             <span>Generative AI</span>
                         </a>
                     </li>
@@ -1744,7 +1749,9 @@
                     <td style="text-align: center; padding: 10px;"><i class="bi bi-arrow-right"></i></td>
                     <td><strong>Track</strong></td>
                     <td>Image Segmentation</td>
-                    <td>Uses SAM2 Tracking to create "AUTO" labeled keyframes between the manual labeled keyframes.</td>
+                    <td>
+                        Uses <strong>SAM2 Tracking</strong> to propagate segmentations and create "AUTO" labeled keyframes between manual keyframes. You can run propagation interactively in the foreground or offload it to the background.
+                    </td>
                 </tr>
 
                 <tr>
@@ -1787,6 +1794,30 @@
                 </tr>
             </tbody>
         </table>
+
+        <div class="background-tracking-box" style="background: rgba(255, 170, 0, 0.05); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #ffaa00;">
+            <h4 style="color: #ffaa00; margin-top: 0;"><i class="bi bi-gear-fill" style="animation: spin 3s linear infinite; display: inline-block;"></i> Background SAM2 Tracking:</h4>
+            <p style="font-size: 0.95em; color: #ccc;">
+                For large videos or long sequences, frame propagation using Segment Anything 2 (SAM2) can be computationally intensive and take time. To stay productive, you can offload this process to the backend:
+            </p>
+            <ul style="font-size: 0.9em; color: #ccc; margin-left: 15px; padding-left: 10px;">
+                <li style="margin-bottom: 8px;">
+                    <strong>Run in Background:</strong> Click the yellow <strong>Run in Background</strong> button inside the SAM2 tracking propagation modal. This instantly closes the annotation canvas and returns you to the Video Management panel.
+                </li>
+                <li style="margin-bottom: 8px;">
+                    <strong>Live Progress Banner:</strong> A prominent, real-time tracking banner is displayed at the top of your video list. It features a spinning gear icon, highlights the directory name being processed, and displays a precise percentage completion status along with a visual progress bar.
+                </li>
+                <li style="margin-bottom: 8px;">
+                    <strong>Parallel Tasking:</strong> While propagation runs in the background, you are free to rename, duplicate, or delete other video sequences, or set up other annotation tasks.
+                </li>
+                <li style="margin-bottom: 8px;">
+                    <strong>Cancel Anytime:</strong> If you need to stop propagation early, click the <strong>Cancel Tracking</strong> button directly on the background banner or in the modal to cleanly halt the task.
+                </li>
+                <li style="margin-bottom: 8px;">
+                    <strong>Automatic Completion:</strong> When tracking finishes, the banner is automatically removed, the video list is updated, and all generated "AUTO" labeled keyframes are saved and ready.
+                </li>
+            </ul>
+        </div>
 
     </div>
 
