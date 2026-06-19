@@ -3415,7 +3415,7 @@
     <tr id='cv.gaussian_noise'>
         <td>Gaussian Noise</td>
         <td><i class='bi bi-broadcast'></i></td>
-        <td><ul><li>source : image2D</li><li>mean : double</li><li>stdDev : double</li>        </ul></td>        <td><ul><li>output : image2D</li>        </ul></td>        <td>Applies gaussian noise to an image.</td>
+        <td><ul><li>source : image2D</li><li>mean : double</li><li>stdDev : double</li><li>color : bool</li>        </ul></td>        <td><ul><li>output : image2D</li>        </ul></td>        <td>Applies gaussian noise to an image.</td>
     </tr>
     <tr id='cv.homography'>
         <td>Homography</td>
@@ -3465,7 +3465,7 @@
     <tr id='cv.noise'>
         <td>Image Noise</td>
         <td><i class='bi bi-broadcast'></i></td>
-        <td><ul><li>source : image2D</li><li>mode : int</li><li>mean : double</li><li>stdDev : double</li><li>prob : double</li>        </ul></td>        <td><ul><li>output : image2D</li>        </ul></td>        <td>Applies synthetic noise to an image.</td>
+        <td><ul><li>source : image2D</li><li>mode : int</li><li>mean : double</li><li>stdDev : double</li><li>prob : double</li><li>color : bool</li>        </ul></td>        <td><ul><li>output : image2D</li>        </ul></td>        <td>Applies synthetic noise to an image.</td>
     </tr>
     <tr id='cv.pyr_down'>
         <td>Pyr Down</td>
@@ -3485,7 +3485,7 @@
     <tr id='cv.saltandpepper_noise'>
         <td>Salt and Pepper Noise</td>
         <td><i class='bi bi-broadcast'></i></td>
-        <td><ul><li>source : image2D</li><li>prob : double</li>        </ul></td>        <td><ul><li>output : image2D</li>        </ul></td>        <td>Applies salt and pepper noise to an image.</td>
+        <td><ul><li>source : image2D</li><li>prob : double</li><li>color : bool</li>        </ul></td>        <td><ul><li>output : image2D</li>        </ul></td>        <td>Applies salt and pepper noise to an image.</td>
     </tr>
     <tr id='cv.scharr_edge_detector'>
         <td>Scharr Edge Detector</td>
@@ -3515,7 +3515,7 @@
     <tr id='cv.speckle_noise'>
         <td>Speckle Noise</td>
         <td><i class='bi bi-broadcast'></i></td>
-        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>output : image2D</li>        </ul></td>        <td>Applies speckle noise to an image.</td>
+        <td><ul><li>source : image2D</li><li>color : bool</li>        </ul></td>        <td><ul><li>output : image2D</li>        </ul></td>        <td>Applies speckle noise to an image.</td>
     </tr>
     <tr id='cv.sqr_box_filter'>
         <td>Sqr Box Filter</td>
@@ -5887,6 +5887,11 @@
         <td><i class='bi bi-rulers'></i></td>
         <td><ul><li>source : image2D</li><li>dsize : int2</li><li>interpolation : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Resizes an image down to or up to the specified size</td>
     </tr>
+    <tr id='cv.rotation'>
+        <td>Rotation</td>
+        <td><i class='bi bi-rulers'></i></td>
+        <td><ul><li>source : image2D</li><li>angle : double</li><li>scale : double</li>        </ul></td>        <td><ul><li>output : image2D</li>        </ul></td>        <td>Rotates an image by a given angle and scale.</td>
+    </tr>
     <tr id='cv.scan_stitcher'>
         <td>Scan Stitcher</td>
         <td><i class='bi bi-gear'></i></td>
@@ -6108,7 +6113,7 @@
     <tr id='cv.video_writer'>
         <td>Video Writer</td>
         <td><i class='bi bi-card-image'></i></td>
-        <td><ul><li>source : image2D</li><li>directory : string</li><li>filename : string</li><li>format : int</li><li>trigger : int</li><li>duration : double</li><li>delay : double</li><li>fps : double</li>        </ul></td>        <td><ul>        </ul></td>        <td>Saves Video</td>
+        <td><ul><li>source : image2D</li><li>directory : string</li><li>filename : string</li><li>format : int</li><li>Snapshot : int</li><li>duration : double</li><li>delay : double</li><li>fps : double</li><li>Export... : int</li>        </ul></td>        <td><ul>        </ul></td>        <td>Saves Video</td>
     </tr>
     <tr id='py.wifi_server'>
         <td>Wi-Fi Server</td>
