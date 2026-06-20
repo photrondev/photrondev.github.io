@@ -1808,7 +1808,7 @@
                     <strong>Live Progress Banner:</strong> A prominent, real-time tracking banner is displayed at the top of your video list. It features a spinning gear icon, highlights the directory name being processed, and displays a precise percentage completion status along with a visual progress bar.
                 </li>
                 <li style="margin-bottom: 8px;">
-                    <strong>Parallel Tasking:</strong> While propagation runs in the background, you are free to rename, duplicate, or delete other video sequences, or set up other annotation tasks.
+                    <strong>Parallel Tasking:</strong> While propagation runs in the background, you are free to rename, create variations, or delete other video sequences, or set up other annotation tasks.
                 </li>
                 <li style="margin-bottom: 8px;">
                     <strong>Cancel Anytime:</strong> If you need to stop propagation early, click the <strong>Cancel Tracking</strong> button directly on the background banner or in the modal to cleanly halt the task.
@@ -1856,8 +1856,8 @@
                 <td style="padding: 8px;"><strong>Refresh:</strong> Re-extracts frames for a video that has already been processed.</td>
             </tr>
             <tr style="border-bottom: 1px solid #e2e8f0;">
-                <td style="padding: 8px; text-align: center;"><i class="bi bi-copy"></i></td>
-                <td style="padding: 8px;"><strong>Duplicate:</strong> Creates a copy of the video file entry. This new entry can be used to create more training images - see <i class="bi bi-infinity"></i> Workflow </td>
+                <td style="padding: 8px; text-align: center;"><i class="bi bi-layers"></i></td>
+                <td style="padding: 8px;"><strong>Create Variation:</strong> Creates a copy or variant of the video file entry. This new variation can be used to apply preprocessing workflows (e.g. noise, color) and generate more training images - see <i class="bi bi-infinity"></i> Workflow </td>
             </tr>
             <tr style="border-bottom: 1px solid #e2e8f0;">
                 <td style="padding: 8px; text-align: center;"><i class="bi bi-trash"></i></td>
@@ -1876,7 +1876,7 @@
         <h4 style="color: steelblue; margin-top: 20px;"><i class="bi bi-diagram-3"></i> 3. Workflow Management</h4>
         <ul style="font-size: 0.9em;">
             <li><strong>Processing and Refreshing:</strong> Click the <strong>Process</strong> icon to start extraction. Use the <strong>Refresh</strong> icon to update frames if settings change.</li>
-            <li><strong>Handling Duplicates:</strong> Flagged with an <strong>Infinity icon</strong>, these have restricted access. You may <strong>Rename</strong> or <strong>Delete</strong> them, but you cannot open the standard processing workflow until they are resolved.</li>
+            <li><strong>Handling Variations:</strong> Flagged with an <strong>Infinity icon</strong>, these have restricted access. You may <strong>Rename</strong> or <strong>Delete</strong> them, but you cannot open the standard processing workflow until they are resolved.</li>
             <li><strong>Renaming Files:</strong> Click the <strong>Rename</strong> icon, enter the new name in the dialog, and confirm.</li>
         </ul>
 
@@ -3382,6 +3382,11 @@
         <td>Morph Gradient Border</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Morphological dilated pixel result minus morphological eroded pixel result with border control.</td>
+    </tr>
+    <tr id='cuda.noise'>
+        <td>Cuda Image Noise</td>
+        <td><i class='bi bi-broadcast'></i></td>
+        <td><ul><li>source : cuda2D</li><li>amount : double</li><li>color : bool</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Applies high-quality custom synthetic noise to a Cuda image buffer.</td>
     </tr>
     <tr id='cuda.prewitt'>
         <td>Prewitt</td>
