@@ -3378,6 +3378,11 @@
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : cuda2D</li><li>radius : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Blur image using median 3x3 blurs</td>
     </tr>
+    <tr id='cuda.mono_preprocess'>
+        <td>Cuda Preprocess</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : cuda2D</li><li>contrast : double</li><li>brightness : double</li><li>radius : double</li><li>noise : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Combined monochrome processing including brightness, contrast, iterative blur, and noise.</td>
+    </tr>
     <tr id='cuda.morph_gradient_border'>
         <td>Morph Gradient Border</td>
         <td><i class='bi bi-stars'></i></td>
@@ -8366,7 +8371,7 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
         Note, on OSX and Linux instead of using "..\python.exe", you should use "python3"
     </p>
 
-<pre>..\python.exe app.pyc [-help] [-device #] [-test ...] [-cuda ...] [-batch] [-final node name or node uuid] [-override json] [-nobrowser] [-source ...] [-path ...] [-port ...] [-resolution ...] [-test ...] [-label]  [-fps ...]\n [-mcp]\n  [workflow]</pre>
+<pre>..\python.exe app.pyc [-help] [-device #] [-test ...] [-cuda ...] [-batch] [-final node name or node uuid] [-override json] [-nobrowser] [-source ...] [-path ...] [-port ...] [-resolution ...] [-test ...] [-label] [-fps ...] [-mcp] [-label_variations directory] [-clean] [workflow]</pre>
 
     <table>
         <tr>
@@ -8486,6 +8491,20 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
             <td>Starts MCP server. See <a href="#mcp">MCP Server</a></td>
             <td></td>
             <td><pre>..\python.exe app.pyc -mcp</pre></td>
+        </tr>
+
+        <tr>
+            <td>-label_variations</td>
+            <td>Runs batch variation preprocessing for the specified directory (e.g., assets folder).</td>
+            <td></td>
+            <td><pre>..\python.exe app.py -batch -label_variations ..\assets\AI_Welding</pre></td>
+        </tr>
+
+        <tr>
+            <td>-clean</td>
+            <td>Force full recomputation of variations when used with -label_variations by deleting existing completion cookies and images first.</td>
+            <td></td>
+            <td><pre>..\python.exe app.py -batch -clean -label_variations ..\assets\AI_Welding</pre></td>
         </tr>
 
         <tr>
