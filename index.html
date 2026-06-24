@@ -8371,7 +8371,7 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
         Note, on OSX and Linux instead of using "..\python.exe", you should use "python3"
     </p>
 
-<pre>..\python.exe app.pyc [-help] [-device #] [-test ...] [-cuda ...] [-batch] [-final node name or node uuid] [-override json] [-nobrowser] [-source ...] [-path ...] [-port ...] [-resolution ...] [-test ...] [-label] [-fps ...] [-mcp] [-label_variations directory] [-clean] [workflow]</pre>
+<pre>..\python.exe app.pyc [-help] [-device #] [-test ...] [-cuda ...] [-batch] [-final node name or node uuid] [-override json] [-nobrowser] [-source ...] [-path ...] [-port ...] [-resolution ...] [-test ...] [-label] [-fps ...] [-mcp] [-label_variations directory] [-movie movie_prefix] [-clean] [workflow]</pre>
 
     <table>
         <tr>
@@ -8501,8 +8501,22 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
         </tr>
 
         <tr>
+            <td>-movie</td>
+            <td>Filter variation subdirectories under the .variations folder when running -label_variations. If specified, only folders starting with the given name/prefix (e.g., "bighole" matching "bighole - Copy", "bighole - Variation #1") are searched, cleaned, and processed.</td>
+            <td></td>
+            <td><pre>..\python.exe app.py -batch -label_variations ..\assets\AI_Welding -movie bighole</pre></td>
+        </tr>
+
+        <tr>
+            <td>-devices</td>
+            <td>(Used with run_batch_preprocess.py) Number of devices (e.g. GPUs) to distribute batches over. If set to 2, it creates 2x more batches, passing -device 0 to the first half and -device 1 to the second half.</td>
+            <td>1</td>
+            <td><pre>..\python.exe run_batch_preprocess.py -label_variations ..\assets\AI_Welding -devices 2</pre></td>
+        </tr>
+
+        <tr>
             <td>-clean</td>
-            <td>Force full recomputation of variations when used with -label_variations by deleting existing completion cookies and images first.</td>
+            <td>Force full recomputation of variations when used with -label_variations by deleting existing completion cookies and images first. Supports -movie filtering.</td>
             <td></td>
             <td><pre>..\python.exe app.py -batch -clean -label_variations ..\assets\AI_Welding</pre></td>
         </tr>
