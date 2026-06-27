@@ -228,7 +228,7 @@
     " onmouseover="this.style.background='rgba(0, 86, 179, 0.15)'; this.style.color='#0056b3'; this.style.transform='translateX(4px)';"
                            onmouseout="this.style.background='rgba(0, 86, 179, 0.05)'; this.style.color='#d4d4d4'; this.style.transform='translateX(0)';">
                             <span style="margin-right: 6px; display: inline-flex; align-items: center; transform: translateY(-1px);" class="bi bi-magic"></span>
-                            <span>AI Lab & Tuning</span>
+                            <span>AI Studios</span>
                         </a>
                     </li>
 
@@ -330,10 +330,12 @@
                         <ul class="dropdown-menu">
 
                             <li class="dropdown-submenu">
-                                <a href="#">Labeling and Fine Tuning</a>
+                                <a href="#">AI Studios</a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#AiLabeler">Labeling</a></li>
-                                    <li><a href="#AiLabeler">Fine Tuning</a></li>
+                                    <li><a href="#AiLabeler">AI Labeling Studio</a></li>
+                                    <li><a href="#VideoStudio">Video Segmentation Studio</a></li>
+                                    <li><a href="#SplittingStudio">Video Splitting Studio</a></li>
+                                    <li><a href="#FineTuning">Fine Tuning</a></li>
                                     <li><a href="#PyrenderTutorial">3D Rendering for Synthetic Rendering</a></li>
                                 </ul>
                             </li>
@@ -1673,238 +1675,385 @@
         See the reference section for the full list of <a href="#ML">ML Tools</a>
     </p>
 
-    <h2 id="AiLabeler">Labeling, Tracking, and Fine Tuning</h2>
+    <h2 id="AiLabeler">AI Studios</h2>
 
     <p>
-        The AI Labeling Tool is a specialized environment for creating high-quality datasets. It facilitates pixel-perfect
-        <strong>Image Segmentation</strong>, <strong>Instance Segmentation</strong>, and object <strong>Detection</strong> by combining
-        automated class management, sequential image processing, and AI-assisted tracking. Once labeled, you can fine-tune to create a custom ML model.
+        Infini-Workflow provides two tightly integrated, specialized studios for high-fidelity dataset creation and automated machine learning preparation: the <strong>AI Labeling Studio</strong> and the <strong>Video Segmentation Studio</strong>, complemented by the interactive <strong>Video Splitting Studio</strong> for heavy high-speed sequences, and the <strong>Fine Tuning Studio</strong> for native model optimization.
     </p>
 
-    <div class="tool-section">
-        <h3 style="color: #0dcaf0;">Setup & Initialization</h3>
-        <p>Initialize your task by choosing an annotation type and importing your source media.</p>
+    <!-- SECTION 1: AI LABELING STUDIO -->
+    <div class="tool-section" style="border-top: 3px solid #0dcaf0; padding-top: 15px; margin-top: 25px;">
+        <h3 style="color: #0dcaf0; display: flex; align-items: center; gap: 10px;">
+            <i class="bi bi-magic"></i> AI Labeling Studio
+        </h3>
+        <p>
+            The AI Labeling Studio is a specialized annotation environment built for compiling premium quality ML dataset corpora. It combines an interactive vector/raster edit canvas, sequential frame propagation, and automated checkpoint managers to facilitate pixel-perfect labeling.
+        </p>
+
+        <h4 style="color: #0dcaf0; margin-top: 20px;"><i class="bi bi-bookmark"></i> Task Types Supported</h4>
         <ul class="viewer-help-list">
             <li>
-                <i class="bi bi-bookmark"></i> <strong>Select Task:</strong> Choose between <strong>Detection</strong>, <strong>Instance Segmentation</strong>, or <strong>Image Segmentation</strong>.
+                <strong>Detection:</strong> Draw rectangular bounding boxes around interest targets to train regression-based localization models (e.g., YOLO v8).
             </li>
             <li>
-                <i class="bi bi-film"></i> <strong>Video Processing:</strong> Click the <strong>Open Videos</strong> button to trigger the <strong><a href="#video-management-dialog">Video Management</a></strong>. This interface interfaces with the backend to convert raw video files into frame sequences. Once converted, the system enables instant access for labeling.
+                <strong>Instance Segmentation:</strong> Manage individual multi-class object instances with automated outline tracking and custom labeling.
             </li>
             <li>
-                <i class="bi bi-box-arrow-in-down"></i> <strong>Import:</strong> Imports manual keyframes (image segmentation), named after the sequence, e.g. 0001.jpg. Select a directory of jpeg files where the image file should be black and white representation of the first class pixels.
+                <strong>Image Segmentation:</strong> Pixel-level annotations (semantic/binary masks) for isolating fluid boundaries, fractures, or complex shapes.
             </li>
         </ul>
-    </div>
 
-    <div class="tool-section">
-        <h3 style="color: #6f42c1;">Labeling, Tracking, & Navigation</h3>
+        <h4 style="color: #0dcaf0; margin-top: 20px;"><i class="bi bi-pencil-square"></i> Labeling, Tracking, &amp; Navigation</h4>
+        <p>Annotate frames by clicking the <strong>Edit</strong> <i class="bi bi-pencil"></i> button on an extracted frame directory. Once in the viewer, select your active class, use a path tool (such as <strong>Add Rectangle</strong> or polygon points), and click and drag to define your shape. Switch classes as needed, and save your progress.</p>
 
-        <p>Annotate files by clicking the <strong>Edit</strong> <i class="bi bi-pencil"></i> button. Once in the viewer, select a class from the list (use the background class to create "holes"), then choose a path tool (e.g., <strong>Add Rectangle</strong>) and click and drag in the viewer to create your shape. Switch between classes as needed; when finished, click the <strong>Save</strong> icon to register your labels.</p>
-
-        <table class="table table-bordered table-sm">
+        <table class="table table-bordered table-sm" style="color: white; font-size: 0.9em; margin-top: 15px;">
             <colgroup>
                 <col style="width: 60px;">
                 <col style="width: 20%;">
-                <col style="width: 20%;">
+                <col style="width: 15%;">
                 <col style="width: auto;">
             </colgroup>
             <thead>
-                <tr>
+                <tr style="border-bottom: 2px solid #0dcaf0;">
                     <th style="text-align: center;">Icon</th>
                     <th>Action</th>
-                    <th>Label Type</th>
+                    <th>Type</th>
                     <th>Description</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr style="border-bottom: 1px solid #2d2d3d;">
                     <td style="text-align: center; padding: 10px;">
                         <a id="path-save" class="bi bi-floppy-fill ai-label-icon"></a>
                     </td>
-                    <td><strong>Save</strong></td>
+                    <td><strong>Save Labels</strong></td>
                     <td>All</td>
-                    <td>Click the icon or press <kbd>s</kbd> to register current labels.</td>
+                    <td>Register current frame annotation state to local storage and active SQLite cache (Hotkey: <kbd>s</kbd>).</td>
                 </tr>
-                <tr>
+                <tr style="border-bottom: 1px solid #2d2d3d;">
                     <td style="text-align: center; padding: 10px; white-space: nowrap;">
                         <a id="path-previous" class="bi bi-caret-left-fill ai-label-icon"></a>
                         <a id="path-next" class="bi bi-caret-right-fill ai-label-icon"></a>
                     </td>
-                    <td><strong>Navigation</strong></td>
+                    <td><strong>Timeline Navigation</strong></td>
                     <td>All</td>
-                    <td>Use <kbd>a</kbd> (Prev) and <kbd>d</kbd> (Next) to cycle frames and restore state.</td>
+                    <td>Cycle forward or backward through extracted image frame files (Hotkeys: <kbd>a</kbd> for previous, <kbd>d</kbd> for next).</td>
                 </tr>
-
-                <tr>
+                <tr style="border-bottom: 1px solid #2d2d3d;">
                     <td style="text-align: center; padding: 10px;">
                         <a id="path-sam-prompt" class="bi bi-chat-dots-fill ai-nav-icon"></a>
                     </td>
                     <td><strong>AI Smart Segment</strong></td>
-                    <td>Detection & Instance Segmentation</td>
-                    <td>Click the icon to perform AI-assisted segmentation by clicking on targets.</td>
+                    <td>Detection / Segment</td>
+                    <td>Uses Segment Anything Model (SAM) prompt grids to perform automated multi-object boundaries creation from single point clicks.</td>
                 </tr>
-
-                <tr>
+                <tr style="border-bottom: 1px solid #2d2d3d;">
                     <td style="text-align: center; padding: 10px;"><i class="bi bi-arrow-right"></i></td>
-                    <td><strong>Track</strong></td>
-                    <td>Image Segmentation</td>
-                    <td>
-                        Uses <strong>SAM2 Tracking</strong> to propagate segmentations and create "AUTO" labeled keyframes between manual keyframes. You can run propagation interactively in the foreground or offload it to the background.
-                    </td>
+                    <td><strong>Sequential Propagation</strong></td>
+                    <td>Image Segment</td>
+                    <td>Leverages Segment Anything 2 (SAM2) tracking algorithms to propagate segmentations forward and backward to automatically label keyframes between manual annotations.</td>
                 </tr>
-
-                <tr>
+                <tr style="border-bottom: 1px solid #2d2d3d;">
                     <td style="text-align: center; padding: 10px;"><i class="bi bi-eye"></i></td>
-                    <td><strong>Spot Check</strong></td>
-                    <td>Image Segmentation</td>
-                    <td>Plays back the preview of the labeled results.</td>
+                    <td><strong>Spot Check Preview</strong></td>
+                    <td>Image Segment</td>
+                    <td>Fast play back slider to quickly view chronological segment blending and overlay consistency.</td>
                 </tr>
-
-                <tr>
+                <tr style="border-bottom: 1px solid #2d2d3d;">
                     <td style="text-align: center; padding: 10px;"><i class="bi bi-pencil"></i></td>
                     <td><strong>Vectorization</strong></td>
-                    <td>Image Segmentation</td>
-                    <td>Deleting an "AUTO" path triggers <strong>Vectorization</strong>, converting complex masks to editable paths.</td>
+                    <td>Image Segment</td>
+                    <td>Deletes an individual automated outline segment to trigger vectorization, converting the rasterized mask into editable bezier anchor nodes.</td>
                 </tr>
-                <tr>
+                <tr style="border-bottom: 1px solid #2d2d3d;">
                     <td style="text-align: center; padding: 10px;"><i class="bi bi-exclamation-triangle"></i></td>
                     <td><strong>Manual Overrides</strong></td>
-                    <td>Image Segmentation</td>
-                    <td>Modifying a keyframe invalidates nearby "AUTO" paths to prevent tracking drift.</td>
+                    <td>Image Segment</td>
+                    <td>Modifying any frame already marked as "AUTO" instantly elevates it to "MANUAL", invalidating adjacent automatically tracked regions to avoid spatial drift.</td>
                 </tr>
-                <tr>
+                <tr style="border-bottom: 1px solid #2d2d3d;">
                     <td style="text-align: center; padding: 10px;"><i class="bi bi-trash"></i></td>
-                    <td><strong>AUTO</strong></td>
-                    <td>Image Segmentation</td>
-                    <td>Deletes AUTO keyframes.</td>
-                </tr>
-                <tr>
-                    <td style="text-align: center; padding: 10px;"><i class="bi bi-trash"></i></td>
-                    <td><strong>ALL</strong></td>
-                    <td>Image Segmentation</td>
-                    <td>Deletes ALL manual and AUTO keyframes.</td>
-                </tr>
-
-                <tr>
-                    <td style="text-align: center; padding: 10px;"><i class="bi bi-trash"></i></td>
-                    <td><strong>CHECKPOINT</strong></td>
+                    <td><strong>Checkpoint Rollbacks</strong></td>
                     <td>All</td>
-                    <td>Deletes the prior checkpoint.</td>
+                    <td>Cleans, prunes, or deletes preceding automated frame segments, manual tags, or restores previous workspace checkpoints.</td>
                 </tr>
             </tbody>
         </table>
 
-        <div class="background-tracking-box" style="background: rgba(255, 170, 0, 0.05); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #ffaa00;">
-            <h4 style="color: #ffaa00; margin-top: 0;"><i class="bi bi-gear-fill" style="animation: spin 3s linear infinite; display: inline-block;"></i> Background SAM2 Tracking:</h4>
+        <h4 style="color: #0dcaf0; margin-top: 20px;"><i class="bi bi-gear-wide-connected"></i> Dataset Fine-Tuning &amp; Weights Compilation</h4>
+        <p>After compiling labeled sequences, use the <strong>Fine Tuning</strong> controls to compile native models (e.g. YOLO, UNet) based on your custom annotations.</p>
+        <ul class="viewer-help-list">
+            <li><strong>Model &amp; Training Specs:</strong> Define neural architecture backbone size, evaluation/training split ratios, learning rate, and epochs count.</li>
+            <li><strong>Multi-Video Compilation:</strong> Click the Fine-Tune button to invoke a project-wide <strong>Fine-Tune Videos selection dialog</strong>. This tool shows all videos inside your folder, with thumbnails, and memorizes your checked video directories using persistent cookies.</li>
+            <li><strong>Real-time Status Log:</strong> Stream console progress, epoch completion, active validation splits loss curves, and background training loops directly inside the interface.</li>
+            <li><strong>Inference Node Generation:</strong> Once a training run successfully completes, click "Create Inference Node" to drop a pre-configured native ML Inference block containing your compiled weights directly into your core workspace.</li>
+        </ul>
+    </div>
+
+    <!-- SECTION 2: VIDEO SEGMENTATION STUDIO -->
+    <div id="VideoStudio" class="tool-section" id="video-management-dialog" style="border-top: 3px solid #6f42c1; padding-top: 15px; margin-top: 30px;">
+        <h3 style="color: #6f42c1; display: flex; align-items: center; gap: 10px;">
+            <i class="bi bi-film"></i> Video Segmentation Studio
+        </h3>
+        <p>
+            The Video Segmentation Studio serves as the central control room for managing raw media sources, converting film into discrete frames, and preparing frame sequences. It features rich asynchronous processing and high-performance background pipelines.
+        </p>
+
+        <h4 style="color: #6f42c1; margin-top: 20px;"><i class="bi bi-layout-text-window-reverse"></i> Workspace Organization</h4>
+        <p>Your video corpus is managed inside an interactive spreadsheet overview, providing clear indicators for Thumbnail Preview, Sequence Filenames, and Lifecycle Actions:</p>
+        <ul class="viewer-help-list">
+            <li><strong>Thumbnail Zoom:</strong> Hover your mouse cursor over any video thumbnail on the left column to instantly reveal an interactive full-size floating hover preview of the video frame.</li>
+            <li><strong>Filename Paths:</strong> Displays file sequences or active folders within the current project repository.</li>
+            <li><strong>Lifecycle Action Dashboard:</strong> A set of quick-action control buttons corresponding to the video state.</li>
+        </ul>
+
+        <h4 style="color: #6f42c1; margin-top: 20px;"><i class="bi bi-tools"></i> Video Actions and Workflow Icons</h4>
+        <p>Each video entry displays a set of actions depending on whether it's a raw file, a processed sequence, or a preprocessed variation:</p>
+
+        <table style="width: 100%; font-size: 0.9em; border-collapse: collapse; margin-top: 10px; color: white;">
+            <thead>
+                <tr style="border-bottom: 2px solid #6f42c1; text-align: left;">
+                    <th style="padding: 8px; width: 60px; text-align: center;">Icon</th>
+                    <th style="padding: 8px;">Action</th>
+                    <th style="padding: 8px;">Function &amp; Backend Flow</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="border-bottom: 1px solid #2d2d3d;">
+                    <td style="padding: 8px; text-align: center;"><i class="bi bi-folder-symlink" style="color: #0dcaf0;"></i></td>
+                    <td><strong>Open Workspace</strong></td>
+                    <td style="padding: 8px;">Opens the frame-by-frame canvas editor for an already processed video directory.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #2d2d3d;">
+                    <td style="padding: 8px; text-align: center;"><i class="bi bi-play-circle" style="color: #00ff88;"></i></td>
+                    <td><strong>Process Video</strong></td>
+                    <td style="padding: 8px;">Launches frame extraction for raw film files. Note: Videos with high frame counts (over 240 frames) automatically redirect to the <strong>Video Splitting Studio</strong> to define target boundaries.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #2d2d3d;">
+                    <td style="padding: 8px; text-align: center;"><i class="bi bi-arrow-clockwise" style="color: #ffc107;"></i></td>
+                    <td><strong>Re-Extract / Refresh</strong></td>
+                    <td style="padding: 8px;">Clears previous frames and triggers re-extraction. Handy when original source files change or parameters are adjusted.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #2d2d3d;">
+                    <td style="padding: 8px; text-align: center;"><i class="bi bi-layers" style="color: #ffaa00;"></i></td>
+                    <td><strong>Create Variation</strong></td>
+                    <td style="padding: 8px;">Creates a lightweight virtual copy/duplicate of the entry. Used to run augmentation pipelines (e.g. brightness, contrast, noise, and color changes) while keeping the same annotations.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #2d2d3d;">
+                    <td style="padding: 8px; text-align: center;"><i class="bi bi-infinity" style="color: #ffaa00;"></i></td>
+                    <td><strong>Apply Preprocessing Workflow</strong></td>
+                    <td style="padding: 8px;">Opens the variations setup interface to configure image preprocessing nodes, expanding dataset variance synthetically.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #2d2d3d;">
+                    <td style="padding: 8px; text-align: center;"><i class="bi bi-type-italic" style="color: #cbd5e0;"></i></td>
+                    <td><strong>Rename</strong></td>
+                    <td style="padding: 8px;">Safely renames directories, database entries, and dependent checkpoints across the filesystem.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #2d2d3d;">
+                    <td style="padding: 8px; text-align: center;"><i class="bi bi-trash" style="color: #dc3545;"></i></td>
+                    <td><strong>Delete</strong></td>
+                    <td style="padding: 8px;">Permanently deletes extracted frames, caches, and database configurations.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- SAM2 Background Box -->
+        <div class="background-tracking-box" style="background: rgba(111, 66, 193, 0.05); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #6f42c1;">
+            <h4 style="color: #a180e6; margin-top: 0;"><i class="bi bi-cpu-fill" style="animation: spin 3s linear infinite; display: inline-block;"></i> Background Frame Tracking (SAM2)</h4>
             <p style="font-size: 0.95em; color: #ccc;">
-                For large videos or long sequences, frame propagation using Segment Anything 2 (SAM2) can be computationally intensive and take time. To stay productive, you can offload this process to the backend:
+                To keep labeling pipelines interactive, long-sequence frame propagation using SAM2 can be offloaded to a background thread directly from the annotation editor:
             </p>
             <ul style="font-size: 0.9em; color: #ccc; margin-left: 15px; padding-left: 10px;">
                 <li style="margin-bottom: 8px;">
-                    <strong>Run in Background:</strong> Click the yellow <strong>Run in Background</strong> button inside the SAM2 tracking propagation modal. This instantly closes the annotation canvas and returns you to the Video Management panel.
+                    <strong>Run in Background:</strong> Click the "Run in Background" button inside the tracking modal to close the editor and resume other workflow actions.
                 </li>
                 <li style="margin-bottom: 8px;">
-                    <strong>Live Progress Banner:</strong> A prominent, real-time tracking banner is displayed at the top of your video list. It features a spinning gear icon, highlights the directory name being processed, and displays a precise percentage completion status along with a visual progress bar.
+                    <strong>Live Progress Banner:</strong> A prominent tracking banner resides at the top of the Video Segmentation Studio showing a spinning gear, sequence name, and completion percentage alongside a real-time progress bar.
                 </li>
                 <li style="margin-bottom: 8px;">
-                    <strong>Parallel Tasking:</strong> While propagation runs in the background, you are free to rename, create variations, or delete other video sequences, or set up other annotation tasks.
-                </li>
-                <li style="margin-bottom: 8px;">
-                    <strong>Cancel Anytime:</strong> If you need to stop propagation early, click the <strong>Cancel Tracking</strong> button directly on the background banner or in the modal to cleanly halt the task.
-                </li>
-                <li style="margin-bottom: 8px;">
-                    <strong>Automatic Completion:</strong> When tracking finishes, the banner is automatically removed, the video list is updated, and all generated "AUTO" labeled keyframes are saved and ready.
+                    <strong>Concurrent Operations:</strong> While background propagation runs, you can create variations, delete sequences, or perform metadata changes on other videos.
                 </li>
             </ul>
         </div>
 
+        <!-- BATCH PROCESSING BOX -->
+        <div class="batch-processing-box" style="background: rgba(111, 66, 193, 0.05); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #6f42c1;">
+            <h4 style="color: #a180e6; margin-top: 0;"><i class="bi bi-collection-play-fill"></i> Batch Processing &amp; Automated Queue Management</h4>
+            <p style="font-size: 0.95em; color: #ccc;">
+                To fast-track pipelines involving large video libraries, the Video Segmentation Studio integrates <strong>Batch Processing</strong>:
+            </p>
+            <ul style="font-size: 0.9em; color: #ccc; margin-left: 15px; padding-left: 10px;">
+                <li style="margin-bottom: 12px;">
+                    <strong>Wipe &amp; Clean Rebuild:</strong> Toggle the <em>"Clean preprocessed data"</em> option to wipe previously completed cookies and cache states. This ensures that the parallel processor reconstructs all target frames and augmented variations from scratch, eliminating dirty-state cache discrepancies.
+                </li>
+                <li style="margin-bottom: 12px;">
+                    <strong>Workload Parallelization:</strong> Specify the <em>"Number of parallel batches"</em> to control how many independent background python processes are spawned. This splits the dataset across parallel processors to saturate multiple computing pipelines.
+                </li>
+                <li style="margin-bottom: 12px;">
+                    <strong>Hardware Telemetry:</strong> View the read-only <em>"Number of devices (GPUs)"</em> field to quickly verify the total discrete graphics processing units available in the host environment.
+                </li>
+                <li style="margin-bottom: 12px;">
+                    <strong>Chained Training Execution:</strong> By checking <em>"Automatically start training after data expansion"</em>, the pipeline creates an automated feedback loop, directly triggering model fine-tuning runs using the configured hyperparameters once parallel data expansion completes.
+                </li>
+                <li style="margin-bottom: 12px;">
+                    <strong>Graceful GUI Exit &amp; Dedicated Terminal Spawn:</strong> Clicking the primary <strong>"Do you want to EXIT and start Batch Preprocessing?"</strong> button serializes the configuration, closes the local web server GUI, and immediately spawns a high-priority, dedicated standalone terminal window to execute the heavy processing workload. The browser window is then gracefully redirected to Photron's home portal.
+                </li>
+            </ul>
+        </div>
     </div>
 
-    <div id="video-management-dialog" style="background: rgba(70, 130, 180, 0.05); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid steelblue; color: white;">
-        <h3 style="color: steelblue;"><i class="bi bi-film"></i> Video Management</h3>
-        <p style="font-size: 0.9em;">
-            The Video Management interface provides a comprehensive set of tools for viewing, organizing, and processing your video files.
+    <!-- SECTION 3: VIDEO SPLITTING STUDIO -->
+    <div id="SplittingStudio" class="tool-section" id="video-splitting-studio" style="border-top: 3px solid #ff9f0a; padding-top: 15px; margin-top: 30px; margin-bottom: 25px;">
+        <h3 style="color: #ff9f0a; display: flex; align-items: center; gap: 10px;">
+            <i class="bi bi-scissors"></i> Video Splitting Studio
+        </h3>
+        <p>
+            The <strong>Video Splitting Studio</strong> is a dedicated high-fidelity interface designed to manage heavy, long, or high-speed video sequences. Because annotating thousands of frames linearly is impractical, the Splitter allows you to clip precise frame spans and compile them into shorter, highly manageable chunks.
         </p>
 
-        <h4 style="color: steelblue;"><i class="bi bi-layout-text-window"></i> 1. Interface Overview</h4>
-        <p style="font-size: 0.9em;">The video management screen is organized into a table format for quick access and efficient batch management.</p>
-        <ul style="font-size: 0.9em;">
-            <li><strong>Thumbnail:</strong> A quick visual preview of the video content.</li>
-            <li><strong>Filename:</strong> Displays the name of the video file or directory.</li>
-            <li><strong>Actions:</strong> A collection of interactive buttons used to manage the file's lifecycle, state, and properties.</li>
-        </ul>
-
-        <h4 style="color: steelblue;"><i class="bi bi-tools"></i> 2. Action Icons and Functions</h4>
-        <p style="font-size: 0.9em;">The actions available to you depend on the current processing state of the video.</p>
-
-        <table style="width: 100%; font-size: 0.9em; border-collapse: collapse; margin-top: 10px; color: white;">
-            <tr style="border-bottom: 2px solid #cbd5e0; text-align: left;">
-                <th style="padding: 8px; width: 50px;">Icon</th>
-                <th style="padding: 8px;">Function</th>
-            </tr>
-            <tr style="border-bottom: 1px solid #e2e8f0;">
-                <td style="padding: 8px; text-align: center;"><i class="bi bi-folder-symlink"></i></td>
-                <td style="padding: 8px;"><strong>Open:</strong> Opens the directory or workflow for an already processed video.</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #e2e8f0;">
-                <td style="padding: 8px; text-align: center;"><i class="bi bi-play-circle"></i></td>
-                <td style="padding: 8px;"><strong>Process:</strong> Starts the frame extraction process for raw video files.</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #e2e8f0;">
-                <td style="padding: 8px; text-align: center;"><i class="bi bi-arrow-clockwise"></i></td>
-                <td style="padding: 8px;"><strong>Refresh:</strong> Re-extracts frames for a video that has already been processed.</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #e2e8f0;">
-                <td style="padding: 8px; text-align: center;"><i class="bi bi-layers"></i></td>
-                <td style="padding: 8px;"><strong>Create Variation:</strong> Creates a copy or variant of the video file entry. This new variation can be used to apply preprocessing workflows (e.g. noise, color) and generate more training images - see <i class="bi bi-infinity"></i> Workflow </td>
-            </tr>
-            <tr style="border-bottom: 1px solid #e2e8f0;">
-                <td style="padding: 8px; text-align: center;"><i class="bi bi-trash"></i></td>
-                <td style="padding: 8px;"><strong>Delete:</strong> Permanently removes the video entry from the management list.</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #e2e8f0;">
-                <td style="padding: 8px; text-align: center;"><i class="bi bi-type-italic"></i></td>
-                <td style="padding: 8px;"><strong>Rename:</strong> Opens a dialog to modify the file name.</td>
-            </tr>
-            <tr>
-                <td style="padding: 8px; text-align: center;"><i class="bi bi-infinity"></i></td>
-                <td style="padding: 8px;"><strong>Workflow:</strong> Process to generate new input images such as with noise or brighter or darker (keeping same masks).</td>
-            </tr>
-        </table>
-
-        <h4 style="color: steelblue; margin-top: 20px;"><i class="bi bi-diagram-3"></i> 3. Workflow Management</h4>
-        <ul style="font-size: 0.9em;">
-            <li><strong>Processing and Refreshing:</strong> Click the <strong>Process</strong> icon to start extraction. Use the <strong>Refresh</strong> icon to update frames if settings change.</li>
-            <li><strong>Handling Variations:</strong> Flagged with an <strong>Infinity icon</strong>, these have restricted access. You may <strong>Rename</strong> or <strong>Delete</strong> them, but you cannot open the standard processing workflow until they are resolved.</li>
-            <li><strong>Renaming Files:</strong> Click the <strong>Rename</strong> icon, enter the new name in the dialog, and confirm.</li>
-        </ul>
-
-        <h4 style="color: steelblue;"><i class="bi bi-eye"></i> 4. Enhanced Previewing</h4>
-        <p style="font-size: 0.9em;">
-            To see a larger preview: Simply <strong>hover your mouse</strong> over the small thumbnail image in the table's first column. The full-sized preview will appear automatically and hide when you move your mouse away.
+        <h4 style="color: #ff9f0a; margin-top: 20px;"><i class="bi bi-lightning-charge"></i> Automated Redirection</h4>
+        <p>
+            You do not need to launch the Splitter manually. Inside the Video Segmentation Studio, clicking <strong>Process</strong> <i class="bi bi-play-circle"></i> on any raw video file containing <strong>more than 240 frames</strong> will automatically open the full-screen Video Splitting Studio interface.
         </p>
+
+        <h4 style="color: #ff9f0a; margin-top: 20px;"><i class="bi bi-sliders"></i> Features and Interactive Scrubber Controls</h4>
+        <ul class="viewer-help-list" style="font-size: 0.95em; color: #ddd;">
+            <li style="margin-bottom: 10px;">
+                <i class="bi bi-camera-reels-fill" style="color: #ff9f0a;"></i> <strong>Real-time Frame Scrubber:</strong> Drag the premium timeline range slider to scrub through frames instantly. The viewer shows real-time frame index badges and original resolution specifications.
+            </li>
+            <li style="margin-bottom: 10px;">
+                <i class="bi bi-scissors" style="color: #00ff88;"></i> <strong>START &amp; END Boundary Pins:</strong> Click <strong>Set Start Boundary</strong> or <strong>Set End Boundary</strong> to drop green (START) and red (END) marker pins directly on the scrubber track. Only frames inside this custom boundary will be processed.
+            </li>
+            <li style="margin-bottom: 10px;">
+                <i class="bi bi-hdd-stack-fill" style="color: #ff9f0a;"></i> <strong>Custom Chunking Size:</strong> Specify the maximum frames per output sequence part (default: 240 frames). The splitter calculates exactly how many discrete chunk sequences will be compiled.
+            </li>
+            <li style="margin-bottom: 10px;">
+                <i class="bi bi-skip-forward-fill" style="color: #ffc107;"></i> <strong>Temporal Frame Skipping:</strong> Apply a frame step/skip ratio (e.g., sample 1 frame every 5 frames) to temporally downsample high-speed video clips, dramatically reducing redundant data while preserving key kinematics.
+            </li>
+            <li style="margin-bottom: 10px;">
+                <i class="bi bi-bar-chart-line-fill" style="color: #00ff88;"></i> <strong>Live Estimation Breakdown:</strong> As you tweak boundaries, chunks, or skips, a live dashboard recalculates total chosen frame span, frame sampling, exact frame count to extract, and compiles a complete output part name list dynamically (e.g. <code>clip_1_split.mp4</code>, <code>clip_2_split.mp4</code>).
+            </li>
+            <li style="margin-bottom: 10px;">
+                <i class="bi bi-hourglass-split" style="color: #dc3545;"></i> <strong>High-Performance Extraction:</strong> Click <strong>Proceed Split</strong> to execute high-speed splitting. The overlay triggers background extraction, automatically creating individual virtual video files inside your main Video Segmentation Studio table list once completed.
+            </li>
+        </ul>
     </div>
 
-    <div class="tool-section">
-        <h3 style="color: #ffc107;">Fine Tuning & Results</h3>
-        <p>Use the <strong>Fine Tuning</strong> panel to train a custom model once your labeling is complete.</p>
-        <ul class="viewer-help-list">
-            <li><i class="bi bi-gear"></i> <strong>Training Configuration:</strong> Select model size, splits, and epochs. Training is blocked if no labeled data is detected.</li>
-            <li>
-                <i class="bi bi-file-earmark-play"></i> <strong>Multi-Video Selection:</strong> If your project contains multiple labeled videos, clicking "Train" will trigger a <strong>Fine-Tune Videos</strong> dialog.
-                <ul>
-                    <li>Use <strong>Select All</strong> or <strong>Select Current</strong> to define your training dataset.</li>
-                    <li>The dialog shows thumbnails for quick identification and automatically remembers your preferences via browser cookies for your current project path.</li>
+    <!-- SECTION 4: FINE TUNING STUDIO -->
+    <div id="FineTuning" class="tool-section" style="border-top: 3px solid #ffc107; padding-top: 15px; margin-top: 30px; margin-bottom: 25px;">
+        <h3 style="color: #ffc107; display: flex; align-items: center; gap: 10px;">
+            <i class="bi bi-cpu"></i> Fine Tuning
+        </h3>
+        <p>
+            The <strong>Fine Tuning</strong> provides a powerful, web-native interface to train, validate, and optimize state-of-the-art machine learning models directly on your custom-labeled datasets. Rather than exporting your data and writing complex boilerplate training scripts, you can initiate high-performance model training in one click, monitor metrics in real time, and deploy your custom weights immediately within your workspace.
+        </p>
+
+        <h4 style="color: #ffc107; margin-top: 20px;"><i class="bi bi-database-check"></i> 1. Dataset Preparation &amp; Rules</h4>
+        <p>
+            Before initiating training, you must ensure your annotated dataset meets the system requirements. The system enforces strict validation gates:
+        </p>
+        <ul class="viewer-help-list" style="font-size: 0.95em; color: #ddd;">
+            <li style="margin-bottom: 10px;">
+                <i class="bi bi-check-circle-fill" style="color: #00ff88;"></i> <strong>Data Finalization:</strong> All bounding boxes, polygons, and segment masks must be fully saved and finalized. The system searches SQLite caches to compile the raw training matrix.
+            </li>
+            <li style="margin-bottom: 10px;">
+                <i class="bi bi-exclamation-triangle-fill" style="color: #dc3545;"></i> <strong>Validation Check Rules:</strong> Training cannot begin if no frames have been annotated. The system will throw a validation error dialog and block execution if the labeled frame count is zero, preventing wasted computing overhead.
+            </li>
+            <li style="margin-bottom: 10px;">
+                <i class="bi bi-folder-symlink-fill" style="color: #0dcaf0;"></i> <strong>Automatic Class Mapping:</strong> Custom classes defined during label creation are dynamically numbered and mapped (e.g., <code>class_0: cell</code>, <code>class_1: nucleus</code>) to generate compatible YAML configuration descriptors automatically.
+            </li>
+        </ul>
+
+        <h4 style="color: #ffc107; margin-top: 20px;"><i class="bi bi-sliders2-vertical"></i> 2. Hyperparameter Configuration</h4>
+        <p>
+            The studio exposes crucial learning parameters in a visual dashboard, allowing you to fine-tune the training process:
+        </p>
+        <ul class="viewer-help-list" style="font-size: 0.95em; color: #ddd;">
+            <li style="margin-bottom: 10px;">
+                <i class="bi bi-layers-half" style="color: #ffc107;"></i> <strong>Model Size &amp; Backbone Selection:</strong> Choose from standard neural backbones depending on your speed and resource needs (e.g., <code>YOLOv8 Nano (n)</code> for real-time edge performance, <code>YOLOv8 Small (s)</code> or <code>Medium (m)</code> for complex multi-class detection).
+            </li>
+            <li style="margin-bottom: 10px;">
+                <i class="bi bi-percent" style="color: #00ff88;"></i> <strong>Train/Val Split Ratio:</strong> Fine-tune the percentage of frames reserved for validation (typically <code>80/20</code> or <code>90/10</code> split). This partitions your dataset cleanly, shielding the validation set to monitor overfitting.
+            </li>
+            <li style="margin-bottom: 10px;">
+                <i class="bi bi-arrow-repeat" style="color: #ff9f0a;"></i> <strong>Epoch Control:</strong> Specify the total training epochs (range: <code>10 - 500</code>). Epoch controllers allow you to govern the model's iteration density over your target corpus.
+            </li>
+            <li style="margin-bottom: 10px;">
+                <i class="bi bi-grid-3x3-gap-fill" style="color: #0dcaf0;"></i> <strong>Batch Size &amp; VRAM Optimization:</strong> Set the number of images processed concurrently per backward gradient update (e.g., <code>8</code>, <code>16</code>, <code>32</code>, or <code>64</code>). 
+                <ul style="margin-top: 5px; padding-left: 20px; font-size: 0.95em;">
+                    <li style="color: #ccc; margin-bottom: 4px;"><em>Higher Batch Sizes:</em> Maximizes GPU hardware utilization, speeds up overall training duration, and provides more stable gradient updates. Best suited for high-end GPUs.</li>
+                    <li style="color: #ccc; margin-bottom: 4px;"><em>Lower Batch Sizes:</em> Dramatically reduces the active VRAM footprint. If your system encounters a <code>CUDA Out of Memory (OOM)</code> crash, downsize the batch size parameter to <code>8</code> or <code>4</code>.</li>
+                    <li style="color: #ccc; margin-bottom: 4px;"><em>Dynamic Auto-Batching:</em> Setting the parameter to <code>Auto</code> commands the trainer to run initial dummy dry-run passes on your hardware to determine VRAM ceilings, automatically picking the largest safe batch size.</li>
                 </ul>
             </li>
-            <li><i class="bi bi-broadcast"></i> <strong>Live Status Monitoring:</strong> View real-time logs and loss metrics during training.</li>
-            <li><i class="bi bi-node-plus"></i> <strong>Create Inference:</strong> Automatically generate a specialized inference node in your main workspace, pre-configured with your new model weights.</li>
+        </ul>
+
+        <h4 style="color: #ffc107; margin-top: 20px;"><i class="bi bi-collection-play"></i> 3. Initiating Training &amp; Multi-Video Selection</h4>
+        <p>
+            To compile broad generalization capabilities, models should train on varied datasets. The Fine Tuning Studio supports compiling multi-video datasets with seamless UX:
+        </p>
+        <ul class="viewer-help-list" style="font-size: 0.95em; color: #ddd;">
+            <li style="margin-bottom: 10px;">
+                <i class="bi bi-ui-checks" style="color: #00ff88;"></i> <strong>Project-Wide Multi-Video Dialog:</strong> Clicking the training initiation trigger opens a dedicated workspace-wide sequence selection dialog. You can select exactly which labeled clips are included in the compilation run.
+            </li>
+            <li style="margin-bottom: 10px;">
+                <i class="bi bi-images" style="color: #ffc107;"></i> <strong>Visual Thumbnail Grid:</strong> The selection dialog displays visual thumbnail previews, name tags, frame counts, and active annotation counts for each video clip to easily track labeled sources.
+            </li>
+            <li style="margin-bottom: 10px;">
+                <i class="bi bi-cookie" style="color: #ff9f0a;"></i> <strong>State Retention via Browser Cookies:</strong> Your dataset selection preferences, model configurations, and target selections are serialized in secure browser cookie states. Refreshing the dashboard or reopening the studio retains your exact working choices, eliminating repetitive setup.
+            </li>
+        </ul>
+        <h4 style="color: #ffc107; margin-top: 20px;"><i class="bi bi-terminal"></i> 4. Batch Training &amp; Standalone Execution</h4>
+        <p>
+            When initiating a project-wide multi-sequence training operation in batch mode, the selection dialog transforms into a high-performance, standalone compiler setup panel:
+        </p>
+        <ul class="viewer-help-list" style="font-size: 0.95em; color: #ddd;">
+            <li style="margin-bottom: 10px;">
+                <i class="bi bi-terminal-fill" style="color: #00ff88;"></i> <strong>Standalone Mode Indicator:</strong> The dialog modal displays a dedicated terminal icon (<i class="bi bi-terminal" style="color: #ff9f0a;"></i>) in the header, indicating that the training workload will run in high-priority background compilation mode.
+            </li>
+            <li style="margin-bottom: 10px;">
+                <i class="bi bi-trash-fill" style="color: #ff3b30;"></i> <strong>Delete Prior Training Checkpoint:</strong> A red checkbox option appears in the dialog footer: <em>"Delete prior training checkpoint"</em>. Checking this clears any saved weights from previous neural runs, forcing the compiler to optimize parameters purely from a clean, unbiased initial state.
+            </li>
+            <li style="margin-bottom: 10px;">
+                <i class="bi bi-box-arrow-right" style="color: #ff9f0a;"></i> <strong>Graceful Shutdown &amp; Standalone Launch:</strong> The primary trigger button is styled in high-visibility crimson: <strong>"Do you want to EXIT and start training?"</strong>. Clicking this initiates the backend process, closes INFINIWORKFLOW (to allocate 100% of host VRAM and CPU to ML training), and launches a dedicated standalone console window where training is optimized in parallel.
+            </li>
+        </ul>
+
+        <h4 style="color: #ffc107; margin-top: 20px;"><i class="bi bi-graph-up-arrow"></i> 5. Real-Time Training Monitoring</h4>
+        <p>
+            Once you trigger the run, the dashboard transitions into an interactive telemetry and performance viewport:
+        </p>
+        <ul class="viewer-help-list" style="font-size: 0.95em; color: #ddd;">
+            <li style="margin-bottom: 10px;">
+                <i class="bi bi-terminal-fill" style="color: #00ff88;"></i> <strong>Live Log Streaming:</strong> Watch the stdout logs directly inside the manual pane or fine-tuning logs widget. The system streams actual PyTorch training steps, batch processing speeds, and background GPU telemetry.
+            </li>
+            <li style="margin-bottom: 10px;">
+                <i class="bi bi-speedometer2" style="color: #0dcaf0;"></i> <strong>Interactive Progress Indicators:</strong> Real-time progress bars show overall completion percentage, current epoch index, and estimated remaining time (ETA).
+            </li>
+            <li style="margin-bottom: 10px;">
+                <i class="bi bi-activity" style="color: #ff3b30;"></i> <strong>Dynamic Loss Curve Evaluations:</strong> A live-updating telemetry chart plots training loss, validation loss, mean Average Precision (mAP50, mAP50-95), and recall across epochs, helping you visually pinpoint overfitting or convergence plateaus instantly.
+            </li>
+        </ul>
+
+        <h4 style="color: #ffc107; margin-top: 20px;"><i class="bi bi-cloud-arrow-up-fill"></i> 6. Deployment and Canvas Integration</h4>
+        <p>
+            When training concludes, your optimized model is packaged and made available for immediate production:
+        </p>
+        <ul class="viewer-help-list" style="font-size: 0.95em; color: #ddd;">
+            <li style="margin-bottom: 10px;">
+                <i class="bi bi-box-seam-fill" style="color: #00ff88;"></i> <strong>Weight Compilation:</strong> The pipeline extracts the highest-scoring parameters (<code>best.pt</code>) along with evaluation metrics tables.
+            </li>
+            <li style="margin-bottom: 10px;">
+                <i class="bi bi-diagram-3-fill" style="color: #ffc107;"></i> <strong>Native ML Inference Node:</strong> With one click, compile a custom ML Inference Canvas node containing your newly trained model. This node inserts directly into your active flowgraph workspace.
+            </li>
+            <li style="margin-bottom: 10px;">
+                <i class="bi bi-play-btn-fill" style="color: #0dcaf0;"></i> <strong>Immediate Inference Loop:</strong> Connect raw video streams or high-speed frames into this custom Canvas node to run inference using your personalized model parameters immediately, completing the automated feedback loop.
+            </li>
         </ul>
     </div>
 
     <div class="usage-tips" style="background: rgba(13, 202, 240, 0.05); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #0dcaf0;">
-        <h4 style="color: #0dcaf0;"><i class="bi bi-magic"></i> AI Tracking & Mechanics Pro-Tips:</h4>
+        <h4 style="color: #0dcaf0;"><i class="bi bi-magic"></i> AI Tracking &amp; Mechanics Pro-Tips:</h4>
         <ul style="font-size: 0.9em; color: #ccc;">
             <li><strong>Drift Prevention:</strong> Always verify your path after manually overriding a keyframe, as the system clears dependent "AUTO" segments to maintain sequence integrity.</li>
             <li><strong>Performance:</strong> Images are processed at 1024px using the FastSAM-s model for optimal balance between speed and precision.</li>
