@@ -1192,8 +1192,8 @@
         <li><i class="bi bi-square-fill"></i> <strong>Insert Rectangle:</strong> Draws a 4-point rectangular .</li>
         <li><i class="bi bi-circle-fill"></i> <strong>Insert Ellipse:</strong> Creates a circular or elliptical region.</li>
         <li><i class="bi bi-pentagon-fill"></i> <strong>Insert Shape:</strong> Allows drawing of custom polygons by clicking.</li>
-        <li><i class="bi bi-pencil"></i> <strong>Insert Freehand:</strong> Sketch a custom path freely with the mouse.</li>
-        <li><i class="bi bi-magic"></i> <strong>Insert Lasso:</strong> Intelligent selection tool for defining shapes.</li>
+        <li><i class="bi bi-pencil"></i> <strong>Insert Freehand:</strong> Sketch a custom path freely with the mouse. <em>(Long-press for Vector Brush thickness options)</em></li>
+        <li><i class="bi bi-magic"></i> <strong>Insert Lasso:</strong> Intelligent selection tool for defining shapes. <em>(Long-press for Stroke envelope thickness options)</em></li>
         <li><i class="bi bi-arrows-angle-expand"></i> <strong>Convert to Bezier:</strong> Changes sharp corners into smooth curves.</li>
         <li><i class="bi bi-arrows-angle-contract"></i> <strong>Convert to Point:</strong> Changes smooth curves back into sharp corners.</li>
         <li><i class="bi bi-trash-fill" style="color: #e74c3c;"></i> <strong>Delete Selected:</strong> Removes the active point or shape.</li>
@@ -1332,11 +1332,11 @@
             </li>
             <li>
                 <i class="bi bi-pencil"></i>
-                <strong>Insert Freehand:</strong> Allows for organic path creation by following the movement of your cursor while the mouse button is held down.
+                <strong>Insert Freehand:</strong> Allows for organic path creation by following the movement of your cursor while the mouse button is held down. <em>Supports Vector Brush mode (long press to select brush thickness).</em>
             </li>
             <li>
                 <i class="bi bi-magic"></i>
-                <strong>Insert Lasso:</strong> An intelligent selection tool that helps wrap complex shapes by detecting edges or following specific mouse gestures.
+                <strong>Insert Lasso:</strong> An intelligent selection tool that helps wrap complex shapes by detecting edges or following specific mouse gestures. <em>Supports stroke-envelope drawing (long press to select stroke thickness).</em>
             </li>
         </ul>
     </div>
@@ -1386,6 +1386,29 @@
                 <li><strong>Click & Drag:</strong> If you hold the mouse button down and drag while placing a point, <strong>Bezier control handles</strong> will automatically extend from the vertex. This allows you to create curved segments in real-time without needing to convert the point later.</li>
             </ul>
 
+        </div>
+
+        <div class="tool-section">
+            <h3><i class="bi bi-brush"></i> Vector Brush & Stroke Mode</h3>
+            <p>The <strong>Insert Freehand</strong> and <strong>Insert Lasso</strong> tools support an advanced <strong>Vector Brush / Stroke Mode</strong>. Instead of always generating solid, filled shapes, this mode allows you to draw strokes and outlines of a specific thickness following your hand path.</p>
+            <ul>
+                <li><strong>Activating Brush Mode:</strong> Long-press (click and hold for 450ms) on either the <strong>Insert Freehand</strong> (<i class="bi bi-pencil"></i>) or <strong>Insert Lasso</strong> (<i class="bi bi-magic"></i>) toolbar buttons to open the <strong>Brush Flyout Menu</strong>.</li>
+                <li><strong>Brush Options:</strong>
+                    <ul>
+                        <li><strong>Filled Shape:</strong> (Default) Draws a standard closed, solid-filled vector shape.</li>
+                        <li><strong>Small Brush (2px):</strong> Draws a thin 2px vector stroke envelope.</li>
+                        <li><strong>Medium Brush (6px):</strong> Draws a medium 6px vector stroke envelope.</li>
+                        <li><strong>Large Brush (10px):</strong> Draws a thick 10px vector stroke envelope.</li>
+                    </ul>
+                </li>
+                <li><strong>Visual Indicators:</strong>
+                    <ul>
+                        <li>When a brush thickness greater than 0px is active, the <strong>Insert Freehand</strong> icon dynamically updates from a pencil (<i class="bi bi-pencil"></i>) to a brush (<i class="bi bi-brush"></i>).</li>
+                        <li>An active tool with a custom brush thickness will be highlighted with a distinctive blue active-ring indicator in the toolbar.</li>
+                    </ul>
+                </li>
+                <li><strong>Stroke Envelope Generation:</strong> When drawing with a non-zero brush thickness, the path editor automatically generates a closed polygonal boundary (a stroke envelope) representing the thickness of your stroke rather than just connecting the start and endpoints as a solid polygon.</li>
+            </ul>
         </div>
 
         <div class="tool-section">
