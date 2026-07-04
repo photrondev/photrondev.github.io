@@ -2607,6 +2607,11 @@
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : cuda2D</li><li>inEdges : double2</li><li>outEdges : double2</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Smoothstep of Cuda Buffer</td>
     </tr>
+    <tr id='cuda.color_preprocess'>
+        <td>Color Variations</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : cuda2D</li><li>contrast : double</li><li>brightness : double</li><li>radius : double</li><li>noise : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Combined color processing including brightness, contrast, iterative blur, and noise.</td>
+    </tr>
     <tr id='cuda.yuv->bgr'>
         <td>YUV->BGR</td>
         <td><i class='bi bi-palette'></i></td>
@@ -3552,11 +3557,6 @@
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : cuda2D</li><li>radius : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Blur image using median 3x3 blurs</td>
     </tr>
-    <tr id='cuda.mono_preprocess'>
-        <td>Cuda Preprocess</td>
-        <td><i class='bi bi-stars'></i></td>
-        <td><ul><li>source : cuda2D</li><li>contrast : double</li><li>brightness : double</li><li>radius : double</li><li>noise : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Combined monochrome processing including brightness, contrast, iterative blur, and noise.</td>
-    </tr>
     <tr id='cuda.morph_gradient_border'>
         <td>Morph Gradient Border</td>
         <td><i class='bi bi-stars'></i></td>
@@ -3806,6 +3806,11 @@
         <td><i class='bi bi-mask'></i></td>
         <td><ul><li>source : cuda2D</li><li>targetColor : color</li><li>radius : double2</li><li>outputChannels : int</li><li>invert : bool</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>RGB Threshold of Cuda Buffer</td>
     </tr>
+    <tr id='cuda.mono_preprocess'>
+        <td>Grayscale Variations</td>
+        <td><i class='bi bi-mask'></i></td>
+        <td><ul><li>source : cuda2D</li><li>contrast : double</li><li>brightness : double</li><li>radius : double</li><li>noise : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Combined monochrome processing including brightness, contrast, iterative blur, and noise.</td>
+    </tr>
     <tr id='cv.grayscale'>
         <td>Grayscale</td>
         <td><i class='bi bi-palette'></i></td>
@@ -3989,6 +3994,11 @@
         <td>Take Picture</td>
         <td><i class='bi bi-file-image'></i></td>
         <td><ul><li>source : image2D</li><li>click : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Takes a picture</td>
+    </tr>
+    <tr id='cv.temporal_diff_movie_reader'>
+        <td>Temporal Difference Movie Reader</td>
+        <td><i class='bi bi-film'></i></td>
+        <td><ul><li>source : string</li><li>cache : int</li><li>realtime : bool</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Reads Images from a movie and applies temporal differential in blue chanbnel</td>
     </tr>
     <tr id='py.text'>
         <td>Text</td>
