@@ -556,7 +556,6 @@
 
             <li><i class="bi bi-robot"></i> Plays Introduction Tutorial</li>
             <li><i class="bi bi-robot"></i> Plays Workflow Gesture Tutorial</li>
-
             <li><i class="bi bi-robot"></i>  Plays <a href="#tutorials">Live Tutorials</a> that explain how to use the app</li>
             <li><i class="bi bi-mouse2"></i> Opens a guide for mouse and touch gestures</li>
             <li><i class="bi bi-infinity"></i> About box</li>
@@ -2203,7 +2202,7 @@
     <tr id='cv.multi_label_path'>
         <td>Multi-Label Path</td>
         <td><i class='bi bi-layers-fill'></i></td>
-        <td><ul><li>Source : image2D</li><li>Path 1 : string</li><li>Label 1 : string</li><li>Color 1 : color</li><li>Path 2 : string</li><li>Label 2 : string</li><li>Color 2 : color</li><li>Path 3 : string</li><li>Label 3 : string</li><li>Color 3 : color</li><li>Path 4 : string</li><li>Label 4 : string</li><li>Color 4 : color</li><li>Path 5 : string</li><li>Label 5 : string</li><li>Color 5 : color</li><li>Path 6 : string</li><li>Label 6 : string</li><li>Color 6 : color</li><li>Path 7 : string</li><li>Label 7 : string</li><li>Color 7 : color</li><li>Path 8 : string</li><li>Label 8 : string</li><li>Color 8 : color</li><li>Path 9 : string</li><li>Label 9 : string</li><li>Color 9 : color</li><li>Path 10 : string</li><li>Label 10 : string</li><li>Color 10 : color</li><li>Auto Matte Path : string</li><li>Clear Path : string</li><li>blend : double</li>        </ul></td>        <td><ul><li>Mask : image2D</li><li>Preview : image2D</li><li>Detect : matrix2D</li><li>Points : matrix2D</li>        </ul></td>        <td>Renders 10 independent labeled paths. Generates a Class-ID mask (0-9) and a preview with bounding boxes and labels.</td>
+        <td><ul><li>Source : image2D</li><li>Path 1 : string</li><li>Label 1 : string</li><li>Color 1 : color</li><li>Path 2 : string</li><li>Label 2 : string</li><li>Color 2 : color</li><li>Path 3 : string</li><li>Label 3 : string</li><li>Color 3 : color</li><li>Path 4 : string</li><li>Label 4 : string</li><li>Color 4 : color</li><li>Path 5 : string</li><li>Label 5 : string</li><li>Color 5 : color</li><li>Path 6 : string</li><li>Label 6 : string</li><li>Color 6 : color</li><li>Path 7 : string</li><li>Label 7 : string</li><li>Color 7 : color</li><li>Path 8 : string</li><li>Label 8 : string</li><li>Color 8 : color</li><li>Path 9 : string</li><li>Label 9 : string</li><li>Color 9 : color</li><li>Path 10 : string</li><li>Label 10 : string</li><li>Color 10 : color</li><li>Auto Matte Path : string</li><li>Clear Path : string</li><li>blend : double</li><li>Hide Bounding Box and Label : bool</li>        </ul></td>        <td><ul><li>Mask : image2D</li><li>Preview : image2D</li><li>Detect : matrix2D</li><li>Points : matrix2D</li>        </ul></td>        <td>Renders 10 independent labeled paths. Generates a Class-ID mask (0-9) and a preview with bounding boxes and labels.</td>
     </tr>
     <tr id='cv.onnx_basic_classification'>
         <td>ONNX for Basic Classification</td>
@@ -5746,6 +5745,16 @@
         <td><i class='bi bi-graph-up-arrow'></i></td>
         <td><ul><li>source : image2D</li><li>position : int2</li><li>normalize : bool</li>        </ul></td>        <td><ul><li>out : image2D</li><li>red : double</li><li>green : double</li><li>blue : double</li><li>alpha : double</li><li>luminance : double</li>        </ul></td>        <td>For a given pixel, find its R,G,B, Alpha value, and Luminance.</td>
     </tr>
+    <tr id='py.camera_calibration'>
+        <td>SoccerNet Camera Calibration</td>
+        <td><i class='bi bi-camera-reels'></i></td>
+        <td><ul><li>source : image2D</li><li>keypoints2D : matrix2D</li><li>keypoints3D : matrix2D</li>        </ul></td>        <td><ul><li>cameraTranslation : double3</li><li>cameraRotation : double3</li><li>cameraIntrinsics : matrix2D</li><li>homography : matrix2D</li>        </ul></td>        <td>Calculates camera extrinsics, intrinsics, and homography from localized pitch markings.</td>
+    </tr>
+    <tr id='cv.soccernet_field_localization'>
+        <td>SoccerNet Field Localization</td>
+        <td><i class='bi bi-bounding-box-circles'></i></td>
+        <td><ul><li>source : image2D</li><li>confidenceThreshold : double</li><li>activationThreshold : double</li>        </ul></td>        <td><ul><li>keypoints2D : matrix2D</li><li>preview : image2D</li>        </ul></td>        <td>Detects soccer pitch line markings and goal post extremities using deep learning.</td>
+    </tr>
     <tr id='cv.statistics_nonzero'>
         <td>Statistics for Non Zero Pixels</td>
         <td><i class='bi bi-graph-up-arrow'></i></td>
@@ -5914,6 +5923,11 @@
         <td><i class='bi bi-compass-fill'></i></td>
         <td><ul><li>source1 : image2D</li><li>source2 : image2D</li><li>minHessian : int</li>        </ul></td>        <td><ul><li>keypoints1 : matrix2D</li><li>preview : image2D</li><li>keypoints2 : matrix2D</li>        </ul></td>        <td>Finds the feature vector correspondent to the keypoints using the FLANN matcher</td>
     </tr>
+    <tr id='cv.game_state_reconstruction'>
+        <td>Game State Reconstruction</td>
+        <td><i class='bi bi-geo-alt'></i></td>
+        <td><ul><li>source : image2D</li><li>confThreshold : double</li><li>nmsThreshold : double</li>        </ul></td>        <td><ul><li>playerPositions : matrix2D</li><li>preview : image2D</li>        </ul></td>        <td>Runs object detection and projects athletes onto a 2D minimap using homography.</td>
+    </tr>
     <tr id='cv.line_crossing'>
         <td>Line Crossing Counter</td>
         <td><i class='bi bi-sign-stop'></i></td>
@@ -5953,6 +5967,11 @@
         <td>SIFT Detector</td>
         <td><i class='bi bi-compass-fill'></i></td>
         <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>keypoints : matrix2D</li><li>preview : image2D</li>        </ul></td>        <td>Determines strong corners on an image using the SIFT detector</td>
+    </tr>
+    <tr id='cv.spatial_tracker'>
+        <td>Spatial Object Tracker</td>
+        <td><i class='bi bi-crosshair'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>distanceThreshold : double</li><li>maxDisappeared : int</li>        </ul></td>        <td><ul><li>trackedObjects : matrix2D</li><li>preview : image2D</li>        </ul></td>        <td>A lightweight, math-only Multi-Object Tracker (MOT) that assigns persistent IDs to bounding boxes based on centroid distance.</td>
     </tr>
     <tr id='cv.speed_tracker'>
         <td>Speed Tracker</td>
