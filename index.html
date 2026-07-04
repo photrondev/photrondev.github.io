@@ -543,7 +543,7 @@
         <ul>
             <li><i class="bi bi-infinity"></i> INFINIWORKFLOW HUB, Platform Information, Packages & What's New & More</li>
             <li><i class="bi bi-lightbulb"></i> <a href="#GenerativeAI">Generative AI</a> that creates new workflows based on user prompts</li>
-            <li><i class="bi bi-bookmark"></i> AI Labeling and Fine Tuning</li>
+            <li><i class="bi bi-bookmark"></i> <a href="#AiLabeler">AI Studio</a> allows you to label, fine-tune models and create inference tools</li>
             <li><i class="bi bi-terminal"></i> Displays the rendering status console which also indicates progress, warnings and errors</li>
             <li><i class="bi bi-grid-3x3-gap-fill"></i> Shows the Grid Search dialog that is used to optimize your ML models using the <a href="#GridSearch">GridSearch UI</a></li>
             <li><i class="bi bi-shop-window"></i> Show the published view of the workflow. This is an experimental <a href="#Publish">feature</a> that allows you to simplify the workflow into a list of published parameters and hide the workflow. When in publish mode, click on this icon to switch back to the flowgraph mode again.</li>
@@ -599,19 +599,19 @@
         </li>
         <li>
             <p id="drop-inbetween">
-                Insert new tool inbetween
+                Insert new tool inbetween by dropping node from the catalog over an edge which will highlight to show you can insert it inbetween
             </p>
             <img src="https://photrondev.github.io/assets/ui_node_drag_drop_inbetween.gif" />
         </li>
         <li>
             <p>
-                Insert node inbetween
+                Insert exisiting node by dragging it and making mouse over an  edge which will highlight to show you can insert it inbetween
             </p>
             <img src="https://photrondev.github.io/assets/ui_node_drag_drop_inbetween2.gif" />
         </li>
         <li>
             <p id="drop-port-feature">
-                Insert new tool after
+                Insert new tool after by dragging node from catalog and dropping with mouse over a port, it connects an edge from that port
             </p>
             <img src="https://photrondev.github.io/assets/ui_node_drag_drop_after_port.gif" />
         </li>
@@ -1704,7 +1704,6 @@
         Infini-Workflow provides two tightly integrated, specialized studios for high-fidelity dataset creation and automated machine learning preparation: the <strong>AI Labeling Studio</strong> and the <strong>Video Segmentation Studio</strong>, complemented by the interactive <strong>Video Splitting Studio</strong> for heavy high-speed sequences, and the <strong>Fine Tuning Studio</strong> for native model optimization.
     </p>
 
-    <!-- SECTION 1: AI LABELING STUDIO -->
     <div class="tool-section" style="border-top: 3px solid #0dcaf0; padding-top: 15px; margin-top: 25px;">
         <h3 style="color: #0dcaf0; display: flex; align-items: center; gap: 10px;">
             <i class="bi bi-magic"></i> AI Labeling Studio
