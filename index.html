@@ -246,7 +246,7 @@
                             <li><a href="#NodeMenu">Node Context Menu</a></li>
                             <li><a href="#Editor">Parameter Editor</a></li>
                             <li><a href="#Viewer">Viewer</a></li>
-                            <li><a href="#ImportExport">IO</a></li>
+                            <li><a href="#ImportExport">Import & Export Browser</a></li>
                         </ul>
                     </li>
 
@@ -445,7 +445,7 @@
         <li><a href="#Editor">Parameter Editor</a></li>
         <li><a href="#Viewer">Viewer</a></li>
         <li><a href="#PathEditor">Path Editor</a></li>
-        <li><a href="#ImportExport">Import & Export</a></li>
+        <li><a href="#ImportExport">Import & Export Browser</a></li>
     </ul>
 
     <h2 id="hub">INFINIWORKFLOW HUB</h2>
@@ -481,9 +481,9 @@
 
         <li><i class="bi bi-file-earmark"></i> File</li>
         <ul>
-            <li><i class="bi bi-cloud-upload"></i>  Import a workflow will open the import dialog and allow you to select an existing workflow from the demos folder using the <a href="#ImportExport">Import UI</a></li>
+            <li><i class="bi bi-cloud-upload"></i>  Import a workflow will open the import dialog and allow you to select an existing workflow from the demos folder using the <a href="#ImportExport">Import Browser</a></li>
             <li><i class="bi bi-star"></i> Add authoring notes to the workflow to include your name and description of the workflow</li>
-            <li><i class="bi bi-cloud-download"></i> Saves the workflow using the <a href="#ImportExport">Export UI</a></li>
+            <li><i class="bi bi-cloud-download"></i> Saves the workflow using the <a href="#ImportExport">Export Browser</a></li>
             <li><i class="bi bi-cart"></i> Generate code for integration into your application See <a href="#CodeGenerator">Code Generator</a></li>
             <li><i class="bi bi-trash"></i> Clears the workflow to start a new one from scratch</li>
             <li><i class="bi bi-power"></i> Exit the application</li>
@@ -8673,15 +8673,67 @@
 
 
 
-    <h2 id="ImportExport">Import/Export</h2>
+    <h2 id="ImportExport">Import & Export Browser</h2>
+    <img src="https://photrondev.github.io/assets/ui_import_workflow.gif" alt="File Browser Demo" />
+
+
     <p>
-        For Import or Export, files are shown in a custom file selector dialog.
-        Files <i class="bi bi-file-earmark-fill"></i>icons and Folder <i class="bi bi-folder-fill"></i> icons are selectable.
-        You have restricted access to the files that are located in either the ${assets} or ${demos} folders
-        where INFINIWORKFLOW is installed. To import your own images, copy the files to the ${assets} folder and then they will be available to
-        select in the file selector dialog.
+        The INFINIWORKFLOW Import & Export Browser browser provides a sophisticated interface for managing, previewing, and selecting your workflows and assets.
     </p>
-    <img src="https://photrondev.github.io/assets/ui_import_workflow.gif" />
+
+    <h3>1. Navigating the File System</h3>
+    <p>
+        The file browser manages files located in the <code>${assets}</code>, <code>${demos}</code>, and <code>${downloads}</code> folders. Use the <strong>Root Folder Select</strong> dropdown at the top-left to toggle between these primary storage locations.
+    </p>
+
+    <p><strong>Breadcrumb Navigation:</strong></p>
+    <p>
+        The path bar below the header allows you to jump back to any parent directory by clicking on the folder names.
+        <br><em>Example:</em> <code>$ / demos / Verticals</code>
+    </p>
+    <ul>
+        <li><strong>$ (Root):</strong> Clicking this returns you to the top-level directory.</li>
+        <li><strong>/:</strong> Denotes hierarchy levels between folders.</li>
+        <li><strong>Folder Segments (e.g., demos):</strong> Clicking any segment navigates you back to that specific directory, regardless of depth.</li>
+    </ul>
+
+    <p><strong>Custom Path Mapping:</strong></p>
+    <p>
+        You can define additional directory paths as prefixes using the <code>-path</code> argument when launching the application.
+        <br><em>Example:</em> <code>..\python.exe app.pyc -path "captures=C:\Users\imagi\CapturesFolder;media=C:\media"</code>
+    </p>
+
+    <h3>2. View Modes & Searching</h3>
+    <p>
+        Customize your browsing experience using the icons in the top-right toolbar:
+    </p>
+    <ul>
+        <li><strong>Icon View <i class="bi bi-card-text"></i>:</strong> Displays files with visual thumbnails. Ideal for workflows and image assets.</li>
+        <li><strong>List View <i class="bi bi-list"></i>:</strong> Displays a detailed table including modification dates and file types.</li>
+        <li><strong>Search Bar:</strong> Type in the filter bar to dynamically hide files that do not match your query. Click the backspace icon <i class="bi bi-backspace-fill"></i> to clear your filter.</li>
+    </ul>
+
+    <h3>3. Advanced Preview & Training Overlays</h3>
+    <p>
+        When selecting a <code>.json</code> workflow, the browser provides an integrated preview window:
+    </p>
+    <ul>
+        <li><strong>Metadata Panel:</strong> Displays author, description, and requirements (e.g., CUDA or PyTorch).</li>
+        <li><strong>Training Overlays:</strong> For select workflows, a dedicated training overlay will launch. This allows you to view multi-language instructions, browse a gallery of related workflows via the <strong>Next/Previous</strong> arrows, and click <strong>Load Content</strong> <i class="bi bi-box-arrow-in-down"></i> to import.</li>
+    </ul>
+
+    <h3>4. Importing and Exporting</h3>
+    <p>
+        The system validates your hardware against the workflow requirements.
+    </p>
+    <blockquote>
+        <strong>Note:</strong> If the requirement text turns <strong>red</strong>, your current system is missing the necessary GPU nodes (CUDA/PyTorch) required to run the selected workflow.
+    </blockquote>
+
+
+
+
+
 
     <h3 id="Customize">Customize Node</h3>
     <p>
