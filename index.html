@@ -1881,8 +1881,8 @@
                 </tr>
                 <tr style="border-bottom: 1px solid #2d2d3d;">
                     <td style="padding: 8px; text-align: center;"><i class="bi bi-layers" style="color: #ffaa00;"></i></td>
-                    <td><strong>Create Variation</strong></td>
-                    <td style="padding: 8px;">Creates a lightweight virtual copy/duplicate of the entry. Used to run augmentation pipelines (e.g. brightness, contrast, noise, and color changes) while keeping the same annotations.</td>
+                    <td><strong>Create Variation (Option B)</strong></td>
+                    <td style="padding: 8px;">Creates a lightweight copy of the entry. If no copy exists, a clean copy is created instantly with copied annotations. If a duplicate copy already exists, you are prompted to <strong>Regenerate Variations</strong> to cleanly reset and overwrite folders rather than cluttering directories.</td>
                 </tr>
                 <tr style="border-bottom: 1px solid #2d2d3d;">
                     <td style="padding: 8px; text-align: center;"><i class="bi bi-infinity" style="color: #ffaa00;"></i></td>
@@ -1917,6 +1917,31 @@
                 </li>
                 <li style="margin-bottom: 8px;">
                     <strong>Concurrent Operations:</strong> While background propagation runs, you can create variations, delete sequences, or perform metadata changes on other videos.
+                </li>
+            </ul>
+        </div>
+
+        <!-- NEW: DATASET PREPROCESSING, HEADING CONTROLS, & SEQUENTIAL DUPLICATION BOX -->
+        <div class="preprocessing-variations-box" style="background: rgba(111, 66, 193, 0.05); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #6f42c1;">
+            <h4 style="color: #a180e6; margin-top: 0;"><i class="bi bi-layers-half"></i> Dataset Preprocessing &amp; Sequential Duplication</h4>
+            <p style="font-size: 0.95em; color: #ccc;">
+                To expand your annotations synthetically, the <strong>Variations Panel</strong> offers powerful single-click duplication and global bulk propagation:
+            </p>
+            <ul style="font-size: 0.9em; color: #ccc; margin-left: 15px; padding-left: 10px;">
+                <li style="margin-bottom: 8px;">
+                    <strong>Header-Level Controls:</strong> The <em>"Generate"</em> and <em>"Back to Video Segmentation Studio"</em> buttons are neatly integrated at the header level of the variations window, offering maximum screen real estate.
+                </li>
+                <li style="margin-bottom: 8px;">
+                    <strong>Delete All Except Copy:</strong> Clicking <em>"Delete All Variations"</em> deletes all augmented variations while keeping the primary <code>- Copy</code> directory fully intact on disk, letting you reset your augmentation pipelines without losing key annotations.
+                </li>
+                <li style="margin-bottom: 8px;">
+                    <strong>Sequential Duplication to ALL:</strong> The <em>"Duplicate Variations to All"</em> action copies the configured variations of your selected source movie sequentially across <strong>all other processed/labeled movies</strong> in the active workspace.
+                </li>
+                <li style="margin-bottom: 8px;">
+                    <strong>Silent Fail-Over Guard:</strong> The sequential duplication queue is built with bulletproof error handling. Unlabeled movies, empty mask states, or missing directories are silently and gracefully bypassed, ensuring the bulk queue completes without halting or throwing error blocks.
+                </li>
+                <li style="margin-bottom: 8px;">
+                    <strong>Dual-Progress Visualizer:</strong> An interactive overall progress tracking overlay appears during bulk duplication, detailing the current active task (e.g., <code>Task 2 of 5</code>) and progress percentage in real time.
                 </li>
             </ul>
         </div>
@@ -2117,6 +2142,7 @@
             <li><strong>Run Anywhere:</strong> Execute the exported script in any environment supporting our framework, allowing you to bypass platform limitations and utilize your own hardware resources for heavy training workloads.</li>
         </ul>
     </div>
+
 
     <h2>Tools</h2>
 
