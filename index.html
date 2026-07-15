@@ -9352,13 +9352,13 @@ Error Handling: If a requested tool or file cannot be found, report the error us
         <ul>
             <li><strong>Workflow Preview:</strong> Displays a DOT-rendered graph. Selecting "Ok" will trigger <code>workflow.importWorkflow</code>, clearing the current editor to load the AI-generated graph.</li>
             <li>
-                <strong>Plugin Viewer and Compiler:</strong> Opens a multi-file browser to inspect generated <code>.cpp</code>, <code>.h</code>, and <code>.json</code> files[cite: 8]. Clicking <strong>Save and Compile</strong> initiates a sophisticated automation pipeline:
+                <strong>Plugin Viewer and Compiler:</strong> Opens a multi-file browser to inspect generated <code>.cpp</code>, <code>.h</code>, and <code>.json</code> files. Clicking <strong>Save and Compile</strong> initiates a sophisticated automation pipeline:
                 <ul>
-                    <li><strong>Disk Export:</strong> Files are written to the local SDK directory structure at <code>/sdk/gen_ai/[PluginName]</code>[cite: 3].</li>
-                    <li><strong>Automated Build System:</strong> The system creates a dedicated <code>build</code> directory and runs <strong>CMake configuration</strong> tailored to the host operating system (e.g., Visual Studio 2022 for Windows or standard Makefiles for Unix-based systems)[cite: 3].</li>
-                    <li><strong>Real-time Progress Tracking:</strong> A visual <strong>Progress Bar</strong> and live <strong>Status Log</strong> appear directly within the viewer window, replacing the standard code view to show the compiler's output in real-time[cite: 8].</li>
+                    <li><strong>Disk Export:</strong> Files are written to the local SDK directory structure at <code>/sdk/gen_ai/[PluginName]</code>.</li>
+                    <li><strong>Automated Build System:</strong> The system creates a dedicated <code>build</code> directory and runs <strong>CMake configuration</strong> tailored to the host operating system (e.g., Visual Studio 2022 for Windows or standard Makefiles for Unix-based systems).</li>
+                    <li><strong>Real-time Progress Tracking:</strong> A visual <strong>Progress Bar</strong> and live <strong>Status Log</strong> appear directly within the viewer window, replacing the standard code view to show the compiler's output in real-time.</li>
                     <li><strong>Success Integration:</strong> Upon a successful build, the progress bar turns green, the compiled <code>.plugin</code> is automatically moved to the <code>Extensions</code> directory, and the <strong>Toolbox</strong> is reinitialized for immediate use without a restart.</li>
-                    <li><strong>Error Reporting:</strong> If compilation fails, the progress bar turns red, and the full compiler error log is displayed in the viewer to assist with debugging[cite: 8].</li>
+                    <li><strong>Error Reporting:</strong> If compilation fails, the progress bar turns red, and the full compiler error log is displayed in the viewer to assist with debugging.</li>
                 </ul>
             </li>
         </ul>
@@ -12001,7 +12001,7 @@ result = "torch.generic_loader"
             <td>superviseValue</td>
             <td><pre>bool superviseValue(PluginHost* host, int index, char* value);</pre></td>
             <td>
-                Called for indices listed in the "update_values" array in the node JSON[cite: 1, 2].
+                Called for indices listed in the "update_values" array in the node JSON.
                 The <b>value</b> parameter is a 512-byte buffer.
                 Return <b>true</b> and write a string to the buffer (e.g., a hex color or status text) to force a new value into the UI widget.
             </td>
@@ -14377,36 +14377,76 @@ test summary: 0 out of 2 pass
     </table>
 
     <h2 id="CodeGenerator">App Publisher & Code Generation Guide</h2>
-
     <p>Once you have built, tested, and optimized an AI-embedded computer vision pipeline visually inside the <strong>InfiniWorkflow</strong> interface, the next step is deployment. The <strong>App Hub & Publisher</strong> allows you to turn your graphical pipeline configurations into production-ready, standalone application source code.</p>
 
-    <div class="license-callout">
+    <section class="license-callout">
         <h3>Commercial License Notice</h3>
         <p>The code generation modules, runtime target bindings, and underlying high-performance <strong>InfiniWorkflow Engine Library</strong> are proprietary software covered strictly under the <strong>Photron USA Inc. Commercial License Agreement</strong>. Redistribution, production deployment, or embedding these binaries into commercial applications requires a valid enterprise subscription tier.</p>
-    </div>
+    </section>
 
-    <h2>Workflow Publishing Overview</h2>
-    <p>Publishing extracts your layout’s node topology, initialization states, connection matrices, and asset configurations. It then generates type-safe programming bindings matching your exact architecture. This guarantees that your application runs precisely as designed in the editor, bypassing manual programming errors during deployment.</p>
+    <h2>Code Generation Wizard</h2>
+    <p>The publishing process is powered by an interactive <strong>Code Generator Wizard</strong>, which streamlines the transition from pipeline to production. The wizard consists of three distinct steps:</p>
+    <ul>
+        <li><strong>Language Selection:</strong> Choose your target development environment (C++ or Python).</li>
+        <li><strong>Bundle Mode Selection:</strong> Decide between a full "Sample App" (including menus, sliders, and viewports) or "Only Raw Code" (core logic only.</li>
+        <li><strong>Interface Customization:</strong> Configure the front-end experience for your Sample App.</li>
+    </ul>
+
+    <h2>Sample App Customization</h2>
+    <p>When selecting the <strong>Sample App</strong> bundle mode, you gain access to the <strong>Interface Configurator</strong>, allowing you to tailor the user experience without writing manual UI code.</p>
+
+    <h3>UI Layout Modes</h3>
+    <p>You can choose between two primary interface configurations:</p>
+    <ul>
+        <li><strong>Default UI:</strong> Automatically exposes all nodes and ports into a standard layout.</li>
+        <li><strong>Customize UI Layout:</strong> Allows for granular control over the application interface.</li>
+    </ul>
+
+    <h3>Advanced Customization Features</h3>
+    <p>Within the "Customize" mode, you can manage how users interact with your pipeline:</p>
+    <ul>
+        <li><strong>Tab Management:</strong> Organize complex input parameters into categorized tabs (e.g., "General Controls", "Algorithm Tuning").</li>
+        <li><strong>Input Exposure:</strong> Select specific node inputs to expose, rename them for end-users, and reorder them within the UI.</li>
+        <li>
+            <strong>Output Rendering Styles:</strong> Define how data outputs appear in the app based on their type:
+            <ul>
+                <li><strong>Images:</strong> Render as <em>Video Feed</em>, <em>Thumbnail Strip</em>, or <em>Raw Hex Inspector</em>.</li>
+                <li><strong>Numeric (int/float/double):</strong> Render as <em>Value Card</em>, <em>Realtime Line Plot</em>, or <em>Status Indicator</em>.</li>
+                <li><strong>Other Data:</strong> Render as <em>Console Terminal</em> or <em>JSON Inspector</em>.</li>
+            </ul>
+        </li>
+    </ul>
 
     <h2>Supported Generation Targets</h2>
-    <div class="grid">
-        <div class="card">
-            <h3>Native C++ Code Generation</h3>
-            <p>Generates tight C++ structures (<code>app_logic.h</code> and <code>app_logic.cpp</code>) using dynamic library linking (FFI) to link directly against the <code>photron_engine</code> library.</p>
-            <ul>
-                <li><strong>Best For:</strong> Maximum real-time performance, ultra-low latency edge devices, and production embedded systems.</li>
-                <li><strong>Type Safety:</strong> Automatically compiles localized node IDs and distinct port connection enums.</li>
-            </ul>
-        </div>
-        <div class="card">
-            <h3>Python Code Generation</h3>
-            <p>Generates an object-oriented Python layer (<code>app_logic.py</code>) mapping identically to the engine's memory spaces, running alongside a standalone interactive execution script.</p>
-            <ul>
-                <li><strong>Best For:</strong> Rapid prototyping, direct cross-platform integration, and wrapping hybrid CV/Generative AI scripts.</li>
-                <li><strong>Features:</strong> Threaded callback handlers processing continuous binary and frame streams smoothly.</li>
-            </ul>
-        </div>
-    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Target</th>
+                <th>Best For</th>
+                <th>Features</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Native C++</strong></td>
+                <td>Ultra-low latency, edge devices, and production embedded systems.</td>
+                <td>Tight C++ structures, dynamic library linking, and type-safe node/port enums.</td>
+            </tr>
+            <tr>
+                <td><strong>Python</strong></td>
+                <td>Rapid prototyping, cross-platform integration, and hybrid AI workflows.</td>
+                <td>Object-oriented Python layer, threaded callback handlers, and native extension support.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Build & Run Functionality</h2>
+    <p>Upon generating your application, you are provided with a <strong>Hardwired Source Explorer</strong>. This interface allows you to:</p>
+    <ul>
+        <li><strong>Review Source Code:</strong> Browse and verify all generated files.</li>
+        <li><strong>Download:</strong> Export your project as a ZIP bundle.</li>
+        <li><strong>Build & Run:</strong> Use the "Build & Run" feature to trigger the backend compiler, which recreates workspace directories, generates build targets (e.g., CMake/MSBuild), and launches the standalone application directly from the editor.</li>
+    </ul>
 
     <h2>Architecture & API Usage</h2>
     <p>Regardless of your chosen output language, your code follows a matching workflow lifecycle to manage memory boundaries and thread execution models cleanly:</p>
