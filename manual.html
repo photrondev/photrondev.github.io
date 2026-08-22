@@ -194,7 +194,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#INFINICAM_Setup">Quick Start Guide</a></li>
-                                    <li><a href="#Infinicam">INFINICAM Tools</a></li>
+                                    <li><a href="#HighSpeedCameras">INFINICAM Tools</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown-submenu">
@@ -203,7 +203,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#HAWK_Setup">Quick Start Guide</a></li>
-                                    <li><a href="#HAWK">HAWK Tools</a></li>
+                                    <li><a href="#HighSpeedCameras">HAWK Tools</a></li>
                                 </ul>
                             </li>
                             <li class=""><a href="#UserAuthentication">User Authentication</a></li>
@@ -395,7 +395,7 @@
                             <li><a href="#Widgets">Widgets Tools</a></li>
 
                             <!-- END OF AUTO GENERATED TOC -->
-                            <li><a href="#Infinicam">Infinicam</a></li>
+                            <li><a href="#HighSpeedCameras">High Speed Cameras</a></li>
                             <li><a href="#CustomizingTools">Customizing your own Tools</a></li>
                             <li class=""><a href="#SystemPerformance">System Performance</a></li>
                             <li><a href="#CreatingTriggers">Creating Triggers</a></li>
@@ -1575,30 +1575,30 @@
 
 
 
-    <h2 id="Infinicam">Photron Infinicam</h2>
+    <h2 id="HighSpeedCameras">Photron High Speed Cameras</h2>
 
-    <p>Infinicam is a high-speed streaming camera capable of capturing and transferring 1.2-megapixel of image data to PC memory at 1,000fps via USB 3.1. Infiniworkflow, on top of all of its many other functionalities, is designed to be a platform for using Infinicam(s) and saving Infinicam footage. There are certain differences between nodes related to Infinicam and most other nodes, so if you will be using an Infinicam, reading through this section is the fastest way to understand everything Infiniworkflow can do with your Infinicam.</p>
+    <p>INFINICAM and HAWK are high-speed streaming cameras capable of capturing and transferring 1.2-megapixel of image data to PC memory at 1,000fps via USB 3.1. Infiniworkflow, on top of all of its many other functionalities, is designed to be a platform for using INFINICAM(s) and HAWK(s) and saving their footage. There are certain differences between nodes related to INFINICAM/HAWK and most other nodes, so if you will be using an INFINICAM or HAWK, reading through this section is the fastest way to understand everything Infiniworkflow can do with your camera.</p>
 
-    <p>The following section will be broken into 3 parts: the Infinicam viewer node and the Infinicam saving nodes.</p>
+    <h4>1. INFINICAM / HAWK Viewer node:</h4>
 
-    <h4>1. Infinicam Viewer node:</h4>
+    <p>When an INFINICAM or HAWK is plugged in, a node called "Infinicam" will come up. This node allows you to view the camera feed, and also set the preroll and postroll frames (pre/postroll frames will be discussed later). If multiple cameras are connected, each one will show up as its own node (i.e. "Infinicam", "Infinicam #2", etc). Note that the camera may take a few seconds to open. Also note that this node only allows you to view the feed; saving is done separately.</p>
 
-    <p>When an Infinicam is plugged in, a node called "Infinicam" will come up. This node allows you to view the Infinicam, and also set the preroll and postroll frames (pre/postroll frames will be discussed later). If multiple Infinicams are connected, each Infinicam will show up as its own node (i.e. "Infinicam", "Infinicam #2", etc). Note that the Infinicam may take a few seconds to open. Also note that this node only allows you to view the Infinicam; saving is done separately.</p>
+    <h4>2. INFINICAM / HAWK Saving nodes:</h4>
 
-    <h4>2. Infinicam Saving nodes:</h4>
+    <p>Infiniworkflow has 2 ways of saving footage for each camera line — "Infinicam Save Movie" and "Infinicam Save Compressed" for INFINICAM cameras, and "Hawk Save Movie" and "Hawk Save Compressed" for HAWK cameras. These saving nodes will come up for each respective camera that is connected to your machine (in other words, if you have 2 INFINICAM cameras connected, "Infinicam Save Movie" and "Infinicam Save Compressed" save footage from the first, and "Infinicam Save Movie #2" and "Infinicam Save Compressed #2" save footage from the second — the same numbering convention applies to HAWK nodes). Note that these saving nodes do not need to be connected to the viewer node itself; all that is required is that the Trigger is clicked.</p>
 
-    <p>Infiniworkflow has 2 ways of saving Infinicam footage - "Infinicam Save Movie" and "Infinicam Save Compressed". These 2 saving nodes will come up for each respective Infinicam that is connected to your machine (in other words, if you have 2 Infinicams connected, "Infinicam Save Movie" and "Infinicam Save Compressed" save footage from the first Infinicam, and "Infinicam Save Movie #2" and "Infinicam Save Compressed #2" save footage from the second Infinicam). Note that these saving nodes do not need to be connected to the "Infinicam" viewer node itself; all that is required is that the Trigger is clicked.</p>
     <img src="https://photrondev.github.io/assets/infinicam_save_nodes.jpg" width="50%" />
 
-    <p>The "Infinicam Save Movie" node, upon hitting the Trigger, saves footage from the selected Infinicam in any file type (.MP4, .MDAT, etc.) and to any file location. The total number of frames of Infinicam footafe that will be saved by this node when the Trigger is clicked is based on your Infinicam's pre-roll and post-roll number of frames. To explain what these terms means, consider the following example: you wish to save footage whenever an object falls off a conveyor belt in a factory. You have a workflow that will set a Trigger to True as soon as it detects that an object has just begun to fall off the belt. To understand why objects sometimes fall off the belt, you want to save the 2000 frames of footage from before the moment the object begins falling, as well as 1000 frames of footage after that point for good measure. Thus, you will set your pre-roll to 2000, and your post-roll to 1000. When Infinicam Save Movie node is Triggered, a total of 3000 frames will be saved precisely as you want them to.</p>
+    <p>The "Save Movie" nodes ("Infinicam Save Movie" / "Hawk Save Movie"), upon hitting the Trigger, save footage from the selected camera in any file type (.MP4, .MDAT, etc.) and to any file location. The total number of frames that will be saved when the Trigger is clicked is based on your camera's pre-roll and post-roll number of frames. To explain what these terms mean, consider the following example: you wish to save footage whenever an object falls off a conveyor belt in a factory. You have a workflow that will set a Trigger to True as soon as it detects that an object has just begun to fall off the belt. To understand why objects sometimes fall off the belt, you want to save the 2000 frames of footage from before the moment the object begins falling, as well as 1000 frames of footage after that point for good measure. Thus, you will set your pre-roll to 2000, and your post-roll to 1000. When the Save Movie node is Triggered, a total of 3000 frames will be saved precisely as you want them to.</p>
 
-    <p>The "Infinicam Save Movie" node tends to be slower, as it needs to compress and decompress data on the fly. The "Infinicam Save Compressed" node, on the other hand, saves out compressed images, which means that the footage gets saved to your computer faster and is more informationally dense (a single 2 second video can be a few hundred megabytes). Whereas the prior node allows users to select the Codec and the File format, the "Infinicam Save Compressed" node hardcodes both, so 2 files are always returned: a MDAT file of the footage itself and a CIH file of the footage metadata.</p>
+    <p>The "Save Movie" nodes tend to be slower, as they need to compress and decompress data on the fly. The "Save Compressed" nodes ("Infinicam Save Compressed" / "Hawk Save Compressed"), on the other hand, save out compressed images, which means footage gets saved to your computer faster and is more informationally dense (a single 2 second video can be a few hundred megabytes). Whereas the Save Movie nodes allow users to select the Codec and File format, the Save Compressed nodes hardcode both, so 2 files are always returned: a MDAT file of the footage itself and a CIH file of the footage metadata.</p>
 
-    <p>Note for both saving nodes: if the Trigger has already been pressed and you wish to stop saving (i.e. save a shorter clip of footage), you can simply click the Trigger again to immediately save out all frames already gathered to your machine.</p>
+    <p>Note for all saving nodes: if the Trigger has already been pressed and you wish to stop saving (i.e. save a shorter clip of footage), you can simply click the Trigger again to immediately save out all frames already gathered to your machine.</p>
 
-    <p>If you wish to view the footage that is saved from the "Infinicam Save Compressed" node, use the "Infinicam Movie Reader" node, which reads MDAT/CIH files.</p>
+    <p>If you wish to view footage saved from either "Save Compressed" node, use the "Infinicam Movie Reader" node, which reads MDAT/CIH files.</p>
 
-    <p>Important note: by default, when "Infinicam Save Compressed" is Triggered, the number of frames that will be saved will be equal to the Infinicam's preroll plus postroll. However, if you wish to save out Infinicam footage continually, you can click the checkbox in the "Infinicam Save Compressed" editing menu for "Constant Saving". When true, you may set the maximum file size you wish for the saved Infinicam footage. When the node is Triggered now, footage will continue to save into the file you created until the maximum file size limit has been reached.</p>
+    <p>Important note: by default, when a "Save Compressed" node is Triggered, the number of frames saved will equal the camera's preroll plus postroll. However, if you wish to save footage continually, you can click the checkbox in the editing menu for "Constant Saving". When true, you may set the maximum file size for the saved footage. When the node is Triggered, footage will continue to save into the file you created until the maximum file size limit has been reached.</p>
+
 
 
     <h2 id="Utilities">Utilities</h2>
@@ -1828,7 +1828,7 @@
         See the reference section for the full list of <a href="#ML">ML Tools</a>
     </p>
 
-   
+
 
     <h2>Tools</h2>
 
@@ -14036,7 +14036,7 @@ test summary: 0 out of 2 pass
     </table>
 
 
-    
+
     <hr>
 
 
