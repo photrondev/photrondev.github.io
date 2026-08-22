@@ -1,0 +1,960 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>CodeGen & GUI Designer — User Guide</title>
+    <style>
+        :root {
+            --bg: #f5f7fa;
+            --card: #fff;
+            --text: #20252b;
+            --muted: #5e6975;
+            --line: #dce2e8;
+            --accent: #1769aa;
+            --accent2: #eaf4fb;
+            --good: #177245;
+            --warn: #8a5a00
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font: 16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif
+        }
+
+        header {
+            background: #17212b;
+            color: #fff;
+            padding: 52px max(24px,calc((100% - 1200px)/2))
+        }
+
+            header h1 {
+                font-size: 38px;
+                margin: 0 0 8px
+            }
+
+            header p {
+                max-width: 900px;
+                color: #d4dde5;
+                margin: 6px 0
+            }
+
+        .wrap {
+            max-width: 1200px;
+            margin: auto;
+            padding: 30px 24px 80px
+        }
+
+        nav {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 30px
+        }
+
+            nav strong {
+                display: block;
+                margin-bottom: 10px
+            }
+
+            nav a {
+                color: var(--accent);
+                text-decoration: none;
+                margin-right: 18px;
+                display: inline-block
+            }
+
+        section {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 0 0 28px
+        }
+
+        h2 {
+            font-size: 28px;
+            margin: 0 0 14px;
+            color: #18232e
+        }
+
+        h3 {
+            font-size: 21px;
+            margin-top: 28px;
+            color: #263746
+        }
+
+        h4 {
+            font-size: 18px;
+            margin-bottom: 6px
+        }
+
+        .callout {
+            padding: 16px 18px;
+            border-radius: 8px;
+            background: var(--accent2);
+            border-left: 4px solid var(--accent);
+            margin: 18px 0
+        }
+
+        .tip {
+            background: #eef8f1;
+            border-left-color: var(--good)
+        }
+
+        .warning {
+            background: #fff8e8;
+            border-left-color: #d08a00
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 15px 0
+        }
+
+        th, td {
+            border: 1px solid var(--line);
+            padding: 11px;
+            vertical-align: top;
+            text-align: left
+        }
+
+        th {
+            background: #eef2f5
+        }
+
+        ol, ul {
+            padding-left: 25px
+        }
+
+        .steps li {
+            margin: 10px 0
+        }
+
+        .screenshot {
+            border: 2px dashed #b9c4ce;
+            padding: 24px;
+            text-align: center;
+            color: #6b7783;
+            border-radius: 8px;
+            background: #fafbfc
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+            gap: 15px
+        }
+
+        .feature {
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            padding: 17px
+        }
+
+            .feature h4 {
+                margin-top: 0
+            }
+
+        .small {
+            font-size: 14px;
+            color: var(--muted)
+        }
+
+        @media(max-width:700px) {
+            header h1 {
+                font-size: 30px
+            }
+
+            section {
+                padding: 20px
+            }
+
+            .wrap {
+                padding: 20px 12px
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h3 style="margin-top: 0; color: #ff9500;">Commercial License Notice</h3>
+        <p style="margin-bottom: 0;">The code generation modules, runtime target bindings, and underlying high-performance <strong>InfiniWorkflow Engine Library</strong> are proprietary software covered strictly under the <strong>Photron USA Inc. Commercial License Agreement</strong>. Redistribution, production deployment, or embedding these binaries into commercial applications requires a valid enterprise subscription tier.</p>
+    </header>
+
+    <div class="wrap">
+        <nav>
+            <strong>Contents</strong>
+            <a href="#overview">Overview</a>
+            <a href="#getting-started">Getting Started</a>
+            <a href="#codegen">Code Generation</a>
+            <a href="#designer">GUI Designer</a>
+            <a href="#canvas">Canvas</a>
+            <a href="#views">Views</a>
+            <a href="#features">Features</a>
+            <a href="#style">Style</a>
+            <a href="#build">Build</a>
+            <a href="#workflow">Typical Workflow</a>
+            <a href="#tips">Tips</a>
+        </nav>
+
+        <section id="overview">
+            <h2>1. What is CodeGen?</h2>
+            <p>CodeGen turns your workflow into application or integration code. Depending on what you need, you can generate a complete sample application, a plugin, an extension, a notebook, or only the underlying processing code.</p>
+
+            <div class="feature-grid">
+                <div class="feature"><h4>Sample App</h4><p>Creates a complete application with a configurable user interface. This is the option to use when you want to design the application's controls, views, features, appearance, and build behavior.</p></div>
+                <div class="feature"><h4>OFX Plugin</h4><p>Creates an OpenFX plugin suitable for hosts such as Resolve and Nuke.</p></div>
+                <div class="feature"><h4>PFV4 Plugin</h4><p>Creates a Photron PFV4 plugin for camera frame buffers.</p></div>
+                <div class="feature"><h4>MATLAB Ext</h4><p>Creates a MEX extension that can be called from MATLAB.</p></div>
+                <div class="feature"><h4>Jupyter Notebook</h4><p>Creates an interactive Python notebook configured around the workflow.</p></div>
+                <div class="feature"><h4>Only Code</h4><p>Generates the core processing code without the sample application's GUI.</p></div>
+            </div>
+
+            <div class="callout tip">
+                <b>Which option should I choose?</b><br>
+                Choose <b>Sample App</b> when you want to customize the application's interface. Choose <b>Only Code</b> when you only need the processing implementation. Use the plugin or notebook options when the generated code is intended for those environments.
+            </div>
+        </section>
+
+        <section id="getting-started">
+            <h2>2. Starting CodeGen</h2>
+            <ol class="steps">
+                <li>Open CodeGen from the application.</li>
+                <li>Choose the type of output you want to create.</li>
+                <li>Enter an <b>Application Name</b> for generated applications.</li>
+                <li>Click <b>Proceed</b>.</li>
+                <li>If you selected <b>Sample App</b>, the GUI Designer opens so you can configure the application before generation.</li>
+            </ol>
+
+            <h3>Application Name</h3>
+            <p>The Application Name identifies the generated application. Use a simple name such as <b>my_app</b>. The application name is also used when creating the generated application workspace.</p>
+
+            <h3>Cancel</h3>
+            <p><b>Cancel</b> closes the CodeGen setup without starting generation.</p>
+
+            <h3>Proceed</h3>
+            <p><b>Proceed</b> continues with the selected generation type. You must enter an application name before continuing from the application setup screen.</p>
+        </section>
+
+        <section id="codegen">
+            <h2>3. CodeGen Options</h2>
+
+            <h3>Sample App — C++</h3>
+            <p>Creates a C++ sample application with a configurable GUI. Selecting this option takes you to the GUI Designer.</p>
+
+            <h3>Sample App — Python</h3>
+            <p>Creates a Python sample application with a configurable GUI. Selecting this option takes you to the GUI Designer.</p>
+
+            <h3>OFX Plugin</h3>
+            <p>Creates a C++ OpenFX plugin. This is intended for OpenFX-compatible hosts such as Resolve and Nuke.</p>
+
+            <h3>PFV4 Plugin</h3>
+            <p>Creates a C++ Photron PFV4 plugin for camera frame buffers.</p>
+
+            <h3>MATLAB Ext</h3>
+            <p>Creates a MATLAB MEX extension that can be called directly from MATLAB scripts.</p>
+
+            <h3>Jupyter Notebook</h3>
+            <p>Creates a Python Jupyter Notebook configured for interactive use.</p>
+
+            <h3>Only Code — C++</h3>
+            <p>Generates C++ processing code without the sample application's GUI.</p>
+
+            <h3>Only Code — Python</h3>
+            <p>Generates Python processing code without the sample application's GUI.</p>
+
+            <p class="small">The available generation choices and their C++/Python modes are defined by the CodeGen configuration. fileciteturn7file0L13-L23</p>
+        </section>
+
+        <section id="designer">
+            <h2>4. GUI Designer Overview</h2>
+            <p>The GUI Designer is where you configure the interface of a Sample App.</p>
+
+            <p>The designer is organized into five main areas:</p>
+            <ol>
+                <li><b>Parameters</b> — the available workflow controls and outputs.</li>
+                <li><b>Canvas</b> — where you arrange application controls.</li>
+                <li><b>Views</b> — where you configure visual and telemetry outputs.</li>
+                <li><b>Features</b> — where you choose application capabilities.</li>
+                <li><b>Style</b> — where you configure the appearance and layout behavior.</li>
+                <li><b>Build</b> — where C++ applications can be configured for automatic compilation, execution, and packaging.</li>
+            </ol>
+
+            <div class="screenshot">
+                GUI Designer layout<br><br>
+                Parameters &nbsp; | &nbsp; Canvas / Views / Features / Style / Build<br>
+                <span class="small">The exact appearance follows the application's current theme.</span>
+            </div>
+
+            <h3>Back</h3>
+            <p><b>Back</b> returns to the CodeGen selection screen without proceeding with the current designer configuration.</p>
+
+            <h3>Proceed</h3>
+            <p><b>Proceed</b> accepts the current GUI configuration and starts generation.</p>
+        </section>
+
+        <section id="canvas">
+            <h2>5. Canvas Tab</h2>
+            <p>The <b>Canvas</b> is where you design the application's control interface. You can drag workflow parameters onto the canvas, move them, resize them, select multiple controls, and organize controls into separate application tabs.</p>
+
+            <h3>Parameters panel</h3>
+            <p>The left side of the designer contains the parameters available from your workflow.</p>
+
+            <h4>UI Widgets</h4>
+            <ul>
+                <li><b>Text Label</b> — adds text that can be used to describe or organize controls.</li>
+                <li><b>Horizontal Separator</b> — adds a visual dividing line between groups of controls.</li>
+            </ul>
+
+            <h4>Workflow nodes</h4>
+            <p>Each workflow node appears as a group containing its available inputs and outputs.</p>
+
+            <ul>
+                <li><b>Inputs &amp; Controls</b> — parameters that can be placed on the application's control panel.</li>
+                <li><b>Outputs</b> — values produced by the node that can be used as application views or telemetry.</li>
+            </ul>
+
+            <h3>Search</h3>
+            <p>Use the search field at the top of the Parameters area to quickly find a node, input, or output.</p>
+
+            <h3>Adding a control</h3>
+            <ol class="steps">
+                <li>Find the parameter in the Parameters area.</li>
+                <li>Drag it onto the Canvas.</li>
+                <li>Drop it where you want the control to appear.</li>
+                <li>Select the control to edit its properties.</li>
+            </ol>
+
+            <div class="callout">You can also drag an entire workflow node onto the Canvas. This creates a group of controls for that node rather than requiring each parameter to be added individually.</div>
+
+            <h3>Moving and resizing controls</h3>
+            <p>Click and drag a control to move it. Select a control to expose its resize handle, then drag the handle to change its size.</p>
+
+            <h3>Selecting multiple controls</h3>
+            <p>Multiple controls can be selected together. Multi-selection is useful for moving groups of controls or aligning them.</p>
+
+            <h3>Alignment</h3>
+            <table>
+                <tr><th>Button</th><th>What it does</th></tr>
+                <tr><td><b>Align Left</b></td><td>Lines up selected controls using their left edges.</td></tr>
+                <tr><td><b>Align Center</b></td><td>Centers selected controls horizontally.</td></tr>
+                <tr><td><b>Align Right</b></td><td>Lines up selected controls using their right edges.</td></tr>
+            </table>
+
+            <h3>Clear</h3>
+            <p><b>Clear</b> removes the controls from the current canvas so you can rebuild the layout.</p>
+
+            <h3>Undo and Redo</h3>
+            <p><b>Undo</b> reverses recent layout changes. <b>Redo</b> restores a change that was undone.</p>
+        </section>
+
+        <section id="canvas-tabs">
+            <h2>6. Organizing the Interface with Canvas Tabs</h2>
+            <p>Canvas tabs let you divide a complex application interface into separate pages of controls.</p>
+
+            <h3>Adding a tab</h3>
+            <p>Click <b>+ Tab</b> to create a new page. The new page starts with the name <b>New Tab</b>.</p>
+
+            <h3>Renaming a tab</h3>
+            <p>Double-click a tab name to rename it. Use meaningful names such as <b>Camera</b>, <b>Processing</b>, <b>Output</b>, or <b>Advanced</b>.</p>
+
+            <h3>Switching tabs</h3>
+            <p>Click a tab to make it the active control page.</p>
+
+            <h3>Deleting a tab</h3>
+            <p>Use the tab's close button to delete it. You will be asked to confirm because all controls on that page are deleted with the tab. The final remaining tab cannot be deleted.</p>
+
+            <div class="callout warning"><b>Important:</b> deleting a tab also deletes the parameters placed on that tab. Make sure you have moved anything you want to keep before confirming.</div>
+        </section>
+
+        <section id="properties">
+            <h2>7. Control Properties</h2>
+            <p>Select a control on the Canvas to edit its properties.</p>
+
+            <h3>Assigned Tab</h3>
+            <p>Choose which application page should contain the selected control.</p>
+
+            <h3>Display Label / Text</h3>
+            <p>Change the text displayed next to or inside the control.</p>
+
+            <h3>Text Color</h3>
+            <p>For text labels, choose the color used by the label.</p>
+
+            <h3>Text Alignment</h3>
+            <p>Text labels can be aligned <b>Left</b>, <b>Center</b>, or <b>Right</b>.</p>
+
+            <h3>Camera Options</h3>
+            <p>Camera-related controls can have camera-source constraints where applicable.</p>
+
+            <h3>Position and Size</h3>
+            <p>You can directly edit the control's <b>X</b>, <b>Y</b>, <b>Width</b>, and <b>Height</b> values for precise placement.</p>
+
+            <h3>Remove Selected</h3>
+            <p>Use <b>Remove Selected</b> to delete the selected control from the interface.</p>
+
+            <h3>Different controls have different properties</h3>
+            <p>The properties shown depend on the selected item. For example, text labels expose text and alignment settings, while camera controls can expose camera-specific settings.</p>
+        </section>
+
+        <section id="views">
+            <h2>8. Views Tab</h2>
+            <p>The <b>Views</b> tab controls what the application displays as visual outputs and telemetry.</p>
+
+            <h3>Media</h3>
+            <p>The Media area contains image/video-style outputs from the workflow.</p>
+
+            <h4>Output title</h4>
+            <p>Give each output a meaningful title. The title is what users see when interacting with the generated application.</p>
+
+            <h4>Default View</h4>
+            <p>Use <b>Set as Default</b> to make a media output the application's default view.</p>
+
+            <h4>Remove</h4>
+            <p>Remove an output from the application's configured views when it is not needed.</p>
+
+            <h3>Telemetry</h3>
+            <p>Telemetry outputs are numeric or other non-video values that can be displayed by the application.</p>
+
+            <ul>
+                <li>Set the output's <b>Title</b>.</li>
+                <li>Choose its display <b>Color</b>.</li>
+                <li>Remove outputs that are not useful to the application.</li>
+            </ul>
+
+            <div class="callout tip"><b>Tip:</b> use clear titles for outputs. For example, instead of leaving a technical port name visible, use a user-facing description such as <b>Frame Rate</b>, <b>Temperature</b>, or <b>Edge Strength</b>.</div>
+        </section>
+
+        <section id="features">
+            <h2>9. Features Tab</h2>
+            <p>The <b>Features</b> tab determines which capabilities are available to users of the generated application.</p>
+
+            <h3>Playback Controls</h3>
+            <p>The playback section controls navigation through media or frames.</p>
+            <table>
+                <tr><th>Feature</th><th>Purpose</th></tr>
+                <tr><td><b>Seek First</b></td><td>Move to the first available frame or position.</td></tr>
+                <tr><td><b>Seek Prior</b></td><td>Move to the previous frame or position.</td></tr>
+                <tr><td><b>Seek Next</b></td><td>Move to the next frame or position.</td></tr>
+                <tr><td><b>Seek Last</b></td><td>Move to the final available frame or position.</td></tr>
+            </table>
+
+            <h3>Application Features</h3>
+            <table>
+                <tr><th>Feature</th><th>Purpose</th></tr>
+                <tr><td><b>Zoom</b></td><td>Provides zoom functionality for the displayed content.</td></tr>
+                <tr><td><b>Image</b></td><td>Provides image-related viewing functionality.</td></tr>
+                <tr><td><b>Measurement</b></td><td>Provides measurement functionality.</td></tr>
+                <tr><td><b>Stabilize</b></td><td>Provides stabilization functionality.</td></tr>
+                <tr><td><b>Key Stone</b></td><td>Provides keystone correction functionality.</td></tr>
+                <tr><td><b>Pixel Probe</b></td><td>Provides pixel inspection functionality.</td></tr>
+                <tr><td><b>View</b></td><td>Provides view-related functionality.</td></tr>
+                <tr><td><b>Telemetry</b></td><td>Provides telemetry display functionality.</td></tr>
+            </table>
+
+            <h3>Available and Enabled</h3>
+            <p>Features are managed using two lists:</p>
+            <ul>
+                <li><b>Available</b> — features that are not currently enabled.</li>
+                <li><b>Enabled</b> — features that will be available in the generated application.</li>
+            </ul>
+
+            <h3>Moving features</h3>
+            <table>
+                <tr><th>Button</th><th>Action</th></tr>
+                <tr><td><b>Move All</b></td><td>Enables all available features.</td></tr>
+                <tr><td><b>Move</b></td><td>Moves selected features into the Enabled list.</td></tr>
+                <tr><td><b>Move</b> in the opposite direction</td><td>Returns selected enabled features to Available.</td></tr>
+                <tr><td><b>Move All</b> in the opposite direction</td><td>Removes all optional features from Enabled.</td></tr>
+            </table>
+
+            <div class="callout tip"><b>Recommended approach:</b> only enable features your application's users actually need. This keeps the generated interface simpler and easier to use.</div>
+        </section>
+
+        <section id="style">
+            <h2>10. Style Tab</h2>
+            <p>The <b>Style</b> tab controls the visual appearance and layout behavior of the generated application.</p>
+
+            <h3>App Features &amp; Layout</h3>
+
+            <h4>Controls Position</h4>
+            <table>
+                <tr><th>Option</th><th>Result</th></tr>
+                <tr><td><b>Left</b></td><td>Application controls appear on the left side of the interface.</td></tr>
+                <tr><td><b>Right</b></td><td>Application controls appear on the right side.</td></tr>
+                <tr><td><b>Floating</b></td><td>Controls use a floating panel arrangement.</td></tr>
+            </table>
+
+            <h4>Timeline Position</h4>
+            <table>
+                <tr><th>Option</th><th>Result</th></tr>
+                <tr><td><b>Embedded</b></td><td>The timeline is integrated with the viewing area.</td></tr>
+                <tr><td><b>Top</b></td><td>The timeline appears above the viewer.</td></tr>
+                <tr><td><b>Bottom</b></td><td>The timeline appears below the viewer.</td></tr>
+            </table>
+
+            <h3>Fonts &amp; Global</h3>
+            <ul>
+                <li><b>Font Name / File</b> — choose the application's font.</li>
+                <li><b>Base Size</b> — controls the general text size.</li>
+                <li><b>Global Alpha</b> — controls overall interface opacity.</li>
+            </ul>
+
+            <h3>Padding &amp; Spacing</h3>
+            <p>These controls determine how much space is used around windows, frames, items, and nested controls. Adjust them to make the interface more compact or more spacious.</p>
+
+            <h3>Rounding &amp; Borders</h3>
+            <p>These controls determine the amount of corner rounding and border thickness used throughout the interface, including windows, frames, popups, tabs, scrollbars, and controls.</p>
+
+            <h3>Colors</h3>
+            <p>Colors are grouped into logical sections:</p>
+            <ul>
+                <li><b>Base</b> — general text, backgrounds, borders, and navigation.</li>
+                <li><b>Frames &amp; Inputs</b> — fields, check marks, sliders, and input states.</li>
+                <li><b>Buttons &amp; Headers</b> — buttons and header states.</li>
+                <li><b>Tabs &amp; Titles</b> — tabs and title bars.</li>
+                <li><b>Misc &amp; Plots</b> — scrollbars, separators, resize grips, and plot colors.</li>
+            </ul>
+
+            <h3>Theme Presets</h3>
+            <p>The available presets include:</p>
+            <ul>
+                <li>ImGui Dark</li>
+                <li>Corporate Light</li>
+                <li>Dracula</li>
+                <li>Cyberpunk</li>
+                <li>Nord</li>
+                <li>Solarized Dark</li>
+                <li>Solarized Light</li>
+                <li>Monokai</li>
+                <li>Material Dark</li>
+                <li>Gruvbox</li>
+                <li>Operator Focus</li>
+                <li>Custom Override</li>
+            </ul>
+
+            <h3>Theme Search</h3>
+            <p>Use the search field to quickly locate a style setting.</p>
+
+            <h3>Live Preview</h3>
+            <p>The live preview shows how the application's controls, viewer, and timeline will be arranged. Use it while experimenting with layout settings so you can see the effect before generating the application.</p>
+
+            <div class="callout tip"><b>Customizing a preset:</b> once you change individual style values, the designer treats the theme as a custom configuration so your changes can be retained.</div>
+        </section>
+
+        <section id="build">
+            <h2>11. Build Tab</h2>
+            <p>The <b>Build</b> tab provides build and packaging options for C++ Sample Apps.</p>
+
+            <h3>Automatic Compilation</h3>
+            <p><b>Enable Automatic Compilation (Build)</b> controls whether the generated C++ application is automatically compiled.</p>
+
+            <h3>Automatic Execution</h3>
+            <p><b>Enable Automatic Execution (Run)</b> controls whether the application is launched automatically after a successful build.</p>
+
+            <div class="callout warning"><b>Run depends on Build.</b> Automatic execution is only useful when automatic compilation is enabled.</div>
+
+            <h3>Packaging &amp; Installer</h3>
+            <p>Enable the installer/package option when you want the generated application prepared for distribution.</p>
+
+            <p>Installer information includes:</p>
+            <table>
+                <tr><th>Setting</th><th>What to enter</th></tr>
+                <tr><td><b>Author / Company</b></td><td>The company or person responsible for the application.</td></tr>
+                <tr><td><b>Version</b></td><td>The application's release version.</td></tr>
+                <tr><td><b>App Identifier / Bundle ID</b></td><td>The unique application identifier.</td></tr>
+                <tr><td><b>Description</b></td><td>A description of the application.</td></tr>
+                <tr><td><b>License File Path</b></td><td>An optional license file to include with the package.</td></tr>
+            </table>
+
+            <p>The interface describes packaging targets as <b>NSIS Windows / DMG Mac</b>.</p>
+        </section>
+
+        <section id="generation">
+            <h2>12. Generating the Application</h2>
+            <p>After configuring the designer, click <b>Proceed</b>.</p>
+
+            <ol class="steps">
+                <li>The designer saves the current configuration.</li>
+                <li>CodeGen starts generating the selected application.</li>
+                <li>A progress display shows the generation status.</li>
+                <li>When generation finishes, the generated files are displayed.</li>
+            </ol>
+
+            <p>The generation process uses the selected language, application name, workflow, and interface configuration. The source confirms that the generation request includes the selected generation mode, layout configuration, application name, and plugin/notebook options where applicable. fileciteturn7file2L190-L205</p>
+        </section>
+
+        <section id="source">
+            <h2>13. Generated Source</h2>
+            <p>After generation, the application displays the generated files so you can inspect the result.</p>
+
+            <h3>Build &amp; Run</h3>
+            <p>When the generated result contains a buildable application, <b>Build &amp; Run</b> is available. The generated result is considered buildable when the expected CMake or Python application files are present. fileciteturn7file2L225-L242</p>
+
+            <h3>Copying build output</h3>
+            <p>The build workspace provides a console showing compiler/build messages. Use this output when diagnosing a failed build.</p>
+
+            <h3>Build progress</h3>
+            <p>During compilation, the status can progress through workspace creation, CMake configuration, C++ compilation, deployment, and finally a successful running state. fileciteturn7file6L474-L516</p>
+        </section>
+
+        <section id="workflow">
+            <h2>14. Recommended User Workflow</h2>
+            <ol class="steps">
+                <li><b>Choose Sample App</b> if you need a custom application interface.</li>
+                <li><b>Enter the application name.</b></li>
+                <li><b>Open the Canvas.</b></li>
+                <li><b>Add the important workflow inputs.</b> Drag them from Parameters onto the Canvas.</li>
+                <li><b>Organize controls into tabs.</b> Use separate tabs for logical groups of controls.</li>
+                <li><b>Configure control properties.</b> Set labels, placement, size, and other available options.</li>
+                <li><b>Configure Views.</b> Add the visual outputs users should see and choose a default view.</li>
+                <li><b>Configure Telemetry.</b> Add useful numeric outputs and give them readable names and colors.</li>
+                <li><b>Configure Features.</b> Enable only the capabilities users need.</li>
+                <li><b>Configure Style.</b> Choose the control position, timeline location, theme, colors, spacing, and other appearance settings.</li>
+                <li><b>Configure Build.</b> For C++, decide whether the application should build and run automatically and whether it should be packaged.</li>
+                <li><b>Proceed.</b> Generate the application.</li>
+                <li><b>Build &amp; Run.</b> If available, compile and launch the generated application.</li>
+            </ol>
+        </section>
+
+        <section id="tips">
+            <h2>15. Practical Design Tips</h2>
+
+            <h3>Keep the Canvas simple</h3>
+            <p>Do not place every parameter on one page. Use Canvas tabs to separate groups of related controls.</p>
+
+            <h3>Use user-facing labels</h3>
+            <p>Technical workflow parameter names may be useful to developers but confusing to end users. Rename displayed labels to describe what the setting actually does.</p>
+
+            <h3>Choose a useful default view</h3>
+            <p>If your workflow produces several visual outputs, choose the output users are most likely to need first as the default.</p>
+
+            <h3>Do not enable unnecessary features</h3>
+            <p>Every enabled feature adds another capability to the generated application. Keep the interface focused on the application's purpose.</p>
+
+            <h3>Use Style after the interface is functional</h3>
+            <p>First build the controls and views, then use Style to refine the appearance and layout. This makes it easier to distinguish functional changes from visual changes.</p>
+
+            <h3>Test Build and Run before packaging</h3>
+            <p>For C++ applications, verify that the generated application builds and runs correctly before preparing the installer/package.</p>
+        </section>
+
+        <section id="reference">
+            <h2>16. Quick Reference</h2>
+            <table>
+                <tr><th>Screen / Tab</th><th>Main purpose</th></tr>
+                <tr><td><b>CodeGen</b></td><td>Choose what kind of code or application to generate.</td></tr>
+                <tr><td><b>Canvas</b></td><td>Design the application's controls and control pages.</td></tr>
+                <tr><td><b>Views</b></td><td>Configure visual outputs and telemetry.</td></tr>
+                <tr><td><b>Features</b></td><td>Choose playback and application capabilities.</td></tr>
+                <tr><td><b>Style</b></td><td>Configure layout, fonts, spacing, colors, borders, rounding, and theme.</td></tr>
+                <tr><td><b>Build</b></td><td>Configure automatic C++ build/run and packaging.</td></tr>
+                <tr><td><b>Proceed</b></td><td>Accept the configuration and generate the application.</td></tr>
+                <tr><td><b>Back</b></td><td>Return to the previous configuration screen.</td></tr>
+            </table>
+        </section>
+
+        <h2>Build, Run & Installer Generation</h2>
+        <p>Upon generating your application, you are provided with a <strong>Source code</strong> explorer interface. This interface allows you to:</p>
+        <ul>
+            <li><strong>Review Source Code:</strong> Browse and verify all generated files using an interactive file list.</li>
+            <li><strong>Download All:</strong> Export your project as a standalone ZIP archive, packaged directly into your Downloads folder.</li>
+            <li><strong>Build & Run:</strong> Trigger the Standalone Application Compiler to recreate workspace directories, generate CMake targets, compile C++ files via MSBuild, and deploy the runtime.</li>
+            <li><strong>Console Logs:</strong> Access real-time build logs with a dedicated interface to copy log output directly to your clipboard.</li>
+        </ul>
+
+        <h3>Installer Generation (NSIS Requirement)</h3>
+        <p>The system also provides a Standalone ZIP Packager that compresses your application into a final distributable artifact. To successfully build full executable installers via this backend service, you must install <strong>NSIS (Nullsoft Scriptable Install System)</strong> on your build machine. Ensure that the <code>makensis</code> executable is explicitly added to your system's PATH environment variable so the automated packaging scripts can invoke it correctly.</p>
+
+        <h2>Localization</h2>
+        <p>To translate or customize text within your generated application, the engine supports a drop-in localization dictionary. Follow these steps to implement custom strings:</p>
+        <ol>
+            <li>Navigate to the <code>assets</code> directory within your project workspace.</li>
+            <li>Create a text file explicitly named <code>localize.txt</code>.</li>
+            <li>Add your translations using a standard key-value format. You can use either an equals sign (<code>=</code>) or a colon (<code>:</code>) as a delimiter.</li>
+        </ol>
+        <p><strong>Example <code>localize.txt</code> formatting:</strong></p>
+<pre style="background: #1a1a1a; color:white;padding : 15px; border-radius: 5px;"><code># This is a comment line
+my_app = My Custom App Name
+Zoom In : Magnify View
+Tracking Progress = Processando o Rastreamento
+</code></pre>
+        <p><em>Note: The engine will automatically load these pairs at runtime and replace corresponding <code>tr("...")</code> text wrapping instances in the UI.</em></p>
+
+        <h3>Bundling the Visual C++ Redistributable</h3>
+
+        <p>If your application depends on the Visual C++ runtime, you can have the installer check for it and install it automatically &mdash; no code changes required.</p>
+
+        <p>Place your copy of <code>vc_redist.x64.exe</code> in your project's <code>assets</code> folder. During generation, the installer:</p>
+
+        <ul>
+            <li>Detects whether the file is present. If it isn't, this step is skipped entirely and the installer behaves exactly as before.</li>
+            <li>If it is present, the installer checks the target machine's registry to see whether the runtime is already installed.</li>
+            <li>If the runtime is missing, the installer silently runs <code>vc_redist.x64.exe</code> before continuing with your app's installation.</li>
+            <li>If the runtime is already present, the redistributable is skipped so install times stay fast.</li>
+        </ul>
+
+        <p>This means bundling the redistributable is entirely optional and additive &mdash; including or omitting <code>vc_redist.x64.exe</code> from <code>assets</code> is the only thing you need to do.</p>
+
+        <hr>
+
+        <h3>Customizing Your App and Installer Branding</h3>
+
+        <p>When you generate your C++ or Python applications, the system automatically includes default branding assets and licensing files so your app is ready to compile immediately. However, you can easily override these defaults to fully customize and white-label your application and its installer.</p>
+
+        <h4>How It Works</h4>
+
+        <p>The code generator uses a simple drop-in replacement system. During generation, it checks your project's <code>assets</code> folder for specific file names. If it finds your custom files, it will use them. If a file is missing, it will seamlessly fall back to the default system assets.</p>
+
+        <h4>Supported Custom Files</h4>
+
+        <p>To override the default branding, simply place any of the following files directly into your project's <code>assets</code> directory:</p>
+
+        <ul>
+            <li><code>favicon.ico</code>: Changes the main application icon and the desktop shortcut icon.</li>
+            <li><code>sidebar.bmp</code>: Changes the tall sidebar image on the Welcome and Finish pages of the installer.</li>
+            <li><code>topbar.bmp</code>: Changes the small header banner image on the top right of the inner installer pages.</li>
+            <li><code>EULA.txt</code>: Replaces the default End User License Agreement with your own legal text.</li>
+        </ul>
+
+        <h4>The Result</h4>
+
+        <p>There is no need to modify any code, scripts, or configuration files. Just drop your preferred assets into the <code>assets</code> folder, and the next time you trigger the code generation, your branding will automatically replace the defaults!</p>
+
+
+
+        <h3>Code Signing Your Executable and Installer</h3>
+
+        <p>If you have a code-signing process, you can have it applied automatically during generation.</p>
+
+        <p>Place a signing script in your project's <code>assets</code> folder:</p>
+
+        <ul>
+            <li>On Windows, name it <code>signing.bat</code> (or <code>signing.cmd</code>).</li>
+            <li>On macOS or Linux, name it <code>signing.sh</code> (or a script named <code>signing</code> with no extension).</li>
+        </ul>
+
+        <p>The script should accept a single argument &mdash; the full path to the file to sign &mdash; and sign that file in place (for example, by calling out to <code>signtool</code> on Windows or <code>codesign</code>/your own signing tooling on macOS/Linux).</p>
+
+        <p>When a signing script is found:</p>
+
+        <ul>
+            <li>Your application's executable is signed before it's packaged.</li>
+            <li>The final compiled installer is signed after it's built.</li>
+        </ul>
+
+        <p>If no signing script is present in <code>assets</code>, signing is skipped entirely and generation proceeds exactly as it would otherwise &mdash; no extra steps, no changes to your build.</p>
+
+        <blockquote>
+            <p><strong>Note:</strong> The uninstaller that ships inside the installer is not currently signed as part of this process.</p>
+        </blockquote>
+
+
+
+        <h2>Application User Interface Features</h2>
+        <p>The generated application's user interface can be xtended with application features by adding them in the Features tab of the GUI designer.</p>
+
+
+        <h3>1. Zoom Controls</h3>
+        <ul>
+            <li><strong>Action Buttons:</strong> The sidebar provides explicit buttons for "Zoom In", "Zoom Out", "Zoom Fit", and "Fullscreen".</li>
+            <li><strong>Interactive Controls:</strong> Inside the viewer, users can zoom dynamically using the mouse scroll wheel, which scales the image relative to the cursor's position. Users can also pan the viewport by clicking and dragging the middle mouse button.</li>
+            <li><strong>Hotkeys:</strong> Keyboard shortcuts are available, such as <code>=</code> or <code>I</code> to zoom in, <code>-</code> or <code>O</code> to zoom out, and <code>F</code> or <code>R</code> to reset the view to fit the screen.</li>
+        </ul>
+
+        <h3>2. Image Adjustments & Comparison</h3>
+        <ul>
+            <li><strong>Adjustments Menu:</strong> A dedicated window allows users to tweak the viewport's "Gamma", "Brightness", and "Contrast" via sliders.</li>
+            <li><strong>Channel Isolation:</strong> Users can isolate specific color channels by clicking the "R", "G", "B", "A", or "RGB" buttons.</li>
+            <li><strong>Wipe & Capture:</strong> Users can click "Capture" to store the current frame as a reference. Enabling the "Wipe" feature splits the viewport, allowing users to drag a vertical divider to compare the live feed against the captured reference frame.</li>
+        </ul>
+
+        <h3>3. Measurement & Calibration</h3>
+        <ul>
+            <li><strong>Measurement Tools:</strong> The UI includes toggles to draw interactive overlays on the video feed, including "Ruler" (distance), "Angle", "Angle2" (four-point angle), "Multi" (polylines), "Radius", and "Diameter".</li>
+            <li><strong>Calibration Plane:</strong> A 4-point calibration quad can be manipulated to calculate real-world physical distances using perspective homography.</li>
+            <li><strong>Units & Grid:</strong> Users can enable a "Grid Overlay" and specify physical plane dimensions (Width/Height) using specific units like "mm", "cm", "m", "in", or "ft".</li>
+        </ul>
+
+        <h3>4. Stabilization</h3>
+        <ul>
+            <li><strong>Tracking Modes:</strong> Users can stabilize the video feed using either "One Point" or "Two Point" tracking modes.</li>
+            <li><strong>Configuration:</strong> The sidebar allows adjustment of the "ROI Size" (Region of Interest) and "Template Size" for the tracker.</li>
+            <li><strong>Execution:</strong> Explicit "Track Backward" and "Track Forward" buttons are used to trace the motion path across the timeline, generating a stabilization transform that locks the video in place.</li>
+        </ul>
+
+        <h3>5. Keystone Correction</h3>
+        <ul>
+            <li><strong>Perspective Warping:</strong> By enabling the Keystone feature, users can grab and drag four handles ("K0" through "K3") to warp the image's perspective.</li>
+            <li><strong>Reset:</strong> A "Reset Keystone Quad" button quickly restores the perspective to its default flat state.</li>
+        </ul>
+
+        <h3>6. View Selector & Exporting</h3>
+        <ul>
+            <li><strong>Stream Selection:</strong> A dropdown combo box allows users to switch the active viewport feed between different nodes, such as raw webcams, "Weld Analysis" preview images, or metric data matrices.</li>
+            <li><strong>Export View:</strong> Users can click "Export View..." to save the currently selected stream to disk. Image feeds are exported as <code>.mp4</code> or <code>.avi</code> files, while matrix data is exported as <code>.csv</code> files.</li>
+        </ul>
+
+        <h3>7. Telemetry & Data Inspection</h3>
+        <ul>
+            <li><strong>Live Graphs:</strong> A "LiveTelemetry" panel automatically plots numerical output streams (like a "Weld Analysis" area metric) on a real-time line graph, complete with tooltip readouts and Min/Max bounds tracking.</li>
+            <li><strong>Pixel Probe:</strong> Hovering the mouse over the viewer provides a real-time text readout of the cursor's relative X/Y coordinates, calculated real-world physical coordinates, and specific color values (e.g., Grayscale, RGB, or RGBA).</li>
+            <li><strong>Matrix Tables:</strong> If the selected view is a data matrix rather than an image, the viewer dynamically renders an interactive, scrollable data table with sortable columns.</li>
+        </ul>
+
+        <h3>8. Playback & Timeline</h3>
+        <ul>
+            <li><strong>Controls:</strong> Rendered either at the top, bottom, or as a sleek semi-transparent overlay inside the viewer, the playback controls include standard "Play" and "Pause" buttons.</li>
+            <li><strong>Scrubbing:</strong> A timeline slider allows users to scrub through specific frames of the video.</li>
+        </ul>
+
+        <h2>Architecture & API Usage</h2>
+        <p>Regardless of your chosen output language, your code follows a matching workflow lifecycle to manage memory boundaries and thread execution models cleanly:</p>
+
+        <ul>
+            <li><strong>Initialization & Setup:</strong> Loads target runtime binaries, maps project asset storage roots, and instantiates the workflow pipeline topology.</li>
+            <li><strong>Live Parameter Manipulation:</strong> Modifies runtime variables type-safely via calculated Port Enums dynamically mapped down to memory slots.</li>
+            <li><strong>Interactive Stream Inspection:</strong> Wireframes target engine pins out to processing windows using live callback registration methods like <code>addMatrixLive</code> and <code>addImageLive</code>.</li>
+        </ul>
+
+        <h3>C++ API</h3>
+<pre style="background: #1a1a1a; padding: 15px; border-radius: 5px;"><code>
+OVERALL C++ WORKFLOW LIFECYCLE USAGE HANDBOOK:
+
+INITIALIZATION & SETUP:
+AppLogic app;
+if (!app.initEngine()) { // Initializes Photron Engine
+    // Handle DLL loading failure safely
+    return -1;
+}
+app.setupWorkflow(); // Hydrates pipeline handles, configurations, and topology
+
+LIVE PARAMETER MODIFICATION:
+Modifies parameter values type-safely via Port Enums mapped dynamically:
+app.updateNodeVal(NodeID::AI_WELDING, AI_WeldingInputs::MODEL, std::string("..."));
+
+LIVE VIEWER API:
+Registers a live callback to view output of a node's port
+app.addImageLive(NodeID::AI_WELDING, 2, "live_ai_welding_2", on_ai_welding_2_callback);
+app.addMatrixLive(NodeID::WELD_ANALYSIS, 0, "live_weld_analysis_0", on_weld_analysis_0_callback);
+app.addNumericLive(NodeID::WELD_ANALYSIS, 2, "live_weld_analysis_2", on_weld_analysis_2_numeric_callback);
+</code></pre>
+
+        <h3>C++ Example</h3>
+        <p>Below is a typical lifecycle implementation mapping the exported C++ target bindings based on the engine's initialization architecture:</p>
+<pre style="background: #1a1a1a; padding: 15px; border-radius: 5px;"><code>#include "app_logic.h"
+#include &lt;iostream&gt;
+#include &lt;mutex&gt;
+#include &lt;opencv2/opencv.hpp&gt;
+
+// Define a global lock and frame buffer
+std::mutex g_data_mutex;
+cv::Mat g_ai_welding_2_frame;
+
+// Define the live image callback
+void on_ai_welding_2_callback(const cv::Mat& frame) {
+    std::lock_guard&lt;std::mutex&gt; lock(g_data_mutex);
+    if (!frame.empty()) {
+        frame.copyTo(g_ai_welding_2_frame);
+    }
+}
+
+int main() {
+    AppLogic app;
+    
+    // 1. Initialize engine library bindings
+    if (!app.initEngine()) {
+        std::cerr &lt;&lt; "Failed to load photron_engine runtime binary." &lt;&lt; std::endl;
+        return -1;
+    }
+    
+    // 2. Hydrate configuration parameters and thread topology
+    app.setupWorkflow(); 
+    
+    // 3. Connect Live View Listeners
+    app.addImageLive(NodeID::AI_WELDING, 2, "live_ai_welding_2", on_ai_welding_2_callback);
+    
+    // 4. Update active node attributes type-safely via generated Port Enums
+    app.updateNodeVal(NodeID::AI_WELDING, AI_WeldingInputs::MODEL, std::string("path/to/model.onnx"));
+    
+    // Main UI or execution loop would continue here...
+    return 0;
+}</code></pre>
+
+        <h3>Local C++ Compilation & Deployment</h3>
+        <p>To compile your pipeline using native C++ bindings, ensure your built application can access all engine library links correctly by executing the following steps:</p>
+        <ol>
+            <li>Download the generated <code>app_logic.h</code> and <code>app_logic.cpp</code> files and add them to your C++ application project layout.</li>
+            <li>Build the source files together with your main orchestration code into a compiled executable file.</li>
+            <li>Move or copy your finalized executable binary artifact into the designated bin directory or run the included standalone zip packager.</li>
+            <li>Execute your application binary directly from that folder.</li>
+        </ol>
+
+        <table border="1" style="border-collapse: collapse; width: 100%; margin-bottom: 20px;">
+            <thead style="background: #2a2a2a; text-align: left;">
+                <tr>
+                    <th style="padding: 10px;">Method</th>
+                    <th style="padding: 10px;">Description & Examples</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 10px;"><code>__init__</code></td>
+                    <td style="padding: 10px;">Initializes the Photron engine, configures the <code>PythonNodeFactory</code>, and sets up essential FFI callback types and memory management to prevent garbage collection crashes.</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;"><code>initialize_workflow</code></td>
+                    <td style="padding: 10px;">Entry point for building the computational pipeline; instantiates C++ nodes and Python proxies, sets node parameters, and establishes edge connections.</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;"><code>add_live_viewer</code></td>
+                    <td style="padding: 10px;">
+                        Creates a live viewer node, connects it to a source, and registers a callback for C++ nodes
+                        <br><br><b>Examples:</b><br>
+                        1. <b>Numeric:</b> <code>app.add_live_viewer(NodeID.NUMERIC_A_B, 0, 'numeric', lambda val: print(f"Value: {val}"))</code><br>
+                        2. <b>String:</b> <code>app.add_live_viewer(NodeID.STR, 0, 'string', lambda s: print(f"String: {s.decode('utf-8')}"))</code><br>
+                        3. <b>Matrix:</b> <code>app.add_live_viewer(NodeID.DARKNET_YOLO7_CLASSIFICATION, 0, 'matrix', lambda mat: print(f"Mean: {mat.mean()}"))</code><br>
+                        4. <b>Image:</b> <code>app.add_live_viewer(NodeID.MOVIE_READER, 0, 'image', lambda img: print(f"Shape: {img.shape}"))</code>
+                        <br><br><b>Note:</b> Automatically wraps raw C++ pointers into NumPy arrays and uses <code>arr.copy()</code> to ensure data persistence.
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;"><code>execution_loop</code></td>
+                    <td style="padding: 10px;">A daemon thread that manages node updates, triggers re-execution for "dirty" Python nodes, and handles stream inspection logging.</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;"><code>update_node_val</code></td>
+                    <td style="padding: 10px;">Updates node parameters; if the target is a Python node, it marks it as "dirty" for re-execution; otherwise, it calls the engine’s parameter setter.</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;"><code>view_node</code></td>
+                    <td style="padding: 10px;">Designates a node/port for real-time inspection. For Python nodes, it enables internal monitoring; for C++ nodes, it triggers native engine rendering.</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;"><code>update_from_cpp</code></td>
+                    <td style="padding: 10px;">Synchronizes Python state with C++ updates, parsing binary streams and mapping raw data buffers to NumPy arrays.</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;"><code>python_proxy_callback</code></td>
+                    <td style="padding: 10px;">A static FFI handler invoked by the C++ engine to flag specific proxy nodes as "dirty" when their port data updates.</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;"><code>stop</code></td>
+                    <td style="padding: 10px;">Signals the execution thread to stop and gracefully shuts down the workflow pipeline.</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+</body>
+</html>
