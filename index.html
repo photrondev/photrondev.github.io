@@ -211,7 +211,7 @@
 
 
                     <li style="list-style: none; margin: 10px 0;">
-                        <a href="#CodeGenerator" style="
+                        <a href="/codegen.html" style="
                             display: inline-flex;
                             align-items: center;
                             justify-content: center;
@@ -484,7 +484,7 @@
             <li><i class="bi bi-cloud-upload"></i>  Import a workflow will open the import dialog and allow you to select an existing workflow from the demos folder using the <a href="#ImportExport">Import Browser</a></li>
             <li><i class="bi bi-star"></i> Add authoring notes to the workflow to include your name and description of the workflow</li>
             <li><i class="bi bi-cloud-download"></i> Saves the workflow using the <a href="#ImportExport">Export Browser</a></li>
-            <li><i class="bi bi-cart"></i> Generate code for integration into your application See <a href="#CodeGenerator">Code Generator</a></li>
+            <li><i class="bi bi-cart"></i> Generate code for integration into your application See <a href="/codegen.html">Code Generator</a></li>
             <li><i class="bi bi-trash"></i> Clears the workflow to start a new one from scratch</li>
             <li><i class="bi bi-power"></i> Exit the application</li>
         </ul>
@@ -2506,7 +2506,7 @@
         <tr id='cv.unet_generic_segmentation'>
             <td>U-Net Generic Segmentation</td>
             <td><i class='bi bi-filetype-ai'></i></td>
-            <td><ul><li>source : image2D</li><li>filter : string</li><li>confidence : double</li><li>blend : double</li>        </ul></td>
+            <td><ul><li>source : image2D</li><li>model : string</li><li>filter : string</li><li>confidence : double</li><li>blend : double</li>        </ul></td>
             <td><ul><li>mask : image2D</li><li>preview : image2D</li>        </ul></td>
             <td>Generic U-Net inference node for semantic segmentation with configurable confidence and filtering.</td>
         </tr>
@@ -7779,7 +7779,7 @@
         <tr id='cv.keystone'>
             <td>Keystone</td>
             <td><i class='bi bi-bounding-box'></i></td>
-            <td><ul><li>source : image2D</li><li>Keystone Polygon : string</li><li>Source Resolution : bool</li><li>Output Width : double</li><li>Output Height : double</li><li>Crop : bool</li><li>Border Size : double</li><li>Interpolation : int</li>        </ul></td>
+            <td><ul><li>source : image2D</li><li>Keystone Polygon : string</li><li>Custom Resolution : bool</li><li>Output Width : double</li><li>Output Height : double</li><li>Crop : bool</li><li>Border Size : double</li><li>Interpolation : int</li>        </ul></td>
             <td><ul><li>output : image2D</li><li>preview : image2D</li>        </ul></td>
             <td>Warps a user-defined 4-point polygon in the video scene into a flat, rectangular image.</td>
         </tr>
@@ -9873,6 +9873,15 @@ Error Handling: If a requested tool or file cannot be found, report the error us
                     <a target="_blank" href="https://huggingface.co/opencv/edge_detection_dexined">Code for edge detection using a model(ONNX) using a Convolutional Neural Network (CNN)</a>
                 </td>
                 <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1H8-izdOk3KnFE5OsCA9zyZmgM-JUPn9C/view?usp=sharing">dexined</a> </td>
+            </tr>
+
+            <tr>
+                <td> Nano Font </td>
+                <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu24.04 LTS"></i> </td>
+                <td>
+                    <a target="_blank" href="https://fonts.google.com/noto/specimen/Noto+Sans+JP">Noto Sans JP — Japanese font from the Noto font family</a>
+                </td>
+                <td> <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1_E9BVcQud-RhebTmG-cal81Q_hPoldnr/view?usp=sharing">nano_font</a> </td>
             </tr>
 
             <tr>
@@ -14429,266 +14438,10 @@ test summary: 0 out of 2 pass
 
     </table>
 
-    <h2 id="CodeGenerator">App Publisher & Code Generation Guide</h2>
-    <p>Once you have built, tested, and optimized an AI-embedded computer vision pipeline visually inside the <strong>InfiniWorkflow</strong> interface, the next step is deployment. The <strong>App Hub & Publisher</strong> allows you to turn your graphical pipeline configurations into production-ready, standalone application source code.</p>
 
-    <section class="license-callout">
-        <h3>Commercial License Notice</h3>
-        <p>The code generation modules, runtime target bindings, and underlying high-performance <strong>InfiniWorkflow Engine Library</strong> are proprietary software covered strictly under the <strong>Photron USA Inc. Commercial License Agreement</strong>. Redistribution, production deployment, or embedding these binaries into commercial applications requires a valid enterprise subscription tier.</p>
-    </section>
-
-    <h2>Code Generation Wizard</h2>
-    <p>The publishing process is powered by an interactive <strong>Code Generator Wizard</strong>, which streamlines the transition from pipeline to production. The wizard consists of three distinct steps:</p>
-    <ul>
-        <li><strong>Language Selection:</strong> Choose your target development environment (C++ or Python).</li>
-        <li><strong>Bundle Mode Selection:</strong> Decide between a full "Sample App" (including menus, sliders, and viewports) or "Only Raw Code" (core logic only.</li>
-        <li><strong>Interface Customization:</strong> Configure the front-end experience for your Sample App.</li>
-    </ul>
-
-    <h2>Sample App Customization</h2>
-    <p>When selecting the <strong>Sample App</strong> bundle mode, you gain access to the <strong>Interface Configurator</strong>, allowing you to tailor the user experience without writing manual UI code.</p>
-
-    <h3>UI Layout Modes</h3>
-    <p>You can choose between two primary interface configurations:</p>
-    <ul>
-        <li><strong>Default UI:</strong> Automatically exposes all nodes and ports into a standard layout.</li>
-        <li><strong>Customize UI Layout:</strong> Allows for granular control over the application interface.</li>
-    </ul>
-
-    <h3>Advanced Customization Features</h3>
-    <p>Within the "Customize" mode, you can manage how users interact with your pipeline:</p>
-    <ul>
-        <li><strong>Tab Management:</strong> Organize complex input parameters into categorized tabs (e.g., "General Controls", "Algorithm Tuning").</li>
-        <li><strong>Input Exposure:</strong> Select specific node inputs to expose, rename them for end-users, and reorder them within the UI.</li>
-        <li>
-            <strong>Output Rendering Styles:</strong> Define how data outputs appear in the app based on their type:
-            <ul>
-                <li><strong>Images:</strong> Render as <em>Video Feed</em>, <em>Thumbnail Strip</em>, or <em>Raw Hex Inspector</em>.</li>
-                <li><strong>Numeric (int/float/double):</strong> Render as <em>Value Card</em>, <em>Realtime Line Plot</em>, or <em>Status Indicator</em>.</li>
-                <li><strong>Other Data:</strong> Render as <em>Console Terminal</em> or <em>JSON Inspector</em>.</li>
-            </ul>
-        </li>
-    </ul>
-
-    <h2>Supported Generation Targets</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Target</th>
-                <th>Best For</th>
-                <th>Features</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>Native C++</strong></td>
-                <td>Ultra-low latency, edge devices, and production embedded systems.</td>
-                <td>Tight C++ structures, dynamic library linking, and type-safe node/port enums.</td>
-            </tr>
-            <tr>
-                <td><strong>Python</strong></td>
-                <td>Rapid prototyping, cross-platform integration, and hybrid AI workflows.</td>
-                <td>Object-oriented Python layer, threaded callback handlers, and native extension support.</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h2>Build & Run Functionality</h2>
-    <p>Upon generating your application, you are provided with a <strong>Hardwired Source Explorer</strong>. This interface allows you to:</p>
-    <ul>
-        <li><strong>Review Source Code:</strong> Browse and verify all generated files.</li>
-        <li><strong>Download:</strong> Export your project as a ZIP bundle.</li>
-        <li><strong>Build & Run:</strong> Use the "Build & Run" feature to trigger the backend compiler, which recreates workspace directories, generates build targets (e.g., CMake/MSBuild), and launches the standalone application directly from the editor.</li>
-    </ul>
-
-    <h2>Architecture & API Usage</h2>
-    <p>Regardless of your chosen output language, your code follows a matching workflow lifecycle to manage memory boundaries and thread execution models cleanly:</p>
-
-    <ul>
-        <li><strong>Initialization & Setup:</strong> Loads target runtime binaries, maps project asset storage roots, and instantiates the workflow pipeline topology.</li>
-        <li><strong>Live Parameter Manipulation:</strong> Modifies runtime variables type-safely via calculated Port Enums dynamically mapped down to memory slots.</li>
-        <li><strong>Interactive Stream Inspection:</strong> Wireframes target engine pins out to processing windows (such as standard viewer windows, native <code>imshow</code> framebuffers, or full-screen render panels) using thread-isolated UI loops.</li>
-    </ul>
-
-    <h3>C++ API</h3>
-<pre><code>
-    OVERALL C++ WORKFLOW LIFECYCLE USAGE HANDBOOK:
-
-    INITIALIZATION & SETUP:
-    AppLogic app;
-    if (!app.init_engine()) {
-    Handle DLL loading failure safely
-    return -1;
-    }
-    app.setup_workflow(); Hydrates pipeline handles, configurations, and topology
-
-    LIVE PARAMETER MODIFICATION:
-    Modifies parameter values type-safely via Port Enums mapped dynamically:
-    app.update_node_val(NodeID::MOVIE_READER, MovieReaderInputs::REALTIME, "true");
-    app.update_node_val(NodeID::CANNY_EDGE_DETECTOR, CannyEdgeDetectorInputs::THRESHOLD1, "120.0");
-
-    INTERACTIVE VISUAL INSPECTION:
-    Hooks native view overlays onto engine processing nodes:
-    app.view_node(NodeID::CANNY_EDGE_DETECTOR, 0, ViewMode::IMSHOW);
-
-    LIVE VIEWER API:
-    Adds a live callback to view output of a node's port
-    app.addImageLive(NodeID::MOVIE_READER, 0, [](const cv::Mat& frame) {
-           Your code here
-    });
- </code></pre>
-
-    <h3>C++ Example</h3>
-    <p>Below is a typical lifecycle implementation mapping the exported C++ target bindings:</p>
-    <pre><code>#include "app_logic.h"
-#include &lt;iostream&gt;
-
-int main() {
-    AppLogic app;
     
-    // 1. Initialize engine library bindings
-    if (!app.init_engine()) {
-        std::cerr &lt;&lt; "Failed to load photron_engine.dll runtime binary." &lt;&lt; std::endl;
-        return -1;
-    }
-    
-    // 2. Hydrate configuration parameters and thread topology
-    app.setup_workflow(); 
-    
-    // 3. Update active node attributes type-safely via generated Port Enums
-    app.update_node_val(NodeID::MOVIE_READER, MovieReaderInputs::REALTIME, "true");
-    app.update_node_val(NodeID::CANNY_EDGE_DETECTOR, CannyEdgeDetectorInputs::THRESHOLD1, "120.0");
-    
-    // 4. Hook native view overlay windows on a processing node
-    app.view_node(NodeID::CANNY_EDGE_DETECTOR, 0, ViewMode::IMSHOW);
-    
-    return 0;
-}</code></pre>
+    <hr>
 
-    <h3>Local C++ Compilation & Deployment</h3>
-    <p>To compile your pipeline using native C++ bindings, ensure your built application can access all engine library links correctly by executing the following steps:</p>
-    <ol>
-        <li>Download the generated <code>app_logic.h</code> and <code>app_logic.cpp</code> files and add them to your C++ application project layout.</li>
-        <li>Build the source files together with your main orchestration code into a compiled executable file.</li>
-        <li>Move or copy your finalized <code>.exe</code> binary artifact into the <code>external/bin</code> subdirectory located within your main <strong>InfiniWorkflow</strong> installation folder.</li>
-        <li>
-            Execute your application binary directly from that folder
-        </li>
-    </ol>
-
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Method</th>
-                <th>Description & Examples</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><code>__init__</code></td>
-                <td>Initializes the Photron engine, configures the <code>PythonNodeFactory</code>, and sets up essential FFI callback types and memory management to prevent garbage collection crashes.</td>
-            </tr>
-            <tr>
-                <td><code>initialize_workflow</code></td>
-                <td>Entry point for building the computational pipeline; instantiates C++ nodes and Python proxies, sets node parameters, and establishes edge connections.</td>
-            </tr>
-            <tr>
-                <td><code>add_live_viewer</code></td>
-                <td>
-                    Creates a live viewer node, connects it to a source, and registers a callback for C++ nodes
-                    <br><br><b>Examples:</b><br>
-                    1. <b>Numeric:</b> <code>app.add_live_viewer(NodeID.NUMERIC_A_B, 0, 'numeric', lambda val: print(f"Value: {val}"))</code><br>
-                    2. <b>String:</b> <code>app.add_live_viewer(NodeID.STR, 0, 'string', lambda s: print(f"String: {s.decode('utf-8')}"))</code><br>
-                    3. <b>Matrix:</b> <code>app.add_live_viewer(NodeID.DARKNET_YOLO7_CLASSIFICATION, 0, 'matrix', lambda mat: print(f"Mean: {mat.mean()}"))</code><br>
-                    4. <b>Image:</b> <code>app.add_live_viewer(NodeID.MOVIE_READER, 0, 'image', lambda img: print(f"Shape: {img.shape}"))</code>
-                    <br><br><b>Note:</b> Automatically wraps raw C++ pointers into NumPy arrays and uses <code>arr.copy()</code> to ensure data persistence.
-                </td>
-            </tr>
-            <tr>
-                <td><code>execution_loop</code></td>
-                <td>A daemon thread that manages node updates, triggers re-execution for "dirty" Python nodes, and handles stream inspection logging.</td>
-            </tr>
-            <tr>
-                <td><code>update_node_val</code></td>
-                <td>Updates node parameters; if the target is a Python node, it marks it as "dirty" for re-execution; otherwise, it calls the engine’s parameter setter.</td>
-            </tr>
-            <tr>
-                <td><code>view_node</code></td>
-                <td>Designates a node/port for real-time inspection. For Python nodes, it enables internal monitoring; for C++ nodes, it triggers native engine rendering.</td>
-            </tr>
-            <tr>
-                <td><code>update_from_cpp</code></td>
-                <td>Synchronizes Python state with C++ updates, parsing binary streams and mapping raw data buffers to NumPy arrays.</td>
-            </tr>
-            <tr>
-                <td><code>python_proxy_callback</code></td>
-                <td>A static FFI handler invoked by the C++ engine to flag specific proxy nodes as "dirty" when their port data updates.</td>
-            </tr>
-            <tr>
-                <td><code>stop</code></td>
-                <td>Signals the execution thread to stop and gracefully shuts down the workflow pipeline.</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h3>Generated Interactive Terminal App</h3>
-    <p>When selecting the Python code deployment option, the generator bundles a complete, terminal-driven interactive control dashboard using the <code>rich</code> console framework. This script allows developers or operators to verify running models immediately without building a standalone UI wrapper from scratch.</p>
-
-    <ul>
-        <li><strong>Non-Blocking I/O Loops:</strong> Continuously polls telemetry values and logs notifications on background execution threads without halting frame processing loops.</li>
-        <li><strong>Live Metric Streaming:</strong> Outputs system state flags, numeric parameters, shape matrices, and active image dimension diagnostics directly to the user console.</li>
-        <li><strong>On-the-Fly Configuration Changes:</strong> Intercepts terminal keypad inputs to navigate running workflow steps, alter custom values, or open direct debugging view streams instantly.</li>
-    </ul>
-
-    <h3>Local Python Testing & Execution</h3>
-    <p>To test and run your generated Python pipeline locally, follow these steps to ensure all runtime dependencies and core engine libraries load correctly:</p>
-    <ol>
-        <li>Save your downloaded <code>my_app.py</code> and <code>app_logic.py</code> files directly into the <code>app</code> folder located inside your main <strong>InfiniWorkflow</strong> installation directory.</li>
-        <li>Open your terminal or command prompt.</li>
-        <li>
-            Change directory into that folder by running:
-            <pre><code>cd /path/to/infiniworkflow/app</code></pre>
-        </li>
-        <li>
-            Execute the interactive dashboard script using the Python interpreter:
-            <pre><code>python my_app.py</code></pre>
-        </li>
-    </ol>
-
-    <p style="text-align: center; color: var(--secondary-color); font-size: 0.85em; margin-top: 50px;">
-        © 2026 Photron USA Inc. All rights reserved. InfiniWorkflow, App Hub, and associated logos are registered trademarks of Photron USA Inc.
-    </p>
-
-    <h2 id="tutorials">Live Tutorials</h2>
-
-    <p>
-        <strong>Getting Started:</strong> To begin, a specialized tutorial browser window will appear on your screen. This interface lists all available interactive paths. Simply browse and select the topic or workflow you want to learn, and launch it to begin the live session.
-    <p>Once launched, this interactive system guides you through automated workflows right inside your application interface. Read this guide to understand the visual alerts, messaging system, and safety overrides during an active tutorial.</p>
-
-    <h3>1. Visual Interface Cues</h3>
-    <p>When an automated live tutorial session is active, the system provides real-time ambient feedback via global window styling so you always know when the system is in control.</p>
-
-    <h4>The Active Session Frame</h4>
-    <ul>
-        <li><strong>Appearance:</strong> A thick, high-visibility <code>yellow</code> border framing the entire browser window viewport.</li>
-        <li><strong>Purpose:</strong> Indicates that a Live Tutorial script is actively executing steps or listening to UI inputs.</li>
-        <li><strong>Interaction:</strong> Clicks pass safely through the border overlay, allowing you to interact with page buttons naturally.</li>
-    </ul>
-
-    <h3>2. Dynamic Messages & System Dialogs</h3>
-    <p>The application triggers automated modal dialogs to communicate quick operational status changes without interrupting your concentration flow.</p>
-
-    <div class="info-box">
-        <strong>Information Messages:</strong> Routine notifications present a blue informational icon. These dialogs are modal, dimming the background, and will stay open until you click <em>"Ok"</em> or click outside the message window to dismiss them.
-    </div>
-
-    <h4>Aborting</h4>
-    <p>To abort a tutorial, select the Live Tutorial in the Windows menu.</p>
-
-    <ul>
-        <li><strong>Automatic Dismissal:</strong> This message requires <strong>no action</strong> from you. It features no clickable confirmation buttons and will self-destruct automatically after a few seconds once the sequence is securely halted.</li>
-        <li><strong>Localization Support:</strong> The base status notice fully respects local system language strings via the built-in <code>tr()</code> module.</li>
-    </ul>
 
     <h1 id="INFINICAM_Setup">INFINICAM Quick Start Guide</h1>
 
