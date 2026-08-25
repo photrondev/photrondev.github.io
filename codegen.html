@@ -475,6 +475,10 @@
                 <tr><td><b>Key Stone</b></td><td>Provides keystone correction functionality.</td></tr>
                 <tr><td><b>Pixel Probe</b></td><td>Provides pixel inspection functionality.</td></tr>
                 <tr><td><b>View</b></td><td>Provides view-related functionality.</td></tr>
+                <tr><td><b>Undo / Redo</b></td><td>Provides undo/redo related functionality.</td></tr>
+                <tr><td><b>Load / Save</b></td><td>Provides load/save of settings functionality.</td></tr>
+                <tr><td><b>Reset All</b></td><td>Provides reset all of settings functionality.</td></tr>
+                <tr><td><b>View</b></td><td>Provides view-related functionality.</td></tr>
                 <tr><td><b>Telemetry</b></td><td>Provides telemetry display functionality.</td></tr>
             </table>
 
@@ -591,9 +595,10 @@
                 <tr><td><b>App Identifier / Bundle ID</b></td><td>The unique application identifier.</td></tr>
                 <tr><td><b>Description</b></td><td>A description of the application.</td></tr>
                 <tr><td><b>License File Path</b></td><td>An optional license file to include with the package.</td></tr>
+                <tr><td><b>Package all executables</b></td><td>If checked, packages all executables located in the <code>external/bin</code> directory. If unchecked, only the main application executable is packaged.</td></tr>
             </table>
 
-            <p>The interface describes packaging targets as <b>NSIS Windows / DMG Mac</b>.</p>
+            <p>The interface describes packaging targets as <b>NSIS Windows / DMG Mac / AppImage Linux</b>.</p>
         </section>
 
         <section id="generation">
@@ -711,16 +716,16 @@ Tracking Progress = Processando o Rastreamento
 
         <p>If your application depends on the Visual C++ runtime, you can have the installer check for it and install it automatically &mdash; no code changes required.</p>
 
-        <p>Place your copy of <code>vc_redist.x64.exe</code> in your project's <code>assets</code> folder. During generation, the installer:</p>
+        <p>Place your copy of <code>VC_redist.x64.exe</code> in the <code>codegen_installer</code> folder (located at the same level as the <code>app</code> folder). If not found there, the generator will check the <code>assets</code> folder. During generation, the installer:</p>
 
         <ul>
-            <li>Detects whether the file is present. If it isn't, this step is skipped entirely and the installer behaves exactly as before.</li>
+            <li>Detects whether the file is present in either location. If it isn't, this step is skipped entirely and the installer behaves exactly as before.</li>
             <li>If it is present, the installer checks the target machine's registry to see whether the runtime is already installed.</li>
-            <li>If the runtime is missing, the installer silently runs <code>vc_redist.x64.exe</code> before continuing with your app's installation.</li>
+            <li>If the runtime is missing, the installer silently runs <code>VC_redist.x64.exe</code> before continuing with your app's installation.</li>
             <li>If the runtime is already present, the redistributable is skipped so install times stay fast.</li>
         </ul>
 
-        <p>This means bundling the redistributable is entirely optional and additive &mdash; including or omitting <code>vc_redist.x64.exe</code> from <code>assets</code> is the only thing you need to do.</p>
+        <p>This means bundling the redistributable is entirely optional and additive &mdash; including or omitting <code>VC_redist.x64.exe</code> is the only thing you need to do.</p>
 
         <hr>
 
@@ -730,23 +735,48 @@ Tracking Progress = Processando o Rastreamento
 
         <h4>How It Works</h4>
 
-        <p>The code generator uses a simple drop-in replacement system. During generation, it checks your project's <code>assets</code> folder for specific file names. If it finds your custom files, it will use them. If a file is missing, it will seamlessly fall back to the default system assets.</p>
+        <p>The code generator uses a hierarchical override directory <code>codegen_installer</code> (located at the same level as the <code>app</code> folder) to search for custom branding and configuration files. Below are the precise search priority paths for each supported asset type:</p>
 
-        <h4>Supported Custom Files</h4>
+        <h5>1. Sidebar and Topbar Bitmaps (<code>sidebar.bmp</code>, <code>topbar.bmp</code>)</h5>
+        <ol>
+            <li>Specific app override: <code>codegen_installer/{{app_name}}/{{filename}}</code></li>
+            <li>General installer override: <code>codegen_installer/{{filename}}</code></li>
+            <li>Ultimate fallback: Default system bitmaps inside <code>app/static/assets/</code></li>
+        </ol>
 
-        <p>To override the default branding, simply place any of the following files directly into your project's <code>assets</code> directory:</p>
+        <h5>2. End User License Agreements (<code>EULA.txt</code>, <code>LICENSE.txt</code>)</h5>
+        <ol>
+            <li>Specific app override: <code>codegen_installer/{{app_name}}/{{filename}}</code></li>
+            <li>General installer override: <code>codegen_installer/{{filename}}</code></li>
+            <li>Ultimate fallback: Root level <code>{{filename}}</code></li>
+        </ol>
 
+        <h5>3. Extra Assets Copy List and Localization (<code>manifest.txt</code>, <code>localize.txt</code>)</h5>
+        <ol>
+            <li>Specific app override: <code>codegen_installer/{{app_name}}/{{filename}}</code></li>
+            <li>General installer override: <code>codegen_installer/{{filename}}</code></li>
+            <li>Workspace assets fallback: <code>assets/{{filename}}</code></li>
+        </ol>
+
+        <h5>4. App Icon and Splashscreen (<code>favicon.ico</code>, <code>splashscreen.png</code>)</h5>
+        <ol>
+            <li>Specific app override: <code>codegen_installer/{{app_name}}/{{filename}}</code></li>
+            <li>General installer override: <code>codegen_installer/{{filename}}</code></li>
+            <li>Workspace assets override: <code>assets/{{filename}}</code></li>
+            <li>Ultimate fallback: Default system icon/splashscreen inside <code>app/static/</code> or <code>app/static/assets/</code></li>
+        </ol>
+
+        <h4>Manifest File Security Constraints</h4>
+        <p>For safety and traversal protection, entries in <code>manifest.txt</code> must comply with strict validation rules:</p>
         <ul>
-            <li><code>favicon.ico</code>: Changes the main application icon and the desktop shortcut icon.</li>
-            <li><code>sidebar.bmp</code>: Changes the tall sidebar image on the Welcome and Finish pages of the installer.</li>
-            <li><code>topbar.bmp</code>: Changes the small header banner image on the top right of the inner installer pages.</li>
-            <li><code>EULA.txt</code>: Replaces the default End User License Agreement with your own legal text.</li>
-            <li><code>splashscreen.png</code>: Replaces the default splashscreen.</li>
+            <li><strong>No Directory Traversal:</strong> Any path containing <code>..</code> segments is strictly prohibited and skipped.</li>
+            <li><strong>Restricted Scope:</strong> Paths must reside strictly inside the <code>assets/</code> or <code>Extensions/</code> directories.</li>
+            <li><strong>No Copy-All Directories:</strong> Specifying root base folders (exactly `assets` or `Extensions`) to copy the entire repository is rejected.</li>
         </ul>
 
         <h4>The Result</h4>
 
-        <p>There is no need to modify any code, scripts, or configuration files. Just drop your preferred assets into the <code>assets</code> folder, and the next time you trigger the code generation, your branding will automatically replace the defaults!</p>
+        <p>There is no need to modify any code, scripts, or configuration files. Just drop your preferred assets into the override locations, and the next time you trigger the code generation, your custom branding will automatically replace the defaults!</p>
 
 
 
