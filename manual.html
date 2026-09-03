@@ -2378,10 +2378,20 @@
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Convert Colorspace</td>
     </tr>
+    <tr id='cv.hsl_correct'>
+        <td>HSL Correct</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li><li>hue : double</li><li>sat : double</li><li>luma : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Modify Color of Cuda Buffer Using HSL Sliders</td>
+    </tr>
     <tr id='cv.hsv->rgb'>
         <td>HSV->RGB</td>
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Convert Colorspace</td>
+    </tr>
+    <tr id='cv.hsv_correct'>
+        <td>HSV Correct</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li><li>hue : double</li><li>sat : double</li><li>bright : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Modify Color of Cuda Buffer Using HSV/HSB Sliders</td>
     </tr>
     <tr id='cv.img2->mat2'>
         <td>Image2D to Matrix2D</td>
@@ -3647,6 +3657,16 @@
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : image2D</li><li>maxval : double</li><li>adaptiveMethod : int</li><li>blockSize : int</li><li>C : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>The function is typically used to get a bi-level (binary inverse) image out of a grayscale image</td>
     </tr>
+    <tr id='cv.chroma_keyer'>
+        <td>Chroma Keyer</td>
+        <td><i class='bi bi-mask'></i></td>
+        <td><ul><li>source : image2D</li><li>inEdges : double2</li><li>mode : int</li><li>outputChannels : int</li><li>invert : bool</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Chroma Key of Cuda Buffer</td>
+    </tr>
+    <tr id='cv.cielab_threshold'>
+        <td>CIELAB Threshold</td>
+        <td><i class='bi bi-mask'></i></td>
+        <td><ul><li>source : image2D</li><li>targetColor : color</li><li>radius : double2</li><li>scale : double</li><li>outputChannels : int</li><li>invert : bool</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>CIELAB Threshold of Cuda Buffer</td>
+    </tr>
     <tr id='cuda.chroma_keyer'>
         <td>Chroma Keyer</td>
         <td><i class='bi bi-mask'></i></td>
@@ -3681,6 +3701,11 @@
         <td>Grayscale</td>
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Convert to grayscale</td>
+    </tr>
+    <tr id='cv.hue_threshold'>
+        <td>Hue Threshold</td>
+        <td><i class='bi bi-mask'></i></td>
+        <td><ul><li>source : image2D</li><li>targetColor : color</li><li>radius : double2</li><li>outputChannels : int</li><li>invert : bool</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Hue Threshold of Cuda Buffer</td>
     </tr>
     <tr id='cv.in_range'>
         <td>Color In Range</td>
@@ -3746,6 +3771,11 @@
         <td>Quick Path</td>
         <td><i class='bi bi-gear'></i></td>
         <td><ul><li>source : image2D</li><li>path : string</li><li>color : color</li><li>invert : bool</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li><li>cutout : image2D</li>        </ul></td>        <td>Creates and renders up to 5 Paths</td>
+    </tr>
+    <tr id='cv.rgb_threshold'>
+        <td>RGB Threshold</td>
+        <td><i class='bi bi-mask'></i></td>
+        <td><ul><li>source : image2D</li><li>targetColor : color</li><li>radius : double2</li><li>outputChannels : int</li><li>invert : bool</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>RGB Threshold of Cuda Buffer</td>
     </tr>
     <tr id='cv.saliency'>
         <td>Saliency</td>
