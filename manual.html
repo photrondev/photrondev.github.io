@@ -2253,25 +2253,30 @@
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>BGR to YUV of Cuda Buffer</td>
     </tr>
-    <tr id='cuda.brightness'>
+    <tr id='cuda.color_brightness'>
         <td>Brightness</td>
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : cuda2D</li><li>brightness : double</li><li>red : double</li><li>green : double</li><li>blue : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Change Brightness of Cuda Buffer</td>
     </tr>
-    <tr id='cuda.contrast'>
+    <tr id='cuda.color_contrast'>
         <td>Contrast</td>
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : cuda2D</li><li>contrast : double</li><li>red : double</li><li>green : double</li><li>blue : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Change Contrast of Cuda Buffer</td>
+    </tr>
+    <tr id='cuda.color_gamma'>
+        <td>Gamma</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : cuda2D</li><li>gamma : double</li><li>red : double</li><li>green : double</li><li>blue : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Change Gamma of Cuda Buffer</td>
+    </tr>
+    <tr id='cuda.color_lift'>
+        <td>Lift</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : cuda2D</li><li>lift : double</li><li>red : double</li><li>green : double</li><li>blue : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Change Lift of Cuda Buffer</td>
     </tr>
     <tr id='cuda.crop'>
         <td>Crop</td>
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : image2D</li><li>point1 : int2</li><li>point2 : int2</li><li>mode : int</li><li>fillColor : color</li><li>detections : matrix2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Crop input image</td>
-    </tr>
-    <tr id='cuda.gamma'>
-        <td>Gamma</td>
-        <td><i class='bi bi-palette'></i></td>
-        <td><ul><li>source : cuda2D</li><li>gamma : double</li><li>red : double</li><li>green : double</li><li>blue : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Change Gamma of Cuda Buffer</td>
     </tr>
     <tr id='cuda.gamma_fwd'>
         <td>Gamma Fwd</td>
@@ -2303,7 +2308,7 @@
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : cuda2D</li><li>hue : double</li><li>sat : double</li><li>bright : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Modify Color of Cuda Buffer Using HSV/HSB Sliders</td>
     </tr>
-    <tr id='cuda.invert'>
+    <tr id='cuda.invert_color'>
         <td>Invert</td>
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Inverts RGB channels of Cuda Buffer</td>
@@ -2312,11 +2317,6 @@
         <td>Levels</td>
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : cuda2D</li><li>inEdges : double2</li><li>outEdges : double2</li><li>gamma : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Smoothstep leveling of Cuda Buffer Using Gamma Function</td>
-    </tr>
-    <tr id='cuda.lift'>
-        <td>Lift</td>
-        <td><i class='bi bi-palette'></i></td>
-        <td><ul><li>source : cuda2D</li><li>lift : double</li><li>red : double</li><li>green : double</li><li>blue : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Change Lift of Cuda Buffer</td>
     </tr>
     <tr id='cuda.rgb->hls'>
         <td>RGB->HLS</td>
@@ -2475,262 +2475,262 @@
     <tr id='cuda.average'>
         <td>Average</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mask : cuda2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Average blend mode</td>
+        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Average blend mode</td>
     </tr>
     <tr id='cuda.blend'>
         <td>Blend</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mask : cuda2D</li><li>mode : int</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Change Blend of Cuda Buffer</td>
+        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mode : int</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Change Blend of Cuda Buffer</td>
     </tr>
     <tr id='cuda.blend_add'>
         <td>Add</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mask : cuda2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Add blend mode</td>
+        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Add blend mode</td>
     </tr>
     <tr id='cuda.blend_multiply'>
         <td>Multiply</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mask : cuda2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Multiply blend mode</td>
+        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Multiply blend mode</td>
     </tr>
     <tr id='cuda.blend_subtract'>
         <td>Subtract</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mask : cuda2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Subtract blend mode</td>
+        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Subtract blend mode</td>
     </tr>
     <tr id='cuda.color_burn'>
         <td>Color Burn</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mask : cuda2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Color Burn blend mode</td>
+        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Color Burn blend mode</td>
     </tr>
     <tr id='cuda.color_dodge'>
         <td>Color Dodge</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mask : cuda2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Color Dodge blend mode</td>
+        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Color Dodge blend mode</td>
     </tr>
     <tr id='cuda.darken'>
         <td>Darken</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mask : cuda2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Darken blend mode</td>
+        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Darken blend mode</td>
     </tr>
     <tr id='cuda.difference'>
         <td>Difference</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mask : cuda2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Difference blend mode</td>
+        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Difference blend mode</td>
     </tr>
     <tr id='cuda.exclusion'>
         <td>Exclusion</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mask : cuda2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Exclusion blend mode</td>
+        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Exclusion blend mode</td>
     </tr>
     <tr id='cuda.glow'>
         <td>Glow</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mask : cuda2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Glow blend mode</td>
+        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Glow blend mode</td>
     </tr>
     <tr id='cuda.hard_light'>
         <td>Hard Light</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mask : cuda2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Hard Light blend mode</td>
+        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Hard Light blend mode</td>
     </tr>
     <tr id='cuda.hard_mix'>
         <td>Hard Mix</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mask : cuda2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Hard Mix blend mode</td>
+        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Hard Mix blend mode</td>
     </tr>
     <tr id='cuda.lighten'>
         <td>Lighten</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mask : cuda2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Lighten blend mode</td>
+        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Lighten blend mode</td>
     </tr>
     <tr id='cuda.linear_burn'>
         <td>Linear Burn</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mask : cuda2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Linear Burn blend mode</td>
+        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Linear Burn blend mode</td>
     </tr>
     <tr id='cuda.linear_dodge'>
         <td>Linear Dodge</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mask : cuda2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Linear Dodge blend mode</td>
+        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Linear Dodge blend mode</td>
     </tr>
     <tr id='cuda.linear_light'>
         <td>Linear Light</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mask : cuda2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Linear Light blend mode</td>
+        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Linear Light blend mode</td>
     </tr>
     <tr id='cuda.negation'>
         <td>Negation</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mask : cuda2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Negation blend mode</td>
+        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Negation blend mode</td>
     </tr>
     <tr id='cuda.normal'>
         <td>Normal</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mask : cuda2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Normal blend mode</td>
+        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Normal blend mode</td>
     </tr>
     <tr id='cuda.overlay'>
         <td>Overlay</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mask : cuda2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Overlay blend mode</td>
+        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Overlay blend mode</td>
     </tr>
     <tr id='cuda.phoenix'>
         <td>Phoenix</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mask : cuda2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Phoenix blend mode</td>
+        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Phoenix blend mode</td>
     </tr>
     <tr id='cuda.pin_light'>
         <td>Pin Light</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mask : cuda2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Pin Light blend mode</td>
+        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Pin Light blend mode</td>
     </tr>
     <tr id='cuda.reflect'>
         <td>Reflect</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mask : cuda2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Reflect blend mode</td>
+        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Reflect blend mode</td>
     </tr>
     <tr id='cuda.screen'>
         <td>Screen</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mask : cuda2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Screen blend mode</td>
+        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Screen blend mode</td>
     </tr>
     <tr id='cuda.soft_light'>
         <td>Soft Light</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mask : cuda2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Soft Light blend mode</td>
+        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Soft Light blend mode</td>
     </tr>
     <tr id='cuda.vivid_light'>
         <td>Vivid Light</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>mask : cuda2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Vivid Light blend mode</td>
+        <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Vivid Light blend mode</td>
     </tr>
     <tr id='cv.average'>
         <td>Average</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mask : image2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Average blend mode</td>
+        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Average blend mode</td>
     </tr>
     <tr id='cv.blend'>
         <td>Blend</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mask : image2D</li><li>mode : int</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change Blend of image buffer</td>
+        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mode : int</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change Blend of image buffer</td>
     </tr>
     <tr id='cv.blend_add'>
         <td>Add</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mask : image2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Add blend mode</td>
+        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Add blend mode</td>
     </tr>
     <tr id='cv.blend_multiply'>
         <td>Multiply</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mask : image2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Multiply blend mode</td>
+        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Multiply blend mode</td>
     </tr>
     <tr id='cv.blend_subtract'>
         <td>Subtract</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mask : image2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Subtract blend mode</td>
+        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Subtract blend mode</td>
     </tr>
     <tr id='cv.color_burn'>
         <td>Color Burn</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mask : image2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Color Burn blend mode</td>
+        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Color Burn blend mode</td>
     </tr>
     <tr id='cv.color_dodge'>
         <td>Color Dodge</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mask : image2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Color Dodge blend mode</td>
+        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Color Dodge blend mode</td>
     </tr>
     <tr id='cv.darken'>
         <td>Darken</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mask : image2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Darken blend mode</td>
+        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Darken blend mode</td>
     </tr>
     <tr id='cv.difference'>
         <td>Difference</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mask : image2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Difference blend mode</td>
+        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Difference blend mode</td>
     </tr>
     <tr id='cv.exclusion'>
         <td>Exclusion</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mask : image2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Exclusion blend mode</td>
+        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Exclusion blend mode</td>
     </tr>
     <tr id='cv.glow'>
         <td>Glow</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mask : image2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Glow blend mode</td>
+        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Glow blend mode</td>
     </tr>
     <tr id='cv.hard_light'>
         <td>Hard Light</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mask : image2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Hard Light blend mode</td>
+        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Hard Light blend mode</td>
     </tr>
     <tr id='cv.hard_mix'>
         <td>Hard Mix</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mask : image2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Hard Mix blend mode</td>
+        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Hard Mix blend mode</td>
     </tr>
     <tr id='cv.lighten'>
         <td>Lighten</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mask : image2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Lighten blend mode</td>
+        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Lighten blend mode</td>
     </tr>
     <tr id='cv.linear_burn'>
         <td>Linear Burn</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mask : image2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Linear Burn blend mode</td>
+        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Linear Burn blend mode</td>
     </tr>
     <tr id='cv.linear_dodge'>
         <td>Linear Dodge</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mask : image2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Linear Dodge blend mode</td>
+        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Linear Dodge blend mode</td>
     </tr>
     <tr id='cv.linear_light'>
         <td>Linear Light</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mask : image2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Linear Light blend mode</td>
+        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Linear Light blend mode</td>
     </tr>
     <tr id='cv.negation'>
         <td>Negation</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mask : image2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Negation blend mode</td>
+        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Negation blend mode</td>
     </tr>
     <tr id='cv.normal'>
         <td>Normal</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mask : image2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Normal blend mode</td>
+        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Normal blend mode</td>
     </tr>
     <tr id='cv.overlay'>
         <td>Overlay</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mask : image2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Overlay blend mode</td>
+        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Overlay blend mode</td>
     </tr>
     <tr id='cv.phoenix'>
         <td>Phoenix</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mask : image2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Phoenix blend mode</td>
+        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Phoenix blend mode</td>
     </tr>
     <tr id='cv.pin_light'>
         <td>Pin Light</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mask : image2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Pin Light blend mode</td>
+        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Pin Light blend mode</td>
     </tr>
     <tr id='cv.reflect'>
         <td>Reflect</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mask : image2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Reflect blend mode</td>
+        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Reflect blend mode</td>
     </tr>
     <tr id='cv.screen'>
         <td>Screen</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mask : image2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Screen blend mode</td>
+        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Screen blend mode</td>
     </tr>
     <tr id='cv.soft_light'>
         <td>Soft Light</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mask : image2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Soft Light blend mode</td>
+        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Soft Light blend mode</td>
     </tr>
     <tr id='cv.vivid_light'>
         <td>Vivid Light</td>
         <td><i class='bi bi-stack'></i></td>
-        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>mask : image2D</li><li>opacity : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Vivid Light blend mode</td>
+        <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Vivid Light blend mode</td>
     </tr>
     <tr id='cv.divide'>
         <td>Divide</td>
@@ -3745,7 +3745,7 @@
     <tr id='cv.quick_path'>
         <td>Quick Path</td>
         <td><i class='bi bi-gear'></i></td>
-        <td><ul><li>source : image2D</li><li>path : string</li><li>color : color</li><li>invert : bool</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li>        </ul></td>        <td>Creates and renders up to 5 Paths</td>
+        <td><ul><li>source : image2D</li><li>path : string</li><li>color : color</li><li>invert : bool</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li><li>cutout : image2D</li>        </ul></td>        <td>Creates and renders up to 5 Paths</td>
     </tr>
     <tr id='cv.saliency'>
         <td>Saliency</td>
