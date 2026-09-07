@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>User Guide</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        :root {
+            --brand: #4f7cff;
+            --brand-dark: #2f4fb0;
+        }
+        body {
+            font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: #f4f6fb;
+        }
+        .hero {
+            background: linear-gradient(135deg, var(--brand-dark), var(--brand) 60%, #7aa5ff);
+            color: #fff;
+            padding: 5rem 1rem 6rem;
+        }
+        .hero .badge {
+            font-size: 0.85rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            background: rgba(255,255,255,0.18);
+            border: 1px solid rgba(255,255,255,0.35);
+        }
+        .hero-icon {
+            font-size: 3.25rem;
+            filter: drop-shadow(0 6px 14px rgba(0,0,0,0.25));
+        }
+        .hero h1 {
+            font-weight: 700;
+        }
+        .content-wrap {
+            margin-top: -3.5rem;
+        }
+        .toc-card {
+            position: sticky;
+            top: 1.5rem;
+        }
+        .toc-card a {
+            text-decoration: none;
+            color: #495057;
+            display: block;
+            padding: 0.35rem 0;
+        }
+        .toc-card a:hover {
+            color: var(--brand-dark);
+        }
+        .feature-card {
+            border: none;
+            border-radius: 14px;
+            box-shadow: 0 4px 18px rgba(20, 30, 60, 0.06);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            height: 100%;
+        }
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 26px rgba(20, 30, 60, 0.10);
+        }
+        .feature-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            background: rgba(79, 124, 255, 0.12);
+            color: var(--brand-dark);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+        .section-title {
+            font-weight: 700;
+            border-left: 5px solid var(--brand);
+            padding-left: 0.75rem;
+        }
+        kbd {
+            background: #212529;
+        }
+        footer {
+            color: #8a93a3;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero text-center">
+        <div class="hero-icon mb-3"><i class="bi bi-book-half"></i></div>
+        <h1 class="display-5">Full User Guide</h1>
+        <p class="lead col-lg-8 mx-auto opacity-75">
+            A complete, step-by-step manual for this application is being written. In the meantime, everything
+            below covers what each built-in feature does and how to use it &mdash; enough to get productive today.
+        </p>
+    </header>
+
+    <div class="container content-wrap pb-5" style="max-width: 900px;">
+
+        <div class="card feature-card p-3 mb-4">
+            <p class="mb-0"><i class="bi bi-info-circle text-primary me-2"></i>To be completed by App author...</p>
+        </div>
+
+        <nav class="d-flex flex-wrap gap-2 mb-4">
+            <a href="#zoom" class="btn btn-sm btn-outline-primary"><i class="bi bi-zoom-in me-1"></i>Zoom</a>
+            <a href="#adjustments" class="btn btn-sm btn-outline-primary"><i class="bi bi-sliders me-1"></i>Adjustments</a>
+            <a href="#measurement" class="btn btn-sm btn-outline-primary"><i class="bi bi-rulers me-1"></i>Measurement</a>
+            <a href="#stabilization" class="btn btn-sm btn-outline-primary"><i class="bi bi-camera-reels me-1"></i>Stabilization</a>
+            <a href="#keystone" class="btn btn-sm btn-outline-primary"><i class="bi bi-aspect-ratio me-1"></i>Keystone</a>
+            <a href="#views" class="btn btn-sm btn-outline-primary"><i class="bi bi-grid-1x2 me-1"></i>Views</a>
+            <a href="#telemetry" class="btn btn-sm btn-outline-primary"><i class="bi bi-graph-up me-1"></i>Telemetry</a>
+            <a href="#playback" class="btn btn-sm btn-outline-primary"><i class="bi bi-play-circle me-1"></i>Playback</a>
+            <a href="#multiview" class="btn btn-sm btn-outline-primary"><i class="bi bi-window-split me-1"></i>Multi-View</a>
+            <a href="#preferences" class="btn btn-sm btn-outline-primary"><i class="bi bi-gear me-1"></i>Preferences</a>
+            <a href="#logging" class="btn btn-sm btn-outline-primary"><i class="bi bi-file-earmark-text me-1"></i>Logging</a>
+        </nav>
+
+                <section id="zoom" class="mb-5">
+                    <h3 class="section-title mb-3"><i class="bi bi-zoom-in me-2"></i>Zoom Controls</h3>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-mouse2"></i></div>
+                                <h6>Buttons</h6>
+                                <p class="small text-muted mb-0">Explicit "Zoom In", "Zoom Out", "Zoom Fit" and "Fullscreen" buttons in the Viewer menu and sidebar.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-arrows-move"></i></div>
+                                <h6>Mouse</h6>
+                                <p class="small text-muted mb-0">Scroll to zoom toward the cursor; drag with the middle mouse button to pan.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-keyboard"></i></div>
+                                <h6>Hotkeys</h6>
+                                <p class="small text-muted mb-0">
+                                    <kbd>=</kbd> / <kbd>I</kbd> zoom in &middot; <kbd>-</kbd> / <kbd>O</kbd> zoom out &middot; <kbd>F</kbd> resets to fit.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="adjustments" class="mb-5">
+                    <h3 class="section-title mb-3"><i class="bi bi-sliders me-2"></i>Image Adjustments &amp; Comparison</h3>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-brightness-high"></i></div>
+                                <h6>Adjustments</h6>
+                                <p class="small text-muted mb-0">Gamma, Brightness and Contrast sliders in the Adjustments window.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-palette"></i></div>
+                                <h6>Channels</h6>
+                                <p class="small text-muted mb-0">
+                                    Isolate a channel from Viewer &gt; Channels, or with the
+                                    <kbd>R</kbd> <kbd>G</kbd> <kbd>B</kbd> <kbd>A</kbd> hotkeys. Pressing the active
+                                    channel's key again returns to "RGBA".
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-layers-half"></i></div>
+                                <h6>Wipe &amp; Capture</h6>
+                                <p class="small text-muted mb-0">Capture a reference frame, then drag the Wipe divider to compare it against the live feed.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="measurement" class="mb-5">
+                    <h3 class="section-title mb-3"><i class="bi bi-rulers me-2"></i>Measurement &amp; Calibration</h3>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-vector-pen"></i></div>
+                                <h6>Tools</h6>
+                                <p class="small text-muted mb-0">Ruler, Angle, Angle2, Multi (polyline), Radius and Diameter overlays drawn directly on the video.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-bounding-box"></i></div>
+                                <h6>Calibration plane</h6>
+                                <p class="small text-muted mb-0">A 4-point quad converts pixel measurements into real-world units via perspective homography.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-x-octagon"></i></div>
+                                <h6>Closing the dialog</h6>
+                                <p class="small text-muted mb-0">Closing Measurement also hides every drawn shape from the viewer. It's mutually exclusive with Stabilization &mdash; opening one closes the other.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="stabilization" class="mb-5">
+                    <h3 class="section-title mb-3"><i class="bi bi-camera-reels me-2"></i>Stabilization</h3>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-crosshair"></i></div>
+                                <h6>Tracking modes</h6>
+                                <p class="small text-muted mb-0">Choose "One Point" or "Two Point" tracking, with adjustable ROI and Template sizes.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-skip-backward"></i></div>
+                                <h6>Track Backward / Forward</h6>
+                                <p class="small text-muted mb-0">Trace the motion path across the timeline to build the stabilization transform.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-x-octagon"></i></div>
+                                <h6>Exclusive with Measurement</h6>
+                                <p class="small text-muted mb-0">Only one of Measurement / Stabilization can be open at a time.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="keystone" class="mb-5">
+                    <h3 class="section-title mb-3"><i class="bi bi-aspect-ratio me-2"></i>Keystone Correction</h3>
+                    <div class="card feature-card p-3 d-inline-block">
+                        <p class="small text-muted mb-0">
+                            <i class="bi bi-check2-circle text-primary me-1"></i>Drag the four handles ("K0"&ndash;"K3") to warp perspective, and use
+                            "Reset Keystone" to restore a flat image.
+                        </p>
+                    </div>
+                </section>
+
+                <section id="views" class="mb-5">
+                    <h3 class="section-title mb-3"><i class="bi bi-grid-1x2 me-2"></i>View Selector &amp; Exporting</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-collection-play"></i></div>
+                                <h6>Stream selection</h6>
+                                <p class="small text-muted mb-0">Switch the active viewport feed between the available output streams via the Output menu.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-download"></i></div>
+                                <h6>Export Output&hellip;</h6>
+                                <p class="small text-muted mb-0">Save the selected stream as <code>.mp4</code>/<code>.avi</code> for images, or <code>.csv</code> for matrix data.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="telemetry" class="mb-5">
+                    <h3 class="section-title mb-3"><i class="bi bi-graph-up me-2"></i>Telemetry &amp; Data Inspection</h3>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-activity"></i></div>
+                                <h6>Live graphs</h6>
+                                <p class="small text-muted mb-0">Numerical output streams plot on a live line graph with tooltips and Min/Max tracking.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-eyedropper"></i></div>
+                                <h6>Pixel probe</h6>
+                                <p class="small text-muted mb-0">Hover the viewer for real-time coordinates, real-world position and color values.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-table"></i></div>
+                                <h6>Matrix tables</h6>
+                                <p class="small text-muted mb-0">A matrix-type view renders as an interactive, sortable data table instead of an image.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="playback" class="mb-5">
+                    <h3 class="section-title mb-3"><i class="bi bi-play-circle me-2"></i>Playback &amp; Timeline</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-keyboard"></i></div>
+                                <h6>Controls</h6>
+                                <p class="small text-muted mb-0">Play/Pause buttons sit at the top, bottom, or as an overlay inside the viewer, with a scrubbable timeline slider. Press <kbd>Space</kbd> anywhere in the window to toggle Play/Pause.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-dial"></i></div>
+                                <h6>Set Frame Number (if enabled)</h6>
+                                <p class="small text-muted mb-0">A crosshair-style button next to the timeline opens a small calculator-style keypad for typing an exact frame number to jump straight to it.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="multiview" class="mb-5">
+                    <h3 class="section-title mb-3"><i class="bi bi-window-split me-2"></i>Multi-View (Spawn)</h3>
+                    <p class="text-muted">Launch and tile extra copies of this application ("followers") alongside the original ("master") from Windows &gt; Multi-View, using the "2x1"/"2x2" quick layouts or "Terminate Spawns" to close them all.</p>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-link-45deg"></i></div>
+                                <h6>Always synced</h6>
+                                <p class="small text-muted mb-0">Window tiling, the focus-highlight border style, the active Theme, and the UI Language always follow the master.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-toggles"></i></div>
+                                <h6>Configurable sync</h6>
+                                <p class="small text-muted mb-0">Preferences &gt; Multi-View &gt; Sync (master only) toggles <strong>Frame</strong>, <strong>Pan/Zoom</strong> and <strong>Channels</strong> independently &mdash; all on by default.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-arrow-left-right"></i></div>
+                                <h6>Timeline switches to Embedded</h6>
+                                <p class="small text-muted mb-0">The master's Timeline Position is forced to "Embedded" the moment the group tiles, and restored automatically once every follower is closed.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-collection-play"></i></div>
+                                <h6>Bidirectional Timeline (optional)</h6>
+                                <p class="small text-muted mb-0">Off by default (Preferences &gt; Multi-View &gt; Sync). When on, every spawned window gets its own playback bar, and pressing Play/Pause or scrubbing on any one of them - master or follower - takes over and drives the whole group.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="preferences" class="mb-5">
+                    <h3 class="section-title mb-3"><i class="bi bi-gear me-2"></i>Preferences</h3>
+                    <p class="text-muted">Two collapsible groups, both open by default.</p>
+                    <h6 class="text-uppercase text-muted small">Customization <span class="text-lowercase">(always shown)</span></h6>
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-paint-bucket"></i></div>
+                                <h6>Theme</h6>
+                                <p class="small text-muted mb-0">Pick a built-in color preset, or "Designer Default" to restore the theme this application shipped with.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-translate"></i></div>
+                                <h6>Language</h6>
+                                <p class="small text-muted mb-0">Switch the UI text between English and any bundled language (German, Spanish, French, Japanese, Chinese). Saved automatically and remembered on the next launch.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h6 class="text-uppercase text-muted small">Multi-View <span class="text-lowercase">(master only)</span></h6>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-window-stack"></i></div>
+                                <h6>Border</h6>
+                                <p class="small text-muted mb-0">The focus-highlight border color and thickness.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-app-indicator"></i></div>
+                                <h6>Apps</h6>
+                                <p class="small text-muted mb-0">Which executable, if not this one, launches in each of the three spawn slots.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-toggles"></i></div>
+                                <h6>Sync</h6>
+                                <p class="small text-muted mb-0">Frame, Pan/Zoom and Channels sync toggles for followers - all on by default - plus a Bidirectional Timeline toggle (off by default).</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h6 class="text-uppercase text-muted small mt-3">Logging <span class="text-lowercase">(always shown)</span></h6>
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-file-earmark-text"></i></div>
+                                <h6>Advanced Logging</h6>
+                                <p class="small text-muted mb-0">Off by default. See the Logging section below for what it does and when to turn it on.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h6 class="text-uppercase text-muted small mt-3">Playback Controls <span class="text-lowercase">(always shown)</span></h6>
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-toggles"></i></div>
+                                <h6>Seek First / Prior / Next / Last / Set Frame Number</h6>
+                                <p class="small text-muted mb-0">Show or hide each of these timeline buttons independently, at any time - no rebuild needed. The starting state comes from how this app was built, but you can change it here and it's remembered on the next launch.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="logging" class="mb-5">
+                    <h3 class="section-title mb-3"><i class="bi bi-file-earmark-text me-2"></i>Logging</h3>
+                    <p class="text-muted">If you run into a problem with this application, enabling Advanced Logging and sending in the log file is the fastest way to help diagnose it.</p>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-1-circle"></i></div>
+                                <h6>1. Turn it on</h6>
+                                <p class="small text-muted mb-0">Open Preferences &gt; Logging and check <strong>Advanced Logging</strong>. The dialog also shows you the exact log file path.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-2-circle"></i></div>
+                                <h6>2. Restart the app</h6>
+                                <p class="small text-muted mb-0">Close and relaunch so the more detailed startup logging is active, then reproduce whatever issue you ran into.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card feature-card p-3">
+                                <div class="feature-icon mb-2"><i class="bi bi-3-circle"></i></div>
+                                <h6>3. Send the log file</h6>
+                                <p class="small text-muted mb-0">A single file is written fresh on every run - just attach that one file when you report the issue.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="small text-muted mt-3 mb-0">A basic log is always written, even with Advanced Logging off. The file lives at <code>%LOCALAPPDATA%\&lt;AppName&gt;\logs\&lt;AppName&gt;.log</code> on Windows (macOS/Linux use the equivalent per-user logs folder), and is shown in full in Preferences &gt; Logging.</p>
+                </section>
+
+        <footer class="text-center small pt-4 mt-4 border-top">
+            <i class="bi bi-file-earmark-text me-1"></i>Generated with Infini-Workflow &middot; replace this file at
+            <code>codegen_installer/&lt;app_name&gt;/user_guide.html</code> or <code>codegen_installer/user_guide.html</code>
+            to fully customize this manual for your application.
+        </footer>
+    </div>
+
+</body>
+</html>

@@ -456,13 +456,14 @@
             <p>The <b>Features</b> tab determines which capabilities are available to users of the generated application.</p>
 
             <h3>Playback Controls</h3>
-            <p>The playback section controls navigation through media or frames.</p>
+            <p>The playback section controls navigation through media or frames. Each toggle below only sets the <em>initial</em> state - the generated app also gets a Preferences &gt; Playback Controls page with the same five checkboxes, so an end user can show or hide any of these buttons at runtime without a rebuild; that choice is saved to settings and restored on the next launch.</p>
             <table>
                 <tr><th>Feature</th><th>Purpose</th></tr>
                 <tr><td><b>Seek First</b></td><td>Move to the first available frame or position.</td></tr>
                 <tr><td><b>Seek Prior</b></td><td>Move to the previous frame or position.</td></tr>
                 <tr><td><b>Seek Next</b></td><td>Move to the next frame or position.</td></tr>
                 <tr><td><b>Seek Last</b></td><td>Move to the final available frame or position.</td></tr>
+                <tr><td><b>Set Frame Number</b></td><td>Adds a button (crosshair/target glyph in C++, a calculator icon in Python) next to the timeline that opens a small modal with a calculator-style numeric keypad for typing an exact frame number to jump to. Off by default, like the four Seek toggles above. In a Multi-View group with Bidirectional Timeline on, using it also claims playback authority for the whole group, same as any other transport control.</td></tr>
             </table>
 
             <h3>Application Features</h3>
@@ -480,6 +481,7 @@
                 <tr><td><b>Reset All</b></td><td>Provides reset all of settings functionality.</td></tr>
                 <tr><td><b>View</b></td><td>Provides view-related functionality.</td></tr>
                 <tr><td><b>Telemetry</b></td><td>Provides telemetry display functionality.</td></tr>
+                <tr><td><b>Spawn</b></td><td>Provides the Multi-View menu, letting the running application launch and tile extra copies of itself ("followers") alongside the original ("master").</td></tr>
             </table>
 
             <h3>Available and Enabled</h3>
@@ -698,19 +700,39 @@
         <p>The system also provides a Standalone ZIP Packager that compresses your application into a final distributable artifact. To successfully build full executable installers via this backend service, you must install <strong>NSIS (Nullsoft Scriptable Install System)</strong> on your build machine. Ensure that the <code>makensis</code> executable is explicitly added to your system's PATH environment variable so the automated packaging scripts can invoke it correctly.</p>
 
         <h2>Localization</h2>
-        <p>To translate or customize text within your generated application, the engine supports a drop-in localization dictionary. Follow these steps to implement custom strings:</p>
+        <p>To translate or customize text within your generated application, the engine supports drop-in localization dictionaries. Follow these steps to implement custom strings:</p>
         <ol>
-            <li>Navigate to the <code>assets</code> directory within your project workspace.</li>
-            <li>Create a text file explicitly named <code>localize.txt</code>.</li>
+            <li>Navigate to the <code>assets/localize</code> directory within your project workspace (create it if it doesn't exist yet).</li>
+            <li>Create a text file explicitly named <code>localize.txt</code> (or one of the language-specific filenames below).</li>
             <li>Add your translations using a standard key-value format. You can use either an equals sign (<code>=</code>) or a colon (<code>:</code>) as a delimiter.</li>
         </ol>
-        <p><strong>Example <code>localize.txt</code> formatting:</strong></p>
+        <p><strong>Example <code>assets/localize/localize.txt</code> formatting:</strong></p>
 <pre style="background: #1a1a1a; color:white;padding : 15px; border-radius: 5px;"><code># This is a comment line
 my_app = My Custom App Name
 Zoom In : Magnify View
 Tracking Progress = Processando o Rastreamento
 </code></pre>
-        <p><em>Note: The engine will automatically load these pairs at runtime and replace corresponding <code>tr("...")</code> text wrapping instances in the UI.</em></p>
+        <p><em>Note: The engine will automatically load these pairs at runtime and replace corresponding <code>tr("...")</code> text wrapping instances in the UI. Localization files live under an <code>assets/localize/</code> subfolder (not flat in <code>assets/</code>) to keep that folder from accumulating one file per bundled language - the icons used by "..." buttons live in their own <code>assets/icons/</code> subfolder for the same reason.</em></p>
+
+        <h3>Default Language (GUI Designer)</h3>
+        <p>The <b>Style</b> tab of the GUI Designer (for the standalone C++/Python sample-app targets - not shown for PFV4 plugin exports) has a <b>Default Language</b> dropdown next to the theme preset picker. This sets which bundled dictionary the generated app starts with; the end user can still change it afterward via <b>Preferences &gt; Language</b> at runtime, same as always.</p>
+
+        <h3>Multiple Languages &amp; the Preferences &gt; Language Selector</h3>
+        <p>Beyond the single always-loaded <code>localize.txt</code> above, the generated application also ships with a <b>Preferences &gt; Language</b> dropdown that lets the end user switch between several bundled dictionaries at runtime, without editing any files themselves:</p>
+        <table>
+            <tr><th>Language combo entry</th><th>Dictionary file</th></tr>
+            <tr><td><b>English</b></td><td><code>localize.txt</code> - the same file described above (empty by default, so every <code>tr("...")</code> call falls back to its own English key text unless you've added overrides). Also the default unless a different Default Language is set in the GUI Designer's Style tab.</td></tr>
+            <tr><td><b>German</b></td><td><code>localize_de-DE.txt</code></td></tr>
+            <tr><td><b>Spanish</b></td><td><code>localize_es-ES.txt</code></td></tr>
+            <tr><td><b>French</b></td><td><code>localize_fr-FR.txt</code></td></tr>
+            <tr><td><b>Japanese</b></td><td><code>localize_ja-JP.txt</code></td></tr>
+            <tr><td><b>Chinese</b></td><td><code>localize_zh-CN.txt</code></td></tr>
+        </table>
+        <p>Each of these files uses the exact same key-value format as <code>localize.txt</code> above, lives in the same <code>assets/localize/</code> subfolder, and is resolved through the same <code>codegen_installer/&lt;app_name&gt;</code> &rarr; <code>codegen_installer</code> &rarr; workspace <code>assets/localize/</code> override hierarchy described under "Extra Assets Copy List and Localization" below - a language file that can't be resolved anywhere for a given build simply isn't bundled, and its combo entry falls back to English text at runtime instead of failing to build.</p>
+        <ul>
+            <li><strong>Persistence:</strong> The chosen language is saved to the app's own <code>.ini</code> settings file (<code>[Localization]</code> section) and restored automatically the next time the application starts.</li>
+            <li><strong>Multi-View sync:</strong> In a Multi-View (Spawn) group, every follower's language always follows the master's current pick (like the Theme preset above) - a follower's own Preferences &gt; Language combo can still be opened, but whatever it's set to is re-applied from the master every frame, so it always ends up matching the group.</li>
+        </ul>
 
         <h3>Bundling the Visual C++ Redistributable</h3>
 
@@ -755,7 +777,7 @@ Tracking Progress = Processando o Rastreamento
         <ol>
             <li>Specific app override: <code>codegen_installer/{{app_name}}/{{filename}}</code></li>
             <li>General installer override: <code>codegen_installer/{{filename}}</code></li>
-            <li>Workspace assets fallback: <code>assets/{{filename}}</code></li>
+            <li>Workspace assets fallback: <code>assets/{{filename}}</code> for <code>manifest.txt</code>; <code>assets/localize/{{filename}}</code> for <code>localize.txt</code> and every per-language file (see the Localization section above).</li>
         </ol>
 
         <h5>4. App Icon and Splashscreen (<code>favicon.ico</code>, <code>splashscreen.png</code>)</h5>
@@ -824,13 +846,13 @@ Tracking Progress = Processando o Rastreamento
         <ul>
             <li><strong>Action Buttons:</strong> The sidebar provides explicit buttons for "Zoom In", "Zoom Out", "Zoom Fit", and "Fullscreen".</li>
             <li><strong>Interactive Controls:</strong> Inside the viewer, users can zoom dynamically using the mouse scroll wheel, which scales the image relative to the cursor's position. Users can also pan the viewport by clicking and dragging the middle mouse button.</li>
-            <li><strong>Hotkeys:</strong> Keyboard shortcuts are available, such as <code>=</code> or <code>I</code> to zoom in, <code>-</code> or <code>O</code> to zoom out, and <code>F</code> or <code>R</code> to reset the view to fit the screen.</li>
+            <li><strong>Hotkeys:</strong> Keyboard shortcuts are available, such as <code>=</code> or <code>I</code> to zoom in, <code>-</code> or <code>O</code> to zoom out, and <code>F</code> to reset the view to fit the screen.</li>
         </ul>
 
         <h3>2. Image Adjustments & Comparison</h3>
         <ul>
             <li><strong>Adjustments Menu:</strong> A dedicated window allows users to tweak the viewport's "Gamma", "Brightness", and "Contrast" via sliders.</li>
-            <li><strong>Channel Isolation:</strong> Users can isolate specific color channels by clicking the "R", "G", "B", "A", or "RGB" buttons.</li>
+            <li><strong>Channel Isolation:</strong> Users can isolate specific color channels via the Viewer &gt; Channels menu ("R", "G", "B", "A", or "RGBA"), or with the <code>R</code>/<code>G</code>/<code>B</code>/<code>A</code> hotkeys directly - each shown next to its menu entry. Pressing the hotkey for whichever channel is already active switches back to "RGBA", the same as clicking that menu entry a second time.</li>
             <li><strong>Wipe & Capture:</strong> Users can click "Capture" to store the current frame as a reference. Enabling the "Wipe" feature splits the viewport, allowing users to drag a vertical divider to compare the live feed against the captured reference frame.</li>
         </ul>
 
@@ -839,6 +861,8 @@ Tracking Progress = Processando o Rastreamento
             <li><strong>Measurement Tools:</strong> The UI includes toggles to draw interactive overlays on the video feed, including "Ruler" (distance), "Angle", "Angle2" (four-point angle), "Multi" (polylines), "Radius", and "Diameter".</li>
             <li><strong>Calibration Plane:</strong> A 4-point calibration quad can be manipulated to calculate real-world physical distances using perspective homography.</li>
             <li><strong>Units & Grid:</strong> Users can enable a "Grid Overlay" and specify physical plane dimensions (Width/Height) using specific units like "mm", "cm", "m", "in", or "ft".</li>
+            <li><strong>Closing the dialog:</strong> Closing the Measurement window (via Windows &gt; Measurement, or the window's own close button) also hides every ruler/angle/multi/radius/diameter shape from the viewer, not just the dialog itself.</li>
+            <li><strong>Exclusive with Stabilization:</strong> Measurement and Stabilization are mutually exclusive - opening one automatically closes the other if it was already open.</li>
         </ul>
 
         <h3>4. Stabilization</h3>
@@ -846,6 +870,7 @@ Tracking Progress = Processando o Rastreamento
             <li><strong>Tracking Modes:</strong> Users can stabilize the video feed using either "One Point" or "Two Point" tracking modes.</li>
             <li><strong>Configuration:</strong> The sidebar allows adjustment of the "ROI Size" (Region of Interest) and "Template Size" for the tracker.</li>
             <li><strong>Execution:</strong> Explicit "Track Backward" and "Track Forward" buttons are used to trace the motion path across the timeline, generating a stabilization transform that locks the video in place.</li>
+            <li><strong>Exclusive with Measurement:</strong> Stabilization and Measurement are mutually exclusive - opening one automatically closes the other if it was already open.</li>
         </ul>
 
         <h3>5. Keystone Correction</h3>
@@ -869,8 +894,35 @@ Tracking Progress = Processando o Rastreamento
 
         <h3>8. Playback & Timeline</h3>
         <ul>
-            <li><strong>Controls:</strong> Rendered either at the top, bottom, or as a sleek semi-transparent overlay inside the viewer, the playback controls include standard "Play" and "Pause" buttons.</li>
+            <li><strong>Controls:</strong> Rendered either at the top, bottom, or as a sleek semi-transparent overlay inside the viewer, the playback controls include standard "Play" and "Pause" buttons. The <code>Space</code> key toggles Play/Pause from anywhere in the window.</li>
             <li><strong>Scrubbing:</strong> A timeline slider allows users to scrub through specific frames of the video.</li>
+        </ul>
+
+        <h3>9. Multi-View (Spawn)</h3>
+        <p>Enabling the "Spawn" feature lets the running application launch up to three extra copies of itself ("followers") and tile them alongside the original window ("master") - useful for showing several views of the same live data side by side.</p>
+        <ul>
+            <li><strong>Launching a group:</strong> The Windows &gt; Multi-View menu offers quick layouts ("2x1", "2x2") that spawn followers one at a time and tile master + followers to fill the screen, plus a "Terminate Spawns" command that closes every follower at once.</li>
+            <li><strong>Master's timeline switches to Embedded:</strong> The moment the group goes from solo to tiled, the master's own Timeline Position is forced to "Embedded" (a Top/Bottom bar just wastes space once the window has shrunk to a tile) and its previous position is remembered. Closing every follower - one at a time or via "Terminate Spawns" - restores it automatically.</li>
+            <li><strong>What always follows the master:</strong> Every follower always mirrors the master's window tiling/focus-highlight border style and its active Theme preset - these aren't optional and aren't affected by the "Sync" toggles below.</li>
+            <li><strong>Preferences &gt; Multi-View:</strong> A collapsible, master-only group (open by default) in the Preferences dialog, with three children:
+                <table>
+                    <tr><th>Child category</th><th>Configures</th></tr>
+                    <tr><td><b>Border</b></td><td>The focus-highlight border color/thickness.</td></tr>
+                    <tr><td><b>Apps</b></td><td>Which executable, if not this one, launches in each of the three spawn slots.</td></tr>
+                    <tr><td><b>Sync</b></td><td>Three independent checkboxes, all on by default - <b>Frame</b> (playback position/play-pause), <b>Pan/Zoom</b>, and <b>Channels</b> (R/G/B/A/RGBA). Turning one off stops just that behavior from propagating to followers. Below these, a <b>Bidirectional Timeline</b> checkbox (off by default) - see below.</td></tr>
+                </table>
+            </li>
+            <li><strong>Preferences &gt; Customization:</strong> A second collapsible group (also open by default, and shown either way - master or follower) holding <b>Theme</b> and <b>Language</b>. A follower's own Preferences dialog only ever shows this group - opening it is still possible, but the Multi-View group is master-only.</li>
+            <li><strong>Bidirectional Timeline:</strong> Off by default. When enabled, every spawned follower window shows its own embedded playback/timeline bar (instead of no transport controls at all), and dragging any one window's scrubber or Play/Pause - master or any follower - takes over as the group's "playback authority" and pushes that new frame/play-state to every other window in the group. Authority is a lightweight hand-off (a shared generation counter), not a fixed role, so control can pass back and forth between windows freely as different ones are interacted with; it costs nothing extra on windows that never touch their own transport controls.</li>
+        </ul>
+
+        <h3>10. Logging</h3>
+        <p>Every generated application (C++ and Python alike) writes a small diagnostic log file on every run, so a user who hits a problem has something concrete to send back rather than a screenshot of a crash.</p>
+        <ul>
+            <li><strong>Always on, basic:</strong> A handful of startup/lifecycle milestones (engine init, workflow setup, listener registration, configuration loading) plus any caught startup error, written to one file that's truncated fresh at the start of every run - only the most recent run ever matters, so there's nothing to prune or rotate.</li>
+            <li><strong>Log file location:</strong> The OS's conventional per-user local app data folder, not Documents/settings.ini's folder - <code>%LOCALAPPDATA%\&lt;AppName&gt;\logs\&lt;AppName&gt;.log</code> on Windows, <code>~/Library/Logs/&lt;AppName&gt;/&lt;AppName&gt;.log</code> on macOS, <code>~/.local/share/&lt;AppName&gt;/logs/&lt;AppName&gt;.log</code> on Linux. The exact path is also shown directly in Preferences &gt; Logging so a user never has to go hunting for it.</li>
+            <li><strong>Preferences &gt; Logging - Advanced Logging:</strong> Off by default. Turning it on adds much more detail specifically about application startup (every engine/workflow init step, which configuration file got loaded and why, DLL/asset resolution) - exactly the phase most likely to fail silently before any UI is even on screen. It has no effect on anything after startup completes, so leaving it on costs nothing once the app is running normally.</li>
+            <li><strong>Recommended workflow when something goes wrong:</strong> enable Advanced Logging in Preferences, relaunch the app to reproduce the issue, then locate and send the one log file at the path above.</li>
         </ul>
 
         <h2>Architecture & API Usage</h2>

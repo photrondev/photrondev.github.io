@@ -2223,6 +2223,11 @@
         <th>Outputs</th>
         <th>Description</th>
     </tr>
+    <tr id='cv.bgr->yuv'>
+        <td>BGR->YUV</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Convert Colorspace</td>
+    </tr>
     <tr id='cv.color_brightness'>
         <td>Brightness</td>
         <td><i class='bi bi-palette'></i></td>
@@ -2368,6 +2373,11 @@
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : image2D</li><li>gamma : double</li><li>red : double</li><li>green : double</li><li>blue : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change the Gamma thorugh a Look Up Table (L.U.T.) for a Colored Image</td>
     </tr>
+    <tr id='cv.hls->rgb'>
+        <td>HLS->RGB</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Convert Colorspace</td>
+    </tr>
     <tr id='cv.hsl->hsv'>
         <td>HSL->HSV</td>
         <td><i class='bi bi-palette'></i></td>
@@ -2423,6 +2433,11 @@
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : matrix2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Convert Matrix2D to Image2D</td>
     </tr>
+    <tr id='cv.rgb->hls'>
+        <td>RGB->HLS</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Convert Colorspace</td>
+    </tr>
     <tr id='cv.rgb->hsl'>
         <td>RGB->HSL</td>
         <td><i class='bi bi-palette'></i></td>
@@ -2442,6 +2457,11 @@
         <td>Smoothstep</td>
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : image2D</li><li>inEdges : double2</li><li>outEdges : double2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Smoothstep to set in and out black levels</td>
+    </tr>
+    <tr id='cv.yuv->bgr'>
+        <td>YUV->BGR</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Convert Colorspace</td>
     </tr>
     <tr id='cv.yuv->hsv'>
         <td>YUV->HSV</td>
