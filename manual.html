@@ -392,6 +392,7 @@
 <li><a href="#Trash">Trash Tools</a></li>
 <li><a href="#Triggers">Triggers Tools</a></li>
 <li><a href="#Utilities">Utilities Tools</a></li>
+<li><a href="#Verticals">Verticals Tools</a></li>
 <li><a href="#Widgets">Widgets Tools</a></li>
 
                             <!-- END OF AUTO GENERATED TOC -->
@@ -1062,6 +1063,23 @@
             to execute on the same CPU thread
         </li>
         <li><i class="glyphicon glyphicon-resize-full"></i> Split: For the selected nodes you can split them to run on different CPU threads</li>
+        <li>
+            <i class="bi bi-hourglass-split"></i> Balance Inputs...: available when the selected node has 2 or more connected inputs. Every node runs on its own
+            free-running thread, so two branches feeding the same node can drift out of sync - one branch might be 3 nodes deep and slower to update than a
+            branch feeding straight from the camera. This opens the <b>Balance Inputs</b> dialog:
+            <ul>
+                <li>Click <b>Measure</b> to run a short (~1 second) measurement pass. For each connected input, it compares how many times that branch's
+                    immediate upstream node rendered during the window against the fastest branch, and reports the difference as <i>cycles behind</i> in a table
+                    (branch, port, cycles behind).</li>
+                <li>Click <b>Apply</b> to automatically insert a <code>cv.delay_balance</code> node inline on every branch that's behind, each configured to
+                    hold its input back by the measured number of cycles - bringing all the branches back in sync with the slowest one.</li>
+                <li>The dialog re-measures automatically after applying, so you can confirm the branches are now balanced, or re-run it later if you edit
+                    the graph and the timing drifts again.</li>
+            </ul>
+            The inserted <code>cv.delay_balance</code> nodes are ordinary nodes - you can select one afterward and hand-tune its <code>cycles</code>
+            parameter in the Parameter Editor if needed. This compensation only makes sense while the graph is genuinely free-running live/interactive, so it
+            is automatically bypassed (acts as a pass-through) during export and other batch/composite rendering, and during Stabilization frame tracking.
+        </li>
     </ul>
 
 
@@ -1840,11 +1858,6 @@
         <th>Outputs</th>
         <th>Description</th>
     </tr>
-    <tr id='cv.blood_cell_detection_inference'>
-        <td>Blood Cell Detection</td>
-        <td><i class='bi bi-filetype-ai'></i></td>
-        <td><ul><li>source : image2D</li><li>filter : string</li><li>confidence : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li>        </ul></td>        <td>Identifies RBC, WBC, and Platelets in microscopy images using YOLOv8.<p style='color:red;'>The following package is required: medical</p></td>
-    </tr>
     <tr id='cv.body_pose_coco'>
         <td>Body Pose COCO</td>
         <td><i class='bi bi-filetype-ai'></i></td>
@@ -1890,25 +1903,10 @@
         <td><i class='bi bi-filetype-ai'></i></td>
         <td><ul><li>source : image2D</li><li>filter : string</li><li>scoreThreshold : double</li><li>nmsThreshold : double</li><li>top K : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li><li>expressions : string</li>        </ul></td>        <td>Detect facial expressions using YuNET ONNX model: angry, disgust, fearful, happy, neutral, sad, surprised.<p style='color:red;'>The following package is required: yunet</p></td>
     </tr>
-    <tr id='cv.fire_smoke_detection_inference'>
-        <td>Fire Smoke Detection</td>
-        <td><i class='bi bi-filetype-ai'></i></td>
-        <td><ul><li>source : image2D</li><li>filter : string</li><li>confidence : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li>        </ul></td>        <td>Identifies Fire and Smoke from images using YOLOv8.<p style='color:red;'>The following package is required: emergency</p></td>
-    </tr>
-    <tr id='cv.forklift_detection_inference'>
-        <td>Forklift Detection</td>
-        <td><i class='bi bi-filetype-ai'></i></td>
-        <td><ul><li>source : image2D</li><li>filter : string</li><li>confidence : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : double</li>        </ul></td>        <td>Detection of forklifts, persons, and pallets in warehouse environments using YOLOv8.<p style='color:red;'>The following package is required: warehouse</p></td>
-    </tr>
     <tr id='cv.handpose_estimation'>
         <td>Handpose Estimation</td>
         <td><i class='bi bi-filetype-ai'></i></td>
         <td><ul><li>source : image2D</li><li>size : int2</li><li>confidenceThreshold : double</li><li>scale : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li><li>openClose : bool</li>        </ul></td>        <td>Detects palms and fingers based on OpenPose neural network model. In out, the 1st column is the id of the point, the 2nd and 3rd are the coordinates of that point, and the 4th column is the confidence.<p style='color:red;'>The following package is required: pose</p></td>
-    </tr>
-    <tr id='cv.hardhat_detection_inference'>
-        <td>Hardhat Detection</td>
-        <td><i class='bi bi-filetype-ai'></i></td>
-        <td><ul><li>source : image2D</li><li>model : string</li><li>filter : string</li><li>confidence : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : double</li>        </ul></td>        <td>Hardhat / No Hardhat detection using a YOLOv8 detection model. It provides bounding box coordinates and confidence levels for identified objects.<p style='color:red;'>The following package is required: warehouse</p></td>
     </tr>
     <tr id='cv.human_parsing_inference'>
         <td>Human Parsing Inference</td>
@@ -1960,45 +1958,10 @@
         <td><i class='bi bi-plugin'></i></td>
         <td><ul><li>source : image2D</li><li>model : string</li><li>outLayerName : string</li><li>classes : string</li><li>scale factor : double</li><li>size : int2</li><li>red mean : double</li><li>green mean : double</li><li>blue mean : double</li><li>swapRB : bool</li><li>crop : bool</li><li>color images : bool</li>        </ul></td>        <td><ul><li>out : int</li><li>preview : image2D</li>        </ul></td>        <td>Onnx Runtime Inference for YOLOX<p style='color:red;'>The following package is required: onnx_runtime_windows</p></td>
     </tr>
-    <tr id='cv.pcb_defect_segmentation_inference'>
-        <td>PCB Defect Segmentation</td>
-        <td><i class='bi bi-filetype-ai'></i></td>
-        <td><ul><li>source : image2D</li><li>filter : string</li><li>confidence : double</li><li>blend : double</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li>        </ul></td>        <td>Detect and segment defects on Printed Circuit Boards (PCB) such as missing holes, mouse bites, and short circuits using YOLOv8-segmentation.<p style='color:red;'>The following package is required: industrial_qc</p></td>
-    </tr>
     <tr id='cv.person_reid'>
         <td>Person ReID</td>
         <td><i class='bi bi-filetype-ai'></i></td>
         <td><ul><li>queryImage : image2D</li><li>galleryList : string</li><li>batchSize : int</li><li>size : int2</li><li>topK : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Matches a person's identity across different cameras or locations in a video or image sequence using features such as appearance, body shape, and clothing to match their identity in different frames<p style='color:red;'>The following package is required: personReiD</p></td>
-    </tr>
-    <tr id='cv.plane_detection_inference'>
-        <td>Plane Detection</td>
-        <td><i class='bi bi-filetype-ai'></i></td>
-        <td><ul><li>source : image2D</li><li>filter : string</li><li>confidence : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li>        </ul></td>        <td>Detects airplanes in aerial or satellite imagery using YOLOv8.<p style='color:red;'>The following package is required: aviation</p></td>
-    </tr>
-    <tr id='cv.pothole_segmentation_inference'>
-        <td>Pothole Segmentation</td>
-        <td><i class='bi bi-filetype-ai'></i></td>
-        <td><ul><li>source : image2D</li><li>confidence : double</li><li>blend : double</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li>        </ul></td>        <td>Detect and segment road potholes using YOLOv8-segmentation.<p style='color:red;'>The following package is required: road_infrastructure</p></td>
-    </tr>
-    <tr id='cv.ppe_detection_inference'>
-        <td>PPE Compliance Detection</td>
-        <td><i class='bi bi-filetype-ai'></i></td>
-        <td><ul><li>source : image2D</li><li>filter : string</li><li>confidence : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li>        </ul></td>        <td>Monitors workplace safety gear compliance (helmets, vests, goggles).<p style='color:red;'>The following package is required: safety</p></td>
-    </tr>
-    <tr id='cv.road_crack_detection_inference'>
-        <td>Road Crack Detection</td>
-        <td><i class='bi bi-filetype-ai'></i></td>
-        <td><ul><li>source : image2D</li><li>model : string</li><li>confidence : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : double</li>        </ul></td>        <td>Detects road pavement cracks using a YOLOv8 detection model. It provides bounding box coordinates and confidence levels for identified cracks.<p style='color:red;'>The following package is required: road_infrastructure</p></td>
-    </tr>
-    <tr id='cv.road_crack_segmentation_inference'>
-        <td>Road Crack Segmentation</td>
-        <td><i class='bi bi-filetype-ai'></i></td>
-        <td><ul><li>source : image2D</li><li>model : string</li><li>confidence : double</li><li>blend : double</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li>        </ul></td>        <td>Detect and segment road pavement cracks using YOLOv8-segmentation.<p style='color:red;'>The following package is required: road_infrastructure</p></td>
-    </tr>
-    <tr id='cv.satellite_segmentation_inference'>
-        <td>Satellite Imagery Segmentation</td>
-        <td><i class='bi bi-filetype-ai'></i></td>
-        <td><ul><li>source : image2D</li><li>filter : string</li><li>confidence : double</li><li>blend : double</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li>        </ul></td>        <td>Segment buildings from satellite and aerial imagery using YOLOv8-segmentation.<p style='color:red;'>The following package is required: geospatial</p></td>
     </tr>
     <tr id='cv.segmentation'>
         <td>Segmentation</td>
@@ -2248,6 +2211,11 @@
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : image2D</li><li>redCurve : string</li><li>greenCurve : string</li><li>blueCurve : string</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Create a Curve Mask Thorugh a Look Up Table (L.U.T.) for a Colored Image</td>
     </tr>
+    <tr id='cv.color_preprocess'>
+        <td>Color Variations</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li><li>contrast : double</li><li>brightness : double</li><li>radius : double</li><li>noise : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Combined color processing including brightness, contrast, iterative blur, and noise.</td>
+    </tr>
     <tr id='cv.convert_colorspace'>
         <td>Convert Colorspace</td>
         <td><i class='bi bi-palette'></i></td>
@@ -2297,6 +2265,11 @@
         <td>HLS->RGB</td>
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>HLS to RGB of Cuda Buffer</td>
+    </tr>
+    <tr id='cuda.hsl->hsv'>
+        <td>HSL->HSV</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>HLS to HSV of Cuda Buffer (composed as HLS->RGB then RGB->HSV)</td>
     </tr>
     <tr id='cuda.hsl_correct'>
         <td>HSL Correct</td>
@@ -2353,6 +2326,11 @@
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>YUV to BGR of Cuda Buffer</td>
     </tr>
+    <tr id='cuda.yuv->hsv'>
+        <td>YUV->HSV</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>YUV to HSV of Cuda Buffer (composed as YUV->RGB then RGB->HSV)</td>
+    </tr>
     <tr id='cuda.yuv->rgb'>
         <td>YUV->RGB</td>
         <td><i class='bi bi-palette'></i></td>
@@ -2373,6 +2351,16 @@
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : image2D</li><li>gamma : double</li><li>red : double</li><li>green : double</li><li>blue : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Change the Gamma thorugh a Look Up Table (L.U.T.) for a Colored Image</td>
     </tr>
+    <tr id='cv.gamma_fwd'>
+        <td>Gamma Forward</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Fixed sRGB Forward Gamma Curve (distinct from the adjustable Color Gamma node)</td>
+    </tr>
+    <tr id='cv.gamma_inv'>
+        <td>Gamma Inverse</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Fixed sRGB Inverse Gamma Curve (distinct from the adjustable Color Gamma node)</td>
+    </tr>
     <tr id='cv.hls->rgb'>
         <td>HLS->RGB</td>
         <td><i class='bi bi-palette'></i></td>
@@ -2380,11 +2368,6 @@
     </tr>
     <tr id='cv.hsl->hsv'>
         <td>HSL->HSV</td>
-        <td><i class='bi bi-palette'></i></td>
-        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Convert Colorspace</td>
-    </tr>
-    <tr id='cv.hsl->rgb'>
-        <td>HSL->RGB</td>
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Convert Colorspace</td>
     </tr>
@@ -2435,11 +2418,6 @@
     </tr>
     <tr id='cv.rgb->hls'>
         <td>RGB->HLS</td>
-        <td><i class='bi bi-palette'></i></td>
-        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Convert Colorspace</td>
-    </tr>
-    <tr id='cv.rgb->hsl'>
-        <td>RGB->HSL</td>
         <td><i class='bi bi-palette'></i></td>
         <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Convert Colorspace</td>
     </tr>
@@ -3323,6 +3301,11 @@
         <td><i class='bi bi-droplet-half'></i></td>
         <td><ul><li>source : image2D</li><li>alpha : double</li><li>K : double</li><li>niters : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Performs Perona-Malik anisotropic diffusion to reduce noise while preserving edges.</td>
     </tr>
+    <tr id='cv.band_pass'>
+        <td>Band Pass</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : image2D</li><li>radius : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Two-Pass Separable Difference-of-Gaussians Band-Pass Filter</td>
+    </tr>
     <tr id='cv.bgseg'>
         <td>Background Subtractor</td>
         <td><i class='bi bi-stars'></i></td>
@@ -3398,20 +3381,10 @@
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : cuda2D</li><li>rho : double</li><li>theta : double</li><li>minLineLength : double</li><li>maxLineGap : double</li>        </ul></td>        <td><ul><li>lines : matrix2D</li><li>preview : image2D</li><li>numLines : int</li><li>maxLength : double</li>        </ul></td>        <td>Detects lines in a grayscale image using the Hough transform.</td>
     </tr>
-    <tr id='cuda.dilate'>
-        <td>Dilate</td>
-        <td><i class='bi bi-stars'></i></td>
-        <td><ul><li>source : cuda2D</li><li>convolution : int2</li><li>dilate : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Blur and dilate image with vertical and horizontal blur</td>
-    </tr>
     <tr id='cuda.dilate_3x3'>
         <td>Dilate 3x3</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : cuda2D</li><li>dilate : int2</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Blur image based on maximum luminance value of surrounding pixels</td>
-    </tr>
-    <tr id='cuda.erode'>
-        <td>Erode</td>
-        <td><i class='bi bi-stars'></i></td>
-        <td><ul><li>source : cuda2D</li><li>convolution : int2</li><li>erode : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Blur and erode image with vertical and horizontal blur</td>
     </tr>
     <tr id='cuda.erode_3x3'>
         <td>Erode 3x3</td>
@@ -3463,6 +3436,16 @@
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Combination of Prewitt Horiz and Prewitt Vert on Cuda Buffer</td>
     </tr>
+    <tr id='cuda.quick_dilate'>
+        <td>Quick Dilate</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : cuda2D</li><li>convolution : int2</li><li>dilate : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Fast dilate-like effect via vertical and horizontal blur thresholded to a hard edge - a cheap GPU approximation, not true morphological dilation (use cv.dilate for that).</td>
+    </tr>
+    <tr id='cuda.quick_erode'>
+        <td>Quick Erode</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : cuda2D</li><li>convolution : int2</li><li>erode : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Fast erode-like effect via vertical and horizontal blur thresholded to a hard edge - a cheap GPU approximation, not true morphological erosion (use cv.erode for that).</td>
+    </tr>
     <tr id='cuda.roberts'>
         <td>Roberts</td>
         <td><i class='bi bi-stars'></i></td>
@@ -3488,20 +3471,45 @@
         <td><i class='bi bi-graph-up-arrow'></i></td>
         <td><ul><li>mask : image2D</li><li>source : image2D</li><li>threshold : double</li><li>mode : int</li><li>method : int</li><li>minSplatterSize : double</li><li>contourIdx : int</li><li>strategy : int</li><li>ellipseColor : color</li><li>rectColor : color</li><li>splatterColor : color</li><li>thickness : int</li>        </ul></td>        <td><ul><li>metrics : matrix2D</li><li>preview : image2D</li><li>area : double</li><li>arcLength : double</li><li>center : double2</li><li>aspect : double</li><li>angle : double</li><li>splatters : int</li>        </ul></td>        <td>Performs contour detection on an image, fits an ellipse to the selected contour, computes contour area & arc length, and draws a real-time overlay chart of these metrics over time.</td>
     </tr>
+    <tr id='cv.quick_dilate'>
+        <td>Quick Dilate</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : image2D</li><li>convolution : int2</li><li>dilate : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Fast dilate-like effect via vertical and horizontal blur thresholded to a hard edge - a cheap approximation, not true morphological dilation (use cv.dilate for that).</td>
+    </tr>
+    <tr id='cv.quick_erode'>
+        <td>Quick Erode</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : image2D</li><li>convolution : int2</li><li>erode : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Fast erode-like effect via vertical and horizontal blur thresholded to a hard edge - a cheap approximation, not true morphological erosion (use cv.erode for that).</td>
+    </tr>
     <tr id='cv.delay'>
         <td>Delay</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Shows a Delayed Image</td>
+    </tr>
+    <tr id='cv.delay_balance'>
+        <td>Delay Balance</td>
+        <td><i class='bi bi-stopwatch'></i></td>
+        <td><ul><li>source : image2D</li><li>cycles : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Holds back the input by a configurable number of processing cycles, to compensate for timing skew between branches feeding a multi-input node</td>
     </tr>
     <tr id='cv.dilate'>
         <td>Dilate</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>shape : int</li><li>ksize : int2</li><li>anchor : int2</li><li>iterations : int</li><li>borderType : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Dilates an image (expands the primary object) by using a specific structuring element that determines the shape of a pixel neighborhood over which the maximum is taken</td>
     </tr>
+    <tr id='cv.dilate_3x3'>
+        <td>Dilate 3x3</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : image2D</li><li>dilate : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Blur image based on maximum luminance value of surrounding pixels (distinct from the generic Dilate node)</td>
+    </tr>
     <tr id='cv.erode'>
         <td>Erode</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>shape : int</li><li>ksize : int2</li><li>anchor : int2</li><li>iterations : int</li><li>borderType : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Erodes an image (shrinks the primary object) by using a specific structuring element that determines the shape of a pixel neighborhood over which the minimum is taken</td>
+    </tr>
+    <tr id='cv.erode_3x3'>
+        <td>Erode 3x3</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : image2D</li><li>erode : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Blur image based on minimum luminance value of surrounding pixels (distinct from the generic Erode node)</td>
     </tr>
     <tr id='cv.fast_line_detector'>
         <td>Fast Line Detector</td>
@@ -3523,10 +3531,20 @@
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>radius : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Applies a bandpass filter to a 1D or 2D floating-point array</td>
     </tr>
+    <tr id='cv.gauss'>
+        <td>Gauss</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Fixed 11x11 Gaussian Blur Filter</td>
+    </tr>
     <tr id='cv.gaussian_noise'>
         <td>Gaussian Noise</td>
         <td><i class='bi bi-broadcast'></i></td>
         <td><ul><li>source : image2D</li><li>mean : double</li><li>stdDev : double</li><li>color : bool</li>        </ul></td>        <td><ul><li>output : image2D</li>        </ul></td>        <td>Applies gaussian noise to an image.</td>
+    </tr>
+    <tr id='cv.high_pass'>
+        <td>High Pass</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : image2D</li><li>maskSize : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>High Pass Filter</td>
     </tr>
     <tr id='cv.homography'>
         <td>Homography</td>
@@ -3543,10 +3561,25 @@
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>rho : double</li><li>theta : double</li><li>threshold : int</li><li>minLineLength : double</li><li>maxLineGap : double</li>        </ul></td>        <td><ul><li>lines : matrix2D</li><li>preview : image2D</li><li>numLines : int</li><li>maxLength : double</li>        </ul></td>        <td>Detects lines in a grayscale image using the Hough transform.</td>
     </tr>
+    <tr id='cv.iterative_blur'>
+        <td>Iterative Blur</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : image2D</li><li>radius : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Repeated 3x3 Blur Passes with Fractional Radius Blending</td>
+    </tr>
+    <tr id='cv.laplace'>
+        <td>Laplace</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : image2D</li><li>maskSize : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Fixed 3x3/5x5 Laplace Edge Filter (distinct from the configurable Laplacian Edge Detector)</td>
+    </tr>
     <tr id='cv.laplacian_edge_detector'>
         <td>Laplacian Edge Detector</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>ksize : int</li><li>scale : double</li><li>delta : double</li><li>borderType : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Laplacian Edge Detect</td>
+    </tr>
+    <tr id='cv.low_pass'>
+        <td>Low Pass</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : image2D</li><li>maskSize : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Low Pass Filter</td>
     </tr>
     <tr id='cv.mean_shift'>
         <td>Mean Shift</td>
@@ -3568,6 +3601,11 @@
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>element : matrix2D</li><li>operation : int</li><li>anchor : int2</li><li>iterations : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Performs advanced morphological transformations using an erosion and dilation as basic operations.</td>
     </tr>
+    <tr id='cv.morph_gradient_border'>
+        <td>Morph Gradient Border</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Morphological Gradient (Dilate minus Erode) over a Fixed 5x5 Diamond Mask with Replicated Border</td>
+    </tr>
     <tr id='cv.morphology_hit_or_miss'>
         <td>Morph Hit or Miss</td>
         <td><i class='bi bi-stars'></i></td>
@@ -3577,6 +3615,11 @@
         <td>Image Noise</td>
         <td><i class='bi bi-broadcast'></i></td>
         <td><ul><li>source : image2D</li><li>mode : int</li><li>mean : double</li><li>stdDev : double</li><li>prob : double</li><li>color : bool</li>        </ul></td>        <td><ul><li>output : image2D</li>        </ul></td>        <td>Applies synthetic noise to an image.</td>
+    </tr>
+    <tr id='cv.prewitt'>
+        <td>Prewitt</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Combination of Prewitt Horizontal and Prewitt Vertical Edge Filters</td>
     </tr>
     <tr id='cv.pyr_down'>
         <td>Pyr Down</td>
@@ -3593,6 +3636,11 @@
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>theta : double</li><li>start angle : double</li><li>end angle : double</li><li>scale : int</li><li>crop : bool</li><li>norm : bool</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Canny Edge Detection is calculates the projection of an image's intensity along lines at specific angles.</td>
     </tr>
+    <tr id='cv.roberts'>
+        <td>Roberts</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Combination of Roberts Down and Roberts Up Diagonal Edge Filters</td>
+    </tr>
     <tr id='cv.saltandpepper_noise'>
         <td>Salt and Pepper Noise</td>
         <td><i class='bi bi-broadcast'></i></td>
@@ -3603,6 +3651,11 @@
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>dx : int</li><li>dy : int</li><li>scale : double</li><li>delta : double</li><li>borderType : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Scharr Edge Detect</td>
     </tr>
+    <tr id='cv.separable_blur'>
+        <td>Separable Blur</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : image2D</li><li>convolution : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Blur image with vertical and horizontal blur</td>
+    </tr>
     <tr id='cv.sep_filter_2d_gabor'>
         <td>Sep Filter 2D Gabor</td>
         <td><i class='bi bi-stars'></i></td>
@@ -3612,6 +3665,11 @@
         <td>Sep Filter 2D Gaussian</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>ddepth : int</li><li>ksize : int</li><li>sigma : double</li><li>ktype : int</li><li>anchor : int2</li><li>delta : double</li><li>borderType : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Applies a separable linear filter to an image</td>
+    </tr>
+    <tr id='cv.sharpen'>
+        <td>Sharpen</td>
+        <td><i class='bi bi-stars'></i></td>
+        <td><ul><li>source : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Sharpening Convolution Kernel</td>
     </tr>
     <tr id='cv.sobel'>
         <td>Sobel</td>
@@ -3786,6 +3844,11 @@
         <td>Grayscale Shapes</td>
         <td><i class='bi bi-mask'></i></td>
         <td><ul><li>source : image2D</li><li>lines : matrix2D</li><li>circles : matrix2D</li><li>rectangles : matrix2D</li><li>path : matrix2D</li><li>blend : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Draws Lines, Circles, and/or Rectangles with Masks</td>
+    </tr>
+    <tr id='cv.mono_preprocess'>
+        <td>Grayscale Variations</td>
+        <td><i class='bi bi-mask'></i></td>
+        <td><ul><li>source : image2D</li><li>contrast : double</li><li>brightness : double</li><li>radius : double</li><li>noise : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Combined monochrome processing including brightness, contrast, iterative blur, and noise.</td>
     </tr>
     <tr id='cv.quick_path'>
         <td>Quick Path</td>
@@ -6176,6 +6239,11 @@
         <td><i class='bi bi-upload'></i></td>
         <td><ul><li>account_file : string</li><li>mime_type : string</li><li>source : string</li><li>folder_id : string</li><li>trigger : int</li>        </ul></td>        <td><ul><li>status : string</li><li>completed : bool</li>        </ul></td>        <td>Uploads file to Google Drive<p style='color:red;'>The following package is required: google_drive</p></td>
     </tr>
+    <tr id='py.http_request'>
+        <td>HTTP Request</td>
+        <td><i class='bi bi-globe'></i></td>
+        <td><ul><li>url : string</li><li>method : string</li><li>headers : string</li><li>body : string</li><li>trigger : int</li>        </ul></td>        <td><ul><li>status code : int</li><li>response body : string</li><li>success : bool</li>        </ul></td>        <td>Sends a generic HTTP/REST request (GET, POST, PUT, PATCH, DELETE) to any URL</td>
+    </tr>
     <tr id='cv.image_writer'>
         <td>Image Writer</td>
         <td><i class='bi bi-card-image'></i></td>
@@ -6205,6 +6273,31 @@
         <td>Microphone</td>
         <td><i class='bi bi-magic'></i></td>
         <td><ul><li>trigger : int</li><li>period : int</li>        </ul></td>        <td><ul><li>out : audio</li>        </ul></td>        <td>Listens and streams the microphone</td>
+    </tr>
+    <tr id='py.modbus_read'>
+        <td>Modbus Read</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>host : string</li><li>port : int</li><li>unit id : int</li><li>register type : int</li><li>address : int</li><li>count : int</li><li>trigger : int</li>        </ul></td>        <td><ul><li>status : string</li><li>values : matrix2D</li><li>completed : bool</li>        </ul></td>        <td>Reads registers or coils from a Modbus TCP device (e.g. a PLC)<p style='color:red;'>The following package is required: modbus</p></td>
+    </tr>
+    <tr id='py.modbus_write'>
+        <td>Modbus Write</td>
+        <td><i class='bi bi-cpu-fill'></i></td>
+        <td><ul><li>host : string</li><li>port : int</li><li>unit id : int</li><li>register type : int</li><li>address : int</li><li>value : double</li><li>trigger : int</li>        </ul></td>        <td><ul><li>status : string</li><li>completed : bool</li>        </ul></td>        <td>Writes a register or coil to a Modbus TCP device (e.g. a PLC)<p style='color:red;'>The following package is required: modbus</p></td>
+    </tr>
+    <tr id='py.mqtt_publish'>
+        <td>MQTT Publish</td>
+        <td><i class='bi bi-broadcast'></i></td>
+        <td><ul><li>host : string</li><li>port : int</li><li>topic : string</li><li>message : string</li><li>qos : int</li><li>trigger : int</li>        </ul></td>        <td><ul><li>status : string</li>        </ul></td>        <td>Publishes a message to an MQTT broker topic<p style='color:red;'>The following package is required: mqtt</p></td>
+    </tr>
+    <tr id='py.mqtt_subscribe'>
+        <td>MQTT Subscribe</td>
+        <td><i class='bi bi-broadcast-pin'></i></td>
+        <td><ul><li>trigger : int</li><li>host : string</li><li>port : int</li><li>topic : string</li>        </ul></td>        <td><ul><li>message : string</li>        </ul></td>        <td>Subscribes to an MQTT broker topic and outputs received messages<p style='color:red;'>The following package is required: mqtt</p></td>
+    </tr>
+    <tr id='py.pagerduty_incident'>
+        <td>PagerDuty Incident</td>
+        <td><i class='bi bi-exclamation-triangle'></i></td>
+        <td><ul><li>routing key : string</li><li>summary : string</li><li>severity : string</li><li>source : string</li><li>trigger : int</li>        </ul></td>        <td><ul><li>status : string</li><li>success : bool</li>        </ul></td>        <td>Triggers a PagerDuty incident via the Events API v2</td>
     </tr>
     <tr id='py.philips_hue'>
         <td>Philips Hue</td>
@@ -6270,6 +6363,11 @@
         <td>Send Email</td>
         <td><i class='bi bi-envelope'></i></td>
         <td><ul><li>credentials : string</li><li>trigger : int</li><li>recipients : string</li><li>subject : string</li><li>message : string</li><li>matrix : matrix2D</li><li>matrix attachment name : string</li><li>table : DataFrame</li><li>table attachment name : string</li><li>image : image2D</li><li>image attachment name : string</li><li>reset : int</li>        </ul></td>        <td><ul><li>success : bool</li>        </ul></td>        <td>Sends an email from your Gmail email address<p style='color:red;'>The following package is required: send_email</p></td>
+    </tr>
+    <tr id='py.send_sns'>
+        <td>Send SNS Message</td>
+        <td><i class='bi bi-chat-dots'></i></td>
+        <td><ul><li>access_key : string</li><li>secret_key : string</li><li>region : string</li><li>phone_number : string</li><li>message : string</li><li>trigger : int</li>        </ul></td>        <td><ul><li>status : string</li><li>completed : bool</li>        </ul></td>        <td>Sends an SMS text message (or topic notification) via AWS SNS<p style='color:red;'>The following package is required: aws_s3</p></td>
     </tr>
     <tr id='py.serial'>
         <td>Serial</td>
@@ -6344,6 +6442,16 @@
         <td>Exit</td>
         <td><i class='bi bi-gear'></i></td>
         <td><ul><li>trigger : int</li>        </ul></td>        <td><ul>        </ul></td>        <td>Exit application when trigger is true</td>
+    </tr>
+    <tr id='py.generate_barcode'>
+        <td>Generate Barcode</td>
+        <td><i class='bi bi-upc'></i></td>
+        <td><ul><li>text : string</li><li>symbology : string</li>        </ul></td>        <td><ul><li>image : image2D</li>        </ul></td>        <td>Generates a 1D barcode image from text<p style='color:red;'>The following package is required: qr_barcode_generator</p></td>
+    </tr>
+    <tr id='py.generate_qr_code'>
+        <td>Generate QR Code</td>
+        <td><i class='bi bi-qr-code'></i></td>
+        <td><ul><li>text : string</li><li>box size : int</li><li>border : int</li>        </ul></td>        <td><ul><li>image : image2D</li>        </ul></td>        <td>Generates a QR code image from text<p style='color:red;'>The following package is required: qr_barcode_generator</p></td>
     </tr>
     <tr id='py.get_color'>
         <td>Get Color</td>
@@ -6599,6 +6707,485 @@
         <td>XY to Int2</td>
         <td><i class='bi bi-gear'></i></td>
         <td><ul><li>x : int</li><li>y : int</li>        </ul></td>        <td><ul><li>out : int2</li>        </ul></td>        <td>Set X and Y to create Int2</td>
+    </tr>
+</table>
+<h3 id='Verticals'>Verticals</h3><p>The Industry-specific tools built from the verticals proposal review (docs/verticals_todo_analysis.md): agriculture, drones, factory automation, infrastructure, logistics, maintenance, medical, quality inspection, R&D, robotics, safety management, security, smart city, sports analytics, startups, and teaching. Each node's tags list which vertical(s) it belongs to. tools are all under the <i class="bi bi-globe"> Verticals</i> category. The full list of display tools is as follows:</p><table>
+    <tr>
+        <th>Name</th>
+        <th>Icon</th>
+        <th>Inputs</th>
+        <th>Outputs</th>
+        <th>Description</th>
+    </tr>
+    <tr id='cv.autonomous_landing_aid'>
+        <td>Autonomous Landing Aid</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>landing pad pattern : image2D</li><li>max wind drift offset pixels : int</li>        </ul></td>        <td><ul><li>landing zone acquired : bool</li><li>descent vector : matrix2D</li><li>preview : image2D</li>        </ul></td>        <td>Tracks a landing pad marker with template matching and reports the pixel offset a drone must correct to align its descent, compensating for wind drift.</td>
+    </tr>
+    <tr id='cv.autonomous_robot_navigation'>
+        <td>Autonomous Robot Navigation</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>safe floor color hsv : matrix2D</li><li>max obstacle height pixels : int</li>        </ul></td>        <td><ul><li>navigable path mask : image2D</li><li>steering vector recommendation : matrix2D</li>        </ul></td>        <td>Maps floor regions by color space vectors to provide navigation path solutions for automated guided vehicles (AGVs).</td>
+    </tr>
+    <tr id='cv.auto_docking_logic'>
+        <td>Auto Docking Logic</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>dock target template : image2D</li><li>alignment precision pixels : double</li>        </ul></td>        <td><ul><li>dock aligned : bool</li><li>alignment offsets : matrix2D</li><li>preview : image2D</li>        </ul></td>        <td>Identifies high-contrast symbols on docking stations to compute coordinate adjustments for precise automated charging connections.</td>
+    </tr>
+    <tr id='cv.ball_trajectory_track'>
+        <td>Ball Trajectory Track</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>ball diameter (pixels) : double</li><li>expected velocity range : matrix2D</li>        </ul></td>        <td><ul><li>trajectory arc line : matrix2D</li><li>impact point estimate : matrix2D</li><li>preview : image2D</li>        </ul></td>        <td>Tracks a known-diameter ball via Hough-circle detection frame-to-frame, fits a parabolic arc to the tracked path, and extrapolates it forward to estimate where the ball will land.</td>
+    </tr>
+    <tr id='cv.barcode_presence_checker'>
+        <td>Barcode Presence Checker</td>
+        <td><i class='bi bi-upc-scan'></i></td>
+        <td><ul><li>source : image2D</li><li>search region : image2D</li><li>min gradient density : double</li>        </ul></td>        <td><ul><li>barcode present : bool</li><li>preview : image2D</li>        </ul></td>        <td>Verifies the structural presence of a barcode using Sobel gradient-magnitude density and a gradient-orientation histogram concentration check, inside an optional search region. No decode is attempted, so it still flags a barcode that is present but too damaged or low-contrast to decode.</td>
+    </tr>
+    <tr id='cv.bed_egress_alarm'>
+        <td>Bed Egress Alarm</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>bed boundary poly : matrix2D</li><li>trigger overlap percent : double</li>        </ul></td>        <td><ul><li>egress warning : bool</li><li>preview : image2D</li>        </ul></td>        <td>Runs background-subtraction silhouette detection against a configured bed-boundary polygon and raises an early warning once the patient's body mask starts spilling outside the bed perimeter, before a full egress event occurs.</td>
+    </tr>
+    <tr id='cv.belt_tension_analyzer'>
+        <td>Belt Tension Analyzer</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>belt profile line : matrix2D</li><li>max sag tolerance pixels : int</li>        </ul></td>        <td><ul><li>tension fault : bool</li><li>sag distance pixels : int</li><li>preview : image2D</li>        </ul></td>        <td>Measures vertical sag deviation of long mechanical drive belts by fitting a straight reference line to a detected edge profile.</td>
+    </tr>
+    <tr id='cv.blood_cell_detection_inference'>
+        <td>Blood Cell Detection</td>
+        <td><i class='bi bi-globe'></i></td>
+        <td><ul><li>source : image2D</li><li>filter : string</li><li>confidence : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li>        </ul></td>        <td>Identifies RBC, WBC, and Platelets in microscopy images using YOLOv8.<p style='color:red;'>The following package is required: medical</p></td>
+    </tr>
+    <tr id='cv.color_variance_detector'>
+        <td>Color Variance Detector</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>target color space : matrix2D</li><li>max delta e : double</li>        </ul></td>        <td><ul><li>color passed : bool</li><li>delta e value : double</li><li>preview : image2D</li>        </ul></td>        <td>Computes the mean CIELab color inside one or more detection ROIs and compares it against a target master shade using the CIE76 delta-E distance, reporting the worst-case (largest) delta-E across all ROIs.</td>
+    </tr>
+    <tr id='cv.conveyor_jam_detector'>
+        <td>Conveyor Jam Detector</td>
+        <td><i class='bi bi-exclamation-triangle'></i></td>
+        <td><ul><li>source : image2D</li><li>jam velocity zero limit : double</li><li>stagnation frames : int</li>        </ul></td>        <td><ul><li>conveyor jammed : bool</li><li>preview : image2D</li>        </ul></td>        <td>Analyzes dense optical flow to flag a jam when the item travel path stalls to near-zero velocity while the surrounding conveyor surface is still visibly moving.</td>
+    </tr>
+    <tr id='cv.corrosion_prediction_node'>
+        <td>Corrosion Prediction Node</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>baseline rust mask : image2D</li><li>rust color bounds hsv : matrix2D</li>        </ul></td>        <td><ul><li>corrosion growth percentage : double</li><li>maintenance required : bool</li><li>preview : image2D</li>        </ul></td>        <td>Thresholds brown/orange rust coloration in HSV space and tracks contour area growth against a baseline to flag expanding corrosion on structural elements.</td>
+    </tr>
+    <tr id='cv.crop_growth_monitoring'>
+        <td>Crop Growth Monitoring</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>greenhouse bed roi : matrix2D</li><li>greenness ratio threshold : double</li>        </ul></td>        <td><ul><li>leaf area index : double</li><li>growth rate status : double</li><li>preview : image2D</li>        </ul></td>        <td>Measures growing leaf surface areas and coverage scores inside target greenhouse zones over extended periods.</td>
+    </tr>
+    <tr id='cv.crowd_density_analysis'>
+        <td>Crowd Density Analysis</td>
+        <td><i class='bi bi-people-fill'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>zone mask : image2D</li><li>max people per sq pixel : double</li><li>minConfidence : double</li><li>mediumThreshold : double</li><li>highThreshold : double</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>current people count : int</li><li>density ratio : double</li><li>density state : int</li>        </ul></td>        <td>Computes a zone-area-normalized crowd density ratio from an upstream person detector's bounding boxes and raises a Low/Medium/High occupancy state when a configurable per-area capacity is exceeded.</td>
+    </tr>
+    <tr id='cv.dam_water_level_monitor'>
+        <td>Dam Water Level Monitor</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>crest reference line : matrix2D</li><li>danger zone elevation pixels : int</li>        </ul></td>        <td><ul><li>water height meters : double</li><li>spillway overflow risk : bool</li><li>preview : image2D</li>        </ul></td>        <td>Tracks reservoir waterline elevation against painted crest gauge marks using Sobel edge and HSV color segmentation, with pixel-to-meter calibration, to support automated spillway monitoring.</td>
+    </tr>
+    <tr id='cv.defective_packaging_node'>
+        <td>Defective Packaging Node</td>
+        <td><i class='bi bi-box-seam'></i></td>
+        <td><ul><li>source : image2D</li><li>nominal package aspect ratio : double</li><li>edge linearity tolerance : double</li>        </ul></td>        <td><ul><li>packaging fault : bool</li><li>preview : image2D</li>        </ul></td>        <td>Monitors packaging shape continuity along high-speed wrap lines using minAreaRect aspect-ratio and fitLine edge-residual checks to flag warped containers, folded lids, or broken seal edges.</td>
+    </tr>
+    <tr id='cv.disaster_evacuation_aid'>
+        <td>Disaster Evacuation Aid</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>nominal exit direction : matrix2D</li><li>flow stagnation threshold : double</li>        </ul></td>        <td><ul><li>bottleneck alert : bool</li><li>average flow velocity : double</li><li>preview : image2D</li>        </ul></td>        <td>Runs dense optical flow over a crowd and compares the average flow vector against a nominal exit direction to flag stagnation or counter-flow bottlenecks during emergency evacuations.</td>
+    </tr>
+    <tr id='cv.disaster_site_assessment'>
+        <td>Disaster Site Assessment</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>pre disaster reference image : image2D</li><li>structural change threshold : double</li>        </ul></td>        <td><ul><li>damage severity index : double</li><li>blocked road segments : matrix2D</li><li>preview : image2D</li>        </ul></td>        <td>Registers a pre-disaster reference image onto the live feed with feature-based homography, differences the two, and reports a structural damage severity score plus bounding boxes of likely collapse/debris blockages.</td>
+    </tr>
+    <tr id='cv.dock_management_node'>
+        <td>Dock Management</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>dock bay polygons : matrix2D</li><li>unloading duration limit mins : double</li><li>fps : double</li><li>reset : int</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>bay occupied : bool</li><li>occupancy duration secs : double</li>        </ul></td>        <td>Tracks incoming vehicle/truck bounding boxes against configured dock bay zones, logging arrival dwell time to flag bays that exceed the unloading turnaround limit.</td>
+    </tr>
+    <tr id='cv.emergency_stop_visibility_checker'>
+        <td>Emergency Stop Visibility Checker</td>
+        <td><i class='bi bi-exclamation-octagon-fill'></i></td>
+        <td><ul><li>source : image2D</li><li>e stop template : image2D</li><li>max obstruction percent : double</li>        </ul></td>        <td><ul><li>button obstructed : bool</li><li>obstruction percent : double</li><li>preview : image2D</li>        </ul></td>        <td>Locates an emergency-stop button via template matching and flags when foreground obstructions cover more of the button than the allowed safety limit.</td>
+    </tr>
+    <tr id='cv.eyewash_access_monitor'>
+        <td>Eyewash Access Monitor</td>
+        <td><i class='bi bi-droplet-fill'></i></td>
+        <td><ul><li>source : image2D</li><li>pathway mask : image2D</li><li>min clearance width : int</li>        </ul></td>        <td><ul><li>access clear : bool</li><li>clearance coverage percent : double</li><li>preview : image2D</li>        </ul></td>        <td>Uses background subtraction within a pathway mask to verify that the floor route leading to an emergency eyewash station keeps a clear corridor of at least the required minimum width.</td>
+    </tr>
+    <tr id='cv.fall_prevention_edge_monitor'>
+        <td>Fall Prevention Edge Monitor</td>
+        <td><i class='bi bi-sign-turn-slight-right-fill'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>hazard line : matrix2D</li><li>trigger distance pixels : int</li>        </ul></td>        <td><ul><li>edge proximity warning : bool</li><li>closest margin pixels : double</li><li>preview : image2D</li>        </ul></td>        <td>Tracks foot-keypoint detections and computes their directional motion trend toward one or more hazard edges (e.g. an open floor edge or platform boundary), raising a predictive tripwire warning before, not only after, the trigger distance is crossed.</td>
+    </tr>
+    <tr id='cv.fan_engagement_analysis'>
+        <td>Fan Engagement Analysis</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>crowd quadrant grid : matrix2D</li>        </ul></td>        <td><ul><li>stadium excitement index : double</li><li>preview : image2D</li>        </ul></td>        <td>Computes a smoothed crowd motion-energy index from dense optical flow, aggregated per quadrant/grid cell, as a coarse proxy for stadium excitement.</td>
+    </tr>
+    <tr id='cv.fill_level_verification'>
+        <td>Fill Level Verification</td>
+        <td><i class='bi bi-droplet-half'></i></td>
+        <td><ul><li>source : image2D</li><li>target fill height : int</li><li>tolerance pixels : int</li><li>container roi : image2D</li>        </ul></td>        <td><ul><li>fill status : int</li><li>fill percentage : double</li><li>preview : image2D</li>        </ul></td>        <td>Finds a container's liquid-to-air meniscus line with Canny edge detection plus a horizontal edge-density row search, then compares the resulting fill height (in pixels, from the container base) against a target fill height +/- a pixel tolerance.</td>
+    </tr>
+    <tr id='cv.fire_extinguisher_blockage_detector'>
+        <td>Fire Extinguisher Blockage Detector</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>keep clear zone : image2D</li><li>time threshold : double</li><li>fps : double</li><li>movement tolerance : double</li><li>reset : int</li>        </ul></td>        <td><ul><li>station blocked : bool</li><li>dwell seconds : double</li><li>preview : image2D</li>        </ul></td>        <td>Watches a fire-extinguisher or fire-fighting equipment keep-clear floor zone for anything left inside it long enough to be a blockage, using background subtraction restricted to the zone plus a per-track stationary dwell timer.</td>
+    </tr>
+    <tr id='cv.fire_smoke_detection_inference'>
+        <td>Fire Smoke Detection</td>
+        <td><i class='bi bi-globe'></i></td>
+        <td><ul><li>source : image2D</li><li>filter : string</li><li>confidence : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li>        </ul></td>        <td>Identifies Fire and Smoke from images using YOLOv8.<p style='color:red;'>The following package is required: emergency</p></td>
+    </tr>
+    <tr id='cv.fleet_dynamic_tracking'>
+        <td>Fleet Dynamic Tracking</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>warehouse floorplan matrix : matrix2D</li><li>speed limit pixels per frame : double</li>        </ul></td>        <td><ul><li>asset velocities : matrix2D</li><li>speed violation triggered : bool</li><li>preview : image2D</li>        </ul></td>        <td>Computes per-track centroid velocities from an upstream tracker's per-ID position matrix to build traffic heatmaps and enforce warehouse floor speed limits.</td>
+    </tr>
+    <tr id='cv.foreign_object_inspector'>
+        <td>Foreign Object Inspector</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>inspection zone : image2D</li><li>allowed color range : matrix2D</li><li>minimum blob size : int</li>        </ul></td>        <td><ul><li>contamination detected : bool</li><li>foreign blob area : int</li><li>preview : image2D</li>        </ul></td>        <td>Flags contamination inside an inspection zone: any pixel whose BGR color falls outside a supplied allowed-color range is a candidate foreign-object pixel, blob-filtered by contour area to reject sensor noise.</td>
+    </tr>
+    <tr id='cv.forklift_collision_avoidance'>
+        <td>Forklift Collision Avoidance</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>travel direction fov deg : double</li><li>braking distance threshold pixels : int</li>        </ul></td>        <td><ul><li>braking command triggered : bool</li><li>object in path : bool</li><li>preview : image2D</li>        </ul></td>        <td>Tests a forklift's forward safety cone - derived from its frame-to-frame heading, a travel-direction field of view, and a braking-distance threshold - against pedestrian/obstacle detections to trigger a braking warning.</td>
+    </tr>
+    <tr id='cv.forklift_detection_inference'>
+        <td>Forklift Detection</td>
+        <td><i class='bi bi-globe'></i></td>
+        <td><ul><li>source : image2D</li><li>filter : string</li><li>confidence : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : double</li>        </ul></td>        <td>Detection of forklifts, persons, and pallets in warehouse environments using YOLOv8.<p style='color:red;'>The following package is required: warehouse</p></td>
+    </tr>
+    <tr id='cv.gait_analysis_node'>
+        <td>Gait Analysis Node</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>stride cadence fps : double</li><li>joint confidence cutoff : double</li>        </ul></td>        <td><ul><li>stride length pixels : double</li><li>asymmetry index : double</li><li>preview : image2D</li>        </ul></td>        <td>Ingests the 18-keypoint pose matrix produced by the body-pose nodes (ankle, knee and hip joints) and derives stride length and left/right asymmetry from the foot-strike events found in each ankle's vertical trajectory across the gait cycle.</td>
+    </tr>
+    <tr id='cv.gas_leak_thermal_detector'>
+        <td>Gas Leak Thermal Detector</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>thermal sensitivity : double</li><li>plume size threshold : int</li>        </ul></td>        <td><ul><li>leak detected : bool</li><li>plume centroid : matrix2D</li><li>preview : image2D</li>        </ul></td>        <td>Detects gas plumes in a thermal (or any single/multi-channel) camera feed via background subtraction, extracting plume blobs by contour analysis and reporting each blob's area and centroid, largest first.</td>
+    </tr>
+    <tr id='cv.gene_sequence_patterning'>
+        <td>Gene Sequence Patterning</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>lane count : int</li><li>molecular weight markers : matrix2D</li>        </ul></td>        <td><ul><li>band locations : matrix2D</li><li>relative intensity log : matrix2D</li><li>preview : image2D</li>        </ul></td>        <td>Performs gel-electrophoresis band densitometry: per-lane pixel-intensity profiling with peak detection to locate and quantify DNA/protein bands.</td>
+    </tr>
+    <tr id='cv.hardhat_detection_inference'>
+        <td>Hardhat Detection</td>
+        <td><i class='bi bi-globe'></i></td>
+        <td><ul><li>source : image2D</li><li>model : string</li><li>filter : string</li><li>confidence : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : double</li>        </ul></td>        <td>Hardhat / No Hardhat detection using a YOLOv8 detection model. It provides bounding box coordinates and confidence levels for identified objects.<p style='color:red;'>The following package is required: warehouse</p></td>
+    </tr>
+    <tr id='cv.heavy_machine_proximity_tracker'>
+        <td>Heavy Machine Proximity Tracker</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>buffer radius pixels : double</li><li>machinery class id : int</li>        </ul></td>        <td><ul><li>proximity breach : bool</li><li>closest distance : double</li><li>preview : image2D</li>        </ul></td>        <td>Splits an upstream [N x 6] detections matrix into a machinery set and a worker set by class ID, projects a dynamic buffer envelope around each machine's bounding box, and computes the pairwise box-to-box distance to flag any worker breach.</td>
+    </tr>
+    <tr id='cv.helmet_usage_checker'>
+        <td>Helmet Usage Checker</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>helmet detections : matrix2D</li><li>iou threshold : double</li><li>alert delay frames : int</li>        </ul></td>        <td><ul><li>non compliant count : int</li><li>safety alarm : bool</li><li>preview : image2D</li>        </ul></td>        <td>Turns raw person and hard-hat detector output into an actual compliance alert: checks how much of each hard-hat box falls inside a person box (IoU-style containment), tracks people frame to frame, and only alarms after a worker has gone without a helmet for alert_delay_frames consecutive frames.</td>
+    </tr>
+    <tr id='cv.illegal_dumping_monitor'>
+        <td>Illegal Dumping Monitor</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>dump zone mask : image2D</li><li>min object volume : int</li><li>fps : double</li><li>persistence seconds : double</li><li>movement tolerance : double</li><li>learn rate : double</li><li>reset : int</li>        </ul></td>        <td><ul><li>dumping event detected : bool</li><li>preview : image2D</li>        </ul></td>        <td>Runs background subtraction within a dump-zone mask to detect a new static object that persists above a minimum size for a sustained period, flagging illegal dumping events.</td>
+    </tr>
+    <tr id='cv.injury_risk_prediction'>
+        <td>Injury Risk Prediction</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>baseline gait signature : matrix2D</li><li>asymmetry limit : double</li>        </ul></td>        <td><ul><li>fatigue risk index : double</li><li>injury warning : bool</li><li>preview : image2D</li>        </ul></td>        <td>Tracks hip-normalized ankle position from a body-pose keypoint stream to compute a left/right stride-amplitude asymmetry index, flagging a fatigue/injury-risk warning when it exceeds a configurable limit. The gait-asymmetry signal is real; predicting actual injury risk from it is a real-world overclaim.</td>
+    </tr>
+    <tr id='cv.iv_drip_rate_counter'>
+        <td>IV Drip Rate Counter</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>chamber roi : matrix2D</li><li>drop size threshold : int</li>        </ul></td>        <td><ul><li>drips per minute : double</li><li>preview : image2D</li>        </ul></td>        <td>Frame-differences a calibrated IV drip-chamber ROI to detect each falling drop as a moving blob, and counts drips using the same line-crossing-style event counting as cv.line_crossing to report a rolling drips-per-minute rate.</td>
+    </tr>
+    <tr id='cv.jaywalking_detector'>
+        <td>Jaywalking Detector</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>roadway mask : image2D</li><li>crosswalk boundaries : matrix2D</li><li>min pedestrian area : int</li><li>max pedestrian area : int</li><li>learn rate : double</li>        </ul></td>        <td><ul><li>jaywalker detected : bool</li><li>preview : image2D</li>        </ul></td>        <td>Detects pedestrian blobs via background subtraction and flags any that overlap the roadway mask outside the crosswalk boundary polygon, without requiring an upstream detector.</td>
+    </tr>
+    <tr id='cv.jersey_number_ocr'>
+        <td>Jersey Number OCR</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>font style library : matrix2D</li><li>minimum text confidence : double</li>        </ul></td>        <td><ul><li>detected jersey number : int</li><li>preview : image2D</li>        </ul></td>        <td>Recognizes a player's jersey number from a torso crop using a self-contained classical pipeline: contour-based digit-region proposal followed by correlation matching against synthetically rendered digit glyphs. Purpose-built for large, bold, uniform jersey numerals — not a substitute for full-alphabet scene-text OCR.</td>
+    </tr>
+    <tr id='cv.label_printing_verifier'>
+        <td>Label Printing Verifier</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>template image : image2D</li><li>similarity threshold : double</li><li>ROI rect : matrix2D</li>        </ul></td>        <td><ul><li>label valid : bool</li><li>confidence score : double</li><li>preview : image2D</li>        </ul></td>        <td>Verifies label print quality/positioning via normalized cross-correlation (matchTemplate TM_CCOEFF_NORMED) between a reference template image and an ROI of the current frame.</td>
+    </tr>
+    <tr id='cv.lab_animal_behavior'>
+        <td>Lab Animal Behavior</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>cage quadrant mask : image2D</li><li>velocity threshold : double</li>        </ul></td>        <td><ul><li>travel distance pixels : double</li><li>time spent in quadrant : matrix2D</li><li>preview : image2D</li>        </ul></td>        <td>Tracks a lab animal's position via background subtraction and blob tracking, accumulating total travel distance and per-quadrant dwell time inside a test enclosure.</td>
+    </tr>
+    <tr id='cv.landslide_retaining_wall_watch'>
+        <td>Landslide Retaining Wall Watch</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>wall geometry points : matrix2D</li><li>max bulge tolerance pixels : int</li>        </ul></td>        <td><ul><li>wall failure warning : bool</li><li>preview : image2D</li>        </ul></td>        <td>Identifies structural shifts or concrete bulging on retaining walls along high-risk mountain roads by fitting a reference line through the wall geometry and measuring the maximum perpendicular deviation of Canny edge points from it.</td>
+    </tr>
+    <tr id='cv.leak_detection_node'>
+        <td>Leak Detection Node</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>floor roi mask : image2D</li><li>reflection change sensitivity : double</li>        </ul></td>        <td><ul><li>fluid leak detected : bool</li><li>leak area pixels : int</li><li>preview : image2D</li>        </ul></td>        <td>Runs background subtraction over a floor ROI to spot a growing reflective/specular wet patch from a fluid leak, reporting its contour area.</td>
+    </tr>
+    <tr id='cv.license_plate_recognition'>
+        <td>License Plate Recognition</td>
+        <td><i class='bi bi-car-front-fill'></i></td>
+        <td><ul><li>source : image2D</li><li>region country code : string</li><li>minAspectRatio : double</li><li>maxAspectRatio : double</li><li>minPlateAreaPx : double</li><li>plateConfidenceCutoff : double</li><li>outputWidth : int</li><li>outputHeight : int</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>plate image : image2D</li><li>plate found : bool</li><li>candidate count : int</li>        </ul></td>        <td>Locates a license-plate-shaped region using contour and aspect-ratio filtering, slant-corrects it with a perspective warp, and outputs a rectified plate crop. Does not perform OCR itself - connect plate_image into cv.text_detect_ppocr (and a downstream text recognizer) to read the characters.</td>
+    </tr>
+    <tr id='cv.manhole_cover_check'>
+        <td>Manhole Cover Check</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>circularity tolerance : double</li><li>displacement limit pixels : int</li>        </ul></td>        <td><ul><li>cover misaligned : bool</li><li>cover missing : bool</li><li>preview : image2D</li>        </ul></td>        <td>Flags displaced, broken, or missing utility manhole covers using contour extraction, the 4*pi*Area/Perimeter^2 circularity metric, and centroid displacement from the image center (the expected cover position for a fixed, overhead-mounted monitoring camera).</td>
+    </tr>
+    <tr id='cv.material_optimization_node'>
+        <td>Material Optimization</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>hopper empty level pixels : int</li><li>fill density threshold : double</li>        </ul></td>        <td><ul><li>material fill level percentage : double</li><li>low refill warning : bool</li><li>preview : image2D</li>        </ul></td>        <td>Measures the material fill level inside a wrapping-machinery hopper via edge-density row scanning, to monitor usage speed and warn ahead of supply changes.</td>
+    </tr>
+    <tr id='cv.microscopic_cell_counting'>
+        <td>Microscopic Cell Counting</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>average cell diameter pixels : int</li><li>eccentricity limit : double</li>        </ul></td>        <td><ul><li>total cells counted : int</li><li>viability ratio : double</li><li>preview : image2D</li>        </ul></td>        <td>Separates overlapping/clustered cells in a microscopy image with marker-based watershed segmentation, then counts them and scores viability by ellipse-fit roundness (eccentricity).</td>
+    </tr>
+    <tr id='cv.micro_crack_extractor'>
+        <td>Micro Crack Extractor</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>block size : int</li><li>C parameter : double</li><li>maximum crack length : int</li>        </ul></td>        <td><ul><li>crack detected : bool</li><li>crack network density : double</li><li>preview : image2D</li>        </ul></td>        <td>Extracts hair-line surface cracks: adaptiveThreshold isolates locally-darker ridge pixels, morphological skeletonization thins them to single-pixel-wide lines, and a connected-component length filter rejects sensor noise (and optionally overlong components).</td>
+    </tr>
+    <tr id='cv.missing_bolt_detection'>
+        <td>Missing Bolt Detection</td>
+        <td><i class='bi bi-search'></i></td>
+        <td><ul><li>source : image2D</li><li>expected bolt count : int</li><li>bolt head diameter range : matrix2D</li>        </ul></td>        <td><ul><li>all bolts present : bool</li><li>missing count : int</li><li>preview : image2D</li>        </ul></td>        <td>Employs a Hough circle transform tuned to the expected fastener head diameter to find empty bolt locations on assemblies, comparing the detected count against the expected count.</td>
+    </tr>
+    <tr id='cv.multi_robot_coordination'>
+        <td>Multi Robot Coordination</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>marker id list : matrix2D</li><li>target inter robot distance : double</li>        </ul></td>        <td><ul><li>formation error detected : bool</li><li>relative robot positions : matrix2D</li><li>preview : image2D</li>        </ul></td>        <td>Tracks unique spatial patterns on adjacent automated assets to maintain safe formation spacing during operations.</td>
+    </tr>
+    <tr id='cv.mvp_feedback_extraction'>
+        <td>MVP Feedback Extraction</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>expression sensitivity matrix : matrix2D</li>        </ul></td>        <td><ul><li>frustration score : double</li><li>delight score : double</li><li>preview : image2D</li>        </ul></td>        <td>Maps an upstream facial-expression classifier's output onto frustration/delight scalars, for reading usability-test reactions during MVP demos.</td>
+    </tr>
+    <tr id='cv.obstacle_avoidance_node'>
+        <td>Obstacle Avoidance Node</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>min stopping distance mm : double</li><li>sensor fov angle : double</li>        </ul></td>        <td><ul><li>obstacle ahead : bool</li><li>closest obstacle distance : double</li><li>preview : image2D</li>        </ul></td>        <td>Identifies obstacle profiles inside a robot's forward-facing stereo field or depth map projection.</td>
+    </tr>
+    <tr id='cv.online_proctoring_node'>
+        <td>Online Proctoring</td>
+        <td><i class='bi bi-webcam'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>allowed head turn angle : double</li><li>absence time limit secs : double</li>        </ul></td>        <td><ul><li>proctor flag raised : bool</li><li>violation type : int</li><li>preview : image2D</li>        </ul></td>        <td>Detects exam-integrity violations from an upstream face-detection matrix: looking away from the screen, a second person entering the camera view, and prolonged absence from the seat.</td>
+    </tr>
+    <tr id='cv.operational_monitoring_node'>
+        <td>Operational Monitoring Node</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>motion pixels threshold : int</li><li>shift duration hours : double</li>        </ul></td>        <td><ul><li>utilization rate : double</li><li>machine active state : bool</li><li>preview : image2D</li>        </ul></td>        <td>Thresholds frame-difference motion pixel counts and accumulates active/inactive frames over a shift duration to compute an OEE-style machine utilization ratio.</td>
+    </tr>
+    <tr id='cv.package_seal_inspector'>
+        <td>Package Seal Inspector</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>edge mask : image2D</li><li>minimum seal width : int</li>        </ul></td>        <td><ul><li>seal broken : bool</li><li>preview : image2D</li>        </ul></td>        <td>Checks a heat-sealed packaging edge for width uniformity and continuity: a distance transform of the seal-band mask gives the local half-width everywhere, sampled along the band's morphological skeleton to find the minimum width; a seal is flagged broken if that minimum drops below threshold or the band mask is not a single connected run.</td>
+    </tr>
+    <tr id='cv.packing_condition_check'>
+        <td>Packing Condition Check</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>deformity tolerance percentage : double</li><li>tape contrast ratio : double</li>        </ul></td>        <td><ul><li>package damaged : bool</li><li>structural score : double</li><li>preview : image2D</li>        </ul></td>        <td>Inspects shipping box profiles for crushed or deformed corners by measuring contour corner-angle deviation from an ideal box shape, and checks tape-seam continuity via edge-gradient scanning.</td>
+    </tr>
+    <tr id='cv.particle_piv_tracker'>
+        <td>Particle PIV Tracker</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>interrogation window size pixels : int</li>        </ul></td>        <td><ul><li>velocity field matrix : matrix2D</li><li>preview : image2D</li>        </ul></td>        <td>Particle Image Velocimetry: block cross-correlation of interrogation windows between two frames to estimate a per-block velocity field, useful for aerodynamic/fluid drag research.</td>
+    </tr>
+    <tr id='cv.part_orientation_aligner'>
+        <td>Part Orientation Aligner</td>
+        <td><i class='bi bi-arrow-clockwise'></i></td>
+        <td><ul><li>source : image2D</li><li>symmetry axis vector : matrix2D</li>        </ul></td>        <td><ul><li>orientation angle deg : double</li><li>needs rotation : bool</li><li>preview : image2D</li>        </ul></td>        <td>Computes the principal-axis orientation angle of asymmetric parts on a conveyor belt via PCA over the part contour, providing a rotation adjustment angle for downstream robotic handlers.</td>
+    </tr>
+    <tr id='cv.payload_slippage_detector'>
+        <td>Payload Slippage Detector</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>slip velocity threshold : double</li>        </ul></td>        <td><ul><li>slippage detected : bool</li><li>preview : image2D</li>        </ul></td>        <td>Monitors surface flow shifts on held materials to detect slips against automated gripper surfaces.</td>
+    </tr>
+    <tr id='cv.pcb_defect_segmentation_inference'>
+        <td>PCB Defect Segmentation</td>
+        <td><i class='bi bi-globe'></i></td>
+        <td><ul><li>source : image2D</li><li>filter : string</li><li>confidence : double</li><li>blend : double</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li>        </ul></td>        <td>Detect and segment defects on Printed Circuit Boards (PCB) such as missing holes, mouse bites, and short circuits using YOLOv8-segmentation.<p style='color:red;'>The following package is required: industrial_qc</p></td>
+    </tr>
+    <tr id='cv.pcb_solder_diagnoser'>
+        <td>PCB Solder Diagnoser</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>junction coordinates : matrix2D</li><li>minimum solder area : int</li><li>maximum solder area : int</li>        </ul></td>        <td><ul><li>solder fault detected : bool</li><li>faulty junction count : int</li><li>preview : image2D</li>        </ul></td>        <td>Diagnoses solder-JOINT quality (not board/trace defects) at known junction coordinates: a brightness/specular threshold isolates each solder blob, then contour circularity and area filtering flag cold, bridged, insufficient, or missing joints with classical CV.</td>
+    </tr>
+    <tr id='cv.physical_education_rep_counter'>
+        <td>Physical Education Rep Counter</td>
+        <td><i class='bi bi-activity'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>exercise type id : int</li><li>target rep count : int</li><li>reset : int</li>        </ul></td>        <td><ul><li>completed reps : int</li><li>form compliance rating : double</li><li>preview : image2D</li>        </ul></td>        <td>Ingests an upstream body-pose keypoint matrix and counts fitness repetitions (squats, push-ups, jumping jacks) by peak-counting the relevant joint angle, while also scoring form compliance.</td>
+    </tr>
+    <tr id='cv.pitch_deck_optimizer'>
+        <td>Pitch Deck Optimizer</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>text regions : matrix2D</li><li>brand color palette : matrix2D</li><li>max text density percent : double</li>        </ul></td>        <td><ul><li>design score : double</li><li>suggested layout fixes : matrix2D</li><li>preview : image2D</li>        </ul></td>        <td>Heuristic single-frame design QA for a presentation slide: text density vs. an upstream OCR node's text regions, brand-color-histogram alignment, and contour-based layout symmetry. design_score is a heuristic proxy, not a ground-truth design-quality metric.</td>
+    </tr>
+    <tr id='cv.plane_detection_inference'>
+        <td>Plane Detection</td>
+        <td><i class='bi bi-globe'></i></td>
+        <td><ul><li>source : image2D</li><li>filter : string</li><li>confidence : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li>        </ul></td>        <td>Detects airplanes in aerial or satellite imagery using YOLOv8.<p style='color:red;'>The following package is required: aviation</p></td>
+    </tr>
+    <tr id='cv.player_distance_track'>
+        <td>Player Distance Track</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>tracked positions : matrix2D</li><li>player ID tag : int</li><li>field dimensions (meters) : matrix2D</li><li>fps : double</li>        </ul></td>        <td><ul><li>total distance (meters) : double</li><li>max sprint speed : double</li><li>preview : image2D</li>        </ul></td>        <td>Accumulates a tracked player's total distance covered and peak sprint speed by converting per-frame pixel displacement to meters via a homography built from the full-frame corners and a supplied field size.</td>
+    </tr>
+    <tr id='cv.posture_ergonomics_advisor'>
+        <td>Posture Ergonomics Advisor</td>
+        <td><i class='bi bi-person-standing'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>max slouch angle deg : double</li>        </ul></td>        <td><ul><li>ergonomic warning : bool</li><li>preview : image2D</li>        </ul></td>        <td>Ingests an upstream body-pose keypoint matrix and flags neck/torso slouching by measuring how far the neck, head, and shoulder line lean away from vertical during desk/computer work.</td>
+    </tr>
+    <tr id='cv.pothole_segmentation_inference'>
+        <td>Pothole Segmentation</td>
+        <td><i class='bi bi-globe'></i></td>
+        <td><ul><li>source : image2D</li><li>confidence : double</li><li>blend : double</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li>        </ul></td>        <td>Detect and segment road potholes using YOLOv8-segmentation.<p style='color:red;'>The following package is required: road_infrastructure</p></td>
+    </tr>
+    <tr id='cv.power_grid_vegetation_encroachment'>
+        <td>Power Grid Vegetation Encroachment</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>wire clearance envelope pixels : int</li>        </ul></td>        <td><ul><li>encroachment detected : bool</li><li>clearance breach distance : int</li><li>preview : image2D</li>        </ul></td>        <td>Measures the clearance gap between utility power lines and nearby vegetation by combining Hough-line wire detection with HSV green-vegetation thresholding and point-to-segment distance geometry, to prioritize line trimming schedules.</td>
+    </tr>
+    <tr id='cv.power_line_inspection'>
+        <td>Power Line Inspection</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>line length min pixels : int</li><li>max angle deviation deg : double</li>        </ul></td>        <td><ul><li>wire defect detected : bool</li><li>wire count in view : int</li><li>preview : image2D</li>        </ul></td>        <td>Isolates high-voltage conductors from aerial footage with edge detection and Hough line filtering by length/angle, clusters the surviving segments into distinct wires, and flags likely breaks, sag, or occlusion.</td>
+    </tr>
+    <tr id='cv.ppe_detection_inference'>
+        <td>PPE Compliance Detection</td>
+        <td><i class='bi bi-globe'></i></td>
+        <td><ul><li>source : image2D</li><li>filter : string</li><li>confidence : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : int</li>        </ul></td>        <td>Monitors workplace safety gear compliance (helmets, vests, goggles).<p style='color:red;'>The following package is required: safety</p></td>
+    </tr>
+    <tr id='cv.production_line_anomaly'>
+        <td>Production Line Anomaly</td>
+        <td><i class='bi bi-diagram-3'></i></td>
+        <td><ul><li>source : image2D</li><li>gold standard template : image2D</li><li>structural similarity cutoff : double</li>        </ul></td>        <td><ul><li>anomaly flag : bool</li><li>anomaly variance score : double</li><li>preview : image2D</li>        </ul></td>        <td>Registers the live frame against a gold-standard template with an ECC alignment and compares them with a windowed SSIM score to identify configuration errors or missing elements on products.</td>
+    </tr>
+    <tr id='cv.product_dimension_measurer'>
+        <td>Product Dimension Measurer</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>homography : matrix2D</li><li>pixel to metric ratio : double</li><li>target width : double</li><li>target height : double</li><li>tolerance : double</li>        </ul></td>        <td><ul><li>measured width : double</li><li>measured height : double</li><li>is within tolerance : bool</li><li>processed preview : image2D</li>        </ul></td>        <td>Measures a detected product's physical width/height from a homography-calibrated view: the detection bounding box's corners are mapped through an optional 3x3 homography to a rectified top-down space, converted to metric units, and compared against a target size and tolerance.</td>
+    </tr>
+    <tr id='cv.pylon_corrosion_detection'>
+        <td>Pylon Corrosion Detection</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>galvanized steel color bounds : matrix2D</li><li>rust percentage trigger : double</li>        </ul></td>        <td><ul><li>corrosion alert : bool</li><li>affected surface area percent : double</li><li>preview : image2D</li>        </ul></td>        <td>Scans transmission pylon frameworks to isolate surface rust using a classical cv::inRange rust-hue threshold against the galvanized steel baseline color, tracking the affected area ratio to flag degradation.</td>
+    </tr>
+    <tr id='cv.river_level_monitoring'>
+        <td>River Level Monitoring</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>gauge bounds : matrix2D</li><li>alert level pixels : int</li>        </ul></td>        <td><ul><li>current level pixels : int</li><li>flood warning : bool</li><li>preview : image2D</li>        </ul></td>        <td>Segments the waterline via edge density within a gauge ROI, measuring how far the water has risen against a structural gauge marker and raising a flood warning near the alert level.</td>
+    </tr>
+    <tr id='cv.road_crack_detection_inference'>
+        <td>Road Crack Detection</td>
+        <td><i class='bi bi-globe'></i></td>
+        <td><ul><li>source : image2D</li><li>model : string</li><li>confidence : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li><li>preview : image2D</li><li>numDetects : double</li>        </ul></td>        <td>Detects road pavement cracks using a YOLOv8 detection model. It provides bounding box coordinates and confidence levels for identified cracks.<p style='color:red;'>The following package is required: road_infrastructure</p></td>
+    </tr>
+    <tr id='cv.road_crack_segmentation_inference'>
+        <td>Road Crack Segmentation</td>
+        <td><i class='bi bi-globe'></i></td>
+        <td><ul><li>source : image2D</li><li>model : string</li><li>confidence : double</li><li>blend : double</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li>        </ul></td>        <td>Detect and segment road pavement cracks using YOLOv8-segmentation.<p style='color:red;'>The following package is required: road_infrastructure</p></td>
+    </tr>
+    <tr id='cv.satellite_segmentation_inference'>
+        <td>Satellite Imagery Segmentation</td>
+        <td><i class='bi bi-globe'></i></td>
+        <td><ul><li>source : image2D</li><li>filter : string</li><li>confidence : double</li><li>blend : double</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li>        </ul></td>        <td>Segment buildings from satellite and aerial imagery using YOLOv8-segmentation.<p style='color:red;'>The following package is required: geospatial</p></td>
+    </tr>
+    <tr id='cv.shelf_stockout_detector'>
+        <td>Shelf Stockout Detector</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>shelf roi grid : matrix2D</li><li>minimum empty space ratio : double</li>        </ul></td>        <td><ul><li>stockout detected : bool</li><li>empty slots count : int</li><li>preview : image2D</li>        </ul></td>        <td>Monitors a grid of warehouse rack ROI cells for structural stockouts by comparing per-cell Sobel edge-density against an exposed-backing-mesh reference threshold.</td>
+    </tr>
+    <tr id='cv.shot_release_angle_calc'>
+        <td>Shot Release Angle Calc</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>wrist elbow shoulder skeletal chain : matrix2D</li><li>fps : double</li>        </ul></td>        <td><ul><li>release angle (degrees) : double</li><li>launch velocity (m/s) : double</li><li>preview : image2D</li>        </ul></td>        <td>Computes the wrist-elbow-shoulder release angle at the moment of a shot from pose keypoints, and estimates launch velocity from frame-to-frame wrist displacement, calibrated to real-world units using the athlete's own forearm length (~0.28m) as an anthropometric pixel-to-meter scale.</td>
+    </tr>
+    <tr id='cv.signage_visibility_analysis'>
+        <td>Signage Visibility Analysis</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>minimum text height (px) : int</li><li>camera viewing angle (deg) : double</li><li>minimum sharpness variance : double</li>        </ul></td>        <td><ul><li>signage readable : bool</li><li>legibility score : double</li><li>preview : image2D</li>        </ul></td>        <td>Scores a sign/display's real-world legibility by combining a Laplacian-variance focus/contrast check on the camera view with a text-height-vs-viewing-angle check against an upstream OCR text-detection matrix (e.g. cv.text_detect_ppocr), so a sign is only reported readable when it is both in focus and its text is tall enough for the camera's viewing angle.</td>
+    </tr>
+    <tr id='cv.singulation_verifier'>
+        <td>Singulation Verifier</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>expected item count : int</li><li>blob separation threshold : double</li>        </ul></td>        <td><ul><li>is singulated : bool</li><li>actual count detected : int</li><li>preview : image2D</li>        </ul></td>        <td>Measures spatial separation lines to confirm a robot has picked exactly one component from an active bulk bin feed.</td>
+    </tr>
+    <tr id='cv.snow_ice_detection'>
+        <td>Snow / Ice Detection</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>road surface ROI : image2D</li><li>whiteness threshold : double</li>        </ul></td>        <td><ul><li>is snow covered : bool</li><li>glare slippery risk : bool</li><li>preview : image2D</li>        </ul></td>        <td>Classifies a road surface as snow-covered from HSV whiteness ratio, and separately flags black-ice glare risk from specular highlight density and value variance, within an optional road-surface mask or detection-box ROI.</td>
+    </tr>
+    <tr id='cv.sports_form_analysis'>
+        <td>Sports Form Analysis</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>reference pro athlete pose : matrix2D</li><li>joint angle tolerance (degrees) : double</li>        </ul></td>        <td><ul><li>form deviation percentage : double</li><li>joint angle trajectories : matrix2D</li><li>preview : image2D</li>        </ul></td>        <td>Compares 8 tracked joint angles (elbows, shoulders, hips, knees) against a supplied reference-athlete pose to compute a form-deviation percentage, and outputs the running joint-angle history for review.</td>
+    </tr>
+    <tr id='cv.street_light_failure_monitor'>
+        <td>Street Light Failure Monitor</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>light zone coordinates : matrix2D</li><li>minimum lux intensity : double</li><li>baseline learn rate : double</li><li>drop ratio : double</li><li>reset : int</li>        </ul></td>        <td><ul><li>light failure detected : bool</li><li>preview : image2D</li>        </ul></td>        <td>Tracks a slowly-adapting nighttime brightness baseline per monitored light zone and flags a failure when a zone's mean intensity drops sharply below its own baseline, or below an absolute minimum, mirroring cv.camera_tamper_detection's brightness-cut logic applied per zone instead of to the whole frame.</td>
+    </tr>
+    <tr id='cv.subsidence_monitoring_node'>
+        <td>Subsidence Monitoring Node</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>marker anchor points : matrix2D</li><li>sub pixel precision : double</li>        </ul></td>        <td><ul><li>vertical shift mm : double</li><li>subsidence alert : bool</li><li>preview : image2D</li>        </ul></td>        <td>Tracks high-precision reference markers across frames using cv::goodFeaturesToTrack/cv::cornerSubPix sub-pixel corner tracking to monitor slow, long-term structural shifting or ground sinking patterns.</td>
+    </tr>
+    <tr id='cv.surface_scratch_detector'>
+        <td>Surface Scratch Detector</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>sensitivity : double</li><li>minimum length pixels : double</li><li>expected contour mask : image2D</li>        </ul></td>        <td><ul><li>scratch detected : bool</li><li>defect count : int</li><li>processed preview : image2D</li>        </ul></td>        <td>Detects surface scratches as Canny edge discontinuities not explained by an optional expected-contour baseline mask (e.g. Canny run once on a known-good reference part), then length-filters the remaining contours to reject noise.</td>
+    </tr>
+    <tr id='cv.thermal_fluid_dynamics_mapper'>
+        <td>Thermal Fluid Dynamics Mapper</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>fluid channel roi : image2D</li>        </ul></td>        <td><ul><li>convection velocity vectors : matrix2D</li><li>preview : image2D</li>        </ul></td>        <td>Maps convection velocity vectors across a liquid or gas mixing channel by running Farneback dense optical flow between frames, restricted to an optional channel ROI mask.</td>
+    </tr>
+    <tr id='cv.valve_position_verifier'>
+        <td>Valve Position Verifier</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>valve center point : matrix2D</li><li>open angle degrees : double</li><li>closed angle degrees : double</li>        </ul></td>        <td><ul><li>valve state : int</li><li>preview : image2D</li>        </ul></td>        <td>Detects the manual valve lever via Hough line segments and computes its rotation angle to verify open, closed, or ambiguous system settings.</td>
+    </tr>
+    <tr id='cv.vibration_wave_analyzer'>
+        <td>Vibration Wave Analyzer</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>tracking edge coord : matrix2D</li><li>subpixel interpolation factor : int</li>        </ul></td>        <td><ul><li>vibration frequency hz : double</li><li>displacement amplitude px : double</li><li>preview : image2D</li>        </ul></td>        <td>Tracks a sub-pixel edge/corner point across frames (optical flow + cornerSubPix) and runs a temporal FFT on its displacement series to estimate vibration frequency and amplitude. Note: the camera's frame rate sets a hard Nyquist ceiling on the highest detectable frequency, so this is suited to low-frequency structural sway/sag, not high-frequency bearing vibration.</td>
+    </tr>
+    <tr id='cv.vineyard_yield_estimator'>
+        <td>Vineyard Yield Estimator</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>cluster size min pixels : int</li><li>occlusion compensation factor : double</li>        </ul></td>        <td><ul><li>estimated yield kg : double</li><li>cluster count : int</li><li>preview : image2D</li>        </ul></td>        <td>Counts visible grape clusters within vine canopy zones to forecast harvest volume calculations.</td>
+    </tr>
+    <tr id='cv.virtual_ref_assistance'>
+        <td>Virtual Ref Assistance</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>court boundary lines : matrix2D</li><li>player foot contact point : matrix2D</li><li>field homography : matrix2D</li>        </ul></td>        <td><ul><li>line breach detected : bool</li><li>margin of error (mm) : double</li><li>preview : image2D</li>        </ul></td>        <td>Checks a tracked player's foot-contact point against the court/field boundary lines to flag out-of-bounds or offside line breaches, with an optional homography input for a real-world millimeter margin.</td>
+    </tr>
+    <tr id='cv.weather_pattern_prediction'>
+        <td>Weather Pattern Prediction</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>optical flow window size : int</li><li>vorticity threshold : double</li>        </ul></td>        <td><ul><li>storm heading vector : matrix2D</li><li>cloud cover percentage : double</li><li>preview : image2D</li>        </ul></td>        <td>Estimates a storm heading vector from Farneback dense optical flow between weather-camera frames (excluding locally turbulent pixels via a vorticity threshold), plus a threshold/contour cloud-cover percentage.</td>
+    </tr>
+    <tr id='cv.worker_safety_distance'>
+        <td>Worker Safety Distance</td>
+        <td><i class='bi bi-cpu'></i></td>
+        <td><ul><li>source : image2D</li><li>detections : matrix2D</li><li>machine hazard poly : matrix2D</li><li>min safe clearance pixels : int</li>        </ul></td>        <td><ul><li>clearance breach : bool</li><li>current clearance : int</li><li>preview : image2D</li>        </ul></td>        <td>Ingests person-class detection boxes and checks each worker's clearance against a machine hazard polygon, using pointPolygonTest distance geometry to flag any breach of the minimum safe clearance.</td>
     </tr>
 </table>
 <h3 id='Widgets'>Widgets</h3><p>The User Interface Widgets which can be used for Publishing a simplified UI tools are all under the <i class="bi bi-sliders"> Widgets</i> category. The full list of display tools is as follows:</p><table>
@@ -7238,6 +7825,18 @@
         To have a prompt console where you can actually "ask" the AI to build or update your workflow, you need a Client that connects to the SSE (Server-Sent Events) port we just opened in your app (Port 8000). AnythingLLM is the easiest desktop console for MCP.
     </p>
 
+    <h4>How to Start the MCP Server</h4>
+
+    <p>The MCP server is opt-in and does not run by default. Launch INFINIWORKFLOW from the command line with the <code>-mcp</code> flag:</p>
+
+<pre>
+INFINIWORKFLOW.bat -mcp
+</pre>
+
+    <p>This starts the MCP SSE server on <code>http://localhost:8000</code> alongside the normal application. Requires the <code>fastmcp</code> Python package to be installed - if you see "MCP dependencies (fastmcp) not found" printed at startup, install it with <code>pip install fastmcp</code> and relaunch.</p>
+
+    <p><strong>Security note:</strong> the server listens on all network interfaces with no authentication, so anything on your network that can reach port 8000 can read and modify your workflow while it's running. Only use <code>-mcp</code> on a trusted machine/network.</p>
+
     <h4>Download</h4>
     <ul>
         <li>Install AnythingLLM Desktop.</li>
@@ -7285,7 +7884,7 @@ Loading/Saving: Use import_workflow(filename="Untitled.json") to load demo files
 NODE & LINKING RULES
 Creating Nodes:
 1. Find the identifier in tools.json.
-2. Call add_node(tool_type="identifier", name="Human Readable Name").
+2. Call add_node(tool_type="identifier", node_name="Human Readable Name").
 
 Connecting: Use connect_nodes(from_node, from_port, to_node, to_port) to build the graph.
 
@@ -7305,6 +7904,51 @@ Precision: Use exact identifiers from the JSON keys when adding nodes. For examp
 
 Error Handling: If a requested tool or file cannot be found, report the error using show_message.
 </pre>
+
+    <h4>Available Tools</h4>
+
+    <p>These are the MCP tools exposed by INFINIWORKFLOW. A node can be addressed by its uuid or by its human-readable name shown on the canvas; if a name matches more than one node, tools that take a node name will report the ambiguity instead of guessing.</p>
+
+    <table>
+        <thead>
+            <tr><th>Tool</th><th>What it does</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>get_tool_catalog()</code></td><td>Returns every available node type (identifier, description, inputs, outputs) - use this to look up the correct <code>tool_type</code> before calling <code>add_node</code>.</td></tr>
+            <tr><td><code>get_demo_examples()</code></td><td>Returns example prompt/workflow pairs from the built-in demos, useful as few-shot reference.</td></tr>
+            <tr><td><code>get_workflow_json()</code></td><td>Returns the current graph (nodes, edges, uuids) as JSON.</td></tr>
+            <tr><td><code>get_unique_node_name(base_name)</code></td><td>Returns a name guaranteed not to collide with an existing node, e.g. "Camera" &rarr; "Camera1".</td></tr>
+            <tr><td><code>add_node(tool_type, node_name)</code></td><td>Adds a node to the canvas, e.g. <code>add_node(tool_type="cv.canny", node_name="Edge Detect")</code>.</td></tr>
+            <tr><td><code>connect_nodes(from_node, from_port, to_node, to_port)</code></td><td>Wires an output port to an input port, e.g. <code>connect_nodes("Camera", 0, "Edge Detect", 0)</code>. Same as <code>connect_ports</code>.</td></tr>
+            <tr><td><code>remove_connection(from_node, from_port, to_node, to_port)</code></td><td>Removes an existing connection.</td></tr>
+            <tr><td><code>set_parameter(node_name, parameter, value)</code></td><td>Sets an input's value, e.g. <code>set_parameter("Edge Detect", "threshold1", "100")</code>. Parameter names come from <code>get_tool_catalog</code>'s <code>inputs</code> list.</td></tr>
+            <tr><td><code>get_node_image(node_name, port, is_input)</code></td><td>Returns a base64 PNG preview of what a node's port is currently producing/receiving.</td></tr>
+            <tr><td><code>open_viewer(node_name, port)</code></td><td>Opens the image/video viewer on a node's output.</td></tr>
+            <tr><td><code>zoom_to_node(node_name)</code></td><td>Pans/zooms the canvas to bring an off-screen node into view.</td></tr>
+            <tr><td><code>toggle_playback()</code></td><td>Starts or stops live processing.</td></tr>
+            <tr><td><code>jump_to_frame(frame)</code></td><td>Scrubs the timeline to a specific frame (for recorded sources).</td></tr>
+            <tr><td><code>show_message(text, duration)</code></td><td>Shows a status message/speech bubble in the UI - use this to narrate what the agent is doing.</td></tr>
+            <tr><td><code>import_workflow(filename)</code></td><td>Loads a workflow file from the demos folder, e.g. <code>import_workflow(filename="Untitled.json")</code>.</td></tr>
+            <tr><td><code>save_demo_json(json_string)</code></td><td>Saves a JSON graph to <code>demos/Untitled.json</code>.</td></tr>
+            <tr><td><code>reset_canvas()</code></td><td>Clears the entire workflow, starting fresh.</td></tr>
+        </tbody>
+    </table>
+
+    <h4>Example Prompts</h4>
+
+    <p>Once connected and the system prompt above is set, you can ask things like:</p>
+
+    <ul>
+        <li>"Build a workflow that reads a webcam, applies a Canny edge filter, and shows the result in a viewer."</li>
+        <li>"Add a blur node between the camera and the edge detector."</li>
+        <li>"What nodes are in the workflow right now?"</li>
+        <li>"Set the threshold on the edge detector to 150."</li>
+        <li>"Zoom to the node called 'Edge Detect' so I can see it."</li>
+        <li>"Start playback."</li>
+        <li>"Clear the canvas and load the Untitled demo."</li>
+    </ul>
+
+    <p>The agent will call the tools above one at a time (adding nodes, wiring connections, adjusting parameters) and narrate its progress via <code>show_message</code> - watch the canvas update live as it works.</p>
 
     <h2 id="GenerativeAI">Generative AI</h2>
 
