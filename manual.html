@@ -577,6 +577,7 @@
             <li><i class="bi bi-search"></i> Find a node in the flowgraph, adjusts the viewport and selects the node</li>
             <li><i class="bi bi-diagram-3 rotate-90"></i> Auto arrange the nodes</li>
             <li><i class="bi bi-radar"></i> Flowgraph radar mode, cycles between: (default) show when invisible elements on flowgraph, always show radar, never show radar</li>
+            <li><i class="bi bi-speedometer2"></i> Profile: measures each node's execution performance and briefly shows a colored FPS speed-dial badge on every active node (green/yellow/red for fast/medium/slow), fading out automatically after a few seconds. Has no effect on performance when not in use.</li>
             <li><i class="bi bi-arrow-left-circle-fill"></i> Select/deselect before: allows you to change selection of the nodes before the current node in your flowgraph</li>
             <li><i class="bi bi-arrow-right-circle-fill"></i> Select/deselect after: allows you to change selection of the nodes after the current node in your flowgraph</li>
 
@@ -1142,6 +1143,8 @@
             <td>
                 A numeric input allows you to enter a value. There are also step controls that allow you to increment one unit up and down.
                 Below the numeric input you can drag, a range UI will appear. Whilst dragging, holding the shift key will do smaller step changes whilst holding control key will do larger step changes.
+                For whole number and decimal parameters (not the multi-component numeric2/numeric3 versions), an icon <i class="bi bi-calculator"></i> next to the reset icon opens a
+                standalone calculator so you can compute a value with +, -, &times;, &divide; and type it directly into the field.
             </td>
         </tr>
         <tr>
