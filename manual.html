@@ -258,6 +258,29 @@
                         </a>
                     </li>
 
+                    <li style="list-style: none; margin: 10px 0;">
+                        <a href="/mcp.html" style="
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: #d4d4d4;
+                            text-decoration: none;
+                            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+                            font-size: 0.95rem;
+                            font-weight: 500;
+                            padding: 8px 16px;
+                            line-height: 1;
+                            border-left: 3px solid #0056b3;
+                            background: rgba(0, 86, 179, 0.05);
+                            border-radius: 0 6px 6px 0;
+                            transition: all 0.2s ease-in-out;
+                        " onmouseover="this.style.background='rgba(0, 86, 179, 0.15)'; this.style.color='#0056b3'; this.style.transform='translateX(4px)';"
+                           onmouseout="this.style.background='rgba(0, 86, 179, 0.05)'; this.style.color='#d4d4d4'; this.style.transform='translateX(0)';">
+                            <span style="margin-right: 6px; display: inline-flex; align-items: center; transform: translateY(-1px);" class="bi bi-plug-fill"></span>
+                            <span>MCP / AI Agent</span>
+                        </a>
+                    </li>
+
 
                     <li style="list-style: none; margin: 10px 0;">
                         <a href="#GenerativeAI" style="
@@ -1277,7 +1300,7 @@
         <li><i class="bi bi-chevron-bar-right"></i> <strong>Last Frame:</strong> Jumps to the end of the sequence.</li>
         <li><i class="bi bi-calculator"></i> <strong>Set Current Frame:</strong> Opens a dialog to jump to a specific frame number.</li>
 
-        <li><i class="bi bi-layout-split"></i> <strong>Toggle Wipe:</strong> Activates Split Screen mode. Drag the vertical divider to compare live view (right) vs reference (left).</li>
+        <li><i class="bi bi-layout-split"></i> <strong>Toggle Wipe:</strong> Activates Split Screen mode. Drag the divider to compare live view vs reference; drag the circular handle at either end to rotate the divider's angle.</li>
         <li><i class="bi bi-camera"></i> <strong>Capture reference:</strong> Stores the current frame to be used as the reference image for the Wipe tool.</li>
 
         <li>
@@ -2613,6 +2636,11 @@
         <td><i class='bi bi-stack'></i></td>
         <td><ul><li>background : cuda2D</li><li>foreground : cuda2D</li><li>opacity : double</li><li>mask : cuda2D</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Composite with Vivid Light blend mode</td>
     </tr>
+    <tr id='cuda.wipe'>
+        <td>Wipe</td>
+        <td><i class='bi bi-stack'></i></td>
+        <td><ul><li>A : image2D</li><li>B : image2D</li><li>amount : double</li><li>angle : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Antialiased wipe transition between two Cuda buffers</td>
+    </tr>
     <tr id='cv.average'>
         <td>Average</td>
         <td><i class='bi bi-stack'></i></td>
@@ -2742,6 +2770,11 @@
         <td>Vivid Light</td>
         <td><i class='bi bi-stack'></i></td>
         <td><ul><li>background : image2D</li><li>foreground : image2D</li><li>opacity : double</li><li>mask : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Composite with Vivid Light blend mode</td>
+    </tr>
+    <tr id='cv.wipe'>
+        <td>Wipe</td>
+        <td><i class='bi bi-stack'></i></td>
+        <td><ul><li>A : image2D</li><li>B : image2D</li><li>amount : double</li><li>angle : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Antialiased wipe transition between two images</td>
     </tr>
     <tr id='cv.divide'>
         <td>Divide</td>
@@ -6983,7 +7016,7 @@
     <tr id='cv.obstacle_avoidance_node'>
         <td>Obstacle Avoidance Node</td>
         <td><i class='bi bi-cpu'></i></td>
-        <td><ul><li>source : image2D</li><li>min stopping distance mm : double</li><li>sensor fov angle : double</li>        </ul></td>        <td><ul><li>obstacle ahead : bool</li><li>closest obstacle distance : double</li><li>preview : image2D</li>        </ul></td>        <td>Identifies obstacle profiles inside a robot's forward-facing stereo field or depth map projection.</td>
+        <td><ul><li>depth : image2D</li><li>min stopping distance mm : double</li><li>sensor fov angle : double</li>        </ul></td>        <td><ul><li>obstacle ahead : bool</li><li>closest obstacle distance : double</li><li>preview : image2D</li>        </ul></td>        <td>Identifies obstacle profiles inside a robot's forward-facing depth map projection (compose with cv.depth_inference upstream).</td>
     </tr>
     <tr id='cv.online_proctoring_node'>
         <td>Online Proctoring</td>
@@ -7828,6 +7861,8 @@
         To have a prompt console where you can actually "ask" the AI to build or update your workflow, you need a Client that connects to the SSE (Server-Sent Events) port we just opened in your app (Port 8000). AnythingLLM is the easiest desktop console for MCP.
     </p>
 
+    <p>See <a href="/mcp.html" target="_blank">the MCP / AI Agent page</a> for live server status, copy-button setup snippets for Claude Code / Claude Desktop / AnythingLLM, and a large set of example prompts. The app's Windows menu also has a quick "MCP AI Agent" launcher that opens a terminal running your agent CLI directly.</p>
+
     <h4>How to Start the MCP Server</h4>
 
     <p>The MCP server is opt-in and does not run by default. Launch INFINIWORKFLOW from the command line with the <code>-mcp</code> flag:</p>
@@ -7878,25 +7913,25 @@ Identification: Search tools.json using the user's description. Match against th
 Key: The dictionary key (e.g., cv.canny or py.read_csv) is the unique tool_type required for the add_node tool.
 
 UI & CANVAS COMMANDS
-Clear Canvas: Use reset_canvas() to wipe the workspace.
+Clear Canvas: Use reset_canvas() to wipe the workspace. Cannot be undone.
 
 Focusing: If a node is out of view or the user "can't see the nodes," use zoom_to_node(node_name="Node Name").
 
-Loading/Saving: Use import_workflow(filename="Untitled.json") to load demo files and save_demo_json(json_string="...") to persist state.
+Loading/Saving: Use import_workflow(filename="Untitled.json") to load demo files (cannot be undone) and save_workflow() to persist the current graph to disk.
 
 NODE & LINKING RULES
 Creating Nodes:
 1. Find the identifier in tools.json.
-2. Call add_node(tool_type="identifier", node_name="Human Readable Name").
+2. Call add_node(tool_type="identifier", node_name="Human Readable Name"). Nodes with a mandatory file input (e.g. cv.movie_reader) land with that field empty - follow up with set_parameter. Use validate_add_node(tool_type) first if unsure whether a type has mandatory inputs.
 
-Connecting: Use connect_nodes(from_node, from_port, to_node, to_port) to build the graph.
+Connecting: Use connect_nodes(from_node, from_port, to_node, to_port) to build the graph (alias: connect_ports). Use remove_connection to unwire, remove_node to delete a node entirely, and rename_node / set_node_enabled to rename or enable/disable one.
 
-Tuning: Use set_parameter(node_name, parameter, value) to adjust settings. Consult tools.json for valid parameter names and default values within a node's inputs array.
+Tuning: Use set_parameter(node_name, parameter, value) to adjust settings. Consult tools.json for valid parameter names and default values within a node's inputs array. update_node_positions repositions nodes on the canvas; add_node_input / remove_node_input add or remove a dynamic port on nodes that support variable input counts.
 
 VIEWER & PLAYBACK
 Output Viewer: Use open_viewer(node_name="Node Name", port=0) to inspect results.
 
-Execution: Use toggle_playback() to start/stop processing or jump_to_frame(frame=X) to scrub the timeline.
+Execution: Use toggle_playback(node_name) to start/stop a specific playable node (e.g. a movie reader) and jump_to_frame(frame=X, node_name=None) to scrub the timeline - omit node_name to apply to every playable node. get_playback_state reads back the current frame/play state.
 
 Behavioral Guidelines
 Communication: Always call show_message(text="...") to explain what you are doing while the automation runs.
@@ -7917,23 +7952,65 @@ Error Handling: If a requested tool or file cannot be found, report the error us
             <tr><th>Tool</th><th>What it does</th></tr>
         </thead>
         <tbody>
+            <tr><th colspan="2">Discovery / read-only</th></tr>
             <tr><td><code>get_tool_catalog()</code></td><td>Returns every available node type (identifier, description, inputs, outputs) - use this to look up the correct <code>tool_type</code> before calling <code>add_node</code>.</td></tr>
             <tr><td><code>get_demo_examples()</code></td><td>Returns example prompt/workflow pairs from the built-in demos, useful as few-shot reference.</td></tr>
+            <tr><td><code>get_recent_catalog_items(months_back)</code></td><td>Lists catalog entries added/modified in the last N months - useful for discovering newly added node types.</td></tr>
             <tr><td><code>get_workflow_json()</code></td><td>Returns the current graph (nodes, edges, uuids) as JSON.</td></tr>
+            <tr><td><code>get_workflow_path()</code></td><td>Returns the current workflow's file path/root on disk.</td></tr>
             <tr><td><code>get_unique_node_name(base_name)</code></td><td>Returns a name guaranteed not to collide with an existing node, e.g. "Camera" &rarr; "Camera1".</td></tr>
-            <tr><td><code>add_node(tool_type, node_name)</code></td><td>Adds a node to the canvas, e.g. <code>add_node(tool_type="cv.canny", node_name="Edge Detect")</code>.</td></tr>
+            <tr><td><code>validate_add_node(tool_type)</code></td><td>Checks a tool identifier's mandatory-input requirements before calling <code>add_node</code>.</td></tr>
+            <tr><td><code>get_node_image(node_name, port, is_input)</code></td><td>Returns a base64 PNG preview of what a node's port is currently producing/receiving.</td></tr>
+            <tr><td><code>get_node_resolution(node_name, port)</code></td><td>Returns width/height/channels/depth of a node's output port (C++ nodes only).</td></tr>
+            <tr><td><code>get_node_custom_values(node_names)</code></td><td>Returns every set parameter for the given nodes (or all nodes if omitted), keyed by each input's own uuid.</td></tr>
+            <tr><td><code>get_playback_state(node_name)</code></td><td>Returns the current frame/playing state of a playable node.</td></tr>
+            <tr><td><code>get_existing_groups(group_name)</code></td><td>Lists group/macro definitions available to insert into the graph.</td></tr>
+            <tr><td><code>get_project_resolution()</code></td><td>Returns the project's current canvas resolution.</td></tr>
+            <tr><td><code>get_cuda_devices()</code></td><td>Lists available CUDA device names on this machine.</td></tr>
+            <tr><td><code>get_package_info()</code></td><td>Lists installed/available Python packages the workflow's tools depend on.</td></tr>
+            <tr><td><code>get_performance_counters()</code></td><td>Returns per-node performance/timing counters for the running workflow.</td></tr>
+            <tr><td><code>get_node_inputs(node_name)</code></td><td>Richer read than <code>get_workflow_json</code>'s per-node inputs - includes live supervise/validation state (whether each input currently satisfies what the node needs to run).</td></tr>
+            <tr><td><code>get_node_io_customization(node_name)</code></td><td>Returns a node's exposed-input/output customization state (per-port uuid, current label, hidden flags) - used for group/macro port customization.</td></tr>
+            <tr><td><code>get_valid_functions(node_names)</code></td><td>Given selected node(s), lists which operations/conditions are valid for them - use to ground <code>add_trigger</code>'s <code>operation</code>/<code>condition</code> arguments instead of guessing.</td></tr>
+            <tr><td><code>get_published_outputs()</code></td><td>Read-only: lists which node outputs are currently published.</td></tr>
+            <tr><td><code>get_node_value(node_name, port)</code></td><td>Reads a Python node's current output value directly (number, string, list, small matrix) - Python nodes only, no equivalent for <code>cv.*</code> nodes.</td></tr>
+
+            <tr><th colspan="2">Graph editing</th></tr>
+            <tr><td><code>add_node(tool_type, node_name, x, y)</code></td><td>Adds a node to the canvas, e.g. <code>add_node(tool_type="cv.canny", node_name="Edge Detect")</code>. x/y are optional; omit to auto-place.</td></tr>
+            <tr><td><code>batch_update(add_vertices, add_edges, remove_vertices, remove_edges)</code></td><td>Builds/tears down many nodes and edges in one round-trip - use instead of N separate <code>add_node</code>/<code>connect_ports</code>/<code>remove_node</code> calls when constructing or restructuring a large graph. <code>add_edges</code> entries may reference a <code>node_name</code> defined earlier in the same <code>add_vertices</code> list.</td></tr>
+            <tr><td><code>remove_node(node_name)</code></td><td>Removes a node from the graph.</td></tr>
+            <tr><td><code>rename_node(node_name, new_name)</code></td><td>Renames a node.</td></tr>
+            <tr><td><code>set_node_enabled(node_name, enabled)</code></td><td>Enables or disables a node.</td></tr>
             <tr><td><code>connect_nodes(from_node, from_port, to_node, to_port)</code></td><td>Wires an output port to an input port, e.g. <code>connect_nodes("Camera", 0, "Edge Detect", 0)</code>. Same as <code>connect_ports</code>.</td></tr>
             <tr><td><code>remove_connection(from_node, from_port, to_node, to_port)</code></td><td>Removes an existing connection.</td></tr>
             <tr><td><code>set_parameter(node_name, parameter, value)</code></td><td>Sets an input's value, e.g. <code>set_parameter("Edge Detect", "threshold1", "100")</code>. Parameter names come from <code>get_tool_catalog</code>'s <code>inputs</code> list.</td></tr>
-            <tr><td><code>get_node_image(node_name, port, is_input)</code></td><td>Returns a base64 PNG preview of what a node's port is currently producing/receiving.</td></tr>
+            <tr><td><code>add_node_input(node_name)</code> / <code>remove_node_input(node_name)</code></td><td>Adds/removes a dynamic input port on nodes that support variable input counts (Python nodes only).</td></tr>
+            <tr><td><code>add_node_output(node_name)</code> / <code>remove_node_output(node_name)</code></td><td>Adds/removes a dynamic output port on nodes that support variable output counts (Python nodes only).</td></tr>
+            <tr><td><code>set_node_io_customization(node_name, input_names, output_names)</code></td><td>Renames/relabels a node's exposed inputs and/or outputs, keyed by input/output <code>identifier</code>, e.g. <code>{"threshold1": {"name": "Sensitivity"}}</code>.</td></tr>
+            <tr><td><code>update_node_positions(positions)</code></td><td>Repositions one or more nodes, e.g. <code>update_node_positions({"Canny": [400, 200]})</code>.</td></tr>
+            <tr><td><code>add_trigger(sink_node, input_port, source_node, operation, condition, value)</code></td><td>Adds a conditional trigger on an input, firing when another node's value satisfies the given condition.</td></tr>
+            <tr><td><code>remove_all_triggers(sink_node, input_port)</code></td><td>Clears all triggers on a node's input port.</td></tr>
+            <tr><td><code>merge_cpu_threads(node_names)</code> / <code>split_cpu_threads(node_names)</code></td><td>Groups the given nodes onto one CPU thread, or splits them back apart.</td></tr>
+            <tr><td><code>set_node_buffer_size(node_name, buffer_size)</code></td><td>Tunes a node's frame buffer depth - perf-tuning lever for playback-heavy graphs.</td></tr>
+            <tr><td><code>set_node_gpu_device(node_names, gpu_device)</code></td><td>Reassigns the GPU device index for one or more nodes.</td></tr>
+            <tr><td><code>set_project_resolution(width, height, resize_spatial)</code></td><td>Sets the project's canvas resolution.</td></tr>
+            <tr><td><code>flush_undo_redo()</code></td><td>Clears the undo/redo history - use after a batch of agent-driven edits the user shouldn't undo back through.</td></tr>
+            <tr><td><code>reset_canvas()</code></td><td>Clears the entire workflow, starting fresh. Cannot be undone.</td></tr>
+
+            <tr><th colspan="2">Viewer / playback / UI</th></tr>
             <tr><td><code>open_viewer(node_name, port)</code></td><td>Opens the image/video viewer on a node's output.</td></tr>
             <tr><td><code>zoom_to_node(node_name)</code></td><td>Pans/zooms the canvas to bring an off-screen node into view.</td></tr>
-            <tr><td><code>toggle_playback()</code></td><td>Starts or stops live processing.</td></tr>
-            <tr><td><code>jump_to_frame(frame)</code></td><td>Scrubs the timeline to a specific frame (for recorded sources).</td></tr>
+            <tr><td><code>toggle_playback(node_name)</code></td><td>Starts or stops playback on a specific playable node, returning the resulting play state.</td></tr>
+            <tr><td><code>set_playing(play)</code></td><td>Explicitly starts or stops playback on every playable node - use for a known end state rather than <code>toggle_playback</code>'s per-node flip.</td></tr>
+            <tr><td><code>jump_to_frame(frame, node_name)</code></td><td>Scrubs to a specific frame. Omit <code>node_name</code> to apply to every playable node.</td></tr>
+            <tr><td><code>advance_frame(node_name)</code> / <code>rewind_frame(node_name)</code></td><td>Steps one frame forward/back. Omit <code>node_name</code> to apply to every playable node.</td></tr>
+            <tr><td><code>jump_to_first_frame(node_name)</code> / <code>jump_to_last_frame(node_name)</code></td><td>Jumps to the start/end of playback. Omit <code>node_name</code> to apply to every playable node.</td></tr>
             <tr><td><code>show_message(text, duration)</code></td><td>Shows a status message/speech bubble in the UI - use this to narrate what the agent is doing.</td></tr>
-            <tr><td><code>import_workflow(filename)</code></td><td>Loads a workflow file from the demos folder, e.g. <code>import_workflow(filename="Untitled.json")</code>.</td></tr>
-            <tr><td><code>save_demo_json(json_string)</code></td><td>Saves a JSON graph to <code>demos/Untitled.json</code>.</td></tr>
-            <tr><td><code>reset_canvas()</code></td><td>Clears the entire workflow, starting fresh.</td></tr>
+
+            <tr><th colspan="2">Workflow files</th></tr>
+            <tr><td><code>import_workflow(filename)</code></td><td>Loads a workflow file from the demos folder, replacing the current graph. Cannot be undone.</td></tr>
+            <tr><td><code>save_workflow()</code></td><td>Saves the current graph to disk (same path the app's own Save action uses).</td></tr>
+            <tr><td><code>save_as_workflow(filename, root, folder)</code></td><td>Saves the current graph to a NEW file, leaving the currently-open workflow untouched - a fork/branch rather than an overwrite.</td></tr>
         </tbody>
     </table>
 
@@ -7949,6 +8026,13 @@ Error Handling: If a requested tool or file cannot be found, report the error us
         <li>"Zoom to the node called 'Edge Detect' so I can see it."</li>
         <li>"Start playback."</li>
         <li>"Clear the canvas and load the Untitled demo."</li>
+        <li>"Build a full pipeline in one shot: movie reader, grayscale, canny, and a viewer, all connected."</li>
+        <li>"Add another output port to the split node, then rename the new port to 'Overflow'."</li>
+        <li>"Step the movie reader forward one frame and show me the result."</li>
+        <li>"What is the current numeric value on the counter node's output?"</li>
+        <li>"What operations are valid for the movie reader node, so I can trigger something off of it?"</li>
+        <li>"Save this as a new file called 'variant_1.json' without overwriting the original."</li>
+        <li>"Reassign the Canny node to GPU device 1 and bump its buffer size to 30."</li>
     </ul>
 
     <p>The agent will call the tools above one at a time (adding nodes, wiring connections, adjusting parameters) and narrate its progress via <code>show_message</code> - watch the canvas update live as it works.</p>
