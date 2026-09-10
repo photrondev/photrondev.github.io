@@ -1321,7 +1321,7 @@
             <li><i class="bi bi-rulers"></i> <strong>Measurement:</strong> Interactive on-screen <a href="#measurement">measurement</a> (Ruler, Angle, Radius, Diameter, Multi-Segment).</li>
             <li><i class="bi bi-bounding-box"></i> <strong>Keystone:</strong> Warps a user-defined 4-point <a href="#keystone">keystone</a> in the video scene into a flat, rectangular image.</li>
             <li><i class="bi bi-compass"></i> <strong>Stabilize:</strong> Allows tracking and 1 or 2 point <a href="#keystone">stabilization</a>.</li>
-            <li><i class="bi bi-columns-gap"></i> <strong>Multi-View:</strong> Compares the current view against up to 3 pinned nodes live, side by side - see <a href="#multiview">Multi-View</a>.</li>
+            <li><i class="bi bi-columns-gap"></i> <strong>Multi-View:</strong> Compares the current view against up to 3 sources you add, live, side by side - see <a href="#multiview">Multi-View</a>.</li>
         </ul>
 
         <li style="margin-top: 20px; border-top: 1px solid #444; padding-top: 10px; font-weight: bold; color: #aaa;">Path Editor Tools</li>
@@ -1403,17 +1403,19 @@
 
     <h3 id="multiview">Multi-View</h3>
     <p>
-        Multi-View automatically remembers the last few things you've viewed and compares them live, in one place -
-        a wipe divider or side-by-side split for 2 things, a tiled 3-way or 4-way view for 3 or 4. There's no pinning to set up -
-        just view a node's output normally, view another, and Multi-View has something to compare as soon as you open it. Viewing
-        two different outputs of the same node counts as two separate things to compare. It never permanently adds anything to
-        the flowgraph: opening Multi-View creates a temporary, hidden compare node behind the scenes, and closing Multi-View
-        removes it immediately. Only image outputs can be compared this way (not data frames, tensors, or other non-image views).
+        Multi-View compares up to 4 image sources live, in one place - a wipe divider or side-by-side split for 2,
+        a tiled 3-way or 4-way view for 3 or 4. Slot A always tracks whatever you're currently viewing in the main
+        viewer; slots B, C and D are added and removed manually from the Multi-View dialog itself, so browsing to
+        something else in the flowgraph never disturbs a comparison you've already built up. It never permanently
+        adds anything to the flowgraph: opening Multi-View creates a temporary, hidden compare node behind the
+        scenes, and closing Multi-View removes it immediately. Only image outputs can be compared this way (not
+        data frames, tensors, or other non-image views).
     </p>
     <ul>
-        <li><i class="bi bi-columns-gap"></i> <strong>Multi-View entry:</strong> Found under <strong>More Tools</strong> - opens the compare dialog showing whatever you've most recently viewed.</li>
-        <li><strong>Mode buttons:</strong> <strong>Wipe</strong> (antialiased draggable divider - drag the line to move it, the circular handles at each end to rotate it, same interaction as the regular Toggle Wipe tool), <strong>Split View</strong> (top/bottom split, no divider), <strong>3 View</strong> (one on top, two side by side below), and <strong>Quad View</strong> (four quadrants). Only the modes valid for how many things are currently being compared are enabled - Wipe and Split View both need exactly 2, 3 View needs 3, Quad View needs 4.</li>
-        <li><strong>Comparing list:</strong> One row per item being compared, most recently viewed first (slot A), showing its node name and output port name. Each row except the current view (slot A) has a remove button, in case something in the history isn't worth comparing - view something new to add it back in.</li>
+        <li><i class="bi bi-columns-gap"></i> <strong>Multi-View entry:</strong> Found under <strong>More Tools</strong> - always available, even before anything else has been added.</li>
+        <li><strong>Mode buttons:</strong> <strong>Wipe</strong> (antialiased draggable divider - drag the line to move it, the circular handles at each end to rotate it, same interaction as the regular Toggle Wipe tool), <strong>Split View</strong> (top/bottom split, no divider), <strong>3 View</strong> (one on top, two side by side below), and <strong>Quad View</strong> (four quadrants). Only the modes valid for how many sources are currently being compared are enabled - Wipe and Split View both need exactly 2, 3 View needs 3, Quad View needs 4. In Split View, 3 View and Quad View, each tile briefly flashes its letter (A/B/C/D) whenever the layout appears or changes, so it's clear which source is which.</li>
+        <li><strong>Comparing list:</strong> One row per source, labeled A/B/C/D. Slot A always shows the current view. Use the <strong>Add source</strong> row to fill B, C or D; each filled row (except A) has a remove button, so swapping a pick is just remove, then add again. When a row's source traces back to a playable video or camera node, a play/pause button also appears on that row to control it directly - closing Multi-View automatically resumes anything paused this way.</li>
+        <li><strong>Add source picker:</strong> Opens with two tabs. <strong>List</strong> groups every node's image outputs under its node name, with a search box (filters by node or port name; Enter picks the match if the search narrows it to exactly one) - handy once the flowgraph has a lot of nodes. <strong>Diagram</strong> is a read-only, pan-and-zoom schematic of the flowgraph itself (drag to pan, scroll to zoom) - nodes with an image output are highlighted, and clicking one of their port dots picks it directly. In both tabs, a small green A/B/C/D badge appears next to any port that's already part of the current comparison, so it's easy to see what's already in use at a glance.</li>
     </ul>
     <p>
         Multi-View is only available from the main viewer - it isn't part of the AI Label Studio or Video Segmentation Studio viewing workflow.
