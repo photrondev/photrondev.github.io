@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>MCP / AI Agent — User Guide</title>
+    <style>
+        :root {
+            --bg: #f5f7fa;
+            --card: #fff;
+            --text: #20252b;
+            --muted: #5e6975;
+            --line: #dce2e8;
+            --accent: #1769aa;
+            --accent2: #eaf4fb;
+            --good: #177245;
+            --warn: #8a5a00;
+            --shadow: 0 2px 10px rgba(20,35,50,.05)
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 180px;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font: 16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif
+        }
+
+        header {
+            background: #17212b;
+            color: #fff;
+            padding: 52px max(24px,calc((100% - 1200px)/2))
+        }
+
+            header h1 {
+                font-size: 38px;
+                margin: 0 0 8px
+            }
+
+            header p {
+                max-width: 900px;
+                color: #d4dde5;
+                margin: 6px 0
+            }
+
+        .wrap {
+            max-width: 1200px;
+            margin: auto;
+            padding: 30px 24px 80px
+        }
+
+        nav {
+            position: sticky;
+            top: 12px;
+            z-index: 10;
+            background: rgba(255,255,255,.97);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 18px 22px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow)
+        }
+
+            nav strong {
+                display: block;
+                margin-bottom: 10px
+            }
+
+            nav a {
+                color: var(--accent);
+                text-decoration: none;
+                margin-right: 18px;
+                display: inline-block
+            }
+
+        section {
+            scroll-margin-top: 180px;
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 0 0 28px
+        }
+
+        h2 {
+            font-size: 28px;
+            margin: 0 0 14px;
+            color: #18232e
+        }
+
+        h3 {
+            font-size: 21px;
+            margin-top: 28px;
+            color: #263746
+        }
+
+        h4 {
+            font-size: 18px;
+            margin-bottom: 6px
+        }
+
+        .callout {
+            padding: 16px 18px;
+            border-radius: 8px;
+            background: var(--accent2);
+            border-left: 4px solid var(--accent);
+            margin: 18px 0
+        }
+
+        .tip {
+            background: #eef8f1;
+            border-left-color: var(--good)
+        }
+
+        .warning {
+            background: #fff8e8;
+            border-left-color: #d08a00
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 15px 0
+        }
+
+        th, td {
+            border: 1px solid var(--line);
+            padding: 11px;
+            vertical-align: top;
+            text-align: left
+        }
+
+        th {
+            background: #eef2f5
+        }
+
+        ol, ul {
+            padding-left: 25px
+        }
+
+        .steps li {
+            margin: 10px 0
+        }
+
+        .small {
+            font-size: 14px;
+            color: var(--muted)
+        }
+
+        .code-block {
+            position: relative;
+            margin: 14px 0;
+        }
+
+        pre {
+            background: #16202b;
+            color: #d7e2ea;
+            border-radius: 8px;
+            padding: 16px 90px 16px 16px;
+            overflow-x: auto;
+            font: 14px/1.5 Consolas,"Courier New",monospace;
+            margin: 0;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+            .copy-btn:hover {
+                background: #0f4f7d
+            }
+
+            .copy-btn.copied {
+                background: var(--good)
+            }
+
+        .prompt-list {
+            list-style: none;
+            padding: 0;
+            margin: 14px 0;
+        }
+
+            .prompt-list li {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+                border: 1px solid var(--line);
+                border-radius: 8px;
+                padding: 10px 14px;
+                margin: 8px 0;
+                background: #fafbfc;
+            }
+
+            .prompt-list .prompt-text {
+                font-family: Consolas,"Courier New",monospace;
+                font-size: 14px;
+            }
+
+            .prompt-list .copy-btn {
+                position: static;
+                flex-shrink: 0;
+            }
+
+        #status-line {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+
+            #status-line.status-ok {
+                background: #eef8f1;
+                color: var(--good);
+            }
+
+            #status-line.status-off {
+                background: #fdeeee;
+                color: #a3271f;
+            }
+
+            #status-line.status-unknown {
+                background: #f0f0f0;
+                color: var(--muted);
+            }
+
+        #launcher-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 14px 0;
+        }
+
+        #llm-command {
+            font-family: Consolas,"Courier New",monospace;
+            font-size: 15px;
+            padding: 8px 12px;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        #launch-btn {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 9px 18px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+            #launch-btn:hover {
+                background: #0f4f7d
+            }
+
+        #launch-result {
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        @media(max-width:700px) {
+            header h1 {
+                font-size: 30px
+            }
+
+            section {
+                padding: 20px
+            }
+
+            .wrap {
+                padding: 20px 12px
+            }
+
+            nav {
+                position: static
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>MCP / AI Agent</h1>
+        <p>InfiniWorkflow exposes its node graph to an AI agent (Claude, or any MCP-compatible client) over an MCP server. This page covers connecting an agent, launching one, and what it can actually do.</p>
+    </header>
+
+    <div class="wrap">
+        <nav>
+            <strong>Contents</strong>
+            <a href="#status">Status &amp; Launch</a>
+            <a href="#claude-code">Claude Code</a>
+            <a href="#claude-desktop">Claude Desktop</a>
+            <a href="#anythingllm">AnythingLLM</a>
+            <a href="#prompts">Example Prompts</a>
+            <a href="#tools">Available Tools</a>
+            <a href="#ai-studio">AI Studio Pipeline</a>
+        </nav>
+
+        <section id="status">
+            <h2>1. Status &amp; Launch</h2>
+
+            <div id="status-line" class="status-unknown">Checking MCP server status...</div>
+
+            <p>The toolbar icon for this page dims when the app wasn't started with <code>-mcp</code> - the MCP server only starts once, at app launch, so if it's off you'll need to restart InfiniWorkflow with that flag rather than starting it from here.</p>
+
+            <h3>Launch an agent here</h3>
+            <p class="small">Opens a real terminal window running the command below, in the InfiniWorkflow project directory. The command is remembered (in a cookie) for next time.</p>
+            <div id="launcher-row">
+                <input type="text" id="llm-command" value="claude" spellcheck="false">
+                <button id="launch-btn">Launch</button>
+            </div>
+            <div id="launch-result"></div>
+        </section>
+
+        <section id="claude-code">
+            <h2>2. Claude Code</h2>
+            <p>Register the server once per machine (or per project, with <code>--scope local</code>):</p>
+            <div class="code-block">
+                <pre id="claude-code-cmd">claude mcp add --transport sse infiniworkflow http://127.0.0.1:8000/sse</pre>
+                <button class="copy-btn" data-target="claude-code-cmd">Copy</button>
+            </div>
+            <p class="small">After that, any <code>claude</code> session started in this project picks up the connection automatically - including one launched from the button above. No special prefix is needed - just describe what you want in plain language and Claude calls the right tools on its own.</p>
+        </section>
+
+        <section id="claude-desktop">
+            <h2>3. Claude Desktop</h2>
+            <p>Add this to Claude Desktop's MCP server settings:</p>
+            <div class="code-block">
+                <pre id="claude-desktop-cfg">{
+  "mcpServers": {
+    "infiniworkflow": {
+      "type": "sse",
+      "url": "http://127.0.0.1:8000/sse"
+    }
+  }
+}</pre>
+                <button class="copy-btn" data-target="claude-desktop-cfg">Copy</button>
+            </div>
+        </section>
+
+        <section id="anythingllm">
+            <h2>4. AnythingLLM</h2>
+            <p>Install AnythingLLM Desktop, then go to <b>Settings &gt; Extensions &gt; MCP</b> and add:</p>
+            <div class="code-block">
+                <pre id="anythingllm-cfg">{
+  "mcpServers": {
+    "infiniworkflow": {
+      "type": "sse",
+      "url": "http://127.0.0.1:8000/sse"
+    }
+  }
+}</pre>
+                <button class="copy-btn" data-target="anythingllm-cfg">Copy</button>
+            </div>
+            <p>Then, in <b>Workspace Settings &gt; Agent Configuration</b>, paste a system prompt telling the agent how to map requests to tools (see <a href="manual.html#mcp">the manual's MCP section</a> for a starting point) - unlike Claude, AnythingLLM's agent doesn't already know the tool names, so it needs to be told.</p>
+            <div class="callout warning">
+                <b>Prefix required:</b> AnythingLLM only uses tools in a chat message that starts with <code>@agent</code> - that's AnythingLLM's own convention for switching a message into agent/tool-use mode, not anything specific to InfiniWorkflow. Plain chat messages (no <code>@agent</code>) never call tools, no matter what you ask. Example: <code>@agent add a canny node connected to the movie reader</code>.
+            </div>
+        </section>
+
+        <section id="prompts">
+            <h2>5. Example Prompts</h2>
+            <p class="small">Once connected, try asking things like this (copy one into your agent's chat - prefix with <code>@agent</code> if you're using AnythingLLM, no prefix needed for Claude):</p>
+            <div id="prompt-groups"></div>
+        </section>
+
+        <section id="tools">
+            <h2>6. Available Tools</h2>
+            <p class="small">Also kept in sync in <a href="manual.html#mcp">the manual's MCP Server section</a>. A node can be addressed by its uuid or by its human-readable name shown on the canvas; if a name matches more than one node, tools that take a node name will report the ambiguity instead of guessing.</p>
+
+            <table>
+                <thead>
+                    <tr><th>Tool</th><th>What it does</th></tr>
+                </thead>
+                <tbody>
+                    <tr><th colspan="2">Discovery / read-only</th></tr>
+                    <tr><td><code>get_tool_catalog()</code></td><td>Returns every available node type (identifier, description, inputs, outputs) - use this to look up the correct <code>tool_type</code> before calling <code>add_node</code>.</td></tr>
+                    <tr><td><code>get_demo_examples()</code></td><td>Returns example prompt/workflow pairs from the built-in demos, useful as few-shot reference.</td></tr>
+                    <tr><td><code>get_recent_catalog_items(months_back)</code></td><td>Lists catalog entries added/modified in the last N months - useful for discovering newly added node types.</td></tr>
+                    <tr><td><code>get_workflow_json()</code></td><td>Returns the current graph (nodes, edges, uuids) as JSON.</td></tr>
+                    <tr><td><code>get_workflow_path()</code></td><td>Returns the current workflow's file path/root on disk.</td></tr>
+                    <tr><td><code>get_unique_node_name(base_name)</code></td><td>Returns a name guaranteed not to collide with an existing node, e.g. "Camera" &rarr; "Camera1".</td></tr>
+                    <tr><td><code>validate_add_node(tool_type)</code></td><td>Checks a tool identifier's mandatory-input requirements before calling <code>add_node</code>.</td></tr>
+                    <tr><td><code>get_node_image(node_name, port, is_input)</code></td><td>Returns the current image for a node's port as a real image the agent can look at.</td></tr>
+                    <tr><td><code>get_node_resolution(node_name, port)</code></td><td>Returns width/height/channels/depth of a node's output port (C++ nodes only).</td></tr>
+                    <tr><td><code>get_node_custom_values(node_names)</code></td><td>Returns every set parameter for the given nodes (or all nodes if omitted), keyed by each input's own uuid.</td></tr>
+                    <tr><td><code>get_playback_state(node_name)</code></td><td>Returns the current frame/playing state of a playable node.</td></tr>
+                    <tr><td><code>get_existing_groups(group_name)</code></td><td>Lists group/macro definitions available to insert into the graph.</td></tr>
+                    <tr><td><code>get_project_resolution()</code></td><td>Returns the project's current canvas resolution.</td></tr>
+                    <tr><td><code>get_cuda_devices()</code></td><td>Lists available CUDA device names on this machine.</td></tr>
+                    <tr><td><code>get_package_info()</code></td><td>Lists installed/available Python packages the workflow's tools depend on.</td></tr>
+                    <tr><td><code>get_performance_counters()</code></td><td>Returns per-node performance/timing counters for the running workflow.</td></tr>
+                    <tr><td><code>get_node_inputs(node_name)</code></td><td>Richer read than <code>get_workflow_json</code>'s per-node inputs - includes live supervise/validation state (whether each input currently satisfies what the node needs to run).</td></tr>
+                    <tr><td><code>get_node_io_customization(node_name)</code></td><td>Returns a node's exposed-input/output customization state (per-port uuid, current label, hidden flags) - used for group/macro port customization.</td></tr>
+                    <tr><td><code>get_valid_functions(node_names)</code></td><td>Given selected node(s), lists which operations/conditions are valid for them - use to ground <code>add_trigger</code>'s <code>operation</code>/<code>condition</code> arguments instead of guessing.</td></tr>
+                    <tr><td><code>get_published_outputs()</code></td><td>Read-only: lists which node outputs are currently published.</td></tr>
+                    <tr><td><code>get_node_value(node_name, port)</code></td><td>Reads a Python node's current output value directly (number, string, list, small matrix) - Python nodes only, no equivalent for <code>cv.*</code> nodes.</td></tr>
+                    <tr><td><code>search_tool_catalog(query, max_results)</code></td><td>Keyword-relevance search over the full catalog (identifier/title/description/tags) - use instead of <code>get_tool_catalog</code> when you have a specific capability in mind, e.g. <code>search_tool_catalog("detect edges")</code>.</td></tr>
+                    <tr><td><code>explain_workflow()</code></td><td>Returns the current graph in data-flow (topological) order with each node's catalog title/description, set parameters, and named connections - a ready-made basis for summarizing/explaining a workflow, instead of cross-referencing <code>get_workflow_json</code> and <code>get_tool_catalog</code> yourself.</td></tr>
+
+                    <tr><th colspan="2">Graph editing</th></tr>
+                    <tr><td><code>add_node(tool_type, node_name, x, y)</code></td><td>Adds a node to the canvas, e.g. <code>add_node(tool_type="cv.canny", node_name="Edge Detect")</code>. x/y are optional; omit to auto-place.</td></tr>
+                    <tr><td><code>propose_pipeline(tool_types, node_names, parameters, auto_build, clear_canvas, connect_from, connect_from_port, start_x, start_y)</code></td><td>Builds a linear node chain from explicit <code>tool_type</code> identifiers you've already decided on (e.g. via <code>search_tool_catalog</code>/<code>get_tool_catalog</code>) - no natural-language guessing happens inside this tool itself, since picking the right node for a plain-language step is a judgment call, not a keyword-matching one. Read-only by default (<code>auto_build=False</code>) - pass <code>auto_build=True</code> to actually add and wire the nodes left-to-right. <code>parameters</code> (optional, one dict per <code>tool_type</code>, <code>{}</code> for none) applies <code>set_parameter</code> to each node right after it's added, e.g. so the first node's <code>source</code> is already set. <code>clear_canvas=True</code> wipes the graph first (new pipeline from scratch); <code>connect_from="Existing Node"</code> wires the new chain onto an existing node's output instead (extend/fix an existing pipeline) - use one or the other, not both.</td></tr>
+                    <tr><td><code>batch_update(add_vertices, add_edges, remove_vertices, remove_edges)</code></td><td>Builds/tears down many nodes and edges in one round-trip - use instead of N separate <code>add_node</code>/<code>connect_ports</code>/<code>remove_node</code> calls when constructing or restructuring a large graph. <code>add_edges</code> entries may reference a <code>node_name</code> defined earlier in the same <code>add_vertices</code> list.</td></tr>
+                    <tr><td><code>remove_node(node_name)</code></td><td>Removes a node from the graph.</td></tr>
+                    <tr><td><code>rename_node(node_name, new_name)</code></td><td>Renames a node.</td></tr>
+                    <tr><td><code>set_node_enabled(node_name, enabled)</code></td><td>Enables or disables a node.</td></tr>
+                    <tr><td><code>connect_nodes(from_node, from_port, to_node, to_port)</code></td><td>Wires an output port to an input port, e.g. <code>connect_nodes("Camera", 0, "Edge Detect", 0)</code>. Same as <code>connect_ports</code>.</td></tr>
+                    <tr><td><code>remove_connection(from_node, from_port, to_node, to_port)</code></td><td>Removes an existing connection.</td></tr>
+                    <tr><td><code>set_parameter(node_name, parameter, value)</code></td><td>Sets an input's value, e.g. <code>set_parameter("Edge Detect", "threshold1", "100")</code>. Parameter names come from <code>get_tool_catalog</code>'s <code>inputs</code> list.</td></tr>
+                    <tr><td><code>add_node_input(node_name)</code> / <code>remove_node_input(node_name)</code></td><td>Adds/removes a dynamic input port on nodes that support variable input counts (Python nodes only).</td></tr>
+                    <tr><td><code>add_node_output(node_name)</code> / <code>remove_node_output(node_name)</code></td><td>Adds/removes a dynamic output port on nodes that support variable output counts (Python nodes only).</td></tr>
+                    <tr><td><code>set_node_io_customization(node_name, input_names, output_names)</code></td><td>Renames/relabels a node's exposed inputs and/or outputs, keyed by input/output <code>identifier</code>, e.g. <code>{"threshold1": {"name": "Sensitivity"}}</code>.</td></tr>
+                    <tr><td><code>update_node_positions(positions)</code></td><td>Repositions one or more nodes, e.g. <code>update_node_positions({"Canny": [400, 200]})</code>.</td></tr>
+                    <tr><td><code>add_trigger(sink_node, input_port, source_node, operation, condition, value)</code></td><td>Adds a conditional trigger on an input, firing when another node's value satisfies the given condition.</td></tr>
+                    <tr><td><code>remove_all_triggers(sink_node, input_port)</code></td><td>Clears all triggers on a node's input port.</td></tr>
+                    <tr><td><code>merge_cpu_threads(node_names)</code> / <code>split_cpu_threads(node_names)</code></td><td>Groups the given nodes onto one CPU thread, or splits them back apart.</td></tr>
+                    <tr><td><code>set_node_buffer_size(node_name, buffer_size)</code></td><td>Tunes a node's frame buffer depth - perf-tuning lever for playback-heavy graphs.</td></tr>
+                    <tr><td><code>set_node_gpu_device(node_names, gpu_device)</code></td><td>Reassigns the GPU device index for one or more nodes.</td></tr>
+                    <tr><td><code>set_project_resolution(width, height, resize_spatial)</code></td><td>Sets the project's canvas resolution.</td></tr>
+                    <tr><td><code>flush_undo_redo()</code></td><td>Clears the undo/redo history - use after a batch of agent-driven edits the user shouldn't undo back through.</td></tr>
+                    <tr><td><code>reset_canvas()</code></td><td>Clears the entire workflow, starting fresh. Cannot be undone.</td></tr>
+
+                    <tr><th colspan="2">Viewer / playback / UI</th></tr>
+                    <tr><td><code>open_viewer(node_name, port)</code></td><td>Opens the image/video viewer on a node's output.</td></tr>
+                    <tr><td><code>zoom_to_node(node_name)</code></td><td>Pans/zooms the canvas to bring an off-screen node into view.</td></tr>
+                    <tr><td><code>toggle_playback(node_name)</code></td><td>Starts or stops playback on a specific playable node, returning the resulting play state.</td></tr>
+                    <tr><td><code>set_playing(play)</code></td><td>Explicitly starts or stops playback on every playable node - use for a known end state rather than <code>toggle_playback</code>'s per-node flip.</td></tr>
+                    <tr><td><code>jump_to_frame(frame, node_name)</code></td><td>Scrubs to a specific frame. Omit <code>node_name</code> to apply to every playable node.</td></tr>
+                    <tr><td><code>advance_frame(node_name)</code> / <code>rewind_frame(node_name)</code></td><td>Steps one frame forward/back. Omit <code>node_name</code> to apply to every playable node.</td></tr>
+                    <tr><td><code>jump_to_first_frame(node_name)</code> / <code>jump_to_last_frame(node_name)</code></td><td>Jumps to the start/end of playback. Omit <code>node_name</code> to apply to every playable node.</td></tr>
+                    <tr><td><code>show_message(text, duration)</code></td><td>Shows a status message/speech bubble in the UI - use this to narrate what the agent is doing.</td></tr>
+
+                    <tr><th colspan="2">Workflow files</th></tr>
+                    <tr><td><code>import_workflow(filename)</code></td><td>Loads a workflow file from the demos folder, replacing the current graph. Cannot be undone.</td></tr>
+                    <tr><td><code>save_workflow()</code></td><td>Saves the current graph to disk (same path the app's own Save action uses).</td></tr>
+                    <tr><td><code>save_as_workflow(filename, root, folder)</code></td><td>Saves the current graph to a NEW file, leaving the currently-open workflow untouched - a fork/branch rather than an overwrite.</td></tr>
+
+                    <tr><th colspan="2">AI Studio / Video Studio pipeline (see <a href="#ai-studio">full section below</a>)</th></tr>
+                    <tr><td><code>run_ai_studio_pipeline(movie_path, root, folder, seed_prompt, track_direction, generate_variations, stop_after, export_name, base_model, epochs, train_split_pct, force_retrack, use_batch)</code></td><td>Runs extract &rarr; (split if &gt;1024 frames) &rarr; seed &rarr; SAM2 track &rarr; optional variations &rarr; optional train as one background pipeline. Returns a <code>pipeline_id</code> immediately. <code>seed_prompt</code> takes a <code>points</code> list (a point you picked, e.g. after looking at the frame with <code>get_node_image</code>), or <code>{"auto": true, "prompt": "welding pool"}</code> for real text-guided matching - a bare <code>{"auto": true}</code> with no prompt isn't a real seeding mode (it's just SAM's most-confident guess) and is treated the same as giving no <code>seed_prompt</code> at all: the pipeline stops at <code>stage="awaiting_seed"</code>, and the live progress dialog's click-to-seed UI takes over from there. A points/auto+prompt attempt that fails also falls back to the same click-to-seed UI rather than hard-failing. <code>base_model</code> is <code>"Small"</code>/<code>"Medium"</code> (default)/<code>"Large"</code>, matching AI Labeling Studio's own dropdown - any other value is rejected by the training script. <code>force_retrack=True</code> clears stale per-frame tracking output from a prior run on the same clip first, since SAM2 tracking otherwise silently skips frames that already have cached output. <code>use_batch</code> (default <code>False</code>) picks the training mechanism for <code>stop_after="train"</code> - see the training callout below.</td></tr>
+                    <tr><td><code>get_ai_studio_pipeline_status(pipeline_id)</code></td><td>Polls a pipeline's current stage/progress/message. Once training starts (non-batch, the default), keep polling this in the same session until <code>stage</code> is <code>"done"</code>/<code>"failed"</code> - the process no longer exits.</td></tr>
+                    <tr><td><code>cancel_ai_studio_pipeline(pipeline_id)</code></td><td>Requests cancellation at the next stage boundary. During non-batch training this actually terminates the training subprocess and reports <code>stage="failed"</code>; has no effect once <code>use_batch=True</code> training has actually started (the process exits shortly after regardless).</td></tr>
+                    <tr><td><code>run_ai_studio_finetune(root, folder, export_name, base_model, epochs, train_split_pct, generate_variations, use_batch)</code></td><td>Trains directly on an already-labeled frames folder, skipping extract/seed/track. Same <code>base_model</code>/<code>use_batch</code> choices as above. <code>folder</code> must be the SOURCE frames folder that already contains real tracked labels (e.g. <code>"welding_clip/.videos/welding_clip"</code>) - the training subprocess discovers images/masks by walking that folder's own parent for sibling <code>.videos</code>/<code>.variations</code> entries, not from <code>export_name</code>.</td></tr>
+                    <tr><td><code>get_ai_studio_pipeline_result(export_name)</code></td><td>Reads training results (loss/accuracy CSV/PNG, exported ONNX) straight off disk. The exported <code>*.onnx</code> is always under <code>export_name</code>; the <code>.results</code> CSV/PNG metrics instead land under the SOURCE folder's top-level segment (e.g. <code>"welding_clip"</code>, not <code>export_name</code>) - call this again with that name if the first call shows the onnx but no metrics.</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="ai-studio">
+            <h2>7. AI Studio / Video Studio Pipeline</h2>
+            <p>These five tools let an agent drive the whole "segment this movie and train a model" workflow that AI Labeling Studio / Video Studio otherwise require many manual clicks for. They call the exact same underlying functions the UI itself uses - nothing about AI Labeling Studio or Video Studio changes because this exists, and anything the pipeline produces (extracted frames, keyframe masks, tracked labels) shows up exactly the same as if a human had done it, if you open that folder in AI Studio afterward.</p>
+
+            <h3>The five stages</h3>
+            <ol class="steps">
+                <li><b>extract</b> - pulls frames out of the source video. Videos over 1024 frames are split into chunks first automatically; only the first chunk is processed by this pipeline.</li>
+                <li><b>seed</b> - segments one keyframe, two real ways: a foreground point you supply (<code>seed_prompt={"frame": N, "points": [[x,y]]}</code> - look at the frame first with <code>get_node_image</code> to pick a good point), or a plain-language description (<code>seed_prompt={"frame": N, "auto": true, "prompt": "welding pool"}</code>). There's no way to guess "what to segment" from a single sentence about the whole video, so one of these is required - a bare <code>{"auto": true}</code> with no prompt isn't reliable enough to run on its own (it's just SAM's single most-confident guess) and is treated the same as no <code>seed_prompt</code> at all: the pipeline stops and waits, and the app's own progress dialog offers a click-to-seed UI to finish the job by hand (click one or more points, preview the resulting mask, then confirm). A points/prompt attempt that fails falls back to the same click-to-seed UI rather than just failing outright.</li>
+                <li><b>track</b> - propagates that seed mask across the whole frame sequence with SAM2. The live progress dialog shows a thumbnail of the latest tracked frame as it goes.</li>
+                <li><b>variations</b> <span class="small">(optional)</span> - generates data-augmentation copies of the labeled video for a larger training set.</li>
+                <li><b>train</b> <span class="small">(optional)</span> - fine-tunes a model on the labeled (and optionally augmented) frames.</li>
+            </ol>
+
+            <div class="callout tip">
+                <b>Training stays in the app by default.</b> <code>stop_after="train"</code> and <code>run_ai_studio_finetune</code> both train via the same non-batch, in-GUI mechanism AI Labeling Studio's own "Start Fine-Tuning" button uses - InfiniWorkflow (and this MCP server) stays running the whole time, so just keep polling <code>get_ai_studio_pipeline_status</code> until <code>stage</code> is <code>"done"</code>/<code>"failed"</code>, then call <code>get_ai_studio_pipeline_result</code> in the same session. On success the node also registers a brand-new inference tool in the catalog, named after <code>export_name</code> - the status message names it directly, so search for that name (or check <a href="#tools">Available Tools</a>' <code>search_tool_catalog</code>) to actually use the trained model in a graph.
+            </div>
+            <div class="callout warning">
+                <b><code>use_batch=True</code> exits the app instead.</b> Pass this to use the legacy path (same as the app's own "EXIT and train" button): InfiniWorkflow - <i>including this MCP server</i> - closes about a second later, on purpose, to free the GPU/CPU for a fully detached training process. Your agent's connection will drop; that's expected, not a failure. Reconnect once InfiniWorkflow has restarted and call <code>get_ai_studio_pipeline_result(export_name)</code>. Only use this if the default non-batch path doesn't work for some reason.
+            </div>
+
+            <h3>Example: segment a video, then train, in two calls</h3>
+            <div class="code-block">
+                <pre id="ai-studio-ex1">run_ai_studio_pipeline(
+    movie_path="welding_clip.mp4",
+    root="demos",
+    seed_prompt={"frame": 0, "points": [[420, 260]]},
+    stop_after="track"
+)
+# -> {"pipeline_id": "..."}  poll with get_ai_studio_pipeline_status(pipeline_id)
+# once stage == "done", the video is fully labeled - open it in AI Labeling
+# Studio to check it, or go straight to training:
+
+run_ai_studio_finetune(
+    root="demos",
+    folder="welding_clip/.videos/welding_clip",
+    export_name="welding_v1",
+    epochs=30
+)
+# -> {"pipeline_id": "..."} - InfiniWorkflow stays open; keep polling
+# get_ai_studio_pipeline_status(pipeline_id) until stage is "done"/"failed",
+# then read the results (onnx under "welding_v1", metrics under "welding_clip"):
+get_ai_studio_pipeline_result(export_name="welding_v1")
+get_ai_studio_pipeline_result(export_name="welding_clip")</pre>
+                <button class="copy-btn" data-target="ai-studio-ex1">Copy</button>
+            </div>
+
+            <h3>Example: seeding with a text description</h3>
+            <div class="code-block">
+                <pre id="ai-studio-ex3">run_ai_studio_pipeline(
+    movie_path="welding_clip.mp4",
+    root="demos",
+    seed_prompt={"frame": 0, "auto": true, "prompt": "welding pool"},
+    stop_after="track"
+)
+# if this description-based match fails, the pipeline falls back to
+# stage="awaiting_seed" automatically - same as giving no seed_prompt at all
+# (see below) - rather than just failing outright.</pre>
+                <button class="copy-btn" data-target="ai-studio-ex3">Copy</button>
+            </div>
+
+            <h3>Example: no seed point yet, or auto-seeding failed (two-call resume flow)</h3>
+            <p class="small">Omitting <code>seed_prompt</code> - or giving one that doesn't pan out - stops the pipeline right after extraction so you (or the agent, after looking at a frame) can decide where to seed. In the app itself, the progress dialog offers a click-to-seed UI for exactly this case instead of needing a second tool call at all.</p>
+            <div class="code-block">
+                <pre id="ai-studio-ex2">run_ai_studio_pipeline(movie_path="welding_clip.mp4", root="demos")
+# -> stage: "awaiting_seed", frames_folder: "welding_clip/.videos/welding_clip"
+# look at a frame, then resume with the same movie_path/root/folder plus a seed:
+run_ai_studio_pipeline(
+    movie_path="welding_clip.mp4",
+    root="demos",
+    seed_prompt={"frame": 0, "points": [[420, 260]]}
+)</pre>
+                <button class="copy-btn" data-target="ai-studio-ex2">Copy</button>
+            </div>
+
+            <p class="small">Only one AI Studio pipeline runs at a time; <code>run_ai_studio_pipeline</code>/<code>run_ai_studio_finetune</code> return an error immediately if one is already active. Check with <code>get_ai_studio_pipeline_status</code>, or <code>cancel_ai_studio_pipeline</code> if you need to free the slot before it finishes on its own.</p>
+        </section>
+    </div>
+
+    <script>
+        // Minimal self-contained cookie helpers - this page is a standalone
+        // static doc (like codegen.html/aistudio.html), not part of the main
+        // app's ES module graph, so it doesn't import global.js's versions.
+        function getCookie(name, defaultValue) {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.startsWith(name + '=')) {
+                    return decodeURIComponent(cookie.substring(name.length + 1));
+                }
+            }
+            return defaultValue;
+        }
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + encodeURIComponent(value) + expires + "; path=/";
+        }
+
+        function copyText(text, btn) {
+            navigator.clipboard.writeText(text).then(() => {
+                const original = btn.textContent;
+                btn.textContent = "Copied!";
+                btn.classList.add("copied");
+                setTimeout(() => { btn.textContent = original; btn.classList.remove("copied"); }, 1500);
+            }).catch(() => {
+                alert("Could not copy automatically - please select and copy manually.");
+            });
+        }
+
+        document.querySelectorAll('.copy-btn[data-target]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const target = document.getElementById(btn.dataset.target);
+                if (target) copyText(target.textContent, btn);
+            });
+        });
+
+        const EXAMPLE_PROMPT_GROUPS = {
+            "Building a graph": [
+                "Add a movie reader with source set to city.mp4",
+                "Add a canny edge detector connected to the movie reader",
+                "Add a blur filter and connect it after the camera",
+                "Add a canny node, then a blur node after it, and wire them together",
+                "Insert a grayscale filter between the camera and the canny node",
+                "Give me a unique name for a new Canny node before you add it",
+                "Check whether cv.movie_reader has any mandatory inputs before adding it",
+                "Build a full pipeline in one shot: movie reader -> grayscale -> canny -> view, all wired together",
+                "Add five blur nodes in a row, each feeding the next, in a single batch call",
+                "Replace the whole graph: remove every existing node and edge, then add a fresh movie reader and canny node connected together",
+            ],
+            "Editing existing nodes": [
+                "Rename the Blur node to 'Softener'",
+                "Disable the Canny node without removing it",
+                "Set the Canny node's threshold1 to 150",
+                "Move the Blur node to position 400, 200",
+                "Add another input port to the concat node",
+                "Add another output port to the split node",
+                "Remove the extra output port I just added to the split node",
+                "Remove the connection between the camera and the blur node",
+                "Delete the node called 'Softener'",
+                "Rename the Canny node's threshold1 input to 'Sensitivity' for the group's public interface",
+                "Show me the current exposed input/output labels on the Canny node before I rename anything",
+                "Reassign the Canny and Blur nodes to GPU device 1",
+                "Increase the movie reader's buffer size to 30 frames",
+            ],
+            "Inspecting the workflow": [
+                "What nodes are currently in the workflow?",
+                "Show me a preview of the Canny node's output",
+                "What parameters are set on the movie reader node?",
+                "What's the current playback frame on the movie reader?",
+                "List the available node types that mention 'blur'",
+                "What tool types were added to the catalog in the last 2 months?",
+                "What CUDA devices are available on this machine?",
+                "Show me the full input state of the Canny node, including whether its inputs are currently satisfied",
+                "What operations/conditions are valid for the movie reader node, so I can set up a trigger on it?",
+                "What is the current numeric value coming out of the counter node?",
+                "What's the current string value on the text node's output?",
+                "Which node outputs are currently published?",
+            ],
+            "Playback & project": [
+                "Start playback on the movie reader",
+                "Jump to frame 100 on the movie reader",
+                "Pause every playable node in the workflow",
+                "Explicitly make sure every playable node is playing",
+                "Step the movie reader forward one frame",
+                "Step the movie reader back one frame",
+                "Jump the movie reader to its first frame",
+                "Jump the movie reader to its last frame",
+                "Set the project resolution to 1920x1080",
+                "Merge the camera and blur nodes onto one CPU thread",
+                "Clear the undo/redo history",
+            ],
+            "Triggers": [
+                "Add a trigger so the view node's input fires when the counter node's value is greater than 100",
+                "Clear all triggers on the view node's first input",
+            ],
+            "Catalog search & pipeline building": [
+                "Search the tool catalog for something that can detect edges",
+                "Find a node type for reading a video file",
+                "Propose a pipeline for: read a video file, convert to grayscale, detect edges, view the result",
+                "Propose and actually build a pipeline that reads a video, blurs it, then detects edges",
+                "Clear the canvas and build a fresh pipeline that reads a video and detects edges",
+                "Add a blur and edge-detect step after my existing Movie Reader node",
+                "Explain what the current workflow does",
+                "Summarize this graph for someone who's never seen it before",
+            ],
+            "AI Studio / Video Studio pipeline": [
+                "Segment welding_clip.mp4 - seed the mask at frame 0 with a point at (420, 260) and track it through the whole video",
+                "Segment the welding pool in welding_clip.mp4 and track it through the whole video",
+                "Extract frames from welding_clip.mp4 but don't seed or track it yet, so I can click the seed point myself in the app",
+                "Re-track welding_clip.mp4 from scratch, clearing any previous tracking output first",
+                "Track welding_clip.mp4 backward from frame 50 instead of forward",
+                "Check the status of the AI Studio pipeline I started",
+                "Cancel the running AI Studio pipeline",
+                "Train a model on the already-labeled welding_clip video, call the export 'welding_v1', and keep InfiniWorkflow open while it trains",
+                "Train welding_v1 using the old batch method that closes InfiniWorkflow to free the GPU",
+                "Generate data-augmentation variations for the welding_clip video and train once they're ready",
+                "Show me the training results for the 'welding_v1' export",
+                "The training results only showed the model file, no loss graph - check the results under the source video's own folder too",
+                "What's the name of the new inference tool from my last training run, and how do I use it?",
+            ],
+            "Files & housekeeping": [
+                "Save the current workflow",
+                "Save the current workflow as a new file called 'edge_detect_variant.json' without touching the original",
+                "Load the demo workflow called Untitled.json",
+                "Reset the canvas and start a new workflow",
+                "Show a message on screen saying 'Setup complete'",
+                "Zoom the canvas to the Canny node",
+            ],
+        };
+
+        const groupsContainer = document.getElementById('prompt-groups');
+        Object.entries(EXAMPLE_PROMPT_GROUPS).forEach(([groupName, prompts]) => {
+            const h3 = document.createElement('h3');
+            h3.textContent = groupName;
+            groupsContainer.appendChild(h3);
+
+            const ul = document.createElement('ul');
+            ul.className = 'prompt-list';
+            prompts.forEach(prompt => {
+                const li = document.createElement('li');
+                const span = document.createElement('span');
+                span.className = 'prompt-text';
+                span.textContent = prompt;
+                const btn = document.createElement('button');
+                btn.className = 'copy-btn';
+                btn.textContent = 'Copy';
+                btn.addEventListener('click', () => copyText(prompt, btn));
+                li.appendChild(span);
+                li.appendChild(btn);
+                ul.appendChild(li);
+            });
+            groupsContainer.appendChild(ul);
+        });
+
+        const commandInput = document.getElementById('llm-command');
+        commandInput.value = getCookie('infiniworkflow/llmCommand', 'claude');
+        commandInput.addEventListener('change', () => {
+            setCookie('infiniworkflow/llmCommand', commandInput.value, 365);
+        });
+
+        document.getElementById('launch-btn').addEventListener('click', () => {
+            const command = commandInput.value.trim();
+            setCookie('infiniworkflow/llmCommand', command, 365);
+            const resultEl = document.getElementById('launch-result');
+            resultEl.textContent = "Launching...";
+            $.getJSON('/launch_llm_agent', { arg: JSON.stringify({ command: command }) }, function (data) {
+                resultEl.textContent = (data && data.success) ? "Launched." : "Error: " + (data && data.message ? data.message : "unknown error");
+            }).fail(function () {
+                resultEl.textContent = "Error: could not reach the backend.";
+            });
+        });
+
+        function refreshStatus() {
+            const statusLine = document.getElementById('status-line');
+            $.getJSON('/get_mcp_status', {}, function (data) {
+                if (data && data.enabled) {
+                    statusLine.className = 'status-ok';
+                    statusLine.textContent = 'MCP server running on port ' + data.port + ' (http://127.0.0.1:' + data.port + '/sse)';
+                } else {
+                    statusLine.className = 'status-off';
+                    statusLine.textContent = 'MCP server is not running. Restart InfiniWorkflow with the -mcp flag to enable it.';
+                }
+            }).fail(function () {
+                statusLine.className = 'status-unknown';
+                statusLine.textContent = 'Could not check MCP server status (is InfiniWorkflow running?).';
+            });
+        }
+        refreshStatus();
+    </script>
+</body>
+</html>
