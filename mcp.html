@@ -317,6 +317,7 @@
             <a href="#prompts">Example Prompts</a>
             <a href="#tools">Available Tools</a>
             <a href="#ai-studio">AI Studio Pipeline</a>
+            <a href="#plugin-generation">Plugin Generation</a>
         </nav>
 
         <section id="status">
@@ -465,6 +466,13 @@
                     <tr><td><code>cancel_ai_studio_pipeline(pipeline_id)</code></td><td>Requests cancellation at the next stage boundary. During non-batch training this actually terminates the training subprocess and reports <code>stage="failed"</code>; has no effect once <code>use_batch=True</code> training has actually started (the process exits shortly after regardless).</td></tr>
                     <tr><td><code>run_ai_studio_finetune(root, folder, export_name, base_model, epochs, train_split_pct, generate_variations, use_batch)</code></td><td>Trains directly on an already-labeled frames folder, skipping extract/seed/track. Same <code>base_model</code>/<code>use_batch</code> choices as above. <code>folder</code> must be the SOURCE frames folder that already contains real tracked labels (e.g. <code>"welding_clip/.videos/welding_clip"</code>) - the training subprocess discovers images/masks by walking that folder's own parent for sibling <code>.videos</code>/<code>.variations</code> entries, not from <code>export_name</code>.</td></tr>
                     <tr><td><code>get_ai_studio_pipeline_result(export_name)</code></td><td>Reads training results (loss/accuracy CSV/PNG, exported ONNX) straight off disk. The exported <code>*.onnx</code> is always under <code>export_name</code>; the <code>.results</code> CSV/PNG metrics instead land under the SOURCE folder's top-level segment (e.g. <code>"welding_clip"</code>, not <code>export_name</code>) - call this again with that name if the first call shows the onnx but no metrics.</td></tr>
+
+                    <tr><th colspan="2">Plugin generation (see <a href="#plugin-generation">full section below</a>)</th></tr>
+                    <tr><td><code>get_plugin_sdk_context()</code></td><td>Returns the plugin SDK headers (<code>plugin_api.h</code>/<code>plugin_sdk.h</code>) plus 4 full reference example plugins - everything needed to write a new C++ plugin node's 4 files yourself. Call this first; it supplies grounding, it does not generate code for you.</td></tr>
+                    <tr><td><code>get_plugin_catalog_schema()</code></td><td>Returns the catalog-JSON contract for a plugin's <code>&lt;plugin_name&gt;.json</code>, including the critical rule that the <code>inputs</code> array order is a positional contract with <code>plugin_impl.cpp</code>'s <code>update()</code>, not just documentation.</td></tr>
+                    <tr><td><code>build_and_install_plugin(plugin_name, files, overwrite)</code></td><td>Writes your drafted <code>plugin_impl.h</code>/<code>plugin_impl.cpp</code>/<code>&lt;plugin_name&gt;.json</code>/<code>CMakeLists.txt</code> to <code>sdk/gen_ai/&lt;plugin_name&gt;/</code> and runs the CMake configure+build. Returns <code>{"success": true, "log": "..."}</code> or a build failure log to fix and retry (pass <code>overwrite=True</code> on a retry - the first attempt's directory needs clearing).</td></tr>
+                    <tr><td><code>activate_plugin(plugin_name)</code></td><td>Hot-registers a just-built plugin with the running engine so it's usable in this session without an app restart. Call once, right after a successful <code>build_and_install_plugin</code>, then confirm with <code>add_node</code>.</td></tr>
+                    <tr><td><code>preview_plugin_in_ui(plugin_name, files)</code></td><td>Shows a plugin's drafted files in the app's own code-viewer dialog - the same one the in-UI Gemini generator uses - so a human can read the code and click Download or Compile themselves, instead of the calling model building it autonomously. UI-only; doesn't build or validate anything itself.</td></tr>
                 </tbody>
             </table>
         </section>
@@ -544,6 +552,76 @@ run_ai_studio_pipeline(
             </div>
 
             <p class="small">Only one AI Studio pipeline runs at a time; <code>run_ai_studio_pipeline</code>/<code>run_ai_studio_finetune</code> return an error immediately if one is already active. Check with <code>get_ai_studio_pipeline_status</code>, or <code>cancel_ai_studio_pipeline</code> if you need to free the slot before it finishes on its own.</p>
+        </section>
+
+        <section id="plugin-generation">
+            <h2>8. Plugin Generation</h2>
+            <p>Write a brand-new compiled C++ node from a natural-language description, without going through the in-app chatbox's Gemini-based generator. The design is deliberate: rather than the MCP server calling another LLM internally, these tools hand <i>you</i> (the calling model) the same SDK headers and reference examples the chatbox feeds to Gemini, and you write the plugin's 4 files yourself - you get to see and fix real compiler errors directly, instead of a second model doing it opaquely inside the tool.</p>
+
+            <h3>The call flow</h3>
+            <ol class="steps">
+                <li><b>get_plugin_sdk_context()</b> - read the SDK interface (<code>setup</code>/<code>update</code>/<code>superviseInputs</code>/<code>superviseValue</code>/<code>execute</code>/<code>isCached</code>/<code>flushCache</code>/<code>teardown</code>/<code>destroy</code>) and 4 full reference plugins (Canny2, boxblur, abandoned_object, topple_detection).</li>
+                <li><b>get_plugin_catalog_schema()</b> - read the catalog JSON contract before writing <code>&lt;plugin_name&gt;.json</code>.</li>
+                <li>Write the 4 files yourself - <code>plugin_impl.h</code>, <code>plugin_impl.cpp</code>, <code>&lt;plugin_name&gt;.json</code>, <code>CMakeLists.txt</code> (base <code>CMakeLists.txt</code> on <code>abandoned_object</code>'s or <code>topple_detection</code>'s - <b>not</b> <code>Canny2</code>'s or <code>boxblur</code>'s, which hard-fail CMake on Windows (they ship a companion <code>.sln</code>/<code>.vcxproj</code> instead, which this flow can't use). Its <code>POST_BUILD</code> step, which copies the compiled binary (renamed to <code>.plugin</code>, via a <code>PREFIX</code>/<code>SUFFIX</code> target property) and catalog JSON into <code>Extensions/</code>, is what actually makes the node show up.</li>
+                <li>Either build it yourself with <b>build_and_install_plugin(plugin_name, files)</b> (writes and compiles them - on failure, read the log, fix your draft, retry with <code>overwrite=True</code>), or hand it to the human with <b>preview_plugin_in_ui(plugin_name, files)</b>, which opens the same code-viewer dialog the in-UI Gemini generator uses so they can read the code and click Compile themselves (that button posts to the same underlying build endpoint).</li>
+                <li><b>activate_plugin(plugin_name)</b> - hot-registers the compiled node with the running engine. Only needed after <code>build_and_install_plugin</code>; the dialog's own Compile button does this automatically.</li>
+                <li><code>add_node(tool_type="&lt;plugin_name&gt;.plugin", ...)</code> - confirm it's actually usable in a graph.</li>
+            </ol>
+
+            <div class="callout tip">
+                <b>Always base CMakeLists.txt on <code>abandoned_object</code> or <code>topple_detection</code>.</b> Two of the four reference examples (<code>Canny2</code>, <code>boxblur</code>) ship a <code>CMakeLists.txt</code> that starts with <code>if (WIN32) message(FATAL_ERROR "Use visual studio project instead!") endif()</code> - it's meant to be used only via their companion <code>.sln</code>/<code>.vcxproj</code> on Windows, and deliberately refuses to configure under CMake there. Both build paths above (<code>build_and_install_plugin</code> and the dialog's Compile button) always run CMake (there's no <code>.sln</code> path for a generated plugin), so copying Canny2/boxblur's <code>CMakeLists.txt</code> fails the build outright on Windows. <code>abandoned_object</code>/<code>topple_detection</code>'s <code>CMakeLists.txt</code> has no such guard and is genuinely cross-platform.
+            </div>
+
+            <h3>Example</h3>
+            <p>This is the kind of request the flow is built for - describe the node in plain language, and the four calls above turn that into a real, running node:</p>
+            <div class="code-block">
+                <pre id="plugin-gen-ex1">Create a plugin that takes a source image2D and a detection matrix2D
+(class ID, x, y, w, h, confidence per row). The output is any detected
+objects that stay stationary for some time. Have inputs of time and an
+event trigger to clear.</pre>
+                <button class="copy-btn" data-target="plugin-gen-ex1">Copy</button>
+            </div>
+            <p>Which the calling model turns into a real build, e.g.:</p>
+            <div class="code-block">
+                <pre id="plugin-gen-ex2">context = get_plugin_sdk_context()
+schema = get_plugin_catalog_schema()
+# Using context + schema, write the 4 files yourself. abandoned_object's
+# reference plugin is the closest starting point (source + detections in,
+# stationary-tracking logic, preview out) - copy its per-track centroid
+# matching, not its trackId assignment (that example hands out a new
+# trackId to every detection every frame, so stationaryFrames_ never
+# actually accumulates - match against previousCentroids_ by nearest
+# distance first, the way topple_detection does, or "stay stationary for
+# some time" can never trigger).
+files = {
+    "plugin_impl.h": "...",                    # your PluginApi subclass header
+    "plugin_impl.cpp": "...",                  # your PluginApi subclass implementation
+    "StationaryObjectDetector.json": "...",    # identifier MUST be "StationaryObjectDetector.plugin"
+    "CMakeLists.txt": "...",                   # base on abandoned_object's/topple_detection's, rename the project
+}
+
+result = build_and_install_plugin(plugin_name="StationaryObjectDetector", files=files)
+# -> {"success": true, "log": "..."} or a build_failed log to fix and retry
+# with overwrite=True
+
+activate_plugin(plugin_name="StationaryObjectDetector")
+# -> {"success": true, "identifier": "StationaryObjectDetector.plugin"}
+
+add_node(tool_type="StationaryObjectDetector.plugin", node_name="Stationary Object Detector")
+# confirms the node is actually usable in this session - open_viewer() on
+# its "preview" output to see it live in the front end</pre>
+                <button class="copy-btn" data-target="plugin-gen-ex2">Copy</button>
+            </div>
+            <p>To let a human review/download/compile the same draft instead of building it autonomously, swap the last three calls for one:</p>
+            <div class="code-block">
+                <pre id="plugin-gen-ex3">preview_plugin_in_ui(plugin_name="StationaryObjectDetector", files=files)
+# -> opens the "Generated Plugin Files" dialog in any connected browser tab -
+# same viewer the in-UI Gemini generator uses. The human reads the code,
+# clicks Download to save the 4 files, or clicks Compile to build it right
+# there (posts to the same /compile_plugin_to_disk endpoint, then hot-
+# registers with the engine the same way activate_plugin does).</pre>
+                <button class="copy-btn" data-target="plugin-gen-ex3">Copy</button>
+            </div>
         </section>
     </div>
 

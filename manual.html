@@ -2306,7 +2306,7 @@
     <tr id='cuda.crop'>
         <td>Crop</td>
         <td><i class='bi bi-palette'></i></td>
-        <td><ul><li>source : image2D</li><li>point1 : int2</li><li>point2 : int2</li><li>mode : int</li><li>fillColor : color</li><li>detections : matrix2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Crop input image</td>
+        <td><ul><li>source : image2D</li><li>point1 : int2</li><li>point2 : int2</li><li>crop : bool</li><li>detections : matrix2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Crop input image</td>
     </tr>
     <tr id='cuda.gamma_fwd'>
         <td>Gamma Fwd</td>
@@ -3015,6 +3015,11 @@
         <th>Outputs</th>
         <th>Description</th>
     </tr>
+    <tr id='py.astype_table'>
+        <td>Astype Table</td>
+        <td><i class='bi bi-table'></i></td>
+        <td><ul><li>source : DataFrame</li><li>mapping : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Casts columns to specified dtypes</td>
+    </tr>
     <tr id='py.bool_cell'>
         <td>Bool Cell</td>
         <td><i class='bi bi-table'></i></td>
@@ -3030,6 +3035,16 @@
         <td><i class='bi bi-table'></i></td>
         <td><ul><li>source : DataFrame</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Returns the columns of the table</td>
     </tr>
+    <tr id='py.concat_tables'>
+        <td>Concat Tables</td>
+        <td><i class='bi bi-table'></i></td>
+        <td><ul><li>left : DataFrame</li><li>right : DataFrame</li><li>axis : int</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Concatenates two tables along an axis</td>
+    </tr>
+    <tr id='py.corr_table'>
+        <td>Correlation Table</td>
+        <td><i class='bi bi-table'></i></td>
+        <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Computes pairwise correlation of numeric columns</td>
+    </tr>
     <tr id='py.count_table'>
         <td>Count Table</td>
         <td><i class='bi bi-table'></i></td>
@@ -3040,6 +3055,21 @@
         <td><i class='bi bi-table'></i></td>
         <td><ul><li>source : DataFrame</li><li>columns : string</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Returns the table with grouped count</td>
     </tr>
+    <tr id='py.crosstab_table'>
+        <td>Crosstab Table</td>
+        <td><i class='bi bi-table'></i></td>
+        <td><ul><li>source : DataFrame</li><li>index_col : string</li><li>columns_col : string</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Computes a cross-tabulation of two columns</td>
+    </tr>
+    <tr id='py.cut_table'>
+        <td>Cut Table</td>
+        <td><i class='bi bi-table'></i></td>
+        <td><ul><li>source : DataFrame</li><li>column : string</li><li>bins : int</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Bins a numeric column into discrete intervals</td>
+    </tr>
+    <tr id='py.describe_table'>
+        <td>Describe Table</td>
+        <td><i class='bi bi-table'></i></td>
+        <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Generates descriptive statistics of the table</td>
+    </tr>
     <tr id='py.double_cell'>
         <td>Double Cell</td>
         <td><i class='bi bi-table'></i></td>
@@ -3048,7 +3078,12 @@
     <tr id='py.drop_columns_table'>
         <td>Drop Columns Table</td>
         <td><i class='bi bi-table'></i></td>
-        <td><ul><li>source : DataFrame</li><li>drop : string</li><li>index_col : bool</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Returns the table with some columns dropped</td>
+        <td><ul><li>source : DataFrame</li><li>drop : string</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Returns the table with some columns dropped</td>
+    </tr>
+    <tr id='py.drop_duplicates_table'>
+        <td>Drop Duplicates Table</td>
+        <td><i class='bi bi-table'></i></td>
+        <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Removes duplicate rows</td>
     </tr>
     <tr id='py.drop_nan_columns'>
         <td>Drop Nan Columns</td>
@@ -3063,17 +3098,17 @@
     <tr id='py.drop_rows_table'>
         <td>Drop Rows Table</td>
         <td><i class='bi bi-table'></i></td>
-        <td><ul><li>source : DataFrame</li><li>drop : string</li><li>index_col : bool</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Returns the table with some rows dropped</td>
+        <td><ul><li>source : DataFrame</li><li>drop : string</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Returns the table with some rows dropped</td>
     </tr>
     <tr id='py.fill_nan_columns'>
         <td>Fill Nan Columns</td>
         <td><i class='bi bi-table'></i></td>
-        <td><ul><li>source : DataFrame</li><li>value : string</li><li>index_col : bool</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Fill any columns with Not a Number</td>
+        <td><ul><li>source : DataFrame</li><li>value : string</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Fill any columns with Not a Number</td>
     </tr>
     <tr id='py.fill_nan_rows'>
         <td>Fill Nan Rows</td>
         <td><i class='bi bi-table'></i></td>
-        <td><ul><li>source : DataFrame</li><li>value : string</li><li>index_col : bool</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Fills any rows with Not a Number</td>
+        <td><ul><li>source : DataFrame</li><li>value : string</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Fills any rows with Not a Number</td>
     </tr>
     <tr id='py.index_location_table'>
         <td>Index Location Table</td>
@@ -3115,6 +3150,11 @@
         <td><i class='bi bi-table'></i></td>
         <td><ul><li>source : DataFrame</li><li>columns : string</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Returns the table with grouped mean</td>
     </tr>
+    <tr id='py.melt_table'>
+        <td>Melt Table</td>
+        <td><i class='bi bi-table'></i></td>
+        <td><ul><li>source : DataFrame</li><li>id_vars : string</li><li>value_vars : string</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Unpivots a table from wide to long format</td>
+    </tr>
     <tr id='py.merge_table'>
         <td>Merge Table</td>
         <td><i class='bi bi-table'></i></td>
@@ -3130,6 +3170,16 @@
         <td><i class='bi bi-table'></i></td>
         <td><ul><li>source : DataFrame</li><li>columns : string</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Returns the table with grouped min</td>
     </tr>
+    <tr id='py.nlargest_table'>
+        <td>N Largest Table</td>
+        <td><i class='bi bi-table'></i></td>
+        <td><ul><li>source : DataFrame</li><li>n : int</li><li>columns : string</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Returns the rows with the largest values in the given columns</td>
+    </tr>
+    <tr id='py.nsmallest_table'>
+        <td>N Smallest Table</td>
+        <td><i class='bi bi-table'></i></td>
+        <td><ul><li>source : DataFrame</li><li>n : int</li><li>columns : string</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Returns the rows with the smallest values in the given columns</td>
+    </tr>
     <tr id='py.numpy_to_dataframe'>
         <td>Numpy To Table</td>
         <td><i class='bi bi-table'></i></td>
@@ -3139,6 +3189,16 @@
         <td>One Hot Encoding</td>
         <td><i class='bi bi-table'></i></td>
         <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Reflect the DataFrame over its main diagonal by writing rows as columns and vice-versa</td>
+    </tr>
+    <tr id='py.pivot_table'>
+        <td>Pivot Table</td>
+        <td><i class='bi bi-table'></i></td>
+        <td><ul><li>source : DataFrame</li><li>index : string</li><li>columns : string</li><li>values : string</li><li>aggfunc : string</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Creates a pivot table by grouping and aggregating values</td>
+    </tr>
+    <tr id='py.query_table'>
+        <td>Query Table</td>
+        <td><i class='bi bi-table'></i></td>
+        <td><ul><li>source : DataFrame</li><li>expression : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Filters rows using a query expression</td>
     </tr>
     <tr id='py.random_table'>
         <td>Random Table</td>
@@ -3155,10 +3215,30 @@
         <td><i class='bi bi-table'></i></td>
         <td><ul><li>filename : string</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Read Excel into Panda Table</td>
     </tr>
+    <tr id='py.rename_columns'>
+        <td>Rename Columns</td>
+        <td><i class='bi bi-table'></i></td>
+        <td><ul><li>source : DataFrame</li><li>mapping : string</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Renames columns using a mapping</td>
+    </tr>
+    <tr id='py.reset_index_table'>
+        <td>Reset Index Table</td>
+        <td><i class='bi bi-table'></i></td>
+        <td><ul><li>source : DataFrame</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Resets the table index to the default integer index</td>
+    </tr>
+    <tr id='py.rolling_mean_table'>
+        <td>Rolling Mean Table</td>
+        <td><i class='bi bi-table'></i></td>
+        <td><ul><li>source : DataFrame</li><li>window : int</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Computes the rolling window mean</td>
+    </tr>
     <tr id='py.sample_table'>
         <td>Sample Table</td>
         <td><i class='bi bi-table'></i></td>
         <td><ul><li>source : DataFrame</li><li>fraction : float</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Returns the sampled table</td>
+    </tr>
+    <tr id='py.set_index_table'>
+        <td>Set Index Table</td>
+        <td><i class='bi bi-table'></i></td>
+        <td><ul><li>source : DataFrame</li><li>column : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Sets a column as the table index</td>
     </tr>
     <tr id='py.set_table'>
         <td>Set Table</td>
@@ -3194,6 +3274,11 @@
         <td>String Cell</td>
         <td><i class='bi bi-table'></i></td>
         <td><ul><li>source : DataFrame</li><li>row : int</li><li>column : int</li>        </ul></td>        <td><ul><li>out : string</li>        </ul></td>        <td>Get string cell value.</td>
+    </tr>
+    <tr id='py.string_replace_table'>
+        <td>String Replace Table</td>
+        <td><i class='bi bi-table'></i></td>
+        <td><ul><li>source : DataFrame</li><li>column : string</li><li>pattern : string</li><li>repl : string</li><li>regex : bool</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Replaces a string pattern in a column</td>
     </tr>
     <tr id='py.string_to_dataframe'>
         <td>String To Table</td>
@@ -3388,6 +3473,11 @@
         <td><i class='bi bi-droplet-half'></i></td>
         <td><ul><li>source : image2D</li><li>alpha : double</li><li>K : double</li><li>niters : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Performs Perona-Malik anisotropic diffusion to reduce noise while preserving edges.</td>
     </tr>
+    <tr id='cv.approx_poly_dp'>
+        <td>Approx Poly DP</td>
+        <td><i class='bi bi-vector-pen'></i></td>
+        <td><ul><li>mask : image2D</li><li>source : image2D</li><li>threshold : double</li><li>mode : int</li><li>method : int</li><li>minSplatterSize : double</li><li>contourIdx : int</li><li>strategy : int</li><li>epsilon : double</li><li>closed : bool</li><li>polyColor : color</li><li>thickness : int</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>polygon : contours</li><li>vertexCount : int</li>        </ul></td>        <td>Simplifies the selected contour into a polygon with fewer vertices using the Douglas-Peucker algorithm (cv::approxPolyDP).</td>
+    </tr>
     <tr id='cv.band_pass'>
         <td>Band Pass</td>
         <td><i class='bi bi-stars'></i></td>
@@ -3428,6 +3518,16 @@
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>ksize : int2</li><li>anchor : int2</li><li>borderType : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Blurs an image using the normalized box filter</td>
     </tr>
+    <tr id='cv.bm3d_denoising'>
+        <td>BM3D Denoising</td>
+        <td><i class='bi bi-image'></i></td>
+        <td><ul><li>source : image2D</li><li>h : double</li><li>templateWindowSize : int</li><li>searchWindowSize : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Denoises a grayscale image using Block-Matching and 3D filtering (BM3D) — widely regarded as the gold-standard non-AI denoising algorithm (cv::xphoto::bm3dDenoising).</td>
+    </tr>
+    <tr id='cv.bounding_rect'>
+        <td>Bounding Rect</td>
+        <td><i class='bi bi-bounding-box'></i></td>
+        <td><ul><li>mask : image2D</li><li>source : image2D</li><li>threshold : double</li><li>mode : int</li><li>method : int</li><li>minSplatterSize : double</li><li>contourIdx : int</li><li>strategy : int</li><li>rectColor : color</li><li>thickness : int</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>position : double2</li><li>size : double2</li><li>rect : matrix2D</li>        </ul></td>        <td>Computes the up-right bounding rectangle of the selected contour (cv::boundingRect).</td>
+    </tr>
     <tr id='cv.box_filter'>
         <td>Box Filter</td>
         <td><i class='bi bi-stars'></i></td>
@@ -3448,10 +3548,20 @@
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>threshold1 : double</li><li>threshold2 : double</li><li>apertureSize : int</li><li>L2gradient : bool</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Canny Edge Detection is a popular edge detection algorithm</td>
     </tr>
+    <tr id='cv.connected_components'>
+        <td>Connected Components</td>
+        <td><i class='bi bi-diagram-3'></i></td>
+        <td><ul><li>mask : image2D</li><li>source : image2D</li><li>threshold : double</li><li>connectivity : int</li><li>minArea : double</li><li>labelColor : color</li><li>thickness : int</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>labels : matrix2D</li><li>stats : matrix2D</li><li>centroids : matrix2D</li><li>numLabels : int</li>        </ul></td>        <td>Labels every distinct connected blob in a binary mask and returns its bounding box, area, and centroid in a single efficient pass (cv::connectedComponentsWithStats).</td>
+    </tr>
     <tr id='cv.convert_depth'>
         <td>Convert Depth</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>precision : int</li><li>normalize : bool</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Convert Depth Precision between 8u, 8s, 16u, 16s, and 32f</td>
+    </tr>
+    <tr id='cv.convex_hull'>
+        <td>Convex Hull</td>
+        <td><i class='bi bi-hexagon'></i></td>
+        <td><ul><li>mask : image2D</li><li>source : image2D</li><li>threshold : double</li><li>mode : int</li><li>method : int</li><li>minSplatterSize : double</li><li>contourIdx : int</li><li>strategy : int</li><li>clockwise : bool</li><li>hullColor : color</li><li>thickness : int</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>hull : contours</li><li>vertexCount : int</li><li>hullArea : double</li>        </ul></td>        <td>Computes the convex hull (outer envelope) of the selected contour's points (cv::convexHull).</td>
     </tr>
     <tr id='cuda.band_pass'>
         <td>Bandpass filter</td>
@@ -3462,11 +3572,6 @@
         <td>Detect Circles</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : cuda2D</li><li>dp : double</li><li>minDist : double</li><li>cannyThreshold : int</li><li>votesThreshold : int</li><li>minRadius : int</li><li>maxRadius : int</li><li>maxCircles : int</li>        </ul></td>        <td><ul><li>circles : matrix2D</li><li>preview : image2D</li><li>numCircles : int</li><li>maxRadius : double</li>        </ul></td>        <td>Detects circles in a grayscale image using the Hough transform.</td>
-    </tr>
-    <tr id='cuda.detect_lines'>
-        <td>Detect Lines</td>
-        <td><i class='bi bi-stars'></i></td>
-        <td><ul><li>source : cuda2D</li><li>rho : double</li><li>theta : double</li><li>minLineLength : double</li><li>maxLineGap : double</li>        </ul></td>        <td><ul><li>lines : matrix2D</li><li>preview : image2D</li><li>numLines : int</li><li>maxLength : double</li>        </ul></td>        <td>Detects lines in a grayscale image using the Hough transform.</td>
     </tr>
     <tr id='cuda.dilate_3x3'>
         <td>Dilate 3x3</td>
@@ -3506,7 +3611,7 @@
     <tr id='cuda.median_blur'>
         <td>Median Blur</td>
         <td><i class='bi bi-stars'></i></td>
-        <td><ul><li>source : cuda2D</li><li>radius : double</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Blur image using median 3x3 blurs</td>
+        <td><ul><li>source : cuda2D</li><li>ksize : int</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Blur image using median 3x3 blurs</td>
     </tr>
     <tr id='cuda.morph_gradient_border'>
         <td>Morph Gradient Border</td>
@@ -3588,6 +3693,11 @@
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>sigmaS : double</li><li>sigmaR : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Edge-preserving cartoon/watercolor-like stylization (cv::stylization).</td>
     </tr>
+    <tr id='cv.decompose_homography'>
+        <td>Decompose Homography</td>
+        <td><i class='bi bi-badge-3d'></i></td>
+        <td><ul><li>homography : matrix2D</li><li>cameraMatrix : matrix2D</li>        </ul></td>        <td><ul><li>numSolutions : int</li><li>rotation : matrix2D</li><li>translation : double3</li><li>normal : double3</li><li>allRotations : matrix2D</li><li>allTranslations : matrix2D</li>        </ul></td>        <td>Decomposes a planar homography into its possible rotation, translation, and plane-normal solutions given the camera intrinsics (cv::decomposeHomographyMat).</td>
+    </tr>
     <tr id='cv.delay'>
         <td>Delay</td>
         <td><i class='bi bi-stars'></i></td>
@@ -3608,6 +3718,11 @@
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>dilate : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Blur image based on maximum luminance value of surrounding pixels (distinct from the generic Dilate node)</td>
     </tr>
+    <tr id='cv.distance_transform'>
+        <td>Distance Transform</td>
+        <td><i class='bi bi-rulers'></i></td>
+        <td><ul><li>mask : image2D</li><li>threshold : double</li><li>distanceType : int</li><li>maskSize : int</li>        </ul></td>        <td><ul><li>distance : image2D</li><li>preview : image2D</li><li>maxDistance : double</li>        </ul></td>        <td>Computes, for every pixel of a binary mask, the distance to the nearest zero pixel — the standard precursor to skeletonization and watershed segmentation (cv::distanceTransform).</td>
+    </tr>
     <tr id='cv.erode'>
         <td>Erode</td>
         <td><i class='bi bi-stars'></i></td>
@@ -3623,6 +3738,11 @@
         <td><i class='bi bi-slash-lg'></i></td>
         <td><ul><li>source : image2D</li><li>lengthThreshold : int</li><li>distanceThreshold : double</li><li>cannyTh1 : double</li><li>cannyTh2 : double</li><li>cannyApertureSize : int</li><li>doMerge : bool</li><li>drawArrows : bool</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Finds lines in the input image using the FLD algorithm.</td>
     </tr>
+    <tr id='cv.fast_nlmeans_denoising_colored'>
+        <td>Fast NL Means Denoising (Color)</td>
+        <td><i class='bi bi-image'></i></td>
+        <td><ul><li>source : image2D</li><li>h : double</li><li>hColor : double</li><li>templateWindowSize : int</li><li>searchWindowSize : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Removes photographic noise from a color image using Non-Local Means denoising, which preserves edges and texture far better than a blur (cv::fastNlMeansDenoisingColored).</td>
+    </tr>
     <tr id='cv.filter_2d'>
         <td>Filter 2D</td>
         <td><i class='bi bi-stars'></i></td>
@@ -3632,6 +3752,11 @@
         <td>Find Contours</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>mode : int</li><li>method : int</li><li>point : int2</li>        </ul></td>        <td><ul><li>contours : contours</li><li>hierarchy : matrix2D</li>        </ul></td>        <td>Finds contours in a binary image</td>
+    </tr>
+    <tr id='cv.fisheye_undistort'>
+        <td>Fisheye Undistort</td>
+        <td><i class='bi bi-camera'></i></td>
+        <td><ul><li>source : image2D</li><li>cameraMatrix : matrix2D</li><li>distCoeffs : matrix2D</li><li>balance : double</li><li>fovScale : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Corrects wide-angle fisheye lens distortion using the fisheye camera model — for wide-FOV inspection or drone cameras where the standard pinhole model is a poor fit (cv::fisheye::undistortImage).</td>
     </tr>
     <tr id='cv.frequency_bandpass'>
         <td>Frequency Bandpass</td>
@@ -3647,6 +3772,11 @@
         <td>Gaussian Noise</td>
         <td><i class='bi bi-broadcast'></i></td>
         <td><ul><li>source : image2D</li><li>mean : double</li><li>stdDev : double</li><li>color : bool</li>        </ul></td>        <td><ul><li>output : image2D</li>        </ul></td>        <td>Applies gaussian noise to an image.</td>
+    </tr>
+    <tr id='cv.guided_filter'>
+        <td>Guided Filter</td>
+        <td><i class='bi bi-droplet-half'></i></td>
+        <td><ul><li>source : image2D</li><li>guide : image2D</li><li>radius : int</li><li>eps : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Edge-preserving smoothing guided by a second (often sharper) image — smoother, more artifact-free results than bilateral filtering for detail enhancement and haze removal (cv::ximgproc::guidedFilter).</td>
     </tr>
     <tr id='cv.high_pass'>
         <td>High Pass</td>
@@ -3668,6 +3798,11 @@
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>rho : double</li><li>theta : double</li><li>threshold : int</li><li>minLineLength : double</li><li>maxLineGap : double</li>        </ul></td>        <td><ul><li>lines : matrix2D</li><li>preview : image2D</li><li>numLines : int</li><li>maxLength : double</li>        </ul></td>        <td>Detects lines in a grayscale image using the Hough transform.</td>
     </tr>
+    <tr id='cv.inpaint_classical'>
+        <td>Inpaint (Classical)</td>
+        <td><i class='bi bi-eraser'></i></td>
+        <td><ul><li>source : image2D</li><li>mask : image2D</li><li>inpaintRadius : double</li><li>method : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Removes small blemishes, scratches, or text using classical Telea or Navier-Stokes inpainting — much faster than DNN-based inpainting for small defects (cv::inpaint).</td>
+    </tr>
     <tr id='cv.iterative_blur'>
         <td>Iterative Blur</td>
         <td><i class='bi bi-stars'></i></td>
@@ -3688,6 +3823,16 @@
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>maskSize : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Low Pass Filter</td>
     </tr>
+    <tr id='cv.match_shapes'>
+        <td>Match Shapes</td>
+        <td><i class='bi bi-intersect'></i></td>
+        <td><ul><li>maskA : image2D</li><li>maskB : image2D</li><li>source : image2D</li><li>threshold : double</li><li>mode : int</li><li>method : int</li><li>minSplatterSize : double</li><li>contourIdx : int</li><li>strategy : int</li><li>matchMethod : int</li><li>contourAColor : color</li><li>contourBColor : color</li><li>thickness : int</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>similarity : double</li>        </ul></td>        <td>Compares the contours extracted from two mask images and returns a similarity score using Hu moments (cv::matchShapes). Lower is more similar; 0 is identical.</td>
+    </tr>
+    <tr id='cv.mcc_color_checker'>
+        <td>Color Checker Detector</td>
+        <td><i class='bi bi-palette'></i></td>
+        <td><ul><li>source : image2D</li><li>chartType : int</li><li>boxColor : color</li><li>thickness : int</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>found : bool</li><li>corners : matrix2D</li><li>patchColors : matrix2D</li>        </ul></td>        <td>Automatically detects a Macbeth/ColorChecker chart in an image and extracts its patch colors, for building accurate color-correction profiles (cv::mcc::CCheckerDetector).</td>
+    </tr>
     <tr id='cv.mean_shift'>
         <td>Mean Shift</td>
         <td><i class='bi bi-stars'></i></td>
@@ -3697,6 +3842,16 @@
         <td>Median Blur</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>ksize : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Blurs an image using the median filter</td>
+    </tr>
+    <tr id='cv.min_area_rect'>
+        <td>Min Area Rect</td>
+        <td><i class='bi bi-bounding-box'></i></td>
+        <td><ul><li>mask : image2D</li><li>source : image2D</li><li>threshold : double</li><li>mode : int</li><li>method : int</li><li>minSplatterSize : double</li><li>contourIdx : int</li><li>strategy : int</li><li>rectColor : color</li><li>thickness : int</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>center : double2</li><li>size : double2</li><li>angle : double</li><li>rect : matrix2D</li>        </ul></td>        <td>Computes the minimum-area rotated bounding rectangle of the selected contour (cv::minAreaRect) — ideal for skewed objects.</td>
+    </tr>
+    <tr id='cv.min_enclosing_circle'>
+        <td>Min Enclosing Circle</td>
+        <td><i class='bi bi-circle'></i></td>
+        <td><ul><li>mask : image2D</li><li>source : image2D</li><li>threshold : double</li><li>mode : int</li><li>method : int</li><li>minSplatterSize : double</li><li>contourIdx : int</li><li>strategy : int</li><li>circleColor : color</li><li>thickness : int</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>center : double2</li><li>radius : double</li>        </ul></td>        <td>Computes the smallest circle that fully encloses the selected contour (cv::minEnclosingCircle).</td>
     </tr>
     <tr id='cv.morphological_skeleton'>
         <td>Morphological Skeleton</td>
@@ -3723,6 +3878,11 @@
         <td><i class='bi bi-broadcast'></i></td>
         <td><ul><li>source : image2D</li><li>mode : int</li><li>mean : double</li><li>stdDev : double</li><li>prob : double</li><li>color : bool</li>        </ul></td>        <td><ul><li>output : image2D</li>        </ul></td>        <td>Applies synthetic noise to an image.</td>
     </tr>
+    <tr id='cv.point_polygon_test'>
+        <td>Point Polygon Test</td>
+        <td><i class='bi bi-crosshair'></i></td>
+        <td><ul><li>mask : image2D</li><li>source : image2D</li><li>threshold : double</li><li>mode : int</li><li>method : int</li><li>minSplatterSize : double</li><li>contourIdx : int</li><li>strategy : int</li><li>testPoint : double2</li><li>measureDist : bool</li><li>insideColor : color</li><li>outsideColor : color</li><li>thickness : int</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>distance : double</li><li>inside : bool</li>        </ul></td>        <td>Tests whether a point lies inside, outside, or on the edge of the selected contour, and optionally measures the signed distance (cv::pointPolygonTest).</td>
+    </tr>
     <tr id='cv.prewitt'>
         <td>Prewitt</td>
         <td><i class='bi bi-stars'></i></td>
@@ -3738,10 +3898,20 @@
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>borderType : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Upsamples an image and then blurs it</td>
     </tr>
+    <tr id='cv.quality_metrics'>
+        <td>Quality Metrics (PSNR/SSIM)</td>
+        <td><i class='bi bi-clipboard-check'></i></td>
+        <td><ul><li>source : image2D</li><li>reference : image2D</li>        </ul></td>        <td><ul><li>psnr : double</li><li>ssim : double</li><li>ssimMap : image2D</li>        </ul></td>        <td>Computes standard full-reference image-quality scores (PSNR and SSIM) between a source image and a reference image (cv::quality::QualityPSNR, cv::quality::QualitySSIM).</td>
+    </tr>
     <tr id='cv.radon_transform'>
         <td>Radon Transform</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>theta : double</li><li>start angle : double</li><li>end angle : double</li><li>scale : int</li><li>crop : bool</li><li>norm : bool</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Canny Edge Detection is calculates the projection of an image's intensity along lines at specific angles.</td>
+    </tr>
+    <tr id='cv.recover_pose'>
+        <td>Recover Pose</td>
+        <td><i class='bi bi-badge-3d'></i></td>
+        <td><ul><li>points1 : matrix2D</li><li>points2 : matrix2D</li><li>cameraMatrix : matrix2D</li><li>method : int</li><li>threshold : double</li><li>prob : double</li>        </ul></td>        <td><ul><li>essentialMatrix : matrix2D</li><li>rotation : matrix2D</li><li>translation : double3</li><li>inlierCount : int</li>        </ul></td>        <td>Estimates the relative camera rotation and translation between two views from matched 2D point pairs, via the essential matrix (cv::findEssentialMat + cv::recoverPose). The foundation of monocular visual odometry.</td>
     </tr>
     <tr id='cv.roberts'>
         <td>Roberts</td>
@@ -3783,6 +3953,11 @@
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>ddepth : int</li><li>dx : int</li><li>dy : int</li><li>ksize : int</li><li>scale : double</li><li>delta : double</li><li>borderType : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Detects edges by calculating the first, second, third, or mixed image derivatives using an extended Sobel operator</td>
     </tr>
+    <tr id='cv.solve_pnp'>
+        <td>Solve PnP</td>
+        <td><i class='bi bi-badge-3d'></i></td>
+        <td><ul><li>objectPoints : matrix2D</li><li>imagePoints : matrix2D</li><li>cameraMatrix : matrix2D</li><li>distCoeffs : matrix2D</li><li>method : int</li><li>useRansac : bool</li>        </ul></td>        <td><ul><li>success : bool</li><li>rvec : double3</li><li>tvec : double3</li><li>reprojectionError : double</li>        </ul></td>        <td>Computes the 6DOF camera pose (rotation + translation) from a set of 3D object points and their matched 2D image points (cv::solvePnP).</td>
+    </tr>
     <tr id='cv.spatial_gradient'>
         <td>Spatial Gradient</td>
         <td><i class='bi bi-stars'></i></td>
@@ -3803,20 +3978,50 @@
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>ksize : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Blurs an image by creating a kind of moving stack of colors whilst scanning through the image</td>
     </tr>
+    <tr id='cv.stereo_rectify'>
+        <td>Stereo Rectify</td>
+        <td><i class='bi bi-camera2'></i></td>
+        <td><ul><li>leftImage : image2D</li><li>rightImage : image2D</li><li>cameraMatrixLeft : matrix2D</li><li>distCoeffsLeft : matrix2D</li><li>cameraMatrixRight : matrix2D</li><li>distCoeffsRight : matrix2D</li><li>rotation : matrix2D</li><li>translation : double3</li>        </ul></td>        <td><ul><li>rectifiedLeft : image2D</li><li>rectifiedRight : image2D</li><li>Q : matrix2D</li>        </ul></td>        <td>Rectifies a calibrated stereo image pair so corresponding points lie on the same horizontal row — the standard precursor to disparity/depth computation (cv::stereoRectify + cv::initUndistortRectifyMap + cv::remap).</td>
+    </tr>
     <tr id='cv.structuring_element'>
         <td>Get Structuring Element</td>
         <td><i class='bi bi-eye-fill'></i></td>
         <td><ul><li>shape : int</li><li>ksize : int2</li><li>anchor : int2</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Returns a structuring element of the specified size and shape for morphological operations.</td>
+    </tr>
+    <tr id='cv.subdiv2d'>
+        <td>Delaunay Triangulation</td>
+        <td><i class='bi bi-triangle'></i></td>
+        <td><ul><li>points : matrix2D</li><li>source : image2D</li><li>rectWidth : int</li><li>rectHeight : int</li><li>triangleColor : color</li><li>thickness : int</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>triangles : matrix2D</li><li>triangleCount : int</li>        </ul></td>        <td>Computes the Delaunay triangulation of a set of 2D points (cv::Subdiv2D) — used for mesh generation, morphing, and feature-point triangulation.</td>
     </tr>
     <tr id='cv.super_pixel'>
         <td>Create Super Pixel</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>source : image2D</li><li>region size : int</li><li>ratio : double</li><li>numIterations : int</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>numSuperpixels : int</li><li>labelsMap : image2D</li><li>contourMask : image2D</li>        </ul></td>        <td>Initializes a SuperpixelLSC (Linear Spectral Clustering) object for the input image.</td>
     </tr>
+    <tr id='cv.thinning'>
+        <td>Thinning</td>
+        <td><i class='bi bi-vector-pen'></i></td>
+        <td><ul><li>mask : image2D</li><li>threshold : double</li><li>thinningType : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Reduces shapes in a binary mask to a 1-pixel-wide skeleton — the standard preprocessing step for OCR and structural crack-network analysis (cv::ximgproc::thinning).</td>
+    </tr>
     <tr id='cv.tonemap_drago'>
         <td>Tonemap Drago</td>
         <td><i class='bi bi-stars'></i></td>
         <td><ul><li>hdr source : image2D</li><li>gamma : double</li><li>saturation : double</li><li>bias : double</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Blurs an image using the normalized box filter</td>
+    </tr>
+    <tr id='cv.tracker_csrt'>
+        <td>Tracker CSRT</td>
+        <td><i class='bi bi-crop'></i></td>
+        <td><ul><li>source : image2D</li><li>position : double2</li><li>size : double2</li><li>reinit : bool</li><li>boxColor : color</li><li>thickness : int</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>position : double2</li><li>size : double2</li><li>tracking : bool</li>        </ul></td>        <td>Tracks a rectangular region frame-to-frame using the Discriminative Correlation Filter with Channel and Spatial Reliability (CSRT) — highly accurate and occlusion-resistant, though slower than KCF (cv::TrackerCSRT).</td>
+    </tr>
+    <tr id='cv.tracker_kcf'>
+        <td>Tracker KCF</td>
+        <td><i class='bi bi-crop'></i></td>
+        <td><ul><li>source : image2D</li><li>position : double2</li><li>size : double2</li><li>reinit : bool</li><li>boxColor : color</li><li>thickness : int</li>        </ul></td>        <td><ul><li>preview : image2D</li><li>position : double2</li><li>size : double2</li><li>tracking : bool</li>        </ul></td>        <td>Tracks a rectangular region frame-to-frame using Kernelized Correlation Filters (KCF) — extremely fast, well suited to low-power or embedded hardware (cv::TrackerKCF).</td>
+    </tr>
+    <tr id='cv.triangulate_points'>
+        <td>Triangulate Points</td>
+        <td><i class='bi bi-badge-3d'></i></td>
+        <td><ul><li>projMatrix1 : matrix2D</li><li>projMatrix2 : matrix2D</li><li>points1 : matrix2D</li><li>points2 : matrix2D</li>        </ul></td>        <td><ul><li>points3D : matrix2D</li><li>pointCount : int</li>        </ul></td>        <td>Reconstructs 3D points from two camera views given their projection matrices and matched 2D point pairs (cv::triangulatePoints).</td>
     </tr>
 </table>
 <h3 id='Grayscale'>Grayscale</h3><p>The Grayscale Filters that create single channel images tools are all under the <i class="bi bi-mask"> Grayscale</i> category. The full list of display tools is as follows:</p><table>
@@ -4458,6 +4663,16 @@
         <td><i class='bi bi-grid-3x3'></i></td>
         <td><ul><li>start : int</li><li>end : int</li><li>step : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Return values spaced by step within a given interval [start, stop]</td>
     </tr>
+    <tr id='py.matrix_argsort'>
+        <td>Argsort</td>
+        <td><i class='bi bi-grid-3x3'></i></td>
+        <td><ul><li>source : matrix2D</li><li>axis : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Return the indices that would sort the array along the given axis</td>
+    </tr>
+    <tr id='py.matrix_clip'>
+        <td>Clip</td>
+        <td><i class='bi bi-grid-3x3'></i></td>
+        <td><ul><li>source : matrix2D</li><li>min_value : double</li><li>max_value : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Clip (limit) the values in the array between a minimum and maximum</td>
+    </tr>
     <tr id='cv.per_element_comparison'>
         <td>Per Element Comparison</td>
         <td><i class='bi bi-eye-fill'></i></td>
@@ -4468,15 +4683,35 @@
         <td><i class='bi bi-grid-3x3'></i></td>
         <td><ul><li>Input #1 : matrix2D</li><li>Input #2 : matrix2D</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Concatentate matrices</td>
     </tr>
+    <tr id='py.matrix_convolve'>
+        <td>Convolve</td>
+        <td><i class='bi bi-grid-3x3'></i></td>
+        <td><ul><li>a : matrix2D</li><li>v : matrix2D</li><li>mode : string</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Return the discrete, linear convolution of two one-dimensional arrays</td>
+    </tr>
     <tr id='py.matrix_cross'>
         <td>Cross Product</td>
         <td><i class='bi bi-grid-3x3'></i></td>
         <td><ul><li>Input #1 : matrix2D</li><li>Input #2 : matrix2D</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Returns the cross product of 3-element vectors</td>
     </tr>
+    <tr id='py.matrix_cumprod'>
+        <td>Cumulative Product</td>
+        <td><i class='bi bi-grid-3x3'></i></td>
+        <td><ul><li>source : matrix2D</li><li>axis : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Return the cumulative product of the elements along the given axis</td>
+    </tr>
+    <tr id='py.matrix_cumsum'>
+        <td>Cumulative Sum</td>
+        <td><i class='bi bi-grid-3x3'></i></td>
+        <td><ul><li>source : matrix2D</li><li>axis : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Return the cumulative sum of the elements along the given axis</td>
+    </tr>
     <tr id='py.matrix_det'>
         <td>Determinant</td>
         <td><i class='bi bi-grid-3x3'></i></td>
         <td><ul><li>source : matrix2D</li>        </ul></td>        <td><ul><li>out : numeric</li>        </ul></td>        <td>Compute the determinant of an array</td>
+    </tr>
+    <tr id='py.matrix_diagonal'>
+        <td>Diagonal</td>
+        <td><i class='bi bi-grid-3x3'></i></td>
+        <td><ul><li>source : matrix2D</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Extract the diagonal of a 2D array, or construct a diagonal matrix from a 1D array</td>
     </tr>
     <tr id='py.matrix_divide'>
         <td>Divide</td>
@@ -4503,10 +4738,25 @@
         <td><i class='bi bi-grid-3x3'></i></td>
         <td><ul><li>size : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Return a 2-D array with ones on the diagonal and zeros elsewhere. In other words, an identity matrix of size n</td>
     </tr>
+    <tr id='py.matrix_fft'>
+        <td>FFT</td>
+        <td><i class='bi bi-grid-3x3'></i></td>
+        <td><ul><li>source : matrix2D</li><li>axis : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Compute the one-dimensional discrete Fourier Transform and output its magnitude</td>
+    </tr>
+    <tr id='py.matrix_flip'>
+        <td>Flip</td>
+        <td><i class='bi bi-grid-3x3'></i></td>
+        <td><ul><li>source : matrix2D</li><li>axis : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Reverse the order of elements in an array along the given axis</td>
+    </tr>
     <tr id='py.matrix_hstack'>
         <td>HStack</td>
         <td><i class='bi bi-grid-3x3'></i></td>
         <td><ul><li>Input #1 : matrix2D</li><li>Input #2 : matrix2D</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Stack arrays in sequence horizontally (column wise). All input arrays have the same shape except for the 2nd axis</td>
+    </tr>
+    <tr id='py.matrix_ifft'>
+        <td>IFFT</td>
+        <td><i class='bi bi-grid-3x3'></i></td>
+        <td><ul><li>source : matrix2D</li><li>axis : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Compute the one-dimensional inverse discrete Fourier Transform and output its real part</td>
     </tr>
     <tr id='py.matrix_index'>
         <td>Index</td>
@@ -4588,6 +4838,16 @@
         <td><i class='bi bi-grid-3x3'></i></td>
         <td><ul><li>source : matrix2D</li>        </ul></td>        <td><ul><li>out : int</li>        </ul></td>        <td>Compute the arithmetic mean</td>
     </tr>
+    <tr id='py.matrix_median'>
+        <td>Median</td>
+        <td><i class='bi bi-grid-3x3'></i></td>
+        <td><ul><li>source : matrix2D</li>        </ul></td>        <td><ul><li>out : double</li>        </ul></td>        <td>Compute the median of the array elements</td>
+    </tr>
+    <tr id='py.matrix_meshgrid'>
+        <td>Meshgrid</td>
+        <td><i class='bi bi-grid-3x3'></i></td>
+        <td><ul><li>x : matrix2D</li><li>y : matrix2D</li>        </ul></td>        <td><ul><li>grid_x : matrix2D</li><li>grid_y : matrix2D</li>        </ul></td>        <td>Return coordinate matrices from two coordinate vectors</td>
+    </tr>
     <tr id='py.matrix_min'>
         <td>Min</td>
         <td><i class='bi bi-grid-3x3'></i></td>
@@ -4597,6 +4857,11 @@
         <td>Per Element Multiply</td>
         <td><i class='bi bi-grid-3x3'></i></td>
         <td><ul><li>source1 : matrix2D</li><li>source2 : matrix2D</li><li>scale : double</li><li>dtype : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Calculates the per-element scaled product of two arrays</td>
+    </tr>
+    <tr id='py.matrix_nan_to_num'>
+        <td>NaN to Num</td>
+        <td><i class='bi bi-grid-3x3'></i></td>
+        <td><ul><li>source : matrix2D</li><li>nan_value : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Replace NaN values in the array with a specified value</td>
     </tr>
     <tr id='cv.norm'>
         <td>Norm</td>
@@ -4653,10 +4918,25 @@
         <td><i class='bi bi-grid-3x3'></i></td>
         <td><ul><li>Input #1 : matrix2D</li><li>Input #2 : matrix2D</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Compute the outer product of two vectors</td>
     </tr>
+    <tr id='py.matrix_pad'>
+        <td>Pad</td>
+        <td><i class='bi bi-grid-3x3'></i></td>
+        <td><ul><li>source : matrix2D</li><li>pad_width : int</li><li>mode : string</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Pad an array symmetrically on all sides</td>
+    </tr>
+    <tr id='py.matrix_percentile'>
+        <td>Percentile</td>
+        <td><i class='bi bi-grid-3x3'></i></td>
+        <td><ul><li>source : matrix2D</li><li>q : double</li>        </ul></td>        <td><ul><li>out : double</li>        </ul></td>        <td>Compute the q-th percentile of the array elements</td>
+    </tr>
     <tr id='py.matrix_get_point'>
         <td>Get Point</td>
         <td><i class='bi bi-grid-3x3'></i></td>
         <td><ul><li>source : matrix2D</li><li>x column : int</li><li>y column : int</li><li>width column : int</li><li>height column : int</li>        </ul></td>        <td><ul><li>center : matrix2D</li><li>topLeft : matrix2D</li><li>topRight : matrix2D</li><li>bottomLeft : matrix2D</li><li>bottomRight : matrix2D</li>        </ul></td>        <td>Gets a point vector from a the matrix point with XYWH</td>
+    </tr>
+    <tr id='py.matrix_polyfit'>
+        <td>Polyfit</td>
+        <td><i class='bi bi-grid-3x3'></i></td>
+        <td><ul><li>x : matrix2D</li><li>y : matrix2D</li><li>degree : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Least squares polynomial fit, returning the polynomial coefficients</td>
     </tr>
     <tr id='py.matrix_power'>
         <td>Power</td>
@@ -4678,6 +4958,16 @@
         <td><i class='bi bi-grid-3x3'></i></td>
         <td><ul><li>trigger : int</li><li>size #1 : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Random matrices</td>
     </tr>
+    <tr id='py.matrix_random_binomial'>
+        <td>Random Binomial</td>
+        <td><i class='bi bi-grid-3x3'></i></td>
+        <td><ul><li>rows : int</li><li>cols : int</li><li>n : int</li><li>p : double</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Draw samples from a binomial distribution into a matrix of the given shape</td>
+    </tr>
+    <tr id='py.matrix_random_choice'>
+        <td>Random Choice</td>
+        <td><i class='bi bi-grid-3x3'></i></td>
+        <td><ul><li>source : matrix2D</li><li>size : int</li><li>replace : bool</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Generate a random sample of the given size from the flattened array</td>
+    </tr>
     <tr id='py.matrix_random_n'>
         <td>Matrix Random Normal Distribution</td>
         <td><i class='bi bi-grid-3x3'></i></td>
@@ -4698,6 +4988,11 @@
         <td><i class='bi bi-grid-3x3'></i></td>
         <td><ul><li>source : matrix2D</li><li>size #1 : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Gives a new shape to an array without changing its data</td>
     </tr>
+    <tr id='py.matrix_roll'>
+        <td>Roll</td>
+        <td><i class='bi bi-grid-3x3'></i></td>
+        <td><ul><li>source : matrix2D</li><li>shift : int</li><li>axis : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Roll array elements along a given axis</td>
+    </tr>
     <tr id='cv.select'>
         <td>Select</td>
         <td><i class='bi bi-eye-fill'></i></td>
@@ -4717,6 +5012,11 @@
         <td>Solve</td>
         <td><i class='bi bi-grid-3x3'></i></td>
         <td><ul><li>a : matrix2D</li><li>b : matrix2D</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Solve a linear matrix equation, or system of linear scalar equations. Computes the exact solution x of ax = b</td>
+    </tr>
+    <tr id='py.matrix_sort'>
+        <td>Sort</td>
+        <td><i class='bi bi-grid-3x3'></i></td>
+        <td><ul><li>source : matrix2D</li><li>axis : int</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Return a sorted copy of the array along the given axis</td>
     </tr>
     <tr id='py.matrix_split'>
         <td>Split</td>
@@ -4758,6 +5058,11 @@
         <td><i class='bi bi-grid-3x3'></i></td>
         <td><ul><li>source : matrix2D</li>        </ul></td>        <td><ul><li>out : matrix2D</li>        </ul></td>        <td>Transposes a matrix</td>
     </tr>
+    <tr id='py.matrix_unique'>
+        <td>Unique</td>
+        <td><i class='bi bi-grid-3x3'></i></td>
+        <td><ul><li>source : matrix2D</li>        </ul></td>        <td><ul><li>unique_values : matrix2D</li><li>counts : matrix2D</li>        </ul></td>        <td>Find the unique elements of an array and their counts</td>
+    </tr>
     <tr id='py.matrix_vstack'>
         <td>VStack</td>
         <td><i class='bi bi-grid-3x3'></i></td>
@@ -4782,6 +5087,16 @@
         <th>Outputs</th>
         <th>Description</th>
     </tr>
+    <tr id='py.accuracy_score'>
+        <td>Accuracy Score</td>
+        <td><i class='bi bi-lightbulb-fill'></i></td>
+        <td><ul><li>truth : DataFrame</li><li>predicted : DataFrame</li>        </ul></td>        <td><ul><li>out : double</li>        </ul></td>        <td>Calculates classification accuracy</td>
+    </tr>
+    <tr id='py.adaboost_classifier'>
+        <td>AdaBoost Classifier</td>
+        <td><i class='bi bi-lightbulb-fill'></i></td>
+        <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>n_estimators : int</li><li>learning_rate : double</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li>        </ul></td>        <td><ul><li>out : ML.Model</li>        </ul></td>        <td>AdaBoost classifier model</td>
+    </tr>
     <tr id='py.bernoulli_nb_classifier'>
         <td>Bernoulli NB Classifier</td>
         <td><i class='bi bi-lightbulb-fill'></i></td>
@@ -4792,10 +5107,50 @@
         <td><i class='bi bi-lightbulb-fill'></i></td>
         <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>alpha : double</li><li>force_alpha : bool</li><li>fit_prior : bool</li><li>min_categories : int</li>        </ul></td>        <td><ul><li>out : ML.Model</li>        </ul></td>        <td>Categorical Naive Bayes Classifier model</td>
     </tr>
+    <tr id='py.classification_report'>
+        <td>Classification Report</td>
+        <td><i class='bi bi-lightbulb-fill'></i></td>
+        <td><ul><li>truth : DataFrame</li><li>predicted : DataFrame</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Builds a per-class precision/recall/F1 report table</td>
+    </tr>
     <tr id='py.complement_nb_classifier'>
         <td>Complement NB Classifier</td>
         <td><i class='bi bi-lightbulb-fill'></i></td>
         <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>alpha : double</li><li>force_alpha : bool</li><li>fit_prior : bool</li><li>norm : bool</li>        </ul></td>        <td><ul><li>out : ML.Model</li>        </ul></td>        <td>Complement Naive Bayes Classifier model</td>
+    </tr>
+    <tr id='py.confusion_matrix_table'>
+        <td>Confusion Matrix Table</td>
+        <td><i class='bi bi-lightbulb-fill'></i></td>
+        <td><ul><li>truth : DataFrame</li><li>predicted : DataFrame</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Builds a confusion matrix table</td>
+    </tr>
+    <tr id='py.cross_val_score'>
+        <td>Cross Validation Score</td>
+        <td><i class='bi bi-lightbulb-fill'></i></td>
+        <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>model_type : string</li><li>cv : int</li><li>scoring : string</li>        </ul></td>        <td><ul><li>mean_score : double</li><li>fold_scores : DataFrame</li>        </ul></td>        <td>Runs k-fold cross-validation for a chosen model type and reports mean and per-fold scores</td>
+    </tr>
+    <tr id='py.dbscan_cluster'>
+        <td>DBSCAN Clustering</td>
+        <td><i class='bi bi-lightbulb-fill'></i></td>
+        <td><ul><li>source : DataFrame</li><li>feature_columns : string</li><li>eps : double</li><li>min_samples : int</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Fits a DBSCAN clustering model and appends predicted cluster labels as a new column</td>
+    </tr>
+    <tr id='py.decision_tree_classifier'>
+        <td>Decision Tree Classifier</td>
+        <td><i class='bi bi-lightbulb-fill'></i></td>
+        <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>max_depth : int</li><li>min_samples_split : int</li><li>criterion : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li>        </ul></td>        <td><ul><li>out : ML.Model</li>        </ul></td>        <td>Decision tree classifier model</td>
+    </tr>
+    <tr id='py.decision_tree_regressor'>
+        <td>Decision Tree Regressor</td>
+        <td><i class='bi bi-lightbulb-fill'></i></td>
+        <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>max_depth : int</li><li>min_samples_split : int</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li>        </ul></td>        <td><ul><li>out : ML.Model</li>        </ul></td>        <td>Decision tree regressor model</td>
+    </tr>
+    <tr id='py.extra_trees_classifier'>
+        <td>Extra Trees Classifier</td>
+        <td><i class='bi bi-lightbulb-fill'></i></td>
+        <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>n_estimators : int</li><li>max_depth : int</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li>        </ul></td>        <td><ul><li>out : ML.Model</li>        </ul></td>        <td>Extra trees classifier model</td>
+    </tr>
+    <tr id='py.f1_score'>
+        <td>F1 Score</td>
+        <td><i class='bi bi-lightbulb-fill'></i></td>
+        <td><ul><li>truth : DataFrame</li><li>predicted : DataFrame</li>        </ul></td>        <td><ul><li>out : double</li>        </ul></td>        <td>Calculates weighted F1 score</td>
     </tr>
     <tr id='py.gaussian_nb_classifier'>
         <td>Gaussian NB Classifier</td>
@@ -4811,6 +5166,21 @@
         <td>Gaussian Process Regressor</td>
         <td><i class='bi bi-lightbulb-fill'></i></td>
         <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>alpha : double</li><li>optimizer : bool</li><li>n_restarts_optimizer : int</li><li>normalize_y : bool</li><li>random_state : int</li>        </ul></td>        <td><ul><li>out : ML.Model</li>        </ul></td>        <td>Gaussian Process Regressor model</td>
+    </tr>
+    <tr id='py.gradient_boosting_classifier'>
+        <td>Gradient Boosting Classifier</td>
+        <td><i class='bi bi-lightbulb-fill'></i></td>
+        <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>n_estimators : int</li><li>learning_rate : double</li><li>max_depth : int</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li>        </ul></td>        <td><ul><li>out : ML.Model</li>        </ul></td>        <td>Gradient boosting classifier model</td>
+    </tr>
+    <tr id='py.gradient_boosting_regressor'>
+        <td>Gradient Boosting Regressor</td>
+        <td><i class='bi bi-lightbulb-fill'></i></td>
+        <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>n_estimators : int</li><li>learning_rate : double</li><li>max_depth : int</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li>        </ul></td>        <td><ul><li>out : ML.Model</li>        </ul></td>        <td>Gradient boosting regressor model</td>
+    </tr>
+    <tr id='py.kmeans_cluster'>
+        <td>KMeans Clustering</td>
+        <td><i class='bi bi-lightbulb-fill'></i></td>
+        <td><ul><li>source : DataFrame</li><li>feature_columns : string</li><li>n_clusters : int</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Fits a KMeans clustering model and appends predicted cluster labels as a new column</td>
     </tr>
     <tr id='py.kneighbors_classifier'>
         <td>KNeighbors Classifier</td>
@@ -4847,6 +5217,11 @@
         <td><i class='bi bi-lightbulb-fill'></i></td>
         <td><ul><li>truth : DataFrame</li><li>predicted : DataFrame</li>        </ul></td>        <td><ul><li>out : double</li>        </ul></td>        <td>Calculates Mean Square Error</td>
     </tr>
+    <tr id='py.minmax_scaler'>
+        <td>MinMax Scaler</td>
+        <td><i class='bi bi-lightbulb-fill'></i></td>
+        <td><ul><li>source : DataFrame</li><li>feature_columns : string</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Scales feature columns to a given range (default 0 to 1)</td>
+    </tr>
     <tr id='py.mlp_neural_network'>
         <td>MLP Neural Network</td>
         <td><i class='bi bi-lightbulb-fill'></i></td>
@@ -4882,6 +5257,16 @@
         <td><i class='bi bi-lightbulb-fill'></i></td>
         <td><ul><li>source : image2D</li><li>confidenceThreshold : double</li><li>language : int</li>        </ul></td>        <td><ul><li>out : DataFrame</li><li>preview : image2D</li>        </ul></td>        <td>Reads text in an image using EasyOCR<p style='color:red;'>The following package is required: ocr</p></td>
     </tr>
+    <tr id='py.pca_transform'>
+        <td>PCA Transform</td>
+        <td><i class='bi bi-lightbulb-fill'></i></td>
+        <td><ul><li>source : DataFrame</li><li>feature_columns : string</li><li>n_components : int</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Reduces feature columns to principal components via PCA</td>
+    </tr>
+    <tr id='py.precision_score'>
+        <td>Precision Score</td>
+        <td><i class='bi bi-lightbulb-fill'></i></td>
+        <td><ul><li>truth : DataFrame</li><li>predicted : DataFrame</li>        </ul></td>        <td><ul><li>out : double</li>        </ul></td>        <td>Calculates weighted classification precision</td>
+    </tr>
     <tr id='py.r2_score'>
         <td>R2 Score</td>
         <td><i class='bi bi-lightbulb-fill'></i></td>
@@ -4891,6 +5276,16 @@
         <td>Random Forest Model</td>
         <td><i class='bi bi-lightbulb-fill'></i></td>
         <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>n_estimators : int</li><li>criterion : string</li><li>max_depth : int</li><li>min_samples_split : double</li><li>min_samples_leaf : double</li><li>min_weight_fraction_leaf : double</li><li>max_features : string</li><li>max_leaf_nodes : int</li><li>min_impurity_decrease : double</li><li>bootstrap : bool</li><li>oob_score : bool</li><li>random_state : int</li><li>warm_start : bool</li><li>ccp_alpha : double</li><li>max_samples : double</li>        </ul></td>        <td><ul><li>out : ML.Model</li>        </ul></td>        <td>Random Forest Classifier model</td>
+    </tr>
+    <tr id='py.random_forest_regressor'>
+        <td>Random Forest Regressor</td>
+        <td><i class='bi bi-lightbulb-fill'></i></td>
+        <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>n_estimators : int</li><li>max_depth : int</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li>        </ul></td>        <td><ul><li>out : ML.Model</li>        </ul></td>        <td>Random forest regressor model</td>
+    </tr>
+    <tr id='py.recall_score'>
+        <td>Recall Score</td>
+        <td><i class='bi bi-lightbulb-fill'></i></td>
+        <td><ul><li>truth : DataFrame</li><li>predicted : DataFrame</li>        </ul></td>        <td><ul><li>out : double</li>        </ul></td>        <td>Calculates weighted classification recall</td>
     </tr>
     <tr id='py.ridge_classifier'>
         <td>Ridge Classifier</td>
@@ -4911,6 +5306,11 @@
         <td>SGD Regressor</td>
         <td><i class='bi bi-lightbulb-fill'></i></td>
         <td><ul><li>source : DataFrame</li><li>X : string</li><li>Y : string</li><li>args : string</li><li>filename : string</li><li>save : bool</li><li>train : int</li><li>loss : string</li><li>penalty : string</li><li>alpha : double</li><li>l1_ratio : double</li><li>fit_intercept : bool</li><li>max_iter : int</li><li>tol : double</li><li>shuffle : bool</li><li>epsilon : double</li><li>random_state : int</li><li>learning_rate : string</li><li>eta0 : double</li><li>power_t : double</li><li>early_stopping : bool</li><li>validation_fraction : double</li><li>n_iter_no_change : int</li><li>warm_start : bool</li><li>average : int</li>        </ul></td>        <td><ul><li>out : ML.Model</li>        </ul></td>        <td>Stochastic Gradient Descent Regressor model</td>
+    </tr>
+    <tr id='py.standard_scaler'>
+        <td>Standard Scaler</td>
+        <td><i class='bi bi-lightbulb-fill'></i></td>
+        <td><ul><li>source : DataFrame</li><li>feature_columns : string</li><li>args : string</li>        </ul></td>        <td><ul><li>out : DataFrame</li>        </ul></td>        <td>Standardizes feature columns by removing the mean and scaling to unit variance</td>
     </tr>
     <tr id='py.svc_model'>
         <td>SVC Model</td>
@@ -5139,6 +5539,16 @@
         <td><i class='bi bi-bar-chart-fill'></i></td>
         <td><ul><li>source : DataFrame</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Pandas density plot</td>
     </tr>
+    <tr id='py.errorbar_plot'>
+        <td>Errorbar Plot</td>
+        <td><i class='bi bi-bar-chart-fill'></i></td>
+        <td><ul><li>source : DataFrame</li><li>x : string</li><li>y : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li><li>yerr_column : string</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Pandas errorbar plot</td>
+    </tr>
+    <tr id='py.heatmap_plot'>
+        <td>Heatmap Plot</td>
+        <td><i class='bi bi-bar-chart-fill'></i></td>
+        <td><ul><li>source : DataFrame</li><li>use_correlation : bool</li><li>args : string</li><li>title : string</li><li>Figure Size : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Pandas heatmap / correlation matrix plot</td>
+    </tr>
     <tr id='py.hexbin_plot'>
         <td>Hexbin Plot</td>
         <td><i class='bi bi-bar-chart-fill'></i></td>
@@ -5183,6 +5593,21 @@
         <td>Scatter Plot CV</td>
         <td><i class='bi bi-grid-3x3'></i></td>
         <td><ul><li>matrix : matrix2D</li><li>background color : color</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Plot matrix data into a scatter plot using OpenCV Plot library.</td>
+    </tr>
+    <tr id='py.stem_plot'>
+        <td>Stem Plot</td>
+        <td><i class='bi bi-bar-chart-fill'></i></td>
+        <td><ul><li>source : DataFrame</li><li>x : string</li><li>y : string</li><li>args : string</li><li>title : string</li><li>xlabel : string</li><li>ylabel : string</li><li>legend : bool</li><li>logx : bool</li><li>logy : bool</li><li>color : string</li><li>Figure Size : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Pandas stem plot</td>
+    </tr>
+    <tr id='py.subplot_grid'>
+        <td>Subplot Grid</td>
+        <td><i class='bi bi-bar-chart-fill'></i></td>
+        <td><ul><li>rows : int</li><li>cols : int</li><li>Input #1 : image2D</li><li>Input #2 : image2D</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Compose multiple plot images into a grid</td>
+    </tr>
+    <tr id='py.violin_plot'>
+        <td>Violin Plot</td>
+        <td><i class='bi bi-bar-chart-fill'></i></td>
+        <td><ul><li>source : DataFrame</li><li>y : string</li><li>args : string</li><li>title : string</li><li>Figure Size : int2</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Pandas violin plot</td>
     </tr>
 </table>
 <h3 id='Pytorch'>Pytorch</h3><p>The PyTorch deep learning for building ML models tools are all under the <i class="bi bi-fire"> Pytorch</i> category. The full list of display tools is as follows:</p><table>
@@ -6163,15 +6588,15 @@
         <td><i class='bi bi-rulers'></i></td>
         <td><ul><li>source : image2D</li><li>point1 : int2</li><li>point2 : int2</li>        </ul></td>        <td><ul><li>out : image2D</li><li>preview : image2D</li>        </ul></td>        <td>Crops a line of an Image</td>
     </tr>
-    <tr id='cuda.resize'>
-        <td>Resize</td>
+    <tr id='cuda.scale'>
+        <td>Scale (Cuda)</td>
         <td><i class='bi bi-rulers'></i></td>
-        <td><ul><li>source : cuda2D</li><li>resizeScale : double</li><li>resizeMethod : int</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Change Resize of Cuda Buffer</td>
+        <td><ul><li>source : cuda2D</li><li>resizeScale : double</li><li>resizeMethod : int</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Scales a Cuda GPU buffer by a percentage amount (legacy CUDA-native pipeline).</td>
     </tr>
     <tr id='cuda.transform'>
         <td>Transform</td>
         <td><i class='bi bi-rulers'></i></td>
-        <td><ul><li>source : cuda2D</li><li>translate : double2</li><li>center : double2</li><li>angle : double</li><li>scale : double</li><li>dsize : int2</li><li>useSourceResolution : bool</li><li>flags : int</li><li>crop : bool</li><li>point1 : int2</li><li>point2 : int2</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Applies an affine transformation to an image</td>
+        <td><ul><li>source : cuda2D</li><li>translate : double2</li><li>center : double2</li><li>angle : double</li><li>scale : double</li><li>dsize : int2</li><li>useSourceResolution : bool</li><li>flags : int</li><li>borderType : int</li><li>crop : bool</li><li>point1 : int2</li><li>point2 : int2</li>        </ul></td>        <td><ul><li>out : cuda2D</li>        </ul></td>        <td>Applies an affine transformation to an image</td>
     </tr>
     <tr id='cv.estimate_affine2d'>
         <td>Estimate Affine 2D</td>
@@ -6247,6 +6672,11 @@
         <td>Rotation</td>
         <td><i class='bi bi-rulers'></i></td>
         <td><ul><li>source : image2D</li><li>angle : double</li><li>scale : double</li>        </ul></td>        <td><ul><li>output : image2D</li>        </ul></td>        <td>Rotates an image by a given angle and scale.</td>
+    </tr>
+    <tr id='cv.scale'>
+        <td>Scale</td>
+        <td><i class='bi bi-rulers'></i></td>
+        <td><ul><li>source : image2D</li><li>scalePercent : double</li><li>interpolation : int</li>        </ul></td>        <td><ul><li>out : image2D</li>        </ul></td>        <td>Scales an image up or down by a percentage of its current size, keeping aspect ratio fixed.</td>
     </tr>
     <tr id='cv.scan_stitcher'>
         <td>Scan Stitcher</td>
@@ -6902,7 +7332,7 @@
     <tr id='cv.defective_packaging_node'>
         <td>Defective Packaging Node</td>
         <td><i class='bi bi-box-seam'></i></td>
-        <td><ul><li>source : image2D</li><li>nominal package aspect ratio : double</li><li>edge linearity tolerance : double</li>        </ul></td>        <td><ul><li>packaging fault : bool</li><li>preview : image2D</li>        </ul></td>        <td>Monitors packaging shape continuity along high-speed wrap lines using minAreaRect aspect-ratio and fitLine edge-residual checks to flag warped containers, folded lids, or broken seal edges.</td>
+        <td><ul><li>source : image2D</li><li>nominal package aspect ratio : double</li><li>edge linearity tolerance : double</li><li>aspect ratio tolerance : double</li>        </ul></td>        <td><ul><li>packaging fault : bool</li><li>preview : image2D</li>        </ul></td>        <td>Monitors packaging shape continuity along high-speed wrap lines using minAreaRect aspect-ratio and fitLine edge-residual checks to flag warped containers, folded lids, or broken seal edges.</td>
     </tr>
     <tr id='cv.disaster_evacuation_aid'>
         <td>Disaster Evacuation Aid</td>
@@ -11336,7 +11766,7 @@ test summary: 0 out of 2 pass
       "delay": 0
     }
   ],
-  "workflow": "${demos}/Artificial Intelligence/Inference/Yolov5/yolov5.json",
+  "workflow": "${demos}/Inference/Yolov5/yolov5.json",
   "on_error": "exit",
   "verbose": true
 }
@@ -12348,7 +12778,7 @@ test summary: 0 out of 2 pass
                 <pre>    
                 {
                     "name": "importWorkflow",
-                    "workflow": "${demos}/Artificial Intelligence/PyTorch/CIFAR Classification/CIFAR Test/cifar test.json",
+                    "workflow": "${demos}/PyTorch/CIFAR Classification/CIFAR Test/cifar test.json",
                     "delay": 1000
                 }
                 </pre>
