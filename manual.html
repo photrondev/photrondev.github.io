@@ -648,7 +648,7 @@
         <li><i class="bi bi-gear-fill"></i> Windows</li>
         <ul>
             <li><i class="bi bi-infinity"></i> INFINIWORKFLOW HUB, Platform Information, Packages & What's New & More</li>
-            <li><i class="bi bi-lightbulb"></i> <a href="#GenerativeAI">Generative AI</a> that creates new workflows based on user prompts</li>
+            <li><i class="bi bi-lightbulb"></i> <a href="#GenerativeAI">Generative AI</a> chatbox (Claude or ChatGPT) that can build/edit workflows, generate plugins, run AI Studio, and more from natural-language prompts</li>
             <li><i class="bi bi-bookmark"></i> <a href="/aistudio.html#AiLabeler">AI Studio</a> allows you to label movies, fine-tune models and create segmentation inference tools</li>
             <li><i class="bi bi-terminal"></i> Displays the rendering status console which also indicates progress, warnings and errors</li>
             <li><i class="bi bi-grid-3x3-gap-fill"></i> Shows the Grid Search dialog that is used to optimize your ML models using the <a href="#GridSearch">GridSearch UI</a></li>
@@ -8545,110 +8545,26 @@ Error Handling: If a requested tool or file cannot be found, report the error us
 
     <h2 id="GenerativeAI">Generative AI</h2>
 
-    <p>The purpose of this feature is to generate workflows automatically from user prompts and relies on using the Google GenAI SDK.</p>
+    <p>Chat with an AI coding agent wired to InfiniWorkflow's own MCP server, so it can edit the live workflow graph, generate and compile C++ plugins, drive AI Studio, inspect state, and control playback, all from natural-language requests. Both <strong>Claude</strong> (Anthropic, via the <code>claude</code>/Claude Code CLI) and <strong>ChatGPT</strong> (OpenAI, via the <code>codex</code> CLI) are supported - pick between them with the chatbox's "CLI" dropdown. This section covers the in-app chatbox specifically; see the full <a href="mcp.html">MCP / AI Agent</a> page for the underlying tool list and for connecting an external agent (Claude Desktop, AnythingLLM, ...) instead.</p>
 
     <h4>1. Prerequisites</h4>
-    <p>Ensure you have installed the genai package</p>
-
-    <h4>2. Google Cloud Authentication</h4>
-    <p>The implementation relies on Application Default Credentials (ADC) rather than a hardcoded API key.</p>
     <ul>
-        <li>Install the <strong>Google Cloud CLI (gcloud)</strong> if it is not already on your system.</li>
-        <li>Enable the <strong>Vertex AI API</strong> within your Google Cloud Project console.</li>
-        <li>Authenticate your local machine by running the following command in your terminal:</li>
+        <li>The <code>fastmcp</code> Python package - installed automatically the first time you use the chatbox (or the MCP page's "Launch" button), or manually via <code>python -m pip install fastmcp</code>. See <code>app/packages/mcp.json</code>.</li>
+        <li>The CLI for whichever agent you want to use: <code>claude</code> (<a href="https://docs.claude.com/en/docs/claude-code" target="_blank">Claude Code</a>) for Claude, or <code>codex</code> (OpenAI's Codex CLI) for ChatGPT. Sign in once in a terminal so it has its own authentication configured.</li>
     </ul>
-    <pre><code>gcloud auth application-default login</code></pre>
+    <p>No Google Cloud / Vertex AI setup, API keys, or region selection are needed - the CLI handles its own authentication, the same way it would if you ran it in a terminal yourself.</p>
 
-    <h4>3. Environment Variables</h4>
-    <p>The script explicitly requires your Google Cloud Project ID to initialize the client properly. You must set this via an environment variable.</p>
-
-    <h5>macOS / Linux</h5>
-    <pre><code>export IW_GEMINI_PROJECT_ID="your-project-id"</code></pre>
-
-    <h5>Windows (Command Prompt)</h5>
-    <pre><code>set IW_GEMINI_PROJECT_ID="your-project-id"</code></pre>
-
-    <h5>Windows (PowerShell)</h5>
-    <pre><code>$env:IW_GEMINI_PROJECT_ID="your-project-id"</code></pre>
-
-    <h4>4. Execution</h4>
-
-    <p>
-        Click the <i class="bi bi-lightbulb"></i> <a href="#GenerativeAI">Generative AI</a> in the application toolbox. Enter the prompt and select the Google region
-        and then click Generate and then wait for the workflow to be generated.
-    </p>
-
-
-    <section id="introduction">
-        <p>The Generative AI Chatbox, implemented in <code>chatbox.js</code>, is a multimodal interface that allows users to generate complex system workflows and C++ plugins using natural language prompts powered by Google Gemini.</p>
-    </section>
+    <h4>2. Opening the chatbox</h4>
+    <p>Click the <i class="bi bi-lightbulb"></i> <a href="#GenerativeAI">Generative AI</a> icon in the application toolbar. The first time you use it on a machine, it asks which CLI command to run (defaults to <code>claude</code>) before opening the chat - after that, the same setting is available in the dialog's own "Command" field, alongside a "CLI" dropdown for choosing between Claude and ChatGPT. Both are shared, via the same cookie, with the <a href="mcp.html">MCP page</a>'s own "Launch an agent" command field.</p>
 
     <section id="interface-modes">
-        <h4 id="GeminiUsage">2. Operational Modes</h4>
-        <div class="feature-grid">
-            <div class="feature-card">
-                <h5>Workflow Mode</h5>
-                <p>Designed for visual graph creation. It translates descriptions into a series of connected nodes (vertices) and edges.</p>
-                <p><strong>Example:</strong> <em>"Movie Reader then do yolo v7 detection..."</em></p>
-            </div>
-            <div class="feature-card">
-                <h5>Plugin Mode</h5>
-                <p>Generates C++ source code and configuration files for the SDK. This mode requires a specific Plugin Name before generation.</p>
-                <p><strong>Example:</strong> <em>"Create a Plugin that takes a source image2D..."</em></p>
-            </div>
-        </div>
-    </section>
-
-    <section id="configuration">
-        <h4>3. Regional Configuration</h4>
-        <p>Users can specify the Google Cloud Platform (GCP) region for AI inference. Available regions include:</p>
-        <ul>
-            <li><code>us-central1</code> (US Central)</li>
-            <li><code>us-east1</code> (US East 1)</li>
-            <li><code>europe-west1</code> (Belgium)</li>
-            <li><code>asia-northeast1</code> (Tokyo)</li>
-        </ul>
-        <p>Preferences are persisted via the <code>gcp_region</code> cookie.</p>
-    </section>
-
-    <section id="execution">
-        <h4>4. Execution</h4>
-        <p>To use the system, follow the standardized execution workflow:</p>
-
-        <h4>4.1. Initiation</h4>
-        <p>Click the <strong>Generative AI</strong> button (lightbulb icon) in the application toolbox. This initializes the <code>Chatbox</code> class and builds the dark-themed UI overlay.</p>
-
-        <h4>4.2. Prompt Submission</h4>
-        <ol>
-            <li>Select your desired <strong>Mode</strong> (Workflow or Plugin).</li>
-            <li>Verify the <strong>Region</strong> setting.</li>
-            <li>Enter your technical requirements into the text .</li>
-            <li>Click the <strong>Send</strong> (<i class="bi bi-send-fill"></i>) button.</li>
-        </ol>
-
-        <div class="note">
-            <strong>Note for Plugin Mode:</strong> If "Plugin" is selected, a secondary dialog will appear requesting a <strong>Plugin Name</strong>. This name is used to identify the generated file package.
-        </div>
-
-        <h4>4.3. Review</h4>
-        <ul>
-            <li><strong>Workflow Preview:</strong> Displays a DOT-rendered graph. Selecting "Ok" will trigger <code>workflow.importWorkflow</code>, clearing the current editor to load the AI-generated graph.</li>
-            <li>
-                <strong>Plugin Viewer and Compiler:</strong> Opens a multi-file browser to inspect generated <code>.cpp</code>, <code>.h</code>, and <code>.json</code> files. Clicking <strong>Save and Compile</strong> initiates a sophisticated automation pipeline:
-                <ul>
-                    <li><strong>Disk Export:</strong> Files are written to the local SDK directory structure at <code>/sdk/gen_ai/[PluginName]</code>.</li>
-                    <li><strong>Automated Build System:</strong> The system creates a dedicated <code>build</code> directory and runs <strong>CMake configuration</strong> tailored to the host operating system (e.g., Visual Studio 2022 for Windows or standard Makefiles for Unix-based systems).</li>
-                    <li><strong>Real-time Progress Tracking:</strong> A visual <strong>Progress Bar</strong> and live <strong>Status Log</strong> appear directly within the viewer window, replacing the standard code view to show the compiler's output in real-time.</li>
-                    <li><strong>Success Integration:</strong> Upon a successful build, the progress bar turns green, the compiled <code>.plugin</code> is automatically moved to the <code>Extensions</code> directory, and the <strong>Toolbox</strong> is reinitialized for immediate use without a restart.</li>
-                    <li><strong>Error Reporting:</strong> If compilation fails, the progress bar turns red, and the full compiler error log is displayed in the viewer to assist with debugging.</li>
-                </ul>
-            </li>
-        </ul>
+        <h4>3. A single conversation, not separate modes</h4>
+        <p>There's no "Workflow" vs. "Plugin" mode anymore - one free-form conversation decides on its own which tools a message calls for (build/edit a graph, generate a plugin, run AI Studio, inspect state, control playback, and more), the same way an external Claude Code session connected via MCP would. A fresh conversation shows a row of example prompts spanning that range - click one to drop it into the input.</p>
     </section>
 
     <section id="history">
-        <h4>5. History Management</h4>
-        <p>The Chatbox maintains a list of the 10 most recent unique prompts per mode:</p>
+        <h4>4. Real conversation history</h4>
+        <p>Each conversation is a genuine, persistent multi-turn session, not a one-shot request:</p>
         <table>
             <thead>
                 <tr>
@@ -8658,23 +8574,32 @@ Error Handling: If a requested tool or file cannot be found, report the error us
             </thead>
             <tbody>
                 <tr>
+                    <td><strong>Threads</strong></td>
+                    <td>The sidebar (toggled via <code>#history-toggle</code>) lists past conversations by title and last-updated time - click one to load its full transcript, or the <i class="bi bi-plus-lg"></i> icon to start a new one.</td>
+                </tr>
+                <tr>
+                    <td><strong>Memory</strong></td>
+                    <td>Each thread keeps its own persistent CLI session, so later messages in the same conversation have full context of earlier ones - reattached via the CLI's own resume mechanism even after an InfiniWorkflow restart.</td>
+                </tr>
+                <tr>
+                    <td><strong>Deletion</strong></td>
+                    <td>Hovering a thread row shows an <i class="bi bi-x-lg"></i> to delete it, closing its session and dropping its saved transcript.</td>
+                </tr>
+                <tr>
                     <td><strong>Storage</strong></td>
-                    <td>Cookies (<code>chat_history</code> and <code>plugin_history</code>)</td>
-                </tr>
-                <tr>
-                    <td><strong>Sidebar</strong></td>
-                    <td>Toggled via the <code>#history-toggle</code> button</td>
-                </tr>
-                <tr>
-                    <td><strong>Recall</strong></td>
-                    <td>Clicking a history item auto-populates the prompt </td>
-                </tr>
-                <tr>
-                    <td><strong>Cleanup</strong></td>
-                    <td>Trash icon clears the history for the active mode</td>
+                    <td><code>app/chatbox_threads.json</code> on disk, not cookies.</td>
                 </tr>
             </tbody>
         </table>
+    </section>
+
+    <section id="execution">
+        <h4>5. What happens when you send a message</h4>
+        <ul>
+            <li>The agent calls MCP tools directly against the live, running workflow - graph edits appear on the canvas as they happen (over the same live-update mechanism an external Claude Code/Desktop session would use), so there's no separate "review and import" step for a generated graph.</li>
+            <li>If the agent drafts a new C++ plugin, it opens the same "Generated Plugin Files" viewer as before so you can read the code and click Download or Compile yourself - see <a href="mcp.html#plugin-generation">Plugin Generation</a> on the MCP page for the full flow.</li>
+            <li>The agent's own reply text appears in the chat pane underneath your message.</li>
+        </ul>
     </section>
 
 
@@ -8976,15 +8901,6 @@ Error Handling: If a requested tool or file cannot be found, report the error us
                     <a target="_blank" href="https://github.com/ocornut/imgui">Codegen package for Python GUI</a>
                 </td>
                 <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1lCW_BeXGBTz-L9df7_QZNZdqzKNIm6cD/view?usp=sharing">codegenpy</a> </td>
-            </tr>
-
-            <tr>
-                <td> Generative AI </td>
-                <td> <i class="bi bi-windows" title="Supports Microsoft Windows 11+"></i> <i class="bi bi-apple" title="Supports Apple OSX 12.6.2+"></i> <i class="bi bi-ubuntu" title="Supports Linux Ubuntu24.04 LTS"></i>  </td>
-                <td>
-                    <a target="_blank" href="https://gemini.google.com/app">Generative AI to allow user prompts to generate workflows</a>
-                </td>
-                <td>  <a target="_blank" class="ziplink" href="https://drive.google.com/file/d/1vwQDxo4_ojCqoM5IP39d_fiLe_ieD6tH/view?usp=sharing">genai</a> </td>
             </tr>
 
             <tr>

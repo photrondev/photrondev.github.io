@@ -325,10 +325,12 @@
 
             <div id="status-line" class="status-unknown">Checking MCP server status...</div>
 
-            <p>The toolbar icon for this page dims when the app wasn't started with <code>-mcp</code> - the MCP server only starts once, at app launch, so if it's off you'll need to restart InfiniWorkflow with that flag rather than starting it from here.</p>
+            <p>The MCP server now starts itself the first time it's needed - either from the "Launch" button below, or the chatbox's Generative AI dialog - so <code>-mcp</code> at startup is optional (useful only if you want it running before you open this page, e.g. for Claude Desktop). If starting it fails (for example <code>fastmcp</code> isn't installed), the error shows up right where you triggered it.</p>
+
+            <p>The in-app chatbox has no separate "Workflow" or "Plugin" mode anymore - it's a single free-form conversation, backed by this same MCP server, that decides on its own which tools a message calls for (build/edit a graph, generate a plugin, drive AI Studio, inspect state, control playback, ...). It keeps real multi-turn history too: each conversation is its own saved thread with its own persistent <code>claude</code> session, switchable from the sidebar, so context isn't lost between messages or across an InfiniWorkflow restart.</p>
 
             <h3>Launch an agent here</h3>
-            <p class="small">Opens a real terminal window running the command below, in the InfiniWorkflow project directory. The command is remembered (in a cookie) for next time.</p>
+            <p class="small">Opens a real terminal window running the command below, in the InfiniWorkflow project directory, starting the MCP server first if it isn't already running. The command is remembered (in a cookie) for next time.</p>
             <div id="launcher-row">
                 <input type="text" id="llm-command" value="claude" spellcheck="false">
                 <button id="launch-btn">Launch</button>
@@ -472,7 +474,7 @@
                     <tr><td><code>get_plugin_catalog_schema()</code></td><td>Returns the catalog-JSON contract for a plugin's <code>&lt;plugin_name&gt;.json</code>, including the critical rule that the <code>inputs</code> array order is a positional contract with <code>plugin_impl.cpp</code>'s <code>update()</code>, not just documentation.</td></tr>
                     <tr><td><code>build_and_install_plugin(plugin_name, files, overwrite)</code></td><td>Writes your drafted <code>plugin_impl.h</code>/<code>plugin_impl.cpp</code>/<code>&lt;plugin_name&gt;.json</code>/<code>CMakeLists.txt</code> to <code>sdk/gen_ai/&lt;plugin_name&gt;/</code> and runs the CMake configure+build. Returns <code>{"success": true, "log": "..."}</code> or a build failure log to fix and retry (pass <code>overwrite=True</code> on a retry - the first attempt's directory needs clearing).</td></tr>
                     <tr><td><code>activate_plugin(plugin_name)</code></td><td>Hot-registers a just-built plugin with the running engine so it's usable in this session without an app restart. Call once, right after a successful <code>build_and_install_plugin</code>, then confirm with <code>add_node</code>.</td></tr>
-                    <tr><td><code>preview_plugin_in_ui(plugin_name, files)</code></td><td>Shows a plugin's drafted files in the app's own code-viewer dialog - the same one the in-UI Gemini generator uses - so a human can read the code and click Download or Compile themselves, instead of the calling model building it autonomously. UI-only; doesn't build or validate anything itself.</td></tr>
+                    <tr><td><code>preview_plugin_in_ui(plugin_name, files)</code></td><td>Shows a plugin's drafted files in the app's own code-viewer dialog - the same one the chatbox uses - so a human can read the code and click Download or Compile themselves, instead of the calling model building it autonomously. UI-only; doesn't build or validate anything itself.</td></tr>
                 </tbody>
             </table>
         </section>
@@ -556,14 +558,14 @@ run_ai_studio_pipeline(
 
         <section id="plugin-generation">
             <h2>8. Plugin Generation</h2>
-            <p>Write a brand-new compiled C++ node from a natural-language description, without going through the in-app chatbox's Gemini-based generator. The design is deliberate: rather than the MCP server calling another LLM internally, these tools hand <i>you</i> (the calling model) the same SDK headers and reference examples the chatbox feeds to Gemini, and you write the plugin's 4 files yourself - you get to see and fix real compiler errors directly, instead of a second model doing it opaquely inside the tool.</p>
+            <p>Write a brand-new compiled C++ node from a natural-language description. The design is deliberate: rather than the MCP server calling another LLM internally, these tools hand <i>you</i> (the calling model) the SDK headers and reference examples, and you write the plugin's 4 files yourself - you get to see and fix real compiler errors directly, instead of a second model doing it opaquely inside the tool. This is exactly what the in-app chatbox does too, since it's itself just a Claude session wired to this same MCP server (see <a href="#status">Status &amp; Launch</a>) - there's no separate generator anymore.</p>
 
             <h3>The call flow</h3>
             <ol class="steps">
                 <li><b>get_plugin_sdk_context()</b> - read the SDK interface (<code>setup</code>/<code>update</code>/<code>superviseInputs</code>/<code>superviseValue</code>/<code>execute</code>/<code>isCached</code>/<code>flushCache</code>/<code>teardown</code>/<code>destroy</code>) and 4 full reference plugins (Canny2, boxblur, abandoned_object, topple_detection).</li>
                 <li><b>get_plugin_catalog_schema()</b> - read the catalog JSON contract before writing <code>&lt;plugin_name&gt;.json</code>.</li>
                 <li>Write the 4 files yourself - <code>plugin_impl.h</code>, <code>plugin_impl.cpp</code>, <code>&lt;plugin_name&gt;.json</code>, <code>CMakeLists.txt</code> (base <code>CMakeLists.txt</code> on <code>abandoned_object</code>'s or <code>topple_detection</code>'s - <b>not</b> <code>Canny2</code>'s or <code>boxblur</code>'s, which hard-fail CMake on Windows (they ship a companion <code>.sln</code>/<code>.vcxproj</code> instead, which this flow can't use). Its <code>POST_BUILD</code> step, which copies the compiled binary (renamed to <code>.plugin</code>, via a <code>PREFIX</code>/<code>SUFFIX</code> target property) and catalog JSON into <code>Extensions/</code>, is what actually makes the node show up.</li>
-                <li>Either build it yourself with <b>build_and_install_plugin(plugin_name, files)</b> (writes and compiles them - on failure, read the log, fix your draft, retry with <code>overwrite=True</code>), or hand it to the human with <b>preview_plugin_in_ui(plugin_name, files)</b>, which opens the same code-viewer dialog the in-UI Gemini generator uses so they can read the code and click Compile themselves (that button posts to the same underlying build endpoint).</li>
+                <li>Either build it yourself with <b>build_and_install_plugin(plugin_name, files)</b> (writes and compiles them - on failure, read the log, fix your draft, retry with <code>overwrite=True</code>), or hand it to the human with <b>preview_plugin_in_ui(plugin_name, files)</b>, which opens the same code-viewer dialog the chatbox uses so they can read the code and click Compile themselves (that button posts to the same underlying build endpoint).</li>
                 <li><b>activate_plugin(plugin_name)</b> - hot-registers the compiled node with the running engine. Only needed after <code>build_and_install_plugin</code>; the dialog's own Compile button does this automatically.</li>
                 <li><code>add_node(tool_type="&lt;plugin_name&gt;.plugin", ...)</code> - confirm it's actually usable in a graph.</li>
             </ol>
@@ -616,7 +618,7 @@ add_node(tool_type="StationaryObjectDetector.plugin", node_name="Stationary Obje
             <div class="code-block">
                 <pre id="plugin-gen-ex3">preview_plugin_in_ui(plugin_name="StationaryObjectDetector", files=files)
 # -> opens the "Generated Plugin Files" dialog in any connected browser tab -
-# same viewer the in-UI Gemini generator uses. The human reads the code,
+# same viewer the chatbox uses. The human reads the code,
 # clicks Download to save the 4 files, or clicks Compile to build it right
 # there (posts to the same /compile_plugin_to_disk endpoint, then hot-
 # registers with the engine the same way activate_plugin does).</pre>
@@ -797,7 +799,14 @@ add_node(tool_type="StationaryObjectDetector.plugin", node_name="Stationary Obje
             const resultEl = document.getElementById('launch-result');
             resultEl.textContent = "Launching...";
             $.getJSON('/launch_llm_agent', { arg: JSON.stringify({ command: command }) }, function (data) {
-                resultEl.textContent = (data && data.success) ? "Launched." : "Error: " + (data && data.message ? data.message : "unknown error");
+                if (data && data.success) {
+                    resultEl.textContent = data.mcp_warning
+                        ? "Launched (MCP server not available: " + data.mcp_warning + ")"
+                        : "Launched.";
+                } else {
+                    resultEl.textContent = "Error: " + (data && data.message ? data.message : "unknown error");
+                }
+                refreshStatus();
             }).fail(function () {
                 resultEl.textContent = "Error: could not reach the backend.";
             });
@@ -811,7 +820,7 @@ add_node(tool_type="StationaryObjectDetector.plugin", node_name="Stationary Obje
                     statusLine.textContent = 'MCP server running on port ' + data.port + ' (http://127.0.0.1:' + data.port + '/sse)';
                 } else {
                     statusLine.className = 'status-off';
-                    statusLine.textContent = 'MCP server is not running. Restart InfiniWorkflow with the -mcp flag to enable it.';
+                    statusLine.textContent = 'MCP server not running yet - it starts automatically on first use (Launch button below, or the chatbox), or restart InfiniWorkflow with -mcp to start it now.';
                 }
             }).fail(function () {
                 statusLine.className = 'status-unknown';
