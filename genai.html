@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Generative AI — User Guide</title>
+    <style>
+        :root {
+            --bg: #0e1116;
+            --card: #161a20;
+            --text: #e6e9ec;
+            --muted: #98a3ad;
+            --line: #2a2f37;
+            --accent: #4fa3e3;
+            --accent2: rgba(79,163,227,0.14);
+            --good: #3ecf8e;
+            --warn: #e0a53e;
+            --shadow: 0 2px 14px rgba(0,0,0,.4)
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 180px;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font: 16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif
+        }
+
+        a {
+            color: var(--accent);
+        }
+
+        header {
+            background: #17212b;
+            color: #fff;
+            padding: 52px max(24px,calc((100% - 1200px)/2))
+        }
+
+            header h1 {
+                font-size: 38px;
+                margin: 0 0 8px
+            }
+
+            header p {
+                max-width: 900px;
+                color: #d4dde5;
+                margin: 6px 0
+            }
+
+        .wrap {
+            max-width: 1200px;
+            margin: auto;
+            padding: 30px 24px 80px
+        }
+
+        nav {
+            position: sticky;
+            top: 12px;
+            z-index: 10;
+            background: rgba(22,26,32,.95);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 18px 22px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow)
+        }
+
+            nav strong {
+                display: block;
+                margin-bottom: 10px
+            }
+
+            nav a {
+                color: var(--accent);
+                text-decoration: none;
+                margin-right: 18px;
+                display: inline-block
+            }
+
+        section {
+            scroll-margin-top: 180px;
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 0 0 28px
+        }
+
+        h2 {
+            font-size: 28px;
+            margin: 0 0 14px;
+            color: var(--text)
+        }
+
+        h3 {
+            font-size: 21px;
+            margin-top: 28px;
+            color: #c9d3db
+        }
+
+        h4 {
+            font-size: 18px;
+            margin-bottom: 6px
+        }
+
+        .callout {
+            padding: 16px 18px;
+            border-radius: 8px;
+            background: var(--accent2);
+            border-left: 4px solid var(--accent);
+            margin: 18px 0
+        }
+
+        .tip {
+            background: rgba(62,207,142,0.12);
+            border-left-color: var(--good)
+        }
+
+        .warning {
+            background: rgba(224,165,62,0.12);
+            border-left-color: var(--warn)
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 15px 0
+        }
+
+        th, td {
+            border: 1px solid var(--line);
+            padding: 11px;
+            vertical-align: top;
+            text-align: left
+        }
+
+        th {
+            background: rgba(255,255,255,0.06)
+        }
+
+        ol, ul {
+            padding-left: 25px
+        }
+
+        code {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 5px;
+            padding: 2px 5px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 0.9em;
+        }
+
+        .small {
+            font-size: 14px;
+            color: var(--muted)
+        }
+
+        @media(max-width:700px) {
+            header h1 {
+                font-size: 30px
+            }
+
+            section {
+                padding: 20px
+            }
+
+            .wrap {
+                padding: 20px 12px
+            }
+
+            nav {
+                position: static
+            }
+        }
+
+        /* ─── Mock dialog screenshot ───
+           Static, non-interactive illustration of the real Generative AI
+           chatbox (matching chatbox.js's own dark "Gemini-style" chrome and
+           class names - .history-item, .example-chip, .chat-bubble, etc.)
+           so it reads as "a screenshot of the dialog" rather than an
+           invented look. Fully self-contained - this page publishes
+           standalone to GitHub Pages, so nothing here may depend on
+           app/static/*.js or *.css at request time. */
+        .mockdlg-frame {
+            pointer-events: none;
+            user-select: none;
+            background: #131314;
+            border: 1px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            max-width: 100%;
+            margin: 14px 0 22px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+            font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+            display: flex;
+            height: 380px;
+        }
+        .mockdlg-caption { font-size: 0.8em; color: #6b7783; font-style: italic; margin: -12px 0 6px; }
+        .mockdlg-sidebar {
+            flex: 0 0 30%; min-width: 190px; background: #1e1f20; border-right: 1px solid #333;
+            display: flex; flex-direction: column;
+        }
+        .mockdlg-sidebar-header {
+            padding: 14px 16px; color: #e3e3e3; font-size: 0.85em; font-weight: 600;
+            display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #2b2b2b;
+        }
+        .mockdlg-history-item {
+            display: flex; align-items: center; gap: 6px; padding: 9px 12px; margin: 6px 8px;
+            border-radius: 10px; color: #e3e3e3; font-size: 0.78em;
+        }
+        .mockdlg-history-item.active { background: #333537; }
+        .mockdlg-history-title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .mockdlg-history-time { opacity: 0.5; font-size: 0.85em; flex-shrink: 0; }
+        .mockdlg-main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+        .mockdlg-main-header {
+            display: flex; align-items: center; justify-content: space-between; gap: 10px;
+            padding: 10px 14px; border-bottom: 1px solid #2b2b2b;
+        }
+        .mockdlg-main-header select, .mockdlg-main-header input {
+            background: #1c1c1c; color: #ddd; border: 1px solid #3a3a3a; border-radius: 4px;
+            padding: 4px 8px; font-size: 0.78em;
+        }
+        .mockdlg-chat-area { flex: 1; padding: 16px; overflow: hidden; }
+        .mockdlg-bubble { margin-bottom: 12px; max-width: 80%; font-size: 0.8em; }
+        .mockdlg-bubble.user { margin-left: auto; text-align: right; }
+        .mockdlg-bubble.assistant { margin-right: auto; text-align: left; }
+        .mockdlg-bubble-label { font-size: 0.75em; color: #888; margin-bottom: 3px; }
+        .mockdlg-bubble-text { display: inline-block; text-align: left; padding: 8px 13px; border-radius: 12px; color: #e3e3e3; line-height: 1.4; }
+        .mockdlg-bubble.user .mockdlg-bubble-text { background: #2a4d69; }
+        .mockdlg-bubble.assistant .mockdlg-bubble-text { background: #262626; }
+        .mockdlg-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .mockdlg-chip { padding: 7px 12px; border: 1px solid #444; border-radius: 14px; font-size: 0.75em; color: #c9c9c9; }
+        .mockdlg-input-row { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-top: 1px solid #2b2b2b; }
+        .mockdlg-input-box {
+            flex: 1; background: #1e1f20; border: 1px solid #3a3a3a; border-radius: 20px; padding: 8px 14px;
+            color: #888; font-size: 0.8em;
+        }
+        .mockdlg-round-btn {
+            width: 34px; height: 34px; border-radius: 50%; background: #333; display: flex;
+            align-items: center; justify-content: center; color: #ccc; font-size: 0.85em; flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TRANSLATION  -->
+
+    <header>
+        <h1>Generative AI</h1>
+        <p>User guide for the in-app Generative AI chatbox in Infini-Workflow - an AI coding agent wired directly to the live workflow via the same MCP server an external Claude Code/Desktop session would use.</p>
+    </header>
+    <div class="wrap">
+        <nav>
+            <strong>Contents</strong>
+            <a href="#Prerequisites">1. Prerequisites</a>
+            <a href="#Opening">2. Opening the Chatbox</a>
+            <a href="#SingleConversation">3. A Single Conversation</a>
+            <a href="#History">4. Conversation History</a>
+            <a href="#Execution">5. Message Execution</a>
+        </nav>
+
+        <section id="overview">
+            <h2>Overview</h2>
+            <p>Chat with an AI coding agent wired to InfiniWorkflow's own MCP server, so it can edit the live workflow graph, generate and compile C++ plugins, drive AI Studio, inspect state, and control playback, all from natural-language requests. Both <strong>Claude</strong> (Anthropic, via the <code>claude</code>/Claude Code CLI) and <strong>ChatGPT</strong> (OpenAI, via the <code>codex</code> CLI) are supported - pick between them with the chatbox's "CLI" dropdown. This page covers the in-app chatbox specifically; see the full <a href="mcp.html">MCP / AI Agent</a> page for the underlying tool list and for connecting an external agent (Claude Desktop, AnythingLLM, ...) instead.</p>
+        </section>
+
+        <section id="Prerequisites">
+            <h2>1. Prerequisites</h2>
+            <ul>
+                <li>The <code>fastmcp</code> Python package - installed automatically the first time you use the chatbox (or the MCP page's "Launch" button), or manually via <code>python -m pip install fastmcp</code>. See <code>app/packages/mcp.json</code>.</li>
+                <li>The CLI for whichever agent you want to use: <code>claude</code> (<a href="https://docs.claude.com/en/docs/claude-code" target="_blank">Claude Code</a>) for Claude, or <code>codex</code> (OpenAI's Codex CLI) for ChatGPT. Sign in once in a terminal so it has its own authentication configured.</li>
+            </ul>
+            <div class="callout tip">No Google Cloud / Vertex AI setup, API keys, or region selection are needed - the CLI handles its own authentication, the same way it would if you ran it in a terminal yourself.</div>
+        </section>
+
+        <section id="Opening">
+            <h2>2. Opening the Chatbox</h2>
+            <p>Click the <i class="bi bi-lightbulb"></i> Generative AI icon in the application toolbar. The first time you use it on a machine, it asks which CLI command to run (defaults to <code>claude</code>) before opening the chat - after that, the same setting is available in the dialog's own "Command" field, alongside a "CLI" dropdown for choosing between Claude and ChatGPT. Both are shared, via the same cookie, with the <a href="mcp.html">MCP page</a>'s own "Launch an agent" command field.</p>
+
+            <div class="mockdlg-caption">Example: the Generative AI chatbox, mid-conversation</div>
+            <div class="mockdlg-frame">
+                <div class="mockdlg-sidebar">
+                    <div class="mockdlg-sidebar-header"><span><i class="bi bi-clock-history"></i> Conversations</span> <i class="bi bi-plus-lg" style="opacity:0.7;"></i></div>
+                    <div class="mockdlg-history-item active"><span class="mockdlg-history-title">Speed up the contours pipeline</span><span class="mockdlg-history-time">2m</span></div>
+                    <div class="mockdlg-history-item"><span class="mockdlg-history-title">Add a YOLO8 detector node</span><span class="mockdlg-history-time">1h</span></div>
+                    <div class="mockdlg-history-item"><span class="mockdlg-history-title">Generate an OFX plugin</span><span class="mockdlg-history-time">Yesterday</span></div>
+                </div>
+                <div class="mockdlg-main">
+                    <div class="mockdlg-main-header">
+                        <span style="color:#e3e3e3; font-size:0.85em;"><i class="bi bi-justify"></i></span>
+                        <div style="display:flex; gap:8px; flex:1; justify-content:flex-end;">
+                            <select disabled><option>Claude</option></select>
+                            <input value="claude" disabled style="width:90px;">
+                        </div>
+                    </div>
+                    <div class="mockdlg-chat-area">
+                        <div class="mockdlg-bubble user">
+                            <div class="mockdlg-bubble-label">You</div>
+                            <div class="mockdlg-bubble-text">Distribute the AI Welding branch to my GPU server and show me the FPS after</div>
+                        </div>
+                        <div class="mockdlg-bubble assistant">
+                            <div class="mockdlg-bubble-label">Claude</div>
+                            <div class="mockdlg-bubble-text">Found a contiguous 3-node branch (Canny → Find Contours → Draw Contours). Distributing it to 192.168.1.42 now - Profile shows 18fps → 54fps after the move.</div>
+                        </div>
+                        <div class="mockdlg-chips">
+                            <div class="mockdlg-chip">Generate a Python sample app for this workflow</div>
+                            <div class="mockdlg-chip">Add a Telemetry output for the frame rate</div>
+                        </div>
+                    </div>
+                    <div class="mockdlg-input-row">
+                        <div class="mockdlg-input-box">Enter a prompt here</div>
+                        <div class="mockdlg-round-btn"><i class="bi bi-mic-fill"></i></div>
+                        <div class="mockdlg-round-btn"><i class="bi bi-send-fill"></i></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="SingleConversation">
+            <h2>3. A Single Conversation, Not Separate Modes</h2>
+            <p>There's no "Workflow" vs. "Plugin" mode anymore - one free-form conversation decides on its own which tools a message calls for (build/edit a graph, generate a plugin, run AI Studio, inspect state, control playback, and more), the same way an external Claude Code session connected via MCP would. A fresh conversation shows a row of example prompts spanning that range - click one to drop it into the input (see the two chips in the mock above).</p>
+        </section>
+
+        <section id="History">
+            <h2>4. Real Conversation History</h2>
+            <p>Each conversation is a genuine, persistent multi-turn session, not a one-shot request:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Mechanism</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Threads</strong></td>
+                        <td>The sidebar (toggled via <code>#history-toggle</code>) lists past conversations by title and last-updated time - click one to load its full transcript, or the <i class="bi bi-plus-lg"></i> icon to start a new one.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Memory</strong></td>
+                        <td>Each thread keeps its own persistent CLI session, so later messages in the same conversation have full context of earlier ones - reattached via the CLI's own resume mechanism even after an InfiniWorkflow restart.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Deletion</strong></td>
+                        <td>Hovering a thread row shows an <i class="bi bi-x-lg"></i> to delete it, closing its session and dropping its saved transcript.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Storage</strong></td>
+                        <td><code>app/chatbox_threads.json</code> on disk, not cookies.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="Execution">
+            <h2>5. What Happens When You Send a Message</h2>
+            <ul>
+                <li>The agent calls MCP tools directly against the live, running workflow - graph edits appear on the canvas as they happen (over the same live-update mechanism an external Claude Code/Desktop session would use), so there's no separate "review and import" step for a generated graph.</li>
+                <li>If the agent drafts a new C++ plugin, it opens the same "Generated Plugin Files" viewer as before so you can read the code and click Download or Compile yourself - see <a href="mcp.html#plugin-generation">Plugin Generation</a> on the MCP page for the full flow.</li>
+                <li>The agent's own reply text appears in the chat pane underneath your message.</li>
+            </ul>
+        </section>
+    </div>
+</body>
+</html>

@@ -6,16 +6,16 @@
     <title>CodeGen & GUI Designer — User Guide</title>
     <style>
         :root {
-            --bg: #f5f7fa;
-            --card: #fff;
-            --text: #20252b;
-            --muted: #5e6975;
-            --line: #dce2e8;
-            --accent: #1769aa;
-            --accent2: #eaf4fb;
-            --good: #177245;
-            --warn: #8a5a00;
-            --shadow: 0 2px 10px rgba(20,35,50,.05)
+            --bg: #0e1116;
+            --card: #161a20;
+            --text: #e6e9ec;
+            --muted: #98a3ad;
+            --line: #2a2f37;
+            --accent: #4fa3e3;
+            --accent2: rgba(79,163,227,0.14);
+            --good: #3ecf8e;
+            --warn: #e0a53e;
+            --shadow: 0 2px 14px rgba(0,0,0,.4)
         }
 
         * {
@@ -32,6 +32,10 @@
             background: var(--bg);
             color: var(--text);
             font: 16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif
+        }
+
+        a {
+            color: var(--accent);
         }
 
         header {
@@ -61,7 +65,7 @@
             position: sticky;
             top: 12px;
             z-index: 10;
-            background: rgba(255,255,255,.97);
+            background: rgba(22,26,32,.95);
             border: 1px solid var(--line);
             border-radius: 12px;
             padding: 18px 22px;
@@ -93,13 +97,13 @@
         h2 {
             font-size: 28px;
             margin: 0 0 14px;
-            color: #18232e
+            color: var(--text)
         }
 
         h3 {
             font-size: 21px;
             margin-top: 28px;
-            color: #263746
+            color: #c9d3db
         }
 
         h4 {
@@ -116,13 +120,13 @@
         }
 
         .tip {
-            background: #eef8f1;
+            background: rgba(62,207,142,0.12);
             border-left-color: var(--good)
         }
 
         .warning {
-            background: #fff8e8;
-            border-left-color: #d08a00
+            background: rgba(224,165,62,0.12);
+            border-left-color: var(--warn)
         }
 
         table {
@@ -139,7 +143,7 @@
         }
 
         th {
-            background: #eef2f5
+            background: rgba(255,255,255,0.06)
         }
 
         ol, ul {
@@ -151,12 +155,12 @@
         }
 
         .screenshot {
-            border: 2px dashed #b9c4ce;
+            border: 2px dashed #3a4048;
             padding: 24px;
             text-align: center;
-            color: #6b7783;
+            color: #8a94a0;
             border-radius: 8px;
-            background: #fafbfc
+            background: #12161c
         }
 
         .feature-grid {
@@ -197,6 +201,58 @@
                 position: static
             }
         }
+
+        /* ─── Mock dialog screenshots ───
+           Static, non-interactive illustrations of the real GUI Designer/
+           CodeGen wizard, reproducing its actual dark chrome/colors (matching
+           gui_designer.js's own inline styles) so they read as "a screenshot
+           of the dialog" rather than an invented look. Same mockdlg- prefix/
+           palette as manual.html's own copy of this block, kept in sync by
+           hand since each doc page is a fully self-contained file (these
+           pages publish standalone to GitHub Pages, so nothing here may
+           depend on app/static/*.js or *.css at request time). */
+        .mockdlg-frame {
+            pointer-events: none;
+            user-select: none;
+            background: #17181a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            max-width: 100%;
+            margin: 14px 0 22px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+            font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+        }
+        .mockdlg-caption { font-size: 0.8em; color: #6b7783; font-style: italic; margin: -12px 0 6px; }
+        .mockdlg-header {
+            color: #4fa3e3; font-size: 1.1em; font-weight: 600; padding: 12px 16px;
+            border-bottom: 1px solid #262626; display: flex; align-items: center; gap: 8px;
+        }
+        .mockdlg-body { padding: 14px 16px; color: #ddd; font-size: 0.85em; }
+        .mockdlg-note { color: #999; font-size: 0.85em; margin-bottom: 10px; }
+        .mockdlg-tabs { display: flex; gap: 2px; border-bottom: 1px solid #2b2b2b; padding: 0 12px; background: #1a1a1a; }
+        .mockdlg-tab { padding: 8px 14px; font-size: 0.82em; color: #8e8e93; border-bottom: 2px solid transparent; }
+        .mockdlg-tab.active { color: #fff; border-bottom-color: #007bff; }
+        .mockdlg-field { margin-bottom: 10px; }
+        .mockdlg-field label { display: block; margin-bottom: 3px; color: #bbb; font-size: 0.8em; }
+        .mockdlg-select, .mockdlg-input {
+            background: #1c1c1c; color: #ddd; border: 1px solid #3a3a3a;
+            border-radius: 4px; padding: 5px 8px; width: 100%; box-sizing: border-box; font-size: 0.85em;
+        }
+        .mockdlg-checkbox-row { display: flex; align-items: center; gap: 7px; font-size: 0.85em; color: #ddd; margin: 8px 0; }
+        .mockdlg-btn { border-radius: 4px; padding: 4px 11px; font-size: 0.76em; font-weight: 600; border: 1px solid; }
+        .mockdlg-tree { background: #141414; border-right: 1px solid #262626; padding: 10px; font-size: 0.8em; color: #ccc; width: 150px; flex-shrink: 0; }
+        .mockdlg-tree-item { padding: 4px 6px; border-radius: 4px; margin-bottom: 2px; }
+        .mockdlg-tree-item.group { color: #8e8e93; font-weight: 600; margin-top: 8px; }
+        .mockdlg-canvas {
+            flex: 1; background: #0f0f10 radial-gradient(circle, #232326 1px, transparent 1px) 0 0/18px 18px;
+            position: relative; min-height: 200px; padding: 10px;
+        }
+        .mockdlg-canvas-control {
+            position: absolute; background: #1c1c1e; border: 1px solid #3a3a3a; border-radius: 5px;
+            color: #ddd; font-size: 0.75em; padding: 6px 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+        }
+        .mockdlg-canvas-control.selected { border-color: #4fa3e3; box-shadow: 0 0 0 1px #4fa3e3; }
     </style>
 </head>
 <body>
@@ -261,6 +317,23 @@
 
             <h3>Proceed</h3>
             <p><b>Proceed</b> continues with the selected generation type. You must enter an application name before continuing from the application setup screen.</p>
+
+            <div class="mockdlg-caption">Example: the CodeGen setup screen</div>
+            <div class="mockdlg-frame">
+                <div class="mockdlg-header"><i class="bi bi-code-slash"></i> CodeGen</div>
+                <div class="mockdlg-body">
+                    <div class="mockdlg-field"><label>Application Name</label>
+                        <input class="mockdlg-input" value="my_app" disabled>
+                    </div>
+                    <div class="mockdlg-field"><label>Output Type</label>
+                        <select class="mockdlg-select" disabled><option>Sample App — C++</option></select>
+                    </div>
+                    <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:12px;">
+                        <div class="mockdlg-btn" style="background:#1e1e1e; color:#f3f4f6; border-color:#2b2b2b;">Cancel</div>
+                        <div class="mockdlg-btn" style="background:#007bff; color:#fff; border-color:#007bff; padding:6px 16px;">Proceed <i class="bi bi-arrow-right"></i></div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section id="codegen">
@@ -295,7 +368,18 @@
 
         <section id="designer">
             <h2>4. GUI Designer Overview</h2>
-            <p>The GUI Designer is where you configure the interface of a Sample App.</p>
+            <p>
+                The GUI Designer compiles your workflow into a standalone application - a generated C++ or Python program with its
+                own window, viewer, and parameter sidebar - instead of running inside INFINIWORKFLOW itself. It opens as a wizard:
+                drag parameters from the left tree onto the canvas to place them in the generated app's layout, switch to the
+                <b>Views</b> tab to choose which viewers show video output, <b>Features</b> to enable optional built-in tools (Zoom,
+                Measurement, Stabilization, Keystone, Telemetry), and <b>Style</b> to pick a theme preset (Dark, Nord, Cyberpunk,
+                Custom) and fine-tune colors, spacing, rounding and fonts. <b>Build</b> shows packaging/installer options before
+                generating the final app. Clicking <b>Proceed</b> sends the full layout/theme configuration as JSON to the backend,
+                which runs the same node-graph-to-code generator used for exporting group nodes as OFX/PFV4 plugins - see
+                <code>docs/gui_designer_codegen.md</code> for that JSON payload's full structure if you're extending the generator
+                itself rather than just using the wizard.
+            </p>
 
             <p>The designer is organized into five main areas:</p>
             <ol>
@@ -307,10 +391,35 @@
                 <li><b>Build</b> — where C++ applications can be configured for automatic compilation, execution, and packaging.</li>
             </ol>
 
-            <div class="screenshot">
-                GUI Designer layout<br><br>
-                Parameters &nbsp; | &nbsp; Canvas / Views / Features / Style / Build<br>
-                <span class="small">The exact appearance follows the application's current theme.</span>
+            <div class="mockdlg-caption">Example: the GUI Designer wizard, Canvas tab</div>
+            <div class="mockdlg-frame">
+                <div style="display:flex; gap:15px; padding:12px 16px; background:#0f0f10; border-bottom:1px solid #2b2b2b; align-items:center; justify-content:space-between;">
+                    <div style="display:flex; align-items:center; gap:12px;">
+                        <div class="mockdlg-btn" style="background:#1e1e1e; color:#f3f4f6; border-color:#2b2b2b;"><i class="bi bi-chevron-left"></i> Back</div>
+                        <div style="color:#8e8e93; font-size:0.8em;">Configuring Interface: <span style="background:#007bff; color:#fff; padding:3px 10px; border-radius:20px; font-weight:bold;">CPP</span></div>
+                    </div>
+                    <div class="mockdlg-btn" style="background:#007bff; color:#fff; border-color:#007bff; padding:7px 18px;">Proceed <i class="bi bi-arrow-right"></i></div>
+                </div>
+                <div class="mockdlg-tabs">
+                    <div class="mockdlg-tab active">Canvas</div><div class="mockdlg-tab">Views</div><div class="mockdlg-tab">Features</div>
+                    <div class="mockdlg-tab">Style</div><div class="mockdlg-tab">Build</div>
+                </div>
+                <div style="display:flex; min-height:220px;">
+                    <div class="mockdlg-tree">
+                        <div class="mockdlg-tree-item group">Parameters</div>
+                        <div class="mockdlg-tree-item">Gain (slider)</div>
+                        <div class="mockdlg-tree-item">Exposure (slider)</div>
+                        <div class="mockdlg-tree-item">Trigger Mode (dropdown)</div>
+                        <div class="mockdlg-tree-item group">Outputs</div>
+                        <div class="mockdlg-tree-item">FPS (readout)</div>
+                    </div>
+                    <div class="mockdlg-canvas">
+                        <div class="mockdlg-canvas-control selected" style="top:14px; left:14px;">Gain</div>
+                        <div class="mockdlg-canvas-control" style="top:14px; left:110px;">Exposure</div>
+                        <div class="mockdlg-canvas-control" style="top:54px; left:14px; width:150px;">Trigger Mode ▾</div>
+                        <div class="mockdlg-canvas-control" style="top:100px; left:14px; color:#8e8e93;">FPS: 29.9</div>
+                    </div>
+                </div>
             </div>
 
             <h3>Back</h3>
@@ -572,6 +681,38 @@
             <p>The live preview shows how the application's controls, viewer, and timeline will be arranged. Use it while experimenting with layout settings so you can see the effect before generating the application.</p>
 
             <div class="callout tip"><b>Customizing a preset:</b> once you change individual style values, the designer treats the theme as a custom configuration so your changes can be retained.</div>
+
+            <div class="mockdlg-caption">Example: the GUI Designer wizard, Style tab</div>
+            <div class="mockdlg-frame">
+                <div class="mockdlg-tabs">
+                    <div class="mockdlg-tab">Canvas</div><div class="mockdlg-tab">Views</div><div class="mockdlg-tab">Features</div>
+                    <div class="mockdlg-tab active">Style</div><div class="mockdlg-tab">Build</div>
+                </div>
+                <div class="mockdlg-body" style="background:#141414; display:flex; gap:16px;">
+                    <div style="flex:1;">
+                        <div class="mockdlg-field"><label>Preset</label>
+                            <select class="mockdlg-select" disabled><option>Dark</option></select>
+                        </div>
+                        <div class="mockdlg-field"><label>Controls Position</label>
+                            <select class="mockdlg-select" disabled><option>Left</option></select>
+                        </div>
+                        <div class="mockdlg-field"><label>Font Size</label>
+                            <input class="mockdlg-input" value="14.0" disabled>
+                        </div>
+                    </div>
+                    <div style="flex:1;">
+                        <div class="mockdlg-field"><label>Window Rounding</label>
+                            <input class="mockdlg-input" value="6.0" disabled>
+                        </div>
+                        <div class="mockdlg-field"><label>Accent (Button)</label>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <div style="width:22px; height:22px; border-radius:4px; background:#007bff; border:1px solid #333;"></div>
+                                <input class="mockdlg-input" value="#007bff" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section id="build">
@@ -601,6 +742,28 @@
             </table>
 
             <p>The interface describes packaging targets as <b>NSIS Windows / DMG Mac / AppImage Linux</b>.</p>
+
+            <div class="mockdlg-caption">Example: the GUI Designer wizard, Build tab</div>
+            <div class="mockdlg-frame">
+                <div class="mockdlg-tabs">
+                    <div class="mockdlg-tab">Canvas</div><div class="mockdlg-tab">Views</div><div class="mockdlg-tab">Features</div>
+                    <div class="mockdlg-tab">Style</div><div class="mockdlg-tab active">Build</div>
+                </div>
+                <div class="mockdlg-body">
+                    <div class="mockdlg-checkbox-row"><input type="checkbox" checked disabled> Enable Automatic Compilation (Build)</div>
+                    <div class="mockdlg-checkbox-row"><input type="checkbox" checked disabled> Enable Automatic Execution (Run)</div>
+                    <div class="mockdlg-checkbox-row"><input type="checkbox" checked disabled> Package for distribution</div>
+                    <div class="mockdlg-field" style="margin-top:8px;"><label>Author / Company</label>
+                        <input class="mockdlg-input" value="Photron USA Inc." disabled>
+                    </div>
+                    <div class="mockdlg-field"><label>Version</label>
+                        <input class="mockdlg-input" value="1.0.0" disabled>
+                    </div>
+                    <div class="mockdlg-field"><label>Package Target</label>
+                        <select class="mockdlg-select" disabled><option>NSIS (Windows)</option></select>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section id="generation">
@@ -935,7 +1098,7 @@ Tracking Progress = Processando o Rastreamento
         </ul>
 
         <h3>C++ API</h3>
-<pre style="background: #1a1a1a; padding: 15px; border-radius: 5px;"><code>
+<pre style="background: #1a1a1a; color:white; padding: 15px; border-radius: 5px;"><code>
 OVERALL C++ WORKFLOW LIFECYCLE USAGE HANDBOOK:
 
 INITIALIZATION & SETUP:
@@ -959,7 +1122,7 @@ app.addNumericLive(NodeID::WELD_ANALYSIS, 2, "live_weld_analysis_2", on_weld_ana
 
         <h3>C++ Example</h3>
         <p>Below is a typical lifecycle implementation mapping the exported C++ target bindings based on the engine's initialization architecture:</p>
-<pre style="background: #1a1a1a; padding: 15px; border-radius: 5px;"><code>#include "app_logic.h"
+<pre style="background: #1a1a1a; color:white; padding: 15px; border-radius: 5px;"><code>#include "app_logic.h"
 #include &lt;iostream&gt;
 #include &lt;mutex&gt;
 #include &lt;opencv2/opencv.hpp&gt;
