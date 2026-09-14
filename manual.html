@@ -1086,6 +1086,26 @@
         .mockdlg-btn.delete { background: rgba(255,105,97,0.16); color: #ff8078; border-color: #ff6961; }
         .mockdlg-btn.send { background: #4fa3e3; color: #111; border-color: #4fa3e3; padding: 6px 16px; }
         .mockdlg-btn.cancel { background: transparent; color: #ff6961; border-color: rgba(255,105,97,0.4); padding: 6px 16px; }
+        .mockdlg-btn.resume.disabled { background: #26262a; color: #5c5c62; border-color: #333; }
+        /* Asset checklist rows (Distributed Rendering's manifest step). */
+        .mockdlg-asset-card {
+            display: flex; align-items: flex-start; gap: 8px;
+            background: #1c1c1e; border: 1px solid #2a2a2a; border-radius: 5px;
+            padding: 7px 9px; margin-bottom: 6px; font-size: 0.85em;
+        }
+        .mockdlg-progress-track { width: 100%; background: #2d2d3d; height: 14px; border-radius: 7px; overflow: hidden; margin: 10px 0; }
+        .mockdlg-progress-fill { height: 100%; background: linear-gradient(90deg, #3b82f6, #4fa3e3); }
+        /* Per-bridge live status card (transposed key/value rows, matching
+           the real 230px sidebar's layout - no room there for a 6-column
+           table, so the real dialog doesn't use one either). */
+        .mockdlg-status-card {
+            border: 1px solid #2a2a2a; border-radius: 5px;
+            padding: 8px 10px; margin-bottom: 8px; font-size: 0.85em;
+        }
+        .mockdlg-status-card-title { color: #ddd; font-weight: 600; margin-bottom: 6px; }
+        .mockdlg-status-card-row { display: flex; justify-content: space-between; gap: 8px; padding: 2px 0; color: #ccc; }
+        .mockdlg-status-card-row > span:first-child { color: #888; flex-shrink: 0; }
+        .mockdlg-status-card-row > span:last-child { text-align: right; word-break: break-word; }
         .mockdlg-tabs { display: flex; gap: 2px; border-bottom: 1px solid #2b2b2b; padding: 0 12px; background: #1a1a1a; }
         .mockdlg-tab { padding: 8px 14px; font-size: 0.82em; color: #8e8e93; border-bottom: 2px solid transparent; }
         .mockdlg-tab.active { color: #fff; border-bottom-color: #007bff; }
@@ -1139,6 +1159,7 @@
                                     <li class=""><a href="#DownloadablePackages">Downloadable Packages</a></li>
                                     <li class=""><a href="#InstallationSteps">Installation Steps</a></li>
                                     <li class=""><a href="#FirewallAccess">Firewall Access</a></li>
+                                    <li class=""><a href="#AutoRestartService">Auto-Restart Service</a></li>
                                     <li class=""><a href="#InstallPatches">Installing Patches</a></li>
                                     <li class=""><a href="#InstallPackages">Installing Packages</a></li>
                                     <li class=""><a href="#UserAuthentication">User Authentication</a></li>
@@ -1522,7 +1543,7 @@
                 <li><i class="bi bi-graph-up-arrow"></i> <span><strong>Benefits:</strong> Review the specific advantages of the architecture, including its modular node-based logic and system scalability.</span></li>
                 <li><i class="bi bi-pc-display-horizontal"></i> <span><strong>Platforms:</strong> Check hardware and OS compatibility, ranging from standard desktop environments (<strong>Windows</strong>, <strong>OSX</strong>, <strong>Linux</strong>) to edge computing hardware like <strong>NVIDIA Jetson</strong>.</span></li>
                 <li><i class="bi bi-globe-americas"></i> <span><strong>Markets:</strong> View details regarding localized support for international regions, specifically English, Japanese, and Chinese users.</span></li>
-                <li><i class="bi bi-box-seam-fill"></i> <span><strong>Packages:</strong> View latest packages that you can extend the capabilites - see <a href="#DownloadablePackages">Downloadable Packages</a>.</span></li>
+                <li><i class="bi bi-box-seam-fill"></i> <span><strong>Packages:</strong> View latest packages that you can extend the capabilities - see <a href="#DownloadablePackages">Downloadable Packages</a>.</span></li>
                 <li><i class="bi bi-stars"></i> <span><strong>What's New:</strong> See the latest tools and user-interface features.</span></li>
             </ul>
         </div>
@@ -1643,7 +1664,7 @@
             <div class="menu-group-card-body">
                 <ul>
                     <li><i class="bi bi-layout-wtf"></i> Switch between different <a href="#Layouts">Layouts</a> in the Toolbox</li>
-                    <li><i class="bi bi-gear"></i> <a href="#Layouts">Toobox Settings</a> such as to Add and Remove Layouts </li>
+                    <li><i class="bi bi-gear"></i> <a href="#Layouts">Toolbox Settings</a> such as to Add and Remove Layouts </li>
                     <li><i class="bi bi-rulers"></i> Sets the preferred numeric range for some of the standard parameters that can be normalized, percentage and other ranges</li>
                     <li><i class="bi bi-crop"></i> Sets the <a href="#ProjectResolution">project resolution</a></li>
                     <li><i class="bi bi-nvidia"></i> Sets the current CUDA device when you have multiple GPUs. Any new nodes powered by CUDA will be executed on this current GPU device.</li>
@@ -1808,7 +1829,7 @@
 
     <h3 id="Layouts">Toolbox Layouts</h3>
     <p>
-        Infiniworkflow has several hundred nodes avaialble, which allows for many possibilities but also can be daunting for new users or can stand in the way of users who
+        Infiniworkflow has several hundred nodes available, which allows for many possibilities but also can be daunting for new users or can stand in the way of users who
         are only looking to build a specific application (if you are building a Data Science workflow, you probably don't need to see the many Color Correction nodes that are
         available). As such, Layouts have been added as a feature for controlling which categories and nodes show up in your Toolbox. They are straightforward to use,
         but by no means necessary to learn about if you do not wish to change how your Toolbox appears, so you may skip this section and not lose any critical information.
@@ -1829,7 +1850,7 @@
             <div class="gesture-card-caption gesture-card-caption-full">
                 In addition to the Layouts seen here, users can also choose to add their own custom Layouts. To add a Layout, go to Settings, which can be found in the bottom right
                 side by the Layouts button, and click on the "New Layouts" option within Settings. Enter in your Layout name, and save. If you click on the Layouts button now, you
-                will now see that you new Layout has been added to the list of other Layouts, as shown here.
+                will now see that your new Layout has been added to the list of other Layouts, as shown here.
             </div>
         </li>
     </ul>
@@ -2264,7 +2285,7 @@
             <template>
                 Multi selection allows you to add tags of permitted values.
                 Click on the widget and a list of permitted values will show up.
-                In some cases youur own user defined values that are not
+                In some cases your own user defined values that are not
                 in the permitted set of values
             </template>
         </li>
@@ -2304,7 +2325,7 @@
             <template>
                 A map is a series of key/value pairs.
                 Clicking on the widget opens a dialog editor that shows documentation as well as
-                allow you to enter the key abd value pair
+                allow you to enter the key and value pair
                 <img src="https://photrondev.github.io/assets/ui_map_dialog_control.jpg" />
             </template>
         </li>
@@ -3040,7 +3061,7 @@
         In this case the "Is Batch" Tool is used to set the "save" parameter which
         will automatically save the model for any <a href="#GridSearch">Grid Search</a>. The output of the model is then passed to a model predict
         and the predicted values can be compared against the ground truth
-        to establish the accuracy of the model. In this scenerio, we use a confusion matrix to plot the accuracy of the results.
+        to establish the accuracy of the model. In this scenario, we use a confusion matrix to plot the accuracy of the results.
         And a ML metric nodes such as "R2 Score" allow you to see the accuracy
         and it can be further used to initiate a <a href="#GridSearch">Grid Search</a>.
     </p>
@@ -3441,7 +3462,7 @@
     <p>
         You can also click on the Import link to load the assets created during the Grid Search. Each ML model tool allows you to save the model to a file, by default models will not be saved but it is recommended whenever you have complex models
         that take time to execute. A common practice when doing a Grid Search is to connect the "Is Batch Tool" to the "save" input parameter of the model - this will
-        always be true when a Grid Search is being done in the background batch process - thus, all the the models will be saved during the Grid Search process.
+        always be true when a Grid Search is being done in the background batch process - thus, all the models will be saved during the Grid Search process.
         The import will then allow you to copy the model into your workflow folder:
     </p>
     <img src="https://photrondev.github.io/assets/ui_gridsearch_import.gif" />
@@ -3692,6 +3713,49 @@
         Source receives the processed data back in. This lets you review the asset checklist and back out before anything
         changes your workflow.
     </p>
+    <div class="mockdlg-caption">Example: the three steps of the sidebar, left to right - the asset checklist, the copy in progress, and the final Ready confirmation</div>
+    <div style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center; margin:14px 0 22px;">
+        <div class="mockdlg-frame" style="width:230px; margin:0;">
+            <div class="mockdlg-body" style="font-size:0.8em;">
+                <div style="color:#eee; font-weight:600; margin-bottom:8px;">Assets to copy</div>
+                <div class="mockdlg-note" style="margin-bottom:8px;">Files referenced by the selected nodes' file inputs. Uncheck any you don't want copied.</div>
+                <div class="mockdlg-asset-card">
+                    <input type="checkbox" checked disabled style="margin-top:2px;">
+                    <div style="min-width:0;">
+                        <div style="word-break:break-all; color:#ddd;">${assets}/yolo8/yolov8n.onnx</div>
+                        <div class="mockdlg-note" style="margin:2px 0 0;">6.23 MB</div>
+                    </div>
+                </div>
+                <div class="mockdlg-asset-card">
+                    <input type="checkbox" disabled style="margin-top:2px;">
+                    <div style="min-width:0;">
+                        <div style="word-break:break-all; color:#ddd;">${assets}/yolo5/classes.txt</div>
+                        <div class="mockdlg-note" style="margin:2px 0 0;">0.01 MB <span class="mockdlg-badge">target already has this</span></div>
+                    </div>
+                </div>
+            </div>
+            <div style="padding:0 16px 14px; display:flex; justify-content:flex-end;">
+                <div class="mockdlg-btn send">Copy</div>
+            </div>
+        </div>
+        <div class="mockdlg-frame" style="width:230px; margin:0;">
+            <div class="mockdlg-body" style="font-size:0.8em;">
+                <div style="color:#eee; font-weight:600; margin-bottom:8px;">Copying assets...</div>
+                <div class="mockdlg-progress-track"><div class="mockdlg-progress-fill" style="width:64%;"></div></div>
+                <div class="mockdlg-note">1 / 2 files - 64%</div>
+                <div class="mockdlg-btn cancel" style="width:100%; text-align:center; margin-top:10px; box-sizing:border-box;">Cancel</div>
+            </div>
+        </div>
+        <div class="mockdlg-frame" style="width:230px; margin:0;">
+            <div class="mockdlg-body" style="font-size:0.8em;">
+                <div style="color:#eee; font-weight:600; margin-bottom:8px;">Ready</div>
+                <div class="mockdlg-note">Assets copied. 1 file(s). Clicking Proceed creates the distributed group and starts the job immediately.</div>
+            </div>
+            <div style="padding:0 16px 14px; display:flex; justify-content:flex-end;">
+                <div class="mockdlg-btn send">Proceed</div>
+            </div>
+        </div>
+    </div>
 
     <h4>Running more than one job at once</h4>
     <p>
@@ -3723,7 +3787,7 @@
                     <div class="mockdlg-sub">127.0.0.1</div>
                     <div class="mockdlg-row"><span>Sink + Source</span><span class="mockdlg-badge">Connected</span></div>
                     <div class="mockdlg-actions">
-                        <div class="mockdlg-btn resume">Resume</div>
+                        <div class="mockdlg-btn resume disabled" title="Already running - nothing to resume">Resume</div>
                         <div class="mockdlg-btn delete">Delete</div>
                     </div>
                 </div>
@@ -3737,6 +3801,32 @@
                         <div class="mockdlg-btn delete">Delete</div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div style="padding:0 16px 14px; display:flex; justify-content:flex-end; gap:8px;">
+            <div class="mockdlg-btn cancel">Delete All</div>
+            <div class="mockdlg-btn send"><i class="bi bi-arrow-repeat"></i> Resume All (1)</div>
+        </div>
+    </div>
+
+    <div class="mockdlg-caption">Example: the live status cards shown after picking the "YOLO Detect" job tile above - one card per bridge</div>
+    <div class="mockdlg-frame" style="width:260px; margin-left:auto; margin-right:auto;">
+        <div class="mockdlg-body">
+            <div class="mockdlg-status-card">
+                <div class="mockdlg-status-card-title">Distributed Sink</div>
+                <div class="mockdlg-status-card-row"><span>Role</span><span>Sink (sends data out)</span></div>
+                <div class="mockdlg-status-card-row"><span>Target</span><span>192.168.1.42</span></div>
+                <div class="mockdlg-status-card-row"><span>Health</span><span class="mockdlg-warn">Not connected</span></div>
+                <div class="mockdlg-status-card-row"><span>Frames</span><span>-</span></div>
+                <div class="mockdlg-status-card-row"><span>Carrying</span><span>source, confidenceThreshold</span></div>
+            </div>
+            <div class="mockdlg-status-card" style="margin-bottom:0;">
+                <div class="mockdlg-status-card-title">Distributed Source</div>
+                <div class="mockdlg-status-card-row"><span>Role</span><span>Source (receives data in)</span></div>
+                <div class="mockdlg-status-card-row"><span>Target</span><span>192.168.1.42</span></div>
+                <div class="mockdlg-status-card-row"><span>Health</span><span class="mockdlg-warn">Not connected</span></div>
+                <div class="mockdlg-status-card-row"><span>Frames</span><span>-</span></div>
+                <div class="mockdlg-status-card-row"><span>Carrying</span><span>out, numDetects</span></div>
             </div>
         </div>
     </div>
@@ -4076,6 +4166,98 @@
     </p>
     <p>
         <b style="color:orange;">If your Firewall is controlled by your anti-virus software then you will need to allow access of INFINIWORKFLOW's python.exe using the anti-virus software.</b>
+    </p>
+
+    <h3 id="AutoRestartService">Running as an Auto-Restart Service</h3>
+    <p>
+        For an unattended <a href="#DistributionProcessing">Distributed Rendering</a> peer or any other headless render server, you generally want
+        INFINIWORKFLOW to come back on its own after a crash, an uncaught exception, or someone closing the console window - not sit down until
+        an admin notices. <code>scripts/iw_watchdog.py</code> is a small, cross-platform supervisor for exactly that: it starts INFINIWORKFLOW,
+        waits for it to exit, and restarts it, with a crash-loop guard (a rolling restart-rate limit plus a minimum-uptime check) so a broken
+        config can't tight-loop the machine instead of just backing off and trying again. It never gives up permanently - "keep restarting it" is
+        the whole point.
+    </p>
+    <p>
+        The watchdog does not itself register as a systemd unit, a launchd job, or a Windows service - it is a plain long-running script. Each
+        platform's own service manager is used only to keep the watchdog alive at boot (it rarely crashes; it is a small restart loop), while the
+        watchdog is what actually supervises INFINIWORKFLOW and restarts it, with the same behavior on every OS instead of three different native
+        "restart on failure" mechanisms.
+    </p>
+    <p>Run it manually to check it works before installing it as a service:</p>
+<pre>python iw_watchdog.py --dir "C:\InfiniWorkflow" --extra-args "-nobrowser -port 5000"</pre>
+    <p>
+        <code>--dir</code> is the INFINIWORKFLOW install root (the folder containing <code>app/</code>, and on Windows the bundled
+        <code>python.exe</code>) - it defaults to the current directory, so pass it explicitly for a service that won't start with a known working
+        directory. <code>--extra-args</code> forwards its value to <code>app.py</code> as a single shell-quoted string (<code>-nobrowser</code> is
+        added automatically if not already present). Restart-loop tuning defaults to 5 restarts per 300-second window before a 60-second backoff,
+        and any exit faster than 10 seconds is always treated as a crash-loop tick regardless of the rolling window; all of these, plus
+        <code>--python</code> (override the interpreter) and <code>--log</code> (defaults to <code>&lt;dir&gt;/logs/iw_watchdog.log</code>, shared
+        by both the watchdog's own restart events and INFINIWORKFLOW's stdout/stderr), are documented in <code>python iw_watchdog.py --help</code>.
+    </p>
+    <p>
+        On a clean stop (Ctrl+C, or a service manager's own stop signal) the watchdog exits without restarting. On POSIX, that stop signal is
+        forwarded to INFINIWORKFLOW as SIGTERM - exactly what <code>app.py</code>'s own signal handler is registered for, so a clean stop also runs
+        the same distributed-renderer cleanup a normal exit does. On Windows, <code>TerminateProcess</code> cannot deliver a clean signal to
+        another process, so a stop there is abrupt by necessity; INFINIWORKFLOW's own startup sweep (<code>sweep_stale_local_renderers()</code>)
+        cleans up anything that abrupt stop left behind the next time it starts.
+    </p>
+
+    <h4>systemd (Linux)</h4>
+    <p>Create <code>/etc/systemd/system/infiniworkflow-watchdog.service</code>:</p>
+<pre>[Unit]
+Description=INFINIWORKFLOW auto-restart watchdog
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /opt/infiniworkflow/scripts/iw_watchdog.py --dir /opt/infiniworkflow
+Restart=on-failure
+RestartSec=5
+User=infiniworkflow
+
+[Install]
+WantedBy=multi-user.target</pre>
+    <p>Then enable and start it:</p>
+<pre>sudo systemctl daemon-reload
+sudo systemctl enable --now infiniworkflow-watchdog</pre>
+
+    <h4>launchd (macOS)</h4>
+    <p>Create <code>~/Library/LaunchAgents/com.photron.infiniworkflow-watchdog.plist</code>:</p>
+<pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+    &lt;key&gt;Label&lt;/key&gt;
+    &lt;string&gt;com.photron.infiniworkflow-watchdog&lt;/string&gt;
+    &lt;key&gt;ProgramArguments&lt;/key&gt;
+    &lt;array&gt;
+        &lt;string&gt;/usr/bin/python3&lt;/string&gt;
+        &lt;string&gt;/opt/infiniworkflow/scripts/iw_watchdog.py&lt;/string&gt;
+        &lt;string&gt;--dir&lt;/string&gt;
+        &lt;string&gt;/opt/infiniworkflow&lt;/string&gt;
+    &lt;/array&gt;
+    &lt;key&gt;RunAtLoad&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;KeepAlive&lt;/key&gt;
+    &lt;true/&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;</pre>
+    <p>Then load it:</p>
+<pre>launchctl load ~/Library/LaunchAgents/com.photron.infiniworkflow-watchdog.plist</pre>
+
+    <h4>Windows (NSSM)</h4>
+    <p>
+        Windows has no built-in way to run a plain script as a service, so use <a target="_blank" href="https://nssm.cc/">NSSM</a> (the Non-Sucking
+        Service Manager) as a thin wrapper:
+    </p>
+<pre>nssm install InfiniWorkflowWatchdog "C:\InfiniWorkflow\python.exe" "C:\InfiniWorkflow\scripts\iw_watchdog.py --dir C:\InfiniWorkflow"
+nssm set InfiniWorkflowWatchdog AppDirectory "C:\InfiniWorkflow"
+nssm set InfiniWorkflowWatchdog Start SERVICE_AUTO_START
+nssm start InfiniWorkflowWatchdog</pre>
+    <p>
+        A Scheduled Task ("Run whether user is logged on or not", triggered "At startup") is a lighter-weight alternative to NSSM if you'd rather
+        not install a third-party tool - it won't restart the watchdog itself if it dies, but the watchdog process itself is small and stable
+        enough that this is rarely a practical concern.
     </p>
 
 
