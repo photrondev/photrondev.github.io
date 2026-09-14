@@ -3691,6 +3691,19 @@
         </div>
     </div>
 
+    <h4>Suggested distribution targets</h4>
+    <p>
+        Once a <a href="#ProfileMenuFunc">Profile</a> pass has produced real timing data for the open workflow, a
+        <i class="bi bi-lightbulb"></i> <b>Suggest</b> button appears alongside the schematic. It opens a small ranked list of
+        candidate selections, each pre-checked against every rule the dialog itself would enforce - so anything offered here is
+        guaranteed sendable. Candidates form a ladder from a single node up to a handful of nodes: the first entry is just the
+        single slowest node in the workflow, the next adds whichever directly-adjacent node is next slowest, and so on - always
+        one contiguous region, never a scattered pick. Each row shows a small preview of its nodes, the estimated time saved, and
+        the estimated data cut across its new boundary. Already-distributed (bridge) nodes and display/viewer nodes are never
+        offered, since neither can usefully be sent to a peer. Click <b>Use this selection</b> on any row to close the list and
+        carry that candidate straight into the normal node selection, ready to pick a peer and device as usual.
+    </p>
+
     <h4>Asset checklist</h4>
     <p>
         Clicking <b>Next</b> builds a manifest of the files referenced by the selected nodes' file inputs (models, LUTs, media,
