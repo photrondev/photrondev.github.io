@@ -272,12 +272,21 @@
             <a href="#codegen">Code Generation</a>
             <a href="#designer">GUI Designer</a>
             <a href="#canvas">Canvas</a>
+            <a href="#canvas-tabs">Canvas Tabs</a>
+            <a href="#properties">Control Properties</a>
             <a href="#views">Views</a>
             <a href="#features">Features</a>
             <a href="#style">Style</a>
             <a href="#build">Build</a>
+            <a href="#generation">Generating</a>
+            <a href="#source">Generated Source</a>
             <a href="#workflow">Typical Workflow</a>
             <a href="#tips">Tips</a>
+            <a href="#reference">Quick Reference</a>
+            <a href="#build-installer">Build &amp; Installer</a>
+            <a href="#localization">Localization</a>
+            <a href="#app-ui-features">App UI Features</a>
+            <a href="#architecture-api">Architecture &amp; API</a>
         </nav>
 
         <section id="overview">
@@ -588,7 +597,6 @@
                 <tr><td><b>Undo / Redo</b></td><td>Provides undo/redo related functionality.</td></tr>
                 <tr><td><b>Load / Save</b></td><td>Provides load/save of settings functionality.</td></tr>
                 <tr><td><b>Reset All</b></td><td>Provides reset all of settings functionality.</td></tr>
-                <tr><td><b>View</b></td><td>Provides view-related functionality.</td></tr>
                 <tr><td><b>Telemetry</b></td><td>Provides telemetry display functionality.</td></tr>
                 <tr><td><b>Spawn</b></td><td>Provides the Multi-View menu, letting the running application launch and tile extra copies of itself ("followers") alongside the original ("master").</td></tr>
             </table>
@@ -660,8 +668,8 @@
             <h3>Theme Presets</h3>
             <p>The available presets include:</p>
             <ul>
-                <li>ImGui Dark</li>
-                <li>Corporate Light</li>
+                <li>Dark</li>
+                <li>Corporate</li>
                 <li>Dracula</li>
                 <li>Cyberpunk</li>
                 <li>Nord</li>
@@ -850,7 +858,8 @@
             </table>
         </section>
 
-        <h2>Build, Run & Installer Generation</h2>
+        <section id="build-installer">
+        <h2>17. Build, Run &amp; Installer Generation</h2>
         <p>Upon generating your application, you are provided with a <strong>Source code</strong> explorer interface. This interface allows you to:</p>
         <ul>
             <li><strong>Review Source Code:</strong> Browse and verify all generated files using an interactive file list.</li>
@@ -861,41 +870,6 @@
 
         <h3>Installer Generation (NSIS Requirement)</h3>
         <p>The system also provides a Standalone ZIP Packager that compresses your application into a final distributable artifact. To successfully build full executable installers via this backend service, you must install <strong>NSIS (Nullsoft Scriptable Install System)</strong> on your build machine. Ensure that the <code>makensis</code> executable is explicitly added to your system's PATH environment variable so the automated packaging scripts can invoke it correctly.</p>
-
-        <h2>Localization</h2>
-        <p>To translate or customize text within your generated application, the engine supports drop-in localization dictionaries. Follow these steps to implement custom strings:</p>
-        <ol>
-            <li>Navigate to the <code>assets/localize</code> directory within your project workspace (create it if it doesn't exist yet).</li>
-            <li>Create a text file explicitly named <code>localize.txt</code> (or one of the language-specific filenames below).</li>
-            <li>Add your translations using a standard key-value format. You can use either an equals sign (<code>=</code>) or a colon (<code>:</code>) as a delimiter.</li>
-        </ol>
-        <p><strong>Example <code>assets/localize/localize.txt</code> formatting:</strong></p>
-<pre style="background: #1a1a1a; color:white;padding : 15px; border-radius: 5px;"><code># This is a comment line
-my_app = My Custom App Name
-Zoom In : Magnify View
-Tracking Progress = Processando o Rastreamento
-</code></pre>
-        <p><em>Note: The engine will automatically load these pairs at runtime and replace corresponding <code>tr("...")</code> text wrapping instances in the UI. Localization files live under an <code>assets/localize/</code> subfolder (not flat in <code>assets/</code>) to keep that folder from accumulating one file per bundled language - the icons used by "..." buttons live in their own <code>assets/icons/</code> subfolder for the same reason.</em></p>
-
-        <h3>Default Language (GUI Designer)</h3>
-        <p>The <b>Style</b> tab of the GUI Designer (for the standalone C++/Python sample-app targets - not shown for PFV4 plugin exports) has a <b>Default Language</b> dropdown next to the theme preset picker. This sets which bundled dictionary the generated app starts with; the end user can still change it afterward via <b>Preferences &gt; Language</b> at runtime, same as always.</p>
-
-        <h3>Multiple Languages &amp; the Preferences &gt; Language Selector</h3>
-        <p>Beyond the single always-loaded <code>localize.txt</code> above, the generated application also ships with a <b>Preferences &gt; Language</b> dropdown that lets the end user switch between several bundled dictionaries at runtime, without editing any files themselves:</p>
-        <table>
-            <tr><th>Language combo entry</th><th>Dictionary file</th></tr>
-            <tr><td><b>English</b></td><td><code>localize.txt</code> - the same file described above (empty by default, so every <code>tr("...")</code> call falls back to its own English key text unless you've added overrides). Also the default unless a different Default Language is set in the GUI Designer's Style tab.</td></tr>
-            <tr><td><b>German</b></td><td><code>localize_de-DE.txt</code></td></tr>
-            <tr><td><b>Spanish</b></td><td><code>localize_es-ES.txt</code></td></tr>
-            <tr><td><b>French</b></td><td><code>localize_fr-FR.txt</code></td></tr>
-            <tr><td><b>Japanese</b></td><td><code>localize_ja-JP.txt</code></td></tr>
-            <tr><td><b>Chinese</b></td><td><code>localize_zh-CN.txt</code></td></tr>
-        </table>
-        <p>Each of these files uses the exact same key-value format as <code>localize.txt</code> above, lives in the same <code>assets/localize/</code> subfolder, and is resolved through the same <code>codegen_installer/&lt;app_name&gt;</code> &rarr; <code>codegen_installer</code> &rarr; workspace <code>assets/localize/</code> override hierarchy described under "Extra Assets Copy List and Localization" below - a language file that can't be resolved anywhere for a given build simply isn't bundled, and its combo entry falls back to English text at runtime instead of failing to build.</p>
-        <ul>
-            <li><strong>Persistence:</strong> The chosen language is saved to the app's own <code>.ini</code> settings file (<code>[Localization]</code> section) and restored automatically the next time the application starts.</li>
-            <li><strong>Multi-View sync:</strong> In a Multi-View (Spawn) group, every follower's language always follows the master's current pick (like the Theme preset above) - a follower's own Preferences &gt; Language combo can still be opened, but whatever it's set to is re-applied from the master every frame, so it always ends up matching the group.</li>
-        </ul>
 
         <h3>Bundling the Visual C++ Redistributable</h3>
 
@@ -951,7 +925,7 @@ Tracking Progress = Processando o Rastreamento
             <li>Ultimate fallback: Default system icon/splashscreen inside <code>app/static/</code> or <code>app/static/assets/</code></li>
         </ol>
 
-        <h5>4. User Guide (<code>user_guide.html</code>)</h5>
+        <h5>5. User Guide (<code>user_guide.html</code>)</h5>
         <ol>
             <li>Specific app override: <code>codegen_installer/{{app_name}}/user_guide.html</code></li>
             <li>General installer override: <code>codegen_installer/user_guide.html</code></li>
@@ -964,7 +938,7 @@ Tracking Progress = Processando o Rastreamento
         <ul>
             <li><strong>No Directory Traversal:</strong> Any path containing <code>..</code> segments is strictly prohibited and skipped.</li>
             <li><strong>Restricted Scope:</strong> Paths must reside strictly inside the <code>assets/</code> or <code>Extensions/</code> directories.</li>
-            <li><strong>No Copy-All Directories:</strong> Specifying root base folders (exactly `assets` or `Extensions`) to copy the entire repository is rejected.</li>
+            <li><strong>No Copy-All Directories:</strong> Specifying root base folders (exactly <code>assets</code> or <code>Extensions</code>) to copy the entire repository is rejected.</li>
         </ul>
 
         <h4>The Result</h4>
@@ -998,10 +972,47 @@ Tracking Progress = Processando o Rastreamento
         <blockquote>
             <p><strong>Note:</strong> The uninstaller that ships inside the installer is not currently signed as part of this process.</p>
         </blockquote>
+        </section>
 
+        <section id="localization">
+        <h2>18. Localization</h2>
+        <p>To translate or customize text within your generated application, the engine supports drop-in localization dictionaries. Follow these steps to implement custom strings:</p>
+        <ol>
+            <li>Navigate to the <code>assets/localize</code> directory within your project workspace (create it if it doesn't exist yet).</li>
+            <li>Create a text file explicitly named <code>localize.txt</code> (or one of the language-specific filenames below).</li>
+            <li>Add your translations using a standard key-value format. You can use either an equals sign (<code>=</code>) or a colon (<code>:</code>) as a delimiter.</li>
+        </ol>
+        <p><strong>Example <code>assets/localize/localize.txt</code> formatting:</strong></p>
+<pre style="background: #1a1a1a; color:white;padding : 15px; border-radius: 5px;"><code># This is a comment line
+my_app = My Custom App Name
+Zoom In : Magnify View
+Tracking Progress = Processando o Rastreamento
+</code></pre>
+        <p><em>Note: The engine will automatically load these pairs at runtime and replace corresponding <code>tr("...")</code> text wrapping instances in the UI. Localization files live under an <code>assets/localize/</code> subfolder (not flat in <code>assets/</code>) to keep that folder from accumulating one file per bundled language - the icons used by "..." buttons live in their own <code>assets/icons/</code> subfolder for the same reason.</em></p>
 
+        <h3>Default Language (GUI Designer)</h3>
+        <p>The <b>Style</b> tab of the GUI Designer (for the standalone C++/Python sample-app targets - not shown for PFV4 plugin exports) has a <b>Default Language</b> dropdown next to the theme preset picker. This sets which bundled dictionary the generated app starts with; the end user can still change it afterward via <b>Preferences &gt; Language</b> at runtime, same as always.</p>
 
-        <h2>Application User Interface Features</h2>
+        <h3>Multiple Languages &amp; the Preferences &gt; Language Selector</h3>
+        <p>Beyond the single always-loaded <code>localize.txt</code> above, the generated application also ships with a <b>Preferences &gt; Language</b> dropdown that lets the end user switch between several bundled dictionaries at runtime, without editing any files themselves:</p>
+        <table>
+            <tr><th>Language combo entry</th><th>Dictionary file</th></tr>
+            <tr><td><b>English</b></td><td><code>localize.txt</code> - the same file described above (empty by default, so every <code>tr("...")</code> call falls back to its own English key text unless you've added overrides). Also the default unless a different Default Language is set in the GUI Designer's Style tab.</td></tr>
+            <tr><td><b>German</b></td><td><code>localize_de-DE.txt</code></td></tr>
+            <tr><td><b>Spanish</b></td><td><code>localize_es-ES.txt</code></td></tr>
+            <tr><td><b>French</b></td><td><code>localize_fr-FR.txt</code></td></tr>
+            <tr><td><b>Japanese</b></td><td><code>localize_ja-JP.txt</code></td></tr>
+            <tr><td><b>Chinese</b></td><td><code>localize_zh-CN.txt</code></td></tr>
+        </table>
+        <p>Each of these files uses the exact same key-value format as <code>localize.txt</code> above, lives in the same <code>assets/localize/</code> subfolder, and is resolved through the same <code>codegen_installer/&lt;app_name&gt;</code> &rarr; <code>codegen_installer</code> &rarr; workspace <code>assets/localize/</code> override hierarchy described under "Extra Assets Copy List and Localization" above - a language file that can't be resolved anywhere for a given build simply isn't bundled, and its combo entry falls back to English text at runtime instead of failing to build.</p>
+        <ul>
+            <li><strong>Persistence:</strong> The chosen language is saved to the app's own <code>.ini</code> settings file (<code>[Localization]</code> section) and restored automatically the next time the application starts.</li>
+            <li><strong>Multi-View sync:</strong> In a Multi-View (Spawn) group, every follower's language always follows the master's current pick (like the Theme preset above) - a follower's own Preferences &gt; Language combo can still be opened, but whatever it's set to is re-applied from the master every frame, so it always ends up matching the group.</li>
+        </ul>
+        </section>
+
+        <section id="app-ui-features">
+        <h2>19. Application User Interface Features</h2>
         <p>The generated application's user interface can be extended with application features by adding them in the Features tab of the GUI designer.</p>
 
 
@@ -1087,8 +1098,10 @@ Tracking Progress = Processando o Rastreamento
             <li><strong>Preferences &gt; Logging - Advanced Logging:</strong> Off by default. Turning it on adds much more detail specifically about application startup (every engine/workflow init step, which configuration file got loaded and why, DLL/asset resolution) - exactly the phase most likely to fail silently before any UI is even on screen. It has no effect on anything after startup completes, so leaving it on costs nothing once the app is running normally.</li>
             <li><strong>Recommended workflow when something goes wrong:</strong> enable Advanced Logging in Preferences, relaunch the app to reproduce the issue, then locate and send the one log file at the path above.</li>
         </ul>
+        </section>
 
-        <h2>Architecture & API Usage</h2>
+        <section id="architecture-api">
+        <h2>20. Architecture &amp; API Usage</h2>
         <p>Regardless of your chosen output language, your code follows a matching workflow lifecycle to manage memory boundaries and thread execution models cleanly:</p>
 
         <ul>
@@ -1224,7 +1237,7 @@ int main() {
                 </tr>
             </tbody>
         </table>
-
+        </section>
 
     </div>
 </body>

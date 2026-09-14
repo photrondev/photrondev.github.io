@@ -1489,7 +1489,7 @@
         </div>
         <div class="info-tile-body">
             <p>
-                INFINIWORKFLOW is a platform for developing AI, ML, & Computer Vision pipelines with real-time sensing acquisition and control
+                INFINIWORKFLOW is a node-based platform for building AI, ML, and Computer Vision pipelines, with real-time support for sensor acquisition and device control.
             </p>
             <ul>
                 <li>
@@ -1515,7 +1515,7 @@
     </div>
 
     <h2>User Interface Elements</h2>
-    <p>INFINIWORKFLOW runs in a browser with the following main UI components</p>
+    <p>INFINIWORKFLOW runs entirely in your browser. Its main UI components are:</p>
     <ul>
         <li><a href="#hub">HUB</a></li>
         <li><a href="#Menu">App Menu</a></li>
@@ -1551,7 +1551,7 @@
 
 
     <h2 id="Menu">App Menu</h2>
-    <p>The application menu allows the following functionality</p>
+    <p>The App Menu is a floating toolbar docked to the top of the canvas, providing the following functionality:</p>
 
     <div class="mockdlg-caption">Example: the real App Menu toolbar (a floating bar docked to the top of the canvas - hover peeks it, pin it open with the pin icon on the left)</div>
     <div style="background:rgba(0,0,0,0.92); border-radius:0 0 10px 10px; padding:10px 16px; display:flex; align-items:center; gap:2px; width:fit-content; max-width:100%; margin:0 auto; overflow-x:auto; font-size:1.3rem; color:rgb(210,210,210); font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif; box-shadow:0 5px 25px rgba(0,0,0,0.4);">
@@ -1587,11 +1587,11 @@
             <div class="menu-group-card-header"><i class="bi bi-file-earmark"></i> File</div>
             <div class="menu-group-card-body">
                 <ul>
-                    <li><i class="bi bi-cloud-upload"></i>  Import a workflow will open the import dialog and allow you to select an existing workflow from the demos folder using the <a href="#ImportExport">Import Browser</a></li>
-                    <li><i class="bi bi-star"></i> Add authoring notes to the workflow to include your name and description of the workflow</li>
-                    <li><i class="bi bi-cloud-download"></i> Saves the workflow using the <a href="#ImportExport">Export Browser</a></li>
-                    <li><i class="bi bi-cart"></i> Generate code for integration into your application See <a href="/codegen.html">Code Generator</a></li>
-                    <li><i class="bi bi-trash"></i> Clears the workflow to start a new one from scratch</li>
+                    <li><i class="bi bi-cloud-upload"></i> Import: opens the import dialog, letting you select an existing workflow from the demos folder using the <a href="#ImportExport">Import Browser</a></li>
+                    <li><i class="bi bi-star"></i> Add authoring notes to the workflow, including your name and a description of the workflow</li>
+                    <li><i class="bi bi-cloud-download"></i> Save: saves the workflow using the <a href="#ImportExport">Export Browser</a></li>
+                    <li><i class="bi bi-cart"></i> Generate code for integration into your application - see <a href="/codegen.html">Code Generator</a></li>
+                    <li><i class="bi bi-trash"></i> Clear: resets the workflow to start a new one from scratch</li>
                     <li><i class="bi bi-power"></i> Exit the application</li>
                 </ul>
             </div>
@@ -1725,13 +1725,12 @@
     <p><i class="bi bi-pause"></i> Pauses all the selected playable nodes which is useful if you are tracking and want to position the tracker marker</p>
 
     <h2 id="Catalog">Toolbox</h2>
-    <p>The toolbox allows you to add new tools as nodes into your flowgraph</p>
+    <p>The Toolbox is where you add new tools to your flowgraph as nodes.</p>
 
     <p>
-        The first tab will show all the tools and the remaining tabs show a subset of tools such as related to computer vision or ML etc. You can hover over
-        the tab icon and a tooltip will show you the category name. Once a category tab is selected you can further refine the list of tools shown by entering keywords input,
-        this is useful to quickly find a particular tool you want to insert into your workflow.
-
+        The first tab shows every tool; the remaining tabs each show a subset, such as tools related to Computer Vision or ML. Hover over a tab icon to see
+        a tooltip with its category name. Once you've selected a category tab, you can further narrow the list by typing keywords into the search field -
+        useful for quickly finding a specific tool to insert into your workflow.
     </p>
 
     <div class="mockdlg-caption">Example: the Toolbox docked at the bottom of the canvas - category tabs, search, and a grid of draggable tool tiles</div>
@@ -1781,7 +1780,7 @@
 
     <h3 id="ToolboxGestures">Toolbox Gestures</h3>
     <p>
-        Hovering over the tools shows a tooltip description of the tool. To insert a tool into the workflow can be done with the following gestures:
+        Hovering over a tool shows a tooltip describing it. You can insert a tool into the workflow using any of the following gestures:
     </p>
     <ul class="gesture-grid gesture-grid-3col">
         <li class="gesture-card">
@@ -1888,10 +1887,10 @@
         <img src="https://photrondev.github.io/assets/ui.jpg" style="margin-top: -100px; margin-bottom: -400px; margin-right: -400px; " />
     </div>
     <p>
-        The flowgraph is used to construct your workflow that comprises of Nodes and Edges. Nodes represents functions that have input and generate outputs.
-        These nodes are created by dragging tools into your workflow from the Toolbox. A node's input and output have 'ports' which are where edges can
-        be connected. Edges are connections between the output port of an upstream node to the input port of a upstream node. Any inputs ports that are unconnected
-        can also be set to specific values using the Parameter Editor. The color of the node indicates the following:
+        The flowgraph is where you construct your workflow, which comprises Nodes and Edges. Nodes represent functions that take input and generate outputs.
+        You create nodes by dragging tools into your workflow from the Toolbox. A node's inputs and outputs have 'ports', which are where edges connect.
+        An edge connects the output port of an upstream node to the input port of a downstream node. Any input port left unconnected
+        can instead be set to a specific value using the Parameter Editor. A node's color indicates its execution language:
     </p>
     <table>
         <tr>
@@ -1926,8 +1925,8 @@
     <ul>
         <li>
             <p>
-                Adding an Edge to connect the output of an upstream node to the input of a downstream node. In this example, we want to have the Yolo Classification be done on a Movie Reader, we thus connect the output of the Movie Reader node to the input of the Yolo Classification node.
-                Click on the source port of the upstream node and the drag to the destination port of the downstream node. A green line color indicates that the edge is allowed which is based on the type matching between the two ports
+                Adding an edge connects the output of an upstream node to the input of a downstream node. In this example, we want to run Yolo Classification on the output of a Movie Reader, so we connect the Movie Reader node's output to the Yolo Classification node's input.
+                Click the source port of the upstream node and drag to the destination port of the downstream node. A green line indicates the edge is allowed, based on the type of the two ports matching.
             </p>
             <div class="media-row">
                 <div class="media-row-item">
@@ -2005,8 +2004,8 @@
         </div>
         <div>
             <p>
-                Removing an Edge disconnects the output of upstream node to the input of a downstream node. In this example we no longer want the Yolo Classification be done on the output of the Movie Reader.
-                Hover over the edge, it will indicate it can be deleted when a change in cursor happens, then click on the edge to delete it
+                Removing an edge disconnects the output of an upstream node from the input of a downstream node. In this example, we no longer want Yolo Classification run on the output of the Movie Reader.
+                Hover over the edge - the cursor changes to show it can be deleted - then click the edge to delete it.
             </p>
             <img src="https://photrondev.github.io/assets/ui_disconnect_edge.gif" />
         </div>
@@ -2215,9 +2214,9 @@
     </div>
 
     <p>
-        The UI consists of the tool icon and the name of the node that is being editoed, followed by the list of input parameters of the edited node and finally the dialog buttons.
-        The description link, which shows the name of the edited node, when clicked will open a webpage that has the description of the tool.
-        The input parameters are shown for any inputs that are not connected via the flowgraph.
+        The dialog is laid out as the tool icon and the name of the node being edited, followed by the list of that node's input parameters, and finally the dialog buttons.
+        Clicking the node's name opens a webpage with the tool's full description.
+        Only inputs that aren't already connected via the flowgraph show up as editable parameters here - a connected input's value comes from its upstream node instead.
     </p>
     <p>
         Hovering over the parameter will show the description of the parameter:
@@ -2236,7 +2235,7 @@
             <div class="param-tile-caption"><span>Numeric textfield</span><i class="bi bi-info-circle-fill" onclick="openParamDescModal(this)"></i></div>
             <template>
                 A numeric input allows you to enter a value. There are also step controls that allow you to increment one unit up and down.
-                Below the numeric input you can drag, a range UI will appear. Whilst dragging, holding the shift key will do smaller step changes whilst holding control key will do larger step changes.
+                Dragging below the numeric input reveals a range slider. While dragging, hold Shift for smaller step changes or Ctrl for larger ones.
                 For whole number and decimal parameters (not the multi-component numeric2/numeric3 versions), an icon <i class="bi bi-calculator"></i> next to the reset icon opens a
                 standalone calculator so you can compute a value with +, -, &times;, &divide; and type it directly into the field.
             </template>
@@ -2246,15 +2245,15 @@
             <div class="param-tile-caption"><span>Numeric2 textfield</span><i class="bi bi-info-circle-fill" onclick="openParamDescModal(this)"></i></div>
             <template>
                 Two numeric inputs allow you to enter both numerical values.
-                Below the numeric input you can drag, a range UI will appear. Whilst dragging, holding the shift key will do smaller step changes whilst holding control key will do larger step changes.
+                Dragging below the numeric input reveals a range slider. While dragging, hold Shift for smaller step changes or Ctrl for larger ones.
             </template>
         </li>
         <li class="gesture-card param-tile">
             <img src="https://photrondev.github.io/assets/ui_slider_control.jpg" />
             <div class="param-tile-caption"><span>Numeric slider</span><i class="bi bi-info-circle-fill" onclick="openParamDescModal(this)"></i></div>
             <template>
-                If the slider has minimum and maximum values a slider appears.
-                Whilst dragging, holding the shift key will do smaller step changes whilst holding control key will do larger step changes.
+                A slider appears whenever the parameter declares minimum and maximum values.
+                While dragging, hold Shift for smaller step changes or Ctrl for larger ones.
             </template>
         </li>
         <li class="gesture-card param-tile">
@@ -2263,30 +2262,27 @@
             <template>
                 Two numeric inputs with sliders that can optionally be locked together to modify both values
                 at the same time.
-                Whilst dragging, holding the shift key will do smaller step changes whilst holding control key will do larger step changes.
+                While dragging, hold Shift for smaller step changes or Ctrl for larger ones.
             </template>
         </li>
         <li class="gesture-card param-tile">
             <img src="https://photrondev.github.io/assets/ui_checkbox_control.jpg" />
             <div class="param-tile-caption"><span>Checkbox</span><i class="bi bi-info-circle-fill" onclick="openParamDescModal(this)"></i></div>
-            <template>A checkbox toggle to allow you to set values of true or false</template>
+            <template>A checkbox toggle for setting a true/false value</template>
         </li>
         <li class="gesture-card param-tile">
             <img src="https://photrondev.github.io/assets/ui_select_control.jpg" />
             <div class="param-tile-caption"><span>Selection menu</span><i class="bi bi-info-circle-fill" onclick="openParamDescModal(this)"></i></div>
             <template>
-                A selection menu allows you to set the value to one of the predefined
-                values from a permitted set of values in the selection menu
+                A dropdown menu for setting the value to one of a predefined set of choices.
             </template>
         </li>
         <li class="gesture-card param-tile">
             <img src="https://photrondev.github.io/assets/ui_multi_select_control.jpg" />
             <div class="param-tile-caption"><span>Multi selection menu</span><i class="bi bi-info-circle-fill" onclick="openParamDescModal(this)"></i></div>
             <template>
-                Multi selection allows you to add tags of permitted values.
-                Click on the widget and a list of permitted values will show up.
-                In some cases your own user defined values that are not
-                in the permitted set of values
+                Lets you add several values as tags. Click the widget to see the list of permitted values;
+                some multi-selection parameters also accept your own custom values outside that permitted list.
             </template>
         </li>
         <li class="gesture-card param-tile">
@@ -2324,8 +2320,7 @@
             <div class="param-tile-caption"><span>Map</span><i class="bi bi-info-circle-fill" onclick="openParamDescModal(this)"></i></div>
             <template>
                 A map is a series of key/value pairs.
-                Clicking on the widget opens a dialog editor that shows documentation as well as
-                allow you to enter the key and value pair
+                Clicking the widget opens a dialog editor that shows documentation and lets you enter each key/value pair
                 <img src="https://photrondev.github.io/assets/ui_map_dialog_control.jpg" />
             </template>
         </li>
@@ -2340,7 +2335,7 @@
         <li class="gesture-card param-tile">
             <img src="https://photrondev.github.io/assets/ui_tabs_control.jpg" />
             <div class="param-tile-caption"><span>Tabs</span><i class="bi bi-info-circle-fill" onclick="openParamDescModal(this)"></i></div>
-            <template>Some of the tools also have a Tab user-interface to layout the controls into different tabs.</template>
+            <template>Some tools lay out their controls across several tabs instead of one long list.</template>
         </li>
         <li class="gesture-card gesture-card-blank" aria-hidden="true"></li>
         <li class="gesture-card gesture-card-blank" aria-hidden="true"></li>
@@ -2419,12 +2414,12 @@
     </p>
 
     <ul class="viewer-help-list">
-        <li><i class="bi bi-window-sidebar"></i> <strong>Toggle Fullscreen:</strong> Switches the viewer between windowed and maximized viewer.</li>
+        <li><i class="bi bi-window-sidebar"></i> <strong>Toggle Fullscreen:</strong> Switches the viewer between windowed and maximized view.</li>
         <li><strong>1:1</strong> <strong>1:1 Pixel Zoom:</strong> Resets zoom so that one image pixel equals exactly one screen pixel.</li>
         <li><i class="bi bi-zoom-in"></i> <strong>Zoom In:</strong> Increases the magnification of the image.</li>
         <li><i class="bi bi-aspect-ratio"></i> <strong>Zoom Fit:</strong> Resets the zoom level to fit the entire image within the current window.</li>
         <li><i class="bi bi-zoom-out"></i> <strong>Zoom Out:</strong> Decreases the magnification of the image.</li>
-        <li><i class="bi bi-crop"></i> <strong>Resolution Information:</strong> Displays resolution, bit depth, and memory usage. Also allows setting Sets the <a href="#ProjectResolution">project resolution</a>.</li>
+        <li><i class="bi bi-crop"></i> <strong>Resolution Information:</strong> Displays resolution, bit depth, and memory usage. Also lets you set the <a href="#ProjectResolution">project resolution</a>.</li>
         <li><i class="bi bi-image"></i> <strong>Toggle Border:</strong> Enables or disables a high-contrast guide border 1 pixel outside the image boundary. Useful for checking alignment against the canvas.</li>
 
         <li><i class="bi bi-chevron-bar-left"></i> <strong>First Frame:</strong> Jumps to the start of the sequence.</li>
@@ -2460,7 +2455,7 @@
 
         <li class="list-section-label" style="margin-top: 20px; border-top: 1px solid #444; padding-top: 10px; font-weight: bold; color: #aaa;">Path Editor Tools</li>
         <li><i class="bi bi-circle"></i> <strong>Insert Point:</strong> Places a single coordinate marker.</li>
-        <li><i class="bi bi-square-fill"></i> <strong>Insert Rectangle:</strong> Draws a 4-point rectangular .</li>
+        <li><i class="bi bi-square-fill"></i> <strong>Insert Rectangle:</strong> Draws a 4-point rectangle.</li>
         <li><i class="bi bi-circle-fill"></i> <strong>Insert Ellipse:</strong> Creates a circular or elliptical region.</li>
         <li><i class="bi bi-pentagon-fill"></i> <strong>Insert Shape:</strong> Allows drawing of custom polygons by clicking.</li>
         <li><i class="bi bi-pencil"></i> <strong>Insert Freehand:</strong> Sketch a custom path freely with the mouse. <em>(Long-press for Vector Brush thickness options)</em></li>
@@ -3021,7 +3016,7 @@
         The Machine Learning filters are based using <a target="_blank" href="https://scikit-learn.org/stable/">scikit-learn</a> Python module
         are all under the <i class="bi bi-lightbulb-fill"> ML</i> category.
         Each ML tool has 3 tabs: Train, Hyperparameters and Export. The Train parameters allow you to set the X and Y columns as well as a trigger to start the training.
-        As training can be slow so a trigger is used to start the process, however, when doing a grid search, the trigger is automatically generated.
+        Since training can be slow, a trigger is used to start the process - though when running a grid search, that trigger is generated automatically.
     </p>
     <ul class="gesture-grid gesture-grid-4col">
         <li class="gesture-card">
@@ -3183,7 +3178,7 @@
 
         <tr>
             <td>#Wait</td>
-            <td>Number of times since last update the node waited as inputs were not ready or didnt change</td>
+            <td>Number of times since last update the node waited because inputs were not ready or hadn't changed</td>
         </tr>
 
         <tr>
@@ -3351,9 +3346,9 @@
 
     <h3 id="Grouping">Grouping</h3>
     <p>
-        Grouping allows you to take a set of nodes that are connected together and create a compount group node.
-        The grouped node is useful to reduce the complexity of your flowgraph and you can further export group nodes
-        as fully fledged tools.
+        Grouping lets you take a set of connected nodes and combine them into a single compound group node.
+        Grouping reduces the visual complexity of your flowgraph, and you can go further and export a group node
+        as a fully-fledged tool of its own.
     </p>
     <ul class="gesture-grid gesture-grid-3col">
         <li class="gesture-card">
@@ -3709,7 +3704,7 @@
         Clicking <b>Copy</b> transfers the checked assets to the target with a live progress bar (cancellable). Once the copy
         finishes - or immediately, if nothing needed to be copied - the dialog reaches a <b>Ready</b> step; nothing has been sent
         to the graph yet. Only when you click <b>Proceed</b> do the selected nodes actually get replaced with a pair of bridge
-        nodes, Distributed Sink and Distributed Source, and the job start: the Sink sends data out from your system and the
+        nodes, Distributed Sink and Distributed Source, and the job starts: the Sink sends data out from your system and the
         Source receives the processed data back in. This lets you review the asset checklist and back out before anything
         changes your workflow.
     </p>
@@ -3946,15 +3941,17 @@
     <h2>Installation</h2>
     <h3 id="SystemRequirements">System Requirements</h3>
     <p>
-        INFINIWORKFLOW runs on a modern PC with Windows 11 or higher or MacOS 12.6.2 or higher. It requires an Intel or AMD processor and ideally a NVIDIA GPU with 12GB+ of disk space.
-        It is highly recommended to have a multicore processor as the execution will be more smoother.
-
-        On Windows the software will run on machines without a NVIDIA GPU
-        but that will significantly reduce the performance especially for ML workflows.
-        A package with no dependencies on Cuda or PyTorch is also available to download - this will not require a NVIDIA GPU to be present on your system and
-        is substantially smaller in size but does not allow you to build deep learning models and is slower for AI inference.
-
-        You must also have the latest Google Chrome browser installed : 131.0.6778.140 or higher.
+        INFINIWORKFLOW runs on a modern PC with Windows 11 or higher, or macOS 12.6.2 or higher. It requires an Intel or AMD processor, at least 12GB of free
+        disk space, and ideally an NVIDIA GPU with sufficient VRAM for your models. A multicore processor is highly recommended, since execution runs
+        noticeably smoother with one.
+    </p>
+    <p>
+        On Windows, the software also runs on machines without an NVIDIA GPU, but that significantly reduces performance, especially for ML workflows.
+        A package with no dependencies on CUDA or PyTorch is also available to download - it doesn't require an NVIDIA GPU to be present on your system and
+        is substantially smaller in size, but it doesn't let you build deep learning models and is slower for AI inference.
+    </p>
+    <p>
+        You must also have a recent Google Chrome browser installed - version 131.0.6778.140 or higher.
     </p>
 
 
@@ -5155,7 +5152,7 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
         Note, on OSX and Linux instead of using "..\python.exe", you should use "python3"
     </p>
 
-<pre>..\python.exe app.pyc [-help] [-device #] [-test ...] [-cuda ...] [-batch] [-final node name or node uuid] [-override json] [-nobrowser] [-source ...] [-path ...] [-port ...] [-resolution ...] [-test ...] [-label] [-fps ...] [-mcp] [-label_variations directory] [-movie movie_prefix] [-clean] [workflow]</pre>
+<pre>..\python.exe app.pyc [-help] [-url ...] [-device #] [-cuda ...] [-batch] [-final node name or node uuid] [-override json] [-nobrowser] [-source ...] [-path ...] [-port ...] [-resolution ...] [-test ...] [-label] [-fps ...] [-mcp] [-label_variations directory] [-movie movie_prefix] [-clean] [workflow]</pre>
 
     <table class="tables-wide arg-table">
         <tr>

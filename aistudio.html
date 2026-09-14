@@ -455,7 +455,7 @@
                     <tr>
                         <td><i class="bi bi-play-circle"></i></td>
                         <td><strong>Process Video</strong></td>
-                        <td>Launches frame extraction for a raw video file. Videos longer than 240 frames redirect automatically to the <strong>Video Splitting Studio</strong> to define target boundaries first.</td>
+                        <td>Launches frame extraction for a raw video file. Videos longer than 1024 frames redirect automatically to the <strong>Video Splitting Studio</strong> to define target boundaries first.</td>
                     </tr>
                     <tr>
                         <td><i class="bi bi-arrow-clockwise"></i></td>
@@ -598,10 +598,13 @@
                         <strong>Frame Deduplication Control:</strong> Set a threshold (range: <code>0 - 1000</code>, default: <code>1</code>) to filter out redundant, static, or identical frames during video processing, reducing annotation workload by eliminating duplicate image sequences.
                     </li>
                     <li>
-                        <strong>Discord Notifications Integration:</strong> Toggle <em>"Enable Discord Notifications"</em> and supply a <strong>Discord Webhook URL</strong>. The backend monitors background batch preprocessing progress and training metrics, periodically posting rich embed updates to your Discord channel.
+                        <strong>Discord Notifications Integration:</strong> Toggle <em>"Enable Discord Notifications"</em> and supply a <strong>Discord Webhook URL</strong>. The backend monitors background batch preprocessing progress and training metrics, periodically posting plain-text status updates (and, for some events, the relevant log/output files) to your Discord channel via the webhook.
                     </li>
                     <li>
-                        <strong>Persistent Cookie-State Retention:</strong> All settings (deduplication threshold, Discord toggles, and webhook URLs) are saved in cookies, so your preferences persist across page reloads and future sessions.
+                        <strong>Export in Subfolder:</strong> When checked, fine-tuned models export to the project's root folder under the export name instead of <code>assets/</code>&lt;export name&gt; - useful when you want trained weights kept alongside the project rather than under the shared assets tree.
+                    </li>
+                    <li>
+                        <strong>Persistent Cookie-State Retention:</strong> All settings (deduplication threshold, Discord toggles, webhook URL, and the export-subfolder choice) are saved in cookies, so your preferences persist across page reloads and future sessions.
                     </li>
                 </ul>
             </div>
@@ -613,7 +616,7 @@
             </p>
             <h3><i class="bi bi-lightning-charge"></i> Automated Redirection</h3>
             <p>
-                You don't need to launch the Splitter manually. Inside the Video Segmentation Studio, clicking <strong>Process</strong> <i class="bi bi-play-circle"></i> on any raw video file with <strong>more than 240 frames</strong> automatically opens the full-screen Video Splitting Studio interface.
+                You don't need to launch the Splitter manually. Inside the Video Segmentation Studio, clicking <strong>Process</strong> <i class="bi bi-play-circle"></i> on any raw video file with <strong>more than 1024 frames</strong> automatically opens the full-screen Video Splitting Studio interface. (The Splitter's own default output chunk size, 240 frames, is a separate, independently adjustable setting - see Custom Chunking Size below.)
             </p>
             <h3><i class="bi bi-sliders"></i> Features and Interactive Scrubber Controls</h3>
             <ul class="viewer-help-list">
@@ -659,25 +662,23 @@
             </ul>
             <h3><i class="bi bi-sliders2-vertical"></i> 2. Hyperparameter Configuration</h3>
             <p>
-                The studio exposes the key learning parameters in a visual dashboard, letting you tune the training process:
+                Before clicking <strong>Train Now</strong>, the panel exposes the following fields (each is remembered between sessions, so you only need to set them once per project):
             </p>
             <ul class="viewer-help-list">
                 <li>
-                    <i class="bi bi-layers-half"></i> <strong>Model Size &amp; Backbone Selection:</strong> Choose from standard neural backbones depending on your speed and resource needs (e.g., <code>YOLOv8 Nano (n)</code> for real-time edge performance, <code>YOLOv8 Small (s)</code> or <code>Medium (m)</code> for complex multi-class detection).
+                    <i class="bi bi-tag"></i> <strong>Export Name:</strong> The name the compiled weights and inference node are saved under.
                 </li>
                 <li>
-                    <i class="bi bi-percent"></i> <strong>Train/Val Split Ratio:</strong> Sets the percentage of frames reserved for validation (typically an <code>80/20</code> or <code>90/10</code> split), keeping a clean validation set aside so you can monitor for overfitting.
+                    <i class="bi bi-percent"></i> <strong>Train Split %:</strong> The percentage of frames used for training, from <code>10</code> to <code>90</code> (default <code>80</code>) - the remainder is held out for validation, so you can monitor for overfitting.
                 </li>
                 <li>
-                    <i class="bi bi-arrow-repeat"></i> <strong>Epoch Control:</strong> Specify the total training epochs (range: <code>10 - 500</code>) to control how many passes the model makes over your dataset.
+                    <i class="bi bi-arrow-repeat"></i> <strong>Epochs:</strong> The number of passes the model makes over your dataset (default <code>50</code>). There's no enforced maximum - more epochs generally means more training time and a higher risk of overfitting a small dataset.
                 </li>
                 <li>
-                    <i class="bi bi-grid-3x3-gap-fill"></i> <strong>Batch Size &amp; VRAM Optimization:</strong> Set the number of images processed concurrently per backward gradient update (e.g., <code>8</code>, <code>16</code>, <code>32</code>, or <code>64</code>).
-                    <ul>
-                        <li><em>Higher Batch Sizes:</em> Maximizes GPU hardware utilization, speeds up overall training duration, and provides more stable gradient updates. Best suited for high-end GPUs.</li>
-                        <li><em>Lower Batch Sizes:</em> Dramatically reduces the active VRAM footprint. If your system encounters a <code>CUDA Out of Memory (OOM)</code> crash, downsize the batch size parameter to <code>8</code> or <code>4</code>.</li>
-                        <li><em>Dynamic Auto-Batching:</em> Setting the parameter to <code>Auto</code> commands the trainer to run initial dummy dry-run passes on your hardware to determine VRAM ceilings, automatically picking the largest safe batch size.</li>
-                    </ul>
+                    <i class="bi bi-diagram-3"></i> <strong>Optimizer:</strong> <code>auto</code>, <code>SGD</code>, <code>Adam</code>, or <code>AdamW</code>. <code>auto</code> lets the training framework pick based on your dataset and model.
+                </li>
+                <li>
+                    <i class="bi bi-aspect-ratio"></i> <strong>Image Size:</strong> The input resolution frames are resized to for training (default <code>640</code>). This is independent of the 1024px resolution the labeling editor's SAM-based tracking uses - see the Performance tip below.
                 </li>
             </ul>
             <h3><i class="bi bi-collection-play"></i> 3. Initiating Training &amp; Multi-Video Selection</h3>
@@ -704,6 +705,12 @@
                     <i class="bi bi-terminal-fill"></i> <strong>Standalone Mode Indicator:</strong> The dialog displays a terminal icon (<i class="bi bi-terminal"></i>) in the header, indicating that training will run as a standalone background process.
                 </li>
                 <li>
+                    <i class="bi bi-sliders2-vertical"></i> <strong>Carried-Over Hyperparameters:</strong> The batch dialog doesn't re-expose Train Split %, Epochs, Optimizer, or Image Size - it reuses whatever you last set (and saved) in the single-video training panel, described above.
+                </li>
+                <li>
+                    <i class="bi bi-arrow-repeat"></i> <strong>Epoch Stages:</strong> Splits the total epoch count into resumable stages (<code>1</code> to <code>100</code>) - if a batch run crashes or is interrupted partway through, it resumes from the last completed stage instead of restarting training from scratch.
+                </li>
+                <li>
                     <i class="bi bi-trash-fill"></i> <strong>Delete Prior Training Checkpoint:</strong> A checkbox in the dialog footer, <em>"Delete prior training checkpoint,"</em> clears any saved weights from previous runs so the model trains from a clean initial state.
                 </li>
                 <li>
@@ -713,27 +720,15 @@
                     <i class="bi bi-hdd-network"></i> <strong>Distribute This Job:</strong> Check <em>"Distribute this job"</em> to send the training run to a discovered remote peer instead of exiting - INFINIWORKFLOW keeps running, and the crimson button's wording changes away from "EXIT" as soon as the box is checked. The checkbox only lists real network peers (never this machine, since a local distribute wouldn't free any VRAM) and disables itself if none are found.
                 </li>
             </ul>
-            <p class="small" style="font-style:italic;">Example: the Batch Training dialog - hyperparameters, the standalone/distribute options, and the launch button</p>
+            <p class="small" style="font-style:italic;">Example: the Batch Training dialog - epoch staging, the standalone/distribute options, and the launch button</p>
             <div style="pointer-events:none; user-select:none; background:#15151b; border:1px solid #2b2b35; border-radius:8px; padding:16px 20px; max-width:640px; font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif; font-size:0.9rem;">
                 <div style="display:flex; align-items:center; justify-content:space-between; color:#e6e9ec; font-weight:600; font-size:1.05rem; margin-bottom:14px;">
                     <span><i class="bi bi-collection-play" style="color:#4fa3e3; margin-right:6px;"></i>Batch Training</span>
                     <i class="bi bi-terminal" style="color:#98a3ad; font-size:1rem;" title="Standalone mode"></i>
                 </div>
                 <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 0; border-bottom:1px solid #232329;">
-                    <span style="color:#c9d3db;">Model size / backbone</span>
-                    <select style="background:#1c1c1c; color:#ddd; border:1px solid #3a3a3a; border-radius:4px; padding:4px 8px;"><option>YOLOv8 Small (s)</option></select>
-                </div>
-                <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 0; border-bottom:1px solid #232329;">
-                    <span style="color:#c9d3db;">Train / Val split</span>
-                    <span style="color:#ddd;">80 / 20</span>
-                </div>
-                <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 0; border-bottom:1px solid #232329;">
-                    <span style="color:#c9d3db;">Epochs</span>
-                    <input value="150" style="width:60px; background:#1c1c1c; color:#ddd; border:1px solid #3a3a3a; border-radius:4px; padding:4px 8px; text-align:center;">
-                </div>
-                <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 0; border-bottom:1px solid #232329;">
-                    <span style="color:#c9d3db;">Batch size</span>
-                    <select style="background:#1c1c1c; color:#ddd; border:1px solid #3a3a3a; border-radius:4px; padding:4px 8px;"><option>Auto</option></select>
+                    <span style="color:#c9d3db;">Epoch Stages (split epochs into stages)</span>
+                    <input value="1" style="width:60px; background:#1c1c1c; color:#ddd; border:1px solid #3a3a3a; border-radius:4px; padding:4px 8px; text-align:center;">
                 </div>
                 <div style="display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px solid #232329;">
                     <input type="checkbox" style="width:18px; height:18px; accent-color:#e05252;">
