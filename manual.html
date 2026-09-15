@@ -15,6 +15,15 @@
             padding-top: 70px;
         }
 
+        /* The fixed navbar (.navbar-fixed-top, ~50px tall) overlaps the top
+           of the viewport, so scrollIntoView()/anchor navigation can land a
+           target's top edge right under it, clipping it. scroll-padding-top
+           reserves that space for ANY scroll-into-view, not just the JS one
+           below - covers native "#id" anchor navigation too. */
+        html {
+            scroll-padding-top: 80px;
+        }
+
         /* ─── Section headings ─── same digital/display font as the nav,
            so page content and navigation read as one consistent system. */
         h2, h3 {
@@ -1214,6 +1223,7 @@
                                     </li>
 
                                     <li><a href="#DistributionProcessing">Distributed Rendering</a></li>
+                                    <li><a href="#RenderToClip">Render to Clip</a></li>
                                     <li><a href="#RemoteScriptExecution">Remote Script Execution</a></li>
                                 </ul>
                             </li>
@@ -1526,6 +1536,7 @@
         <li><a href="#PathEditor">Path Editor</a></li>
         <li><a href="#ImportExport">Browser</a></li>
         <li><a href="#DistributionProcessing">Distributed Rendering</a></li>
+        <li><a href="#RenderToClip">Render to Clip</a></li>
     </ul>
 
     <h2 id="hub">HUB</h2>
@@ -1694,7 +1705,7 @@
             <div class="menu-group-card-body">
                 <ul>
                     <li><i class="bi bi-speedometer2"></i> <a href="#ProfileMenuFunc">Profile</a>: shows a live colored FPS speed-dial badge on every active node - see <a href="#ProfileMenuFunc">Profile</a> for details.</li>
-                    <li><i class="bi bi-hdd-network"></i> <a href="#DistributionProcessing">Distributed Rendering</a>: opens the Distributed Rendering dialog, for running part of your workflow on a different process or a different machine on the network.</li>
+                    <li><i class="bi bi-hdd-network"></i> <a href="#DistributionProcessing">Distributed Rendering</a>: opens the Distributed Rendering dialog, for running part of your workflow on a different process or a different machine on the network - the same dialog's <b>Render to Clip</b> checkbox instead bakes one node's current output to a video file; see <a href="#RenderToClip">Render to Clip</a> for details.</li>
                     <li>
                         <i class="bi bi-hourglass-split"></i> <a href="#Synchronize">Synchronize...</a>: available when the selected node has 2 or more connected inputs. Opens the <b>Synchronize</b> dialog to bring branches that have drifted out of sync back into alignment - see <a href="#Synchronize">Synchronize</a> for details.
                     </li>
@@ -3703,6 +3714,14 @@
         offered, since neither can usefully be sent to a peer. Click <b>Use this selection</b> on any row to close the list and
         carry that candidate straight into the normal node selection, ready to pick a peer and device as usual.
     </p>
+    <p>
+        Every image output the selection exposes at its boundary gets a real port on the local Distributed Source node -
+        including one that isn't wired to anything yet, so there's always somewhere to connect something new later without
+        having to undistribute first. A CUDA-accelerated node's output is exposed locally as a plain image type rather than a
+        GPU buffer either way, since the actual pixels always cross the network as ordinary data - GPU memory itself is never
+        shared between machines (or processes). Double-clicking the Distributed Source node shows its current output live,
+        the same as any other image-producing node.
+    </p>
 
     <h4>Asset checklist</h4>
     <p>
@@ -3846,6 +3865,55 @@
         whose job needs resuming shows a pulsing highlight on the flowgraph so it's easy to spot; opening the Distributed
         Rendering dialog shows a banner with a <b>Resume</b> button per job (or <b>Resume All</b> for every job at once) to
         reconnect it.
+    </p>
+
+    <h3 id="RenderToClip">Render to Clip</h3>
+    <p>
+        Render to Clip bakes one node's current output into a video file, then replaces that node with a <b>Movie Reader</b>
+        pointed at the result - useful for "freezing" an expensive or slow part of a workflow (a detector, an optical-flow
+        pass, anything GPU-heavy) into a plain clip you can play back instantly instead of recomputing every time. It's opened
+        from the same <a href="#DistributionProcessing">Distributed Rendering</a> dialog: pick a target and device as usual,
+        then check <b>Render to Clip</b> on the node-selection step.
+    </p>
+    <h4>Selecting a node</h4>
+    <p>
+        Unlike a normal distribute selection, Render to Clip always takes exactly one node - the one whose current output you
+        want recorded. Everything feeding it is discovered automatically by walking the graph backwards from that node, so
+        there's no need to also select its sources by hand. If the node has more than one image output, a small picker asks
+        which one to record; with just one, it's picked automatically. Set a start/end frame range, then click <b>Next</b> to
+        begin rendering.
+    </p>
+    <h4>This Session vs. New Process</h4>
+    <p>
+        When the target is this machine, a <b>Run</b> dropdown appears (only while Render to Clip is checked - a plain
+        distribute job, or a remote target, has no such choice) with two options:
+    </p>
+    <ul>
+        <li><b>This Session</b> - runs in-thread, sharing this session's own live graph. Fastest to start (no extra process,
+            no exported-subgraph file), but briefly pauses this session's own playback while it runs.</li>
+        <li><b>New Process</b> - launches a genuinely separate INFINIWORKFLOW process to do the render, exactly like a remote
+            peer would, just on this same machine. Slightly slower to start (its own engine has to spin up), but never
+            touches this session's live graph or playback at all.</li>
+    </ul>
+    <p>
+        Either way, progress is shown live as the render proceeds, all the way up to 100% - not just a spinner - and the job
+        appears as its own tile in the same picker as ordinary distribute and script jobs, with the usual Cancel option while
+        it's running.
+    </p>
+    <h4>Replacing the node</h4>
+    <p>
+        Once rendering finishes, the job waits for an explicit choice rather than replacing anything automatically: <b>Replace</b>
+        swaps the recorded node (and anything upstream of it that becomes unused as a result - anything still feeding something
+        else in the graph is left alone) with a new Movie Reader pointed at the clip, rewiring whatever the original node used
+        to feed; <b>Keep Nodes</b> discards the render and leaves the graph untouched. If the recorded node had any other live
+        connection besides the one being captured, a warning lists exactly what will be disconnected before you're asked to
+        confirm.
+    </p>
+    <p>
+        A baked Movie Reader remembers what it replaced - select just that one node on the canvas and open the Distributed
+        Rendering dialog again: it recognizes the selection and lands directly on a <b>Restore Original Nodes</b> confirmation
+        instead of the normal picker, ready to undo the bake and get the original node(s) back, reconnected exactly as they
+        were.
     </p>
 
     <h3 id="RemoteScriptExecution">Remote Script Execution</h3>
@@ -5165,7 +5233,33 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
         Note, on OSX and Linux instead of using "..\python.exe", you should use "python3"
     </p>
 
-<pre>..\python.exe app.pyc [-help] [-url ...] [-device #] [-cuda ...] [-batch] [-final node name or node uuid] [-override json] [-nobrowser] [-source ...] [-path ...] [-port ...] [-resolution ...] [-test ...] [-label] [-fps ...] [-mcp] [-label_variations directory] [-movie movie_prefix] [-clean] [workflow]</pre>
+<pre>..\python.exe app.pyc
+    [-help]
+    [-url ...]
+    [-port ...]
+    [-device #]
+    [-cuda ...]
+    [-batch]
+    [-final node name or node uuid]
+    [-override json]
+    [-nobrowser]
+    [-path ...]
+    [-source ...]
+    [-resolution ...]
+    [-test ...]
+    [-fps ...]
+    [-mcp]
+    [-label_variations directory]
+    [-movie movie_prefix]
+    [-clean]
+    [-studio]
+    [-distributed-listen]
+    [-distributed-token ...]
+    [-clip_uuid ...]
+    [-clip_start ...]
+    [-clip_end ...]
+    [-clip_result ...]
+    [workflow]</pre>
 
     <table class="tables-wide arg-table">
         <tr>
@@ -5313,6 +5407,62 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
             <td>Force full recomputation of variations when used with -label_variations by deleting existing completion cookies and images first. Supports -movie filtering.</td>
             <td></td>
             <td><pre>..\python.exe app.py -batch -clean -label_variations ..\assets\AI_Welding</pre></td>
+        </tr>
+
+        <tr>
+            <td>-resolution</td>
+            <td>Sets the initial viewer resolution, as WIDTHxHEIGHT</td>
+            <td></td>
+            <td><pre>..\python.exe app.pyc -resolution 1920x1080</pre></td>
+        </tr>
+
+        <tr>
+            <td>-studio</td>
+            <td>Opens directly into Studio mode instead of the default editor view</td>
+            <td></td>
+            <td><pre>..\python.exe app.pyc -studio</pre></td>
+        </tr>
+
+        <tr>
+            <td>-distributed-listen</td>
+            <td>Accept Distributed Rendering jobs pushed from another INFINIWORKFLOW instance on the control channel (port 5099) and run them here - opt-in, requires <code>-distributed-token</code> to actually accept anything</td>
+            <td></td>
+            <td><pre>..\python.exe app.pyc -distributed-listen -distributed-token my-shared-secret</pre></td>
+        </tr>
+
+        <tr>
+            <td>-distributed-token</td>
+            <td>Shared secret required on both ends of a Distributed Rendering job dispatch (the orchestrator sending it and the <code>-distributed-listen</code> instance receiving it) - without it, a <code>-distributed-listen</code> instance refuses all incoming jobs and an orchestrator refuses to send to a remote target</td>
+            <td></td>
+            <td><pre>..\python.exe app.pyc -distributed-token my-shared-secret</pre></td>
+        </tr>
+
+        <tr>
+            <td>-clip_uuid</td>
+            <td>(Batch mode, internal - Render to Clip remote dispatch) uuid of the <code>cv.video_writer</code> node to bound-export. Not intended to be set by hand - the orchestrating instance passes this automatically when dispatching a clip render to a remote peer.</td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>-clip_start</td>
+            <td>(Batch mode, internal) First frame of the <code>-clip_uuid</code> bounded export</td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>-clip_end</td>
+            <td>(Batch mode, internal) Last frame of the <code>-clip_uuid</code> bounded export</td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>-clip_result</td>
+            <td>(Batch mode, internal) Path to write the clip render result JSON to before exiting</td>
+            <td></td>
+            <td></td>
         </tr>
 
         <tr>
@@ -9168,6 +9318,7 @@ test summary: 0 out of 2 pass
                 rows.forEach(function (data) {
                     var tr = document.createElement('div');
                     tr.className = 'node-doc-row';
+                    if (data.id) tr.id = data.id;
                     var ioTitle = data.inputs.length + " in / " + data.outputs.length + " out - click for details";
                     tr.innerHTML =
                         "<span class='node-doc-icon'><i class='bi " + (data.icon || "") + "'></i></span>" +
@@ -9211,6 +9362,17 @@ test summary: 0 out of 2 pass
                         console.error('Failed to render a node doc table:', e);
                     }
                 });
+
+                // Per-tool rows (e.g. "#cv.canny") only exist in the DOM after the
+                // render loop above runs, so the browser's own initial-load anchor
+                // scroll (which happens before this script finishes) finds nothing.
+                // Do it ourselves once rows exist.
+                if (location.hash) {
+                    var hashTarget = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+                    if (hashTarget) {
+                        hashTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
 
                 var firstCategory = document.querySelector('.node-doc-category');
                 var searchInput = document.getElementById('node-doc-nav-search');
