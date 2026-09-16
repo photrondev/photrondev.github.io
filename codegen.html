@@ -1056,7 +1056,7 @@ Tracking Progress = Processando o Rastreamento
         <h3>6. View Selector & Exporting</h3>
         <ul>
             <li><strong>Stream Selection:</strong> A dropdown combo box allows users to switch the active viewport feed between different nodes, such as raw webcams, "Weld Analysis" preview images, or metric data matrices.</li>
-            <li><strong>Export View:</strong> Users can click "Export View..." to save the currently selected stream to disk. Image feeds are exported as <code>.mp4</code> or <code>.avi</code> files, while matrix data is exported as <code>.csv</code> files.</li>
+            <li><strong>Export:</strong> The "Export..." menu item opens a dialog to frame-accurately capture one or more output ports of any node in the workflow at once - image ports as <code>.mp4</code>/<code>.avi</code> video, numeric/matrix ports as <code>.csv</code>. Users pick the node, choose which of its ports to capture (each with its own filename and, for video, codec), set a frame range, and are prompted for a destination folder when export starts (with a single confirmation if any file there would be overwritten). Not available in a spawned Multi-View window.</li>
         </ul>
 
         <h3>7. Telemetry & Data Inspection</h3>
@@ -1108,6 +1108,7 @@ Tracking Progress = Processando o Rastreamento
             <li><strong>Initialization & Setup:</strong> Loads target runtime binaries, maps project asset storage roots, and instantiates the workflow pipeline topology.</li>
             <li><strong>Live Parameter Manipulation:</strong> Modifies runtime variables type-safely via calculated Port Enums dynamically mapped down to memory slots.</li>
             <li><strong>Interactive Stream Inspection:</strong> Wireframes target engine pins out to processing windows using live callback registration methods like <code>addMatrixLive</code> and <code>addImageLive</code>.</li>
+            <li><strong>GPU-Resident (CUDA) Frame APIs (advanced):</strong> A separate, GPU-only pair of live APIs - <code>setNodeInputCudaFrame</code>/<code>attachNodeInputCudaFrame</code> to push a live CUDA device frame into a workflow, and <code>addCudaImageLive</code>/<code>add_cuda_image_live</code> to receive one back out without a forced GPU&rarr;CPU download. These are library-level capabilities only - no generated project wires them up automatically today, so using them means writing the node names/IDs and calls into your own code by hand. See <a href="#cuda-live-apis">GPU-Resident (CUDA) Live APIs</a> below.</li>
         </ul>
 
         <h3>C++ API</h3>
@@ -1235,8 +1236,82 @@ int main() {
                     <td style="padding: 10px;"><code>stop</code></td>
                     <td style="padding: 10px;">Signals the execution thread to stop and gracefully shuts down the workflow pipeline.</td>
                 </tr>
+                <tr>
+                    <td style="padding: 10px;"><code>setNodeInputCudaFrame</code></td>
+                    <td style="padding: 10px;">
+                        GPU-resident (CUDA) counterpart to <code>setNodeInputMemoryFrame</code> - pushes a live CUDA device frame (a raw pointer, e.g. from PyCUDA/CuPy/torch's <code>.data_ptr()</code>) into a <code>cuda.memory_source</code> node. Copies (<code>cudaMemcpy2D</code>) into a buffer the engine owns - accepts any input pitch. Caller may reuse/free the pointer the instant this call returns. See <a href="#cuda-live-apis">GPU-Resident (CUDA) Live APIs</a> below.
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;"><code>attachNodeInputCudaFrame</code></td>
+                    <td style="padding: 10px;">
+                        Zero-copy sibling of <code>setNodeInputCudaFrame</code> - adopts the device pointer directly at push time, no copy. The pointer <strong>must already be packed</strong> (<code>pitch == width * num_channels * bytesPerPixel</code>) - rejected (returns <code>False</code>) otherwise. The optional <code>release_callback</code> fires once the engine has copied the frame into its own output buffer - that's when it's safe to reuse/free the pointer.
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;"><code>add_cuda_image_live</code></td>
+                    <td style="padding: 10px;">
+                        GPU-resident counterpart to <code>add_live_viewer(..., 'image', ...)</code> - the callback receives a live CUDA device pointer instead of a downloaded NumPy array, so the frame never leaves the GPU.
+                        <br><br><b>Example:</b> <code>app.add_cuda_image_live(NodeID.CUDA_NODE, 0, lambda ptr, w, h, pitch, c, depth, device: ...)</code>
+                        <br><br><b>Note:</b> This is a <em>synchronous</em> call on the viewer node's own thread - the callback must finish reading the pointer before returning; the engine reuses that buffer on its very next tick. There is no separate release signal like <code>attachNodeInputCudaFrame</code> has on the push-in side.
+                    </td>
+                </tr>
             </tbody>
         </table>
+
+        <section id="cuda-live-apis">
+        <h3>GPU-Resident (CUDA) Live APIs (advanced)</h3>
+        <p>
+            A separate, additive pair of APIs for working with GPU frames without ever forcing a round-trip through CPU
+            memory. <strong>Not used by any generated project automatically</strong> - <code>cuda.memory_source</code> and
+            <code>live.viewer.cuda_image</code> are internal node types with no catalog entry (they can't be dragged onto a
+            canvas), so using either API means adding the corresponding node to your own code-generated workflow by hand
+            and calling these methods directly, the same way you'd call <code>addImageLive</code>/<code>add_live_viewer</code>
+            today. Both APIs are safe no-ops when the engine binary in use wasn't built with CUDA support.
+        </p>
+        <ul>
+            <li>
+                <strong>Push a live frame in</strong> (<code>cuda.memory_source</code> node) - two methods, matching the two
+                ways a GPU frame is typically already available to you:
+                <ul>
+                    <li><code>setNodeInputCudaFrame</code> (C++) / <code>setNodeInputCudaFrame</code> (Python) - copies the frame in, accepting any pitch. The safe default.</li>
+                    <li><code>attachNodeInputCudaFrame</code> - zero-copy at push time, but requires packed rows (no padding) and a release callback to know when the buffer is free again.</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Get a live frame out</strong> (<code>live.viewer.cuda_image</code> node) - <code>addCudaImageLive</code>
+                (C++) / <code>add_cuda_image_live</code> (Python), the GPU-resident counterpart of <code>addImageLive</code>/
+                <code>add_live_viewer(..., 'image', ...)</code>. The callback is synchronous and receives a device pointer
+                valid only for the duration of the call.
+            </li>
+        </ul>
+        <h4>C++</h4>
+<pre style="background: #1a1a1a; color:white; padding: 15px; border-radius: 5px;"><code>// Push a live CUDA frame in (copy path - accepts any pitch)
+app.setNodeInputCudaFrame(NodeID::CUDA_SOURCE, devicePtr, width, height, pitch, numChannels, cvDepthBits, cudaDevice);
+
+// Push a live CUDA frame in (zero-copy path - devicePtr must already be packed)
+app.attachNodeInputCudaFrame(NodeID::CUDA_SOURCE, devicePtr, width, height, pitch, numChannels, cvDepthBits, cudaDevice,
+    [](void* userData) { /* devicePtr is now safe to reuse/free */ }, nullptr);
+
+// Get a live CUDA frame out
+app.addCudaImageLive(NodeID::CUDA_NODE, 0, "live_cuda_0",
+    [](const void* devicePtr, int width, int height, int pitch, int numChannels, int cvDepthBits, int cudaDevice) {
+        // devicePtr is only valid for the duration of this call
+    });
+</code></pre>
+        <h4>Python</h4>
+<pre style="background: #1a1a1a; color:white; padding: 15px; border-radius: 5px;"><code># Push a live CUDA frame in (copy path - accepts any pitch)
+app.setNodeInputCudaFrame(NodeID.CUDA_SOURCE, device_ptr, width, height, pitch, num_channels, cv_depth_bits, cuda_device)
+
+# Push a live CUDA frame in (zero-copy path - device_ptr must already be packed)
+app.attachNodeInputCudaFrame(NodeID.CUDA_SOURCE, device_ptr, width, height, pitch, num_channels, cv_depth_bits, cuda_device,
+    release_callback=lambda: print("device_ptr is now safe to reuse/free"))
+
+# Get a live CUDA frame out
+app.add_cuda_image_live(NodeID.CUDA_NODE, 0,
+    lambda device_ptr, width, height, pitch, num_channels, cv_depth_bits, cuda_device: None)  # must finish reading device_ptr before returning
+</code></pre>
+        </section>
         </section>
 
     </div>
