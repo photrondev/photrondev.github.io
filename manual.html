@@ -4305,6 +4305,18 @@
         by both the watchdog's own restart events and INFINIWORKFLOW's stdout/stderr), are documented in <code>python iw_watchdog.py --help</code>.
     </p>
     <p>
+        For the <a href="#DistributionProcessing">Distributed Rendering</a> peer case specifically, <code>--extra-args</code> is where the
+        <code>-distributed-listen</code>/<code>-distributed-token</code> flags actually go, alongside whatever other startup flags you'd normally
+        pass to <code>app.py</code>:
+    </p>
+<pre>python iw_watchdog.py --dir "C:\InfiniWorkflow" --extra-args "-nobrowser -distributed-listen -distributed-token my-shared-secret"</pre>
+    <p>
+        See <a href="#Args">Command line arguments</a> for the full reference - <code>-distributed-listen</code> opts this instance in to
+        accepting jobs on the control channel (port 5099), and <code>-distributed-token</code> is the shared secret both the orchestrator and this
+        listening instance must agree on; without it, this instance refuses all incoming jobs regardless of <code>-distributed-listen</code>. Any
+        other flag documented there (<code>-resolution</code>, <code>-port</code>, etc.) can be added to the same <code>--extra-args</code> string.
+    </p>
+    <p>
         On a clean stop (Ctrl+C, or a service manager's own stop signal) the watchdog exits without restarting. On POSIX, that stop signal is
         forwarded to INFINIWORKFLOW as SIGTERM - exactly what <code>app.py</code>'s own signal handler is registered for, so a clean stop also runs
         the same distributed-renderer cleanup a normal exit does. On Windows, <code>TerminateProcess</code> cannot deliver a clean signal to
@@ -5455,7 +5467,7 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
             <td><pre>..\python.exe app.pyc -studio</pre></td>
         </tr>
 
-        <tr>
+        <tr id="DistributedListenArg">
             <td>-distributed-listen</td>
             <td>Accept Distributed Rendering jobs pushed from another INFINIWORKFLOW instance on the control channel (port 5099) and run them here - opt-in, requires <code>-distributed-token</code> to actually accept anything</td>
             <td></td>
