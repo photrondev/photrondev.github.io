@@ -968,6 +968,20 @@
             }
         }
 
+        /* ─── Tools menu: two-column layout ─── */
+        .dropdown-menu:has(a[href="#AI"]) {
+            column-count: 2;
+            column-gap: 20px;
+            column-fill: auto;
+            min-width: 350px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+            .dropdown-menu:has(a[href="#AI"]) > li {
+                break-inside: avoid;
+            }
+
         /* ─── Touch / phone nav ───
            Everything above opens on :hover, which a phone does not have, so
            below 768px the menus open on tap instead (see the nav script at the
@@ -990,13 +1004,17 @@
 
             /* Arrow points down while a submenu is expanded */
             .dropdown-submenu.open > a::after {
-                content: "BC";
+                content: "▼";
             }
 
             /* The Tools menu's two columns do not fit a phone */
             .dropdown-menu:has(a[href="#AI"]) {
                 column-count: 1;
                 min-width: 0;
+            }
+
+            .navbar-nav > li.dropdown > .dropdown-menu {
+                width: 100%;
             }
 
             /* A long menu scrolls rather than running past the bottom */
@@ -1006,19 +1024,6 @@
             }
         }
 
-        /* ─── Tools menu: two-column layout ─── */
-        .dropdown-menu:has(a[href="#AI"]) {
-            column-count: 2;
-            column-gap: 20px;
-            column-fill: auto;
-            min-width: 350px;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-            .dropdown-menu:has(a[href="#AI"]) > li {
-                break-inside: avoid;
-            }
 
         /* ─── Spin animation (kept from original) ─── */
         @keyframes spin {
