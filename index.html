@@ -1224,6 +1224,7 @@
 
                                     <li><a href="#DistributionProcessing">Network Manager</a></li>
                                     <li><a href="#RenderToClip">Render to Clip</a></li>
+                                    <li><a href="#DistributedPyTorch">PyTorch Train and PyTorch Test</a></li>
                                     <li><a href="#RemoteScriptExecution">Remote Script Execution</a></li>
                                 </ul>
                             </li>
@@ -1538,6 +1539,7 @@
         <li><a href="#ImportExport">Browser</a></li>
         <li><a href="#DistributionProcessing">Network Manager</a></li>
         <li><a href="#RenderToClip">Render to Clip</a></li>
+        <li><a href="#DistributedPyTorch">PyTorch Train and PyTorch Test</a></li>
     </ul>
 
     <h2 id="hub">HUB</h2>
@@ -1648,6 +1650,13 @@
                     <li>
                         <i class="glyphicon glyphicon-italic"></i> Rename: allows you to modify the name of the node. The name is initially set to be based on the Tool's name but
                         will automatically be made a unique name by prefixing with numbers.
+                        <br>
+                        You can also rename without the menu: <b>click a node's title once</b> and it becomes editable in
+                        place, with the whole name selected so typing replaces it - <b>Enter</b> or clicking away keeps the
+                        new name, <b>Escape</b> abandons it. Dragging a node by its title still works; only a click that
+                        does not move starts editing. Zoomed far enough out that the name is no longer readable, clicking it
+                        does nothing and this menu entry is the way to rename - the hint under the name disappears at the
+                        same point, so it is clear which is which. Double-clicking a node remains View &amp; Edit.
                     </li>
                     <li>
                         <i class="bi bi-magnet-fill"></i> Group: for the selected nodes, allows you to group them together and become child nodes of the group. See <a href="#Grouping">Group Nodes</a>
@@ -1829,7 +1838,7 @@
         </li>
         <li class="gesture-card">
             <img src="https://photrondev.github.io/assets/ui_node_rename.gif" />
-            <div class="gesture-card-caption">Rename node: double click on the title</div>
+            <div class="gesture-card-caption">Rename node: click the title and type</div>
         </li>
         <li class="gesture-card">
             <img src="https://photrondev.github.io/assets/ui_node_show_hide_inputs.gif" />
@@ -3695,6 +3704,22 @@
         INFINIWORKFLOW instances started with <code>-distributed-listen</code>) to pick as the send target, plus the CUDA Device
         on the target that will run the selected nodes.
     </p>
+    <h4>Modes</h4>
+    <p>
+        The node-selection step also carries a <b>Mode</b> row. The modes are mutually exclusive, and which ones can be picked
+        depends on what is selected:
+    </p>
+    <ul>
+        <li><b>Stream</b> - the normal behavior described in this section: the selection runs on the target continuously and
+            its results stream back live. Works for a single node or several.</li>
+        <li><b>Render</b> - records one node's output(s) straight to disk instead. Exactly one node, so it is disabled as
+            soon as a second is selected. See <a href="#RenderToClip">Render to Clip</a>.</li>
+        <li><b>PyTorch Train</b> / <b>PyTorch Test</b> - hands one PyTorch node's whole training or test run over as a
+            single self-contained job. This chip only appears when the selection is a single PyTorch training or testing
+            node, and names whichever of the two it is. See
+            <a href="#DistributedPyTorch">PyTorch Train and PyTorch Test</a>.</li>
+    </ul>
+
     <div class="mockdlg-caption">Example: picking a peer and device before sending a selection</div>
     <div class="mockdlg-frame" style="margin-left:auto; margin-right:auto;">
         <div class="mockdlg-header"><i class="bi bi-hdd-network"></i><span>Network Manager</span></div>
@@ -3751,6 +3776,13 @@
         target already reads every file from the exact same filesystem the checklist itself was built from; just click
         <b>Next</b> to continue. Nodes that may not relocate safely are flagged here as warnings either way. If nothing is
         referenced at all, this step is skipped automatically.
+    </p>
+    <p>
+        A <b>PyTorch Train</b> or <b>PyTorch Test</b> job builds this list differently, because the job carries its own copies
+        of everything rather than reading them where they are: the manifest covers the selected node <em>and everything
+        feeding it</em> - the checkpoint a Load Torch Model reads, the folder a data loader was pointed at - and a folder
+        appears as a single entry with its file count and total size rather than as a list of everything inside it. For a
+        local target it is still shown and still copies nothing.
     </p>
 
     <h4>Sending and start-gated execution</h4>
@@ -3818,7 +3850,9 @@
     <h4>Monitoring running jobs</h4>
     <p>
         While one or more jobs are active, reopening the dialog opens on a job picker: a tile per job with its target and
-        status, plus per-job <b>Resume</b>/<b>Delete</b> buttons and <b>Resume All</b>/<b>Delete All</b> shortcuts. Picking a tile
+        status, plus per-job <b>Resume</b>/<b>Delete</b> buttons and <b>Resume All</b>/<b>Delete All</b> shortcuts. A
+        <b>Clear Completed</b> button removes every finished job at once - script, clip and export jobs alike - leaving
+        anything still running, and the files they produced, alone. Picking a tile
         shows that job's live status table (refreshed every couple of seconds) with each bridge's role, target, health, frame
         count and what data it's carrying. Health is derived from a per-tick heartbeat: <b>Connected</b> while frames have
         arrived recently, <b>Stalled</b> if too much time has passed since the last one, or <b>Waiting...</b>/<b>Not connected</b>
@@ -3894,9 +3928,10 @@
         Render to Clip captures one node's output(s) straight to disk - video, or a CSV for a numeric/matrix value - useful for
         "freezing" an expensive or slow part of a workflow (a detector, an optical-flow pass, anything GPU-heavy) into plain
         files you can play back or read back instantly instead of recomputing every time. It's opened from the same
-        <a href="#DistributionProcessing">Network Manager</a> dialog, as one of two mutually-exclusive modes on the
-        node-selection step: <b>Stream</b> (the dialog's normal continuous distribute/streaming behavior) or <b>Render</b>
-        (this feature). Only one mode is ever active, and which ones are even selectable depends on the current selection -
+        <a href="#DistributionProcessing">Network Manager</a> dialog, as one of the mutually-exclusive modes on the
+        node-selection step: <b>Stream</b> (the dialog's normal continuous distribute/streaming behavior), <b>Render</b>
+        (this feature), or <b>PyTorch Train</b>/<b>PyTorch Test</b> when a single PyTorch training or testing node is
+        selected (see <a href="#DistributedPyTorch">PyTorch Train and PyTorch Test</a>). Only one mode is ever active, and which ones are even selectable depends on the current selection -
         Render requires selecting exactly one node, so it's disabled the moment more than one is selected; Stream stays
         available for both single- and multi-node selections (whichever ones are valid for it in the first place - the same
         rules as always).
@@ -3951,6 +3986,67 @@
         Rendering picker to make the same choice later; the exported files are on disk either way, regardless of what you
         eventually pick.
     </p>
+
+    <h3 id="DistributedPyTorch">PyTorch Train and PyTorch Test</h3>
+    <p>
+        Training and testing are not split across machines the way an ordinary distribute job is - the whole run is handed
+        over as one self-contained job. The selected node generates a standalone script plus everything it needs, that
+        package is sent to the target, and it runs there with no graph, no app and no network of its own. It is opened from
+        the same <a href="#DistributionProcessing">Network Manager</a> dialog as Stream and Render, as a third mode on the
+        node-selection step - one that only appears when the selection is a single PyTorch training or testing node, and is
+        labelled <b>PyTorch Train</b> or <b>PyTorch Test</b> to match whichever kind was selected.
+    </p>
+    <p>
+        The node has to have run at least once first. What travels is read from the node's live inputs - the model, the
+        optimizer and loss for a training run, the trained weights and the test set for a test run - so a graph that has not
+        produced them yet is refused rather than dispatched empty.
+    </p>
+    <h4>What gets copied</h4>
+    <p>
+        The job carries its own files, so the asset step lists everything the selected node <em>and everything feeding it</em>
+        reference - the checkpoint a Load Torch Model reads, the folder a data loader was pointed at, and so on. A folder is
+        listed as a single entry with its file count and total size rather than as a list of everything inside it.
+    </p>
+    <ul>
+        <li><b>A local target</b> reads the same filesystem this session already does, so nothing is copied. The list is
+            shown anyway, as what <em>would</em> be sent to another machine.</li>
+        <li><b>A remote peer</b> gets those files copied into the job itself, and the job re-points its dataset at its own
+            copies when it arrives. A folder larger than 256 MB is not copied: the job is sent as a single message, so a
+            dataset of any real size has to already exist on the peer. It is named, with its size, rather than silently
+            skipped.</li>
+    </ul>
+    <h4>Watching it run</h4>
+    <p>
+        The job appears as its own tile in the picker alongside distribute, clip and script jobs, and opening it tails the
+        job's console live. A training run's <code>loss</code> per epoch is drawn as a chart as it arrives; a test run
+        instead shows a ring of correct against wrong with the percentage in the middle, updated as each batch is scored.
+        The same summary is shown again when the job finishes.
+    </p>
+    <h4>Results</h4>
+    <p>
+        Every PyTorch node keeps its last run - the status, the loss history, the accuracy table and the weights - under
+        <code>${assets}/.pytorch_results/&lt;workflow&gt;/&lt;node&gt;</code>, which is what lets a reopened workflow show the
+        last run instead of "needs training".
+    </p>
+    <ul>
+        <li><b>A local job</b> writes straight into that folder as it goes, so the node simply fills in.</li>
+        <li><b>A remote job</b> writes on the peer. When it finishes, its dialog (<b>Training finished</b> or <b>Testing
+            finished</b>) offers <b>Copy</b>, which brings the results home into that same folder and names the node they
+            belong to. Until you copy them, nothing local changes; once you do, the node shows them and still will after a
+            restart.</li>
+    </ul>
+    <h4>Requirements</h4>
+    <ul>
+        <li>The peer must be started with <a href="#DistributedListenArg"><code>-distributed-listen</code></a> and a matching
+            <code>-distributed-token</code>, the same as any other Network Manager job.</li>
+        <li>A job sent to this machine goes over the same control channel on purpose, so the local case exercises exactly the
+            code a remote one uses. If this instance is not listening it falls back to running the job directly here and says
+            so.</li>
+        <li>The job is told which device to use and <em>refuses to run</em> if CUDA is not available on the target, rather
+            than quietly falling back to a CPU run a hundred times slower.</li>
+        <li>Either way the run happens in its own process, never this session's, so it does not compete with the app for the
+            GPU.</li>
+    </ul>
 
     <h3 id="RemoteScriptExecution">Remote Script Execution</h3>
     <p>
