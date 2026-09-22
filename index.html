@@ -2645,6 +2645,9 @@
             <i class="bi bi-chevron-right" title="Next Frame" style="padding:0 5px;"></i>
             <i class="bi bi-chevron-bar-right" title="Last Frame" style="padding:0 5px;"></i>
             <i class="bi bi-calculator" title="Show/hide the timeline" style="padding:0 5px; color:#4fa3e3;"></i>
+            <span style="color:#2e2e38; margin:0 4px;">|</span>
+            <i class="bi bi-arrow-bar-left" title="Undo" style="padding:0 5px;"></i>
+            <i class="bi bi-arrow-bar-right" title="Redo" style="padding:0 5px; opacity:0.25;"></i>
             <span style="flex:1; display:flex; align-items:center; gap:8px; margin:0 8px; min-width:0;">
                 <span style="flex:1; height:8px; border-radius:4px; background:#222230; position:relative; min-width:30px;">
                     <span style="position:absolute; left:38%; top:-5px; width:18px; height:18px; border-radius:50%; background:#ff9f0a;"></span>
@@ -2700,6 +2703,18 @@
             <a href="#Editor">Parameter Editor</a> together, exactly as double-clicking the node in the flowgraph does. A single click just selects the
             tile's node, so the grid stays up.</li>
     </ul>
+
+    <h4>Undoing a change</h4>
+    <p>
+        <i class="bi bi-arrow-bar-left"></i> <strong>Undo</strong> and <i class="bi bi-arrow-bar-right"></i> <strong>Redo</strong> on the strip cover the
+        workflow edits you make from the grid - adding a node, deleting a layer, reordering one. They are the application's own undo history, the same one the
+        <strong>Edit</strong> menu and <kbd>Ctrl</kbd>+<kbd>Z</kbd> use, so a change made in the grid can equally be undone from the flowgraph afterwards and
+        the other way round. Each button greys out when there is nothing to undo or redo.
+    </p>
+    <p class="mockdlg-note">
+        What a tile is <em>showing</em> is not part of that history: binding a tile, changing the layout, or opening the layer bar are view settings, not
+        workflow changes, so Undo steps past them to the last real edit.
+    </p>
 
     <h4>Layers</h4>
     <p>
@@ -2781,6 +2796,9 @@
             back when you load it again - including after restarting the application. The temporary view nodes themselves are never saved.</li>
         <li><strong>Importing a workflow replaces the grid.</strong> The imported workflow's own grid is loaded, or the tiles are emptied if it does not have
             one. Bindings never carry over from the workflow you were just in, so you are never left looking at tiles pointing at nodes that no longer exist.</li>
+        <li><strong>A tile whose node is deleted simply goes empty</strong> - the same <i class="bi bi-plus"></i> as a tile that was never filled, ready to be
+            pointed at something else. It is not forgotten, though: if the node comes back, by undo or by loading the workflow again, the tile picks it up
+            where it left off.</li>
     </ul>
 
 
