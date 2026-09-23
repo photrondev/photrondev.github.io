@@ -1214,6 +1214,7 @@
                                     <li class=""><a href="#AutoRestartService">Auto-Restart Service</a></li>
                                     <li class=""><a href="#InstallPatches">Installing Patches</a></li>
                                     <li class=""><a href="#InstallPackages">Installing Packages</a></li>
+                                    <li class=""><a href="#PackageImportExport">Import &amp; Export Packages</a></li>
                                     <li class=""><a href="#UserAuthentication">User Authentication</a></li>
                                     <li class=""><a href="#Args">Command line arguments</a></li>
                                     <li class=""><a href="#KnownIssues">Known Issues</a></li>
@@ -1250,6 +1251,7 @@
                                             <li><a href="#EdgeGestures">Edge Gestures</a></li>
                                             <li><a href="#NodeGestures">Node Gestures</a></li>
                                             <li><a href="#PortGestures">Port Gestures</a></li>
+                                            <li><a href="#DynamicPorts">Adding and Removing Ports</a></li>
                                             <li><a href="#ViewportGestures">Viewport Gestures</a></li>
                                         </ul>
                                     </li>
@@ -1646,10 +1648,11 @@
             <div class="menu-group-card-header"><i class="bi bi-file-earmark"></i> File</div>
             <div class="menu-group-card-body">
                 <ul>
-                    <li><i class="bi bi-cloud-upload"></i> Import: opens the import dialog, letting you select an existing workflow from the demos folder using the <a href="#ImportExport">Import Browser</a></li>
-                    <li><i class="bi bi-star"></i> Add authoring notes to the workflow, including your name and a description of the workflow</li>
-                    <li><i class="bi bi-cloud-download"></i> Save: saves the workflow using the <a href="#ImportExport">Export Browser</a></li>
-                    <li><i class="bi bi-cart"></i> Generate code for integration into your application - see <a href="/codegen.html">Code Generator</a></li>
+                    <li><i class="bi bi-cloud-upload"></i> Load Workflow: opens an existing workflow from the demos folder using the <a href="#ImportExport">Browser</a></li>
+                    <li><i class="bi bi-cloud-download"></i> Save Workflow: saves the workflow using the <a href="#ImportExport">Browser</a></li>
+                    <li><i class="bi bi-star"></i> Rate &amp; Label Workflow: add authoring notes to the workflow, including your name and a description of the workflow</li>
+                    <li><i class="bi bi-box-arrow-in-down"></i> Import Package: installs a package zip - a workflow with its extensions and assets - see <a href="#PackageImportExport">Import &amp; Export Packages</a></li>
+                    <li><i class="bi bi-box-arrow-up"></i> Export Package: zips the workflow with its extensions and every file it references into your Downloads folder - see <a href="#PackageImportExport">Import &amp; Export Packages</a></li>
                     <li><i class="bi bi-trash"></i> Clear: resets the workflow to start a new one from scratch</li>
                     <li><i class="bi bi-power"></i> Exit the application</li>
                 </ul>
@@ -1716,11 +1719,8 @@
                     <li>
                         <i class="bi bi-file-earmark-spreadsheet"></i> Export Group: for the selected group node, allows you to export it to a new tool. See <a href="#Grouping">Group Nodes</a>
                     </li>
-                    <li><i class="bi bi-plus-circle-dotted"></i> Insert Input: for the selected node, if the node allows dynamic inputs, allows you to add a new input</li>
-                    <li><i class="bi bi-dash-circle-dotted"></i> Remove Input: for the selected node, if the node allows dynamic inputs, allows you to add a remove the last input</li>
-                    <li><i class="bi bi-plus-circle"></i> Insert Output: for the selected node, if the node allows dynamic outputs, allows you to add a new output</li>
-                    <li><i class="bi bi-dash-circle"></i> Remove Output: for the selected node, if the node allows dynamic outputs, allows you to remove the last output</li>
-                    <li><i class="bi bi-file-earmark-zip"></i> Feature Patch: for the selected node, allows you to package the node, its custom defaults and associated asset files into a feature package you can share with others</li>
+                    <li class="list-note"><i class="bi bi-plus-lg"></i><i class="bi bi-dash-lg"></i> Insert/Remove Input and Output have moved onto the node itself (see <a href="#DynamicPorts">Adding and Removing Ports</a>): select a single node that allows dynamic inputs or outputs and small <b>+</b> / <b>&minus;</b> buttons appear just below it - the left pair adds or removes an input, the right pair an output. <b>&minus;</b> is greyed out when the last input is mandatory or connected, since only an unused last input can be removed</li>
+                    <li><i class="bi bi-file-earmark-zip"></i> Save as Custom Node: for the selected node, creates a new reusable node with the node's current settings as its defaults, packaged with its asset files into a zip in your Downloads folder that you can share with others. To package a whole workflow use <a href="#PackageImportExport">Export Package</a> instead</li>
                 </ul>
             </div>
         </div>
@@ -1736,7 +1736,6 @@
                     <li><i class="bi bi-nvidia"></i> Sets the current CUDA device when you have multiple GPUs. Any new nodes powered by CUDA will be executed on this current GPU device.</li>
                     <li><i class="bi bi-circle-half"></i> Light or Dark Theme</li>
                     <li><i class="bi bi-chat-right-quote"></i> Localize the UI to different languages</li>
-                    <li><i class="bi bi-google-play"></i>Demo mode for showing workflow previews</li>
                 </ul>
             </div>
         </div>
@@ -1746,6 +1745,7 @@
             <div class="menu-group-card-body">
                 <ul>
                     <li><i class="bi bi-infinity"></i> HUB, Platform Information, Packages & What's New & More</li>
+                    <li><i class="bi bi-cart"></i> Generate App Code: generates code for integration into your application - see <a href="/codegen.html">Code Generator</a></li>
                     <li><i class="bi bi-lightbulb"></i> <a href="/genai.html">Generative AI</a> chatbox (Claude or ChatGPT) that can build/edit workflows, generate plugins, run AI Studio, and more from natural-language prompts</li>
                     <li><i class="bi bi-bookmark"></i> <a href="/aistudio.html#AiLabeler">AI Studio</a> allows you to label movies, fine-tune models and create segmentation inference tools</li>
                     <li><i class="bi bi-grid-3x3-gap"></i> <a href="#LiveTiles">Live Tiles</a>: swaps the flowgraph for a grid of live node outputs - the same switch as the <i class="bi bi-grid-3x3-gap"></i> button on the App Menu bar</li>
@@ -1781,7 +1781,7 @@
                     <li><i class="bi bi-camera-reels-fill"></i> <a href="#INFINICAM_Setup">INFINICAM Quick Start Guide</a> </li>
                     <li><i class="bi bi-robot"></i> Plays Introduction Tutorial</li>
                     <li><i class="bi bi-robot"></i> Plays Workflow Gesture Tutorial</li>
-                    <li><i class="bi bi-robot"></i>  Plays <a href="#tutorials">Live Tutorials</a> that explain how to use the app</li>
+                    <li><i class="bi bi-robot"></i>  Live Tutorials: opens the tutorials browser - pick a tutorial and it plays itself on the canvas, showing each click and gesture. Click the button again while one is playing to cancel it</li>
                     <li><i class="bi bi-mouse2"></i> Opens a guide for mouse and touch gestures</li>
                     <li><i class="bi bi-infinity"></i> About box</li>
                 </ul>
@@ -1983,6 +1983,7 @@
         <li><a href="#EdgeGestures">Edge Gestures</a></li>
         <li><a href="#NodeGestures">Node Gestures</a></li>
         <li><a href="#PortGestures">Port Gestures</a></li>
+        <li><a href="#DynamicPorts">Adding and Removing Ports</a></li>
         <li><a href="#ViewportGestures">Viewport Gestures</a></li>
         <li><a href="#NodeMenu">Node Context Menu</a></li>
         <li><a href="#SelectionMenu">Selection Menu</a></li>
@@ -2166,6 +2167,22 @@
             <div class="gesture-card-caption">Mandatory inputs show a rectangular border; optional inputs a circular one</div>
         </li>
     </ul>
+
+    <h3 id="DynamicPorts">Adding and Removing Ports</h3>
+    <p>
+        Some nodes take a variable number of inputs or outputs - for example the PyTorch <b>Sequential</b> node, which takes one input per
+        layer, or the matrix and audio nodes that combine any number of sources. Select one of these nodes on its own and a small
+        <b>+</b> / <b>&minus;</b> pair appears just below it:
+    </p>
+    <ul>
+        <li><b>Left pair</b> (turns yellow on hover, like the input ports) - <b>+</b> adds an input, <b>&minus;</b> removes the last input</li>
+        <li><b>Right pair</b> (turns blue on hover) - <b>+</b> adds an output, <b>&minus;</b> removes the last output</li>
+    </ul>
+    <p>
+        Only the pairs the node supports are shown, and nothing is shown when several nodes are selected or the workflow is published.
+        <b>&minus;</b> for inputs is greyed out when the last input is mandatory or has an edge connected to it - disconnect it first.
+        Adding and removing ports can be undone like any other edit.
+    </p>
     <h3 id="ViewportGestures">Viewport Gestures</h3>
     <ul class="gesture-grid gesture-grid-3col">
         <li class="gesture-card">
@@ -3550,9 +3567,11 @@
         <li><strong>Training Overlays:</strong> For select workflows, a dedicated training overlay will launch. This allows you to view multi-language instructions, browse a gallery of related workflows via the <strong>Next/Previous</strong> arrows, and click <strong>Load Content</strong> <i class="bi bi-box-arrow-in-down"></i> to import.</li>
     </ul>
 
-    <h3>4. Importing and Exporting</h3>
+    <h3>4. Loading and Saving</h3>
     <p>
-        The system validates your hardware against the workflow requirements.
+        The Browser is used by <b>File &gt; Load Workflow</b> and <b>File &gt; Save Workflow</b>. When loading, the system validates your hardware
+        against the workflow requirements. To share a workflow together with its extensions and asset files, use
+        <a href="#PackageImportExport">Export Package</a> instead.
     </p>
     <blockquote>
         <strong>Note:</strong> If the requirement text turns <strong>red</strong>, your current system is missing the necessary GPU nodes (CUDA/PyTorch) required to run the selected workflow.
@@ -3763,7 +3782,7 @@
 
     <p>To begin regression training (or any kind of training for that matter), we need 4 key inputs: a Neural Network Model, an Optimizer function, a Loss/Criterion Function, and the Data that the model will train on. </p>
 
-    <p>The Sequential node performs two actions behind the scenes. Firstly, it combines all machine learning modules that are provided as inputs (including nodes such as Linear, ReLU, Conv2D, MaxPooling2D, LogSoftmax, etc.) into a PyTorch Sequential container; to adjust the amount of input modules the Sequential node takes in, simply right-click on the Sequential node and click “Add Input” or “Remove Input”. Then, the Sequential node takes the Sequential Container and creates a neural network model out of it, with a base class of torch.nn.Module. The output of the Sequential node will thus be the “model” input of the Regression Train node.</p>
+    <p>The Sequential node performs two actions behind the scenes. Firstly, it combines all machine learning modules that are provided as inputs (including nodes such as Linear, ReLU, Conv2D, MaxPooling2D, LogSoftmax, etc.) into a PyTorch Sequential container; to adjust the amount of input modules the Sequential node takes in, select the Sequential node and use the <b>+</b> / <b>&minus;</b> buttons that appear below it (see <a href="#DynamicPorts">Adding and Removing Ports</a>). Then, the Sequential node takes the Sequential Container and creates a neural network model out of it, with a base class of torch.nn.Module. The output of the Sequential node will thus be the “model” input of the Regression Train node.</p>
 
     <p>Several optimizer functions are included in InfiniWorkflow. Most are intuitive (simply set the Neural Network Model as an input, set the Learning Rate and Weight Decay as needed, then set the output of the Optimizer node as an input to Regression Train), but the Per Parameter Optimizer is easy to misunderstand. The Per Parameter Optimizer node only works in tandem with another Optimizer node (such as Adam Optimizer), so make sure to connect the output of Per Parameter Optimizer as an input to the standard Optimizer node.</p>
 
@@ -5548,6 +5567,8 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
     <h3 id="InstallPackages">Installation Packages</h3>
     <p>
         The <a href="#DownloadablePackages">packages (feature patches)</a> are meant to allow new functionaility including demos and assets such as the ML model.
+        Most packages can also be installed without leaving the application using <a href="#PackageImportExport">File &gt; Import Package</a>; the command line below is
+        only required for packages that update the application itself.
         For example you can download the YOLO classifier feature patch, yolo_v1_0.zip then install by open a Windows Powershell prompt
         and then change the directory to your existing INFINIWORKFLOW installation (i.e. where you unzipped your original installation) and type the following where you
         should replace /folder/to/ to the actual folder you downloaded the feature patch:
@@ -5564,6 +5585,67 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../external/bin/onnxruntime/:../external/bin/op
             </li>
         </ul>
     </p>
+
+    <h3 id="PackageImportExport">Import &amp; Export Packages</h3>
+    <p>
+        A <strong>package</strong> is a zip file holding a workflow together with everything it needs to run on another machine: the
+        extensions (custom nodes) it uses and the asset files it references, such as videos, images and ML models.
+        Packages use the same layout as the <a href="#InstallPackages">downloadable packages</a> (<code>demos/</code>, <code>Extensions/</code>,
+        <code>assets/</code>), so a package you export can also be installed with <code>patch.bat</code> / <code>patch.sh</code>, and a downloaded
+        package can be installed with Import Package.
+    </p>
+
+    <h4><i class="bi bi-box-arrow-up"></i> Export Package</h4>
+    <p>
+        <strong>File &gt; Export Package</strong> scans the current workflow and lists what it found in three groups:
+    </p>
+    <ul>
+        <li><strong>Workflow</strong> - the workflow itself, saved as <code>demos/&lt;name&gt;.json</code>, plus its thumbnail if it has one</li>
+        <li><strong>Extensions</strong> - every extension node in the workflow, with its implementation files (<code>.py</code>, <code>.plugin</code>, <code>.glsl</code>, <code>.pickle</code>, <code>.group</code>)</li>
+        <li><strong>Assets</strong> - every file, folder or image sequence referenced by a node, including models a node uses by default</li>
+    </ul>
+    <p>
+        Everything is selected by default. Untick an item to leave it out, or use the checkbox on a group header to select or clear the whole group
+        (a group header shows how many items are selected and their size). The filter box narrows the list, and the totals under the list show the
+        size of the package. Click a group header to collapse it.
+    </p>
+    <p>
+        Files that are outside the <code>assets</code> folder - for example <code>D:\videos\clip.mp4</code>, or a path relative to the workflow -
+        would not exist on another machine. They are marked <em>copied into assets</em>: the package stores them under
+        <code>assets/imported/&lt;name&gt;/</code> and the packaged workflow is rewritten to point there. The workflow you have open is not changed.
+    </p>
+    <p>
+        Enter a <strong>Name</strong> and a <strong>Major</strong> and <strong>Minor Version</strong>. The package is saved as
+        <code>&lt;name&gt;_v&lt;major&gt;_&lt;minor&gt;.zip</code> in your Downloads folder; the dialog shows the full path and warns if a file of that
+        name already exists and will be replaced. A progress bar shows how much has been written, and <strong>Cancel</strong> stops the export
+        and deletes the partial zip. When it finishes, the dialog shows where the package was saved, and <strong>Open Folder</strong> shows it in
+        your file manager.
+    </p>
+
+    <h4><i class="bi bi-box-arrow-in-down"></i> Import Package</h4>
+    <p>
+        <strong>File &gt; Import Package</strong> lists the zip files in your Downloads folder, newest first. Click one to open it, or use
+        <strong>Browse...</strong> to pick a zip from another folder. The contents are shown in the same Workflow / Extensions / Assets groups,
+        all selected by default; items marked <em>replaces existing</em> will overwrite files you already have, and the total number of files
+        that will be replaced is shown under the list.
+    </p>
+    <p>
+        Click <strong>Import</strong> to install the selected items. Files are extracted to a temporary folder first, so <strong>Cancel</strong>
+        leaves your installation untouched. Workflows are installed into the demos folder, extensions into <code>Extensions</code> and assets into
+        <code>assets</code>. New extensions are loaded straight away and the Toolbox is refreshed; if an imported extension replaced one that was
+        already loaded, you are asked to restart INFINIWORKFLOW to use the new version. When the package contains a workflow,
+        <strong>Load Workflow</strong> opens it.
+    </p>
+    <p>
+        Some packages update the application itself - they contain <code>photron_engine</code>, the <code>app</code>, <code>external</code> or
+        <code>backend</code> folders, a <code>requirements.txt</code>, or replace a native <code>.plugin</code> that is already loaded. These cannot be
+        installed while INFINIWORKFLOW is running. Import Package tells you so and shows the command to run instead: exit INFINIWORKFLOW, open a
+        command prompt in the installation folder and run
+    </p>
+    <ul>
+        <li>Windows: <pre>.\patch.bat /folder/to/package_v1_0.zip</pre></li>
+        <li>OSX, Linux or Jetson: <pre>sh patch.sh /folder/to/package_v1_0.zip</pre></li>
+    </ul>
 
     <h3 id="UserAuthentication">User Authentication</h3>
     <p>
@@ -6820,7 +6902,7 @@ result = "torch.generic_loader"
             <td><pre>self, host : PluginHost</pre></td>
             <td><pre>bool</pre></td>
             <td>
-                Returns if the plugin has dynamic inputs, defaults to False
+                Returns if the plugin has dynamic inputs, defaults to False. When True, the input <b>+</b> / <b>&minus;</b> buttons appear under the selected node (see <a href="#DynamicPorts">Adding and Removing Ports</a>)
             </td>
         </tr>
 
@@ -6830,7 +6912,7 @@ result = "torch.generic_loader"
             <td><pre>self, host : PluginHost</pre></td>
             <td><pre>bool</pre></td>
             <td>
-                Returns if the plugin has dynamic outputs, defaults to False
+                Returns if the plugin has dynamic outputs, defaults to False. When True, the output <b>+</b> / <b>&minus;</b> buttons appear under the selected node (see <a href="#DynamicPorts">Adding and Removing Ports</a>)
             </td>
         </tr>
 
