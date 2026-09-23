@@ -437,7 +437,7 @@
                 </div>
             </div>
             <h3><i class="bi bi-tools"></i> Video Actions and Workflow Icons</h3>
-            <p>Each video entry displays a set of actions depending on whether it's a raw file, a processed sequence, or a preprocessed variation:</p>
+            <p>Each video entry displays a set of actions depending on whether it's a raw file, a processed sequence, or a preprocessed variation. The tile buttons are dimmed until you hover over or select the tile; the Play, Rename and Delete icons appear on hover:</p>
             <table>
                 <thead>
                     <tr>
@@ -473,17 +473,31 @@
                         <td>Opens the variations setup interface to configure image preprocessing nodes that synthetically expand your dataset's variance.</td>
                     </tr>
                     <tr>
-                        <td><i class="bi bi-type-italic"></i></td>
+                        <td><i class="bi bi-play-fill"></i></td>
+                        <td><strong>Play</strong></td>
+                        <td>Hover a movie tile and click the play button on its thumbnail (or double-click the thumbnail) to play the movie full-screen in the viewer at its own frame rate. Close the viewer to return to the studio. Photron <code>.mraw</code>/<code>.mdat</code> movies play through their <code>.cihx</code>/<code>.cih</code> header, which must sit next to the movie (not available on macOS).</td>
+                    </tr>
+                    <tr>
+                        <td><i class="bi bi-pencil"></i></td>
                         <td><strong>Rename</strong></td>
-                        <td>Safely renames directories, database entries, and dependent checkpoints across the filesystem.</td>
+                        <td>Hover a movie tile and click the pencil next to its name. The movie file (and its <code>.cihx</code>/<code>.cih</code> header), its frames folder, all of its copies and variations, their label files, and the processed movie list are renamed together. Names already in use (ignoring case), invalid characters, and names containing " - " are refused.</td>
                     </tr>
                     <tr>
                         <td><i class="bi bi-trash"></i></td>
                         <td><strong>Delete</strong></td>
-                        <td>Permanently deletes extracted frames, caches, and database configurations.</td>
+                        <td>Hover a movie tile and click the trash at its top-right corner. Removes the movie's extracted frames, labels, copies and variations and its entry in the processed movie list. Tick <strong>Also delete the movie file from disk</strong> to remove the movie itself too; otherwise it stays and shows as unprocessed.</td>
                     </tr>
                 </tbody>
             </table>
+            <div class="background-tracking-box">
+                <h4><i class="bi bi-shield-check"></i> Rename &amp; Delete Safety</h4>
+                <ul class="viewer-help-list">
+                    <li><strong>Runs to completion:</strong> A progress bar is shown and the operation cannot be cancelled part-way. If a rename fails, every change is undone; if the app stops mid-way, the operation is finished (delete) or undone (rename) the next time the project is opened.</li>
+                    <li><strong>Not while busy:</strong> Rename and delete are refused while tracking or any other studio job is running, or while the movie is open in the viewer.</li>
+                    <li><strong>Where deleted items go:</strong> On Windows they go to the Recycle Bin and on Linux to the Trash, so they can be restored. On macOS, or when an item is too large for the Recycle Bin, deletion is permanent and you must type the movie name to confirm.</li>
+                    <li><strong>Not updated:</strong> Workflows outside the project that point at the movie file by path (for example a saved demo workflow) keep the old path.</li>
+                </ul>
+            </div>
             <!-- SAM2 Background Box -->
             <div class="background-tracking-box">
                 <h4><i class="bi bi-cpu-fill"></i> Background Frame Tracking (SAM2)</h4>
@@ -549,7 +563,7 @@
                         <strong>Graceful GUI Exit &amp; Dedicated Terminal Spawn:</strong> Clicking <strong>"Do you want to EXIT and start Batch Preprocessing?"</strong> serializes the configuration, closes the local web server GUI, and spawns a dedicated, high-priority terminal window to run the processing workload. The browser window is then redirected to Photron's home page.
                     </li>
                     <li>
-                        <strong>Distribute This Job:</strong> Check <em>"Distribute this job"</em> to hand the generated batch script to another machine on the network instead of exiting - INFINIWORKFLOW stays open and your local GPU is freed for other work. Checking the box looks up known peers (discovered the same way as <a href="manual.html#DistributionProcessing">Distributed Rendering</a>'s peer list); if none are found the checkbox disables itself with an explanation. Only real remote peers are offered - running the job on "this machine" wouldn't free anything, since it would still compete with INFINIWORKFLOW for the same GPU. The button label switches away from any "EXIT" wording the moment the box is checked, and no window closes - the job runs on the remote peer while you keep working.
+                        <strong>Distribute This Job:</strong> Check <em>"Distribute this job"</em> to hand the generated batch script to another machine on the network instead of exiting - INFINIWORKFLOW stays open and your local GPU is freed for other work. Checking the box looks up known peers (discovered the same way as <a href="manual.html#DistributionProcessing">Network Manager</a>'s peer list); if none are found the checkbox disables itself with an explanation. Only real remote peers are offered - running the job on "this machine" wouldn't free anything, since it would still compete with INFINIWORKFLOW for the same GPU. The button label switches away from any "EXIT" wording the moment the box is checked, and no window closes - the job runs on the remote peer while you keep working.
                     </li>
                 </ul>
                 <p class="small" style="font-style:italic;">Example: the Batch Preprocessing dialog, configured for a four-way parallel run with distribution enabled</p>
