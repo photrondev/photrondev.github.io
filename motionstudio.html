@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motion Studio - User Guide</title>
+<link href="bootstrap/font/bootstrap-icons.css" rel="stylesheet">
+<style>
+    :root { --bg: #0b0d11; --panel: #111722; --panel2: #0a0d12; --line: #1f2a3a; --line2: #2a3342; --txt: #e6e9ef; --muted: #8b95a5; --dim: #64748b;
+            --acc: #3987e5; --ok: #4ade80; --unc: #f59e0b; --lost: #f87171; --pred: #e879f9; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--txt); font: 15px/1.6 "Segoe UI", system-ui, sans-serif; }
+    a { color: #93c5fd; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 60px; }
+    h1 { font-size: 28px; margin: 0 0 4px; } h1 i { color: var(--acc); }
+    h2 { font-size: 20px; margin: 38px 0 8px; color: #6da7ec; } h3 { font-size: 16px; margin: 22px 0 6px; }
+    .lede { color: var(--muted); max-width: 78ch; }
+    nav { display: flex; gap: 8px; flex-wrap: wrap; margin: 16px 0; }
+    nav a { color: #93c5fd; text-decoration: none; border: 1px solid #1e40af; border-radius: 99px; padding: 3px 12px; font-size: 13px; }
+    code { background: #161c26; border-radius: 5px; padding: 1px 6px; color: #cbd5e1; }
+    kbd { background: #1a2230; border: 1px solid var(--line2); border-bottom-width: 2px; border-radius: 5px; padding: 0 6px; font: 12px Consolas, monospace; }
+    ol li, ul li { margin: 4px 0; }
+    .note { background: #1a1206; border: 1px solid #854d0e; border-radius: 10px; padding: 10px 14px; color: #fde68a; margin: 12px 0; }
+    .tip { background: #0b1a2e; border: 1px solid #1e40af; border-radius: 10px; padding: 10px 14px; color: #bfdbfe; margin: 12px 0; }
+    table.t { border-collapse: collapse; width: 100%; font-size: 14px; margin: 8px 0; }
+    table.t th, table.t td { border-bottom: 1px solid var(--line); padding: 6px 8px; text-align: left; vertical-align: top; }
+    table.t th { color: var(--muted); font-weight: 600; }
+    .scroll { overflow-x: auto; }
+
+    /* ---------- mockups: drawn in HTML, styled like the studio (ms.css) ---------- */
+    .mock { border: 1px solid var(--line2); border-radius: 12px; background: #0b0f16; overflow: hidden; margin: 14px 0 6px; font: 12.5px/1.45 "Segoe UI", system-ui, sans-serif; color: #eef2f8; }
+    .cap { color: var(--dim); font-size: 13px; margin: 0 0 14px; }
+    .m-top { display: flex; align-items: center; gap: 10px; padding: 7px 12px; background: var(--panel); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+    .m-brand { display: flex; gap: 7px; align-items: center; font-weight: 700; font-size: 14px; } .m-brand i { color: var(--a, var(--acc)); }
+    .m-btn { display: inline-flex; align-items: center; gap: 5px; background: #1a2230; border: 1px solid var(--line2); border-radius: 7px; padding: 2px 8px; font-size: 12px; white-space: nowrap; }
+    .m-btn.pri { background: var(--a, var(--acc)); border-color: var(--a, var(--acc)); color: #0b0f16; font-weight: 600; }
+    .m-btn.key { color: #fbbf24; border-color: rgba(251,191,36,.5); } .m-btn.stop { color: var(--lost); opacity: .5; }
+    .m-sel { background: var(--panel2); border: 1px solid var(--line2); border-radius: 7px; padding: 2px 8px; color: #cbd5e1; font-size: 12px; }
+    .m-grow { flex: 1; }
+    .m-steps { display: flex; gap: 4px; }
+    .m-steps span { display: flex; align-items: center; gap: 5px; padding: 2px 9px 2px 4px; border-radius: 8px; color: #9aa7b8; border: 1px solid transparent; }
+    .m-steps span i { width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; font: 700 11px "Segoe UI"; font-style: normal; background: #1a2230; border: 1px solid var(--line2); }
+    .m-steps span.on { background: color-mix(in srgb, var(--a, var(--acc)) 22%, #0b0f16); border-color: var(--a, var(--acc)); color: #fff; }
+    .m-steps span.on i { background: var(--a, var(--acc)); border-color: var(--a, var(--acc)); color: #0b0f16; }
+    .m-chip { font-size: 11px; color: #cbd5e1; background: #1a2230; border: 1px solid var(--line2); border-radius: 99px; padding: 1px 8px; }
+    .m-prompt { display: flex; gap: 8px; align-items: center; padding: 6px 12px; border-bottom: 1px solid var(--line); background: #0d121b; }
+    .m-prompt i.bi-stars { color: var(--a, var(--acc)); }
+    .m-prompt .in { flex: 1; background: var(--panel2); border: 1px solid var(--line2); border-radius: 7px; padding: 3px 9px; color: var(--dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .m-body { display: grid; grid-template-columns: 1fr 300px; min-height: 300px; }
+    .m-left { display: flex; flex-direction: column; border-right: 1px solid var(--line); min-width: 0; }
+    .m-frame { position: relative; flex: 1; min-height: 210px; background: radial-gradient(ellipse at 60% 40%, #26303f, #0b0f16 75%); overflow: hidden; }
+    .m-frame svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .m-tl, .m-tr { display: flex; align-items: center; gap: 6px; padding: 5px 10px; border-top: 1px solid var(--line); }
+    .m-tl .rng { flex: 1; height: 4px; border-radius: 2px; background: linear-gradient(90deg, var(--a, var(--acc)) 38%, #2a3342 38%); position: relative; }
+    .m-tl .rng::after { content: ""; position: absolute; left: 38%; top: -5px; width: 12px; height: 12px; border-radius: 50%; background: #fff; transform: translateX(-50%); }
+    .m-now { color: #9aa7b8; font-size: 11.5px; white-space: nowrap; }
+    .m-status { color: #9aa7b8; font-size: 11.5px; margin-left: 6px; }
+    .m-lanes { padding: 6px 10px 8px; border-top: 1px solid var(--line); display: grid; gap: 3px; }
+    .lane { display: grid; grid-template-columns: 76px 1fr; gap: 8px; align-items: center; font-size: 11px; color: #9aa7b8; }
+    .lane .bar { height: 8px; border-radius: 3px; display: flex; overflow: hidden; background: #1a2230; }
+    .lane .bar b { display: block; height: 100%; }
+    .s1 { background: var(--ok); } .s2 { background: var(--unc); } .s0 { background: var(--lost); } .s3 { background: var(--pred); } .sn { background: #1a2230; }
+    .m-right { padding: 10px 12px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+    .m-card { background: var(--panel); border: 1px solid var(--line); border-radius: 9px; padding: 8px 10px; }
+    .m-card h4 { margin: 0 0 6px; font-size: 12px; color: #9aa7b8; text-transform: uppercase; letter-spacing: .05em; display: flex; align-items: center; gap: 6px; }
+    .m-row { display: flex; justify-content: space-between; gap: 8px; padding: 2px 0; font-size: 12px; } .m-row span:first-child { color: #9aa7b8; }
+    .m-pt { display: flex; align-items: center; gap: 7px; padding: 2px 0; font-size: 12px; }
+    .m-pt .dot { width: 10px; height: 10px; border-radius: 50%; border: 2px solid; }
+    .m-pt em { margin-left: auto; color: var(--dim); font-style: normal; font-size: 11px; }
+    .m-bodies { display: flex; gap: 5px; flex-wrap: wrap; }
+    .m-bodies span { font-size: 11px; border: 1px solid var(--line2); border-radius: 99px; padding: 1px 8px; color: #cbd5e1; }
+    .m-bodies span.on { border-color: var(--a, var(--acc)); background: color-mix(in srgb, var(--a, var(--acc)) 25%, #0b0f16); color: #fff; }
+    .m-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; }
+    .kpi { background: var(--panel); border: 1px solid var(--line); border-radius: 9px; padding: 7px 10px; }
+    .kpi .k { color: #9aa7b8; font-size: 11px; } .kpi .v { font-size: 18px; font-weight: 700; } .kpi .v small { font-size: 11px; color: #9aa7b8; font-weight: 500; }
+    .kpi.hero { border-color: var(--a, var(--acc)); background: color-mix(in srgb, var(--a, var(--acc)) 12%, var(--panel)); }
+    .kpi .s { color: var(--dim); font-size: 10.5px; }
+    .m-charts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .ch { background: var(--panel); border: 1px solid var(--line); border-radius: 9px; padding: 6px 8px 4px; min-width: 0; }
+    .ch .h { color: #9aa7b8; font-size: 11px; margin-bottom: 2px; }
+    .ch svg { width: 100%; height: 92px; display: block; }
+    .m-exp { display: flex; gap: 6px; flex-wrap: wrap; }
+
+    /* launcher */
+    .m-launch { padding: 16px; }
+    .m-launch .h { font-size: 17px; font-weight: 700; display: flex; gap: 8px; align-items: center; } .m-launch .h i { color: var(--acc); }
+    .m-launch p { color: #9aa7b8; margin: 4px 0 12px; font-size: 12.5px; }
+    .m-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+    .tile { background: var(--panel); border: 1px solid var(--line); border-top: 3px solid var(--a); border-radius: 10px; padding: 9px 10px; }
+    .tile i { color: var(--a); font-size: 18px; } .tile b { display: block; font-size: 12.5px; margin: 3px 0 1px; } .tile span { color: #9aa7b8; font-size: 11px; }
+
+    /* application view galleries */
+    .apps { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 14px; margin-top: 10px; }
+    .app { background: #0d121b; border: 1px solid var(--line2); border-top: 3px solid var(--a); border-radius: 12px; padding: 12px; }
+    .app h3 { margin: 0 0 4px; display: flex; gap: 8px; align-items: center; } .app h3 i { color: var(--a); }
+    .app p { color: #b6c0cc; font-size: 13.5px; margin: 6px 0 0; }
+
+    @media (max-width: 760px) {
+        .m-body { grid-template-columns: 1fr; } .m-left { border-right: 0; border-bottom: 1px solid var(--line); }
+        .m-charts { grid-template-columns: 1fr; } .m-top .m-steps { order: 5; width: 100%; }
+    }
+</style>
+</head>
+<body>
+<div class="wrap">
+    <h1><i class="bi bi-bullseye"></i> Motion Studio</h1>
+    <p class="lede">Track points on high-speed footage and get scientific results in real units, each with its uncertainty: speeds, accelerations,
+        strain, impact and rebound, natural frequencies, RPM, projectile velocity and joint angles. Pick the application, place or auto-pick points,
+        track, and read the results; export them to Excel or a PDF report. Open it from <b>AI &gt; Motion Studio</b>
+        (<i class="bi bi-bullseye"></i>).</p>
+    <nav><a href="#start">Start</a><a href="#screen">The screen</a><a href="#source">1 Source</a><a href="#points">2 Points</a><a href="#scale">Time &amp; scale</a>
+        <a href="#track">3 Track</a><a href="#results">4 Results</a><a href="#multicam">Multi-camera (3D)</a><a href="#apps">Applications</a><a href="#export">Export</a>
+        <a href="#prompt">AI prompt</a><a href="#reset">Reset all</a><a href="#node">Tracker node</a><a href="#limits">Good results &amp; limits</a></nav>
+
+    <!-- ================= START ================= -->
+    <h2 id="start">1. Start: what are you measuring?</h2>
+    <p>Opening the studio pauses the workflow, hides the toolbox and closes the editor and the viewer; closing it brings back the toolbox and playback.
+        On first open it asks what you are measuring. Each tile is a customer application, not a tracking technique: it opens its own studio, with its own
+        name, colour, named points, tracking settings, result cards and charts. <b>Custom</b> lets you choose everything yourself. The
+        <i class="bi bi-grid-3x3-gap"></i> button in the top bar brings this page back to switch application.</p>
+
+    <div class="mock">
+        <div class="m-launch">
+            <div class="h"><i class="bi bi-bullseye"></i>What are you measuring?</div>
+            <p>Pick an application, or describe it in the bar above and the AI sets everything up from the clip.</p>
+            <div class="m-grid">
+                <div class="tile" style="--a:#38bdf8"><i class="bi bi-grid-3x3"></i><b>Material Testing Studio</b><span>Strain, elongation, Poisson's ratio</span></div>
+                <div class="tile" style="--a:#f87171"><i class="bi bi-car-front-fill"></i><b>Crash Analysis Studio</b><span>Dummy and head kinematics, injury criteria</span></div>
+                <div class="tile" style="--a:#fb923c"><i class="bi bi-circle-half"></i><b>Airbag Studio</b><span>Shape, volume and inflation rate</span></div>
+                <div class="tile" style="--a:#fbbf24"><i class="bi bi-arrow-down-circle"></i><b>Drop &amp; Impact Studio</b><span>Impact speed, bounce, contact time</span></div>
+                <div class="tile" style="--a:#4ade80"><i class="bi bi-person-arms-up"></i><b>Biomechanics Studio</b><span>Joint angles, speed, coordination</span></div>
+                <div class="tile" style="--a:#a78bfa"><i class="bi bi-soundwave"></i><b>Vibration Studio</b><span>Natural frequencies, damping, mode shapes</span></div>
+                <div class="tile" style="--a:#2dd4bf"><i class="bi bi-gear-wide-connected"></i><b>Rotating Machinery Studio</b><span>RPM, run-out, shaft orbit</span></div>
+                <div class="tile" style="--a:#f472b6"><i class="bi bi-bullseye"></i><b>Ballistics Studio</b><span>Velocity, drag, trajectory</span></div>
+                <div class="tile" style="--a:#60a5fa"><i class="bi bi-droplet-half"></i><b>Spray &amp; Droplet Studio</b><span>Droplet speeds, plume growth</span></div>
+                <div class="tile" style="--a:#e879f9"><i class="bi bi-robot"></i><b>Robot Path Studio</b><span>Path accuracy, repeatability, cycle time</span></div>
+                <div class="tile" style="--a:#facc15"><i class="bi bi-mortarboard"></i><b>Physics Lab Studio</b><span>Projectiles, pendulums, collisions</span></div>
+                <div class="tile" style="--a:#34d399"><i class="bi bi-clipboard2-check"></i><b>Line QA Studio</b><span>Every cycle against a golden run</span></div>
+                <div class="tile" style="--a:#ef4444"><i class="bi bi-asterisk"></i><b>Blast Studio</b><span>Shock speed, overpressure, fragments</span></div>
+                <div class="tile" style="--a:#3987e5"><i class="bi bi-bullseye"></i><b>Custom</b><span>Choose points, method and views yourself</span></div>
+            </div>
+        </div>
+    </div>
+    <p class="cap">The launcher. Each tile sets up points, tracking method, group model, filters, analyses and charts for that application.</p>
+
+    <p>After you pick the application, the studio opens on its first step, <a href="#source">Source</a>. The studio's state (application, clip, points, keys,
+        scale, settings) is saved in the workflow file, so a saved workflow reopens the studio exactly as you left it.</p>
+
+    <!-- ================= SCREEN ================= -->
+    <h2 id="screen">2. The screen</h2>
+    <p>Everything fits on one screen: the frame on the left with the timeline, the tracking buttons and one lane per point; the current step's pane on the right.
+        The four steps, <b>Source</b>, <b>Points</b>, <b>Track</b> and <b>Results</b>, are in the middle of the top bar; you can move between them at any time.
+        On the right of the top bar: <i class="bi bi-arrow-counterclockwise"></i> <a href="#reset">Reset all</a>, <i class="bi bi-question-lg"></i> this guide, and &#10005; to close.</p>
+
+    <div class="mock" style="--a:#f87171">
+        <div class="m-top">
+            <div class="m-brand"><i class="bi bi-car-front-fill"></i>Crash Analysis Studio</div>
+            <span class="m-btn"><i class="bi bi-grid-3x3-gap"></i></span>
+            <span class="m-now">crash_offboard_front · 594×476 · 30 fps · 240 frames</span>
+            <span class="m-grow"></span>
+            <div class="m-steps"><span><i>1</i>Source</span><span class="on"><i>2</i>Points</span><span><i>3</i>Track</span><span><i>4</i>Results</span></div>
+            <span class="m-grow"></span>
+            <span class="m-chip">10,000 fps capture</span><span class="m-chip">0.82 mm/px</span>
+            <span class="m-btn"><i class="bi bi-arrow-counterclockwise"></i></span><span class="m-btn"><i class="bi bi-question-lg"></i></span><span class="m-btn">&#10005;</span>
+        </div>
+        <div class="m-prompt"><i class="bi bi-stars"></i><span class="in">Describe what to measure, e.g. 'head acceleration of the dummy in g' - then refine: 'use optical flow', 'smooth more'</span><span class="m-btn pri"><i class="bi bi-magic"></i>Set up</span></div>
+        <div class="m-body">
+            <div class="m-left">
+                <div class="m-frame">
+                    <svg viewBox="0 0 600 260" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                        <rect x="330" y="150" width="200" height="70" rx="6" fill="#1b2431" stroke="#2c394b"/>
+                        <rect x="360" y="70" width="70" height="90" rx="10" fill="#2a3442"/>
+                        <circle cx="395" cy="55" r="26" fill="#334155"/>
+                        <rect x="355" y="35" width="80" height="44" fill="none" stroke="#f87171" stroke-dasharray="4 3" opacity=".8"/>
+                        <path d="M210 70 C 260 60, 320 56, 380 52" stroke="#f472b6" stroke-width="1.5" fill="none" opacity=".35"/>
+                        <path d="M330 56 C 350 54, 365 53, 380 52" stroke="#f472b6" stroke-width="2.5" fill="none"/>
+                        <path d="M220 74 C 270 66, 330 64, 404 60" stroke="#fbbf24" stroke-width="1.5" fill="none" opacity=".35"/>
+                        <path d="M354 63 C 370 62, 390 61, 404 60" stroke="#fbbf24" stroke-width="2.5" fill="none"/>
+                        <g fill="none" stroke-width="2.5"><circle cx="380" cy="52" r="6" stroke="#4ade80"/><circle cx="404" cy="60" r="6" stroke="#4ade80"/><circle cx="392" cy="112" r="6" stroke="#f59e0b"/><circle cx="470" cy="190" r="6" stroke="#4ade80"/></g>
+                        <line x1="380" y1="52" x2="412" y2="51" stroke="#fff" stroke-width="1.5"/><polygon points="412,48 418,51 412,54" fill="#fff"/>
+                        <text x="388" y="44" fill="#fca5a5" font-size="11">Head</text><text x="400" y="118" fill="#fcd34d" font-size="11">Chest</text><text x="478" y="186" fill="#cbd5e1" font-size="11">Sled reference</text>
+                    </svg>
+                </div>
+                <div class="m-tl"><span class="m-btn"><i class="bi bi-chevron-left"></i></span><span class="m-btn"><i class="bi bi-chevron-right"></i></span><span class="rng"></span><span class="m-now">frame 92 / 240 · 9.20 ms</span></div>
+                <div class="m-tr">
+                    <span class="m-btn"><i class="bi bi-skip-backward-fill"></i></span><span class="m-btn"><i class="bi bi-skip-start-fill"></i></span>
+                    <span class="m-btn stop"><i class="bi bi-stop-fill"></i></span><span class="m-btn"><i class="bi bi-skip-end-fill"></i></span>
+                    <span class="m-btn pri"><i class="bi bi-skip-forward-fill"></i>Track</span><span class="m-btn key"><i class="bi bi-key-fill"></i>Key</span>
+                    <span class="m-status">Last run: 240 frames · 157 fps best</span>
+                </div>
+                <div class="m-lanes">
+                    <div class="lane"><span>Head 1</span><div class="bar"><b class="s1" style="width:38%"></b><b class="s2" style="width:20%"></b><b class="s0" style="width:4%"></b><b class="s2" style="width:38%"></b></div></div>
+                    <div class="lane"><span>Head 2</span><div class="bar"><b class="s1" style="width:34%"></b><b class="s3" style="width:3%"></b><b class="s1" style="width:4%"></b><b class="s2" style="width:59%"></b></div></div>
+                    <div class="lane"><span>Chest 1</span><div class="bar"><b class="s1" style="width:30%"></b><b class="s2" style="width:70%"></b></div></div>
+                    <div class="lane"><span>Sled ref.</span><div class="bar"><b class="s1" style="width:100%"></b></div></div>
+                </div>
+            </div>
+            <div class="m-right">
+                <div class="m-card"><h4><i class="bi bi-diagram-3"></i>Bodies</h4>
+                    <div class="m-bodies"><span class="on">Head 6</span><span>Chest 3</span><span>Pelvis 0</span><span>Sled reference 1</span><span>+ New body</span></div>
+                    <div style="color:#9aa7b8;font-size:11px;margin-top:6px">Points you click or auto-pick join the active body</div>
+                    <div class="m-exp" style="margin-top:6px"><span class="m-btn"><i class="bi bi-bounding-box"></i>Auto points in box</span><span class="m-btn"><i class="bi bi-stars"></i>Auto-pick best features</span></div>
+                </div>
+                <div class="m-card"><h4><i class="bi bi-clock"></i>Time &amp; scale</h4>
+                    <div class="m-row"><span>Capture rate</span><span>10,000 fps · entered by you</span></div>
+                    <div class="m-row"><span>Playback rate in the file</span><span>30 fps</span></div>
+                    <div class="m-row"><span>Scale</span><span>The clip's calibration</span></div>
+                    <div class="m-row"><span>Time zero at frame</span><span>0</span></div>
+                </div>
+                <div class="m-card"><h4><i class="bi bi-sliders"></i>Tracking</h4>
+                    <div class="m-row"><span>Method</span><span>Optical flow</span></div>
+                    <div class="m-row"><span>Group model</span><span>None</span></div>
+                    <div class="m-row"><span>Template / search</span><span>21 / 61 px</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p class="cap">Crash Analysis Studio on the Points step. Lanes: <span style="color:var(--ok)">&#9632; sure</span>,
+        <span style="color:var(--unc)">&#9632; uncertain</span>, <span style="color:var(--pred)">&#9632; placed by the group</span>,
+        <span style="color:var(--lost)">&#9632; lost</span>. The faint line is the whole path, the solid part the last 30 frames; the white arrow is the motion vector.</p>
+
+    <table class="t">
+        <tr><th>Key / mouse</th><th>What it does</th></tr>
+        <tr><td><kbd>&larr;</kbd> <kbd>&rarr;</kbd>, timeline, <i class="bi bi-chevron-left"></i> <i class="bi bi-chevron-right"></i></td><td>Previous / next frame (no tracking)</td></tr>
+        <tr><td>Click on the frame</td><td>Add a point (to the active body, or the next named point)</td></tr>
+        <tr><td>Drag a point</td><td>Move it; a magnifier (loupe) beside the cursor shows the pixels. Moving a point sets a key on that frame</td></tr>
+        <tr><td>Right-click a point</td><td>Remove it</td></tr>
+        <tr><td><kbd>Esc</kbd></td><td>Close the studio</td></tr>
+    </table>
+
+    <!-- ================= SOURCE ================= -->
+    <h2 id="source">3. Step 1, Source</h2>
+    <p>The Source step starts with one choice: <b>One camera (2D)</b>, a clip or a reader in the workflow (below), or <b>Multi-camera (3D)</b>,
+        a rig saved in Camera Studio whose clips open side by side, synced (see <a href="#multicam">Multi-camera (3D)</a>). Switching back to one camera
+        brings your one-camera session back as you left it.</p>
+    <p>Pick the clip to measure. The list shows the workflow's <b>Movie Reader</b> and <b>Photron Movie Reader</b> nodes; click one to use its clip.
+        <b>Open...</b> opens IW's file browser to pick any other MP4 or Photron MRAW (Assets, Downloads, Documents); it is listed under <b>Opened</b>.
+        The clip is read where it is, never copied or uploaded. The card below shows its size, frame count and playback rate. <b>Next: points</b> goes on;
+        clicking on the frame also goes straight to placing points.</p>
+    <div class="mock" style="--a:#fbbf24">
+        <div class="m-top">
+            <div class="m-brand"><i class="bi bi-arrow-down-circle"></i>Drop &amp; Impact Studio</div>
+            <span class="m-grow"></span>
+            <div class="m-steps"><span class="on"><i>1</i>Source</span><span><i>2</i>Points</span><span><i>3</i>Track</span><span><i>4</i>Results</span></div>
+            <span class="m-grow"></span>
+            <span class="m-btn"><i class="bi bi-arrow-counterclockwise"></i></span><span class="m-btn"><i class="bi bi-question-lg"></i></span><span class="m-btn">&#10005;</span>
+        </div>
+        <div class="m-body" style="min-height:0">
+            <div class="m-left"><div class="m-frame" style="min-height:230px">
+                <svg viewBox="0 0 600 260" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                    <rect x="0" y="232" width="600" height="28" fill="#1b2431"/>
+                    <rect x="272" y="40" width="56" height="150" rx="14" fill="#2f3b4c" stroke="#3f4d61"/>
+                    <rect x="286" y="20" width="28" height="24" rx="4" fill="#2f3b4c"/>
+                </svg>
+            </div></div>
+            <div class="m-right">
+                <div style="color:#9aa7b8;font-size:11px;text-transform:uppercase;letter-spacing:.05em">Source</div>
+                <div style="color:#9aa7b8;font-size:11px">In this workflow</div>
+                <div class="m-card" style="display:flex;gap:9px;align-items:center;border-color:#fbbf24"><i class="bi bi-film" style="color:#fbbf24;font-size:16px"></i><div style="flex:1;min-width:0"><b>Movie Reader</b><div style="color:#9aa7b8;font-size:11px">stock_motion_drop_bottle.mp4</div></div><i class="bi bi-check-circle-fill" style="color:var(--ok)"></i></div>
+                <div class="m-card" style="display:flex;gap:9px;align-items:center"><i class="bi bi-camera-reels" style="color:#fbbf24;font-size:16px"></i><div style="flex:1;min-width:0"><b>Photron Movie Reader</b><div style="color:#9aa7b8;font-size:11px">drop_test_04.mraw</div></div></div>
+                <div><span class="m-btn"><i class="bi bi-folder2-open"></i>Open...</span></div>
+                <div class="m-card">
+                    <div class="m-row"><span>Clip</span><span>stock_motion_drop_bottle</span></div>
+                    <div class="m-row"><span>Size</span><span>322 × 648</span></div>
+                    <div class="m-row"><span>Frames</span><span>301</span></div>
+                </div>
+                <div style="text-align:right"><span class="m-btn pri">Next: points <i class="bi bi-arrow-right"></i></span></div>
+            </div>
+        </div>
+    </div>
+    <p class="cap">The Source step: the workflow's movie readers, Open... for any other clip, and the clip's facts.</p>
+    <div class="tip">Live cameras are not a source here: the studio steps back and forth through the clip, re-tracks between keys and uses sure frames only,
+        which needs a recording. Record from the camera and open the recording, or track live in a workflow with the <a href="#node">Multi-Point Tracker node</a>.</div>
+
+    <!-- ================= POINTS ================= -->
+    <h2 id="points">4. Step 2, Points</h2>
+    <p>Most applications name their points, and the pane asks for them in order: e.g. <i>Gauge top</i> and <i>Gauge bottom</i> for material testing,
+        <i>Object</i> and <i>Second point</i> for a drop, <i>Hip, Knee, Ankle, Toe, Trunk</i> for biomechanics, <i>Centre</i> and <i>Rim mark</i> for rotating machinery,
+        <i>Projectile</i> for ballistics. Click each on the frame, then drag to fine-tune with the loupe.</p>
+    <ul>
+        <li><b>Auto-pick best features</b> places the most trackable spots (strong corners, no repeating patterns, spread over the frame). <b>How many points</b> sets the count.</li>
+        <li><b>Auto points in box</b> (<i class="bi bi-bounding-box"></i>): drag a rectangle on the frame; its most trackable features join the active body. Keep the box on the object only.</li>
+        <li><b>Add grid points</b> (Material testing) keeps the gauge points and adds distinctive features in between: the grid behind the strain map.</li>
+        <li><b>Bodies</b> (Crash): every point belongs to a body (<i>Head, Chest, Pelvis, Sled reference</i> or one you add with <b>New body</b>). A body holds any number of points;
+            its position and rotation come from all of its sure points together. Click a body chip to make it active; select a point to rename it or move it to another body.</li>
+        <li><b>Tracking</b> settings come from the application and can be changed: <b>Method</b> (<b>Auto</b>, the default, picks one at each Track; or template matching, optical flow, marker centroid and, when their packages are installed, the AI box trackers: see <a href="#trackers">Trackers</a>), <b>Group model</b>
+            (none, auto, similarity, affine, perspective: points that move together help each other through blur and occlusion), and <b>Template / search</b> size in pixels.</li>
+    </ul>
+
+    <h3 id="scale">Time &amp; scale</h3>
+    <p>The <b>Time &amp; scale</b> card decides what the numbers mean. Both choices show as chips in the top bar and are saved with the studio.</p>
+    <ul>
+        <li><b>Capture rate.</b> A Photron file states it (<i>From the Photron file</i>). An MP4 only gives its playback rate, so enter the camera's capture rate; otherwise
+            times, speeds and accelerations are in playback time and the results say so. Vibration, Rotating machinery, Ballistics and Biomechanics refuse to give results without it.</li>
+        <li><b>Scale</b>:
+            <ul>
+                <li><b>The clip's calibration</b>, made in <a href="/knowledge_studio.html#describe">Knowledge Studio &gt; Describe &gt; Calibrate</a> (lens correction included);</li>
+                <li><b>Two points</b> a known distance apart;</li>
+                <li><b>From gravity</b> (Drop &amp; impact): the object's free fall against 9.81 m/s&sup2;, stated as an assumption;</li>
+                <li><b>From the projectile</b> (Ballistics): its stated diameter, measured edge to edge on one frame with the ruler button and the loupe;</li>
+                <li><b>From a segment</b> (Biomechanics): a stated segment length, e.g. the shank, over its median tracked length;</li>
+                <li><b>Pixels</b>: no scale.</li>
+            </ul>
+            The scale's own uncertainty is carried into every scaled value.</li>
+        <li><b>Time zero at frame</b>: the frame where t = 0, e.g. the moment of impact.</li>
+    </ul>
+
+    <!-- ================= TRACK ================= -->
+    <h2 id="track">5. Step 3, Track</h2>
+    <p>Track forward or back from the current frame, or one frame at a time. Stop at any time; fix a point by dragging it and track again from there.</p>
+    <table class="t">
+        <tr><th>Button</th><th>Action</th></tr>
+        <tr><td><span class="mock" style="display:inline-flex;margin:0;padding:2px"><span class="m-btn pri" style="--a:#3987e5"><i class="bi bi-skip-forward-fill"></i>Track</span></span></td><td>Track forward to the last frame</td></tr>
+        <tr><td><i class="bi bi-skip-backward-fill"></i></td><td>Track backward to the first frame</td></tr>
+        <tr><td><i class="bi bi-skip-end-fill"></i> / <i class="bi bi-skip-start-fill"></i></td><td>Track one frame forward / back</td></tr>
+        <tr><td><i class="bi bi-stop-fill" style="color:var(--lost)"></i></td><td>Cancel</td></tr>
+        <tr><td><span style="color:#fbbf24"><i class="bi bi-key-fill"></i> Key</span></td><td>Set a key: the points as they are now on this frame. The tracker never moves a key; tracking restarts there from your positions.</td></tr>
+    </table>
+    <p>While it tracks, the frame shows the newest tracked frame with its points and trails, the timeline follows it, and the lanes fill in.
+        The preview skips frames when tracking is faster than the display; every frame is still tracked.</p>
+    <p>Every point gets a state on every frame, shown by its colour on the frame and in its lane:</p>
+    <ul>
+        <li><b style="color:var(--ok)">Sure</b>: found and confirmed.</li>
+        <li><b style="color:var(--unc)">Uncertain</b>: found, but a look-alike was nearly as good, the position jumped against the motion, or the point has just come back from hiding and is not confirmed yet.</li>
+        <li><b style="color:var(--pred)">Placed by the group</b>: hidden or contradicting, so the other points of the group placed it.</li>
+        <li><b style="color:var(--lost)">Lost</b>: not found, or outside the image.</li>
+    </ul>
+    <p><b>Results use sure frames only.</b> Uncertain, placed and lost frames are gaps, so no peak comes from a doubted position.</p>
+
+    <div class="mock">
+        <div class="m-lanes" style="border-top:0;padding:12px">
+            <div class="lane"><span>Ball (key 72)</span><div class="bar"><b class="sn" style="width:48%"></b><b class="s1" style="width:10%"></b><b class="sn" style="width:42%"></b></div></div>
+            <div class="lane"><span>Knee</span><div class="bar"><b class="sn" style="width:53%"></b><b class="s1" style="width:47%"></b></div></div>
+            <div class="lane"><span>Toe</span><div class="bar"><b class="sn" style="width:53%"></b><b class="s1" style="width:14%"></b><b class="s2" style="width:9%"></b><b class="s1" style="width:8%"></b><b class="s2" style="width:6%"></b><b class="s1" style="width:10%"></b></div></div>
+        </div>
+    </div>
+    <p class="cap">Lanes after tracking from keys: tracking starts at the first key; the toe drops to uncertain where it passes the other leg, then is re-keyed.</p>
+    <div class="tip"><b>Fast objects: two keys.</b> On the first frame the tracker has no velocity yet, so a fast object (a projectile, a sprinter's foot) may be lost or swapped for a static look-alike.
+        Place it on one frame, step one frame forward, drag it onto the object again (a second key), then Track. The motion model then knows where to look.</div>
+
+    <h3 id="trackers">The trackers: how they work, what they are good at</h3>
+    <p>The <b>Tracker</b> card on the Track step picks the method. New sessions start on <b>Auto (recommended)</b>: when you press Track, the studio takes a quick look
+        (well under a second) at the placed points over the next 10 frames and picks the method, then says why in one line, e.g. <i>Auto chose Template: textured targets, steady look</i>.
+        Printed dots on a plain background get <b>Marker centroid</b>; points whose look changes in a short template trial (rotation, blur, cover) get <b>NanoTrack</b> when its package is
+        installed (up to 12 points; otherwise Template with a looser look-alike margin); large moves between frames, or many points on smooth texture, get <b>Optical flow</b>;
+        anything else keeps the application's own method. The choice is made again at every Track. Choosing a method yourself in the list overrides Auto; sessions saved before Auto
+        existed keep their method.</p>
+    <p>Each application's own method suits it; you rarely need to change it.
+        The speed tag is measured end to end, decoding included (28 points on a 1280 &times; 674 clip): <b>Fast</b> &ge; 200 fps, <b>Medium</b> 60&ndash;200, <b>Slow</b> &lt; 60.</p>
+    <table class="t">
+        <tr><th>Method</th><th>How it works</th><th>Good at</th><th>Limits</th><th>Speed</th></tr>
+        <tr><td><b>Template (NCC, sub-pixel)</b><br>default</td><td>Remembers a small patch around each point on the first frame and finds the best match in a search area around where the point should be now
+            (normalised cross-correlation, so brightness changes do not matter). A parabola through the best match gives a position finer than one pixel.</td>
+            <td>Most accurate on textured surfaces; ignores brightness changes; matching the first patch means no drift on long clips.</td>
+            <td>Needs texture in the patch; the search area must cover the largest move between two frames; strong rotation or scale change needs a group model.</td><td>Fast &middot; 328 fps</td></tr>
+        <tr><td><b>Optical flow (pyramidal LK)</b></td><td>Estimates how the patch's brightness pattern shifted, coarse to fine over an image pyramid, then tracks back again and rejects points that do not return
+            to where they started. The first patch then refines the result.</td>
+            <td>Follows fast or large moves with a small search.</td><td>Needs texture; weaker on repeated patterns, motion blur and occlusion.</td><td>Medium &middot; 154 fps</td></tr>
+        <tr><td><b>Marker centroid</b></td><td>Finds the dot (dark or bright) near the point and takes the centre of its area.</td>
+            <td>Painted or stuck-on dots: exact centre, very fast, immune to texture.</td><td>Needs a clear dot on a plain background, one dot per point; touching dots merge.</td><td>Fast &middot; 236 fps</td></tr>
+        <tr><td><b>AI box: NanoTrack</b></td><td>A small neural network (OpenCV's NanoTrack) learns what is inside a box around each point on the first frame and finds it again in an area about four boxes wide,
+            scoring how sure it is. The box centre is the point; the score is its confidence. All points go through the network together in one pass per frame. Needs the NanoTrack feature package.</td>
+            <td>Big changes in look: rotation, blur, scale, partial cover. On a test object turning 120&deg; in 40 frames it stayed sure on every frame, where template matching was sure on 6 %.</td>
+            <td>Box-level: 2&ndash;3 px RMS on that test, not sub-pixel. Cost grows with every point. Can jump to a look-alike next to the target.</td><td>Slow &middot; 48 fps</td></tr>
+        <tr><td><b>AI box: DaSiamRPN</b></td><td>A larger siamese network (OpenCV's DaSiamRPN) on the GPU, the same idea as NanoTrack with a stronger model.</td>
+            <td>The most robust choice for a few targets (up to 8) that turn or change their look.</td>
+            <td>Box-level, not sub-pixel; up to 8 points (each needs its own 200 MB network); without a GPU it runs at about 3 fps; needs the DaSiamRPN feature package.</td><td>Medium &middot; 75 fps (8 points)</td></tr>
+    </table>
+    <p>Use an <b>AI box</b> method only when the target turns over, tumbles or changes its look so much that template and optical flow lose it; for measurement on a target that keeps its look,
+        template and optical flow are over ten times more accurate (under 0.1 px on the synthetic tests). Both run on the GPU following the FP16 setting (without a GPU NanoTrack uses every CPU core, 29 fps with 28 points). Each appears in the Tracker card only when its optional feature package (NanoTrack, DaSiamRPN) is installed; a saved session that used a missing one opens with Template.</p>
+    <p><b>Group model</b>: points of one body move together. <i>Similarity</i> (move, turn, scale), <i>affine</i> (plus shear) or <i>perspective</i> fit all the body's points each frame;
+        a point that disagrees is rejected, a hidden point is placed by the others (shown as <i>placed by the group</i>), and the fit's rotation and scale turn each patch so matching keeps working.
+        <i>Each point alone</i> uses no fit (independent points, e.g. droplets).</p>
+    <p><b>Advanced</b> values (changes apply to the next track run; <b>Defaults</b> restores the application's values):</p>
+    <ul>
+        <li><b>Template (px)</b>: patch size, odd. Bigger is steadier; smaller follows fine detail. For optical flow it is the flow window.</li>
+        <li><b>Search (px)</b>: area searched around the predicted position. Must cover the largest move between two frames; bigger is slower and finds more look-alikes.</li>
+        <li><b>Min confidence</b>: below this match score (1 = identical patch) a point is uncertain and its frame is left out of the results.</li>
+        <li><b>Template update</b>: 0 always matches the first patch (no drift). Above 0 the patch slowly adapts to a target whose look changes (a burning or deforming part), but long tracks can drift.</li>
+        <li><b>Predict motion</b>: search where constant velocity predicts the point, not where it was. Keep it on for anything that moves fast.</li>
+        <li><b>Optical flow only:</b> <b>Pyramid levels</b> (coarse-to-fine; each level doubles how far a point may move between frames, default 3),
+            <b>Back-check (px)</b> (each point is tracked forward and back; one that does not return within this distance loses confidence, default 1 px),
+            <b>Iterations</b> (refinement steps per level, default 30).</li>
+        <li><b>AI box only:</b> <b>Box (px)</b> (the box each network follows, at least 16 px: cover the part of the object, a bigger box is steadier) and <b>Min confidence</b> (the network's score);
+            search, template update, look-alike margin and predict do not apply.</li>
+        <li><b>Template only:</b> <b>Look-alike margin</b> (a second match within this score of the best makes the point uncertain, default 0.2; 0 turns the check off).</li>
+    </ul>
+
+    <!-- ================= RESULTS ================= -->
+    <h2 id="results">6. Step 4, Results</h2>
+    <p>Results shows the application's own cards and four charts, synced with the frame: the crosshair on the charts follows the current frame. Every value carries its
+        uncertainty (&plusmn; one standard deviation unless it says 95 %), and charts draw a &plusmn;1&sigma; band. The fit window is chosen from the data
+        (the longest window whose residuals still match the tracking noise), and the cards show <i>Computing...</i> until the server's analysis arrives.</p>
+
+    <div class="mock" style="--a:#3987e5">
+        <div class="m-top">
+            <div class="m-brand"><i class="bi bi-bullseye"></i>Motion Studio</div>
+            <span class="m-grow"></span>
+            <div class="m-steps"><span><i>1</i>Source</span><span><i>2</i>Points</span><span><i>3</i>Track</span><span class="on"><i>4</i>Results</span></div>
+            <span class="m-grow"></span><span class="m-chip">mm (calibrated)</span><span class="m-btn">&#10005;</span>
+        </div>
+        <div style="padding:10px 12px;display:grid;gap:10px">
+            <div class="m-kpis">
+                <div class="kpi hero"><div class="k">Peak speed, point 1</div><div class="v">4.82 <small>&plusmn; 0.03 m/s</small></div><div class="s">frame 118</div></div>
+                <div class="kpi"><div class="k">Peak acceleration</div><div class="v">25.5 <small>&plusmn; 0.8 m/s&sup2;</small></div></div>
+                <div class="kpi"><div class="k">Displacement</div><div class="v">312 <small>&plusmn; 2 mm</small></div></div>
+                <div class="kpi"><div class="k">Frames tracked</div><div class="v">240 <small>sure 96 %</small></div></div>
+            </div>
+            <div class="m-charts">
+                <div class="ch"><div class="h">Displacement (mm)</div><svg viewBox="0 0 300 90" preserveAspectRatio="none"><path d="M0 85 C 60 84, 120 70, 180 40 S 260 8, 300 5" stroke="#f472b6" stroke-width="2" fill="none"/><path d="M0 82 C 60 82, 120 62, 180 34 S 260 5, 300 3" stroke="#fbbf24" stroke-width="2" fill="none"/><line x1="140" y1="0" x2="140" y2="90" stroke="#94a3b8" stroke-dasharray="3 3"/></svg></div>
+                <div class="ch"><div class="h">Speed &plusmn;1&sigma; (m/s)</div><svg viewBox="0 0 300 90" preserveAspectRatio="none"><path d="M0 80 C 80 76, 140 40, 200 22 S 280 18, 300 20 L300 30 C 280 28, 260 32, 200 32 S 80 86, 0 88 Z" fill="#f472b6" opacity=".18"/><path d="M0 84 C 80 81, 140 45, 200 27 S 280 23, 300 25" stroke="#f472b6" stroke-width="2" fill="none"/><line x1="140" y1="0" x2="140" y2="90" stroke="#94a3b8" stroke-dasharray="3 3"/></svg></div>
+                <div class="ch"><div class="h">Acceleration &plusmn;1&sigma; (m/s&sup2;)</div><svg viewBox="0 0 300 90" preserveAspectRatio="none"><path d="M0 60 C 60 58, 110 20, 160 26 S 240 58, 300 62 L300 74 C 240 70, 200 40, 160 40 S 60 70, 0 72 Z" fill="#f472b6" opacity=".18"/><path d="M0 66 C 60 64, 110 28, 160 33 S 240 64, 300 68" stroke="#f472b6" stroke-width="2" fill="none"/><line x1="140" y1="0" x2="140" y2="90" stroke="#94a3b8" stroke-dasharray="3 3"/></svg></div>
+                <div class="ch"><div class="h">Path, coloured by speed</div><svg viewBox="0 0 300 90" preserveAspectRatio="none"><defs><linearGradient id="sp" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset=".6" stop-color="#fbbf24"/><stop offset="1" stop-color="#f87171"/></linearGradient></defs><path d="M10 75 C 80 70, 150 50, 200 30 S 270 12, 295 10" stroke="url(#sp)" stroke-width="3" fill="none"/></svg></div>
+            </div>
+            <div class="m-exp"><span class="m-btn"><i class="bi bi-filetype-csv"></i>Export CSV</span><span class="m-btn"><i class="bi bi-file-earmark-excel"></i>Export Excel</span><span class="m-btn"><i class="bi bi-file-earmark-pdf"></i>Report (PDF)</span></div>
+        </div>
+    </div>
+    <p class="cap">Results in the Custom application: cards with &plusmn;, four synced charts, and the three exports.</p>
+
+    <!-- ================= MULTI-CAMERA ================= -->
+    <h2 id="multicam">7. Multi-camera (3D)</h2>
+    <p>Two to eight synchronized cameras see the same points from different directions. Camera Studio calibrates them as a <b>3D rig</b> (each camera's lens,
+        position and time offset, from a wand; see Camera Studio's 3D rig mode) and saves a <code>.rig</code> file. Motion Studio opens that rig, shows its clips side by side
+        on one timeline, and keeps every point paired across the views. Results come in <b>3D</b>: x, y, z in mm with &plusmn; for every point seen by two or more cameras, or per view in image pixels.</p>
+
+    <h3>Open a rig</h3>
+    <ol>
+        <li>On the Source step pick <b>Multi-camera (3D)</b>. The list shows the rigs saved in Camera Studio (<code>${assets}/rigs</code>, with each rig's wand error)
+            and two rendered demos with an exact calibration: the <b>Demo 3D rig</b> (an LED flash, a wand and a thrown ball) and the
+            <b>Demo: drill drop test (3 cameras)</b>, a photoreal test bay at 1,000 fps where a cordless drill with four printed bullseye targets falls 1 m onto concrete,
+            bounces and tumbles (impact at 4.43 m/s; camera A is level, so &minus;y is up and a bounce reads straight off the y chart).
+            Camera Studio's 3D rig mode offers the same two demos for the wand calibration. <b>Open rig...</b> opens a
+            <code>.rig</code> from anywhere in Assets; <b>Camera Studio</b> takes you there to calibrate a new one.</li>
+        <li>The views appear in a grid (the layout that shows them largest), each with its camera letter and its <b>time offset</b> to camera A. Scrubbing,
+            the arrow keys and Play move every view together: camera B's frame is camera A's frame plus B's offset. The table lists each camera's clip, frames and offset;
+            <b>&minus;</b> / <b>+</b> nudge an offset by one frame if a view looks early or late (the tag turns amber, and its tooltip keeps the rig's value).
+            Check the sync by eye on an event every camera sees (the Demo's LED flash lights all three views on the same frame).</li>
+        <li>The card shows the capture rate (from the rig), the <b>common frames</b> every clip covers (the timeline's range), and the calibration.</li>
+    </ol>
+    <div class="note">States you may see: <b>Clip not found</b> on a view (the clip moved): <b>Locate...</b> picks it again, and the other views keep working
+        (two cameras are enough to go on). A view with a different frame rate or a different size than the camera was calibrated at gets an amber frame and a warning.
+        Clips that do not overlap in time leave no common frames, and Next stays off.</div>
+
+    <div class="mock" style="--a:#3987e5">
+        <div class="m-top">
+            <div class="m-brand"><i class="bi bi-bullseye"></i>Motion Studio</div><span class="m-now">Demo 3D rig · 3 cameras</span>
+            <span class="m-grow"></span>
+            <div class="m-steps"><span><i>1</i>Source</span><span class="on"><i>2</i>Points</span><span><i>3</i>Track</span><span><i>4</i>Results</span></div>
+            <span class="m-grow"></span><span class="m-chip">3D · 3 cameras</span><span class="m-chip">1000 fps capture</span>
+        </div>
+        <div class="m-body">
+            <div class="m-left">
+                <div class="m-frame" style="background:#05080c">
+                    <svg viewBox="0 0 600 300" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                        <g fill="#1b2431" stroke="#2c394b"><rect x="6" y="6" width="290" height="140" rx="6"/><rect x="304" y="6" width="290" height="140" rx="6"/><rect x="6" y="154" width="290" height="140" rx="6"/><rect x="304" y="154" width="290" height="140" rx="6" fill="#0a0d12"/></g>
+                        <g font-family="Consolas" font-size="10" fill="#eef2f8"><text x="14" y="20">A Camera A</text><text x="312" y="20">B Camera B</text><text x="14" y="168">C Camera C</text><text x="272" y="20">0 f</text><text x="566" y="20">+3 f</text><text x="268" y="168">&minus;1 f</text><text x="312" y="168" fill="#9aa7b8">Selected point, every view</text></g>
+                        <circle cx="140" cy="70" r="6" fill="none" stroke="#eef2f8" stroke-width="2"/><circle cx="140" cy="70" r="2.5" fill="#f472b6"/><text x="150" y="64" fill="#fff" font-size="10">Head</text>
+                        <path d="M310 40 L590 110" stroke="#fbbf24" stroke-dasharray="5 4" stroke-width="1.3"/><text x="540" y="92" fill="#fbbf24" font-size="9" font-family="Consolas">from A</text>
+                        <circle cx="452" cy="75" r="6" fill="none" stroke="#38bdf8" stroke-width="2"/><circle cx="452" cy="75" r="2.5" fill="#f472b6"/>
+                        <path d="M14 280 L290 170" stroke="#fbbf24" stroke-dasharray="5 4" stroke-width="1.3"/><path d="M14 200 L290 260" stroke="#fbbf24" stroke-dasharray="5 4" stroke-width="1.3"/>
+                        <circle cx="161" cy="222" r="6" fill="none" stroke="#4ade80" stroke-width="2"/><circle cx="161" cy="222" r="2.5" fill="#f472b6"/>
+                        <g fill="#1f2a3a"><rect x="330" y="180" width="70" height="70"/><rect x="410" y="180" width="70" height="70"/><rect x="490" y="180" width="70" height="70"/></g>
+                        <g stroke="#fbbf24" stroke-dasharray="4 3"><path d="M330 200 L400 230"/><path d="M410 210 L480 222"/><path d="M490 230 L560 200"/></g>
+                        <g font-size="9" fill="#9aa7b8"><text x="330" y="262">A 0.00 px off</text><text x="410" y="262">B 0.05 px off</text><text x="490" y="262">C 0.06 px off</text></g>
+                    </svg>
+                </div>
+                <div class="m-tl"><span class="m-btn"><i class="bi bi-chevron-left"></i></span><span class="m-btn"><i class="bi bi-chevron-right"></i></span><span class="rng"></span><span class="m-now">150 / 436 · 0.1500 s</span></div>
+            </div>
+            <div class="m-right">
+                <div class="m-card"><h4><i class="bi bi-bullseye"></i>Points · 3D · 3 cameras</h4>
+                    <div class="m-pt"><span class="dot" style="border-color:#f472b6"></span>Head<em>A B C · 0.06 px</em></div>
+                    <div class="m-pt"><span class="dot" style="border-color:#fbbf24"></span>Chin<em>A B · <span style="color:#fbbf24">4.1 px</span></em></div>
+                </div>
+                <div class="m-card"><h4><i class="bi bi-magnet"></i>Snap</h4>
+                    <div class="m-row"><span>Snap to the line</span><span>on · 6 px</span></div>
+                    <div class="m-row"><span>Find match automatically</span><span>on</span></div>
+                </div>
+                <div class="m-exp"><span class="m-btn"><i class="bi bi-search"></i>Find match</span><span class="m-btn pri">Accept</span></div>
+            </div>
+        </div>
+    </div>
+    <p class="cap">Points in a 3-camera rig: the point placed in A, its epipolar lines in B and C, and the free cell showing the selected point at native pixels in every view.
+        Ring colours: <span style="color:#4ade80">on the line (snapped)</span>, <span style="color:#38bdf8">found by Find match</span>,
+        <span style="color:#fbbf24">proposed (dashed)</span>, white: placed by hand.</p>
+
+    <h3>Place points in every view</h3>
+    <ol>
+        <li><b>Click the point in any view.</b> It gets a name (the application's next point name, or Point 1, 2, ...; rename it in the pane). Its
+            <b>epipolar line</b> appears in every other view as an amber dashed line labelled <i>from A</i>: the point must lie on that line there.
+            The line comes from the rig's lens and pose, so with lens distortion it is a gentle curve, drawn exactly.</li>
+        <li><b>Find match</b> (on by default after the first click) searches along each line for the same patch (normalised cross-correlation on the frame,
+            a narrow band around the line, the patch taken at the exact mark, the peak fitted to a few hundredths of a pixel; about 40 ms) and <b>proposes</b> the mark: a dashed amber ring. Click it to accept, or click where the point really is.
+            A view where no confident match exists says so instead of guessing.</li>
+        <li>A click within the <b>snap band</b> (6 px each side by default) lands <b>on the line</b>; with two marked views the lines cross at the one place the point can be,
+            and a click near the crossing lands on it. Hold <kbd>Alt</kbd> to place freely. Drag a mark to fix it (a loupe shows the pixels; zoom the view for sub-pixel work);
+            right-click removes that view's mark (the last mark removes the point).</li>
+        <li>The table lists every point with a chip per camera (its colour says how the mark was made) and its <b>Reprojection</b> error: the point is triangulated
+            from all its marks and projected back into each view; the column shows the worst distance, in pixels, between a mark and that projection. Near 0 means
+            the marks are one 3D point; a few pixels means one view has the <b>wrong feature</b> (the chip turns amber). A point marked in one camera only reads
+            <i>1 view</i>. The free grid cell shows the selected point at native pixels in every view, with its lines, for checking at pixel level.</li>
+        <li>When a point is in every view, click an empty spot (or <i class="bi bi-plus-lg"></i>) to start the next one. Editing marks on a frame sets a key, as with one camera.</li>
+    </ol>
+
+    <h3>Track</h3>
+    <p><b>Track</b> runs the same tracker in every view, with the same settings (Auto included: Auto picks a method per view from a quick look at each), one frame of every
+        view in turn, so all views fill in live. Points stay paired by name: a row always belongs to the same 3D point in every view. The Track pane shows, per view,
+        the frames tracked, the states on this frame and the method used; per point, its chips on this frame and the reprojection error now and over the tracked frames
+        (median / worst). A worst value of several pixels points to a frame where one view jumped to another feature. The lanes show one band per point with a thin row per view.
+        Speed is shown as world frames per second with every view tracked.</p>
+    <p>A run only rewrites the rows of the points it tracks: a point placed later (say a part that comes into view on frame 500) keeps its own track when you
+        track the others again from an earlier frame, and a key set on an earlier frame leaves a point that did not exist yet alone.</p>
+    <div class="note"><b>When a point leaves a view.</b> If the object turns away from one camera or leaves its picture, that camera's tracker may slide onto the background.
+        With three or more cameras the rig notices: the other views still agree on one 3D point, and this view's mark is more than 5 px away from it. After 3 frames
+        in a row the point is marked <b>lost</b> in that view from its first bad frame to the end of the run (red in the lanes), the 3D result uses the other views,
+        and a message names the point, the view and the frame. While it is unclear which view is wrong (two views, or a mark off along an epipolar line) the
+        disagreeing marks are only made <b>uncertain</b> on that frame.</div>
+    <h3 id="multicam-3d">Results in 3D</h3>
+    <p><b>Results</b> opens on <b>3D (rig)</b>: on every frame, each point seen surely by two or more cameras is <b>triangulated</b> (a linear start, then the
+        position that best fits all its marks). The left shows the <b>3D path</b>: every point's path in mm, coloured by speed (scale on the right), the cameras as
+        frustums (or as markers on the edge when they are off screen), camera A's x, y, z axes and a floor grid. Drag to orbit, Shift+drag to pan, the wheel zooms,
+        double-click (or <i class="bi bi-arrow-counterclockwise"></i>) resets; the marker on each path is the current frame and follows the timeline and Play.
+        <b>Views</b> switches the left back to the cameras. The right shows the usual cards and charts in mm: displacement, speed (m/s) and
+        acceleration (g) in 3D, each with &plusmn;, and Distance 1-2 in 3D (on the Demo's wand it reads its 500 mm). The time and CFC settings work as with one camera.
+        The chips <b>A</b>, <b>B</b>, <b>C</b> switch to one camera alone, in its image pixels.</p>
+    <p>Where the &plusmn; comes from (the info line and the <b>3D position &plusmn;</b> card show it):</p>
+    <ul>
+        <li><b>Tracking noise</b>, measured from the data: the marks of a point never meet exactly, and the spread of those reprojection residuals over all
+            frames gives the noise in pixels (<i>measured</i>; with too few frames it falls back to 0.3 px and says <i>assumed</i>).</li>
+        <li><b>Each camera's pose</b> as the rig's calibration knows it (Camera Studio's report).</li>
+        <li><b>The rig's scale</b>: the wand's length sets the scale for every frame at once, so its tolerance (0.05 %) is one common factor: about 1.5 mm at
+            3 m from camera A. It moves absolute positions, but hardly displacements or speeds.</li>
+        <li><b>Where each mark was put</b>: a click or a drop is only as precise as your aim, about a third of a screen pixel, so its uncertainty in image
+            pixels is that divided by the view's zoom (zoom in to place a mark and it shrinks); a Find match proposal is good to about 0.05 px. A mark the tracker
+            never re-centres keeps that offset for the whole track, and an offset <i>along</i> the epipolar line does not even show in the reprojection error,
+            so it moves the point in depth: this part is propagated into the &plusmn; (not into speeds). The marker-centroid tracker re-centres every frame, so it adds none.</li>
+    </ul>
+    <p>Checked against the Demo 3D rig's truth: with the exact cameras, the tracked ball is within 0.12 mm RMS and 1&sigma; covers 73 % of the frames
+        (68 % is ideal). With a rig calibrated through Camera Studio's wand, the error is 0.45 mm RMS (a common scale of 0.015 %); the stated &plusmn; is cautious
+        there, because it carries the wand's full stated tolerance. Placed by hand in the studio (zoomed in, clicks with a person's aim, Find match, snap),
+        both wand ends come out at 0.6 mm RMS with 1&sigma; covering 68 %. A point seen by only one camera has <b>no 3D value</b>: it is named in the info line, never guessed.
+        Export CSV and Excel gain z and the &plusmn; per axis; the PDF report adds the 3D path view as shown.</p>
+    <div class="note">The wand's markers: Camera Studio finds each wand marker's centre from the pixels above a floor at 10 % of the marker's contrast, so a rod
+        touching the marker (a few grey levels brighter than the wall) no longer pulls the centre toward the other marker. On the Demo that pull read the wand
+        0.17 mm short and scaled the whole rig by 0.036 %; now the scale is within 0.015 %.</div>
+    <div class="tip">The session (rig, offsets you nudged, relinked clips, points with their marks per view, keys, snap settings) is saved with the workflow and
+        comes back when the studio reopens; re-run Track to get the tracks again. Single-camera sessions are not affected.</div>
+
+    <!-- ================= APPLICATIONS ================= -->
+    <h2 id="apps">8. The applications</h2>
+    <p>Each application adds its own analysis on top of the tracked points. The numbers in the mockups are real results from the sample clips.</p>
+
+    <div class="apps">
+        <div class="app" style="--a:#38bdf8">
+            <h3><i class="bi bi-grid-3x3"></i>Material Testing Studio</h3>
+            <div class="mock" style="--a:#38bdf8;margin:8px 0 0"><div style="padding:8px;display:grid;gap:8px">
+                <div class="m-kpis"><div class="kpi hero"><div class="k">Strain at failure</div><div class="v">2.82 <small>&plusmn; 0.07 %</small></div></div><div class="kpi"><div class="k">Failure</div><div class="v">0.43 <small>ms · frame 26</small></div></div></div>
+                <div class="ch"><div class="h">Strain map, &epsilon;yy (frame 23)</div><svg viewBox="0 0 300 70" preserveAspectRatio="none"><defs><linearGradient id="sm" x1="0" x2="1"><stop offset="0" stop-color="#1e3a8a"/><stop offset=".45" stop-color="#22d3ee"/><stop offset=".7" stop-color="#facc15"/><stop offset="1" stop-color="#ef4444"/></linearGradient></defs><rect x="20" y="8" width="260" height="54" fill="url(#sm)" opacity=".85"/><g stroke="#0b0f16" stroke-width=".6" opacity=".7"><path d="M20 35 H280 M85 8 V62 M150 8 V62 M215 8 V62 M20 8 L85 35 L150 8 L215 35 L280 8 M20 62 L85 35 L150 62 L215 35 L280 62"/></g></svg></div>
+            </div></div>
+            <p><b>Gauge top</b> and <b>Gauge bottom</b> form a virtual extensometer: strain, elongation, gauge length and the failure frame (the first frame below half the running peak).
+                Add grid points for a <b>strain map</b> (&epsilon;xx, &epsilon;yy, &epsilon;xy, principal and equivalent strain) drawn over the specimen; triangles outside the gauge are masked.</p>
+        </div>
+
+        <div class="app" style="--a:#f87171">
+            <h3><i class="bi bi-car-front-fill"></i>Crash Analysis Studio</h3>
+            <div class="mock" style="--a:#f87171;margin:8px 0 0"><div style="padding:8px;display:grid;gap:8px">
+                <div class="m-kpis"><div class="kpi hero"><div class="k">Head rotation</div><div class="v">16.6 <small>&plusmn; 0.2&deg;</small></div><div class="s">66 ms · 6 points, 2 used now</div></div><div class="kpi"><div class="k">Chest rotation</div><div class="v">7.7&deg;</div><div class="s">41 ms · then withheld</div></div></div>
+                <div class="ch"><div class="h">Rotation &plusmn;1&sigma; · 2 of 6 Head points used</div><svg viewBox="0 0 300 60" preserveAspectRatio="none"><path d="M0 55 C 80 54, 150 35, 210 10 L210 16 C 150 40, 80 58, 0 58 Z" fill="#f87171" opacity=".2"/><path d="M0 56 C 80 56, 150 38, 210 13" stroke="#f87171" stroke-width="2" fill="none"/><text x="216" y="16" fill="#64748b" font-size="9">withheld: 1 point</text></svg></div>
+            </div></div>
+            <p>Motion relative to the <b>Sled reference</b>. Each body's position and rotation come from a rigid fit of all its sure points; a point that disagrees with the rest is
+                dropped on that frame (red cross on the chart). Rotation is withheld when the points are too close or the body stretches. Filter: auto, or <b>CFC 60/180/600/1000</b> (SAE J211),
+                refused when the capture rate is too low for it.</p>
+            <p><b>Vehicle reference:</b> put 4-6 points on rigid structure on <b>both sides</b> of the dummy (pillars, sill, door striker; not the dash or the seat). Their mean motion
+                is subtracted: an on-board camera shakes and turns during the pulse (NHTSA 11500: up to 52 g of apparent acceleration; with 6 reference points the head's RMS difference
+                to the accelerometer fell from 15 to 7 g). See <i>docs/motion_studio_accel_validation.md</i>.</p>
+            <p><b>Crash templates</b> (the Points step's template list, the launcher and AI setup): <b>Frontal</b> (Head, Chest, Pelvis, Vehicle reference), <b>Side impact</b>
+                (Head, Thorax, Pelvis, Door / B-pillar, Vehicle reference), <b>Pedestrian headform</b> (Headform, Fixed reference) and <b>Drop tower</b> (Impactor, Specimen, Fixed reference).
+                Each body gets its SAE J211 class (head, headform, impactor and pelvis CFC 1000; chest and thorax CFC 180; structure CFC 60; the filter shows <i>template</i>) and a one-line
+                hint for where to place its points. HIC is read for the head, headform or impactor. A class the capture rate cannot carry (CFC 1000 needs over 4,155 fps) is refused for that
+                body with a note, and the body is smoothed from the data instead.</p>
+            <p><b>Sensor... (Results):</b> import an accelerometer CSV (choose or drop the file). Map the time column (s or ms), 1-3 acceleration channels (g or m/s&sup2;; tick the ones in the
+                image plane, e.g. X and Z for a side view), an optional reference to subtract (the sled), an optional CFC on the sensor, and the alignment: a <b>frame column</b> (best),
+                the time zero plus an offset, or <b>auto</b> by cross-correlation (can be off by several ms on a smooth pulse). The sensor is compared at the video's bandwidth (integrated
+                to position, then smoothed exactly like the video): the acceleration chart shows it dashed (the faint line is the sensor with its own filter), and a card shows the RMS and
+                mean difference, the correlation and both peaks with their times. The sensor's HIC15 / HIC36 (all channels, no reference) is shown next to the video HIC, even when the
+                video HIC is refused. Excel gets a <i>Sensor comparison</i> sheet; the PDF a <i>Video vs sensor</i> section. Without a sensor, acceleration charts say <i>verify against a sensor</i>.</p>
+        </div>
+
+        <div class="app" style="--a:#fbbf24">
+            <h3><i class="bi bi-arrow-down-circle"></i>Drop &amp; Impact Studio</h3>
+            <div class="mock" style="--a:#fbbf24;margin:8px 0 0"><div style="padding:8px;display:grid;gap:8px">
+                <div class="m-kpis"><div class="kpi hero"><div class="k">Restitution e</div><div class="v">0.575 <small>&plusmn; 0.003</small></div></div><div class="kpi"><div class="k">Impact speed</div><div class="v">3.04 <small>&plusmn; 0.25 m/s</small></div></div><div class="kpi"><div class="k">Contact</div><div class="v">15.3 <small>&plusmn; 0.2 ms</small></div></div></div>
+                <div class="ch"><div class="h">Height above the contact point, fitted arcs dashed</div><svg viewBox="0 0 300 60" preserveAspectRatio="none"><rect x="128" y="0" width="34" height="60" fill="#fbbf24" opacity=".1"/><path d="M0 5 Q 70 10, 130 56 M160 56 Q 220 22, 300 44" stroke="#fbbf24" stroke-width="2" fill="none"/><path d="M0 5 Q 70 10, 130 56 M160 56 Q 220 22, 300 44" stroke="#fff" stroke-width="1" stroke-dasharray="3 3" fill="none" opacity=".6"/></svg></div>
+            </div></div>
+            <p>Fall and rebound arcs fitted with one shared gravity: impact and rebound speed, coefficient of restitution, contact time, mean contact deceleration, compression
+                (with the <b>Second point</b>), and drop / bounce heights (inferred). e and the times need no scale.</p>
+        </div>
+
+        <div class="app" style="--a:#a78bfa">
+            <h3><i class="bi bi-soundwave"></i>Vibration Studio</h3>
+            <div class="mock" style="--a:#a78bfa;margin:8px 0 0"><div style="padding:8px;display:grid;gap:8px">
+                <div class="scroll"><table class="t" style="font-size:12px;margin:0"><tr><th>Mode</th><th>Peak</th><th>Ring-down f<sub>n</sub></th><th>&zeta;</th></tr>
+                    <tr><td>1</td><td>931.9 &plusmn; 7.3 Hz</td><td>932.07 &plusmn; 0.03 Hz</td><td>(1.67 &plusmn; 0.21)e-4</td></tr>
+                    <tr><td>2</td><td>2216.9 &plusmn; 7.3 Hz</td><td>2219.05 &plusmn; 0.15 Hz</td><td>(1.18 &plusmn; 0.08)e-3</td></tr></table></div>
+                <div class="ch"><div class="h">Amplitude spectrum (log), Nyquist 3,750 Hz</div><svg viewBox="0 0 300 50" preserveAspectRatio="none"><path d="M0 46 L60 44 L72 6 L84 44 L160 45 L176 14 L190 45 L300 47" stroke="#a78bfa" stroke-width="1.6" fill="none"/></svg></div>
+            </div></div>
+            <p>Drift-free displacement, Welch amplitude spectrum, spectrogram and ring-down per point. A modes table gives each natural frequency and its damping ratio &zeta;
+                from the decay after a pluck; click a row to see its ring-down. Needs the capture rate.</p>
+        </div>
+
+        <div class="app" style="--a:#2dd4bf">
+            <h3><i class="bi bi-gear-wide-connected"></i>Rotating Machinery Studio</h3>
+            <div class="mock" style="--a:#2dd4bf;margin:8px 0 0"><div style="padding:8px">
+                <div class="m-kpis"><div class="kpi hero"><div class="k">Speed</div><div class="v">1,024.3 <small>&plusmn; 0.2 rpm</small></div><div class="s">clockwise · 95 % CI</div></div><div class="kpi"><div class="k">Periodicity check</div><div class="v">agrees</div></div><div class="kpi"><div class="k">Angular acceleration</div><div class="v">&minus;55 <small>&plusmn; 3 rpm/s</small></div></div></div>
+            </div></div>
+            <p><b>Centre</b> and <b>Rim mark</b> (or 3+ marks, with the centre in their middle): RPM with a 95 % interval, a periodicity cross-check, angular acceleration, run-out once per
+                turn (TIR) and the centre orbit. An oblique view is handled as a tilted circle. Needs the capture rate.</p>
+        </div>
+
+        <div class="app" style="--a:#f472b6">
+            <h3><i class="bi bi-bullseye"></i>Ballistics Studio</h3>
+            <div class="mock" style="--a:#f472b6;margin:8px 0 0"><div style="padding:8px">
+                <div class="m-kpis"><div class="kpi hero"><div class="k">Velocity (frame 76)</div><div class="v">83.4 <small>&plusmn; 0.6 m/s</small></div></div><div class="kpi"><div class="k">Direction</div><div class="v">2.08 <small>&plusmn; 0.10&deg;</small></div></div><div class="kpi"><div class="k">Kinetic energy</div><div class="v">11.1 <small>&plusmn; 0.15 J</small></div></div></div>
+            </div></div>
+            <p>One <b>Projectile</b> point, tracked from two keys: velocity, direction, the change of speed across the frame, and with a <b>Mass</b> the kinetic energy and momentum.
+                A drag check says whether the slow-down is consistent with air drag, not drag, or below what the frames resolve. Needs the capture rate.</p>
+        </div>
+
+        <div class="app" style="--a:#4ade80">
+            <h3><i class="bi bi-person-arms-up"></i>Biomechanics Studio</h3>
+            <div class="mock" style="--a:#4ade80;margin:8px 0 0"><div style="padding:8px">
+                <div class="m-kpis"><div class="kpi hero"><div class="k">Hip speed, mean</div><div class="v">3.09 <small>&plusmn; 0.09 m/s</small></div></div><div class="kpi"><div class="k">Foot off &rarr; touchdown</div><div class="v">170.0 <small>&plusmn; 1.6 ms</small></div></div><div class="kpi"><div class="k">Knee, most flexed</div><div class="v">29 <small>&plusmn; 8&deg;</small></div></div></div>
+            </div></div>
+            <p><b>Hip, Knee, Ankle, Toe, Trunk</b>: knee, hip and ankle angles, angular velocity, hip speed, a stick figure, and segment lengths that flag frames where a marker slid.
+                Mark events by eye (foot off, touchdown). The &plusmn; includes a 2D bound per segment: one side camera gives angles to a few degrees.</p>
+        </div>
+
+        <div class="app" style="--a:#94a3b8">
+            <h3><i class="bi bi-three-dots"></i>More applications</h3>
+            <p><b>Airbag</b> (bag area, height and width, impactor plate speed and deceleration), <b>Spray &amp; Droplet</b> (droplet speeds, spray width, penetration and angle),
+                <b>Robot Path</b> (tool path, deviation, speed along the path), <b>Physics Lab</b> (pendulum swing angle, phase plot, rise heights), <b>Line QA</b>
+                (every machine cycle against a golden cycle, cycle times) and <b>Blast</b> (front position and speed, bright area). <b>Custom</b> gives displacement, speed,
+                acceleration and the path for any points.</p>
+        </div>
+    </div>
+
+    <!-- ================= EXPORT ================= -->
+    <h2 id="export">9. Export</h2>
+    <p>The Results pane has three exports, all built from exactly what is on screen (sure frames, time zero, analysis window, capture rate and units):</p>
+    <ul>
+        <li><b>Export CSV</b>: every frame and point.</li>
+        <li><b>Export Excel</b>: a <i>Summary</i> sheet (clip, application, capture and playback rate, scale, time zero, the cards with &plusmn;, limits), a <i>Per frame</i> sheet
+            (position in px and real units, confidence, state, displacement, speed and acceleration with &sigma;, plus the application's columns) and a <i>Settings</i> sheet.
+            Applications add their own sheets (e.g. <i>Drop</i>, <i>Frequencies</i>, <i>Spectrum</i>, <i>Rotation</i>, <i>Ballistics</i>, <i>Biomechanics</i>).</li>
+        <li><b>Report (PDF)</b>: the first frame with the points, the settings, the cards, a 2x2 chart grid in ms from time zero, the application's table, and a <i>Limits</i> line that
+            says what the numbers rest on (sure frames only, pixels only, playback time, assumed g...).</li>
+    </ul>
+    <div class="mock"><div style="padding:12px;display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:start">
+        <div style="background:#e5e7eb;border-radius:4px;height:150px;padding:8px;color:#111;font-size:8px;line-height:1.3">
+            <b style="font-size:9px">Motion Studio report</b><br>Clip · Application<br>Capture rate · Scale
+            <div style="background:#9ca3af;height:28px;margin:4px 0;border-radius:2px"></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px"><div style="background:#cbd5e1;height:22px"></div><div style="background:#cbd5e1;height:22px"></div><div style="background:#cbd5e1;height:22px"></div><div style="background:#cbd5e1;height:22px"></div></div>
+            <div style="margin-top:4px;color:#6b7280">Limits: sure frames only</div>
+        </div>
+        <div><div style="font-size:12px;color:#9aa7b8;margin-bottom:4px">gfrp_tensile_material_results.xlsx</div>
+            <div class="scroll"><table class="t" style="font-size:11.5px;margin:0"><tr><th>frame</th><th>time_s</th><th>p1_x</th><th>p1_y</th><th>p1_state</th><th>strain_%</th><th>strain_sigma</th></tr>
+                <tr><td>22</td><td>0.000367</td><td>141.62</td><td>88.04</td><td>sure</td><td>2.41</td><td>0.07</td></tr>
+                <tr><td>23</td><td>0.000383</td><td>141.60</td><td>87.71</td><td>sure</td><td>2.64</td><td>0.07</td></tr>
+                <tr><td>24</td><td>0.000400</td><td>141.59</td><td>87.37</td><td>sure</td><td>2.82</td><td>0.07</td></tr></table></div>
+            <div style="display:flex;gap:6px;margin-top:6px"><span class="m-chip">Summary</span><span class="m-chip">Per frame</span><span class="m-chip">Settings</span></div>
+        </div>
+    </div></div>
+    <p class="cap">The PDF report and the Excel workbook's per-frame sheet (illustrative values).</p>
+
+    <h3 id="video">Video with overlays and strobe still</h3>
+    <p><b>Video</b> (next to the analysis frames) opens a dialog with two tabs.</p>
+    <ul>
+        <li><b>Video with overlays</b>: the chosen frames as an MP4 with what the viewer shows. Options:
+            <ul><li>output rate in fps (the file rate, &frac14; speed, or real time when the camera rate allows), with the slow-motion factor shown;</li>
+                <li>resolution (source, or a smaller long side) and trail length (off, 10, 30, 100 frames or the whole path);</li>
+                <li>point labels, a timestamp (ms from time zero, frame number, slow-motion factor), a scale bar (needs mm) and a speed readout per point.</li></ul>
+            The engine decodes, draws and encodes, so it is fast (about 500 fps on a 322 x 648 clip). A progress bar shows frames and fps; <b>Stop</b> cancels and leaves no file.
+            The file downloads and is also kept in the temp folder <code>iw_motion_studio_exports</code>. It is encoded as MPEG-4 (mp4v): it plays in desktop players
+            (Windows Media Player, VLC) but not inside a browser page.</li>
+        <li><b>Strobe still</b>: one PNG of N evenly spaced exposures (or every k-th frame) on one background, with optional trajectory lines.
+            <i>Moving subject over the median background</i> suits most clips; <i>Lightest</i> suits a bright subject on dark, <i>Darkest</i> a dark one on light.</li>
+    </ul>
+
+    <h3 id="fit">Fit a model</h3>
+    <p><b>Fit</b> fits a model to one point or body over a frame interval: x or y position, displacement, speed or acceleration.</p>
+    <table class="t"><tr><th>Model</th><th>Use</th><th>Reports</th></tr>
+        <tr><td>Linear</td><td>constant velocity</td><td>velocity</td></tr>
+        <tr><td>Quadratic</td><td>constant acceleration, free fall</td><td>acceleration in m/s&sup2; and in g</td></tr>
+        <tr><td>Damped sine</td><td>vibration, ring-down</td><td>frequency, damping ratio, natural frequency</td></tr>
+        <tr><td>Exponential decay</td><td>settling, decay</td><td>time constant</td></tr></table>
+    <p>Each parameter has &plusmn;1&sigma; from the fit covariance scaled by the residuals, plus R&sup2; and the residual RMS. The chart shows the data, the fit curve and the
+        residuals. <b>Keep for the export</b> adds the fit to a <i>Fits</i> sheet in Excel and a <i>Model fits</i> table in the PDF.</p>
+    <p class="note">Fit positions where you can. Speed and acceleration samples are smoothed, so their &plusmn; is a lower bound. With a scale from gravity, a free-fall fit cannot
+        measure g: the studio says so.</p>
+
+    <h3 id="compare">Compare two trials</h3>
+    <p><b>Compare</b> opens trial A against trial B on one screen.</p>
+    <ul>
+        <li><b>Save as trial</b> stores the current session (tracked points, time scale, names). Track the other clip, then compare it with the saved trial.</li>
+        <li>Sync on <i>time zero</i>, <i>the peak</i> of the chosen quantity, or <i>time zero + offset</i> (ms).</li>
+        <li>Both clips play side by side (or overlaid) at the synced time. One chart shows the chosen quantity of both.</li>
+        <li>The cards give each peak with its time, the peak difference, the RMS difference after sync and the shift applied to B.</li>
+    </ul>
+
+    <!-- ================= PROMPT ================= -->
+    <h2 id="prompt">10. Set up with a prompt</h2>
+    <p><b>AI setup</b> (the button in the top bar) opens a dialog that takes a plain sentence, e.g. <i>"head acceleration of the dummy in g"</i>; suggestion chips show typical
+        requests for the application, including the crash templates. The dialog shows the proposed setup as a table (application, method, group, template / search, start frame,
+        filter, smoothing, units) and nothing changes until <b>Apply</b>. Later requests refine it (<i>"use optical flow"</i>, <i>"smooth more"</i>, <i>"it tumbles"</i>). With an empty prompt,
+        <b>Set up from the clip</b> proposes a setup from what Knowledge Studio knows about the clip: its notes, timed boxes, activity, detections and calibration.
+        The AI only reads this text, never the frames. Without an AI, built-in rules are used (<i>AI unavailable: rules used</i>).</p>
+
+    <!-- ================= NODE ================= -->
+    <h2 id="reset">11. Reset all</h2>
+    <p><i class="bi bi-arrow-counterclockwise"></i> <b>Reset all</b> in the top bar starts the studio again from scratch: the application, points, keys, tracking
+        results, scale and settings are removed, and the studio goes back to the application picker and the Source step. It asks first:</p>
+    <div class="mock"><div style="display:grid;place-items:center;padding:22px;background:rgba(5,8,12,.72)">
+        <div class="m-card" style="max-width:420px;padding:14px 16px;box-shadow:0 18px 50px rgba(0,0,0,.55)">
+            <div style="font-weight:700;font-size:15px;display:flex;gap:8px;align-items:center"><i class="bi bi-arrow-counterclockwise" style="color:var(--lost)"></i>Reset Motion Studio?</div>
+            <p style="color:#b6c0cc;margin:8px 0 12px">This removes the application, points, keys, tracking results, scale and settings, and starts again from the Source step. Your clips and the workflow's nodes are not changed.</p>
+            <div style="display:flex;gap:8px;justify-content:flex-end"><span class="m-btn">Cancel</span><span class="m-btn" style="background:#7f1d1d;border-color:var(--lost);font-weight:600"><i class="bi bi-arrow-counterclockwise"></i>Reset all</span></div>
+        </div>
+    </div></div>
+    <p class="cap">The confirmation. <kbd>Esc</kbd> or a click outside cancels.</p>
+
+    <h2 id="node">12. The Multi-Point Tracker node</h2>
+    <p>The studio runs on the C++ node <b>Multi-Point Tracker</b> (<code>cv.multi_point_tracker</code>, Tracking category, CUDA and CPU builds), which you can also use
+        in any live workflow:</p>
+    <ul>
+        <li><b>Methods:</b> template matching (NCC, sub-pixel peak), pyramidal optical flow with a forward-backward check, marker centroid, and the AI box trackers
+            NanoTrack (all points in one batched network pass) and DaSiamRPN (up to 8 points), each from its optional feature package.</li>
+        <li><b>Group model:</b> 2 points similarity, 3 affine, 4+ perspective; only sure points vote, and hidden points are placed by the group and re-acquired.</li>
+        <li><b>World units:</b> optional <i>lens</i> (a Camera Studio <code>.calib</code>) and <i>world_homography</i> inputs.</li>
+        <li><b>Outputs:</b> a preview (trails, state colours, motion vectors, group outline), the points matrix for the current frame, and <i>history</i>: every frame since
+            the restart, so a slow reader (logger, Live Sheet, Python) never misses a frame. <i>history_frames</i> caps it (default 10,000, 0 = off).</li>
+        <li><b>Studio mode:</b> the <i>frame</i> and <i>keys</i> inputs let it track in either direction and restart from hand-set keys; with <i>frame</i> = -1 it runs live.</li>
+    </ul>
+    <p>The tracker's fixed cost is under 1 ms a frame on both builds; the studio shows its tracking speed (<i>fps best</i>) after each run.</p>
+    <p>For box tracking in other workflows, <b>Multi Box Tracker</b> (<code>cv.multi_box_tracker</code>, NanoTrack feature package) follows N boxes (x, y, w, h) at once and
+        outputs the boxes, a confidence per box and a preview; <i>Start</i> or new boxes restart it. Demo: <i>demos/Inference/Multi Box Tracker.json</i>.</p>
+
+    <!-- ================= LIMITS ================= -->
+    <h2 id="limits">13. Good results and limits</h2>
+    <ul>
+        <li>Use the camera's real capture rate. Copies from the web are often slowed or have repeated frames; times are only as good as the frame rate.</li>
+        <li>Choose points with texture or a marker, on the object only. Avoid repeating patterns, reflections and edges that slide (a turning helix, a limb's outline).</li>
+        <li>Check the lanes: long uncertain or lost stretches mean the point needs a key, a bigger template, or a different method.</li>
+        <li>A clip calibration is only correct on its plane: points in front of or behind it read too long or short.</li>
+        <li>One camera measures in the image plane (use <a href="#multicam">Multi-camera (3D)</a> for depth). Out-of-plane motion shortens lengths and angles; Biomechanics puts this in the &plusmn;.</li>
+        <li>A camera mounted on the moving vehicle or rig shakes: add a reference body (4-6 points on rigid structure, both sides of the frame) so its motion is subtracted.
+            On NHTSA 11500 this cut the head's difference to the accelerometer from 15 g to under 6 g RMS.</li>
+        <li>Acceleration needs a clear view: compare video with a sensor only while the point is visible (on 11500, before the airbag covers the head, about 45 ms).</li>
+        <li>AI box trackers keep the point through rotation and blur but are box-level (about 2-3 px), not sub-pixel: prefer Template or markers for precise measurements.</li>
+    </ul>
+    <div class="note">Results are measurements, not certifications. Accelerations come from differentiating position twice, which amplifies noise: injury criteria
+        from video should be validated against an accelerometer before they are relied on. A grid of tracked points is not full-field DIC.</div>
+</div>
+</body>
+</html>

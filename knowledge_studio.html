@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Knowledge Studio - User Guide</title>
+<link href="bootstrap/font/bootstrap-icons.css" rel="stylesheet">
+<style>
+    body { margin: 0; background: #0b0d11; color: #e6e9ef; font: 15px/1.6 "Segoe UI", system-ui, sans-serif; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 20px 60px; }
+    h1 { font-size: 28px; margin: 0 0 4px; } h2 { font-size: 20px; margin: 34px 0 8px; color: #6da7ec; }
+    .lede { color: #8b95a5; max-width: 75ch; }
+    nav { display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0; }
+    nav a { color: #93c5fd; text-decoration: none; border: 1px solid #1e40af; border-radius: 99px; padding: 3px 12px; font-size: 13px; }
+    img { max-width: 100%; border-radius: 10px; border: 1px solid #222a36; margin: 8px 0; }
+    code { background: #161c26; border-radius: 5px; padding: 1px 6px; color: #cbd5e1; }
+    ol li, ul li { margin: 4px 0; }
+    .note { background: #1a1206; border: 1px solid #854d0e; border-radius: 10px; padding: 10px 14px; color: #fde68a; }
+</style>
+</head>
+<body>
+<div class="wrap">
+    <h1><i class="bi bi-journal-bookmark"></i> Knowledge Studio</h1>
+    <p class="lede">Ask questions of your own documents and get answers with a citation for every claim: the page or section they came from, opened at the exact place. Knowledge Studio is the window for <b>Recall</b>, IW's knowledge index. Open it from <b>Analytics &gt; Knowledge Studio</b>.</p>
+    <nav><a href="#libraries">Libraries</a><a href="#sources">Adding sources</a><a href="#ask">Asking</a><a href="#tags">Tags</a><a href="#scripting">Scripting</a><a href="#everywhere">Dashboards, documents, sheets</a><a href="#describe">Describe &amp; calibrate a clip</a><a href="#limits">Limits</a></nav>
+
+    <h2 id="libraries">1. Libraries</h2>
+    <p>A library is one index (a single SQLite file under <code>${assets}/.recall</code>). The left rail lists them; <b>demo pack</b> marks ready-made libraries such as <b>iw_help</b>, built from IW's own manuals, so you can ask a question straight away. Use <b>+</b> to create a library and <b>Delete library</b> (click twice) to remove one. Deleting removes the index only, never your documents.</p>
+
+    <h2 id="sources">2. Adding sources</h2>
+    <p>Open <b>Sources</b>, then <b>Files...</b> or <b>Folder...</b> (IW's file browser) or type a path such as <code>${assets}/docs/procedures</code> and press <b>Add</b>. PDF, Word (.docx), HTML, text and Markdown are read. Documents stay where they are: Recall stores a portable path and a content hash, so unchanged files are skipped the next time and changed ones are re-indexed.</p>
+    <p>Indexing runs in the background with a progress bar and time left; you can keep working, <b>Cancel</b> (the library stays consistent) and <b>Resume</b> later.</p>
+    <img src="images/knowledge_studio/ks_2_indexing.jpg" alt="Indexing progress in the Sources view">
+
+    <h2 id="ask">3. Asking</h2>
+    <p>Type a question in <b>Ask</b> and press Enter. You get numbered citation chips and the passages that answer it; the first citation opens on the right at its page or section, and clicking any chip or passage opens that one. Tick <b>Answer written by Claude</b> to also get a written answer that cites the same numbers (this needs the Claude CLI on this machine). Recent questions are kept in the left rail.</p>
+    <img src="images/knowledge_studio/ks_3_answer.jpg" alt="An answer with numbered citations and the cited manual section open">
+    <p>When nothing in the library answers the question, Knowledge Studio says <b>Not found in this library</b> instead of guessing.</p>
+    <img src="images/knowledge_studio/ks_5_notfound.jpg" alt="Not found">
+
+    <h2 id="tags">4. Tags</h2>
+    <p>In <b>Sources</b>, type a tag in a source's <b>+ tag</b> box and press Enter (click the x on a tag to remove it). In <b>Ask</b>, click tags under the question to search only sources with those tags, e.g. only <code>#procedures</code> or only one customer's documents.</p>
+
+    <h2 id="scripting">5. Scripting and workflows</h2>
+    <p>The same libraries are available to workflows through the <b>Recall Add</b> and <b>Recall Ask</b> nodes, and to scripts and AI agents through the <code>recall_*</code> MCP tools (see the MCP page).</p>
+
+    <h2 id="everywhere">6. Use Recall in dashboards, documents and sheets</h2>
+    <p>A library can answer questions right next to your live data (see <a href="live_boards.html#recall">Sheets, Dashboards &amp; Documents</a>):</p>
+    <ul>
+        <li><b>Dashboard Recall block:</b> in the block editor choose the <b>Recall</b> data source, a library and a question. The block shows a short answer with numbered citation chips, when it was last updated, a refresh button and an <b>Ask a follow-up</b> box. <b>Number</b> mode shows a count from indexed footage, e.g. the busiest moment. Clicking a chip opens the cited section, page or movie moment in a side panel; <b>Open in Knowledge Studio</b> opens it here.</li>
+        <li><b>Ask this dashboard:</b> a toolbar button that answers a question from the dashboard's live values <i>and</i> a library together, e.g. "why did the people count spike, and what does the site safety procedure say to do?". Data citations (D1, D2) name the block and the time; document citations open the source.</li>
+        <li><b>Documents:</b> <b>Insert live block &gt; Recall answer</b> embeds a cited answer; its numbered sources are printed into the PDF.</li>
+        <li><b>Sheets:</b> <code>=RECALL("library", "question")</code> puts the answer text in a cell; <code>=RECALL("site_safety", "How many people were in the entry area at the busiest moment?", "count")</code> gives a number you can use in other formulas.</li>
+    </ul>
+    <p>Answers are cached per library and question. A dashboard refreshing every second does not ask again; an answer is asked again when the library changes (sources added or re-indexed), when you press refresh, or after the block's interval (10 minutes by default). While an answer is being worked out the block shows a small <b>updating...</b> state and keeps the previous answer.</p>
+    <img src="images/knowledge_studio/ks_6_recall_dashboard.jpg" alt="Recall blocks on a dashboard next to the live people count">
+    <p>Demo: open <b>Safety Management &gt; Site Safety Recall Dashboard</b>. Its dashboard puts the live people count next to answers from the <b>site_safety_procedures</b> library (a fictional site safety procedure) and a count from the <b>site_safety</b> footage pack; the workflow also has a sheet with <code>=RECALL</code> cells and a shift report document.</p>
+
+    <h2 id="describe">7. Describe and calibrate a clip</h2>
+    <p>In <b>Sources</b>, a movie row has a <b>Describe</b> button. It opens the clip with a scrubber over the activity curve IW measured, and two tabs on the right.</p>
+    <p><b>Describe</b> is for saying what the clip shows, in your own words:</p>
+    <ul>
+        <li>Scrub to a moment, drag a box on the frame to mark where, and add a timed note with <code>#tags</code>.</li>
+        <li>Fill in <b>What the clip shows</b>, <b>What to measure</b> and <b>What counts as an event</b>.</li>
+        <li><b>Save</b> writes it to <code>clips.json</code> next to the movie and re-indexes the clip, so Ask finds the notes and Solution Studio reads them when the clip is tagged.</li>
+    </ul>
+    <p><b>Calibrate</b> turns pixels into real units (mm, cm, m or inches), so measurements, answers and generated apps use real distances:</p>
+    <ol>
+        <li><b>Lens.</b> Leave <b>None</b> for most footage, or pick a lens calibrated in Camera Studio: clicked points are then corrected for lens distortion before the fit, which keeps wide lenses accurate at the edges. <b>Calibrate a new lens in Camera Studio</b> opens Camera Studio; when you have saved a lens there, press the reload button to list it.</li>
+        <li><b>Method.</b>
+            <ul>
+                <li><b>Surface</b> (4 or more points) handles a camera looking at an angle: a floor, a table, a test board.</li>
+                <li><b>Scale bar</b> (2 points) gives one scale for the whole picture. It is only accurate when the camera looks straight at the surface.</li>
+            </ul></li>
+        <li><b>Known rectangle.</b> For Surface, type the real width and height of a rectangle you can see on that surface (floor tape, parking bays, a tile, a test board), choose the unit and name the surface. Then click its four corners in the order the guide above the frame asks for: top-left, top-right, bottom-right, bottom-left. A magnifier shows the pixels under the cursor; drag any point to fine-tune it.</li>
+        <li><b>Check point.</b> Four points always fit exactly, so the result says <b>unchecked</b>. Press <b>+ Add check point</b>, click another spot whose real position you know, and type its X and Y. Every point then shows its error, and the fit is rated <b>good</b>, <b>fair</b> or <b>check points</b> with its RMS error.</li>
+        <li><b>Grid and Measure.</b> <b>Grid</b> draws a real-world grid that follows the surface, which is a quick visual check. <b>Measure</b>: click two spots to read the distance between them. Only spots on the calibrated surface measure correctly; anything above it (the roof of a car, a person's head) reads too long. Measurements are for checking and are not saved.</li>
+        <li><b>Save calibration.</b> The calibration is saved with the clip in <code>clips.json</code> and a line such as <i>Calibrated: 1 px = 90.7 mm on the car park plane (RMS 36 mm)</i> is added to the clip's description. Ask can cite it, and Solution Studio uses it to build apps that measure in real units. Tick <b>Also add it to the shared list</b> to offer it under <b>Start from</b> for other clips from the same camera; surfaces saved in Camera Studio are listed there too. <b>Remove</b> deletes only the calibration and keeps the clip's notes.</li>
+    </ol>
+    <img src="images/knowledge_studio/ks_7_calibrate.jpg" alt="Calibrate tab: four parking-bay corners and a check point on an angled car park, a measurement across two bays, and the fit rated good">
+    <p>The Scale bar method works the same way: drag A and B onto the ends of something you know the length of, type the length, then measure.</p>
+
+    <h2 id="limits">8. Limits</h2>
+    <div class="note">Footage is indexed too: add movies (.mp4, .avi, .mov, .mkv, .webm, .m4v), audio or stills like any other source. IW samples frames (2 per second by default), records detections and counts with their times, transcribes speech, and makes short time windows searchable. "How many", "when", "which clip" and "busiest moment" questions are answered from the detection rows, and a citation opens the movie at that moment. Frames are never sent to the LLM; text in them is read by OCR only when you turn it on (below). Answers are leads to check against the cited source.</div>
+    <p id="speech"><b>Speech transcription.</b> In <b>Sources</b>, <b>Speech transcription</b> picks the Whisper model a library uses for audio and video: <b>Small</b> is the default and suits most footage; <b>Medium</b> is better for noisy or non-English audio but about 2-3x slower with about 3x the memory; <b>Tiny</b> and <b>Base</b> are faster and rougher; <b>Large-v3</b> is the most accurate and wants a GPU; <b>Off</b> skips speech. <b>Language</b> is detected per file unless you fix it (English, Japanese, German, Spanish, French or Chinese). A model is downloaded the first time it is used (Medium is about 1.5 GB), and the job progress says so. The setting applies to sources added afterwards; after a change, <b>Re-transcribe</b> re-runs just the library's movies and audio as a background job you can cancel and resume. Your last choice becomes the default for new libraries in this browser.</p>
+    <p id="ocr"><b>Text recognition (OCR).</b> Below it, <b>Text recognition (OCR)</b> reads text that is only in pictures, offline, on the CPU: <b>Scanned documents and images</b> (the default) reads PDF pages that have no text layer and still images, and a citation names the page (<code>scan.pdf p.3</code>); <b>Scanned documents, images and footage</b> also reads sampled movie frames (one every 10 s, so labels, plates and screens become searchable), and text that stays on screen is cited as one time range (<code>gate.mp4 @12.0-18.0s</code>); <b>Off</b> skips OCR. Each recognised line and its box is also kept as a row in table <code>ocr</code> for <code>recall_sql</code>. The setting applies to sources added afterwards.</p>
+</div>
+</body>
+</html>
