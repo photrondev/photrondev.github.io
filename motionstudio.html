@@ -106,10 +106,12 @@
     <h1><i class="bi bi-bullseye"></i> Motion Studio</h1>
     <p class="lede">Track points on high-speed footage and get scientific results in real units, each with its uncertainty: speeds, accelerations,
         strain, impact and rebound, natural frequencies, RPM, projectile velocity and joint angles. Pick the application, place or auto-pick points,
-        track, and read the results; export them to Excel or a PDF report. Open it from <b>AI &gt; Motion Studio</b>
+        track, and read the results; export them to Excel or a PDF report. Open it from <b>Studios &gt; Motion Studio</b>
         (<i class="bi bi-bullseye"></i>).</p>
+    <p><a href="https://youtu.be/y0pnjYwMw5Q" target="_blank" rel="noopener"><i class="bi bi-youtube"></i> Watch the full Motion Studio tour</a>
+        (every application, Flow &amp; PIV, Camera Studio and multi-camera 3D; also in Help &gt; Videos).</p>
     <nav><a href="#start">Start</a><a href="#screen">The screen</a><a href="#source">1 Source</a><a href="#points">2 Points</a><a href="#scale">Time &amp; scale</a>
-        <a href="#track">3 Track</a><a href="#results">4 Results</a><a href="#multicam">Multi-camera (3D)</a><a href="#apps">Applications</a><a href="#export">Export</a>
+        <a href="#track">3 Track</a><a href="#results">4 Results</a><a href="#multicam">Multi-camera (3D)</a><a href="#piv">Flow &amp; PIV</a><a href="#lpt">3D particle tracking</a><a href="#dic">Strain &amp; DIC</a><a href="#markerless">Markerless 3D</a><a href="#apps">Applications</a><a href="#export">Export</a>
         <a href="#prompt">AI prompt</a><a href="#reset">Reset all</a><a href="#node">Tracker node</a><a href="#limits">Good results &amp; limits</a></nav>
 
     <!-- ================= START ================= -->
@@ -338,6 +340,8 @@
     <div class="tip"><b>Fast objects: two keys.</b> On the first frame the tracker has no velocity yet, so a fast object (a projectile, a sprinter's foot) may be lost or swapped for a static look-alike.
         Place it on one frame, step one frame forward, drag it onto the object again (a second key), then Track. The motion model then knows where to look.</div>
 
+    <p><b>Watch how</b> (the play button in the header, and on every tile of the application picker): each application plays its own short tutorial, the same
+        video as its slide in the features deck, with related videos (tracking, compare, fit, sharing) to switch to. The picker's &#10005; (or Esc) closes Motion Studio.</p>
     <h3 id="trackers">The trackers: how they work, what they are good at</h3>
     <p>The <b>Tracker</b> card on the Track step picks the method. New sessions start on <b>Auto (recommended)</b>: when you press Track, the studio takes a quick look
         (well under a second) at the placed points over the next 10 frames and picks the method, then says why in one line, e.g. <i>Auto chose Template: textured targets, steady look</i>.
@@ -365,7 +369,16 @@
         <tr><td><b>AI box: DaSiamRPN</b></td><td>A larger siamese network (OpenCV's DaSiamRPN) on the GPU, the same idea as NanoTrack with a stronger model.</td>
             <td>The most robust choice for a few targets (up to 8) that turn or change their look.</td>
             <td>Box-level, not sub-pixel; up to 8 points (each needs its own 200 MB network); without a GPU it runs at about 3 fps; needs the DaSiamRPN feature package.</td><td>Medium &middot; 75 fps (8 points)</td></tr>
+        <tr><td><b>Quadrant target (centre + angle)</b></td><td>A crash quadrant mark looks the same when turned half a turn about its centre: the centre is where the pattern is most symmetric,
+            fitted sub-pixel (bicubic samples, a light ramp allowed for). The mark's angle comes from its two lines (the second harmonic around rings). Your click snaps to the centre.</td>
+            <td>Crash marks: on rendered marks that turn 150&deg;, grow 1.4&times;, blur and sit under a light ramp, the centre is within 0.013 px RMS and the angle within 0.04&deg;.
+            Each point also gets its own &sigma; and its angle (the Results use the marks' angles for a body's rotation; one mark is enough).</td>
+            <td>Needs a quadrant mark at each point. A mark hidden behind a look-alike can be taken for it; two points never sit on one mark (the one whose angle does not continue is lost).</td><td>Fast &middot; over 1,000 fps of tracking (8 marks, 1280 &times; 720)</td></tr>
+        <tr><td><b>Circle target (dot / ring)</b></td><td>The centre of a round mark: the point around which every ring of pixels is most even, fitted sub-pixel with a light ramp allowed for.</td>
+            <td>Round dots and rings through blur, scale and uneven light: 0.008 px RMS on rendered dots.</td><td>Needs a round mark; no angle.</td><td>Fast</td></tr>
     </table>
+    <p><b>Auto points in a box</b> with <i>Quadrant target</i> or <i>Circle target</i> finds the marks themselves (not corners): every clearly symmetric mark in the box, best first;
+        dots, thin lines and speckle are left out for quadrants, quadrants for circles. On the NHTSA sled clip it finds the eight marks on the dummy's head in one click.</p>
     <p>Use an <b>AI box</b> method only when the target turns over, tumbles or changes its look so much that template and optical flow lose it; for measurement on a target that keeps its look,
         template and optical flow are over ten times more accurate (under 0.1 px on the synthetic tests). Both run on the GPU following the FP16 setting (without a GPU NanoTrack uses every CPU core, 29 fps with 28 points). Each appears in the Tracker card only when its optional feature package (NanoTrack, DaSiamRPN) is installed; a saved session that used a missing one opens with Template.</p>
     <p><b>Group model</b>: points of one body move together. <i>Similarity</i> (move, turn, scale), <i>affine</i> (plus shear) or <i>perspective</i> fit all the body's points each frame;
@@ -519,6 +532,8 @@
         position that best fits all its marks). The left shows the <b>3D path</b>: every point's path in mm, coloured by speed (scale on the right), the cameras as
         frustums (or as markers on the edge when they are off screen), camera A's x, y, z axes and a floor grid. Drag to orbit, Shift+drag to pan, the wheel zooms,
         double-click (or <i class="bi bi-arrow-counterclockwise"></i>) resets; the marker on each path is the current frame and follows the timeline and Play.
+        The readout at the bottom left gives every point's x, y and z (mm, camera A's frame) on the current frame: scrub to read a height or a position
+        (with camera A level, as in the drill demo, &minus;y is up, so a bounce is the change in y).
         <b>Views</b> switches the left back to the cameras. The right shows the usual cards and charts in mm: displacement, speed (m/s) and
         acceleration (g) in 3D, each with &plusmn;, and Distance 1-2 in 3D (on the Demo's wand it reads its 500 mm). The time and CFC settings work as with one camera.
         The chips <b>A</b>, <b>B</b>, <b>C</b> switch to one camera alone, in its image pixels.</p>
@@ -546,7 +561,312 @@
         comes back when the studio reopens; re-run Track to get the tracks again. Single-camera sessions are not affected.</div>
 
     <!-- ================= APPLICATIONS ================= -->
-    <h2 id="apps">8. The applications</h2>
+    <h3 id="multicam-6dof">Rigid body (6DoF)</h3>
+    <p>When three or more points are seen in 3D and move as one rigid body (targets on the same part), Results 3D adds a <b>Rigid body</b> card:
+        the body's rotation from the first frame (a total angle and yaw / pitch / roll), its centroid path and its <b>angular speed</b>, each with a
+        &plusmn; from the points' own 3D uncertainty (Monte Carlo). The angular speed is taken over &plusmn;10 ms: frame to frame, a high-speed clip's
+        rotation is smaller than the noise and would read too high. The card also shows how much the point-to-point distances change (rigidity);
+        points that do not move together (a wand and a free ball) are refused with that reason, never fitted. On the drill drop demo with 0.5 mm of
+        noise per axis, the peak spin reads 1,112 &plusmn; 31 deg/s against a true 1,107.</p>
+
+    <h2 id="piv">8. Flow &amp; PIV (velocity fields)</h2>
+    <p>Particle image velocimetry measures a whole flow field from frames of a seeded fluid (tracer particles in a laser sheet, smoke, fog).
+        Pick <b>Flow &amp; PIV Studio</b> on the start screen: instead of points, every frame pair gives a grid of vectors with an uncertainty each,
+        and a run gives the mean and RMS fields with the uncertainty of the mean. The pixels run in the engine on the GPU (node <code>cv.piv</code>);
+        Flow &amp; PIV has its own six steps and no tracking transport. <b>AI setup</b> (top bar) proposes the settings: the engine probes a pair
+        (particle size, seeding, largest shift, a static model), rules pick the window from the one-quarter rule and particles per window, the pair
+        spacing for a slow flow, background subtraction and the auto mask; the AI reads only those numbers and your question (for example a stated
+        reference length). The plan shows as changes with their reasons; nothing changes before Apply.</p>
+    <ol>
+        <li><b>Source.</b> A clip from the workflow or <b>Open...</b> (MP4 or Photron MRAW). <b>Pairs</b>: <b>Time-resolved</b> (frame n with n+&Delta;, every frame; raise
+            &Delta; for slow flows, aim for 5-10 px of shift) or <b>Double-frame</b> (A/B frames 0-1, 2-3, ...). Enter the <b>capture rate</b> (a Photron MRAW states it; the file's
+            playback rate is not it) and the <b>scale</b>: the clip's calibration from Knowledge Studio fills it, or type a known mm/px. Vectors come in mm/s with both,
+            mm/frame or px/s with one, px/frame with neither; the units show in the top bar. An optional <b>reference length D</b> (mm) and
+            <b>reference speed U&infin;</b> give profiles in x/D and u/U&infin;.</li>
+        <li><b>Prepare.</b> Pre-processing in the engine, in this order, each 0 = off: <b>Background subtraction</b> (the minimum of N frames spread over the clip: removes the sheet's glow,
+            reflections and the model), <b>Clip bright</b> (caps particles brighter than k &times; the median particle peak; off by default, it showed no gain on synthetic tests),
+            <b>Intensity normalisation</b> (local min-max over a radius: evens out an uneven sheet), <b>High-pass</b> (for smoke or fog without a background).
+            <b>Mask</b>: <b>Circle</b> (click the centre, then the edge) and <b>Auto mask</b> (the model and walls stay bright in the minimum image while particles move);
+            masked windows get no vector, never an interpolated one. <b>Raw | processed split</b>: click the frame to move the divider.
+            <b>Image quality</b> (this pair, after pre-processing): particle image diameter (2-3 px is ideal; below 2 px the sub-pixel fit locks to whole pixels),
+            seeding density, particles per final window (at least 6-10) and saturated pixels.</li>
+        <li><b>Evaluate.</b> A live preview of the pair under the playhead (about 20-40 ms on the GPU): <b>Vectors</b>, <b>Speed</b>, <b>Vorticity</b> or <b>Uncertainty</b>.
+            Click a vector to see its u, v, &sigma;u, &sigma;v, correlation peak and status (measured, replaced by the median test, or no vector), and its
+            <b>correlation plane</b> (first pass, before window deformation) with the <b>peak ratio</b>: primary over secondary peak, above about 1.5 the
+            match is unambiguous.
+            Presets with their measured bench accuracy: <b>Fast</b> (32 px, one pass), <b>Standard</b> (64 &rarr; 32 px, 3 deformation passes), <b>Accurate</b> (32 &rarr; 16 px), or <b>Custom</b>.
+            <b>Checks</b> (in pixels per pair): the one-quarter rule (largest shift under a quarter of the first window), particles per window, the shift change across a window,
+            and the smallest resolved structure (about two windows).</li>
+        <li><b>Run.</b> Set the frame range and <b>Every</b> (every k-th pair), then <b>Run on the GPU</b>; Cancel stops it. Click the frame to place a <b>probe</b>: its running mean
+            with a &plusmn;2&sigma; band shows convergence. The lane under the timeline colours each pair by its valid share (green &ge; 97 %, amber &ge; 90 %, red below).
+            Speed is measured: pairs per second (decoding included) and the time per stage inside the node. Time-resolved runs with &Delta; = 1 decode
+            each frame once (one reader; the node pairs the previous frame with the current one).</li>
+        <li><b>Results.</b> <b>Mean</b> (|mean| map with mean arrows) and <b>RMS</b> (&radic;(u'&sup2; + v'&sup2;)). The card gives the field-average speed, the median RMS, the median
+            <b>uncertainty of the mean</b> and the valid share; the probe's <b>spectrum</b> gives the dominant frequency (shedding, pulsation) with its resolution.
+            <b>Field movie</b>: every pair of the run plays in the browser (no engine round trip), as a <b>Vorticity</b> or <b>Speed</b> map with <b>Tracers</b>
+            carried by the measured field; click the flow to start a dye source (a streakline, like smoke in a wind tunnel), change the playback rate,
+            zoom and pan while it plays. <b>Line profile</b>: click two points on the mean field for u, v and |V| along the line with the &plusmn;2&sigma; band of the
+            uncertainty of the mean (CSV); <b>Streamlines</b> of the mean field over the map.</li>
+        <li><b>Export.</b> The mean field, or every pair, as <b>CSV</b>, <b>Tecplot</b> (ASCII, ordered zone), <b>VTK</b> (ParaView, structured points with a velocity vector),
+            <b>MATLAB</b> (.mat) or <b>HDF5</b>; every pair is one file per pair, or one stack in MATLAB / HDF5. Files go to a <code>piv_export</code> folder next to the clip. HDF5 needs the optional <b>motion_studio</b> package (Packages page); its button stays grey until then.</li>
+    </ol>
+    <h3 id="piv-numbers">How good are the numbers</h3>
+    <ul>
+        <li><b>Per vector:</b> correlation statistics (the spread of the correlation contributions around the peak) plus a term for unpaired particles (particles leaving the sheet):
+            on synthetic pairs with 0-40 % particle loss, 1.2-3.5 px particles and 16 / 32 px windows the stated &sigma; is 0.6-1.6 &times; the true error
+            (correlation statistics alone read as little as 0.33 &times;).</li>
+        <li><b>The mean:</b> its uncertainty uses the <b>effective</b> number of samples: time-resolved pairs are correlated (lag-1 autocorrelation), so 400 pairs of a slowly
+            changing flow count as far fewer. Run longer, or use <b>Every</b>, until the probe's band is narrow enough.</li>
+        <li><b>Spatial filtering:</b> a window averages the flow inside it. Vortex cores and other structures smaller than about two windows are smoothed; the &plusmn; is the random
+            error, not this bias. Use smaller windows (Accurate) where the gradients are strong and the seeding allows it.</li>
+        <li><b>Demo clip:</b> <code>demo_piv_cylinder_wake.mp4</code> (Assets &gt; verticals) is a rendered cylinder wake (D = 10 mm, 9.4 m/s, 10,000 fps, St 0.21) with exact truth:
+            a 60-pair mean matches the truth's mean over the same pairs to about 0.01 px per pair (median), and a 400-pair run finds the 197 Hz shedding at the probe within its 12.5 Hz resolution.</li>
+    </ul>
+    <h3 id="piv-stereo">Stereo PIV: u, v and w from two cameras</h3>
+    <p>One camera sees only the motion in the light sheet. Two cameras looking at the sheet from different angles also give <b>w</b>, the velocity through the sheet.
+        On the <b>Source</b> step choose <b>Stereo (2 cameras)</b> and pick a rig calibrated in Camera Studio (3D rig), or the demo rig.</p>
+    <ol>
+        <li><b>The sheet plane.</b> With no extra target, the plane goes through the point where the two optical axes come closest, square to their bisector. The pane shows the
+            <b>common area</b> both cameras see, in mm, and the grid's mm/px; the capture rate comes from the rig.</li>
+        <li><b>Self-calibrate</b> (recommended). The two cameras' views are dewarped onto the plane and correlated against each other at the same instant. If the plane is
+            not where the sheet really is, the views disagree. That disparity gives the sheet's offset and tilt, and the plane moves onto it (two passes). The report says how far the
+            sheet was from the rig's plane.</li>
+        <li><b>Prepare / Evaluate.</b> The engine dewarps each camera onto the common grid (one cubic remap inside <code>cv.piv</code>), the pre-processing stages run on both, and
+            PIV runs per camera. In every window the two in-plane displacements give four equations for three unknowns (u, v, w), solved by weighted least squares. The
+            view shows u and v as arrows and w as colour (red away from the cameras, blue toward them). <b>Masks</b> (Circle, Auto mask) are drawn on this sheet view and apply to both cameras: the auto mask finds each camera's static bright regions and carries them onto the grid through its dewarp map; masks follow the grid when self-calibration moves the plane.</li>
+        <li><b>Run / Results / Export.</b> Every pair of both cameras into the mean u, v, w with the RMS and the uncertainty of the mean per component (effective samples, as above);
+            the mean field exports as CSV, Tecplot, VTK or HDF5 (with the motion_studio package) with the w columns. <b>Pair spacing</b> on the Source step pairs each frame with the 2nd-4th next one: on slow flows w is much clearer, velocities stay in mm/s.</li>
+    </ol>
+    <ul>
+        <li><b>The &plusmn;:</b> each camera's correlation &sigma; goes through the reconstruction. The fourth equation also measures the real noise: when the residual says the
+            two views disagree more than their own &sigma; explains (dewarping, the plane, the sheet's thickness), every &sigma; is scaled up by it. On the demo the stated &sigma;
+            covers 66-70 % of the true errors (68 % expected).</li>
+        <li><b>Demo rig:</b> <code>demo_stereo_piv</code> (two cameras at &plusmn;30&deg;, 5000 fps, a vortex in a 3 mm sheet with a known out-of-plane pattern). The sheet sits
+            0.6 mm in front of and 0.5&deg; tilted from the rig's plane on purpose. Self-calibration finds 0.57 mm and 0.52&deg;. The u, v and w errors are 0.0016, 0.0014 and 0.0031 mm
+            per pair (RMS) on displacements up to 0.9 mm. Without self-calibration they are 0.0036, 0.0016 and 0.0046 mm.</li>
+        <li><b>Real footage:</b> <i>Real data: PIV Challenge vortex ring</i> is case E of the 4th International PIV Challenge (2014, La Foy &amp; Vlachos,
+            Virginia Tech): a laminar vortex ring in water filmed by Photron FASTCAM APX-RS cameras at 1000 fps, one camera normal to the sheet and one about 25&deg; off-axis.
+            Both cameras are calibrated from the plate images (7 depths, two levels), and the sheet starts at the plate. Self-calibration moves it 0.7 mm. 99.9 % of windows are valid in both cameras,
+            and the two views agree to 0.05 px. The two cores have equal and opposite circulation (within 7 %), and &Gamma;/&nu; &asymp; 2500 against the stated Re &asymp; 2300.
+            With one camera normal to the sheet and small shifts, w is noisy in a single pair at a pair spacing of 1; the stated &sigma;<sub>w</sub> covers that scatter. <b>Pair spacing</b> (Source) of 3 frames halves the w noise and makes w per pair a coherent field (consecutive pairs agree, r = 0.79); velocities stay in mm/s.
+            The mean w is a reproducible structure (even vs odd pairs agree, r = 0.92). Import: <code>test_suite/piv_bench/import_piv_challenge_e.py</code>.</li>
+    </ul>
+
+    <h3 id="lpt">3D particle tracking (Shake-the-Box): tracks in a volume from four cameras</h3>
+    <p>PIV gives a velocity field in a sheet; <b>3D particle tracking</b> follows every seeded particle in a volume, seen by four cameras, and gives each one's position,
+        velocity and acceleration over time, each with its &plusmn;. Open the <b>3D particle tracking</b> application (Flow &amp; PIV Studio). Its steps:</p>
+    <p><a href="https://youtu.be/y-Uk5l2ArVQ" target="_blank" rel="noopener"><i class="bi bi-youtube"></i> Watch the 3D particle tracking tutorial</a> (3:33).</p>
+    <ol>
+        <li><b>Source.</b> A synthetic 4-camera volume with exact truth (IW's own renderer: choose the flow, the <b>recording</b>, the seeding in particles per pixel, the number of
+            snapshots and the image size). Recordings: <b>Time-resolved</b> (equal steps), <b>Variable time step</b> (random steps of 0.25, 0.5 and 1), <b>Double frame</b> (2 pulses)
+            and <b>Four pulses</b> (independent pulse groups, pulses 0.25 apart). Flows include a high-dynamic-range jet and a 2D Taylor-Green vortex whose exact pressure is known. Every quality number in the studio is scored against that truth and labelled as such. Calibrations import from the 4th PIV Challenge (<code>C_cal.csv</code>), OpenPTV
+            (<code>.ori</code>, <code>.addpar</code>, the glass and water of <code>parameters_ptv.par</code>) and Camera Studio 3D rigs.</li>
+        <li><b>Source: Recorded footage.</b> Real multi-camera clips with their calibration, no truth. <b>OpenPTV cavity</b>: a real water-filled lid-driven cavity seen by four cameras
+            through glass (5 frames, 1280 &times; 1024; the OpenPTV <code>.ori</code> / <code>.addpar</code> with glass 1.46 and water 1.33; the static background is removed).
+            <b>4th PIV Challenge case C</b>: four cameras, double-frame pairs at 0.01, 0.02, ... ppp (choose how many; the organisers' raw 16-bit TIFFs when on disk, else the mp4 copies).
+            <b>Open clips + a calibration file...</b>: one clip per camera and a PIV Challenge style <code>.csv</code> or an OpenPTV folder. <b>Play frames</b> steps through the four
+            cameras. The steps then show what can be measured: the given calibration's reprojection (target dots or calibration points), particles found per camera, triangulated and
+            reconstructed counts, tracks or pairs (case C: against the stated seeding), |v| and position &sigma;; for the cavity, OpenPTV's own result on the same frames
+            (particles, links, displacement and reprojection to the image particles, with the same calibration). The green marks in <b>Camera images</b> are the particles on tracks.
+            Bin to grid and the pressure are off for the 5-frame cavity (they need a long recording); the pressure is off for case C (two pulses give velocity only).</li>
+        <li><b>Calibrate &amp; self-cal.</b> The camera models are pinhole + lens (OpenCV), the Soloff polynomial (cubic in x and y, quadratic in z) and a flat glass wall into water
+            (exact Snell ray tracing). <b>Self-calibrate</b> triangulates sparse particles with a wide allowed error, measures each camera's disparity in 5 &times; 5 &times; 3
+            sub-volumes and folds it into the camera's correction grid until it is under 0.05 px.</li>
+        <li><b>OTF.</b> The particle image of each camera and sub-volume as an elliptical Gaussian, fitted by the engine to isolated reconstructed particles. The shaking projects
+            particles with it.</li>
+        <li><b>Track.</b> The engine finds sub-pixel peaks, triangulates them (every camera, then with one camera left out) and runs <b>IPR</b>: each particle is shaken in 3D to
+            fit its projected OTF to the residual images, weak ones are removed, and new ones are found in what is left. <b>Shake-the-Box</b> then works snapshot by snapshot: every
+            track is predicted from its last positions, shaken onto the new images, IPR finds new particles in the residual, and new tracks start from four snapshots. The pane shows the
+            share of true particles tracked, the ghost fraction, the position error and &sigma;, |v| and |a| with &plusmn;, the time per snapshot and the track length histogram. The
+            view draws the tracks in 3D, coloured by |v| or |a|: drag to orbit, the wheel zooms; <b>Camera images</b> shows the four cameras.
+            <br><b>Variable time step:</b> predictions and track starts are polynomials in the real snapshot times, and the first link's search radius scales with the step, so a
+            short step starts fast tracks and a long step gives slow particles displacement. <b>Double frame:</b> each pulse pair is independent: IPR on each pulse, pairs matched
+            with the neighbours' displacement, a normalised median test removes the inconsistent ones, then IPR runs again on the residual with the pairs kept; two pulses give
+            velocity (its &sigma; from the pair-to-neighbour scatter) but no acceleration. <b>Four pulses:</b> the same with four-pulse tracks, quadratic in time, so acceleration too.</li>
+        <li><b>Bin to grid.</b> Every track sample into bins (a linear fit per bin): mean velocity, Reynolds stresses and TKE, each with its &sigma; from the effective N (distinct tracks
+            in the bin: the samples of one track are not independent), and the divergence residual.</li>
+        <li><b>Dense field &amp; pressure.</b> One snapshot's tracks onto a grid (1.5 mm by default): a quadratic moving least-squares fit per node of the fitted track velocity
+            and Du/Dt, then the pressure from grad p = -&rho; Du/Dt by least squares over every grid edge (Hermite edge integrals; the Poisson solution with Neumann walls; zero mean).
+            The &sigma; goes through the same chain by Monte Carlo from each sample's track-fit &sigma; and the local fit scatter. The <b>Pressure</b> view shows the mid-depth plane.
+            This is a simpler stand-in for VIC+ (no vorticity-transport constraint), so its resolution is the grid, not finer than the particle spacing. Two-pulse recordings have
+            no Du/Dt and so no pressure.</li>
+        <li><b>Export.</b> Tracks as VTK polydata (ParaView), CSV and an HDF5 track store (position, velocity, acceleration and their &sigma; per sample); the binned grid as VTK and Tecplot.</li>
+    </ol>
+    <ul>
+        <li><b>The &plusmn;:</b> each track is fitted with a sliding 2nd-order polynomial (7 samples). The position &sigma; is the track's own fit residual; the &sigma; of velocity and
+            acceleration come from the fit's covariance. On the synthetic volume the stated &sigma; covers 74 % (position), 63 % (velocity) and 71 % (acceleration) of the true errors
+            (68 % expected).</li>
+        <li><b>How good (own renderer, noise-free, 2.6 px particle images, 4 cameras, 512 &times; 512):</b> at 0.05 ppp Shake-the-Box tracks 98.8 % of the particles with 0.02 % ghosts and
+            0.046 voxel RMS position error; IPR alone on one snapshot finds 99.7 % with 0.2 % ghosts. Independent 3D truth needs the LPT Challenge data, so these figures stay
+            &quot;own renderer&quot; until that quality pass.</li>
+        <li><b>Double frame, four pulses, variable step (own renderer, 0.05 ppp):</b> two-pulse 98.5 % of the particles with no ghosts, 0.045 voxel RMS; four-pulse 97.5 %, no ghosts.
+            A jet with a 15 voxel per time-unit core sampled at random steps: the time-stamped tracking keeps 99.6 % (core 99.95 %), where equal-step tracking on the same images
+            loses the core (2 %).</li>
+        <li><b>Pressure (own renderer, 0.05 ppp, 12 snapshots):</b> against the exact pressure of a Lamb-Oseen vortex and a 2D Taylor-Green vortex the RMS error is 0.25 % and 0.34 %
+            of the pressure range, and the stated &sigma; covers the true error at 72 % and 77 % of the nodes (60-80 % is the honest target). The dense velocity's &sigma; adds
+            the two truncation biases (the cubic vs quadratic fit in space and in time) to the robust local scatter and covers 75-77 % (vortex) and 62-75 % (Taylor-Green) per component.</li>
+        <li><b>Real images:</b> 4th PIV Challenge case C (four synthetic cameras, exact calibration, 9 seeding densities as a/b exposures). The pinhole fit reproduces the calibration
+            points to 5&times;10<sup>-7</sup> px (Soloff 0.004 px). IPR reconstructs about the stated number of particles up to 0.05 ppp, and 96-100 % of them are found again in the b
+            exposure; above 0.05 ppp single-snapshot ghosts grow, which is where tracking over time is needed. Two-pulse pairing on the organisers' raw 16-bit a/b exposures (the
+            unpaired particles are dropped each round, so ghosts do not pile up): up to 0.1 ppp the pairs are 76-83 % of the stated count and 92-93 % agree with their
+            neighbours' displacement within 0.5 voxel; at 0.125 and 0.15 ppp 65 % and 47 % are paired and 83 % and 72 % agree (position noise grows with image overlap). OpenPTV <i>test_cavity</i> (a real tank behind glass): the imported orientation
+            with the glass and water puts the calibration target on the detected dots within the dots' own detection noise.</li>
+        <li><b>Speed:</b> about 160 ms per snapshot at 13 k particles (512 &times; 512 &times; 4) on a laptop GPU, IPR on one snapshot 250 ms; the CPU build gives the same answer
+            (the shake is one shared routine, parity under 10<sup>-4</sup> voxel).</li>
+    </ul>
+
+    <h2 id="dic">9. Strain &amp; DIC (strain fields)</h2>
+    <p>Digital image correlation measures displacement and strain over a whole surface from a speckle pattern (sprayed paint, a printed pattern, or the material's
+        own texture). Pick <b>Strain &amp; DIC Studio</b> on the start screen: every frame is compared with the <b>reference frame</b> (the undeformed state), and each point
+        of a grid gets u, v, the Green-Lagrange strains &epsilon;xx, &epsilon;yy, &epsilon;xy and an uncertainty. The pixels run in the engine on the GPU (node
+        <code>cv.dic</code>: subsets matched by IC-GN with an affine shape function, zero-normalised SSD and cubic B-spline sampling); Strain &amp; DIC has its own steps.</p>
+    <ol>
+        <li><b>Source.</b> A clip from the workflow or <b>Open...</b>. Choose the <b>reference frame</b> (strain is measured against it), the <b>capture rate</b>
+            (needed for a load file in time) and the <b>scale</b> (from the clip's calibration, or type mm/px). Strain needs no scale; displacements are in mm once it is known.</li>
+        <li><b>Speckle.</b> The pattern on the reference frame is checked: <b>speckle size</b> (3-7 px is ideal), <b>mean intensity gradient</b> (above about 20 grey levels per px
+            gives noise under 0.01 px), <b>saturated pixels</b> (under 1 %: saturated speckles lose their shape) and contrast. <b>Draw region</b> (two opposite corners) keeps
+            the points on the specimen; points with no speckle get no value, never an invented one.</li>
+        <li><b>Subsets.</b> A live solve of the frame under the playhead against the reference. Presets <b>Fast</b> (41 px subsets, step 16), <b>Standard</b> (31 / 10) and
+            <b>Fine</b> (21 / 6), or set the <b>subset</b> (3-5 speckles across it), <b>step</b> (a third to a half of the subset), <b>strain window</b> (points in the plane fit:
+            bigger is smoother and less local), <b>largest motion</b> (the first frame's search range) and <b>minimum ZNCC</b>. Show &epsilon;yy, &epsilon;xx, &epsilon;xy,
+            &epsilon;1, von Mises, u, v, |d|, ZNCC or &sigma;; click a point for its numbers.</li>
+        <li><b>Correlate.</b> <b>Run on the GPU</b> over a frame range (every k-th frame if wanted): frames are solved in order, each starting from the previous answer.
+            Speed is measured (frames and points per second, solve time per frame); the lane colours each frame by its valid share.</li>
+        <li><b>Strain.</b> A <b>virtual strain gauge</b> (draw a rectangle; the default is every valid point whose strain window is complete: at the region's edge the fit is one-sided and biased) gives the mean &epsilon;yy, &epsilon;xx, &epsilon;xy per frame with
+            &plusmn;2&sigma;, and a <b>virtual extensometer</b> (click its two ends; each end averages a small patch of points) gives the engineering strain between them.
+            The chart shows both over the run. Moving the gauge or the extensometer re-measures the stored fields: no new correlation.</li>
+        <li><b>Tensile.</b> A load-cell file (CSV: time in s or frame, then force in N or kN) and the cross-section give the stress-strain curve and, in the style of
+            ASTM E8 / ISO 6892-1: <b>Young's modulus</b> E (linear fit over the first loading between 10 and 40 % of the tensile strength, &plusmn; from the fit),
+            <b>Poisson's ratio</b> (&minus;&epsilon;xx / &epsilon;yy over the same range), <b>Rp0.2</b> (the 0.2 % offset line) and the <b>tensile strength</b>; then, for sheet metal,
+            the <b>strain hardening exponent n</b> (ASTM E646 / ISO 10275: Hollomon fit of true stress against true strain from 10 % strain, or half the uniform elongation when
+            that is under 12 %, up to the uniform elongation) and the <b>plastic strain ratio r</b> (ISO 10113: width over thickness plastic strain, thickness from constant
+            volume, from the slope over the same range), each with &plusmn;2&sigma;. Strain comes from the extensometer when one is placed, else the gauge.
+            <b>Forming limit (ISO 12004-2)</b>: on a specimen taken to fracture, <b>Find the limit strains</b> uses the last frame before the crack (valid points still at least
+            90 % of the run's median) and both ISO methods: the <i>position</i> method (true major and minor strain on 3 or more sections across the crack, an inverse parabola
+            fitted outside the neck with ISO's window W = 10 mm (1 + &epsilon;2/&epsilon;1), its peak is the limit strain, &plusmn; from the fit, the window placement and the
+            section scatter) and the <i>time</i> method (the onset of thinning instability at the neck). <b>Add to the FLC</b> keeps each specimen (name it, e.g. by its width) in
+            <code>dic_export/flc.json</code>; with 3 or more the <b>FLC</b> is fitted (FLC0 &plusmn;), and <b>This frame on the FLD</b> plots any frame's strains on the forming limit
+            diagram as fail / marginal (within 10 %) / safe / compression. On the real X6Cr17 coupon below, the limit strain is &epsilon;1 0.33, &epsilon;2 &minus;0.16 (uniaxial side),
+            and the two methods agree within 15 %.</li>
+        <li><b>Export.</b> Every frame's field as <b>CSV</b>, <b>VTK</b> (ParaView), one <b>MATLAB</b> stack or a <b>UFF</b> universal file (<code>.unv</code>: the grid as
+            nodes and quads, then a displacement and a strain tensor per frame, for FE and modal tools), plus the series (gauge and extensometer per frame) as CSV,
+            in a <code>dic_export</code> folder next to the clip. Three more tools on this step:
+            <ul>
+                <li><b>Quality report</b> measures this run's own noise floor and spatial resolution: the reference speckle is shifted by a known sub-pixel amount and
+                    warped by sine displacements of shrinking period (fresh noise at the image's own level added), each solved with the run's settings. It gives the
+                    displacement and strain noise, the <b>MTF</b> (gain of u and &epsilon; against the period), the shortest period followed at 90 % (and 50 %) and the
+                    virtual strain gauge length. Type frames before the load (for example 0-4) to add the measured noise floor of the real clip. The report is saved
+                    as <code>&lt;clip&gt;_quality.json</code>. The image noise is estimated from one image and fine speckle adds to it, so the synthetic floor errs high.</li>
+                <li><b>Acceptance report</b> (structured after VDI/VDE 2626): type the frames with no load (static noise) and the frames after a known rigid translation
+                    of the specimen with its nominal move in mm; it reports the displacement and strain noise, the rigid-motion displacement error and the strain that
+                    must be zero, the spatial resolution (after a Quality report) and, for a stereo rig, the reprojection error, each against a limit, with an overall
+                    pass / fail, as <code>&lt;clip&gt;_acceptance.json</code> and <code>.pdf</code>. It records the tests and numbers; it is not a certification.</li>
+                <li><b>Compare with FE</b> reads FE nodal results (CSV with x, y, u, v in mm and optionally the strains, or a UFF) and places them on the reference image
+                    (origin in px and angle). The FE displacement is averaged over the same subset and its strain taken from the same plane fit as the DIC
+                    (<b>levelling</b>), so the difference shows the model, not the DIC's smoothing. It gives the mean and RMS of DIC &minus; FE for u, v and the strains on the current frame.
+                    From Python, <code>dic_features.register_fe_hook(name, fn)</code> plugs in your own FE source.</li>
+                <li><b>Live gauge in the workflow</b> adds a Movie Reader, a <code>cv.dic</code> node with this gauge and extensometer, and a Metrics Logger to the workflow.
+                    <code>cv.dic</code> outputs the gauge &epsilon;xx, &epsilon;yy, &epsilon;xy, its &sigma; and the extensometer strain on every frame (inputs <i>gauge region</i>
+                    and <i>extensometer</i>), so the gauge runs at camera rate with no studio open. Replace the reader with a camera node to measure live.</li>
+            </ul></li>
+    </ol>
+    <h3 id="dic-numbers">How good are the numbers</h3>
+    <ul>
+        <li><b>Per point:</b> &sigma; from the solver's Hessian and the residual noise. The gauge and extensometer &plusmn; also include what the solver cannot see (sub-pixel
+            interpolation bias that swings slowly with the motion): each series' scatter about a local fit over &plusmn;12 frames raises the stated &sigma; where it is bigger.
+            On the demo the 2&sigma; band covers 91 % of the gauge errors and 91 % of the extensometer errors.</li>
+        <li><b>Spatial resolution:</b> a subset and the strain window average the field inside them. On the 2D-DIC Challenge Sample 14 (real benchmark images, a sine of
+            0.1 px amplitude whose period shrinks along x) a 31 px subset follows the truth to the images' noise floor (about 0.01 px) where the period is longer than
+            4 subsets, and reads 0.88 of the amplitude at 3-4 subsets: use smaller subsets (Fine) where strain changes quickly.</li>
+        <li><b>Demo clips:</b> <code>demo_dic_coupon.mp4</code> (Assets &gt; verticals) is a dog-bone coupon pulled to fracture at 2000 fps with exact truth:
+            elastic, yield, 14 % uniform stretch, a neck that reaches 59 % local strain, and fracture. Every point is tracked up to fracture, the uniform
+            strain is within 20 microstrain of the truth, the neck's peak is read about 9 % low (the strain window averages it: use Fine where strain
+            localises), and the Tensile step gives E 69.0 GPa, Poisson 0.32 and Rp0.2 277 MPa (truth 69, 0.33, 276); the strain map plays with the video
+            after a run. <code>demo_dic_tensile.mp4</code> is a rendered aluminium tensile test with exact truth (3 % strain at 500 fps, Poisson
+            0.33, a load file from E 69 GPa, Rp0.2 276 MPa): the gauge &epsilon;yy is within 43 microstrain of the truth on every frame (noise floor about 1 microstrain on
+            the static frames), and the Tensile step gives E 69.1 GPa, &nu; 0.336, Rp0.2 276 MPa.</li>
+    </ul>
+    <h3 id="dic-stereo">Stereo DIC: u, v, w and the surface strain from two cameras</h3>
+    <p>One camera sees only the motion in its image plane: a specimen moving towards it looks bigger, which reads as strain that is not there
+        (on the demo dome, 11,800 microstrain where the truth is 10,100). Two cameras looking at the specimen from different angles also give
+        <b>w</b>, the motion out of the surface, and the true surface strain. On the <b>Source</b> step choose <b>Stereo (2 cameras)</b> and pick a rig
+        calibrated in Camera Studio (3D rig), or the demo rig. <b>Import a calibration</b> reads another system's stereo calibration into a rig:
+        Istra4D (<code>.isprp</code>), VIC-3D (the calibration block of a <code>.z3d</code>, <code>.xml</code> or <code>.cal</code> project), DICe (<code>xml</code>) or an
+        OpenCV stereo <code>yaml</code>. Give the two clips, and the first row kept when the clips are a crop of the calibrated sensor. The rig is saved in
+        Assets &gt; rigs with camera 1 as its world; the import reports the baseline and the angle between the cameras as a sanity check. VIC-3D's radial
+        distortion terms are read as the r&sup2;, r&#8308;, r&#8310; coefficients: check the reprojection on a calibration image when the lens is strongly distorted.</p>
+    <ul>
+        <li><b>How it works:</b> both cameras are resampled by the engine onto one grid on the specimen plane (the <code>dewarp map</code> input of <code>cv.dic</code>);
+            each camera is correlated in time against its own reference, and camera B's frames against camera A's reference give the stereo
+            <b>disparity</b>: the specimen's starting shape (height z0 above the plane) and which point of B's field is the same material point as A's.
+            Every point's two in-plane displacements give u, v, w by weighted least squares, and the strain is the Green-Lagrange strain of the
+            surface in its own tangent plane, from the full 3D deformation (the stretching that bending or bulging adds included).</li>
+        <li><b>Self-calibrate</b> (Source or Speckle step) finds where the specimen really is from the disparity and moves the plane onto it:
+            on the demo it finds the plate 0.400 mm and 0.30&deg; off the rig's plane (truth 0.4 mm / 0.3&deg;). Do it before measuring.</li>
+        <li><b>Subsets</b> solves the frame under the playhead in 3D and draws a map of w, &epsilon;yy, &epsilon;xx, &epsilon;xy, u or v; <b>Correlate</b> runs both cameras;
+            <b>Strain</b> gives the gauge (every valid point) and a <b>3D extensometer</b> (click its two ends on the map): the true 3D distance between the two points.
+            <b>Tensile</b> works as in one-camera mode, and adds a <b>Vibration shape</b> card: give a frequency (with the capture rate set) and the run's 3D
+            displacement is locked in at it per grid point, drawn as amplitude and phase maps of w (out of plane), u or v on the specimen plane: the
+            operating shape of a plate or panel in 3D. On a synthetic plate mode it recovers the shape exactly (MAC 1.0). <b>Export</b>: every frame's x, y, z0, u, v, w, strains and &sigma; as CSV, or VTK with the deformed surface.</li>
+        <li><b>How good:</b> on the demo (a plate stretched 2 %, moved 0.4 mm and bulged 1.5 mm towards the cameras, 8.5 px/mm) u, v, w are within
+            0.0009 / 0.0007 / 0.002 mm RMS of the truth, the surface strain within 0.0001 RMS, the gauge within 11 microstrain and the 3D extensometer within
+            15 microstrain on every frame. Points are triangulated exactly (each camera's ray through where it sees the point), so a large bulge is not
+            under-read: on a 5 mm dome w stays within 0.004 mm. The stated &sigma; is honest: over the run 2&sigma; of w covers 94 % of the real errors.
+            It adds, in quadrature, the correlation &sigma;, the two cameras' disagreement, a first-order subset's bias on a curved surface and, when the rig
+            carries a wand check (Camera Studio), the calibration's scale uncertainty times the displacement.</li>
+    </ul>
+    <h2 id="markerless">10. Markerless biomechanics (3D keypoints)</h2>
+    <p>Biomechanics Studio's Source step has a third source, <b>Markerless 3D</b>: synced clips on a calibrated rig, no markers on the athlete. A keypoint
+        model finds 26 body points in every view (Halpe-26: the body plus heel, big toe and small toe on both feet), they are solved in 3D with a
+        &sigma; each, a scaled leg model gives the joint angles with &plusmn;, and foot contacts come with a &plusmn; in ms. The keypoints run in the engine on the GPU
+        (node <code>cv.body_keypoints</code>); Markerless 3D has its own steps.</p>
+    <p><a href="https://youtu.be/lP_5vGTnLHg" target="_blank" rel="noopener"><i class="bi bi-youtube"></i> Watch the markerless biomechanics tutorial</a> (3:14).</p>
+    <ol>
+        <li><b>Source</b>: pick a take, a rig saved in Camera Studio with its clips, or the COMFI validation takes (4 synced webcams with marker truth and force plates).
+            Software-synced cameras (each frame with its own timestamp) are resampled to camera A's capture times before 3D.</li>
+        <li><b>Keypoints</b>: <i>Find keypoints</i> runs RTMPose-m (Halpe-26, SimCC) on all views in one batch per frame. The crop follows the last frame's
+            keypoints, and a lost view is searched again with the same model (no person detector). Circles show 2&sigma; of each keypoint. The speed chip shows the
+            node's own frames/s and its backend. <i>TensorRT</i> builds an optional engine for this many views per pass (about a minute, once).</li>
+        <li><b>3D &amp; model</b>: each view is weighted by its keypoint &sigma;. The &sigma; is calibrated from the views' agreement on the take itself, so no truth is used,
+            and a view that disagrees with the others (a left / right swap, a hidden limb) is dropped. The model has a pelvis with 6 DoF, a trunk (lumbar, with a
+            weak prior: keypoints cannot see the spine), and per side a hip with 3 DoF, a knee with 1 and an ankle with 2. Segments are scaled to the athlete. The table
+            lists the views and the 3D &sigma; per keypoint.</li>
+        <li><b>Events</b>: foot contact and foot off come from the heel and toe heights in 3D (with hysteresis), timed between frames by a line fit. The &plusmn; is the height
+            noise over the foot's speed. <i>Import CSV or C3D</i> adds force plates (Fz over 20 N = contact; centre of pressure) or EMG (band-pass, rectified,
+            RMS envelope, onset with &plusmn;). The plate events are compared with the video events.</li>
+        <li><b>Results</b>: pick an angle to see it over the take, with its &plusmn;2&sigma; band and, on a validation take, the markers. Headline numbers (peak flexions,
+            flight time, jump height) carry their &plusmn;. On a take with marker truth, the <i>validation table</i> lists RMSD, bias and how often the stated &sigma; covers
+            the error. The pelvis is shown <span style="color:#fbbf24">weak</span> when its RMSD is over 5&deg;. It is never hidden.</li>
+        <li><b>Export</b>: <b>C3D</b> (the 3D keypoints in mm and the plate's Fz), OpenSim <b>.trc</b> (keypoints as markers) and <b>.mot</b> (joint angles in degrees),
+            an angles CSV with every &sigma;, and an <b>overlay MP4</b> of one view with the skeleton, the 2&sigma; circles and the events. The C3D, TRC and MOT writers are IW's own.</li>
+    </ol>
+    <h3 id="markerless-numbers">How good are the numbers</h3>
+    <p>The numbers below are measured on COMFI participant 1012 (LAAS-CNRS, CC BY 4.0): 4 software-synced webcams at 1280&times;720 and 40 fps, Vicon-type
+        markers and 3 force plates. The lifting take calibrates the video-to-mocap lag (58 ms) and the &plusmn; model term. The jumping take is held out.</p>
+    <ul>
+        <li><b>2D keypoints</b>: the engine matches onnxruntime on 200 crops (FP32, max 0.000 px; TensorRT max 0.25 px). The median error against the projected marker
+            joint centres is 10-15 px. That includes COMFI's own camera-to-marker calibration offset (the markers project about 15 px off in one view) and the
+            difference between a keypoint and an anatomical joint centre.</li>
+        <li><b>Speed</b> (RTX 3080 Ti laptop GPU, 4 views, tracking on): <b>182</b> four-view frames/s with TensorRT FP32 (729 crops/s), 98 with OpenCV DNN FP32, and
+            batching the views is twice as fast as one pass per view. FP16 moves keypoints by up to 1.4 px against the CPU (over the 0.5 px parity limit), so the node
+            checks the precision on its first crops and keeps FP32 when FP16 does not agree. The 500 frames/s target is not reached on this GPU.</li>
+        <li><b>3D keypoints</b>: on synthetic skeletons with known per-view noise, the stated covariance is exact (Mahalanobis rms 1.00, 95 % ellipsoid 0.95). On COMFI
+            jumping, after the camera world is registered to the marker world (fitted on lifting: 4.6&deg; and 5 cm), the knees are 26 mm RMSE from the marker joint centres,
+            the ankles 45 mm and the hips 39-57 mm. The stated 1&sigma; covers 69 % of the errors.</li>
+        <li><b>Joint angles</b> (jumping, held out, against the marker angles): knee 8.7-14.8&deg;, hip 12.6-17.8&deg; and ankle 5.2-5.4&deg; RMSD. On the slower lifting take the knee is
+            4.3-6.0&deg; and the ankle 4.7-7.8&deg;. That is above the 3&deg; target at this frame rate: the 4 webcams face the athlete front and back, so the sagittal depth is weak,
+            and frames are motion-blurred at 40 fps. The stated &plusmn; covers 74 % of the errors on average. The pelvis tilt (7.5&deg; RMSD) is flagged as weak.</li>
+        <li><b>Events</b> against the 1 kHz plates (jumping: 5 takeoffs, 5 landings, all found): the errors are -25 to +20 ms with a stated &plusmn; of 8-24 ms
+            (it includes the software timestamps' T/&radic;12). 8 of 10 fall inside 2&sigma;. Landings come about 15 ms early, because the 25 mm height threshold fires before
+            the plate is loaded. The method works at 40 fps, but the &le; 2 ms gate needs a high-speed capture against a plate. On synthetic contacts at 1,000 fps the stated
+            &plusmn; is 0.55 ms, and it covers 66 % (1&sigma;) and 93 % (2&sigma;) of the errors.</li>
+        <li><b>High-speed accuracy is pending</b>: the fine-tune pipeline (synthetic motion blur along each limb, <code>motion_studio/keypoint_finetune.py</code>) is built,
+            but the claim needs a lab capture with 4 high-speed cameras, markers and a 1 kHz plate.</li>
+        <li><b>Licence</b>: the default weights are MMPose RTMPose (Apache-2.0 code) trained on data with research-only terms (MPII, Halpe/AlphaPose). They are for internal
+            use and demos until a legal review.</li>
+    </ul>
+
+    <h2 id="apps">11. The applications</h2>
     <p>Each application adds its own analysis on top of the tracked points. The numbers in the mockups are real results from the sample clips.</p>
 
     <div class="apps">
@@ -557,7 +877,8 @@
                 <div class="ch"><div class="h">Strain map, &epsilon;yy (frame 23)</div><svg viewBox="0 0 300 70" preserveAspectRatio="none"><defs><linearGradient id="sm" x1="0" x2="1"><stop offset="0" stop-color="#1e3a8a"/><stop offset=".45" stop-color="#22d3ee"/><stop offset=".7" stop-color="#facc15"/><stop offset="1" stop-color="#ef4444"/></linearGradient></defs><rect x="20" y="8" width="260" height="54" fill="url(#sm)" opacity=".85"/><g stroke="#0b0f16" stroke-width=".6" opacity=".7"><path d="M20 35 H280 M85 8 V62 M150 8 V62 M215 8 V62 M20 8 L85 35 L150 8 L215 35 L280 8 M20 62 L85 35 L150 62 L215 35 L280 62"/></g></svg></div>
             </div></div>
             <p><b>Gauge top</b> and <b>Gauge bottom</b> form a virtual extensometer: strain, elongation, gauge length and the failure frame (the first frame below half the running peak).
-                Add grid points for a <b>strain map</b> (&epsilon;xx, &epsilon;yy, &epsilon;xy, principal and equivalent strain) drawn over the specimen; triangles outside the gauge are masked.</p>
+                Add grid points for a <b>strain map</b> (&epsilon;xx, &epsilon;yy, &epsilon;xy, principal and equivalent strain) drawn over the specimen; triangles outside the gauge are masked.
+                For strain over the whole surface from a speckle pattern (and E, &nu;, Rp0.2 from a load file), use <a href="#dic">Strain &amp; DIC</a>.</p>
         </div>
 
         <div class="app" style="--a:#f87171">
@@ -583,6 +904,26 @@
                 to position, then smoothed exactly like the video): the acceleration chart shows it dashed (the faint line is the sensor with its own filter), and a card shows the RMS and
                 mean difference, the correlation and both peaks with their times. The sensor's HIC15 / HIC36 (all channels, no reference) is shown next to the video HIC, even when the
                 video HIC is refused. Excel gets a <i>Sensor comparison</i> sheet; the PDF a <i>Video vs sensor</i> section. Without a sensor, acceleration charts say <i>verify against a sensor</i>.</p>
+            <p><b>Crash marks, 6DoF and sensors (Results):</b> track the dummy's quadrant marks with <i>Quadrant target</i> and the head's rotation comes from the marks' own angles
+                (the median of the marks on each frame; a mark that disagrees by more than 3&deg;, on the background or seen edge-on, is left out), with &plusmn; and its rate in &deg;/s.
+                Under <b>6DoF, sensor, walls</b>:
+                <b>Angular-rate sensor</b>: a CSV with a rate column in &deg;/s (the dummy's head ARS) is compared with the video rate, both at CFC 60; a <i>video_frame</i> column aligns it exactly,
+                and the sign (clockwise on screen against the sensor's axis) is taken from the data. The fourth chart then shows both rates (sensor dashed) and a chip the RMS difference and the peaks.
+                On NHTSA test 11500 (side view, 1000 fps) the passenger head's pitch rate from its marks is within 69 &deg;/s RMS of the ARS over 0-82 ms, on a peak near 1,000 &deg;/s, until the airbag covers the head.
+                <b>Target model</b>: type the body's mark positions in mm (one line per point: <i>point: x, y, z</i>, 4 or more, from the dummy drawing or 3D CAD Studio), or
+                <b>Targets from CAD</b>: a point export (CSV / TXT, <i>name, x, y, z</i> per line) matched to the body's points by name, then by number. <b>Model for</b> picks the
+                body being edited, so the sled can have its own model. A <b>CAD model</b> (STL, OBJ, PLY, GLB) in the same coordinates is drawn as a wireframe over the video
+                at each frame's pose. With a lens
+                calibration on the clip, the body gets a <b>single-camera 6DoF</b> (yaw, pitch, roll and translation, each &plusmn;) and <b>BrIC</b> &plusmn; next to HIC (the NHTSA critical rates
+                66.25 / 56.45 / 42.87 rad/s). A mark that does not fit the rest (5&sigma;) is dropped on that frame. On rendered dummy heads with exact truth the rotation is within 0.03-0.04&deg; RMS and BrIC within 0.3 %.
+                The solved body's own X, Y and Z axes are drawn on the frame (red, green, blue) as a 3D gizmo that turns with it. The <b>Lens</b> comes from the
+                clip's calibration, from the <b>camera spec</b> (pixel size in &micro;m and lens in mm), or is <b>estimated from the targets</b> themselves: the focal length that
+                makes every frame's pose fit best, with a &plusmn; from five separate stretches of the clip (on rendered heads it is within 5 % of the truth, inside its &plusmn;);
+                the chip says <i>weak</i> when the body barely turns out of the image plane and the estimate cannot be trusted.
+                <b>Relative to (on-board camera)</b>: a camera on the sled moves and shakes with it; give the sled its own targets and model and every body is measured
+                against the sled each frame, so the camera's own motion cancels (yaw, pitch, roll &plusmn; from both bodies).
+                <b>Wall through</b> two tracked points (they move with the vehicle) gives the body's closest approach to that line and when it crosses; <b>Distance between</b> two bodies gives
+                their closest approach per frame.</p>
         </div>
 
         <div class="app" style="--a:#fbbf24">
@@ -605,6 +946,23 @@
             </div></div>
             <p>Drift-free displacement, Welch amplitude spectrum, spectrogram and ring-down per point. A modes table gives each natural frequency and its damping ratio &zeta;
                 from the decay after a pluck; click a row to see its ring-down. Needs the capture rate.</p>
+            <p><b>Velocity, ISO, orders, ODS</b> (card under the charts): velocity RMS in mm/s over 10-1000 Hz with the tracking noise floor shown and taken out
+                (they add in power), the ISO 10816-3 zone A-D for the machine group and support (a guide: the standard is for bearing housings), the X-Y orbit per point,
+                orders 1&times;, 2&times;, &hellip; and blade pass from a running speed, the <b>operating deflection shape</b> at the selected mode animated on the frame,
+                and MAC against FE mode shapes (CSV or UFF 55). Checked on real footage: a shaker-driven plate at 1000 fps, whose resonances from the video's
+                response match the accelerometer's within one frequency bin.</p>
+            <p>With a running speed, <b>fault hints</b> read the order pattern (unbalance: 1&times; dominant; misalignment: 2&times; high; looseness: many harmonics
+                or half orders; blade pass; a non-synchronous peak: bearings, belts, a resonance), each with its evidence and only from peaks well above the noise floor:
+                hints, not a diagnosis.
+                <b>Amplify the motion</b>: a band around the selected mode (&plusmn;15 % by default, in real Hz), &times;20 by default, shown in the viewer as the
+                amplified clip, the motion map or side by side with the original, and saved as MP4. It runs <code>cv.motion_amplify</code> on the GPU (phase-based,
+                Riesz pyramid; the same frames as its CPU path), about 200 frames a second on a 384 &times; 384 clip.
+                <b>Full-field shape</b> measures the whole surface at the mode: digital image correlation on every frame (GPU, thousands of grid points on any
+                speckle or dot pattern), then each point's amplitude and phase, drawn as two maps (same colour in the phase map = moving together). On the real
+                printer-bed plate at 78.3 Hz it agrees with independently tracked points (MAC 0.96). For the out-of-plane shape in 3D use Stereo DIC (its Tensile step: Vibration shape).
+                <b>Monitor it live</b> adds a Movie Reader &rarr; Multi-Point Tracker &rarr; <code>py.vibration_monitor</code> &rarr; Alarm Events + Metrics Logger
+                workflow: velocity RMS over a rolling window (the tracking noise floor taken out), the ISO zone, the dominant frequency and an alarm (zone C or worse,
+                or your own limit); swap the reader for a camera to watch a machine.</p>
         </div>
 
         <div class="app" style="--a:#2dd4bf">
@@ -631,12 +989,43 @@
                 <div class="m-kpis"><div class="kpi hero"><div class="k">Hip speed, mean</div><div class="v">3.09 <small>&plusmn; 0.09 m/s</small></div></div><div class="kpi"><div class="k">Foot off &rarr; touchdown</div><div class="v">170.0 <small>&plusmn; 1.6 ms</small></div></div><div class="kpi"><div class="k">Knee, most flexed</div><div class="v">29 <small>&plusmn; 8&deg;</small></div></div></div>
             </div></div>
             <p><b>Hip, Knee, Ankle, Toe, Trunk</b>: knee, hip and ankle angles, angular velocity, hip speed, a stick figure, and segment lengths that flag frames where a marker slid.
-                Mark events by eye (foot off, touchdown). The &plusmn; includes a 2D bound per segment: one side camera gives angles to a few degrees.</p>
+                Mark events by eye (foot off, touchdown). The &plusmn; includes a 2D bound per segment: one side camera gives angles to a few degrees.
+                With synced cameras on a calibrated rig, pick <a href="#markerless">Markerless 3D</a> on the Source step instead: no markers, 3D joint angles &plusmn; and automatic foot events.</p>
+        </div>
+
+        <div class="app" style="--a:#60a5fa">
+            <h3><i class="bi bi-droplet-half"></i>Spray &amp; Droplet</h3>
+            <p>Tracked drops give <b>droplet speeds</b> and direction; the liquid's envelope gives the <b>spray width, penetration and cone angle</b> per frame.</p>
+            <p><b>Droplet sizing</b> (Results, <i>Size the drops</i>) runs every frame of the analysis window through the C++ <i>Particle Sizer</i> node: each drop's
+                sub-pixel diameter from its shadow's coverage (the half-depth edge of shadowgraphy; a drop's bright lensing spot is filled), ellipse, roundness and
+                edge focus, touching drops split, drops cut by the frame left out. The studio then keeps only in-focus, round drops (<i>Min focus</i>, <i>Min roundness</i>;
+                ligaments and merged pairs fail roundness, blobs above <i>Max size</i> are the liquid core), removes <b>repeated frames</b> (a slowed clip repeats frames:
+                each drop counted once) and <b>specks on the window</b> (a dark dot that does not move between captures), and gives:</p>
+            <ul>
+                <li><b>D10, D32 (Sauter), D43</b> and the volume quantiles <b>Dv10 / Dv50 (VMD) / Dv90</b> and the span, each with a bootstrap &plusmn; over the drops;</li>
+                <li>the <b>depth-of-field correction</b>: a shadowgraph sees big drops over a deeper slab than small ones, so each drop counts with 1 / DoF(d)
+                    (DoF proportional to d unless calibrated from a reticle traverse); the raw D32 is shown beside the corrected one;</li>
+                <li>the <b>number and volume distributions</b> (log size classes, D32 marked), <b>size-velocity</b> (drops paired across consecutive captures by position and
+                    size; the mean speed per size class &plusmn; its standard error; needs the capture rate) and the <b>drops per frame</b>;</li>
+                <li><b>Shape</b>: the median aspect ratio (major / minor) and the share of spherical drops; <b>across the spray</b>: a grid over the frame with each
+                    cell's D32, drop count or mean speed;</li>
+                <li>with the scale and a calibrated depth of field: <b>number density</b> (drops / cm&sup3;), the <b>liquid volume fraction</b> and the
+                    <b>volume flux</b> carried by the paired drops (cm&sup3; / cm&sup2; / s), over the region or the frame;</li>
+                <li><b>Calibration</b>: <i>Check on this frame</i> sizes a reticle's dots against their nominal diameters (error % &plusmn; per size, the worst);
+                    <i>Calibrate the depth of field from this clip</i> takes a reticle moved through focus over the analysis window (its depth at the first and the
+                    last frame) and fits DoF = a + b &times; d, which the correction and the number density then use;</li>
+                <li><i>Outlines in the viewer</i> shows each sized drop outlined and coloured by its diameter, specks on the window crossed out and rejected blobs
+                    ringed grey; <i>CSV</i> writes every particle of every frame.</li>
+            </ul>
+            <p>Sizes are in pixels until the scale is set on the Points step. Tested: discs of known size within 2 % (0.3 px below 15 px) in shadowgraph and bright field,
+                an inkjet's drops repeat within 2.5 % over their flight, about 100 000 drops a second on a dense 1280 &times; 800 frame.</p>
         </div>
 
         <div class="app" style="--a:#94a3b8">
             <h3><i class="bi bi-three-dots"></i>More applications</h3>
-            <p><b>Airbag</b> (bag area, height and width, impactor plate speed and deceleration), <b>Spray &amp; Droplet</b> (droplet speeds, spray width, penetration and angle),
+            <p><b>Airbag</b> (bag area, height and width, impactor plate speed and deceleration, and the <b>bag volume</b>: slices along the deployment axis from
+                two tracked points, the module and a point outward, each slice an ellipse from <i>two views</i> or, from one view, a <i>body of revolution</i> or a
+                <i>depth ratio</i>; litres &plusmn; per frame (edges and threshold sensitivity), peak, inflation rate, time to full),
                 <b>Robot Path</b> (tool path, deviation, speed along the path), <b>Physics Lab</b> (pendulum swing angle, phase plot, rise heights), <b>Line QA</b>
                 (every machine cycle against a golden cycle, cycle times) and <b>Blast</b> (front position and speed, bright area). <b>Custom</b> gives displacement, speed,
                 acceleration and the path for any points.</p>
@@ -644,7 +1033,7 @@
     </div>
 
     <!-- ================= EXPORT ================= -->
-    <h2 id="export">9. Export</h2>
+    <h2 id="export">12. Export</h2>
     <p>The Results pane has three exports, all built from exactly what is on screen (sure frames, time zero, analysis window, capture rate and units):</p>
     <ul>
         <li><b>Export CSV</b>: every frame and point.</li>
@@ -707,7 +1096,7 @@
     </ul>
 
     <!-- ================= PROMPT ================= -->
-    <h2 id="prompt">10. Set up with a prompt</h2>
+    <h2 id="prompt">13. Set up with a prompt</h2>
     <p><b>AI setup</b> (the button in the top bar) opens a dialog that takes a plain sentence, e.g. <i>"head acceleration of the dummy in g"</i>; suggestion chips show typical
         requests for the application, including the crash templates. The dialog shows the proposed setup as a table (application, method, group, template / search, start frame,
         filter, smoothing, units) and nothing changes until <b>Apply</b>. Later requests refine it (<i>"use optical flow"</i>, <i>"smooth more"</i>, <i>"it tumbles"</i>). With an empty prompt,
@@ -715,7 +1104,7 @@
         The AI only reads this text, never the frames. Without an AI, built-in rules are used (<i>AI unavailable: rules used</i>).</p>
 
     <!-- ================= NODE ================= -->
-    <h2 id="reset">11. Reset all</h2>
+    <h2 id="reset">14. Reset all</h2>
     <p><i class="bi bi-arrow-counterclockwise"></i> <b>Reset all</b> in the top bar starts the studio again from scratch: the application, points, keys, tracking
         results, scale and settings are removed, and the studio goes back to the application picker and the Source step. It asks first:</p>
     <div class="mock"><div style="display:grid;place-items:center;padding:22px;background:rgba(5,8,12,.72)">
@@ -727,7 +1116,7 @@
     </div></div>
     <p class="cap">The confirmation. <kbd>Esc</kbd> or a click outside cancels.</p>
 
-    <h2 id="node">12. The Multi-Point Tracker node</h2>
+    <h2 id="node">15. The Multi-Point Tracker node</h2>
     <p>The studio runs on the C++ node <b>Multi-Point Tracker</b> (<code>cv.multi_point_tracker</code>, Tracking category, CUDA and CPU builds), which you can also use
         in any live workflow:</p>
     <ul>
@@ -744,7 +1133,7 @@
         outputs the boxes, a confidence per box and a preview; <i>Start</i> or new boxes restart it. Demo: <i>demos/Inference/Multi Box Tracker.json</i>.</p>
 
     <!-- ================= LIMITS ================= -->
-    <h2 id="limits">13. Good results and limits</h2>
+    <h2 id="limits">16. Good results and limits</h2>
     <ul>
         <li>Use the camera's real capture rate. Copies from the web are often slowed or have repeated frames; times are only as good as the frame rate.</li>
         <li>Choose points with texture or a marker, on the object only. Avoid repeating patterns, reflections and edges that slide (a turning helix, a limb's outline).</li>
